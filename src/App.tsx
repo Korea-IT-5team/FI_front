@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div>
-      <div>test</div>
+      <div>다인이 바보</div>
     </div>
   );
 }
