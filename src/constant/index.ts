@@ -1,8 +1,32 @@
 // description : Navigation URL PATH
-export const MAIN_PATH = '/main'
+export const MAIN_PATH = '/main';
 export const SNS_PATH = '/sns/:accessToken/:expires';
+
 export const AUTH_PATH = '/authentication';
+export const SIGN_IN_PATH = 'sign-in';
+export const SIGN_UP_PATH = 'sign-up';
 export const BUSINESS_REGISTRATION_PATH = 'business-registration';
+<<<<<<< HEAD
+export const FIND_EMAIL_PATH = 'find-email';
+export const FIND_PASSWORD_PATH = 'find-password';
+export const PASSWORD_RESET_PATH = 'password-reset';
+
+export const RESTAURANT_PATH = '/restaurant'
+export const RESTAURANT_LIST_PATH = 'list';
+export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
+export const RESTAURANT_RESERVATION_PATH = 'reservation';
+export const RESTAURANT_RESERVATION_INFO_PATH = 'info/:reservationNumber';
+
+export const MYPAGE_PATH = '/my-page';
+export const USER_INFO_UPDATE_PATH = 'user-info-update';
+export const USER_DELETE_PATH = 'user-delete';
+
+export const BOARD_PATH = '/board';
+export const INQUIRY_PATH = 'inquiry';
+export const INQUIRY_BOARD_WRITE_PATH = 'write';
+export const INQUIRY_BOARD_UPDATE_PATH =  'update';
+export const INQUIRY_MY_BOARD_LIST_PATH = 'my-board';
+=======
 export const FIND_EMAIL_PATH = '/find-email';
 export const FIND_PASSWORD_PATH = '/find-password';
 export const PASSWORD_RESET_PATH = '/password-reset';
@@ -17,15 +41,45 @@ export const REVIEW_PATH = '/review-list';
 export const INQUIRY_PATH = '/inquiry';
 export const NOTICE_PATH = '/notice'; 
 export const LIST_PATH = 'list';
+>>>>>>> 6a9b7b95604b13b78a73c82dab2314e0adfbf9cc
 export const INQUIRY_DETAILS_PATH = ':inquiryNumber';
+
+export const NOTICE_PATH = 'notice'; 
+export const NOTICE_BOARD_WRITE_PATH = 'write';
+export const NOTICE_BOARD_UPDATE_PATH =  'update';
 export const NOTICE_DETAILS_PATH = ':noticeNumber';
-export const WRITE_PATH = 'write';
-export const MY_BOARD_PATH = 'my-board';
-export const USER_DELETE_PATH = '/user-delete';
 
 // description: Navigation 절대 URL PATH 
 export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
+
+export const SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
+export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const BUSINESS_REGISTRATION_ABSOLUTE_PATH = `${AUTH_PATH}/${BUSINESS_REGISTRATION_PATH}`;
+<<<<<<< HEAD
+export const FIND_EMAIL_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_PATH}`;
+export const FIND_PASSWORD_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_PASSWORD_PATH}`;
+export const PASSWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_PATH}`;
+
+export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
+export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
+export const RESTAURANT_RESERVATION_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}`;
+export const RESTAURANT_RESERVATION_INFO_ABSOLUTE_PATH = (reservationNumber: number | string) => `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}/info/${reservationNumber}`;
+
+export const MYPAGE_ABSOLUTE_PATH = MYPAGE_PATH;
+export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MYPAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
+export const USER_DELETE_ABSOLUTE_PATH = `${MYPAGE_PATH}/${USER_DELETE_PATH}`;
+
+export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
+
+export const INQUIRY_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_WRITE_PATH}`;
+export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_UPDATE_PATH}`;
+export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
+export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
+
+export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
+export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}`;
+export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
+=======
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESTAURANT_LIST_PATH}`;
 export const RESERVATION_ABSOLUTE_PATH = `${RESERVATION_INFO_PATH}/${RESERVATION_PATH}`;
 export const INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${INFO_UPDATE_PATH}`;
@@ -36,6 +90,7 @@ export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: string | number) => `
 export const INQUIRY_WRITE_ABSOLUTE_PATH = `${INQUIRY_PATH}/${WRITE_PATH}`;
 export const NOTICE_WRITE_ABSOLUTE_PATH = `${NOTICE_PATH}/${WRITE_PATH}`;
 export const MY_INQUIRY_BOARD_ABSOLUTE_PATH = `${INQUIRY_PATH}/${MY_BOARD_PATH}`;
+>>>>>>> 6a9b7b95604b13b78a73c82dab2314e0adfbf9cc
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = 'http://localhost:9999';
