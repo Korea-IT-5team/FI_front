@@ -36,6 +36,7 @@ export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: string | number) => `
 export const INQUIRY_WRTIE_ABSOLUTE_PATH = `${INQUIRY_PATH}/${WRITE_PATH}`;
 export const NOTICE_WRITE_ABSOLUTE_PATH = `${NOTICE_PATH}/${WRITE_PATH}`;
 export const MY_INQURIY_BOARD_ABSOLUTE_PATH = `${INQUIRY_PATH}/${MY_BOARD_PATH}`;
+
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = 'http://localhost:9999';
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;

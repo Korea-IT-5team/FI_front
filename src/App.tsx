@@ -5,20 +5,22 @@ import { Routes } from 'react-router';
 // component: root 경로 컴포넌트
 function Index() {
 
-  // state                       
+  //   state   //
 
-  // function                    
+  //   function   //
 
-  // effect                      
+  //   effect   //
 
-  // render                        
-  return <></>;
+  //   render   
+  return (
+    <></>
+  );
 }
 
-// component: Application 컴포넌트 //
+// component: Application 컴포넌트
 function App() {
 
-  //                    render                    //
+  //   render   //
   return (
     <Routes>
       
