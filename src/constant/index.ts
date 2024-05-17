@@ -29,13 +29,14 @@ export const BUSINESS_REGISTRATION_ABSOLUTE_PATH = `${AUTH_PATH}/${BUSINESS_REGI
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${MAIN_PATH}/${RESTAURANT_LIST_PATH}`;
 export const RESERVATION_ABSOLUTE_PATH = `${RESERVATION_INFO_PATH}/${RESERVATION_PATH}`;
 export const INFO_UPDATE_ABSOLUTE_PATH = `${MYPAGE_PATH}/${INFO_UPDATE_PATH}`;
-export const INQUIRY_LIST_ABOLUTE_PATH = `${INQUIRY_PATH}/${LIST_PATH}`;
-export const NOTICE_LIST_ABOLUTE_PATH = `${NOTICE_PATH}/${LIST_PATH}`;
-export const INQUIRY_DETAILS_ABOLUTE_PATH = (inquiryNumber: string | number) => `${INQUIRY_PATH}/${LIST_PATH}/${inquiryNumber}`;
-export const NOTICE_DETAILS_ABOLUTE_PATH = (noticeNumber: string | number) => `${NOTICE_PATH}/${LIST_PATH}/${noticeNumber}`;
-export const INQUIRY_WRTIE_ABOLUTE_PATH = `${INQUIRY_PATH}/${WRITE_PATH}`;
-export const NOTICE_WRITE_ABOLUTE_PATH = `${NOTICE_PATH}/${WRITE_PATH}`;
+export const INQUIRY_LIST_ABSOLUTE_PATH = `${INQUIRY_PATH}/${LIST_PATH}`;
+export const NOTICE_LIST_ABSOLUTE_PATH = `${NOTICE_PATH}/${LIST_PATH}`;
+export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: string | number) => `${INQUIRY_PATH}/${LIST_PATH}/${inquiryNumber}`;
+export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: string | number) => `${NOTICE_PATH}/${LIST_PATH}/${noticeNumber}`;
+export const INQUIRY_WRTIE_ABSOLUTE_PATH = `${INQUIRY_PATH}/${WRITE_PATH}`;
+export const NOTICE_WRITE_ABSOLUTE_PATH = `${NOTICE_PATH}/${WRITE_PATH}`;
 export const MY_INQURIY_BOARD_ABSOLUTE_PATH = `${INQUIRY_PATH}/${MY_BOARD_PATH}`;
+
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = 'http://localhost:9999';
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
