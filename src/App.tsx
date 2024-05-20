@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Routes, useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_PATH, FIND_PASSWORD_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MYPAGE_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_INFO_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import Authentication from './views/Authentication';
 
 // component: root 경로 컴포넌트
 function Index() {
@@ -20,7 +21,7 @@ function Index() {
     else navigator(AUTH_PATH);
   }, []);
 
-  //   render   
+  //   render   //
   return <></>;
 }
 
