@@ -52,12 +52,12 @@ export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
 export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
 
 export const INQUIRY_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_WRITE_PATH}`;
-export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_UPDATE_PATH}`;
+export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_UPDATE_PATH}/${inquiryNumber}`;
 export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
 export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
 
 export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
-export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}`;
+export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
 export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
 
 // description: API URL PATH
@@ -121,7 +121,7 @@ export const GET_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_INQUIRY_BOARD_LIST_URL}/
 export const GET_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
 export const POST_INQUIRY_BOARD_COMMENT_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}/comment`;
 export const DELETE_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
-export const PUT_INQUIRY_BOARD_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
+export const PATCH_INQUIRY_BOARD_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
 export const GET_MY_INQUIRY_BOARD_LIST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/my-list`;
 export const GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_MY_INQUIRY_BOARD_LIST_URL}/search`;
 export const GET_MY_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${GET_MY_INQUIRY_BOARD_LIST_URL}/${inquiryNumber}`;
@@ -134,4 +134,4 @@ export const GET_NOTICE_BOARD_LIST_SEARCH_URL = `${GET_NOTICE_BOARD_LIST_URL}/se
 export const GET_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
 export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}/view-count`;
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
-export const UPDATE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
+export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
