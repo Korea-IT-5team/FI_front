@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function InquiryWrite() {
-
+export default function NoticeList() {
   return (
     <div>
       

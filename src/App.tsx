@@ -9,6 +9,10 @@ import InquiryWrite from './views/service/board/inquiryboard/InquiryWrite';
 import InquiryUpdate from './views/service/board/inquiryboard/InquiryUpdate';
 import MyInquiry from './views/service/board/inquiryboard/MyInquiry';
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
+import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
+import NoticeList from './views/service/board/noticeboard/NoticeList';
+import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
+import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 
 // component: root 경로 컴포넌트
 function Index() {
