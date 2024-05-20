@@ -1,15 +1,15 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import './style.css';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Outlet, Path, useLocation, useNavigate } from 'react-router';
+import { Outlet, Path, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { getSignInUserRequest } from 'src/apis/user';
-import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { AUTH_PATH, GET_RESTAURANT_URL, MAIN_ABSOLUTE_PATH, POST_RESTAURANT_INFO_UPLOAD } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
+import { getSignInUserRequest } from 'src/apis/user';
+import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { AUTH_PATH, GET_RESTAURANT_URL, POST_RESTAURANT_INFO_UPLOAD } from 'src/constant';
+import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
+import './style.css';
 
 //              interface                   //
 interface Props 
@@ -58,7 +58,7 @@ function TopBar()
 }
 
 //              component                   //
-function SideNavigation()
+function RestaurantList()
 {
 
   //                  state                             //
@@ -123,10 +123,10 @@ function SideNavigation()
        navigator(POST_RESTAURANT_INFO_UPLOAD);
   };  
 
-  const onItemClickHandler = () =>
+  const onItemClickHandler = (item:number) =>
     {     
          if (!cookies.accessToken) return;
-         navigator(GET_RESTAURANT_URL(1));
+         navigator(GET_RESTAURANT_URL(item));
     };  
 
 
@@ -145,9 +145,10 @@ function SideNavigation()
       {!restaurantList || restaurantList.length === 0 ? (
           <div className="select-item">해당하는 식당 정보가 없습니다.</div>
         ) : (
-        restaurantList.map((item) => (
-          <div className='select-list-item-box' onClick={() => onItemClickHandler()} key={item.restaurantFoodCategory}>
-            <div className='select-item'>{item.restaurantFoodCategory}</div>
+        restaurantList.slice(0, 12).map((item) => (
+          <div className='select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
+            <div className='select-item'>{item.restaurantImage}</div>
+            <div className='select-item'>{item.restaurantName}</div>
           </div>
         )))
       }
@@ -208,7 +209,7 @@ export default function Restaurant()
   return (
     <div id="wrapper">
         <TopBar/>
-        <SideNavigation/>
+        <RestaurantList/>
         <Outlet /> 
     </div>
   )

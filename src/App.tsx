@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import { Route, Routes, useNavigate } from 'react-router';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH,  NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_INFO_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import { Route, Routes, useNavigate } from 'react-router';
+import './App.css';
+import { AUTH_PATH, MAIN_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_INFO_PATH, RESTAURANT_RESERVATION_PATH } from './constant';
 import Restaurant from './views/Restaurant';
 
 // component: root 경로 컴포넌트
@@ -44,10 +44,10 @@ function App() {
 
       <Route path={RESTAURANT_PATH}/>
         <Route index element={<Restaurant />} />
-        {/* <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
+        <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
-        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
+        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} />
 
 
       {/* <Route path={MYPAGE_PATH} element={<MyPage />} />
