@@ -30,7 +30,7 @@ function App() {
   //   render   //
   return (
     <Routes>
-      <Route index element={<Index />} />
+      {/* <Route index element={<Index />} />
       <Route path={SNS_PATH} element={<Sns />} />
       <Route path={AUTH_PATH} element={<Authentication />} />
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
@@ -56,7 +56,7 @@ function App() {
         <Route path={NOTICE_PATH} element={<Notice />} />
           <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
           <Route path={NOTICE_BOARD_UPDATE_PATH} element={<NoticeUpdate />} />
-          <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetails />} />
+          <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetails />} /> */}
     </Routes>
   );
 }
