@@ -19,3 +19,9 @@ export interface GetNoticeBoardResponseDto extends ResponseDto {
   noticeWriteDatetime: string;
   noticeContents: string;
 }
+
+// description: 공지 게시물 조회수 증가 Response Body DTO
+export interface noticeBoardIncreaseViewCountResponseDto extends ResponseDto {
+  noticeNumber: number;
+  viewCount: number;
+}
