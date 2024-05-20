@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie';
+import { useLocation } from 'react-router';
 
 //              interface                   //
 interface Props 
@@ -97,13 +99,13 @@ function SideNavigation({path}:Props)
 
 
 
-//              component                   //
-export default function ServiceContainer()
+//              component : 식당                 //
+export default function Restaurant()
 {
   //            state               //
   const {pathname} = useLocation();
   
-  const { setLoginUserId, setLoginUserRole } = useUserStore();
+  const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
 
   
   const [cookies] = useCookies();
@@ -147,7 +149,6 @@ export default function ServiceContainer()
   useEffect(() => {
     if (!cookies.accessToken) 
     {
-        navigator(AUTH_ABSOLUTE_PATH);
         return;
     }
 
