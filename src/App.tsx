@@ -44,10 +44,10 @@ function App() {
 
       <Route path={RESTAURANT_PATH}/>
         <Route index element={<Restaurant />} />
-        <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
+        {/* <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
-        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} />
+        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
 
 
       {/* <Route path={MYPAGE_PATH} element={<MyPage />} />

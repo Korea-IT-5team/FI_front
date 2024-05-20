@@ -3,12 +3,13 @@ import { CheckEmailRequestDto, CheckNicknameDto, FindEmailRequestDto, NewPasswor
 import { EMAIL_CHECK_REQUEST_URL, FIND_EMAIL_REQUEST_URL, NICKNAME_CHECK_REQUEST_URL, PASSWORD_RESET_REQUEST_URL, PASSWORD_UPDATE_REQUEST_URL, SIGN_IN_REQUEST_URL, SIGN_UP_REQUEST_URL, TEL_NUMBER_AUTH_CHECK_REQUEST_URL, TEL_NUMBER_AUTH_REQUEST_URL } from "src/constant";
 import { requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
+import { FindEmailResponseDto, PasswordResetResponseDto, SignInResponseDto } from "./dto/response";
 
 // function : 로그인 API 함수
 export const signInRequest = async (requestBody: SignInRequestDto) => {
     const result = await axios
         .post(SIGN_IN_REQUEST_URL, requestBody)
-        .then(requestHandler<ResponseDto>)
+        .then(requestHandler<SignInResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
@@ -35,7 +36,7 @@ export const telNumberAuthCheckRequest = async (requestBody: TelNumberAuthCheckR
 export const findEmailRequest = async (requestBody: FindEmailRequestDto) => {
     const result = await axios
         .post(FIND_EMAIL_REQUEST_URL, requestBody)
-        .then(requestHandler<ResponseDto>)
+        .then(requestHandler<FindEmailResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
@@ -62,7 +63,7 @@ export const checkNicknameRequest = async (requestBody: CheckNicknameDto) => {
 export const passwordResetRequest = async (requestBody: PasswordResetRequestDto) => {
     const result = await axios
         .post(PASSWORD_RESET_REQUEST_URL, requestBody)
-        .then(requestHandler<ResponseDto>)
+        .then(requestHandler<PasswordResetResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
