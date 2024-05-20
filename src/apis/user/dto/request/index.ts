@@ -4,12 +4,12 @@ export interface PasswordRecheckRequestDto {
 }
 
 // description: 회원정보 수정 Request Body DTO
-export interface PasswordRecheckRequestDto {
+export interface PatchUserInfoRequestDto {
     nickname: string;
     userAddress: string;
 }
 
 // description: 회원 탈퇴 Request Body DTO
-export interface PasswordRecheckRequestDto {
+export interface DeleteUserRequestDto {
     password: string;
 }
