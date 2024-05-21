@@ -1,12 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Outlet, Path, useNavigate } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { GetRestaurantListRequest } from 'src/apis/restaurant';
-import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { AUTH_PATH, GET_RESTAURANT_URL, MAIN_PATH, POST_RESTAURANT_INFO_UPLOAD, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import './style.css';
@@ -102,10 +100,11 @@ export default function ServiceContainer()
 
   //            render              //
   return (
+    <>
     <div id="wrapper">
         <TopBar/>
-     
-        <Outlet /> 
     </div>
+        <Outlet /> 
+     </>
   )
 }

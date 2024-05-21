@@ -1,59 +1,16 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Outlet, Path, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { AUTH_PATH, GET_RESTAURANT_URL, POST_RESTAURANT_INFO_UPLOAD, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import './style.css';
 
-//              interface                   //
-interface Props 
-{
-  path:Path;
-}
-
-//              component                   //
-function TopBar()
-{
-  //            state                //
-  const {loginUserRole } = useUserStore();
-  const[cookies,setCookie,removeCookie] = useCookies();
-
-  //            function                     //
-  const navigator = useNavigate();
- 
-  //            event handler               //
-  const onLogClickHandler = () => 
-  {
-      navigator(AUTH_PATH);
-      removeCookie('accessToken',{path:'/'});
-  };
-
-  
-   //            render              //
-   return(
-    <>
-      <div className="top-bar-container">
-          <div className="top-bar-left">☰</div>
-          <div className="top-bar-title">Food Insight(푸드 인사이트)</div>
-          <div className='top-bar-right'>
-          {loginUserRole === '' 
-              ? <div className="second-button" onClick={onLogClickHandler}>로그인/회원가입</div>
-              : loginUserRole === 'ROLE_CEO' 
-              ? <div className="second-button" onClick={onLogClickHandler}>사장 로그아웃</div>
-              : loginUserRole === 'ROLE_USER' 
-              ? <div className="second-button" onClick={onLogClickHandler}>사용자 로그아웃</div>
-              : null}
-          </div>
-      </div>
-    </>
-   );
-}
 
 //              component                   //
 function RestaurantList()
@@ -205,10 +162,6 @@ export default function Restaurant()
 
   //            render              //
   return (
-    <div id="wrapper">
-        <TopBar/>
-        <RestaurantList/>
-        <Outlet /> 
-    </div>
+      <RestaurantList/>
   )
 }

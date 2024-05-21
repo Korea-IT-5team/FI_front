@@ -1,3 +1,8 @@
+.wrapper
+{
+    width: 100%;
+}
+
 .top-bar-container {
     
     display: flex;
