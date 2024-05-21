@@ -41,7 +41,7 @@ export const FIND_EMAIL_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_PATH}`;
 export const PASSWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_PATH}`;
 
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
-export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
+export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string | undefined) => `${RESTAURANT_PATH}/info/${restaurantId}`;
 export const RESTAURANT_RESERVATION_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}`;
 export const RESTAURANT_RESERVATION_INFO_ABSOLUTE_PATH = (reservationNumber: number | string) => `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}/info/${reservationNumber}`;
 

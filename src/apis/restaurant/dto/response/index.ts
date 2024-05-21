@@ -21,5 +21,6 @@ export interface GetRestaurantInfoResponseDto extends ResponseDto {
   restaurantNotice: string;
   restaurantRepresentativeMenu: string;
   restaurantBusinessRegistrationNumber: string;
+  restaurantWriterId:string;
   restaurantReviewList: RestaurantReviewListItem[]
 }

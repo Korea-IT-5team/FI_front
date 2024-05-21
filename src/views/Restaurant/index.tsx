@@ -6,7 +6,7 @@ import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { AUTH_PATH, GET_RESTAURANT_URL, POST_RESTAURANT_INFO_UPLOAD } from 'src/constant';
+import { AUTH_PATH, GET_RESTAURANT_URL, POST_RESTAURANT_INFO_UPLOAD, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import './style.css';
@@ -48,8 +48,6 @@ function TopBar()
               ? <div className="second-button" onClick={onLogClickHandler}>사장 로그아웃</div>
               : loginUserRole === 'ROLE_USER' 
               ? <div className="second-button" onClick={onLogClickHandler}>사용자 로그아웃</div>
-              : loginUserRole === 'ROLE_ADMIN' 
-              ? <div className="second-button" onClick={onLogClickHandler}>관리자 로그아웃</div>
               : null}
           </div>
       </div>
@@ -120,13 +118,13 @@ function RestaurantList()
   const onRegistrationClickHandler = () =>
   {     
        if (!cookies.accessToken) return;
-       navigator(POST_RESTAURANT_INFO_UPLOAD);
+       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(undefined));
   };  
 
   const onItemClickHandler = (item:number) =>
     {     
          if (!cookies.accessToken) return;
-         navigator(GET_RESTAURANT_URL(item));
+         navigator(RESTAURANT_INFO_ABSOLUTE_PATH(item));
     };  
 
 
@@ -159,7 +157,7 @@ function RestaurantList()
 
   
 
-//              component : 식당                 //
+//              component : 식당 리스트             //
 export default function Restaurant()
 {
 

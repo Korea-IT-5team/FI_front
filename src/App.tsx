@@ -4,6 +4,8 @@ import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
 import { AUTH_PATH, MAIN_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_INFO_PATH, RESTAURANT_RESERVATION_PATH } from './constant';
 import Restaurant from './views/Restaurant';
+import RestaurantInfo from './views/Restaurant/RestaurantInfo';
+import ServiceContainer from './layouts/ServiceContainer';
 
 // component: root 경로 컴포넌트
 function Index() {
@@ -42,12 +44,12 @@ function App() {
         <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} /> */}
 
 
-      <Route path={RESTAURANT_PATH}/>
+      <Route path={RESTAURANT_PATH} element={<ServiceContainer/>}/>
         <Route index element={<Restaurant />} />
-        <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
+        {/*
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
-        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} />
+        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
 
 
       {/* <Route path={MYPAGE_PATH} element={<MyPage />} />
