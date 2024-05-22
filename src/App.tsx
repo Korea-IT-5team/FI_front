@@ -21,9 +21,9 @@ function Index() {
   const navigator = useNavigate();
 
   //   effect   //
-  useEffect(() => {
-    navigator(MAIN_PATH);
-  }, []);
+  // useEffect(() => {
+  //   navigator(MAIN_PATH);
+  // }, []);
 
   //   render   //
   return <></>;
