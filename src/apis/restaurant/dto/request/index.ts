@@ -16,6 +16,8 @@ export interface PostRestaurantInfoRequestDto {
 
 // description: 식당 정보 수정 Request Body DTO
 export interface PatchRestaurantInfoRequestDto {
+    restaurantId:string;
+    restaurantImage: string;
     restaurantName: string;
     restaurantFoodCategory: string;
     restaurantPostalCode: string;
