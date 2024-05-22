@@ -75,7 +75,7 @@ function RestaurantList()
   const onRegistrationClickHandler = () =>
   {     
        if (!cookies.accessToken) return;
-       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(undefined));
+       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(0));
   };  
 
   const onItemClickHandler = (item:number) =>

@@ -43,9 +43,8 @@ function App() {
         <Route path={FIND_PASSWORD_PATH} element={<FindPassword />} />
         <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} /> */}
 
-    
       <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} />
-        <Route path={RESTAURANT_LIST_PATH} element={<Restaurant/>}/>
+        <Route path={RESTAURANT_LIST_PATH} element={<Restaurant/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         {/*
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
