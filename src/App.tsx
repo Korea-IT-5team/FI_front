@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Route, Routes, useNavigate } from 'react-router';
-import './App.css';
-import { AUTH_PATH, MAIN_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH } from './constant';
+import { RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH } from './constant';
 import ServiceContainer from './layouts/ServiceContainer';
 import Restaurant from './views/Restaurant';
 import RestaurantInfo from './views/RestaurantInfo';
@@ -17,11 +15,9 @@ function Index() {
   const navigator = useNavigate();
 
   //   effect   //
-  useEffect(() => {
-    const accessToken = cookies.accessToken;
-    if (accessToken) navigator(MAIN_PATH);
-    else navigator(AUTH_PATH);
-  }, []);
+  // useEffect(() => {
+  //   navigator(MAIN_PATH);
+  // }, []);
 
   //   render   
   return <></>;
@@ -54,16 +50,18 @@ function App() {
       {/* <Route path={MYPAGE_PATH} element={<MyPage />} />
         <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
         <Route path={USER_DELETE_PATH} element={<UserDelete />} />
-      <Route path={BOARD_PATH} element={<Board />} />
-        <Route path={INQUIRY_PATH} element={<Inquiry />} />
+      <Route path={BOARD_PATH} />
+        <Route path={INQUIRY_PATH} />
+          <Route element={<InquiryList />} />
           <Route path={INQUIRY_BOARD_WRITE_PATH} element={<InquiryWrite />} />
           <Route path={INQUIRY_BOARD_UPDATE_PATH} element={<InquiryUpdate />} />
           <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<MyInquiry />} />
-          <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetails />} />
-        <Route path={NOTICE_PATH} element={<Notice />} />
+          <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} />
+        <Route path={NOTICE_PATH} />
+          <Route element={<NoticeList />} />
           <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
           <Route path={NOTICE_BOARD_UPDATE_PATH} element={<NoticeUpdate />} />
-          <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetails />} /> */}
+      <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetail />} /> */}
     </Routes>
   );
 }

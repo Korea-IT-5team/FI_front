@@ -18,4 +18,6 @@ export interface GetNoticeBoardResponseDto extends ResponseDto {
   noticeWriteId: string;
   noticeWriteDatetime: string;
   noticeContents: string;
+  viewCount: number;
+
 }

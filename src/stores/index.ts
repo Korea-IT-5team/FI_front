@@ -1,3 +1,5 @@
+import useAuthStore from "./auth.store";
 import useUserStore from "./user.store";
 
-export { useUserStore };
+export { useAuthStore, useUserStore };
+
