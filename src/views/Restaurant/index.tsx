@@ -157,7 +157,7 @@ export default function Restaurant()
   }
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, [cookies.accessToken]);
+  }, []);
 
   // path에 대한 객체를 반환
 

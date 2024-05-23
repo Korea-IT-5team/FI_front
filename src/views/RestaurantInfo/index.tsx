@@ -7,10 +7,11 @@ import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestInputbox from 'src/components/RestInputbox';
 import SelectBox from 'src/components/Selectbox';
+import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
-import './style.css';
 import ReviewList from './ReviewList';
+import './style.css';
 
 //              interface                   //
 
@@ -20,11 +21,11 @@ export default function RestaurantInfo()
 {
 
   //            state               //
-  const { loginUserEmailId, loginUserRole } = useUserStore();
+  const { loginUserEmailId, loginUserRole,restaurantId,setRestaurantId } = useUserStore();
   const [cookies] = useCookies();
-  const{RestaurantId} = useParams();
-  let restIdNumber =Number(RestaurantId);
-  let restaurantId =Number(RestaurantId);
+  const{result} = useParams();
+  let restIdNumber =Number(result);
+  let RestaurantId =Number(result);
   const [restaurantImage, setRestaurantImage] = useState('');
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
@@ -71,8 +72,9 @@ export default function RestaurantInfo()
         restaurantPostalCode,restaurantLocation,restaurantTelNumber,
         restaurantSnsAddress,restaurantOperationHours,restaurantFeatures,
         restaurantNotice,restaurantRepresentativeMenu,restaurantBusinessRegistrationNumber,
-        restaurantWriterId,restaurantReviewList
+        restaurantWriterId,restaurantReviewList,restaurantId
        } = result as GetRestaurantInfoResponseDto;
+      setRestaurantId(restaurantId);
       setRestaurantImage(restaurantImage);
       setRestaurantName(restaurantName);
       setRestaurantFoodCategory(restaurantFoodCategory);
@@ -106,7 +108,7 @@ export default function RestaurantInfo()
             return;
         }
 
-        GetRestaurantInfoRequest(restaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
+        GetRestaurantInfoRequest(RestaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
         restIdNumber=1;
   }
 
@@ -134,12 +136,12 @@ export default function RestaurantInfo()
   //          effect              //
   useEffect(() => {
 
-    if (!cookies.accessToken || restaurantId==0 || restIdNumber==0) 
+    if (!cookies.accessToken || restIdNumber==0) 
     {
         return;
     }
 
-      GetRestaurantInfoRequest(restaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
+      GetRestaurantInfoRequest(RestaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
   },[]);
 
 
@@ -307,6 +309,11 @@ const onBusinessNumberKeydownHandler = (event:KeyboardEvent<HTMLInputElement>) =
         onUpdateClickHandler() : onUploadClickHandler()};
 };
 
+const onReservationClickHandler = () => 
+{
+    navigator(RESTAURANT_RESERVATION_ABSOLUTE_PATH);
+};
+
   //            render              //
   return (
     <>
@@ -320,7 +327,7 @@ const onBusinessNumberKeydownHandler = (event:KeyboardEvent<HTMLInputElement>) =
                             <div>
                                 <div>{restaurantName}</div>
                                 {loginUserRole === "ROLE_USER" && (
-                                <button>예약</button>)}
+                                <button onClick={onReservationClickHandler}>예약</button>)}
                             </div>
                         <div>{restaurantFoodCategory}</div>
                         <div>{grade}</div>

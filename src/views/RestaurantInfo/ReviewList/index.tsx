@@ -1,13 +1,11 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import { DELETEReviewRequestDto, PatchReviewUpDateRequestDto, PostReviewUploadRequestDto } from 'src/apis/restaurant/review';
 import { PatchReviewRequestDto, PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
 import RestInputbox from 'src/components/RestInputbox';
-import SelectBox from 'src/components/Selectbox';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 
@@ -20,14 +18,12 @@ interface Props {
 export default function ReviewList({ value,getRestaurantInfoResponse }: Props) 
 {
     //                      state                           //
-    const { loginUserEmailId, loginUserRole } = useUserStore();
+    const { loginUserEmailId, loginUserRole,restaurantId } = useUserStore();
     const [page,setPage] = useState<boolean>(true);
     const [reviewImage,setReviewImage] = useState<string>("");
     const [rating,setRating] = useState<number>(0);
     const [reviewContents,setReviewContents] = useState<string>("");
-    const{RestaurantId} = useParams();
     const [cookies] = useCookies();
-    let restaurantId = Number(RestaurantId);
 
 
     //                  function                            //
@@ -104,7 +100,7 @@ export default function ReviewList({ value,getRestaurantInfoResponse }: Props)
 
     const onDeleteClickHandler = (item:RestaurantReviewListItem) =>
     {
-        DELETEReviewRequestDto(restaurantId,cookies.accessToken).then(DELETEReviewResponseDto);
+        DELETEReviewRequestDto(item.reviewNumber,cookies.accessToken).then(DELETEReviewResponseDto);
     }
 
     const onRatingKeydownHandler = (event:KeyboardEvent<HTMLInputElement>) =>
