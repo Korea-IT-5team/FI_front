@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Outlet } from 'react-router';
 
 
-//   component: 로그인, 회원가입   //
+//   component: 로그인, 회원가입 공통부분  //
 export default function Authentication() {
     //                    render                    //
     return (
