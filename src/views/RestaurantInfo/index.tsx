@@ -10,6 +10,7 @@ import SelectBox from 'src/components/Selectbox';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import './style.css';
+import ReviewList from './ReviewList';
 
 //              interface                   //
 
@@ -335,7 +336,7 @@ const onSetRestIdNumberHandler = () =>
                     </div>            
 
                     <div id="restaurant-right-down">   
-                        {loginUserRole === "ROLE_USER" && (<button>리뷰작성</button>)}
+                         <ReviewList value={restaurantReviewList} />        
                     </div>
                 </div>
             </div>
