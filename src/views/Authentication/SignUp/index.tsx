@@ -138,8 +138,7 @@ export default function SignUp() {
         alert(message);
         return;
     }
-
-};
+  };
 
   // event handler // 
   const onEmailIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

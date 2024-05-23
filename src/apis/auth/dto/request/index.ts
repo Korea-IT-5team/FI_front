@@ -19,6 +19,7 @@ export interface TelNumberAuthCheckRequestDto {
 export interface FindEmailRequestDto {
     userName: string;
     userTelNumber: string;
+    authNumber: string;
 }
 
 // description: 중복된 이메일 확인 Request Body DTO

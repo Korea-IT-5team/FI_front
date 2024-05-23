@@ -7,6 +7,7 @@ import Authentication from './layouts/AuthenticationContainer';
 import SignIn, { Sns } from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
 import BusinessRegistration from './views/Authentication/BusinessRegistration';
+<<<<<<< HEAD
 import InquiryList from './views/service/board/inquiryboard/InquiryList';
 import InquiryWrite from './views/service/board/inquiryboard/InquiryWrite';
 import InquiryUpdate from './views/service/board/inquiryboard/InquiryUpdate';
@@ -15,6 +16,10 @@ import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
+=======
+import FindEmail from './views/Authentication/FindEmail';
+import PasswordReset from './views/Authentication/PasswordReset';
+>>>>>>> 02ead6963a68f725ef0cce45785a8aeddc368f0e
 
 
 // component: root 경로 컴포넌트
@@ -44,8 +49,13 @@ function App() {
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
+<<<<<<< HEAD
         {/* <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
         <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />  */}
+=======
+        <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
+        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />
+>>>>>>> 02ead6963a68f725ef0cce45785a8aeddc368f0e
       </Route>
       {/* <Route path={RESTAURANT_PATH} element={<Restaurant />} >
         <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
@@ -63,6 +73,7 @@ function App() {
             <Route path={INQUIRY_BOARD_WRITE_PATH} element={<InquiryWrite />} />
             <Route path={INQUIRY_BOARD_UPDATE_PATH} element={<InquiryUpdate />} />
             <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<MyInquiry />} />
+<<<<<<< HEAD
             {/* <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} /> */}
         </Route>
         <Route path={NOTICE_PATH} >
@@ -72,6 +83,17 @@ function App() {
             <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetail />} />
         </Route>
       </Route>
+=======
+            <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} />
+        </Route>
+        <Route path={NOTICE_PATH} >
+          <Route element={<NoticeList />} />
+            <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
+            <Route path={NOTICE_BOARD_UPDATE_PATH} element={<NoticeUpdate />} />
+            <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetail />} />
+        </Route> */}
+      {/* </Route> */}
+>>>>>>> 02ead6963a68f725ef0cce45785a8aeddc368f0e
     </Routes>
   );
 }
