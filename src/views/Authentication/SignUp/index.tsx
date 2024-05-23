@@ -1,7 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import "./style.css";
-import SignInBackground from 'src/assets/image/sign-in-background.png';
-import SignUpBackground from 'src/assets/image/sign-up-background.png';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { checkNicknameRequest, emailCheckRequest, signInRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
@@ -12,149 +10,9 @@ import InputBox from 'src/components/inputBox/Index';
 import { MAIN_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useAuthStore } from 'src/stores';
 
-//   component: Sns 로그인   //
-export function Sns() {
-
-  // state //
-  const { accessToken, expires } = useParams();
-  const [cookies, setCookie] = useCookies();
-
-  // function //
-  const navigator = useNavigate();
-
-  // effect //
-  useEffect(() => {
-    if (!accessToken || !expires) return;
-    const expiration = new Date(Date.now() + (Number(expires) * 1000));
-    setCookie('accessToken', accessToken, { path: '/', expires: expiration });
-
-    navigator(SIGN_IN_ABSOLUTE_PATH);
-}, []);
-
-  //   render   //
-  return(
-    <></>
-  );
-}
-
-// type //
-type AuthPage = 'sign-in' | 'sign-up';
-
-// interface //
-interface SnsContainerProps {
-  title: string;
-}
-
-// component // 
-function SnsContainer({ title }: SnsContainerProps) {
-
-  // event handler //
-  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-    // 주소 확인
-      window.location.href = 'http://localhost:9999/api/v1/auth/oauth2/' + type;
-  };
-    // render: sns화면 //
-    return (
-      <div className="authentication-sns-container">
-          <div className="sns-container-title label">{title}</div>
-          <div className="sns-button-container">
-              <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
-              <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
-          </div>
-      </div>
-  );
-}
-
-// interface //
-interface Props {
-  onLinkClickHandler: () => void
-}
-
-//   component: 로그인   //
-function SignIn({onLinkClickHandler}: Props) {
-
-  // state //
-  const [cookie, setCookie] = useCookies();
-
-  const [emailId, setEmailId] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const [message, setMessage] = useState<string>('');
-
-  // function // 
-  const navigator = useNavigate();
-
-  const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
-
-    const message = 
-    !result ? '서버에 문제가 있습니다.' :
-    result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' : 
-    result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-    result.code === 'TF' ? '서버에 문제가 있습니다.' :
-    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  setMessage(message);
-
-  const isSuccess = result && result.code === 'SU';
-  if (!isSuccess) return;
-
-  const { accessToken, expires } = result as SignInResponseDto;
-  const expiration = new Date(Date.now() + (expires * 1000));
-  setCookie('accessToken', accessToken, {path: '/', expires: expiration})
-
-  navigator(MAIN_PATH);
-  };
-
-  // event handler //
-  const onEmailIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmailId(event.target.value);
-    setMessage('');
-  };
-
-  const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    setMessage('');
-  };
-
-  const onPasswordKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== 'Enter') return;
-    onSignInButtonClickHandler();
-  };
-
-  const onSignInButtonClickHandler = () => {
-        
-    if (!emailId || !password) {
-        setMessage('이에일과 비밀번호를 모두 입력하세요.');
-        return;
-    }
-
-    const requestBody: SignInRequestDto = {
-        userEmailId: emailId,
-        password: password
-    }
-    signInRequest(requestBody).then(signInResponse);
-    
-  };
-
-
-  //   render   //
-  return(
-    <div className="authentication-contents">
-    <div className="authentication-input-container">
-        <InputBox label="이메일" type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} />
-        <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
-    </div>
-    <div className="authentication-button-container">
-        <div className="primary-button full-width" onClick={onSignInButtonClickHandler}>로그인</div>
-        <div className="text-link" onClick={onLinkClickHandler}>회원가입</div>
-    </div>
-    <div className="short-divider"></div>
-    <SnsContainer title="SNS 로그인" />
-</div>
-  );
-}
 
 //   component: 회원가입   //
-function SignUp({onLinkClickHandler}: Props) {
+export default function SignUp() {
 
   //   state   //
   const { 
@@ -280,7 +138,6 @@ function SignUp({onLinkClickHandler}: Props) {
         alert(message);
         return;
     }
-    onLinkClickHandler();
 
 };
 
@@ -441,12 +298,17 @@ function SignUp({onLinkClickHandler}: Props) {
 };
 
 // 사원등록 번호 인증 버튼 핸들러 추가
+  const onBusinessRegistrationButtonClickHandler = () => {
+    // API 사용
+  }
 // 일반회원 건너띄기 버튼 핸들러 추가 
+  const onBusinessRegistrationPassButtonClickHandler = () => {
+    // 로그인 페이지로 이동하기 버튼 
+  }
 
   //   render   //
   return(
     <div className="authentication-contents">
-      <SnsContainer title="SNS 회원가입" />
       <div className="short-divider"></div>
       <div className="authentication-input-container">
 
@@ -469,57 +331,9 @@ function SignUp({onLinkClickHandler}: Props) {
       </div>
       <div className="authentication-button-container">
           <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>회원가입</div>
-          <div className="text-link" onClick={onLinkClickHandler}>로그인</div>
+          <div className="text-link" onClick={()=>{}}>로그인</div>
       </div>
   </div>
   );
 }
 
-//   component: 사업자등록번호 확인   //
-function BusinessRegistration() {
-
-  // state //
-  const { emailId, password, nickname, userTelNumber,authNumber,userAddress,userName} = useAuthStore();
-
-  // function //
-  const navigator = useNavigate();
-
-  // 기능적 부분에서는 추가할 사항 없고 render부분 추가하기 
-  //   render   //
-  return(
-    <></>
-  );
-}
-
-//   component: 로그인, 회원가입   //
-export default function Authentication() {
-
-  //                    state                    //
-  const [page, setPage] = useState<AuthPage>('sign-in');
-
-  //                    event handler                    //
-  const onLinkClickHandler = () => {
-      if (page === 'sign-in') setPage('sign-up');
-      else setPage('sign-in');
-  };
-
-  //                    constant                    //
-  const AuthenticationContents = 
-      page === 'sign-in' ? 
-          <SignIn onLinkClickHandler={onLinkClickHandler} /> : 
-          <SignUp onLinkClickHandler={onLinkClickHandler} />;
-
-  //                    render                    //
-  return (
-      <div id="authentication-wrapper">
-          <div className="authentication-box">
-              <div className="authentication-container">
-                  <div className="authentication-title h1">
-                      {"Food Insight"}
-                  </div>
-                  { AuthenticationContents }
-              </div>
-          </div>
-      </div>
-  );
-}
