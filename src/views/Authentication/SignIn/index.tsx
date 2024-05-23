@@ -1,4 +1,5 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import "./style.css";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
 import { signInRequest } from "src/apis/auth";
@@ -46,7 +47,6 @@ function SnsContainer({ title }: SnsContainerProps) {
 
     // event handler //
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-        // 주소 확인
         window.location.href = 'http://localhost:9999/api/v1/auth/oauth2/' + type;
     };
     // render: sns화면 //
@@ -129,16 +129,31 @@ export default function SignIn() {
     //   render   //
     return (
         <div className="authentication-contents">
-            <div className="authentication-input-container">
-                <InputBox label="이메일" type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} />
-                <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
+            <div className="authentication-sign-title">로그인</div>
+            <div className="authentication-contents-box">
+                <div className="authentication-input-container">
+                    <div className="input-email">
+                        <InputBox label="이메일" type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} />
+                    </div>
+                    <div className="input-password">
+                        <InputBox label="비밀번호" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
+                    </div>
+                </div>
+                <div className="authentication-button-container">
+                    <div className="primary-button full-width" onClick={onSignInButtonClickHandler}>로그인</div>
+                </div>
             </div>
-            <div className="authentication-button-container">
-                <div className="primary-button full-width" onClick={onSignInButtonClickHandler}>로그인</div>
-                <div className="text-link" onClick={() => {}}>회원가입</div>
+            <div className="find-container">
+                <div className="find-email">이메일 찾기</div>
+                <div className="reset-password">비밀번호 재설정</div>
+                <div className="user-sign-up">
+                    <div className="text-link" onClick={() => {}}>회원가입</div>
+                </div>
             </div>
-            <div className="short-divider"></div>
-            <SnsContainer title="SNS 로그인" />
+            <div className="SNS-container">
+                <div className="short-divider"></div>
+                <SnsContainer title="SNS 로그인" />
+            </div>
         </div>
     );
 }

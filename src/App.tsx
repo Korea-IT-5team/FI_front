@@ -7,6 +7,8 @@ import Authentication from './layouts/AuthenticationContainer';
 import SignIn, { Sns } from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
 import BusinessRegistration from './views/Authentication/BusinessRegistration';
+import FindEmail from './views/Authentication/FindEmail';
+import PasswordReset from './views/Authentication/PasswordReset';
 
 
 // component: root 경로 컴포넌트
@@ -36,8 +38,8 @@ function App() {
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
-        {/* <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
-        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} /> */}
+        <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
+        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />
       </Route>
       {/* <Route path={RESTAURANT_PATH} element={<Restaurant />} >
         <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
@@ -51,19 +53,17 @@ function App() {
       </Route>
       <Route path={BOARD_PATH} >
         <Route path={INQUIRY_PATH} >
-          <Route element={<InquiryList />} >
+          <Route element={<InquiryList />} />
             <Route path={INQUIRY_BOARD_WRITE_PATH} element={<InquiryWrite />} />
             <Route path={INQUIRY_BOARD_UPDATE_PATH} element={<InquiryUpdate />} />
             <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<MyInquiry />} />
             <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} />
-          </Route>
         </Route>
         <Route path={NOTICE_PATH} >
-          <Route element={<NoticeList />} >
+          <Route element={<NoticeList />} />
             <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
             <Route path={NOTICE_BOARD_UPDATE_PATH} element={<NoticeUpdate />} />
             <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetail />} />
-          </Route>
         </Route> */}
       {/* </Route> */}
     </Routes>

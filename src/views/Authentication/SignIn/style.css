@@ -1,0 +1,53 @@
+.authentication-contents {
+    background-color: aqua;
+}
+
+.authentication-sign-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.authentication-contents-box {
+    background-color: blue;
+}
+
+.authentication-input-container {
+    background-color: blueviolet;
+}
+
+.input-email {
+    background-color: cadetblue;
+}
+
+.input-password {
+    background-color: darkkhaki;
+}
+
+.authentication-button-container {
+    background-color: chartreuse;
+}
+
+.find-container {
+    background-color: brown;
+}
+
+.find-email {
+    background-color: chartreuse;
+}
+
+.reset-password {
+    background-color: hotpink;
+}
+
+.user-sign-up {
+    background-color: rgb(15, 98, 124);
+}
+
+.SNS-container {
+    background-color: mediumpurple;
+}
+
+
