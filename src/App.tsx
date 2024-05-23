@@ -3,9 +3,10 @@ import './App.css';
 import { Route, Routes, useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_INFO_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
-import Authentication, { BusinessRegistration, Sns } from './views/Authentication';
+import Authentication from './layouts/AuthenticationContainer';
+import SignIn, { Sns } from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
-import SignIn from './views/Authentication/SignIn';
+import BusinessRegistration from './views/Authentication/BusinessRegistration';
 
 
 // component: root 경로 컴포넌트
@@ -35,10 +36,10 @@ function App() {
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
-        <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
-        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />
+        {/* <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
+        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} /> */}
       </Route>
-      <Route path={RESTAURANT_PATH} element={<Restaurant />} >
+      {/* <Route path={RESTAURANT_PATH} element={<Restaurant />} >
         <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
@@ -63,8 +64,8 @@ function App() {
             <Route path={NOTICE_BOARD_UPDATE_PATH} element={<NoticeUpdate />} />
             <Route path={NOTICE_DETAILS_PATH} element={<NoticeDetail />} />
           </Route>
-        </Route>
-      </Route>
+        </Route> */}
+      {/* </Route> */}
     </Routes>
   );
 }
