@@ -308,13 +308,12 @@ const onSetRestIdNumberHandler = () =>
                         <div id="restaurant_image">{restaurantImage}</div>
                             <div>
                                 <div>{restaurantName}</div>
-                                {loginUserRole === "ROLE_USER" || (loginUserRole === "ROLE_CEO" && loginUserEmailId !== restaurantWriterId )&& (
+                                {loginUserRole === "ROLE_USER" && (
                                 <button>예약</button>)}
                             </div>
                         <div>{restaurantFoodCategory}</div>
                         <div>{grade}</div>
-                        {loginUserRole === "ROLE_USER" || (loginUserRole === "ROLE_CEO" && loginUserEmailId !== restaurantWriterId )&& (
-                        <button>찜클릭</button>)}
+                        {loginUserRole === "ROLE_USER"&& (<button>찜클릭</button>)}
                     </div> 
 
                     <div id="restaurant-left-down">
@@ -336,8 +335,7 @@ const onSetRestIdNumberHandler = () =>
                     </div>            
 
                     <div id="restaurant-right-down">   
-                        {loginUserRole === "ROLE_USER" || (loginUserRole === "ROLE_CEO" && loginUserEmailId !== restaurantWriterId )&& (
-                        <button>리뷰작성</button>)}
+                        {loginUserRole === "ROLE_USER" && (<button>리뷰작성</button>)}
                     </div>
                 </div>
             </div>
