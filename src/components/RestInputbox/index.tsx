@@ -6,7 +6,7 @@ export interface InputBoxProps {
     type: 'text' | 'password' |'file';
     value: string;
     placeholder: string;
-    onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+    onChangeHandler?: (event: ChangeEvent<HTMLInputElement>) => void;
     message?: string;
     error?: boolean;
     accept?:'image/*';

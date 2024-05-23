@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
@@ -19,6 +19,7 @@ function RestaurantList()
   //                  state                             //
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
+  const{path} = useParams();
   const[cookies] = useCookies();
   const {loginUserRole } = useUserStore();
   
@@ -52,7 +53,7 @@ function RestaurantList()
   }
 
     GetRestaurantListRequest(searchWord,cookies.accessToken).then(GetRestaurantListResponse);
-   }, []);
+   }, [path]);
 
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './style.css';
+import { useUserStore } from "src/stores";
 
 interface Prop {
     value: string;
@@ -29,6 +30,7 @@ export default function SelectBox({ value, onChange }: Prop) {
     //                    state                    //
     const [show, setShow] = useState<boolean>(false);
     const [name,setName] = useState<string>('');
+    const { loginUserEmailId, loginUserRole } = useUserStore();
     
     //                    event handler                    //
     const onButtonClickHandler = () => {

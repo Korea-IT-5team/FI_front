@@ -18,7 +18,7 @@ export const GetRestaurantListRequest = async (word:string,accessToken:string) =
     
 
 // function : 특정 식당 정보 검색 API 함수
-export const GetRestaurantInfoRequest = async (restaurantId:number|string,accessToken:string) => 
+export const GetRestaurantInfoRequest = async (restaurantId:number,accessToken:string) => 
 {
         const result = await axios.put(GET_RESTAURANT_URL(restaurantId),bearerAuthorization(accessToken))
         .then(requestHandler<GetRestaurantInfoResponseDto>)

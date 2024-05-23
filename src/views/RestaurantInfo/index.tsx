@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -22,8 +22,9 @@ export default function RestaurantInfo()
   //            state               //
   const { loginUserEmailId, loginUserRole } = useUserStore();
   const [cookies] = useCookies();
-  const{restId} = useParams();
-  let restIdNumber =Number(restId);
+  const{RestaurantId} = useParams();
+  let restIdNumber =Number(RestaurantId);
+  let restaurantId =Number(RestaurantId);
   const [restaurantImage, setRestaurantImage] = useState('');
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
@@ -49,7 +50,7 @@ export default function RestaurantInfo()
 
   const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck
   && restaurantBusinessRegistrationNumberCheck;
-  const signUpButtonClass = `${isRestUploadUpActive ? 'primary' : 'disable'}-button full-width`;
+  const ButtonClass = `${isRestUploadUpActive ? 'primary' : 'disable'}-button full-width`;
 
   //                    function                    /
 
@@ -105,6 +106,7 @@ export default function RestaurantInfo()
             return;
         }
 
+        GetRestaurantInfoRequest(restaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
         restIdNumber=1;
   }
 
@@ -124,6 +126,7 @@ export default function RestaurantInfo()
             return;
         }
 
+        GetRestaurantInfoRequest(restaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
         restIdNumber=1;
   }
  
@@ -131,18 +134,18 @@ export default function RestaurantInfo()
   //          effect              //
   useEffect(() => {
 
-    if (!cookies.accessToken || restId==undefined || restIdNumber==0) 
+    if (!cookies.accessToken || restaurantId==0 || restIdNumber==0) 
     {
         return;
     }
 
-      GetRestaurantInfoRequest(restId,cookies.accessToken).then(GetRestaurantInfoResponse);
+      GetRestaurantInfoRequest(restaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
   },[]);
 
 
 
   useEffect(() => {
-    if (!cookies.accessToken || restId==undefined) 
+    if (!cookies.accessToken || restaurantId==undefined) 
     {
             return;
     }
@@ -189,7 +192,7 @@ export default function RestaurantInfo()
 const onUpdateClickHandler = () => {
     
     if(!restaurantImage || !restaurantName || !restaurantFoodCategory 
-        || !restaurantPostalCode|| !restaurantLocation || !restId)
+        || !restaurantPostalCode|| !restaurantLocation || !restaurantId)
     {
         alert('필수 정보를 입력하지 않았습니다.');
         return;
@@ -197,7 +200,7 @@ const onUpdateClickHandler = () => {
 
     const requestBody: PatchRestaurantInfoRequestDto = 
     {
-        restaurantId:restId,
+        restaurantId:restaurantId,
         restaurantImage:restaurantImage,
         restaurantName:restaurantName,
         restaurantFoodCategory: restaurantFoodCategory,
@@ -297,6 +300,13 @@ const onSetRestIdNumberHandler = () =>
     restIdNumber=0;
 }
 
+const onBusinessNumberKeydownHandler = (event:KeyboardEvent<HTMLInputElement>) =>
+{
+        if(event.key!=='Enter') return;
+        {restaurantWriterId ?
+        onUpdateClickHandler() : onUploadClickHandler()};
+};
+
   //            render              //
   return (
     <>
@@ -334,9 +344,8 @@ const onSetRestIdNumberHandler = () =>
                         {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && 
                         (<div>{restaurantBusinessRegistrationNumber}</div>)}
                     </div>            
-
                     <div id="restaurant-right-down">   
-                         <ReviewList value={restaurantReviewList} />        
+                         <ReviewList value={restaurantReviewList} getRestaurantInfoResponse={GetRestaurantInfoResponse}/>        
                     </div>
                 </div>
             </div>
@@ -350,7 +359,9 @@ const onSetRestIdNumberHandler = () =>
                                     <RestInputbox label="식당 이름" type="text" value={restaurantName}
                                     placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
                                 </div>
-                            <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} /> 
+                            <div>  
+                                <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
+                            </div>
                         </div> 
     
                         <div id="restaurant-left-down">
@@ -383,13 +394,14 @@ const onSetRestIdNumberHandler = () =>
                             placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler}/>
                             
                             <RestInputbox label="사업자 등록번호" type="text" value={restaurantBusinessRegistrationNumber}
-                            placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}/>
+                            placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}
+                            onKeydownHandler={onBusinessNumberKeydownHandler}/>
 
                             {restaurantWriterId ?
                               <button onClick={onUpdateClickHandler}
-                              className={signUpButtonClass}>수정</button> : 
+                              className={ButtonClass}>수정하기</button> : 
                               <button onClick={onUploadClickHandler}
-                              className={signUpButtonClass}>등록하기</button>}
+                              className={ButtonClass}>등록하기</button>}
                         </div>           
                     </div>
                 </div>
