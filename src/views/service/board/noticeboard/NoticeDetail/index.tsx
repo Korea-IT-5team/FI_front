@@ -118,26 +118,21 @@ export default function NoticeDetail() {
     }, []);
     
     //                    render                    //
-    const coverdWriterId = noticeWriteId !== '' && (noticeWriteId[0] + '*'.repeat(noticeWriteId.length - 1));
     return (
-        <div id='qna-detail-wrapper'>
-            <div id='detail-main-box'>
-                <div id='detail-board-box'>
-                    <div id='detail-top-box'></div>
-                    <div id='detail-search-box'></div>
-                    <div id='detail-info-box'>
-                        <div id='detail-info-box-right'>
-                            <div className='detail-info-box-number'>번호</div>
-                            <div className='detail-info-box-status'>상태</div>
-                            <div className='detail-info-box-title'>제목</div>
-                            <div className='detail-info-box-writer'>작성자</div>
-                            <div className='detail-info-box-write-date'>작성시간</div>
-                        </div>
+        <div id='notice-detail-wrapper'>
+            <div className='notice-detail-main-box'>
+                <div className='notice-detail-title'>제목</div>
+                <div className='notice-detail-info-box'>
+                    <div className='notice-detail-mini-box'>
+                        <div className='notice-detail-writeid'>작성자</div>
+                        <div className='notice-detail-date'>날짜</div>
+                        <div className='notice-detail-count'>조회수</div>
                     </div>
-                    <div id='detail-page-box'>
-                        <div className='detail-page-number'>페이지네이션</div>
-                        <div className='detail-writer-button'>글쓰기버튼</div>
-                    </div>
+                    <div className='notice-detail-content'>내용</div>
+                </div>
+                <div className='notice-detail-update-delete-box'>
+                    <div className='notice-detail-update'>수정</div>
+                    <div className='notice-detail-delete'>삭제</div>
                 </div>
             </div>
         </div>

@@ -27,8 +27,9 @@ export const INQUIRY_MY_BOARD_LIST_PATH = 'my-board';
 export const INQUIRY_DETAILS_PATH = ':inquiryNumber';
 
 export const NOTICE_PATH = 'notice'; 
+export const NOTICE_BOARD_LIST_PATH = 'list';
 export const NOTICE_BOARD_WRITE_PATH = 'write';
-export const NOTICE_BOARD_UPDATE_PATH =  'update';
+export const NOTICE_BOARD_UPDATE_PATH = 'update';
 export const NOTICE_DETAILS_PATH = ':noticeNumber';
 
 // description: Navigation 절대 URL PATH 
@@ -56,6 +57,7 @@ export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: number | strin
 export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
 export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
 
+export const NOTICE_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_LIST_PATH}`;
 export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
 export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
 export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
@@ -135,3 +137,6 @@ export const GET_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER
 export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}/view-count`;
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
 export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
+
+export const COUNT_PER_PAGE = 10;
+export const COUNT_PER_SECTION = 10;
