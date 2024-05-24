@@ -23,7 +23,6 @@ export default function NoticeWrite() {
   const navigator = useNavigate();
 
   const postBoardResponse = (result: ResponseDto | null ) => {
-
       const message =
           !result ? '서버에 문제가 있습니다.' : 
           result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
@@ -34,7 +33,6 @@ export default function NoticeWrite() {
           alert(message);
           return;
       }
-
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
@@ -45,9 +43,9 @@ export default function NoticeWrite() {
 };
 
 const NoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  const noticecontents = event.target.value;
-  if (noticecontents.length > 1000) return;
-  setNoticeContents(noticecontents);
+  const noticeContents = event.target.value;
+  if (noticeContents.length > 1000) return;
+  setNoticeContents(noticeContents);
 
   if (!contentsRef.current) return;
   contentsRef.current.style.height = 'auto';

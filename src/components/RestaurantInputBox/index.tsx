@@ -10,10 +10,10 @@ export interface InputBoxProps {
     message?: string;
     error?: boolean;
     accept?:'image/*';
-    onKeydownHandler?:(event:KeyboardEvent<HTMLInputElement>) => void;
+    onKeydownHandler?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export default function RestInputbox({ label, type, value, placeholder,accept, onChangeHandler, onKeydownHandler }: InputBoxProps) {
+export default function RestaurantInputBox({ label, type, value, placeholder, accept, onChangeHandler, onKeydownHandler }: InputBoxProps) {
 
     return (
         <div className="input-box">

@@ -5,7 +5,7 @@ import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import { DELETEReviewRequestDto, PatchReviewUpDateRequestDto, PostReviewUploadRequestDto } from 'src/apis/restaurant/review';
 import { PatchReviewRequestDto, PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
-import RestInputbox from 'src/components/RestInputbox';
+import RestInputBox from 'src/components/RestaurantInputBox';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 
@@ -38,7 +38,8 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             alert(message);
             return;
         }
-        GetRestaurantInfoRequest(restaurantId, cookies.accessToken).then(getRestaurantInfoResponse);
+        GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
+            .then(getRestaurantInfoResponse);
     }
 
 
@@ -54,7 +55,8 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             alert(message);
             return;
         }
-        GetRestaurantInfoRequest(restaurantId, cookies.accessToken).then(getRestaurantInfoResponse);
+        GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
+            .then(getRestaurantInfoResponse);
     }
 
 
@@ -70,7 +72,8 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             alert(message);
             return;
         }
-        GetRestaurantInfoRequest(restaurantId, cookies.accessToken).then(getRestaurantInfoResponse);
+        GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
+            .then(getRestaurantInfoResponse);
     }
 
     //          effect              //
@@ -111,7 +114,8 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             rating: rating,
             reviewContents: reviewContents
         }
-        PostReviewUploadRequestDto(restaurantId, requestBody, cookies.accessToken).then(PostReviewUploadResponseDto);
+        PostReviewUploadRequestDto(restaurantId, requestBody, cookies.accessToken)
+            .then(PostReviewUploadResponseDto);
     }
 
 
@@ -127,7 +131,8 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             rating: rating,
             reviewContents: reviewContents
         }
-        PatchReviewUpDateRequestDto(restaurantId, requestBody, cookies.accessToken).then(PatchReviewUploadResponseDto);
+        PatchReviewUpDateRequestDto(restaurantId, requestBody, cookies.accessToken)
+            .then(PatchReviewUploadResponseDto);
     }
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -180,7 +185,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
                 </>
             ) : (
                 <>
-                    <RestInputbox label="리뷰 이미지" type="file" value={reviewImage}
+                    <RestInputBox label="리뷰 이미지" type="file" value={reviewImage}
                         placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} />
 
                     <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
@@ -195,7 +200,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
                         <option value="5.0">5.0</option>
                     </select>
 
-                    <RestInputbox label="내용" type="file" value={reviewContents} onKeydownHandler={onRatingKeydownHandler}
+                    <RestInputBox label="내용" type="file" value={reviewContents} onKeydownHandler={onRatingKeydownHandler}
                         placeholder="평점 내용을 입력해주세요" onChangeHandler={onContentsChangeHandler} />
 
                     {rating ?

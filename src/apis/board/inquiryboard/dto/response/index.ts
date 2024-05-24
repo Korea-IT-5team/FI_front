@@ -11,7 +11,7 @@ export interface GetSearchInquiryBoardListResponseDto extends ResponseDto {
   inquiryBoardList: InquiryBoardListItem[];
 }
 
-// description: 문의 게시물 확인 Reponse Body DTO
+// description: 문의 게시물 확인 Response Body DTO
 export interface GetInquiryBoardResponseDto extends ResponseDto {
   inquiryNumber: number;
   inquiryTitle: string;
@@ -21,7 +21,7 @@ export interface GetInquiryBoardResponseDto extends ResponseDto {
   comment: string;
 }
 
-// description: 나의 문의 게시물 목록 확인 Reponse Body DTO
+// description: 나의 문의 게시물 목록 확인 Response Body DTO
 export interface GetMyInquiryBoardListResponseDto extends ResponseDto {
   inquiryBoardList: InquiryBoardListItem[];
 }

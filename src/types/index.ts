@@ -21,7 +21,7 @@ export interface RestaurantReservationListItem {
   reservationNumber: number;
   reservationStatus: boolean;
   reservationRestaurantId: number;
-  reservatoinRestaurantName: string;
+  reservationRestaurantName: string;
   reservationUserId: string;
   reservationDate: string;
   reservationTime: string;
