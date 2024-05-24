@@ -21,7 +21,11 @@ export default function RestaurantInfo()
 {
 
   //            state               //
+<<<<<<< HEAD
+  const { loginUserEmailId, loginUserRole,restaurantId,reservationStatus,setRestaurantId } = useUserStore();
+=======
   const { loginUserEmailId, loginUserRole, restaurantId, setRestaurantId } = useUserStore();
+>>>>>>> 45ef4e4762c1be424e01e62ce54f4b15b836ae0f
   const [cookies] = useCookies();
   const{result} = useParams();
   let restIdNumber =Number(result);
@@ -141,9 +145,9 @@ export default function RestaurantInfo()
         return;
     }
 
-    GetRestaurantInfoRequest(RestaurantId,cookies.accessToken)
+      GetRestaurantInfoRequest(RestaurantId,cookies.accessToken)
         .then(GetRestaurantInfoResponse);
-  },[]);
+  },[result]);
 
 
 
@@ -329,8 +333,12 @@ const onReservationClickHandler = () =>
                         <div id="restaurant_image">{restaurantImage}</div>
                             <div>
                                 <div>{restaurantName}</div>
-                                {loginUserRole === "ROLE_USER" && (
-                                <button onClick={onReservationClickHandler}>예약</button>)}
+                            {reservationStatus} ?
+                                ({loginUserRole === "ROLE_USER" && (
+                                <button onClick={onReservationClickHandler}>예약</button>)})
+                                        :
+                                ({loginUserRole === "ROLE_USER" && (
+                                <button onClick={onReservationCancelClickHandler}>예약취소</button>)})
                             </div>
                         <div>{restaurantFoodCategory}</div>
                         <div>{grade}</div>
