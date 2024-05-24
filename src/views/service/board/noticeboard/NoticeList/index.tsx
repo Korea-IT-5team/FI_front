@@ -30,7 +30,7 @@ function ListItem ({
       <div className='qna-list-table-title'>{noticeTitle}</div>
       <div className='qna-list-table-writer-id'>{noticeWriteId}</div>
       <div className='qna-list-table-write-date'>{noticeWriteDatetime}</div>
-      <div className='qna-list-table-viewcount'>{noticeViewCount}</div>
+      <div className='qna-list-table-viewCount'>{noticeViewCount}</div>
     </div>
   );
 }
@@ -38,7 +38,7 @@ function ListItem ({
 // component: 공지사항 목록보기 //
 export default function NoticeList() {
   //                    state                    //
-  const {loginUserId, loginUserRole} = useUserStore();
+  const {loginUserEmailId, loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
 
@@ -58,11 +58,11 @@ export default function NoticeList() {
   //                    function                    //
   const navigator = useNavigate();
   
-  const changePage = (noticeBoardList: NoticeBoardListItem[], totalLenght: number) => {
+  const changePage = (noticeBoardList: NoticeBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
     const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
     let endIndex = currentPage * COUNT_PER_PAGE;
-    if (endIndex > totalLenght - 1) endIndex = totalLenght;
+    if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = noticeBoardList.slice(startIndex, endIndex);
     setViewList(viewList);
   };

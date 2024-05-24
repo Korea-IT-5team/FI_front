@@ -20,16 +20,16 @@ export default function SelectBox({ value, onChange }: Prop) {
         { name: '소고기' , value: '소고기' },
         { name: '돼지고기' , value: '돼지고기' },
         { name: '미역국' , value: '미역국' },
-        { name: '뷔폐' , value: '뷔폐' },
+        { name: '뷔페' , value: '뷔페' },
         { name: '치킨' , value: '치킨' },
         { name: '한식' , value: '한식' },
         { name: '마라탕' , value: '마라탕' },
-        { name: '중식' , value: '중식' },
+        { name: '중식' , value: '중식' }
     ];
 
     //                    state                    //
     const [show, setShow] = useState<boolean>(false);
-    const [name,setName] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const { loginUserEmailId, loginUserRole } = useUserStore();
     
     //                    event handler                    //
@@ -39,7 +39,7 @@ export default function SelectBox({ value, onChange }: Prop) {
     
     const onItemClickHandler = (value: string) => {
         listItem.forEach(item => {
-            if(item.value === value) setName(item.name)
+            if (item.value === value) setName(item.name)
         })
         onChange(value);
         setShow(false);

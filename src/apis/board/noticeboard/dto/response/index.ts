@@ -11,10 +11,10 @@ export interface GetSearchNoticeBoardResponseDto extends ResponseDto {
   noticeBoardList: NoticeBoardListItem[];
 }
 
-// description: 공지 게시물 확인 Reponse Body DTO
+// description: 공지 게시물 확인 Response Body DTO
 export interface GetNoticeBoardResponseDto extends ResponseDto {
   noticeNumber: number;
-  noticeWriteId: string;
+  noticeWriterId: string;
   noticeWriteDatetime: string;
   noticeContents: string;
   viewCount: number;

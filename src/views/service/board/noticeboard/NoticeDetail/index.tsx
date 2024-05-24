@@ -14,12 +14,12 @@ export default function NoticeDetail() {
     //                    state                    //
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
 
-    const { loginUserId, loginUserRole } = useUserStore();
+    const { loginUserEmailId, loginUserRole } = useUserStore();
     const { noticeNumber } = useParams();
 
     const [cookies] = useCookies();
     const [noticeTitle, setNoticeTitle] = useState<string>('');
-    const [noticeWriteId, setNoticeWriterId] = useState<string>('');
+    const [noticeWriterId, setNoticeWriterId] = useState<string>('');
     const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
     const [noticeContents, setNoticeContents] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
@@ -28,6 +28,7 @@ export default function NoticeDetail() {
     const navigator = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
+
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 공지번호입니다.' : 
@@ -68,9 +69,9 @@ export default function NoticeDetail() {
             return;
         }
 
-        const { noticeTitle, noticeWriteId, noticeWriteDatetime, noticeContents, viewCount } = result as GetNoticeBoardResponseDto;
+        const { noticeTitle, noticeWriterId, noticeWriteDatetime, noticeContents, viewCount } = result as GetNoticeBoardResponseDto;
         setNoticeTitle(noticeTitle);
-        setNoticeWriterId(noticeWriteId);
+        setNoticeWriterId(noticeWriterId);
         setNoticeWriteDatetime(noticeWriteDatetime);
         setNoticeContents(noticeContents);
         setViewCount(viewCount);
@@ -98,12 +99,12 @@ export default function NoticeDetail() {
     };
 
     const onUpdateClickHandler = () => {
-        if (!noticeNumber || loginUserId !== noticeWriteId) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriterId) return;
         navigator(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));
     };
 
     const onDeleteClickHandler = () => {
-        if (!noticeNumber || loginUserId !== noticeWriteId || !cookies.accessToken) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriterId || !cookies.accessToken) return;
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
     
@@ -124,19 +125,18 @@ export default function NoticeDetail() {
                 <div className='notice-detail-title'></div>
                 <div className='notice-detail-info-box'>
                     <div className='notice-detail-mini-box'>
-                        <div className='notice-detail-writeid'>작성자</div>
+                        <div className='notice-detail-writer-id'>작성자</div>
                         <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-date'>날짜 </div>
+                        <div className='notice-detail-write-datetime'>날짜 </div>
                         <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-count'>조회수 </div>
+                        <div className='notice-detail-view-count'>조회수 </div>
                     </div>
-                    <div className='notice-detail-content'></div>
-                </div>
                 <div className='notice-detail-update-delete-box'>
                     <div className='notice-detail-update'>수정</div>
                     <div className='notice-detail-delete'>삭제</div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

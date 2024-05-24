@@ -47,43 +47,45 @@ function RestaurantList()
 
   //                    effect                      //
   useEffect(() => {
-  if (!cookies.accessToken) 
-  {
+    if (!cookies.accessToken) 
+    {
       return;
-  }
+    }
 
-    GetRestaurantListRequest(searchWord,cookies.accessToken).then(GetRestaurantListResponse);
-   }, [path]);
+    GetRestaurantListRequest(searchWord, cookies.accessToken)
+      .then(GetRestaurantListResponse);
+  }, [path]);
 
 
 
 
   //                  event handler             //
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => 
-  {
+    {
       const searchWord = event.target.value;
       setSearchWord(searchWord);
-  };
+    };
 
   const onSearchClickHandler = () =>
   {
-      if (!searchWord) return;
-      if (!cookies.accessToken) return;
+    if (!searchWord) return;
+    if (!cookies.accessToken) return;
 
-      GetRestaurantListRequest(searchWord,cookies.accessToken).then(GetRestaurantListResponse);
+    GetRestaurantListRequest(searchWord, cookies.accessToken)
+      .then(GetRestaurantListResponse);
   };
 
   const onRegistrationClickHandler = () =>
   {     
-       if (!cookies.accessToken) return;
-       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(0));
+    if (!cookies.accessToken) return;
+    navigator(RESTAURANT_INFO_ABSOLUTE_PATH(0));
   };  
 
-  const onItemClickHandler = (item:number) =>
-    {     
-         if (!cookies.accessToken) return;
-         navigator(RESTAURANT_INFO_ABSOLUTE_PATH(item));
-    };  
+  const onItemClickHandler = (item: number) =>
+  {     
+    if (!cookies.accessToken) return;
+    navigator(RESTAURANT_INFO_ABSOLUTE_PATH(item));
+  };  
 
 
   //                  render                  //
@@ -151,10 +153,10 @@ export default function Restaurant()
   
   //          effect              //
   useEffect(() => {
-  if (!cookies.accessToken) 
-  {
+    if (!cookies.accessToken) 
+    {
       return;
-  }
+    }
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, []);

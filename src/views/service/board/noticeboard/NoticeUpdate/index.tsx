@@ -13,10 +13,10 @@ export default function NoticeUpdate() {
 
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-  const { loginUserId, loginUserRole } = useUserStore();
+  const { loginUserEmailId, loginUserRole } = useUserStore();
   const { noticeNumber } = useParams();
   const [cookies] = useCookies();
-  const [noticeWriteId, setNoticeWriterId] = useState<string>('');
+  const [noticeWriterId, setNoticeWriterId] = useState<string>('');
   const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
   const [noticeTitle, setNoticeTitle] = useState<string>('');
@@ -39,14 +39,14 @@ export default function NoticeUpdate() {
       return;
     }
 
-    const { noticeWriteId, noticeWriteDatetime, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
-    if (noticeWriteId !== loginUserId) {
+    const { noticeWriterId, noticeWriteDatetime, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
+    if (noticeWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
 
-    setNoticeWriterId(noticeWriteId);
+    setNoticeWriterId(noticeWriterId);
     setNoticeWriteDatetime(noticeWriteDatetime);
     setNoticeContents(noticeContents);
     setNoticeTitle(noticeTitle)
@@ -99,19 +99,20 @@ const NoticeUpdateButtonClickHandler = () => {
 let effectFlag = false;
 useEffect(() => {
     if (!noticeNumber || !cookies.accessToken) return;
-    if(!loginUserRole) return;
-    if(effectFlag) return;
+    if (!loginUserRole) return;
+    if (effectFlag) return;
     effectFlag = true;
-    if(loginUserRole !== 'ROLE_USER') {
+    if (loginUserRole !== 'ROLE_USER') {
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
-    getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse);
+    getNoticeBoardRequest(noticeNumber, cookies.accessToken)
+      .then(getNoticeBoardResponse);
 }, [loginUserRole]);
 
 
 //                    render                    //
   return (
-    <div >dsfsdfd</div>
+    <div >공지 수정</div>
   )
 };

@@ -5,8 +5,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantUpdateRequestDto, PostRestaurantUploadRequestDto } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import RestInputbox from 'src/components/RestInputbox';
-import SelectBox from 'src/components/Selectbox';
+import RestInputBox from 'src/components/RestaurantInputBox';
+import SelectBox from 'src/components/SelectBox';
 import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
@@ -21,7 +21,11 @@ export default function RestaurantInfo()
 {
 
   //            state               //
+<<<<<<< HEAD
   const { loginUserEmailId, loginUserRole,restaurantId,reservationStatus,setRestaurantId } = useUserStore();
+=======
+  const { loginUserEmailId, loginUserRole, restaurantId, setRestaurantId } = useUserStore();
+>>>>>>> 45ef4e4762c1be424e01e62ce54f4b15b836ae0f
   const [cookies] = useCookies();
   const{result} = useParams();
   let restIdNumber =Number(result);
@@ -37,42 +41,41 @@ export default function RestaurantInfo()
   const [restaurantFeatures, setRestaurantFeatures] = useState('');
   const [restaurantNotice, setRestaurantNotice] = useState('');
   const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState('');
-  const [restaurantBusinessRegistrationNumber, setRestaurantBuisnessRegistrationNumber] = useState('');
-  const [restaurantWriterId,setRestaurantWriterId] = useState('');
-  const [restaurantReviewList,setRrestaurantReviewList] = useState<RestaurantReviewListItem[]>([]);
-  const [grade,setGrade] = useState<number>();
-  const [restaurantImageCheck,setRestaurantImageCheck] = useState<boolean>(false);
-  const [restaurantNameCheck,setRestaurantNameCheck] = useState<boolean>(false);
-  const [restaurantFoodCategoryCheck,setRestaurantFoodCategoryCheck] = useState<boolean>(false);
-  const [restaurantPostalCodeCheck,setRestaurantPostalCodeCheck] = useState<boolean>(false);
-  const [restaurantLocationCheck,setRestaurantLocationCheck] = useState<boolean>(false);
-  const [restaurantBusinessRegistrationNumberCheck,setRestaurantBusinessRegistrationNumberCheck] = useState<boolean>(false);
+  const [restaurantBusinessRegistrationNumber, setRestaurantBusinessRegistrationNumber] = useState('');
+  const [restaurantWriterId, setRestaurantWriterId] = useState('');
+  const [restaurantReviewList, setRestaurantReviewList] = useState<RestaurantReviewListItem[]>([]);
+  const [grade, setGrade] = useState<number>();
+  const [restaurantImageCheck, setRestaurantImageCheck] = useState<boolean>(false);
+  const [restaurantNameCheck, setRestaurantNameCheck] = useState<boolean>(false);
+  const [restaurantFoodCategoryCheck, setRestaurantFoodCategoryCheck] = useState<boolean>(false);
+  const [restaurantPostalCodeCheck, setRestaurantPostalCodeCheck] = useState<boolean>(false);
+  const [restaurantLocationCheck, setRestaurantLocationCheck] = useState<boolean>(false);
+  const [restaurantBusinessRegistrationNumberCheck, setRestaurantBusinessRegistrationNumberCheck] = useState<boolean>(false);
 
 
-  const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck
-  && restaurantBusinessRegistrationNumberCheck;
+  const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck && restaurantBusinessRegistrationNumberCheck;
   const ButtonClass = `${isRestUploadUpActive ? 'primary' : 'disable'}-button full-width`;
 
-  //                    function                    /
-
+  //                    function                    //
   const navigator = useNavigate();
+
   const GetRestaurantInfoResponse = ( result : GetRestaurantInfoResponseDto | ResponseDto | null) =>
   {
-      const message =
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const message =
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-      if (!result || result.code !== 'SU') 
-      {
-          alert(message);
-          return;
-      }
+    if (!result || result.code !== 'SU') 
+    {
+        alert(message);
+        return;
+    }
 
-      const { restaurantImage,restaurantName,restaurantFoodCategory,
-        restaurantPostalCode,restaurantLocation,restaurantTelNumber,
-        restaurantSnsAddress,restaurantOperationHours,restaurantFeatures,
-        restaurantNotice,restaurantRepresentativeMenu,restaurantBusinessRegistrationNumber,
-        restaurantWriterId,restaurantReviewList,restaurantId
+      const { restaurantImage, restaurantName, restaurantFoodCategory,
+        restaurantPostalCode, restaurantLocation, restaurantTelNumber,
+        restaurantSnsAddress, restaurantOperationHours, restaurantFeatures,
+        restaurantNotice, restaurantRepresentativeMenu, restaurantBusinessRegistrationNumber,
+        restaurantWriterId, restaurantReviewList, restaurantId
        } = result as GetRestaurantInfoResponseDto;
       setRestaurantId(restaurantId);
       setRestaurantImage(restaurantImage);
@@ -86,9 +89,9 @@ export default function RestaurantInfo()
       setRestaurantFeatures(restaurantFeatures);
       setRestaurantNotice(restaurantNotice);
       setRestaurantRepresentativeMenu(restaurantRepresentativeMenu);
-      setRestaurantBuisnessRegistrationNumber(restaurantBusinessRegistrationNumber);
+      setRestaurantBusinessRegistrationNumber(restaurantBusinessRegistrationNumber);
       setRestaurantWriterId(restaurantWriterId);
-      setRrestaurantReviewList(restaurantReviewList);
+      setRestaurantReviewList(restaurantReviewList);
       
   }
 
@@ -96,52 +99,54 @@ export default function RestaurantInfo()
 
   const PostRestaurantUploadResponse = (result : ResponseDto | null) => 
   { 
-        const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' : 
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const message =
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+    result.code === 'AF' ? '권한이 없습니다.' : 
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-        if (!result || result.code !== 'SU') 
-        {
-            alert(message);
-            return;
-        }
+    if (!result || result.code !== 'SU') 
+    {
+        alert(message);
+        return;
+    }
 
-        GetRestaurantInfoRequest(RestaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
-        restIdNumber=1;
+    GetRestaurantInfoRequest(RestaurantId, cookies.accessToken)
+        .then(GetRestaurantInfoResponse);
+    restIdNumber=1;
   }
 
 
   const PatchRestaurantUpdateResponse = (result: ResponseDto | null) => 
   {
-        const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-        result.code === 'NR' ? '존재하지 않는 식당입니다.':
-        result.code === 'AF' ? '권한이 없습니다.' : 
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const message =
+    !result ? '서버에 문제가 있습니다.' :
+    result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+    result.code === 'NR' ? '존재하지 않는 식당입니다.':
+    result.code === 'AF' ? '권한이 없습니다.' : 
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-        if (!result || result.code !== 'SU') 
-        {
-            alert(message);
-            return;
-        }
+    if (!result || result.code !== 'SU') 
+    {
+        alert(message);
+        return;
+    }
 
-        GetRestaurantInfoRequest(restaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
-        restIdNumber=1;
+    GetRestaurantInfoRequest(restaurantId,cookies.accessToken)
+        .then(GetRestaurantInfoResponse);
+    restIdNumber=1;
   }
  
   
   //          effect              //
   useEffect(() => {
-
     if (!cookies.accessToken || restIdNumber==0) 
     {
         return;
     }
 
-      GetRestaurantInfoRequest(RestaurantId,cookies.accessToken).then(GetRestaurantInfoResponse);
+      GetRestaurantInfoRequest(RestaurantId,cookies.accessToken)
+        .then(GetRestaurantInfoResponse);
   },[result]);
 
 
@@ -149,10 +154,11 @@ export default function RestaurantInfo()
   useEffect(() => {
     if (!cookies.accessToken || restaurantId==undefined) 
     {
-            return;
+        return;
     }
-        const total = restaurantReviewList.reduce((sum, restaurantReviewList) => sum + restaurantReviewList.rating, 0);
-        setGrade(total / restaurantReviewList.length);
+
+    const total = restaurantReviewList.reduce((sum, restaurantReviewList) => sum + restaurantReviewList.rating, 0);
+    setGrade(total / restaurantReviewList.length);
   },[restaurantReviewList]);
 
 
@@ -161,36 +167,36 @@ export default function RestaurantInfo()
 
 
   //                event handler               //
-
-  //                식당 정보 등록               //
+  // 식당 정보 등록
   const onUploadClickHandler = () => {
     
-        if(!restaurantImage || !restaurantName || !restaurantFoodCategory 
-            || !restaurantPostalCode|| !restaurantLocation || !restaurantBusinessRegistrationNumber)
-        {
-            alert('필수 정보를 입력하지 않았습니다.');
-            return;
-        }
+    if(!restaurantImage || !restaurantName || !restaurantFoodCategory 
+        || !restaurantPostalCode|| !restaurantLocation || !restaurantBusinessRegistrationNumber)
+    {
+        alert('필수 정보를 입력하지 않았습니다.');
+        return;
+    }
 
-        const requestBody: PostRestaurantInfoRequestDto = 
-        {
-            restaurantImage:restaurantImage,
-            restaurantName:restaurantName,
-            restaurantFoodCategory: restaurantFoodCategory,
-            restaurantPostalCode: restaurantPostalCode,
-            restaurantLocation:restaurantLocation,
-            restaurantBusinessRegistrationNumber:restaurantBusinessRegistrationNumber,
-            restaurantTelNumber:restaurantTelNumber,
-            restaurantSnsAddress:restaurantSnsAddress,
-            restaurantOperationHours:restaurantOperationHours,
-            restaurantFeatures:restaurantFeatures,
-            restaurantNotice:restaurantNotice,
-            restaurantRepresentativeMenu:restaurantRepresentativeMenu,
-        }
-        PostRestaurantUploadRequestDto(requestBody,cookies.accessToken).then(PostRestaurantUploadResponse);
+    const requestBody: PostRestaurantInfoRequestDto = 
+    {
+        restaurantImage: restaurantImage,
+        restaurantName: restaurantName,
+        restaurantFoodCategory: restaurantFoodCategory,
+        restaurantPostalCode: restaurantPostalCode,
+        restaurantLocation: restaurantLocation,
+        restaurantBusinessRegistrationNumber: restaurantBusinessRegistrationNumber,
+        restaurantTelNumber: restaurantTelNumber,
+        restaurantSnsAddress: restaurantSnsAddress,
+        restaurantOperationHours: restaurantOperationHours,
+        restaurantFeatures: restaurantFeatures,
+        restaurantNotice: restaurantNotice,
+        restaurantRepresentativeMenu: restaurantRepresentativeMenu,
+    }
+    PostRestaurantUploadRequestDto(requestBody, cookies.accessToken)
+        .then(PostRestaurantUploadResponse);
   }
 
-//             식당 정보 수정               //
+// 식당 정보 수정
 const onUpdateClickHandler = () => {
     
     if(!restaurantImage || !restaurantName || !restaurantFoodCategory 
@@ -202,20 +208,21 @@ const onUpdateClickHandler = () => {
 
     const requestBody: PatchRestaurantInfoRequestDto = 
     {
-        restaurantId:restaurantId,
-        restaurantImage:restaurantImage,
-        restaurantName:restaurantName,
+        restaurantId: restaurantId,
+        restaurantImage: restaurantImage,
+        restaurantName: restaurantName,
         restaurantFoodCategory: restaurantFoodCategory,
         restaurantPostalCode: restaurantPostalCode,
-        restaurantLocation:restaurantLocation,
-        restaurantTelNumber:restaurantTelNumber,
-        restaurantSnsAddress:restaurantSnsAddress,
-        restaurantOperationHours:restaurantOperationHours,
-        restaurantFeatures:restaurantFeatures,
-        restaurantNotice:restaurantNotice,
-        restaurantRepresentativeMenu:restaurantRepresentativeMenu,
+        restaurantLocation: restaurantLocation,
+        restaurantTelNumber: restaurantTelNumber,
+        restaurantSnsAddress: restaurantSnsAddress,
+        restaurantOperationHours: restaurantOperationHours,
+        restaurantFeatures: restaurantFeatures,
+        restaurantNotice: restaurantNotice,
+        restaurantRepresentativeMenu: restaurantRepresentativeMenu,
     }
-    PatchRestaurantUpdateRequestDto(requestBody,cookies.accessToken).then(PatchRestaurantUpdateResponse);
+    PatchRestaurantUpdateRequestDto(requestBody, cookies.accessToken)
+        .then(PatchRestaurantUpdateResponse);
 }
 
 
@@ -223,7 +230,7 @@ const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
 {
     const { value } = event.target;
     setRestaurantImage(value);
-    setRestaurantImageCheck(!(value.length===0));
+    setRestaurantImageCheck(!(value.length === 0));
 }   
 
 
@@ -231,26 +238,26 @@ const onNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
 {
     const { value } = event.target;
     setRestaurantName(value);
-    setRestaurantNameCheck(!(value.length===0));
+    setRestaurantNameCheck(!(value.length === 0));
 }   
 
 const onFoodCategoryChangeHandler = (selectFood: string) => {
     setRestaurantFoodCategory(selectFood);
-    setRestaurantFoodCategoryCheck(!(selectFood.length===0));
+    setRestaurantFoodCategoryCheck(!(selectFood.length === 0));
 };
 
 const onPostalCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => 
 {
     const { value } = event.target;
     setRestaurantPostalCode(value);
-    setRestaurantPostalCodeCheck(!(value.length===0));
+    setRestaurantPostalCodeCheck(!(value.length === 0));
 }
 
 const onLocationChangeHandler = (event: ChangeEvent<HTMLInputElement>) => 
 {
     const { value } = event.target;
     setRestaurantLocation(value);
-    setRestaurantLocationCheck(!(value.length===0));
+    setRestaurantLocationCheck(!(value.length === 0));
 }
 
 const onTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => 
@@ -293,8 +300,8 @@ const onRepresentativeMenuChangeHandler = (event: ChangeEvent<HTMLInputElement>)
 const onBusinessNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => 
 {
     const { value } = event.target;
-    setRestaurantBuisnessRegistrationNumber(value);
-    setRestaurantBusinessRegistrationNumberCheck(!(value.length===0));
+    setRestaurantBusinessRegistrationNumber(value);
+    setRestaurantBusinessRegistrationNumberCheck(!(value.length === 0));
 }
 
 const onSetRestIdNumberHandler = () => 
@@ -302,7 +309,7 @@ const onSetRestIdNumberHandler = () =>
     restIdNumber=0;
 }
 
-const onBusinessNumberKeydownHandler = (event:KeyboardEvent<HTMLInputElement>) =>
+const onBusinessNumberKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) =>
 {
         if(event.key!=='Enter') return;
         {restaurantWriterId ?
@@ -356,7 +363,7 @@ const onReservationClickHandler = () =>
                         (<div>{restaurantBusinessRegistrationNumber}</div>)}
                     </div>            
                     <div id="restaurant-right-down">   
-                         <ReviewList value={restaurantReviewList} getRestaurantInfoResponse={GetRestaurantInfoResponse}/>        
+                        <ReviewList value={restaurantReviewList} getRestaurantInfoResponse={GetRestaurantInfoResponse}/>        
                     </div>
                 </div>
             </div>
@@ -364,10 +371,10 @@ const onReservationClickHandler = () =>
                 <div id="restaurant-info">
                     <div id="restaurant-left">
                         <div id="restaurant-left-up">
-                            <RestInputbox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
+                            <RestInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
                             placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
                                 <div>
-                                    <RestInputbox label="식당 이름" type="text" value={restaurantName}
+                                    <RestInputBox label="식당 이름" type="text" value={restaurantName}
                                     placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
                                 </div>
                             <div>  
@@ -376,35 +383,35 @@ const onReservationClickHandler = () =>
                         </div> 
     
                         <div id="restaurant-left-down">
-                            <RestInputbox label="식당 주소" type="text" value={restaurantLocation}
+                            <RestInputBox label="식당 주소" type="text" value={restaurantLocation}
                             placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
 
-                            <RestInputbox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
+                            <RestInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
                             placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
 
-                            <RestInputbox label="식당 우편번호" type="text" value={restaurantPostalCode}
+                            <RestInputBox label="식당 우편번호" type="text" value={restaurantPostalCode}
                             placeholder="우편번호를 입력해주세요" onChangeHandler={onPostalCodeChangeHandler}/>
 
-                            <RestInputbox label="식당 연락쳐" type="text" value={restaurantTelNumber}
+                            <RestInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber}
                             placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
                         </div>
                     </div>
     
                     <div id="restaurant-right"> 
                         <div id="restaurant-right-up">  
-                            <RestInputbox label="운영 시간" type="text" value={restaurantOperationHours}
+                            <RestInputBox label="운영 시간" type="text" value={restaurantOperationHours}
                             placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
 
-                            <RestInputbox label="식당 특징" type="text" value={restaurantFeatures}
+                            <RestInputBox label="식당 특징" type="text" value={restaurantFeatures}
                             placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
         
-                            <RestInputbox label="식당 공지" type="text" value={restaurantNotice}
+                            <RestInputBox label="식당 공지" type="text" value={restaurantNotice}
                             placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
 
-                            <RestInputbox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
+                            <RestInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
                             placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler}/>
                             
-                            <RestInputbox label="사업자 등록번호" type="text" value={restaurantBusinessRegistrationNumber}
+                            <RestInputBox label="사업자 등록번호" type="text" value={restaurantBusinessRegistrationNumber}
                             placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}
                             onKeydownHandler={onBusinessNumberKeydownHandler}/>
 
