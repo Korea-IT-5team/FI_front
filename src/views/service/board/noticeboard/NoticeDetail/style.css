@@ -1,9 +1,24 @@
+body {
+    min-width: 50%;
+    height: 100vh;
+    min-height: 1024px;
+}
+
+#notice-detail-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .notice-detail-main-box {
     background-color: bisque;
+    width: 1300px;
+    height: 900px;
 }
 
 .notice-detail-title {
     background-color: aqua;
+    height: 85px;
+    margin-bottom: 20px;
 }
 
 .notice-detail-info-box {
@@ -12,12 +27,30 @@
 
 .notice-detail-mini-box {
     background-color: blueviolet;
+    display: flex;
 }
 
 .notice-detail-content {
     background-color: tomato;
+    height: 200px;
 }
 
 .notice-detail-update-delete-box {
     background-color: brown;
+    display: flex;
+    margin-top: 10px;
+    float: right;
+}
+
+.notice-detail-update {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 5px 20px;
+}
+
+.notice-detail-delete {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 5px 20px;
+    margin-left: 30px;
 }
