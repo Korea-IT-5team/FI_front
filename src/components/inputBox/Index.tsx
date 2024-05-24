@@ -5,7 +5,7 @@ export interface InputBoxProps {
     type: 'text' | 'password';
     value: string;
     placeholder: string;
-    onChangeHandler: (enet: ChangeEvent<HTMLInputElement>) => void;
+    onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
     buttonTitle?: string;
     buttonStatus?: boolean;
     onButtonClickHandler?: () => void;

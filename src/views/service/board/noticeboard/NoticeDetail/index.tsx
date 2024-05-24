@@ -122,24 +122,21 @@ export default function NoticeDetail() {
     return (
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
-                <div className='notice-detail-contents-box'>
-                    <div className='notice-detail-title'>제목{noticeTitle}</div>
-                        <div className='notice-detail-info-box'>
-                            <div className='notice-detail-mini-box'>
-                                <div className='notice-detail-writer-id'>작성자 {noticeWriterId}</div>
-                                <div className='qna-detail-info-divider'>{'\|'}</div>
-                                <div className='notice-detail-date'>날짜 {noticeWriteDatetime}</div>
-                                <div className='qna-detail-info-divider'>{'\|'}</div>
-                                <div className='notice-detail-count'>조회수 {viewCount}</div>
-                            </div>
-                                <div className='notice-detail-content'>내용</div>
-                        </div>
+                <div className='notice-detail-title'></div>
+                <div className='notice-detail-info-box'>
+                    <div className='notice-detail-mini-box'>
+                        <div className='notice-detail-writer-id'>작성자</div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-write-datetime'>날짜 </div>
+                        <div className='qna-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-view-count'>조회수 </div>
                     </div>
                 <div className='notice-detail-update-delete-box'>
                     <div className='notice-detail-update'>수정</div>
                     <div className='notice-detail-delete'>삭제</div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
