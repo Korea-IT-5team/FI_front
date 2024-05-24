@@ -28,6 +28,7 @@ export default function NoticeDetail() {
     const navigator = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
+
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 공지번호입니다.' : 
@@ -113,8 +114,8 @@ export default function NoticeDetail() {
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken || !noticeNumber) return;
-        increaseViewCountRequest(noticeNumber, cookies.accessToken)
-            .then(increaseViewCountResponse);
+        // increaseViewCountRequest(noticeNumber, cookies.accessToken)
+        //     .then(increaseViewCountResponse);
     }, []);
     
     //                    render                    //

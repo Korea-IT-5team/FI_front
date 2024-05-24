@@ -14,13 +14,6 @@ import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
-<<<<<<< HEAD
-import Main from './views/Main';
-import MyPage from './layouts/MyPageContainer';
-import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
-import UserDelete from './views/Mypage/UserDelete';
-import Board from './layouts/Board';
-=======
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
 import FindEmail from './views/Authentication/FindEmail/FIndEmailInput';
 import PasswordReset from './views/Authentication/PasswordReset/PasswordResetInput';
@@ -39,7 +32,6 @@ import ServiceContainer from './layouts/ServiceContainer';
 import Restaurant from './views/Restaurant';
 import RestaurantInfo from './views/RestaurantInfo';
 import RestaurantReservation from './views/RestaurantReservation';
->>>>>>> 38812d283eca430bc53ee22cfa70e7666c1fc59b
 
 
 // component: root 경로 컴포넌트
@@ -91,16 +83,6 @@ function App() {
         <Route path={USER_DELETE_PATH} element={<UserDelete />} />
       </Route>  
       <Route path={BOARD_PATH} element={<Board />} >
-<<<<<<< HEAD
-        <Route path={INQUIRY_PATH} >
-          <Route element={<InquiryList />} />
-            <Route path={INQUIRY_BOARD_WRITE_PATH} element={<InquiryWrite />} />
-            <Route path={INQUIRY_BOARD_UPDATE_PATH} element={<InquiryUpdate />} />
-            <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<MyInquiry />} />
-            {/* <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} /> */}
-        </Route>
-=======
->>>>>>> 38812d283eca430bc53ee22cfa70e7666c1fc59b
         <Route path={NOTICE_PATH} >
           <Route path={NOTICE_BOARD_LIST_PATH} element={<NoticeList />} />
           <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
