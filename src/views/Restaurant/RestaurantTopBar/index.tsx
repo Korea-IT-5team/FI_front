@@ -53,7 +53,7 @@ function TopBar()
 
 
 //              component             //
-export default function ServiceContainer()
+export default function RestaurantTopBar()
 {
 
   //            state               //

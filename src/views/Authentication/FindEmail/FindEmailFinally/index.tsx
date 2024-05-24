@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useState } from 'react'
-import "./style.css"; 
-import ResponseDto from 'src/apis/response.dto';
+import { ChangeEvent, useState } from 'react';
+import { findEmailRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
 import { FindEmailRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
-import { emailCheckRequest, findEmailRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
+import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/InputBox';
+import "./style.css";
 
 // component: 이메일 찾기 // 
 export default function FindEmailFinally() {
