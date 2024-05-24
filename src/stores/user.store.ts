@@ -1,23 +1,21 @@
 import { create } from "zustand";
 
-interface UserStore 
-{
+interface UserStore {
     loginUserEmailId: string,
     setLoginUserEmailId: (loginUserEmailId: string) => void,
     loginUserRole: string,
-    setLoginUserRole: (loginUserRole:string) => void,
+    setLoginUserRole: (loginUserRole: string) => void,
     restaurantId:number,
-    setRestaurantId: (restaurantId:number) => void,
-   
+    setRestaurantId: (restaurantId: number) => void,
 }
 
 const useUserStore = create<UserStore>(set => ({
     loginUserEmailId: '',
-    setLoginUserEmailId: (loginUserEmailId:string) => set(state => ({ ...state, loginUserEmailId})),
+    setLoginUserEmailId: (loginUserEmailId: string) => set(state => ({ ...state, loginUserEmailId})),
     loginUserRole: '',
-    setLoginUserRole: (loginUserRole:string) => set(state => ({...state,loginUserRole})),
-    restaurantId:0,
-    setRestaurantId: (restaurantId:number) => set(state => ({...state,restaurantId})),
+    setLoginUserRole: (loginUserRole: string) => set(state => ({...state, loginUserRole})),
+    restaurantId: 0,
+    setRestaurantId: (restaurantId: number) => set(state => ({...state, restaurantId})),
 }));
 
 export default useUserStore;

@@ -16,17 +16,17 @@ import './style.css';
 function TopBar()
 {
   //            state                //
-  const {loginUserRole } = useUserStore();
-  const[cookies,removeCookie] = useCookies();
+  const { loginUserRole } = useUserStore();
+  const[cookies, removeCookie] = useCookies();
 
   //            function                     //
   const navigator = useNavigate();
- 
+
   //            event handler               //
   const onLogClickHandler = () => 
   {
       navigator(MAIN_PATH);
-      removeCookie('accessToken',{path:'/'});
+      removeCookie('accessToken', {path:'/'});
   };
 
   
@@ -39,7 +39,7 @@ function TopBar()
           <div className='top-bar-right'>
           {loginUserRole === '' 
               ? <div className="second-button" onClick={onLogClickHandler}>로그인/회원가입</div>
-              : loginUserRole === 'ROLE_CEO' 
+              : loginUserRole === 'ROLE_CEO'
               ? <div className="second-button" onClick={onLogClickHandler}>사장 로그아웃</div>
               : loginUserRole === 'ROLE_USER' 
               ? <div className="second-button" onClick={onLogClickHandler}>사용자 로그아웃</div>
@@ -47,7 +47,7 @@ function TopBar()
           </div>
       </div>
     </>
-   );
+  );
 }
 
 

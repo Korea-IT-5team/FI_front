@@ -24,7 +24,7 @@ import PasswordResetFinally from './views/Authentication/PasswordReset/PasswordR
 import PasswordResetInput from './views/Authentication/PasswordReset/PasswordResetInput';
 import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
 import UserDelete from './views/Mypage/UserDelete';
-import Board from './layouts/Board';
+import Board from './layouts/BoardContainer';
 import Main from './views/Main';
 import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
 import MyPage from './layouts/MyPageContainer';

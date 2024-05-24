@@ -10,13 +10,13 @@ export interface PostRestaurantInfoRequestDto {
     restaurantOperationHours: string;
     restaurantFeatures: string;
     restaurantNotice: string;
-    restaurantBusinessRegistrationNumber:String;
+    restaurantBusinessRegistrationNumber: string;
     restaurantRepresentativeMenu: string;
 }
 
 // description: 식당 정보 수정 Request Body DTO
 export interface PatchRestaurantInfoRequestDto {
-    restaurantId:number;
+    restaurantId: number;
     restaurantImage: string;
     restaurantName: string;
     restaurantFoodCategory: string;
