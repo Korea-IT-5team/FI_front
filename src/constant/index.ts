@@ -114,7 +114,7 @@ export const SERVER_REVIEW_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/review`
 // export const DELETE_REVIEW_REQUEST_URL = `${GET_REVIEW_URL}/delete`;
 export const POST_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/${restaurantId}/write`;
 export const PATCH_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/${restaurantId}/update`;
-export const DELETE_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/${restaurantId}/delete`;
+export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number) => `${SERVER_REVIEW_MODULE_URL}/${reviewNumber}/delete`;
 
 // description: RESERVATION 모듈 내의 기능 URL
 export const SERVER_RESERVATION_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/reservation`;
