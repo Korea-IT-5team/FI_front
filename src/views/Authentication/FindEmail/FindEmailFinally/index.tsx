@@ -6,7 +6,7 @@ import { emailCheckRequest, findEmailRequest, telNumberAuthCheckRequest, telNumb
 import InputBox from 'src/components/inputBox/Index';
 
 // component: 이메일 찾기 // 
-export default function FindEmail() {
+export default function FindEmailFinally() {
 
     // state //
     const [userName, setUserName] = useState<string>('');
@@ -162,6 +162,3 @@ export default function FindEmail() {
         </div>
     )
 }
-
-// 이메일 찾기 화면이랑 이메일 찾기 완료했을 때 나오는 화면 
-// 로그인-> 회원가입으로 전환하는 기능 참고해서 만들기 
