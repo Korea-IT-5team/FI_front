@@ -71,9 +71,19 @@ useEffect(() => {
 
 //                    render                    //
 return (
-  <div id='notice-detail-wrapper'>
-      <div className='notice-detail-main-box'>
-        <div className=''></div>
+  <div id='notice-write-wrapper'>
+      <div className='notice-write-main-box'>
+        <div className='notice-write-info-box'>
+          <div className='notice-write-title-box'>문의 제목</div>
+          <div className='notice-write-content-box'>문의 내용</div>
+        </div>
+        <div className='notice-write-foot-box'>
+          <div className='notice-write-answer'>문의 답변</div>
+          <div className='notice-write-modify'>
+            <div className='notice-write-create'>작성</div>
+            <div className='notice-write-update'>수정</div>
+          </div>
+        </div>
       </div>
   </div>
 );
