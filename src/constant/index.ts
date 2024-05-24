@@ -25,17 +25,19 @@ export const USER_INFO_UPDATE_PATH = 'user-info-update';
 export const USER_DELETE_PATH = 'user-delete';
 
 export const BOARD_PATH = '/board';
+export const NOTICE_PATH = 'notice';
+export const NOTICE_BOARD_LIST_PATH = 'list';
+export const NOTICE_BOARD_WRITE_PATH = 'write';
+export const NOTICE_BOARD_UPDATE_PATH = 'update';
+export const NOTICE_DETAILS_PATH = ':noticeNumber';
+
 export const INQUIRY_PATH = 'inquiry';
+export const INQUIRY_BOARD_LIST_PATH = 'list';
 export const INQUIRY_BOARD_WRITE_PATH = 'write';
 export const INQUIRY_BOARD_UPDATE_PATH =  'update';
 export const INQUIRY_MY_BOARD_LIST_PATH = 'my-board';
 export const INQUIRY_DETAILS_PATH = ':inquiryNumber';
 
-export const NOTICE_PATH = 'notice'; 
-export const NOTICE_BOARD_LIST_PATH = 'list';
-export const NOTICE_BOARD_WRITE_PATH = 'write';
-export const NOTICE_BOARD_UPDATE_PATH = 'update';
-export const NOTICE_DETAILS_PATH = ':noticeNumber';
 
 // description: Navigation 절대 URL PATH 
 export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
@@ -62,15 +64,16 @@ export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
 
 export const BOARD_ABSOLUTE_PATH = `${BOARD_PATH}`;
 
+export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
+export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
+export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
+
+export const INQUIRY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_LIST_PATH}`;
 export const INQUIRY_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_WRITE_PATH}`;
 export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_UPDATE_PATH}/${inquiryNumber}`;
 export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
 export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
 
-export const NOTICE_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_LIST_PATH}`;
-export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
-export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
-export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = 'http://localhost:9999';
