@@ -118,7 +118,7 @@ function RestaurantList()
   
 
 //              component : 식당 리스트             //
-export default function Restaurant()
+export default function Restaurantlist()
 {
 
   //            state               //

@@ -7,21 +7,16 @@ import RestInputbox from "src/components/RestaurantInputBox";
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
-//             </div>
-//             <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-//             <div>예약하기</div>
-//           </div>
-//        </div>
-//     </>
-//   )
-// }
 
 import React from 'react'
 import { PostReservationUploadRequest } from "src/apis/restaurant/reservation";
 
-//                    state                    //
-const[reservationDate,setReservationDate] = useState('');
-const[reservationTime,setReservationTime] = useState('');
+
+export default function RestaurantReservation() {
+
+  //                    state                    //
+const[reservationDate,setReservationDate] = useState<string>('');
+const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
 const { loginUserEmailId, loginUserRole,restaurantId,setRestaurantId ,setReservationStatus} = useUserStore();
@@ -97,7 +92,7 @@ const onReservationClickHandler = () =>
 //                      render                        //
 const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
 const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
-export default function RestaurantReservation() {
+
   return (
     <>
        <div className="reservation-npeople">

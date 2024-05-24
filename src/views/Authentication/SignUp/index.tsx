@@ -6,7 +6,7 @@ import { checkNicknameRequest, emailCheckRequest, signInRequest, signUpRequest, 
 import { CheckEmailRequestDto, CheckNicknameDto, SignInRequestDto, SignUpRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import { SignInResponseDto } from 'src/apis/auth/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import InputBox from 'src/components/InputBox/Index';
+import InputBox from 'src/components/InputBox';
 import { MAIN_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useAuthStore } from 'src/stores';
 
