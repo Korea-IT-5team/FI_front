@@ -18,9 +18,59 @@ export default function RestaurantReservation() {
           </select> */}
        </div>
        <div className="reservation-box">
-          <div>
+          <div className="calendar">
             <div>달력</div>
-            <div>n월 n주차</div>
+          </div>
+          <div className="date-time-people">
+            <div>날짜</div>
+            <div className="Month-day">
+                <input className="input"
+                    type="text"
+                    value={value}
+                    placeholder="월"
+                    onChange={onChangeHandler}/>
+                <input className="input"
+                    type="text"
+                    value={value}
+                    placeholder="일"
+                    onChange={onChangeHandler}/>
+            </div>
+            <div>시간</div>
+            <div className="hour-minute">
+                <input className="input"
+                    type="text"
+                    value={value}
+                    placeholder="시"
+                    onChange={onChangeHandler}/>
+                <input className="input"
+                    type="text"
+                    value={value}
+                    placeholder="분"
+                    onChange={onChangeHandler}/>
+            </div>
+            <div>인원수</div>
+            <div className="people">
+              <div>
+                  <div>1명</div>
+                  <div>2명</div>
+                  <div>3명</div>
+                  <div>4명</div>
+              </div>
+              <div>
+                  <div>5명</div>
+                  <div>6명</div>
+                  <div>7명</div>
+                  <div>8명</div>
+              </div>
+              <div>
+                  <div>9명</div>
+                  <div>10명</div>
+                  <div>11명</div>
+                  <div>12명</div>
+              </div>
+
+            </div>
+            <div>다음</div>
           </div>
        </div>
     </>
