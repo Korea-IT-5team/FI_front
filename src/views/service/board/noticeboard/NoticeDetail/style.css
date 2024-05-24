@@ -2,7 +2,7 @@ body {
     width: 100%;
     min-width: 50%;
     height: 700px;
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 #notice-detail-wrapper {
