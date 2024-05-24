@@ -21,7 +21,7 @@ export default function RestaurantInfo()
 {
 
   //            state               //
-  const { loginUserEmailId, loginUserRole, restaurantId, setRestaurantId } = useUserStore();
+  const { loginUserEmailId, loginUserRole,restaurantId,reservationStatus,setRestaurantId } = useUserStore();
   const [cookies] = useCookies();
   const{result} = useParams();
   let restIdNumber =Number(result);
@@ -141,9 +141,9 @@ export default function RestaurantInfo()
         return;
     }
 
-    GetRestaurantInfoRequest(RestaurantId,cookies.accessToken)
+      GetRestaurantInfoRequest(RestaurantId,cookies.accessToken)
         .then(GetRestaurantInfoResponse);
-  },[]);
+  },[result]);
 
 
 
@@ -322,42 +322,35 @@ const onReservationClickHandler = () =>
     <>
         {restIdNumber !== 0 ? (
             <div id="restaurant-info">
-                <div id="restaurant-left">
-                    <div id="restaurant-left-up">
-                        {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                        <button onClick={onSetRestIdNumberHandler}>수정</button>)}
-                        <div id="restaurant_image">{restaurantImage}</div>
-                            <div>
-                                <div>{restaurantName}</div>
-                                {loginUserRole === "ROLE_USER" && (
-                                <button onClick={onReservationClickHandler}>예약</button>)}
-                            </div>
-                        <div>{restaurantFoodCategory}</div>
-                        <div>{grade}</div>
-                        {loginUserRole === "ROLE_USER"&& (<button>찜클릭</button>)}
-                    </div> 
-
-                    <div id="restaurant-left-down">
-                        <div>{restaurantLocation}</div>
-                        <div>{restaurantSnsAddress}</div>
-                        <div>{restaurantPostalCode}</div>
-                        <div>{restaurantTelNumber}</div>
-                    </div>
-                </div>
-
-                <div id="restaurant-right"> 
-                    <div id="restaurant-right-up">        
-                        <div>{restaurantOperationHours}</div>
-                        <div>{restaurantFeatures}</div>
-                        <div>{restaurantNotice}</div>
-                        <div>{restaurantRepresentativeMenu}</div>
-                        {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && 
-                        (<div>{restaurantBusinessRegistrationNumber}</div>)}
-                    </div>            
-                    <div id="restaurant-right-down">   
-                        <ReviewList value={restaurantReviewList} getRestaurantInfoResponse={GetRestaurantInfoResponse}/>        
-                    </div>
-                </div>
+                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
+                    <button onClick={onSetRestIdNumberHandler}>수정</button>)}
+                    <div id="restaurant_image">{restaurantImage}</div>
+                        <div>
+                            <div>{restaurantName}</div>
+                        {reservationStatus} ?
+                            ({loginUserRole === "ROLE_USER" && (
+                            <button onClick={onReservationClickHandler}>예약</button>)})
+                                    :
+                            ({loginUserRole === "ROLE_USER" && (
+                            <button onClick={onReservationCancelClickHandler}>예약취소</button>)})
+                        </div>
+                    <div>{restaurantFoodCategory}</div>
+                    <div>{grade}</div>
+                    {loginUserRole === "ROLE_USER"&& (<button>찜클릭</button>)}
+                    
+                    <div>{restaurantLocation}</div>
+                    <div>{restaurantSnsAddress}</div>
+                    <div>{restaurantPostalCode}</div>
+                    <div>{restaurantTelNumber}</div>
+                    
+                    <div>{restaurantOperationHours}</div>
+                    <div>{restaurantFeatures}</div>
+                    <div>{restaurantNotice}</div>
+                    <div>{restaurantRepresentativeMenu}</div>
+                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && 
+                    (<div>{restaurantBusinessRegistrationNumber}</div>)}
+                    
+                    <ReviewList value={restaurantReviewList} getRestaurantInfoResponse={GetRestaurantInfoResponse}/>        
             </div>
             ) : (
                 <div id="restaurant-info">
