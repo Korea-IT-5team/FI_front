@@ -1,10 +1,13 @@
 
+
+
+
 export default function RestaurantReservation() {
   return (
     <>
       <div className="reservation-npeople">
-          <div className="reservation">예약하기</div>
-          {/* <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
+          <div className="reservation">예약자 정보</div>
+          <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -15,8 +18,8 @@ export default function RestaurantReservation() {
                 <option value="8">8</option>
                 <option value="9">9</option>
                 <option value="10">10</option>
-          </select> */}
-       </div>
+          </select>
+      </div>
        <div className="reservation-box">
           <div className="calendar">
             <div>달력</div>
@@ -70,7 +73,8 @@ export default function RestaurantReservation() {
               </div>
 
             </div>
-            <div>다음</div>
+            <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+            <div>예약하기</div>
           </div>
        </div>
     </>
