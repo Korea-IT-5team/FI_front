@@ -74,7 +74,7 @@ useEffect(() => {
 //                    render                    //
   return (
     <div>
-      ujhgfr
+      공지 글쓰기 창입니다!
     </div>
   )
 }

@@ -124,7 +124,7 @@ export default function NoticeDetail() {
                 <div className='notice-detail-title'>제목</div>
                 <div className='notice-detail-info-box'>
                     <div className='notice-detail-mini-box'>
-                        <div className='notice-detail-writeid'>작성자</div>
+                        <div className='notice-detail-writeId'>작성자</div>
                         <div className='notice-detail-date'>날짜</div>
                         <div className='notice-detail-count'>조회수</div>
                     </div>
