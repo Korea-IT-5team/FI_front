@@ -1,0 +1,43 @@
+.top-bar-container {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 24px;
+}
+
+.top-bar-left{
+    font-size: 36px;
+}
+
+
+.top-bar-title{
+    font-size: 48px;
+}
+
+
+
+.top-bar-right{
+    font-size: 36px;
+}
+
+.side-navigation-container{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; 
+    margin: 0 auto; /* 가로로 중앙 정렬 */
+}
+
+.search-input-click{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.select-item{
+    text-align: center;
+}
