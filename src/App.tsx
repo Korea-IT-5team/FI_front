@@ -72,12 +72,12 @@ function App() {
           <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
         </Route>
       </Route>
-      <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} >
+      {/* <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} >
         <Route path={RESTAURANT_LIST_PATH} element={<Restaurant/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
-        {/* <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
-      </Route> 
+        <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} />
+      </Route>  */}
       <Route path={MY_PAGE_PATH} element={<MyPage />} >
         <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
         <Route path={USER_DELETE_PATH} element={<UserDelete />} />
