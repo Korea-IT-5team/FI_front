@@ -14,6 +14,10 @@ import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
+<<<<<<< HEAD
+import Main from './views/Main';
+import MyPage from './layouts/MyPageContainer';
+=======
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
 import FindEmail from './views/Authentication/FindEmail/FIndEmailInput';
 import PasswordReset from './views/Authentication/PasswordReset/PasswordResetInput';
@@ -22,12 +26,15 @@ import FindEmailFinally from './views/Authentication/FindEmail/FindEmailFinally'
 import PasswordResetCheck from './views/Authentication/PasswordReset/PasswordResetCheck';
 import PasswordResetFinally from './views/Authentication/PasswordReset/PasswordResetFinally';
 import PasswordResetInput from './views/Authentication/PasswordReset/PasswordResetInput';
+>>>>>>> 38a89d5c4c2614ca9eef95e838df98c2e7f3412d
 import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
 import UserDelete from './views/Mypage/UserDelete';
-import MyPage from './layouts/MyPageContainer';
 import Board from './layouts/Board';
+<<<<<<< HEAD
+=======
 import Main from './views/Main';
 import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
+>>>>>>> 38a89d5c4c2614ca9eef95e838df98c2e7f3412d
 
 
 // component: root 경로 컴포넌트
@@ -58,15 +65,8 @@ function App() {
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
-        <Route path={FIND_EMAIL_PATH} element={<FindEmail />} >
-          <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
-          <Route path={FIND_EMAIL_FINALLY_PATH} element={<FindEmailFinally />} />
-        </Route>
-        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} > 
-          <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
-          <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
-          <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
-        </Route>
+        {/* <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
+        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />  */}
       </Route>
       {/* <Route path={RESTAURANT_PATH} element={<Restaurant />} >
         <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
@@ -79,6 +79,16 @@ function App() {
         <Route path={USER_DELETE_PATH} element={<UserDelete />} />
       </Route>  
       <Route path={BOARD_PATH} element={<Board />} >
+<<<<<<< HEAD
+        <Route path={INQUIRY_PATH} >
+          <Route element={<InquiryList />} />
+            <Route path={INQUIRY_BOARD_WRITE_PATH} element={<InquiryWrite />} />
+            <Route path={INQUIRY_BOARD_UPDATE_PATH} element={<InquiryUpdate />} />
+            <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<MyInquiry />} />
+            {/* <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} /> */}
+        </Route>
+=======
+>>>>>>> 38a89d5c4c2614ca9eef95e838df98c2e7f3412d
         <Route path={NOTICE_PATH} >
           <Route path={NOTICE_BOARD_LIST_PATH} element={<NoticeList />} />
           <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
