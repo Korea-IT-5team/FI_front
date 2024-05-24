@@ -149,16 +149,13 @@ export default function FindEmailInput() {
     return (
         <div className='find-email-container'>
             <div className='find-email-title'>이메일 찾기</div>
-            <div className='find-email-input'>
-            <InputBox label="이름" type="text" value={userName} placeholder="이름을 입력해주세요" onChangeHandler={onUserNameChangeHandler} message={UserNameMessage} error />
-
-            <InputBox label="전화번호" type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonTitle="인증번호 전송" buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
-
-            {isUserTelNumberCheck && 
-            <InputBox label="인증번호" type="text" value={authNumber} placeholder="인증번호 6자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
-
+            <div className='find-email-box'>
+                <div className='find-email-search'>email@email.com</div>
+                <div className='find-email-button'>
+                    <div className='find-email-login'>로그인하기</div>
+                    <div className='find-email-password'>비밀번호 재설정</div>
+                </div>
             </div>
-            <div className='find-email-button'>이메일 찾기</div>
         </div>
     )
 }
