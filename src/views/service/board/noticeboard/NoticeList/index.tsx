@@ -96,7 +96,7 @@ export default function NoticeList() {
   };
 
   return(
-    <>gerkjl</>
+    <>공지 리스트</>
   )
 
 }
