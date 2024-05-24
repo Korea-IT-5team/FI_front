@@ -5,7 +5,7 @@ import { CheckEmailRequestDto, PasswordResetRequestDto, TelNumberAuthRequestDto 
 import ResponseDto from 'src/apis/response.dto';
 
 // component: 비밀번호 찾기 // 
-export default function PasswordReset() {
+export default function PasswordResetCheck() {
 
   // state //
   const [emailId, setEmailId] = useState<string>('');
