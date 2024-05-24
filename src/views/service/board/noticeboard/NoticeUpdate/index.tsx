@@ -13,7 +13,7 @@ export default function NoticeUpdate() {
 
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-  const { loginUserId, loginUserRole } = useUserStore();
+  const { loginUserEmailId, loginUserRole } = useUserStore();
   const { noticeNumber } = useParams();
   const [cookies] = useCookies();
   const [noticeWriteId, setNoticeWriterId] = useState<string>('');
@@ -40,7 +40,7 @@ export default function NoticeUpdate() {
     }
 
     const { noticeWriteId, noticeWriteDatetime, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
-    if (noticeWriteId !== loginUserId) {
+    if (noticeWriteId !== loginUserEmailId) {
       alert('권한이 없습니다.');
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;

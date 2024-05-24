@@ -38,7 +38,7 @@ function ListItem ({
 // component: 공지사항 목록보기 //
 export default function NoticeList() {
   //                    state                    //
-  const {loginUserId, loginUserRole} = useUserStore();
+  const {loginUserEmailId, loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
 
