@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import './App.css';
 import { Route, Routes, useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, FIND_EMAIL_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MY_PAGE_PATH, INQUIRY_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_INFO_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH, NOTICE_BOARD_LIST_PATH } from './constant';
 import Authentication from './layouts/AuthenticationContainer';
-import ServiceContainer from './layouts/ServiceContainer';
+import SignIn, { Sns } from './views/Authentication/SignIn';
+import SignUp from './views/Authentication/SignUp';
 import BusinessRegistration from './views/Authentication/BusinessRegistration';
 import InquiryList from './views/service/board/inquiryboard/InquiryMyList';
 import InquiryWrite from './views/service/board/inquiryboard/InquiryWrite';
@@ -12,10 +14,6 @@ import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
-<<<<<<< HEAD
-import Main from './views/Main';
-import MyPage from './layouts/MyPageContainer';
-=======
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
 import FindEmail from './views/Authentication/FindEmail/FIndEmailInput';
 import PasswordReset from './views/Authentication/PasswordReset/PasswordResetInput';
@@ -24,22 +22,16 @@ import FindEmailFinally from './views/Authentication/FindEmail/FindEmailFinally'
 import PasswordResetCheck from './views/Authentication/PasswordReset/PasswordResetCheck';
 import PasswordResetFinally from './views/Authentication/PasswordReset/PasswordResetFinally';
 import PasswordResetInput from './views/Authentication/PasswordReset/PasswordResetInput';
->>>>>>> 38a89d5c4c2614ca9eef95e838df98c2e7f3412d
 import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
 import UserDelete from './views/Mypage/UserDelete';
 import Board from './layouts/Board';
-<<<<<<< HEAD
-=======
 import Main from './views/Main';
-<<<<<<< HEAD
+import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
+import MyPage from './layouts/MyPageContainer';
+import ServiceContainer from './layouts/ServiceContainer';
 import Restaurant from './views/Restaurant';
 import RestaurantInfo from './views/RestaurantInfo';
-import SignIn, { Sns } from './views/Authentication/SignIn';
-import SignUp from './views/Authentication/SignUp';
-=======
-import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
->>>>>>> 38a89d5c4c2614ca9eef95e838df98c2e7f3412d
->>>>>>> 1fef0a1af903212a5f4819b17f6d46c952119d74
+import RestaurantReservation from './views/RestaurantReservation';
 
 
 // component: root 경로 컴포넌트
@@ -72,28 +64,17 @@ function App() {
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
         {/* <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
         <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />  */}
-      </Route>
       <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} />
         <Route path={RESTAURANT_LIST_PATH} element={<Restaurant/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
-        {/*
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
-  <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
+        {/* <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
+      </Route> 
       <Route path={MY_PAGE_PATH} element={<MyPage />} >
         <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
         <Route path={USER_DELETE_PATH} element={<UserDelete />} />
       </Route>  
       <Route path={BOARD_PATH} element={<Board />} >
-<<<<<<< HEAD
-        <Route path={INQUIRY_PATH} >
-          <Route element={<InquiryList />} />
-            <Route path={INQUIRY_BOARD_WRITE_PATH} element={<InquiryWrite />} />
-            <Route path={INQUIRY_BOARD_UPDATE_PATH} element={<InquiryUpdate />} />
-            <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<MyInquiry />} />
-            {/* <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} /> */}
-        </Route>
-=======
->>>>>>> 38a89d5c4c2614ca9eef95e838df98c2e7f3412d
         <Route path={NOTICE_PATH} >
           <Route path={NOTICE_BOARD_LIST_PATH} element={<NoticeList />} />
           <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />
