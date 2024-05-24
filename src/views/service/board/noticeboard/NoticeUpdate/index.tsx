@@ -39,7 +39,7 @@ export default function NoticeUpdate() {
       return;
     }
 
-    const { noticeWriteId, noticeWriteDatetime, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
+    const { noticeWriterId, noticeWriteDatetime, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
     if (noticeWriteId !== loginUserEmailId) {
       alert('권한이 없습니다.');
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);

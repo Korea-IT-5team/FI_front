@@ -19,7 +19,7 @@ export default function NoticeDetail() {
 
     const [cookies] = useCookies();
     const [noticeTitle, setNoticeTitle] = useState<string>('');
-    const [noticeWriteId, setNoticeWriterId] = useState<string>('');
+    const [noticeWriterId, setNoticeWriterId] = useState<string>('');
     const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
     const [noticeContents, setNoticeContents] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
@@ -69,9 +69,9 @@ export default function NoticeDetail() {
             return;
         }
 
-        const { noticeTitle, noticeWriteId, noticeWriteDatetime, noticeContents, viewCount } = result as GetNoticeBoardResponseDto;
+        const { noticeTitle, noticeWriterId, noticeWriteDatetime, noticeContents, viewCount } = result as GetNoticeBoardResponseDto;
         setNoticeTitle(noticeTitle);
-        setNoticeWriterId(noticeWriteId);
+        setNoticeWriterId(noticeWriterId);
         setNoticeWriteDatetime(noticeWriteDatetime);
         setNoticeContents(noticeContents);
         setViewCount(viewCount);
@@ -99,12 +99,12 @@ export default function NoticeDetail() {
     };
 
     const onUpdateClickHandler = () => {
-        if (!noticeNumber || loginUserEmailId !== noticeWriteId) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriterId) return;
         navigator(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));
     };
 
     const onDeleteClickHandler = () => {
-        if (!noticeNumber || loginUserEmailId !== noticeWriteId || !cookies.accessToken) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriterId || !cookies.accessToken) return;
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
     
@@ -114,25 +114,27 @@ export default function NoticeDetail() {
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken || !noticeNumber) return;
-        // increaseViewCountRequest(noticeNumber, cookies.accessToken)
-        //     .then(increaseViewCountResponse);
+        increaseViewCountRequest(noticeNumber, cookies.accessToken)
+            .then(increaseViewCountResponse);
     }, []);
     
     //                    render                    //
     return (
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
-                <div className='notice-detail-title'></div>
-                <div className='notice-detail-info-box'>
-                    <div className='notice-detail-mini-box'>
-                        <div className='notice-detail-writeid'>작성자</div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-date'>날짜 </div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-count'>조회수 </div>
+                <div className='notice-detail-contents-box'>
+                    <div className='notice-detail-title'>제목{noticeTitle}</div>
+                        <div className='notice-detail-info-box'>
+                            <div className='notice-detail-mini-box'>
+                                <div className='notice-detail-writer-id'>작성자 {noticeWriterId}</div>
+                                <div className='qna-detail-info-divider'>{'\|'}</div>
+                                <div className='notice-detail-date'>날짜 {noticeWriteDatetime}</div>
+                                <div className='qna-detail-info-divider'>{'\|'}</div>
+                                <div className='notice-detail-count'>조회수 {viewCount}</div>
+                            </div>
+                                <div className='notice-detail-content'>내용</div>
+                        </div>
                     </div>
-                    <div className='notice-detail-content'></div>
-                </div>
                 <div className='notice-detail-update-delete-box'>
                     <div className='notice-detail-update'>수정</div>
                     <div className='notice-detail-delete'>삭제</div>
