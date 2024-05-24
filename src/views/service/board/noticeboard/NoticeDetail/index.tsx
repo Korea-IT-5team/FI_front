@@ -14,7 +14,7 @@ export default function NoticeDetail() {
     //                    state                    //
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
 
-    const { loginUserId, loginUserRole } = useUserStore();
+    const { loginUserEmailId, loginUserRole } = useUserStore();
     const { noticeNumber } = useParams();
 
     const [cookies] = useCookies();
@@ -98,12 +98,12 @@ export default function NoticeDetail() {
     };
 
     const onUpdateClickHandler = () => {
-        if (!noticeNumber || loginUserId !== noticeWriteId) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriteId) return;
         navigator(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));
     };
 
     const onDeleteClickHandler = () => {
-        if (!noticeNumber || loginUserId !== noticeWriteId || !cookies.accessToken) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriteId || !cookies.accessToken) return;
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
     

@@ -62,9 +62,17 @@ function App() {
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
-        {/* <Route path={FIND_EMAIL_PATH} element={<FindEmail />} />
-        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} />  */}
-      <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} />
+        <Route path={FIND_EMAIL_PATH} element={<FindEmail />} >
+          <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
+          <Route path={FIND_EMAIL_FINALLY_PATH} element={<FindEmailFinally />} />
+        </Route>
+        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} > 
+          <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
+          <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
+          <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
+        </Route>
+      </Route>
+      <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} >
         <Route path={RESTAURANT_LIST_PATH} element={<Restaurant/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
