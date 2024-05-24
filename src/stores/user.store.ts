@@ -8,7 +8,8 @@ interface UserStore
     setLoginUserRole: (loginUserRole:string) => void,
     restaurantId:number,
     setRestaurantId: (restaurantId:number) => void,
-   
+    reservationStatus:boolean,
+    setReservationStatus: (reservationStatus:boolean) => void,
 }
 
 const useUserStore = create<UserStore>(set => ({
@@ -18,6 +19,8 @@ const useUserStore = create<UserStore>(set => ({
     setLoginUserRole: (loginUserRole:string) => set(state => ({...state,loginUserRole})),
     restaurantId:0,
     setRestaurantId: (restaurantId:number) => set(state => ({...state,restaurantId})),
+    reservationStatus:false,
+    setReservationStatus: (reservationStatus:boolean) => set(state => ({...state,reservationStatus})),
 }));
 
 export default useUserStore;

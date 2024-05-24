@@ -45,7 +45,7 @@ export default function ReviewList({ value,getRestaurantInfoResponse }: Props)
       }
 
 
-      const PatchReviewUploadResponseDto = (result : ResponseDto | null) => 
+      const PatchReviewUploadResponseDto = (result: ResponseDto | null) => 
       { 
             const message =
             !result ? '서버에 문제가 있습니다.' :
