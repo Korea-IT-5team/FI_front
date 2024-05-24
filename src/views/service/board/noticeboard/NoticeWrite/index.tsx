@@ -70,9 +70,11 @@ useEffect(() => {
 }, [loginUserRole]);
 
 //                    render                    //
-  return (
-    <div>
-      공지 글쓰기 창입니다!
-    </div>
-  )
+return (
+  <div id='notice-detail-wrapper'>
+      <div className='notice-detail-main-box'>
+        <div className=''></div>
+      </div>
+  </div>
+);
 }

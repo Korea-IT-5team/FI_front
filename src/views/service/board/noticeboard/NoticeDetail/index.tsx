@@ -28,6 +28,7 @@ export default function NoticeDetail() {
     const navigator = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
+
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 공지번호입니다.' : 
@@ -130,13 +131,12 @@ export default function NoticeDetail() {
                         <div className='qna-detail-info-divider'>{'\|'}</div>
                         <div className='notice-detail-view-count'>조회수 </div>
                     </div>
-                    <div className='notice-detail-content'></div>
-                </div>
                 <div className='notice-detail-update-delete-box'>
                     <div className='notice-detail-update'>수정</div>
                     <div className='notice-detail-delete'>삭제</div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
