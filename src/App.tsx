@@ -29,9 +29,11 @@ import Main from './views/Main';
 import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
 import MyPage from './layouts/MyPageContainer';
 import ServiceContainer from './layouts/ServiceContainer';
-import Restaurant from './views/Restaurant';
-import RestaurantInfo from './views/RestaurantInfo';
-import RestaurantReservation from './views/RestaurantReservation';
+import Restaurant from './views/Restaurant/RestaurantList';
+import Restaurantlist from './views/Restaurant/RestaurantList';
+import RestaurantInfo from './views/Restaurant/RestaurantInfo';
+import RestaurantReservation from './views/Restaurant/RestaurantReservation';
+import ReviewList from './views/Restaurant/ReviewList';
 
 
 // component: root 경로 컴포넌트
@@ -39,11 +41,6 @@ function Index() {
 
   //   function   //
   const navigator = useNavigate();
-
-  //   effect   //
-  useEffect(() => {
-    navigator(MAIN_PATH);
-  }, []);
 
   //   render   //
   return <></>;
@@ -72,10 +69,11 @@ function App() {
           <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
         </Route>
       </Route>
-      <Route path={RESTAURANT_PATH} element={<ServiceContainer/>} >
-        <Route path={RESTAURANT_LIST_PATH} element={<Restaurant/>}/>  
+      <Route path={RESTAURANT_PATH} element={<Restaurant/>} >
+        <Route path={RESTAURANT_LIST_PATH} element={<Restaurantlist/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
+        {/* <Route path={RESTAURANT_RESERVATION_PATH} element={<ReviewList />} /> */}
         {/* <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
       </Route> 
       <Route path={MY_PAGE_PATH} element={<MyPage />} >

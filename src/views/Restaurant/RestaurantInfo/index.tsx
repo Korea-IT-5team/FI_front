@@ -10,8 +10,8 @@ import SelectBox from 'src/components/SelectBox';
 import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
-import ReviewList from './ReviewList';
 import './style.css';
+import ReviewList from '../ReviewList';
 
 //              interface                   //
 
@@ -317,6 +317,11 @@ const onReservationClickHandler = () =>
     navigator(RESTAURANT_RESERVATION_ABSOLUTE_PATH);
 };
 
+const onReservationCancelClickHandler = () => 
+{
+
+};
+
   //            render              //
   return (
     <>
@@ -328,11 +333,14 @@ const onReservationClickHandler = () =>
                         <div>
                             <div>{restaurantName}</div>
                         {reservationStatus} ?
-                            ({loginUserRole === "ROLE_USER" && (
-                            <button onClick={onReservationClickHandler}>예약</button>)})
-                                    :
-                            ({loginUserRole === "ROLE_USER" && (
+
+                        ({loginUserRole === "ROLE_USER" && (
                             <button onClick={onReservationCancelClickHandler}>예약취소</button>)})
+                            
+                                    :
+                        ({loginUserRole === "ROLE_USER" && (
+                            <button onClick={onReservationClickHandler}>예약</button>)})
+                           
                         </div>
                     <div>{restaurantFoodCategory}</div>
                     <div>{grade}</div>
