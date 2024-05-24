@@ -6,12 +6,12 @@ import { GetRestaurantInfoRequest, PatchRestaurantUpdateRequestDto, PostRestaura
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/SelectBox';
+import SelectBox from 'src/components/Selectbox';
 import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
-import './style.css';
 import ReviewList from '../ReviewList';
+import './style.css';
 
 //              interface                   //
 
