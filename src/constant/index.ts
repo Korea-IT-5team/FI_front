@@ -18,7 +18,9 @@ export const RESTAURANT_PATH = '/restaurant'
 export const RESTAURANT_LIST_PATH = 'list';
 export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
 export const RESTAURANT_RESERVATION_PATH = 'reservation';
-export const RESTAURANT_RESERVATION_INFO_PATH = 'info/:reservationNumber';
+export const RESTAURANT_RESERVATION_LIST_PATH = 'reservationList';
+export const RESTAURANT_REVIEW_DETAILS_LIST_PATH = 'reviewDetailsList';
+export const RESTAURANT_REVIEW_DETAILS_PATH = 'reviewDetails/:reviewNumber';
 
 export const MY_PAGE_PATH = '/my-page';
 export const USER_INFO_UPDATE_PATH = 'user-info-update';
@@ -56,7 +58,9 @@ export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RES
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
 export const RESTAURANT_RESERVATION_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}`;
-export const RESTAURANT_RESERVATION_INFO_ABSOLUTE_PATH = (reservationNumber: number | string) => `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}/info/${reservationNumber}`;
+export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH =  `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_LIST_PATH}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH = `${RESTAURANT_PATH}/${RESTAURANT_REVIEW_DETAILS_LIST_PATH}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/reviewDetails/${reviewNumber}`;
 
 export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;
 export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
@@ -108,20 +112,19 @@ export const PATCH_RESTAURANT_INFO_UPDATE = `${GET_RESTAURANT_URL}/info-update`;
 // description: REVIEW 모듈 내의 기능 URL
 export const SERVER_REVIEW_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/review`;
 // description: 아래의 경우 GET_REVIEW_URL로 먼저 화살표함수와 URL을 적어줘서 코드의 가독성을 향상시킬 수 있다.
-// export const GET_REVIEW_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/${restaurantId}`;
-// export const POST_REVIEW_REQUEST_URL = `${GET_REVIEW_URL}/write`;
-// export const PATCH_REVIEW_REQUEST_URL = `${GET_REVIEW_URL}/update`;
-// export const DELETE_REVIEW_REQUEST_URL = `${GET_REVIEW_URL}/delete`;
-export const POST_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/${restaurantId}/write`;
-export const PATCH_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/${restaurantId}/update`;
-export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number) => `${SERVER_REVIEW_MODULE_URL}/${reviewNumber}/delete`;
+export const GET_REVIEW_DETAILS_LIST_URL =  `${SERVER_REVIEW_MODULE_URL}/list`;
+
+export const POST_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/write/${restaurantId}`;
+export const PATCH_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/update/${restaurantId}`;
+export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number) => `${SERVER_REVIEW_MODULE_URL}/delete/${reviewNumber}`;
 
 // description: RESERVATION 모듈 내의 기능 URL
 export const SERVER_RESERVATION_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/reservation`;
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
+export const GET_RESERVATION_CEO_LIST_URL = (restaurantId: number | string) =>  `${SERVER_RESERVATION_MODULE_URL}/ceo-list/${restaurantId}`;
 export const GET_RESERVATION_URL = (reservationNumber: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${reservationNumber}`;
-export const POST_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}/do`;
-export const DELETE_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}/cancel`;
+export const POST_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
+export const DELETE_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
 
 // description: FAVORITE 모듈 내의 기능 URL
 export const SERVER_FAVORITE_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/favorite`;

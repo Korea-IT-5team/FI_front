@@ -17,7 +17,7 @@ interface Props {
 //               component: 리뷰 리스트             // 
 export default function ReviewList({ value, getRestaurantInfoResponse }: Props) {
     //                      state                           //
-    const { loginUserEmailId, loginUserRole, restaurantId } = useUserStore();
+    const { loginUserEmailId, loginUserRole, RestaurantId } = useUserStore();
     const [page, setPage] = useState<boolean>(true);
     const [reviewImage, setReviewImage] = useState<string>("");
     const [rating, setRating] = useState<number>(0);
@@ -38,7 +38,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             alert(message);
             return;
         }
-        GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
+        GetRestaurantInfoRequest(RestaurantId, cookies.accessToken)
             .then(getRestaurantInfoResponse);
     }
 
@@ -55,7 +55,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             alert(message);
             return;
         }
-        GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
+        GetRestaurantInfoRequest(RestaurantId, cookies.accessToken)
             .then(getRestaurantInfoResponse);
     }
 
@@ -72,7 +72,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             alert(message);
             return;
         }
-        GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
+        GetRestaurantInfoRequest(RestaurantId, cookies.accessToken)
             .then(getRestaurantInfoResponse);
     }
 
@@ -114,7 +114,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             rating: rating,
             reviewContents: reviewContents
         }
-        PostReviewUploadRequestDto(restaurantId, requestBody, cookies.accessToken)
+        PostReviewUploadRequestDto(RestaurantId, requestBody, cookies.accessToken)
             .then(PostReviewUploadResponseDto);
     }
 
@@ -131,7 +131,7 @@ export default function ReviewList({ value, getRestaurantInfoResponse }: Props) 
             rating: rating,
             reviewContents: reviewContents
         }
-        PatchReviewUpDateRequestDto(restaurantId, requestBody, cookies.accessToken)
+        PatchReviewUpDateRequestDto(RestaurantId, requestBody, cookies.accessToken)
             .then(PatchReviewUploadResponseDto);
     }
 

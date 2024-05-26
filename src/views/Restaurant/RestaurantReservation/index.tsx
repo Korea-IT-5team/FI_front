@@ -8,7 +8,6 @@ import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
 
-import React from 'react'
 import { PostReservationUploadRequest } from "src/apis/restaurant/reservation";
 
 
@@ -19,7 +18,7 @@ const[reservationDate,setReservationDate] = useState<string>('');
 const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
-const { loginUserEmailId, loginUserRole,restaurantId,setRestaurantId ,setReservationStatus} = useUserStore();
+const { loginUserEmailId, loginUserRole,RestaurantId,setRestaurantId ,setReservationStatus} = useUserStore();
 const [cookies] = useCookies();
 const navigator = useNavigate();
 
@@ -43,7 +42,7 @@ const PostReservationUploadResponse = (result: ResponseDto | null) =>
       }
       
       setReservationStatus(true);
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
+      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(RestaurantId));
 }
 
 //                    event handler                    //
@@ -85,7 +84,7 @@ const onReservationClickHandler = () =>
       reservationTime: reservationTime,
       reservationPeople: reservationPeople,
     }
-    PostReservationUploadRequest(restaurantId, requestBody,cookies.accessToken).then(PostReservationUploadResponse);
+    PostReservationUploadRequest(RestaurantId, requestBody,cookies.accessToken).then(PostReservationUploadResponse);
 }
 
 
