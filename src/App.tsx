@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
-import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, FIND_EMAIL_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, FIND_EMAIL_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_LIST_PATH, RESTAURANT_RESERVATION_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
 import Authentication from './layouts/AuthenticationContainer';
 import Board from './layouts/BoardContainer';
 import MyPage from './layouts/MyPageContainer';
@@ -18,7 +18,9 @@ import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
 import RestaurantInfo from './views/Restaurant/RestaurantInfo';
 import { default as Restaurantlist } from './views/Restaurant/RestaurantList';
 import RestaurantReservation from './views/Restaurant/RestaurantReservation';
+import RestaurantReservationList from './views/Restaurant/RestaurantReservationList';
 import RestaurantTopBar from './views/Restaurant/RestaurantTopBar';
+import ReviewDetailsList from './views/Restaurant/ReviewDetailsList';
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
 import { default as InquiryList, default as InquiryMyList } from './views/service/board/inquiryboard/InquiryMyList';
 import InquiryUpdate from './views/service/board/inquiryboard/InquiryUpdate';
@@ -66,8 +68,9 @@ function App() {
         <Route path={RESTAURANT_LIST_PATH} element={<Restaurantlist/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
-        {/* <Route path={RESTAURANT_RESERVATION_PATH} element={<ReviewList />} /> */}
-        {/* <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
+        <Route path={RESTAURANT_RESERVATION_LIST_PATH} element={<RestaurantReservationList />} />
+        <Route path={RESTAURANT_REVIEW_DETAILS_LIST_PATH} element={<ReviewDetailsList />} />
+        
       </Route> 
       <Route path={MY_PAGE_PATH} element={<MyPage />} >
         <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
