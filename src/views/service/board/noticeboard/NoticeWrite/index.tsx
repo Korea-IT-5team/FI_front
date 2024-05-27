@@ -38,12 +38,12 @@ export default function NoticeWrite() {
   };
 
   //                    event handler                    //
-  const NoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onNoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const noticeTitle = event.target.value;
     setNoticeTitle(noticeTitle);
   };
 
-  const NoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const noticeContents = event.target.value;
     if (noticeContents.length > 1000) return;
     setNoticeContents(noticeContents);
@@ -74,14 +74,12 @@ export default function NoticeWrite() {
   return (
     <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>
-        <div className="notice-write-title-box">문의제목</div>
-        <div className="notice-write-contents-box">문의 내용</div>
-        <div className="notice-write-comment-box">
-          <div className="notice-write-comment">문의답변</div>
-          <div className="notice-write-container">
-            <div className="notice-write-commit">수정</div>
-            <div className="notice-write-update">삭제</div>
-          </div>
+        <div className='notice-write-title-box'>
+          <input className='notice-write-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
+        </div>
+        <div className='notice-write-contents-box'>
+          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <div className='primary-button'>작성</div>
         </div>
       </div>
     </div>
