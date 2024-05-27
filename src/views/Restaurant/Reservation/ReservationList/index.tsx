@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -23,7 +23,6 @@ function ListItem ({
 }: RestaurantReservationListItem) {
 
     //                    function                    //
-    const navigator = useNavigate();
 
     //                    event handler                    //
 
@@ -147,11 +146,6 @@ export default function RestaurantReservationList() {
         if (currentSection === totalSection) return;
         setCurrentSection(currentSection + 1);
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-    };
-
-    const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const searchWord = event.target.value;
-        setSearchWord(searchWord);
     };
 
     //                    effect                    //

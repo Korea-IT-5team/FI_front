@@ -5,16 +5,16 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest, PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
+import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
+import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
 import RestInputBox from 'src/components/RestaurantInputBox';
 import SelectBox from 'src/components/Selectbox';
-import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
-import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
-import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 
 //              interface                   //
 
@@ -369,7 +369,7 @@ export default function RestaurantInfo() {
     };
 
     const onReservationClickHandler = () => {
-        navigator(RESTAURANT_RESERVATION_ABSOLUTE_PATH);
+        navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH);
     };
 
 const onReservationCancelClickHandler = () => 

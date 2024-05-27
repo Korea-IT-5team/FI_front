@@ -65,7 +65,6 @@ export default function RestaurantTopBar()
   
 
   //                    function                    //
-  const navigator = useNavigate();
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
