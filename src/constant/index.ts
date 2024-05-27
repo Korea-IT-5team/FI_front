@@ -12,19 +12,22 @@ export const PASSWORD_RESET_INPUT_PATH = 'password-reset-input';
 export const PASSWORD_RESET_CHECK_PATH = 'password-reset-check';
 export const PASSWORD_RESET_FINALLY_PATH = 'password-reset-finally';
 
-export const RESTAURANT_PATH = '/restaurant'
-export const RESTAURANT_LIST_PATH = 'list';
+export const RESTAURANT_PATH = '/restaurant';
 export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
-export const RESTAURANT_RESERVATION_PATH = 'reservation';
-export const RESTAURANT_RESERVATION_LIST_PATH = 'reservationList';
+export const RESTAURANT_LIST_PATH = 'list';
+
+export const REVIEW_PATH = 'review';
 export const RESTAURANT_REVIEW_DETAILS_LIST_PATH = 'reviewDetailsList';
-export const RESTAURANT_REVIEW_DETAILS_PATH = 'reviewDetail/:reviewNumber';
+export const RESTAURANT_REVIEW_DETAIL_PATH = 'reviewDetail/:reviewNumber';
 export const RESTAURANT_REVIEW_WRITE_PATH = 'reviewWrite/:restaurantId';
 export const RESTAURANT_REVIEW_UPDATE_PATH = 'reviewUpdate/:reviewNumber';
+
+export const RESERVATION_PATH = 'reservation';
+export const DO_RESERVATION_PATH = 'DoReservation';
+export const RESERVATION_LIST_PATH = 'reservationList';
+
+export const FAVORITE_PATH = 'favorite';
 export const RESTAURANT_FAVORITE_LIST_PATH = 'favoriteList';
-
-
-
 
 
 export const MY_PAGE_PATH = '/my-page';
@@ -59,15 +62,19 @@ export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET
 export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}`;
 export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
-export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
+
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
-export const RESTAURANT_RESERVATION_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_PATH}`;
-export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH =  `${RESTAURANT_PATH}/${RESTAURANT_RESERVATION_LIST_PATH}`;
-export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH = `${RESTAURANT_PATH}/${RESTAURANT_REVIEW_DETAILS_LIST_PATH}`;
-export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/reviewDetail/${reviewNumber}`;
-export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_WRITE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/reviewWrite/${restaurantId}`;
-export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_UPDATE_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/reviewUpdate/${reviewNumber}`;
-export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${RESTAURANT_FAVORITE_LIST_PATH}`;
+export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
+
+export const RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESERVATION_PATH}/${DO_RESERVATION_PATH}`;
+export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH =  `${RESTAURANT_PATH}/${RESERVATION_PATH}/${RESERVATION_LIST_PATH}`;
+
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH = `${RESTAURANT_PATH}/${REVIEW_PATH}/${RESTAURANT_REVIEW_DETAILS_LIST_PATH}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewDetail/${reviewNumber}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_WRITE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewWrite/${restaurantId}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_UPDATE_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewUpdate/${reviewNumber}`;
+
+export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${FAVORITE_PATH}/${RESTAURANT_FAVORITE_LIST_PATH}`;
 
 
 export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;

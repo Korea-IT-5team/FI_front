@@ -18,7 +18,7 @@ const[reservationDate,setReservationDate] = useState<string>('');
 const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
-const { loginUserEmailId, loginUserRole,RestaurantId,setRestaurantId ,setReservationStatus} = useUserStore();
+const {RestaurantId ,setReservationStatus} = useUserStore();
 const [cookies] = useCookies();
 const navigator = useNavigate();
 
