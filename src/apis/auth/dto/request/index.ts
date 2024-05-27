@@ -53,4 +53,7 @@ export interface SignUpRequestDto {
     userTelNumber: string;
     authNumber: string;
     userAddress: string;
+    joinPath: string;
+    snsId?: string;
+    businessRegistration?: string;
 }
