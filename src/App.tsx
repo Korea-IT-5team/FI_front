@@ -11,7 +11,7 @@ import Main from './views/Main';
 import UserDelete from './views/Mypage/UserDelete';
 import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
 import RestaurantInfo from './views/Restaurant/RestaurantInfo';
-import Restaurantlist, { default as RestaurantList } from './views/Restaurant/RestaurantList';
+import Restaurantlist from './views/Restaurant/RestaurantList';
 import RestaurantReservation from './views/Restaurant/RestaurantReservation';
 import RestaurantReservationList from './views/Restaurant/RestaurantReservationList';
 import RestaurantTopBar from './views/Restaurant/RestaurantTopBar';
