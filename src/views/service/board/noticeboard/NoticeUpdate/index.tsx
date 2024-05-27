@@ -7,6 +7,7 @@ import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/ap
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
+import './style.css';
 
 //                    component                    //
 export default function NoticeUpdate() {

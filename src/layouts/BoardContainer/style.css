@@ -1,21 +1,46 @@
-#authentication-wrapper {
-    width: 100%;
-    height: 100vh;
-    min-height: 1024px;
-}
-
-.authentication-head-box {
+#board-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center; 
-    width: 100%;
-    height: 100px;
+    flex-direction: column;
+    overflow-y: auto; 
+    max-height: 100vh;
 }
 
-.authentication-title {
-    text-align: center;
-    font-size: 50px;
-    font-weight: bold;
+.board-head-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(238, 238, 238, 1); 
+    padding: 10px 20px;
+    background-color: rgba(255, 148, 45, 1);
+}
 
+.board-icon-image {
+    width: 40px; 
+    height: 40px; 
+    background-size: contain; 
+    margin: 5px; 
+    background-image: url("../../assets/image/main-icon-bar.png");
+}
+
+.board-title {
+    font-size: 40px;
+    font-weight: bold;
     color: rgba(64, 64, 64, 1);
+}
+
+.board-sign-in-box {
+    display: flex;
+    align-items: center; 
+}
+
+.board-admin, .board-sign-in {
+    display: flex;
+    color: rgba(64, 64, 64, 1);
+    font-size: 22px; 
+    margin: 5px 10px; 
+}
+
+.board-sign-in:hover {
+    color: rgba(64, 64, 64, 0.5);
+    cursor: pointer;
 }

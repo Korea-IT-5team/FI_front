@@ -6,6 +6,7 @@ import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/reques
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
+import './style.css';
 
 //                    component                    //
 export default function NoticeWrite() {
@@ -22,69 +23,65 @@ export default function NoticeWrite() {
   //                    function                    //
   const navigator = useNavigate();
 
-  const postBoardResponse = (result: ResponseDto | null ) => {
-      const message =
-          !result ? '서버에 문제가 있습니다.' : 
-          result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+  const postBoardResponse = (result: ResponseDto | null) => {
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
+        result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
           result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-      if (!result || result.code !== 'SU') {
-          alert(message);
-          return;
-      }
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+    if (!result || result.code !== 'SU') {
+      alert(message);
+      return;
+    }
+    navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
   //                    event handler                    //
-  const NoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onNoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const noticeTitle = event.target.value;
     setNoticeTitle(noticeTitle);
-};
+  };
 
-const NoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  const noticeContents = event.target.value;
-  if (noticeContents.length > 1000) return;
-  setNoticeContents(noticeContents);
+  const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const noticeContents = event.target.value;
+    if (noticeContents.length > 1000) return;
+    setNoticeContents(noticeContents);
 
-  if (!contentsRef.current) return;
-  contentsRef.current.style.height = 'auto';
-  contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
-};
+    if (!contentsRef.current) return;
+    contentsRef.current.style.height = 'auto';
+    contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
+  };
 
-const onPostButtonClickHandler = () => {
-  if (!noticeTitle.trim() || !noticeTitle.trim()) return;
-  if (!cookies.accessToken) return;
+  const onPostButtonClickHandler = () => {
+    if (!noticeTitle.trim() || !noticeTitle.trim()) return;
+    if (!cookies.accessToken) return;
 
-  const requestBody: PostNoticeBoardRequestDto = { noticeTitle, noticeContents };
+    const requestBody: PostNoticeBoardRequestDto = { noticeTitle, noticeContents };
 
-  postNoticeBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
-};
+    postNoticeBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
+  };
 
-//                    effect                    //
-useEffect(() => {
-  if (loginUserRole === 'ROLE_ADMIN') {
+  //                    effect                    //
+  useEffect(() => {
+    if (loginUserRole === 'ROLE_ADMIN') {
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
-  }
-}, [loginUserRole]);
+    }
+  }, [loginUserRole]);
 
-//                    render                    //
-return (
-  <div id='notice-write-wrapper'>
+  //                    render                    //
+  return (
+    <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>
-        <div className='notice-write-info-box'>
-          <div className='notice-write-title-box'>문의 제목</div>
-          <div className='notice-write-content-box'>문의 내용</div>
+        <div className='notice-write-title-box'>
+          <input className='notice-write-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
-        <div className='notice-write-foot-box'>
-          <div className='notice-write-answer'>문의 답변</div>
-          <div className='notice-write-modify'>
-            <div className='notice-write-create'>작성</div>
-            <div className='notice-write-update'>수정</div>
-          </div>
+        <div className='notice-write-contents-box'>
+          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <div className='primary-button'>작성</div>
         </div>
       </div>
-  </div>
-);
+    </div>
+  );
 }

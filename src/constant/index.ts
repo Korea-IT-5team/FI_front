@@ -6,13 +6,12 @@ export const AUTH_PATH = '/authentication';
 export const SIGN_IN_PATH = 'sign-in';
 export const SIGN_UP_PATH = 'sign-up';
 export const BUSINESS_REGISTRATION_PATH = 'business-registration';
-export const FIND_EMAIL_PATH = 'find-email';
-export const FIND_EMAIL_INPUT_PATH = 'input';
-export const FIND_EMAIL_FINALLY_PATH = 'finally';
-export const PASSWORD_RESET_PATH = 'password-reset';
-export const PASSWORD_RESET_INPUT_PATH = 'input';
-export const PASSWORD_RESET_CHECK_PATH = 'check';
-export const PASSWORD_RESET_FINALLY_PATH = 'finally';
+export const FIND_EMAIL_INPUT_PATH = 'find-email-input';
+export const FIND_EMAIL_FINALLY_PATH = 'find-email-finally';
+export const PASSWORD_RESET_INPUT_PATH = 'password-reset-input';
+export const PASSWORD_RESET_CHECK_PATH = 'password-reset-check';
+export const PASSWORD_RESET_FINALLY_PATH = 'password-reset-finally';
+
 export const RESTAURANT_PATH = '/restaurant'
 export const RESTAURANT_LIST_PATH = 'list';
 export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
@@ -29,6 +28,7 @@ export const RESTAURANT_FAVORITE_LIST_PATH = 'favoriteList';
 
 
 export const MY_PAGE_PATH = '/my-page';
+export const MY_PAGE_SITE_PATH = 'site';
 export const USER_INFO_UPDATE_PATH = 'user-info-update';
 export const USER_DELETE_PATH = 'user-delete';
 
@@ -53,13 +53,11 @@ export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
 export const SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
 export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const BUSINESS_REGISTRATION_ABSOLUTE_PATH = `${AUTH_PATH}/${BUSINESS_REGISTRATION_PATH}`;
-export const FIND_EMAIL_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_PATH}`;
-export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_PATH}/${FIND_EMAIL_INPUT_PATH}`;
-export const FIND_EMAIL_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_PATH}/${FIND_EMAIL_FINALLY_PATH}`;
-export const PASSWORD_RESET_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_PATH}`;
-export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
-export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_PATH}/${PASSWORD_RESET_CHECK_PATH}`;
-export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
+export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_INPUT_PATH}`;
+export const FIND_EMAIL_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_FINALLY_PATH}`;
+export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
+export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}`;
+export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
@@ -73,10 +71,11 @@ export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${REST
 
 
 export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;
+export const MY_PAGE_SITE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${MY_PAGE_SITE_PATH}`;
 export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
 
-export const BOARD_ABSOLUTE_PATH = `${BOARD_PATH}`;
+export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
 
 export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
 export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
