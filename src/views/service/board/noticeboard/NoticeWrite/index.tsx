@@ -6,6 +6,7 @@ import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/reques
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
+import './style.css';
 
 //                    component                    //
 export default function NoticeWrite() {
