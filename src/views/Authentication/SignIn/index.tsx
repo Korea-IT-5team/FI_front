@@ -34,9 +34,6 @@ export function Sns() {
     );
 }
 
-// type //
-type AuthPage = 'sign-in' | 'sign-up';
-
 // interface //
 interface SnsContainerProps {
     title: string;
