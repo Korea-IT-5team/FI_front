@@ -1,0 +1,72 @@
+#main-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  max-height: 100vh;
+}
+
+.main-head-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(238, 238, 238, 1); 
+  padding: 10px 20px;
+  background-color: rgba(255, 148, 45, 1);
+}
+
+.main-icon-image {
+  width: 40px; 
+  height: 40px; 
+  background-size: contain; 
+  margin: 10px;
+  background-image: url("../../assets/image/main-icon-bar.png");
+}
+
+.main-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: rgba(64, 64, 64, 1);
+}
+
+.main-sign-in {
+  display: flex;
+  color: rgba(64, 64, 64, 1);
+  font-size: 25px;
+  margin: 30px;
+}
+
+.main-sign-in:hover {
+  color: rgba(64, 64, 64, 0.5);
+  cursor: pointer;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto; 
+}
+
+.main-banner-box {
+  width: 100%;
+  height: 500px; 
+  background-image: url(../../assets/image/food-banner-2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.main-image-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.food-image {
+  background-color: rgba(245, 245, 245, 1); 
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px; 
+} 

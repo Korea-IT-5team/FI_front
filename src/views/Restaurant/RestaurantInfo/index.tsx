@@ -7,7 +7,7 @@ import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import { DeleteReservationCancleRequest } from 'src/apis/restaurant/reservation';
 import RestInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/Selectbox';
+import SelectBox from 'src/components/SelectBox';
 import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
