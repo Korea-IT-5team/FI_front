@@ -10,7 +10,7 @@ export interface TelNumberAuthRequestDto {
 }
 
 // description: 전화번호 인증 번호 확인 Request Body DTO
-export interface TelNumberAuthCheckRequestDto {
+export interface CheckTelNumberAuthRequestDto {
     userTelNumber: string;
     authNumber: string;
 }

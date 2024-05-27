@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { findEmailRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { FindEmailRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { FindEmailRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import "./style.css";
 import InputBox from 'src/components/InputBox';
@@ -127,7 +127,7 @@ export default function FindEmailInput() {
         if (!authNumberButtonStatus) return;
         if (!authNumber) return;
 
-        const requestBody: TelNumberAuthCheckRequestDto = {
+        const requestBody: CheckTelNumberAuthRequestDto = {
             userTelNumber: userTelNumber,
             authNumber
         };

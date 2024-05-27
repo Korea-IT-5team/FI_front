@@ -1,13 +1,62 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { checkNicknameRequest, emailCheckRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/InputBox';
 import { useAuthStore } from 'src/stores';
 import "./style.css";
 import { BUSINESS_REGISTRATION_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import { useCookies } from 'react-cookie';
 
+
+//   component: Sns 로그인   //
+export function Sns() {
+
+  // state //
+  const { accessToken, expires } = useParams();
+  const [cookies, setCookie] = useCookies();
+
+  // function //
+  const navigator = useNavigate();
+
+  // effect //
+  useEffect(() => {
+      if (!accessToken || !expires) return;
+      const expiration = new Date(Date.now() + (Number(expires) * 1000));
+      setCookie('accessToken', accessToken, { path: '/', expires: expiration });
+
+      navigator(SIGN_IN_ABSOLUTE_PATH);
+  }, []);
+
+  //   render   //
+  return (
+      <></>
+  );
+}
+
+interface SnsContainerProps {
+  title: string;
+}
+
+// component // 
+function SnsContainer({ title }: SnsContainerProps) {
+
+  // event handler //
+  const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
+      window.location.href = 'http://localhost:9999/api/v1/auth/oauth2/' + type;
+  };
+  // render: sns화면 //
+  return (
+      <div className="authentication-sns-container">
+          <div className="sns-container-title label">{title}</div>
+          <div className="sns-button-container">
+              <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
+              <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
+          </div>
+      </div>
+  );
+}
 
 //   component: 회원가입   //
 export default function SignUp() {
@@ -269,7 +318,7 @@ export default function SignUp() {
     if(!authNumberButtonStatus) return;
     if(!authNumber) return;
 
-    const requestBody: TelNumberAuthCheckRequestDto = {
+    const requestBody: CheckTelNumberAuthRequestDto = {
       userTelNumber: userTelNumber,
       authNumber
     };
@@ -296,13 +345,12 @@ export default function SignUp() {
     navigator(BUSINESS_REGISTRATION_ABSOLUTE_PATH);
 };
 
-// 카카오, 네이버 회원가입 버튼
-
   //   render   //
   return(
     <div id='authentication-wrapper'>
       <div className="authentication-contents">
         <div className="authentication-sign-title">회원가입</div>
+        <SnsContainer title="SNS 로그인" />
         <div className="authentication-sign-container">
           <div className="authentication-input-container">
 
