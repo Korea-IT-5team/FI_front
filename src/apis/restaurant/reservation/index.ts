@@ -26,7 +26,7 @@ export const GetCeoReservationListRequest = async (restaurantId:number,accessTok
 
 
 // fuction : 식당 예약 API 함수 
-export const PostReservationUploadRequest = async (restaurantId:number, requestBody: PostReservationRequestDto,accessToken:string) => 
+export const PostReservationRequest = async (restaurantId:number, requestBody: PostReservationRequestDto,accessToken:string) => 
 {
       const result = await axios.post(POST_RESERVATION_REQUEST_URL(restaurantId), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
@@ -35,10 +35,15 @@ export const PostReservationUploadRequest = async (restaurantId:number, requestB
 } 
 
 // fuction : 식당 예약 취소 API 함수 
-export const DeleteReservationCancleRequest = async (restaurantId:number,accessToken:string) => 
+export const DeleteReservationRequest = async (restaurantId:number,accessToken:string) => 
 {
       const result = await axios.delete(DELETE_RESERVATION_REQUEST_URL(restaurantId), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler)
         return result;
 } 
+
+
+
+
+

@@ -123,11 +123,8 @@ export default function Restaurantlist()
 
   //            state               //
   const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [searchWord, setSearchWord] = useState<string>('');
   const [cookies] = useCookies();
-  const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
-
-  
+  const location = useLocation();
 
   //                    function                    //
   const navigator = useNavigate();

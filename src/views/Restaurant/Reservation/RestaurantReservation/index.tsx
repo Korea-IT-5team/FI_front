@@ -8,7 +8,7 @@ import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
 
-import { PostReservationUploadRequest } from "src/apis/restaurant/reservation";
+import { PostReservationRequest } from "src/apis/restaurant/reservation";
 
 
 export default function RestaurantReservation() {
@@ -26,7 +26,7 @@ const navigator = useNavigate();
 
 //                  function                           //
 
-const PostReservationUploadResponse = (result: ResponseDto | null) => 
+const PostReservationResponse = (result: ResponseDto | null) => 
 {
       const message = 
           !result ? '서버에 문제가 있습니다.':
@@ -84,7 +84,8 @@ const onReservationClickHandler = () =>
       reservationTime: reservationTime,
       reservationPeople: reservationPeople,
     }
-    PostReservationUploadRequest(RestaurantId, requestBody,cookies.accessToken).then(PostReservationUploadResponse);
+
+    PostReservationRequest(RestaurantId, requestBody,cookies.accessToken).then(PostReservationResponse);
 }
 
 

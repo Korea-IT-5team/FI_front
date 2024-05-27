@@ -7,3 +7,8 @@ export interface GetFavoriteListResponseDto extends ResponseDto {
   favoriteRestaurantId: number;
   restaurantList: RestaurantListItem[];
 }
+
+//
+export interface GetRestaurantFavoriteStatusResponseDto extends ResponseDto{
+  favoriteStatus : boolean;
+}
