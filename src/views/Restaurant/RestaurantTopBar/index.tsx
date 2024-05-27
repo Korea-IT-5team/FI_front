@@ -53,7 +53,7 @@ function TopBar()
 
 
 //              component             //
-export default function ServiceContainer()
+export default function RestaurantTopBar()
 {
 
   //            state               //
@@ -69,16 +69,17 @@ export default function ServiceContainer()
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
-    // const message = 
-    //     !result ? '서버에 문제가 있습니다.' :
-    //     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const message = 
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '인증에 실패했습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    // if (!result || result.code == 'DBE') 
-    // {
-    //     alert(message);
-    //     navigator(AUTH_PATH);
-    //     return;
-    // }
+    if (!result || result.code !== 'SU') 
+    {
+        //alert(message);
+        // navigator(MAIN_ABSOLUTE_PATH);
+        return;
+    }
 
     const { userEmailId, userRole } = result as GetUserInfoResponseDto;
     setLoginUserEmailId(userEmailId);
@@ -94,7 +95,7 @@ export default function ServiceContainer()
   }
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, [cookies.accessToken]);
+  }, []);
 
   // path에 대한 객체를 반환
 

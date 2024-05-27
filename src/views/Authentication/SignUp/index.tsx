@@ -1,14 +1,10 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
-import "./style.css";
-import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
-import { checkNicknameRequest, emailCheckRequest, signInRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { CheckEmailRequestDto, CheckNicknameDto, SignInRequestDto, SignUpRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
-import { SignInResponseDto } from 'src/apis/auth/dto/response';
+import { ChangeEvent, useState } from 'react';
+import { checkNicknameRequest, emailCheckRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
+import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import InputBox from 'src/components/InputBox/Index';
-import { MAIN_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import InputBox from 'src/components/InputBox';
 import { useAuthStore } from 'src/stores';
+import "./style.css";
 
 
 //   component: 회원가입   //

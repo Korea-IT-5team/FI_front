@@ -1,12 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { getSignInUserRequest } from 'src/apis/user';
 import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import './style.css';
@@ -19,9 +19,9 @@ function RestaurantList()
   //                  state                             //
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
-  const{path} = useParams();
   const[cookies] = useCookies();
   const {loginUserRole } = useUserStore();
+  const location = useLocation();
   
 
   //                  function                  //
@@ -51,10 +51,10 @@ function RestaurantList()
     {
       return;
     }
-
+    
     GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
-  }, [path]);
+  }, [location]);
 
 
 
@@ -118,7 +118,7 @@ function RestaurantList()
   
 
 //              component : 식당 리스트             //
-export default function Restaurant()
+export default function Restaurantlist()
 {
 
   //            state               //
@@ -134,20 +134,21 @@ export default function Restaurant()
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
-    // const message = 
-    //     !result ? '서버에 문제가 있습니다.' :
-    //     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    const message = 
+        !result ? '서버에 문제가 있습니다.' :
+        result.code === 'AF' ? '인증에 실패했습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    // if (!result || result.code == 'DBE') 
-    // {
-    //     alert(message);
-    //     navigator(AUTH_PATH);
-    //     return;
-    // }
+    if (!result || result.code !== 'SU') 
+    {
+        alert(message);
+        navigator(MAIN_ABSOLUTE_PATH);
+        return;
+    }
 
-    const { userEmailId, userRole } = result as GetUserInfoResponseDto;
-    setLoginUserEmailId(userEmailId);
-    setLoginUserRole(userRole);
+   const { userEmailId, userRole } = result as GetUserInfoResponseDto;
+   setLoginUserEmailId(userEmailId);
+   setLoginUserRole(userRole);
 };
 
   

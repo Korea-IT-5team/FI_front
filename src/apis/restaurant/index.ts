@@ -18,7 +18,7 @@ return result;
 
 // function : 특정 식당 정보 검색 API 함수
 export const GetRestaurantInfoRequest = async (restaurantId: number, accessToken: string) => {
-const result = await axios.put(GET_RESTAURANT_URL(restaurantId), bearerAuthorization(accessToken))
+const result = await axios.get(GET_RESTAURANT_URL(restaurantId), bearerAuthorization(accessToken))
 .then(requestHandler<GetRestaurantInfoResponseDto>)
 .catch(requestErrorHandler)
 return result;
@@ -36,7 +36,7 @@ return result;
 
 // function : 식당 정보 수정 API 함수 
 export const PatchRestaurantUpdateRequestDto = async (requestBody: PatchRestaurantInfoRequestDto, accessToken: string) => {
-const result = await axios.post(PATCH_RESTAURANT_INFO_UPDATE, requestBody, bearerAuthorization(accessToken))
+const result = await axios.patch(PATCH_RESTAURANT_INFO_UPDATE, requestBody, bearerAuthorization(accessToken))
 .then(requestHandler<ResponseDto>)
 .catch(requestErrorHandler)
 return result;

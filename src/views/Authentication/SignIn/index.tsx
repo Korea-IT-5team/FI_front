@@ -1,13 +1,13 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
-import "./style.css";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
 import { signInRequest } from "src/apis/auth";
 import { SignInRequestDto } from "src/apis/auth/dto/request";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
 import ResponseDto from "src/apis/response.dto";
-import InputBox from "src/components/InputBox/Index";
+import InputBox from "src/components/InputBox";
 import { MAIN_PATH, SIGN_IN_ABSOLUTE_PATH } from "src/constant";
+import "./style.css";
 
 //   component: Sns 로그인   //
 export function Sns() {
