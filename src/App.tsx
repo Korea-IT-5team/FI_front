@@ -11,7 +11,7 @@ import Main from './views/Main';
 import UserDelete from './views/Mypage/UserDelete';
 import UserInfoUpdate from './views/Mypage/UserInfoUpdate';
 import RestaurantInfo from './views/Restaurant/RestaurantInfo';
-import { default as Restaurantlist } from './views/Restaurant/RestaurantList';
+import { default as RestaurantList } from './views/Restaurant/RestaurantList';
 import RestaurantReservation from './views/Restaurant/RestaurantReservation';
 import RestaurantReservationList from './views/Restaurant/RestaurantReservationList';
 import RestaurantTopBar from './views/Restaurant/RestaurantTopBar';
@@ -62,7 +62,7 @@ function App() {
         <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
       </Route>
       <Route path={RESTAURANT_PATH} element={<RestaurantTopBar/>} >
-        <Route path={RESTAURANT_LIST_PATH} element={<Restaurantlist/>}/>  
+        <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList/>}/>  
         <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
         <Route path={RESTAURANT_RESERVATION_PATH} element={<RestaurantReservation />} />
         <Route path={RESTAURANT_RESERVATION_LIST_PATH} element={<RestaurantReservationList />} />
