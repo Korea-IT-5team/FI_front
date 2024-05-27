@@ -1,4 +1,4 @@
-#review-list-wrapper {
+#reservation-list-wrapper {
     margin: 0 auto;
     max-width: 1136px;
     display: flex;
@@ -7,14 +7,14 @@
 }
 
 
-.review-list-top {
+.reservation-list-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
 
-.review-list-size-text {
+.reservation-list-size-text {
     font-size: 16px;
     font-weight: 400;
 
@@ -22,19 +22,19 @@
 }
 
 
-.review-list-size-text .emphasis {
+.reservation-list-size-text .emphasis {
     color: rgba(64, 64, 64, 1);
 }
 
 
-.review-list-top-right {
+.reservation-list-top-right {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
 
-.review-list-top-admin-text {
+.reservation-list-top-admin-text {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -42,7 +42,7 @@
     color: rgba(64, 64, 64, 1);
 }
 
-.review-list-table {
+.reservation-list-table {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,7 +53,7 @@
 }
 
 
-.review-list-table-th {
+.reservation-list-table-th {
     display: flex;
     align-items: center;
     gap: 95px;
@@ -68,7 +68,7 @@
 
 
 
-.review-list-table-tr {
+.reservation-list-table-tr {
     display: flex;
     align-items: center;
     gap: 95px;
@@ -84,22 +84,22 @@
     color:rgba(64, 64, 64, 1);
 }
 
-.review-list-table-tr:hover{
+.reservation-list-table-tr:hover{
     cursor: pointer;
     background-color: rgba(238, 238, 238, 0.2);
 }
 
 
-.review-list-table-reviewNumber-number
+.reservation-list-table-reception-number
 {
     width: 56px;
 }
 
-.review-list-table-status{
+.reservation-list-table-status{
     width:45px;
 }
 
-.review-list-table-title{
+.reservation-list-table-title{
     width:349px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -107,7 +107,7 @@
 }
 
 
-.review-list-table-writer-id
+.reservation-list-table-writer-id
 {
     width:67px;
     overflow: hidden;
@@ -116,53 +116,53 @@
 }
 
 
-.review-list-table-write-date{
+.reservation-list-table-write-date{
     width: 54px;
 }
 
-.review-list-table-viewcount{
+.reservation-list-table-viewcount{
     width: 42px;
 }
 
-.review-list-bottom {
+.reservation-list-bottom {
     display: flex;
     justify-content: space-between;
 }
 
-.review-list-pagenation{
+.reservation-list-pagenation{
     display: flex;
     align-items: center;
     gap:24px;
 }
 
 
-.review-list-page-left{
+.reservation-list-page-left{
     width: 40px;
     height: 40px;
 
-    background-image: url('../../../assets/image/page-left.png');
+    background-image: url('../../../../assets/image/page-right.png');
     background-size: 100% 100%;
 
     cursor: pointer;
 }
 
-.review-list-page-right{
+.reservation-list-page-right{
     width: 40px;
     height: 40px;
 
-    background-image: url('../../../assets/image/page-right.png');
+    background-image: url('../../../../assets/image/page-right.png');
     background-size: 100% 100%;
 
     cursor: pointer;
 }
 
-.review-list-page-box{
+.reservation-list-page-box{
     display: flex;
     gap: 16px;
     align-items: center;
 }
 
-.review-list-page{
+.reservation-list-page{
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -172,7 +172,7 @@
     cursor: pointer;
 }
 
-.review-list-page-active{
+.reservation-list-page-active{
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -182,13 +182,13 @@
     cursor: default;
 }
 
-.review-list-search-box{
+.reservation-list-search-box{
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.review-list-search-input-box{
+.reservation-list-search-input-box{
     border: 1px solid rgba(238,238,238,1);
     border-radius: 6px;
     padding: 8px 16px;
@@ -197,7 +197,7 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.review-list-search-input{
+.reservation-list-search-input{
     border: none;
     outline: none;
     background: none;

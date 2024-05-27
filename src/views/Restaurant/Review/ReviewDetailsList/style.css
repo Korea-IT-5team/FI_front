@@ -1,4 +1,4 @@
-#notice-list-wrapper {
+#review-list-wrapper {
     margin: 0 auto;
     max-width: 1136px;
     display: flex;
@@ -6,30 +6,35 @@
     gap: 16px;
 }
 
-.notice-list-top {
+
+.review-list-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.notice-list-size-text {
+
+.review-list-size-text {
     font-size: 16px;
     font-weight: 400;
 
     color: rgba(138, 146, 166, 1);
 }
 
-.notice-list-size-text .emphasis {
+
+.review-list-size-text .emphasis {
     color: rgba(64, 64, 64, 1);
 }
 
-.notice-list-top-right {
+
+.review-list-top-right {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.notice-list-top-admin-text {
+
+.review-list-top-admin-text {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -37,18 +42,18 @@
     color: rgba(64, 64, 64, 1);
 }
 
-.notice-list-table {
+.review-list-table {
     display: flex;
     flex-direction: column;
     align-items: center;
 
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 8px;
-
     background-color: rgba(255, 255, 255, 1);
 }
 
-.notice-list-table-th {
+
+.review-list-table-th {
     display: flex;
     align-items: center;
     gap: 95px;
@@ -58,15 +63,17 @@
     font-weight: 700;
     text-align: center;
 
-    color: rgba(64, 64, 64, 1);
+    color:rgba(64, 64, 64, 1);
 }
 
-.notice-list-table-tr {
+
+
+.review-list-table-tr {
     display: flex;
     align-items: center;
     gap: 95px;
 
-    border-top: 1px solid rgba(238, 238, 238, 1);
+    border-top: 1px solid rgba(238,238,238,1);
     padding: 15px 24px;
 
     font-size: 14px;
@@ -74,58 +81,62 @@
     line-height: 20px;
     text-align: center;
 
-    color: rgba(64, 64, 64, 1);
+    color:rgba(64, 64, 64, 1);
 }
 
-.notice-list-table-tr :hover {
+.review-list-table-tr:hover{
     cursor: pointer;
     background-color: rgba(238, 238, 238, 0.2);
 }
 
 
-.notice-list-table-reception-number {
+.review-list-table-reviewNumber-number
+{
     width: 56px;
 }
 
-.notice-list-table-status {
-    width: 45px;
+.review-list-table-status{
+    width:45px;
 }
 
-.notice-list-table-title {
-    width: 349px;
+.review-list-table-title{
+    width:349px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.notice-list-table-writer-id {
-    width: 67px;
+
+.review-list-table-writer-id
+{
+    width:67px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.notice-list-table-write-date {
+
+.review-list-table-write-date{
     width: 54px;
 }
 
-.notice-list-table-viewcount {
+.review-list-table-viewcount{
     width: 42px;
 }
 
-.notice-list-bottom {
+.review-list-bottom {
     display: flex;
     justify-content: space-between;
 }
 
-.notice-list-pageNation {
+.review-list-pagenation{
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap:24px;
 }
 
 
-/* .notice-list-page-left {
+.review-list-page-left{
     width: 40px;
     height: 40px;
 
@@ -135,7 +146,7 @@
     cursor: pointer;
 }
 
-.notice-list-page-right {
+.review-list-page-right{
     width: 40px;
     height: 40px;
 
@@ -143,15 +154,15 @@
     background-size: 100% 100%;
 
     cursor: pointer;
-} */
-
-.notice-list-page-box {
-    display: flex;
-    align-items: center;
-    gap: 16px;
 }
 
-.notice-list-page {
+.review-list-page-box{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.review-list-page{
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -161,7 +172,7 @@
     cursor: pointer;
 }
 
-.notice-list-page-active {
+.review-list-page-active{
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -171,14 +182,14 @@
     cursor: default;
 }
 
-.notice-list-search-box {
+.review-list-search-box{
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.notice-list-search-input-box {
-    border: 1px solid rgba(238, 238, 238, 1);
+.review-list-search-input-box{
+    border: 1px solid rgba(238,238,238,1);
     border-radius: 6px;
     padding: 8px 16px;
     width: 168px;
@@ -186,7 +197,7 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-.notice-list-search-input {
+.review-list-search-input{
     border: none;
     outline: none;
     background: none;

@@ -1,17 +1,23 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { GetRestaurantInfoRequest, PatchRestaurantUpdateRequestDto, PostRestaurantUploadRequestDto } from 'src/apis/restaurant';
+import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest, PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import { DeleteReservationCancleRequest } from 'src/apis/restaurant/reservation';
+import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
+import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
+import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
 import RestInputBox from 'src/components/RestaurantInputBox';
 import SelectBox from 'src/components/Selectbox';
+<<<<<<< HEAD
 import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+=======
+import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+>>>>>>> 608271d7aea915b6d8a8a1d4cc1dda0553997695
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
-import ReviewList from '../ReviewList';
+import ReviewList from '../Review/ReviewList';
 import './style.css';
 
 //              interface                   //
@@ -21,7 +27,7 @@ import './style.css';
 export default function RestaurantInfo() {
 
     //            state               //
-    const { loginUserEmailId, loginUserRole,RestaurantId,  reservationStatus,setReservationStatus, setRestaurantId } = useUserStore();
+    const { loginUserEmailId, loginUserRole, RestaurantId, reservationStatus, favoriteStatus, setReservationStatus, setRestaurantId, setFavoriteStatus } = useUserStore();
     const [cookies] = useCookies();
     const { restaurantId } = useParams();
     let restIdNumber = Number(restaurantId);
@@ -46,6 +52,7 @@ export default function RestaurantInfo() {
     const [restaurantPostalCodeCheck, setRestaurantPostalCodeCheck] = useState<boolean>(false);
     const [restaurantLocationCheck, setRestaurantLocationCheck] = useState<boolean>(false);
     const [restaurantBusinessRegistrationNumberCheck, setRestaurantBusinessRegistrationNumberCheck] = useState<boolean>(false);
+    const location = useLocation();
 
 
     const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck && restaurantBusinessRegistrationNumberCheck;
@@ -90,7 +97,7 @@ export default function RestaurantInfo() {
 
 
 
-    const PostRestaurantUploadResponse = (result: ResponseDto | null) => {
+    const PostRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
@@ -106,7 +113,7 @@ export default function RestaurantInfo() {
     }
 
 
-    const PatchRestaurantUpdateResponse = (result: ResponseDto | null) => {
+    const PatchRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
@@ -124,7 +131,7 @@ export default function RestaurantInfo() {
         restIdNumber = 1;
     }
 
-    const DeleteReservationCancleResponse = (result: ResponseDto | null) => {
+    const DeleteReservationResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
@@ -142,6 +149,57 @@ export default function RestaurantInfo() {
     }
 
 
+    const PostRestaurantFavoriteResponse = (result: ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+                    result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                        result.code === 'AF' ? '권한이 없습니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
+
+        setFavoriteStatus(true);
+    }
+
+
+    const DeleteRestaurantFavoriteResponse = (result: ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+                    result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                        result.code === 'AF' ? '권한이 없습니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
+
+        setFavoriteStatus(false);
+    }
+
+    const GetRestaurantFavoriteStatusResponse = (result: GetRestaurantFavoriteStatusResponseDto | ResponseDto | null) => {
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+                    result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                        result.code === 'AF' ? '권한이 없습니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
+
+        const { favoriteStatus } = result as GetRestaurantFavoriteStatusResponseDto;
+        setFavoriteStatus(favoriteStatus);
+    }
+
+
     //          effect              //
     useEffect(() => {
         if (!cookies.accessToken || Number(restaurantId) == 0) {
@@ -150,7 +208,7 @@ export default function RestaurantInfo() {
 
         GetRestaurantInfoRequest(Number(restaurantId), cookies.accessToken)
             .then(GetRestaurantInfoResponse);
-    }, [restaurantId]);
+    }, [location]);
 
 
 
@@ -161,8 +219,17 @@ export default function RestaurantInfo() {
 
         const total = restaurantReviewList.reduce((sum, restaurantReviewList) => sum + restaurantReviewList.rating, 0);
         setGrade(total / restaurantReviewList.length);
-    }, [restaurantReviewList]);
+    }, [location]);
 
+
+    useEffect(() => {
+        if (!cookies.accessToken || restaurantId == undefined) {
+            return;
+        }
+
+        GetRestaurantFavoriteStatusRequest(RestaurantId,cookies.accessToken)
+        .then(GetRestaurantFavoriteStatusResponse)
+    }, [location]);
 
     //               constant                     //
 
@@ -193,8 +260,8 @@ export default function RestaurantInfo() {
             restaurantNotice: restaurantNotice,
             restaurantRepresentativeMenu: restaurantRepresentativeMenu,
         }
-        PostRestaurantUploadRequestDto(requestBody, cookies.accessToken)
-            .then(PostRestaurantUploadResponse);
+        PostRestaurantInfoRequest(requestBody, cookies.accessToken)
+            .then(PostRestaurantInfoResponse);
     }
 
     // 식당 정보 수정
@@ -221,8 +288,8 @@ export default function RestaurantInfo() {
             restaurantNotice: restaurantNotice,
             restaurantRepresentativeMenu: restaurantRepresentativeMenu,
         }
-        PatchRestaurantUpdateRequestDto(requestBody, cookies.accessToken)
-            .then(PatchRestaurantUpdateResponse);
+        PatchRestaurantInfoRequest(requestBody, cookies.accessToken)
+            .then(PatchRestaurantInfoResponse);
     }
 
 
@@ -306,7 +373,7 @@ export default function RestaurantInfo() {
     };
 
     const onReservationClickHandler = () => {
-        navigator(RESTAURANT_RESERVATION_ABSOLUTE_PATH);
+        navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH);
     };
 
 const onReservationCancelClickHandler = () => 
@@ -314,14 +381,29 @@ const onReservationCancelClickHandler = () =>
     const confirmed = window.confirm("정말로 취소하시겠습니까?");
     if (confirmed) 
     {
-        DeleteReservationCancleRequest(RestaurantId,cookies.accessToken)
-        .then(DeleteReservationCancleResponse)
+        DeleteReservationRequest(RestaurantId,cookies.accessToken)
+        .then(DeleteReservationResponse)
     } 
     else 
     {
         return;
     }
 };
+
+const onFavoriteClickHandler = () => {
+    if(!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;
+
+    PostRestaurantFavoriteRequest(RestaurantId,cookies.accessToken)
+    .then(PostRestaurantFavoriteResponse)
+}
+
+
+const onCancleFavoriteClickHandler = () => {
+    if(!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;
+
+    DeleteRestaurantFavoriteRequest(RestaurantId,cookies.accessToken)
+    .then(DeleteRestaurantFavoriteResponse)
+}
 
   //            render              //
   return (
@@ -343,7 +425,10 @@ const onReservationCancelClickHandler = () =>
                         </div>
                     <div>{restaurantFoodCategory}</div>
                     <div>{grade}</div>
-                    {loginUserRole === "ROLE_USER"&& (<button>찜클릭</button>)}
+                    {loginUserRole === "ROLE_USER" && favoriteStatus ?
+                    (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) : 
+                    (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
+                    }
                     
                     <div>{restaurantLocation}</div>
                     <div>{restaurantSnsAddress}</div>
@@ -357,7 +442,7 @@ const onReservationCancelClickHandler = () =>
                     {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && 
                     (<div>{restaurantBusinessRegistrationNumber}</div>)}
                     
-                    <ReviewList value={restaurantReviewList} getRestaurantInfoResponse={GetRestaurantInfoResponse}/>   
+                    <ReviewList value={restaurantReviewList}/>   
             </div>
             ) : (
                 <div id="restaurant-info">
