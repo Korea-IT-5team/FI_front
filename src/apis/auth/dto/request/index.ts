@@ -10,7 +10,7 @@ export interface TelNumberAuthRequestDto {
 }
 
 // description: 전화번호 인증 번호 확인 Request Body DTO
-export interface TelNumberAuthCheckRequestDto {
+export interface CheckTelNumberAuthRequestDto {
     userTelNumber: string;
     authNumber: string;
 }
@@ -40,7 +40,6 @@ export interface PasswordResetRequestDto {
 
 // description: 새로운 비밀번호 설정 Request Body DTO
 export interface NewPasswordRequestDto {
-    userEmailId: string;
     password: string;
     linkCode: string;
 }

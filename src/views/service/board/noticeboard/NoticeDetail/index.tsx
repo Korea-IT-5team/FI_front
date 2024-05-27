@@ -120,23 +120,22 @@ export default function NoticeDetail() {
     
     //                    render                    //
     return (
-        <div id='notice-detail-wrapper'>
-            <div className='notice-detail-main-box'>
-                <div className='notice-detail-title'></div>
-                <div className='notice-detail-info-box'>
-                    <div className='notice-detail-mini-box'>
-                        <div className='notice-detail-writer-id'>작성자</div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-write-datetime'>날짜 </div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-view-count'>조회수 </div>
-                    </div>
-                <div className='notice-detail-update-delete-box'>
-                    <div className='notice-detail-update'>수정</div>
-                    <div className='notice-detail-delete'>삭제</div>
-                </div>
-            </div>
+        <div id='notice-write-wrapper'>
+    <div className='notice-write-container-box'>
+      <div className='notice-write-small-box'>
+        <div className="sort">
+          <div className="notice-write-title-box">문의제목</div>
+          <div className="notice-write-contents-box">문의 내용</div>
+          <div className="notice-write-comment-box">
+              <div className="notice-write-comment">문의답변</div>
+              <div className="notice-write-container"> 
+                  <div className="notice-write-commit">수정</div>
+                  <div className="notice-write-update">삭제</div>
+          </div>
         </div>
-        </div>
+    </div>
+      </div>
+  </div>
+  </div>
     );
 }
