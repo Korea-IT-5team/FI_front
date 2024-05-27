@@ -2,78 +2,80 @@
     margin: 0px;
 }
 
-body {
-    width: 100%;
-    min-width: 50%;
-    height: 700px;
-    overflow: hidden;
-}
-
 #notice-write-wrapper {
-    background-color: antiquewhite;
-}
-
-.notice-write-small-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: aqua;
-    gap: 20px;
+    overflow-x: hidden;
+    margin-top: 50px;
+    background-color: rgba(245, 245, 245, 1);
+}
 
-    border: 1px solid black;
+.notice-write-container-box {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 1000px;
+    padding: 50px;
+
+    gap: 30px;
 }
 
 .notice-write-title-box {
-    background-color: yellowgreen;
+    display: flex;
 
-    width: 1700px;
-    height: 40px;
-    margin-top: 60px;
-    
-    border: 1px solid black;
+    width: 100%;
+
+    border-radius: 8px;
+
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 250%;
+
+    background-color: rgba(250, 250, 250, 1);
+}
+
+.notice-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    width: 100%;
+
+    gap: 30px;
 }
 
 .notice-write-contents-box {
-    background-color: violet;
-    width: 1700px;
-    height: 150px;
-
-    border: 1px solid black;
-    margin-top: 20px;
-}
-
-.notice-write-comment-box {
-    background-color: thistle;
     display: flex;
 
-    margin-top: 20px;
-    justify-content: space-between;
+    height: 300px;
+    width: 100%;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(64, 64, 64, 1);
+    
+    background-color: rgba(250, 250, 250, 1);
 }
 
-.notice-write-comment {
-    background-color: brown;
-    width: 1400px;
+.notice-write-button-box {
+    display: flex;
+    flex-direction: row;
+    
+    height: 40px;
+    width: 200px;
+    gap: 10px;
 
-    border: 1px solid black;
+    text-align: center;
+
+    background-color: rgba(245, 245, 245, 1);
 }
 
-.notice-write-container {
-    background-color: chocolate;
+.notice-write-commit:hover {
+    cursor: pointer;
 }
 
-.notice-write-commit {
-    border: 1px solid black;
-    border-radius: 6px;
-
-    width: 50px;
-    margin-bottom: 15px;
-    padding: 10px;
-}
-
-.notice-write-update {
-    border: 1px solid black;
-    border-radius: 6px;
-
-    width: 50px;
-    padding: 10px;
+.notice-write-update:hover {
+    cursor: pointer;
 }
