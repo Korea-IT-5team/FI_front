@@ -121,10 +121,10 @@ export default function NoticeDetail() {
     //                    render                    //
     return (
         <div id='notice-detail-wrapper'>
-            <div className='notice-detail-container-box'>
+            <div className='notice-detail-main-box'>
                 <div className="notice-detail-title-box">공지 제목</div>
-                <div className='notice-contents'>
-                    <div className="notice-detail-contents-box">공지 내용</div>
+                <div className='notice-detail-contents-box'>
+                    <div className="notice-detail-content">공지 내용</div>
                     <div className="notice-detail-button-box">
                         <div className="second-button full-width">수정</div>
                         <div className="error-button full-width">삭제</div>
