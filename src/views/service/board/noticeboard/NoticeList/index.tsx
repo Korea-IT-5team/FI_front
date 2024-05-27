@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
@@ -16,7 +17,7 @@ function ListItem ({
   noticeViewCount
 }: NoticeBoardListItem) {
 
-  // function 
+  //    function    //
   const navigator = useNavigate();
 
   //   event handler   //
@@ -26,9 +27,7 @@ function ListItem ({
   return(
     <div className='notice-list-table-tr' onClick={onClickHandler}>
       <div className='notice-list-table-reception-number'>{noticeNumber}</div>
-
       <div className='qna-list-table-title'>{noticeTitle}</div>
-      <div className='qna-list-table-writer-id'>{noticeWriteId}</div>
       <div className='qna-list-table-write-date'>{noticeWriteDatetime}</div>
       <div className='qna-list-table-viewCount'>{noticeViewCount}</div>
     </div>
@@ -94,9 +93,41 @@ export default function NoticeList() {
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
   };
-
+  // 공지 리스트
   return(
-    <>공지 리스트</>
+    <div id='notice-list-wrapper'>
+      <div className='notice-list-top'>
+        <div className='notice-list-size-text'>전체
+        <span className='emphasis'>999건</span>| 페이지 <span className='emphasis'>2/820</span></div>
+        <div className='notice-list-top-right'>
+          <div className='primary-button'>공지 작성</div>
+        </div>
+      </div>
+      <div className='notice-list-table'>
+        <div className='notice-list-table-reception-number'>번호</div>
+        <div className='notice-list-table-title'>공지제목</div>
+        <div className='notice-list-table-writer-date'>작성일자</div>
+        <div className='notice-list-table-viewcount'>조회수</div>
+      </div>
+      <div className='notice-list-bottom'>
+                <div style={{ width: '299px' }}></div>
+                <div className='notice-list-pageNation'>
+                    <div className='notice-list-page-left'></div>
+                    <div className='notice-list-page-box'>
+                        
+                        <div className='notice-list-page-active'></div> 
+                        <div className='notice-list-page'>5</div>
+                    </div>
+                    <div className='notice-list-page-right'></div>
+                </div>
+                <div className='notice-list-search-box'>
+                    <div className='notice-list-search-input-box'>
+                        <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord}/>
+                    </div>
+                    <div>검색</div>
+                </div>
+            </div>
+    </div>
   )
 
 }
