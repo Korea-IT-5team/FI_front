@@ -1,4 +1,5 @@
 import { ChangeEvent, KeyboardEvent } from "react";
+import "./style.css"
 
 export interface InputBoxProps {
     label?: string;

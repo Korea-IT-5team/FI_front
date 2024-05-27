@@ -142,11 +142,11 @@
 }
 
 .primary {
-    color: rgba(255, 148, 45, 1);
+    color: rgb(0, 0, 255, 1);
 }
 
 .error {
-    color: rgba(50, 50, 50, 1);
+    color: rgba(255, 0, 0, 1);
 }
 
 .primary-bedge {
