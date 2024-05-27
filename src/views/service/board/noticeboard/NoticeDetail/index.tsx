@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { useUserStore } from 'src/stores';
@@ -7,6 +6,7 @@ import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/respon
 import ResponseDto from 'src/apis/response.dto';
 import { BOARD_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { deleteNoticeBoardRequest, getNoticeBoardRequest, increaseViewCountRequest } from 'src/apis/board';
+import './style.css';
 
 //                    component                    //
 export default function NoticeDetail() {
@@ -31,10 +31,10 @@ export default function NoticeDetail() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '잘못된 공지번호입니다.' : 
-            result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'VF' ? '잘못된 공지번호입니다.' :
+                    result.code === 'AF' ? '인증에 실패했습니다.' :
+                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -54,10 +54,10 @@ export default function NoticeDetail() {
     const getNoticeBoardResponse = (result: GetNoticeBoardResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '잘못된 공지번호입니다.' : 
-            result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'VF' ? '잘못된 공지번호입니다.' :
+                    result.code === 'AF' ? '인증에 실패했습니다.' :
+                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -78,21 +78,21 @@ export default function NoticeDetail() {
     };
 
     const deleteNoticeBoardResponse = (result: ResponseDto | null) => {
-        const message = 
-            !result ? '서버에 문제가 있습니다.' : 
-            result.code === 'AF' ? '권한이 없습니다.' : 
-            result.code === 'VF' ? '올바르지 않은 접수번호입니다.' : 
-            result.code === 'NB' ? '존재하지 않는 게시물입니다.' : 
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : 
-            '';
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'AF' ? '권한이 없습니다.' :
+                    result.code === 'VF' ? '올바르지 않은 접수번호입니다.' :
+                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+                                '';
         if (!result || result.code !== 'SU') {
             alert(message);
             return;
         }
         navigator(BOARD_ABSOLUTE_PATH);
-        };
+    };
 
-    
+
     //                    event handler                    //    
     const onListClickHandler = () => {
         navigator(BOARD_ABSOLUTE_PATH);
@@ -107,7 +107,7 @@ export default function NoticeDetail() {
         if (!noticeNumber || loginUserEmailId !== noticeWriterId || !cookies.accessToken) return;
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
-    
+
         deleteNoticeBoardRequest(noticeNumber, cookies.accessToken).then(deleteNoticeBoardResponse);
     };
 
@@ -117,26 +117,20 @@ export default function NoticeDetail() {
         increaseViewCountRequest(noticeNumber, cookies.accessToken)
             .then(increaseViewCountResponse);
     }, []);
-    
+
     //                    render                    //
     return (
-        <div id='notice-detail-wrapper'>
-            <div className='notice-detail-main-box'>
-                <div className='notice-detail-title'></div>
-                <div className='notice-detail-info-box'>
-                    <div className='notice-detail-mini-box'>
-                        <div className='notice-detail-writer-id'>작성자</div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-write-datetime'>날짜 </div>
-                        <div className='qna-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-view-count'>조회수 </div>
+        <div id='notice-write-wrapper'>
+            <div className='notice-write-container-box'>
+                <div className="notice-write-title-box">공지 제목</div>
+                <div className='notice-contents'>
+                    <div className="notice-write-contents-box">공지 내용</div>
+                    <div className="notice-write-button-box">
+                        <div className="second-button full-width">수정</div>
+                        <div className="error-button full-width">삭제</div>
                     </div>
-                <div className='notice-detail-update-delete-box'>
-                    <div className='notice-detail-update'>수정</div>
-                    <div className='notice-detail-delete'>삭제</div>
                 </div>
             </div>
-        </div>
         </div>
     );
 }
