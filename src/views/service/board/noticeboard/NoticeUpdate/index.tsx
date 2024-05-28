@@ -14,13 +14,15 @@ export default function NoticeUpdate() {
 
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
+
   const { loginUserEmailId, loginUserRole } = useUserStore();
   const { noticeNumber } = useParams();
+
   const [cookies] = useCookies();
+
   const [noticeWriterId, setNoticeWriterId] = useState<string>('');
-  const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
-  const [noticeContents, setNoticeContents] = useState<string>('');
   const [noticeTitle, setNoticeTitle] = useState<string>('');
+  const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
   const navigator = useNavigate();
@@ -40,17 +42,15 @@ export default function NoticeUpdate() {
       return;
     }
 
-    const { noticeWriterId, noticeWriteDatetime, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
+    const { noticeWriterId, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
     if (noticeWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
-
     setNoticeWriterId(noticeWriterId);
-    setNoticeWriteDatetime(noticeWriteDatetime);
-    setNoticeContents(noticeContents);
     setNoticeTitle(noticeTitle)
+    setNoticeContents(noticeContents);
   };
 
   const patchNoticeBoardResponse = (result: ResponseDto | null) => {
@@ -88,7 +88,7 @@ export default function NoticeUpdate() {
     contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   };
 
-  const NoticeUpdateButtonClickHandler = () => {
+  const onNoticeUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !noticeNumber) return;
     if (!noticeTitle.trim() || !noticeContents.trim()) return;
 
@@ -97,18 +97,11 @@ export default function NoticeUpdate() {
   };
 
   //                    effect                    //
-  let effectFlag = false;
   useEffect(() => {
-    if (!noticeNumber || !cookies.accessToken) return;
-    if (!loginUserRole) return;
-    if (effectFlag) return;
-    effectFlag = true;
-    if (loginUserRole !== 'ROLE_USER') {
+    if (loginUserRole === 'ROLE_ADMIN') {
       navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
-    getNoticeBoardRequest(noticeNumber, cookies.accessToken)
-      .then(getNoticeBoardResponse);
   }, [loginUserRole]);
 
 
@@ -121,7 +114,7 @@ export default function NoticeUpdate() {
         </div>
         <div className='notice-update-contents-box'>
           <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
-          <div className='primary-button'>수정</div>
+          <div className='primary-button' onClick={onNoticeUpdateButtonClickHandler}>수정</div>
         </div>
       </div>
     </div>
