@@ -3,7 +3,6 @@ import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
 import ResponseDto from "src/apis/response.dto";
 import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/request";
-import RestInputbox from "src/components/RestaurantInputBox";
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
@@ -19,7 +18,7 @@ const[reservationDate,setReservationDate] = useState<string>('');
 const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
-const {setReservationStatus} = useUserStore();
+const {setUserReservationStatus} = useUserStore();
 const {restaurantId} = useParams();
 const [cookies] = useCookies();
 const navigator = useNavigate();
@@ -43,7 +42,7 @@ const PostReservationResponse = (result: ResponseDto | null) =>
           return;
       }
       
-      setReservationStatus(true);
+      setUserReservationStatus(true);
       if(!restaurantId) return;
       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
 }

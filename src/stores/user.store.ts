@@ -7,12 +7,12 @@ interface UserStore {
     setLoginUserRole: (loginUserRole: string) => void,
     restaurantId:number,
     setRestaurantId: (RestaurantId:number) => void,
-    reservationStatus:boolean,
-    setReservationStatus: (reservationStatus:boolean) => void,
     restaurantName:string,
     SetRestaurantName: (restaurantName:string) => void,
-    favoriteStatus:boolean,
-    setFavoriteStatus: (favoriteStatus:boolean) => void
+    userReservationStatus:boolean,
+    setUserReservationStatus: (reservationStatus:boolean) => void,
+    userFavoriteStatus:boolean,
+    setUserFavoriteStatus: (favoriteStatus:boolean) => void
 }
 
 const useUserStore = create<UserStore>(set => ({
@@ -22,12 +22,12 @@ const useUserStore = create<UserStore>(set => ({
     setLoginUserRole: (loginUserRole:string) => set(state => ({...state, loginUserRole})),
     restaurantId:0,
     setRestaurantId: (RestaurantId:number) => set(state => ({...state, RestaurantId})),
-    reservationStatus:false,
-    setReservationStatus: (reservationStatus:boolean) => set(state => ({...state, reservationStatus})),
-    favoriteStatus:false,
-    setFavoriteStatus: (favoriteStatus:boolean) => set(state => ({...state, favoriteStatus})),
     restaurantName:'',
     SetRestaurantName: (restaurantName:string) => set(state => ({...state, restaurantName})),
+    userReservationStatus:false,
+    setUserReservationStatus: (reservationStatus:boolean) => set(state => ({...state, reservationStatus})),
+    userFavoriteStatus:false,
+    setUserFavoriteStatus: (favoriteStatus:boolean) => set(state => ({...state, favoriteStatus})),
 }));
 
 export default useUserStore;

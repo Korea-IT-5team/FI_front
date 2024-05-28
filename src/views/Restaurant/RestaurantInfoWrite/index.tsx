@@ -1,14 +1,13 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
-import RestaurantInputBox from 'src/components/RestaurantInputBox'
-import SelectBox from 'src/components/Selectbox';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
+import SelectBox from 'src/components/SelectBox';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { useStore } from 'zustand';
 
 export default function RestaurantInfoWrite() 
 {   

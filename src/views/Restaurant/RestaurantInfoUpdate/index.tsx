@@ -1,12 +1,12 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import RestaurantInputBox from 'src/components/RestaurantInputBox'
-import SelectBox from 'src/components/Selectbox';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
+import SelectBox from 'src/components/SelectBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 
 export default function RestaurantInfoUpdate() 

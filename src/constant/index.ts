@@ -154,7 +154,6 @@ export const SERVER_FAVORITE_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/favor
 export const GET_FAVORITE_LIST_URL = `${SERVER_FAVORITE_MODULE_URL}/list`;
 export const POST_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
 export const DELETE_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
-export const GET_FAVORITE_STATUS_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
 
 // description: INQUIRY BOARD 모듈 내의 기능 URL
 export const SERVER_INQUIRY_BOARD_MODULE_URL = `${SERVER_API_URL}/inquiry-board`;

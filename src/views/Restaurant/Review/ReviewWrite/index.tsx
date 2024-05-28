@@ -1,12 +1,12 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
-import './style.css';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
-import { PostReviewRequest } from 'src/apis/restaurant/review';
 import ResponseDto from 'src/apis/response.dto';
+import { PostReviewRequest } from 'src/apis/restaurant/review';
+import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import './style.css';
 
 
 //                  component                 //
@@ -95,19 +95,22 @@ export default function ReviewWrite()
   return (
             <>
                 <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
-                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} />    
+                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} /> 
+                   
                 <div className='grade'>평점</div>
-                <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
-                    <option value="1.0">1.0</option>
-                    <option value="1.5">1.5</option>
-                    <option value="2.0">2.0</option>
-                    <option value="2.5">2.5</option>
-                    <option value="3.0">3.0</option>
-                    <option value="3.5">3.5</option>
-                    <option value="4.0">4.0</option>
-                    <option value="4.5">4.5</option>
-                    <option value="5.0">5.0</option>
-                </select>
+                <div id="rating-box">
+                    <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
+                        <option value="1.0">1.0</option>
+                        <option value="1.5">1.5</option>
+                        <option value="2.0">2.0</option>
+                        <option value="2.5">2.5</option>
+                        <option value="3.0">3.0</option>
+                        <option value="3.5">3.5</option>
+                        <option value="4.0">4.0</option>
+                        <option value="4.5">4.5</option>
+                        <option value="5.0">5.0</option>
+                    </select>
+                </div>
 
                 <RestaurantInputBox label="내용" type="text" value={reviewContents} onKeydownHandler={onContentsKeydownHandler}
                 placeholder="평점 내용을 입력해주세요" onChangeHandler={onContentsChangeHandler} />
