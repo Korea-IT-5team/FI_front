@@ -44,6 +44,11 @@ export interface NewPasswordRequestDto {
     linkCode: string;
 }
 
+// description: 사업자등록 번호 Request Body DTO
+export interface businessRegistrationRequestDto {
+    businessRegistration: string;
+}
+
 // description: 회원가입 Request Body DTO
 export interface SignUpRequestDto {
     userEmailId: string;

@@ -1,6 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import "./style.css";
-import { useCookies } from 'react-cookie';
 import { Outlet } from 'react-router';
 
 
@@ -8,9 +6,9 @@ import { Outlet } from 'react-router';
 export default function MyPage() {
     //                    render                    //
     return (
-        <div id="authentication-wrapper">
-            <div className='authentication-head-box'>
-                <div className='authentication-title'>{"Food Insight"}</div>
+        <div id="my-page-wrapper">
+            <div className='my-page-head-box'>
+                <div className='my-page-title'>{"Food Insight"}</div>
             </div>
             <Outlet />
         </div>

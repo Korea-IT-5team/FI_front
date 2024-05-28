@@ -4,14 +4,21 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
+
+
+
 import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
 import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
-import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+
+import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
+
+import { RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 
 //              interface                   //
 
@@ -75,14 +82,14 @@ export default function RestaurantInfo() {
         setRestaurantReviewList(restaurantReviewList);
     }
 
-    const DeleteReservationResponse = (result: ResponseDto | null) => {
+    const DeleteReservationCancelResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
                     result.code === 'NR' ? '존재하지 않는 식당입니다.' :
                         result.code === 'AF' ? '권한이 없습니다.' :
                             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-        
+
         if (!result || result.code !== 'SU') {
             alert(message);
             return;
@@ -187,24 +194,34 @@ export default function RestaurantInfo() {
     }
 
     const onReservationClickHandler = () => {
+
         if(!restaurantId) return;
         navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH(restaurantId));
+
+        // navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH);
+
     };
+
 
 const onReservationCancelClickHandler = () => 
 {
     const confirmed = window.confirm("정말로 취소하시겠습니까?");
     if (confirmed) 
     {
+
         if(!restaurantId) return;
         DeleteReservationRequest(restaurantId,cookies.accessToken)
-        .then(DeleteReservationResponse)
+        .then(DeleteReservationCancelResponse)
+
+
     } 
     else 
     {
         return;
     }
 };
+
+   
 
 const onFavoriteClickHandler = () => {
     if(!loginUserEmailId || !restaurantId || !cookies.accessToken) return;
@@ -222,40 +239,44 @@ const onCancleFavoriteClickHandler = () => {
 }
 
   //            render              //
-  return (
+ 
+
+    //            render              //
+    return (
+
         <>
-            <div id="restaurant-info">
+             
+             <div id="restaurant-info">
+
                     {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                    <button onClick={onSetRestIdNumberHandler}>수정</button>)}
+                        <button onClick={onSetRestIdNumberHandler}>수정</button>)}
                     <div id="restaurant_image">{restaurantImage}</div>
-                        <div>
-                            <div>{restaurantName}</div>
-                        ({loginUserRole === "ROLE_USER" && reservationStatus &&(
+                    <div>
+                        <div>{restaurantName}</div>
+                        ({loginUserRole === "ROLE_USER" && reservationStatus && (
                             <button onClick={onReservationCancelClickHandler}>예약취소</button>)})
-                            
+
                         ({loginUserRole === "ROLE_USER" && !reservationStatus && (
                             <button onClick={onReservationClickHandler}>예약</button>)})
-                           
-                        </div>
+
+                    </div>
                     <div>{restaurantFoodCategory}</div>
                     <div>{grade}</div>
                     {loginUserRole === "ROLE_USER" && favoriteStatus ?
-                    (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) : 
-                    (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
+                        (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
+                        (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
                     }
-                    
+
                     <div>{restaurantLocation}</div>
                     <div>{restaurantSnsAddress}</div>
                     <div>{restaurantPostalCode}</div>
                     <div>{restaurantTelNumber}</div>
-                    
+
                     <div>{restaurantOperationHours}</div>
                     <div>{restaurantFeatures}</div>
                     <div>{restaurantNotice}</div>
                     <div>{restaurantRepresentativeMenu}</div>
-                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && 
-                    (<div>{restaurantBusinessRegistrationNumber}</div>)}
-                    
+
                     <ReviewList value={restaurantReviewList} restaurantId={restaurantId}/>   
             </div>   
         </>
