@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ResponseDto from "src/apis/response.dto";
 import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/request";
 import RestInputbox from "src/components/RestaurantInputBox";
@@ -9,16 +9,18 @@ import { useUserStore } from "src/stores";
 
 
 import { PostReservationRequest } from "src/apis/restaurant/reservation";
+import RestaurantInputBox from "src/components/RestaurantInputBox";
 
 
-export default function RestaurantReservation() {
+export default function DoReservation() {
 
   //                    state                    //
 const[reservationDate,setReservationDate] = useState<string>('');
 const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
-const {RestaurantId ,setReservationStatus} = useUserStore();
+const {setReservationStatus} = useUserStore();
+const {restaurantId} = useParams();
 const [cookies] = useCookies();
 const navigator = useNavigate();
 
@@ -42,7 +44,8 @@ const PostReservationResponse = (result: ResponseDto | null) =>
       }
       
       setReservationStatus(true);
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(RestaurantId));
+      if(!restaurantId) return;
+      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
 }
 
 //                    event handler                    //
@@ -85,7 +88,8 @@ const onReservationClickHandler = () =>
       reservationPeople: reservationPeople,
     }
 
-    PostReservationRequest(RestaurantId, requestBody,cookies.accessToken).then(PostReservationResponse);
+    if(!restaurantId) return;
+    PostReservationRequest(restaurantId, requestBody,cookies.accessToken).then(PostReservationResponse);
 }
 
 
@@ -103,9 +107,9 @@ const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full
             <div>달력</div>
           </div>
           <div className="date-time-people">
-            <RestInputbox label="날짜" type="text" value={reservationDate} placeholder="날짜를 입력해주세요"
+            <RestaurantInputBox label="날짜" type="text" value={reservationDate} placeholder="날짜를 입력해주세요"
             onChangeHandler={onMonthDayChangeHandler}/>
-            <RestInputbox label="시간" type="text" value={reservationTime} placeholder="시간을 입력해주세요"
+            <RestaurantInputBox label="시간" type="text" value={reservationTime} placeholder="시간을 입력해주세요"
             onChangeHandler={onHourMinuteChangeHandler}/>                
             <div>인원수</div>
             <div className="people">

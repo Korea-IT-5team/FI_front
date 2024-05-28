@@ -15,8 +15,8 @@ export default function ReviewUpdate()
 {
   
   //                  state                     //
- 
-  const {loginUserRole,ReviewNumber} = useUserStore();
+  const {reviewNumber} = useParams();
+  const {loginUserRole} = useUserStore();
   const [reviewImage, setReviewImage] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [reviewContents, setReviewContents] = useState<string>("");
@@ -41,7 +41,9 @@ export default function ReviewUpdate()
             return;
           }
 
-          navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(ReviewNumber))
+
+          if(!reviewNumber) return;
+          navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
     }
 
     const GetReviewDetailResponse = (result: GetReviewDetailResponseDto | ResponseDto | null) => 
@@ -92,19 +94,19 @@ export default function ReviewUpdate()
 
 
   const UpdateClickHandler = () => {
-    if (!rating) {
+    if (!rating || !reviewNumber) {
         alert('필수 정보를 입력하지 않았습니다.');
         return;
-  }
+    }
 
-  const requestBody: PatchReviewRequestDto =
-  {
-      reviewImage: reviewImage,
-      rating: rating,
-      reviewContents: reviewContents
-  }
+    const requestBody: PatchReviewRequestDto =
+    {
+        reviewImage: reviewImage,
+        rating: rating,
+        reviewContents: reviewContents
+    }
 
-    PatchReviewRequest(ReviewNumber, requestBody, cookies.accessToken)
+    PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
     .then(PatchReviewResponse);
 }
 
@@ -114,7 +116,7 @@ const ButtonClass = `${rating ? 'primary' : 'disable'}-button full-width`;
   let effectFlag = false;
 
   useEffect(()=>{
-    if(!ReviewNumber || !cookies.accessToken) return;
+    if(!reviewNumber || !cookies.accessToken) return;
     if(!loginUserRole) return;
     if(effectFlag) return;
     effectFlag = true;
@@ -125,7 +127,7 @@ const ButtonClass = `${rating ? 'primary' : 'disable'}-button full-width`;
         return;
     }
 
-    GetReviewDetailRequest(ReviewNumber,cookies.accessToken)  
+    GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
     .then(GetReviewDetailResponse);
   },[location])
 

@@ -1,8 +1,7 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import './style.css';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
 import { PostReviewRequest } from 'src/apis/restaurant/review';
@@ -16,7 +15,7 @@ export default function ReviewWrite()
   
   //                  state                     //
   const navigator = useNavigate();
-  const {RestaurantId} = useUserStore();
+  const {restaurantId} = useParams();
   const [reviewImage, setReviewImage] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [reviewContents, setReviewContents] = useState<string>("");
@@ -39,7 +38,8 @@ export default function ReviewWrite()
         return;
     }
 
-    navigator(RESTAURANT_INFO_ABSOLUTE_PATH(RestaurantId));
+    if(!restaurantId) return;
+    navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
   }
 
    
@@ -80,11 +80,12 @@ export default function ReviewWrite()
         reviewContents: reviewContents
     }
 
-    PostReviewRequest(RestaurantId, requestBody, cookies.accessToken)
+    if(!restaurantId) return;
+    PostReviewRequest(restaurantId, requestBody, cookies.accessToken)
     .then(PostReviewResponse);
 }
 
-
+  console.log(!rating)
   const ButtonClass = `${rating ? 'primary' : 'disable'}-button full-width`;
   
   //                effect                  //
@@ -94,8 +95,8 @@ export default function ReviewWrite()
   return (
             <>
                 <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
-                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} />
-
+                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} />    
+                <div className='grade'>평점</div>
                 <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
                     <option value="1.0">1.0</option>
                     <option value="1.5">1.5</option>
@@ -112,7 +113,7 @@ export default function ReviewWrite()
                 placeholder="평점 내용을 입력해주세요" onChangeHandler={onContentsChangeHandler} />
                     
                 <button onClick={UploadClickHandler}
-                className={ButtonClass}>등록하기</button> :
+                className={ButtonClass}>등록하기</button>
             </>
   )
 }

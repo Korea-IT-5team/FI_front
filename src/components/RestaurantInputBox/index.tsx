@@ -13,14 +13,14 @@ export interface InputBoxProps {
     onKeydownHandler?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export default function RestaurantInputBox({ label, type, value, placeholder, accept, onChangeHandler, onKeydownHandler }: InputBoxProps) {
+export default function RestaurantInputBox({ label, type, value, placeholder, onChangeHandler, onKeydownHandler }: InputBoxProps) {
 
     return (
         <div className="input-box">
             <div className="input-label label">{label}</div>
             <div className="input-content-box">
                 <input
-                    className="input"
+                    className="restaurant-input"
                     type={type}
                     value={value}
                     placeholder={placeholder}

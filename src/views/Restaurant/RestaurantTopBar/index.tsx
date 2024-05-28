@@ -33,22 +33,24 @@ function TopBar()
    //            render              //
    return(
     <>
-      <div className="top-bar-container">
-          <div className="top-bar-left">☰</div>
-          <div className="top-bar-title">Food Insight(푸드 인사이트)</div>
-          <div className='top-bar-right'>
-          {loginUserRole === '' 
-              ? <div className="second-button" onClick={onLogClickHandler}>로그인/회원가입</div>
-              : loginUserRole === 'ROLE_CEO'
-              ? <div className="second-button" onClick={onLogClickHandler}>사장 로그아웃</div>
-              : loginUserRole === 'ROLE_USER' 
-              ? <div className="second-button" onClick={onLogClickHandler}>사용자 로그아웃</div>
-              : null}
+      <div id="main-wrapper">
+          <div className='main-head-box'>
+              <div className='main-icon-image'></div>
+              <div className='main-title'>{"Food Insight"}</div>
+              {loginUserRole === '' 
+               ? <div className="main-sign-in" onClick={onLogClickHandler}>로그인/회원가입</div>
+               : loginUserRole === 'ROLE_CEO'
+               ? <div className="main-sign-in" onClick={onLogClickHandler}>사장 로그아웃</div>
+               : loginUserRole === 'ROLE_USER' 
+               ? <div className="main-sign-in" onClick={onLogClickHandler}>사용자 로그아웃</div>
+               : null}
           </div>
       </div>
     </>
   );
 }
+
+
 
 
 
@@ -58,9 +60,7 @@ export default function RestaurantTopBar()
 
   //            state               //
   const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [searchWord, setSearchWord] = useState<string>('');
   const [cookies] = useCookies();
-  const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
 
   
 
