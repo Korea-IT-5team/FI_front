@@ -1,20 +1,23 @@
 #authentication-wrapper {
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
-    overflow: auto; 
-    max-height: 100vh; 
-    padding: 20px;
+    overflow-y: auto; 
+    max-height: 100vh;
 }
 
 .authentication-head-box {
     text-align: center;
-    border-bottom: 1px solid rgba(238, 238, 238, 1); 
-    padding: 10px;
+
+    padding: 15px 20px;
+
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+    
+    background-color: rgba(255, 148, 45, 0.95);
 }
 
 .authentication-title {
-    font-size: 40px;
+    font-family: 'Ubuntu';
+    font-size: 45px;
     font-weight: bold;
-    margin: 10px 0px;
+    color: rgba(255, 255, 255, 1);
 }

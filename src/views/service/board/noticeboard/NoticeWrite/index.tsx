@@ -15,7 +15,7 @@ export default function NoticeWrite() {
   const { loginUserRole } = useUserStore();
   const { noticeNumber } = useParams();
   const [cookies] = useCookies();
-  const [noticeWriteId, setNoticeWriterId] = useState<string>('');
+  const [noticeWriterId, setNoticeWriterId] = useState<string>('');
   const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
   const [noticeTitle, setNoticeTitle] = useState<string>('');
@@ -79,7 +79,7 @@ export default function NoticeWrite() {
         </div>
         <div className='notice-write-contents-box'>
           <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
-          <div className='primary-button'>작성</div>
+          <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
         </div>
       </div>
     </div>
