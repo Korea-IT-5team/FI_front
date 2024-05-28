@@ -5,7 +5,7 @@ import { DELETE_RESERVATION_REQUEST_URL, GET_RESERVATION_CEO_LIST_URL, GET_RESER
 import { PostReservationRequestDto } from './dto/request';
 import { GetReservationListResponseDto } from './dto/response';
 
-// fuction : 본인예약 내역 목록확인 API 함수
+// function : 본인예약 내역 목록확인 API 함수
 export const GetUserReservationListRequest = async (accessToken:string) => 
 {
       const result = await axios.get(GET_RESERVATION_LIST_URL, bearerAuthorization(accessToken))
@@ -15,7 +15,7 @@ export const GetUserReservationListRequest = async (accessToken:string) =>
 }
 
 
-// fuction : 예약자 내역 목록확인 API 함수
+// function : 예약자 내역 목록확인 API 함수
 export const GetCeoReservationListRequest = async (restaurantId:number,accessToken:string) => 
 {
       const result = await axios.get(GET_RESERVATION_CEO_LIST_URL(restaurantId), bearerAuthorization(accessToken))
@@ -25,7 +25,7 @@ export const GetCeoReservationListRequest = async (restaurantId:number,accessTok
 } 
 
 
-// fuction : 식당 예약 API 함수 
+// function : 식당 예약 API 함수 
 export const PostReservationUploadRequest = async (restaurantId:number, requestBody: PostReservationRequestDto,accessToken:string) => 
 {
       const result = await axios.post(POST_RESERVATION_REQUEST_URL(restaurantId), requestBody, bearerAuthorization(accessToken))
@@ -34,8 +34,8 @@ export const PostReservationUploadRequest = async (restaurantId:number, requestB
         return result;
 } 
 
-// fuction : 식당 예약 취소 API 함수 
-export const DeleteReservationCancleRequest = async (restaurantId:number,accessToken:string) => 
+// function : 식당 예약 취소 API 함수 
+export const DeleteReservationCancelRequest = async (restaurantId:number,accessToken:string) => 
 {
       const result = await axios.delete(DELETE_RESERVATION_REQUEST_URL(restaurantId), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)

@@ -7,7 +7,7 @@ export interface GetNoticeBoardListResponseDto extends ResponseDto {
 }
 
 // description: 검색 공지 게시물 목록 확인 Response Body DTO
-export interface GetSearchNoticeBoardResponseDto extends ResponseDto {
+export interface GetSearchNoticeBoardListResponseDto extends ResponseDto {
   noticeBoardList: NoticeBoardListItem[];
 }
 

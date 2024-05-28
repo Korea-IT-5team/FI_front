@@ -5,7 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantUpdateRequestDto, PostRestaurantUploadRequestDto } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import { DeleteReservationCancleRequest } from 'src/apis/restaurant/reservation';
+import { DeleteReservationCancelRequest } from 'src/apis/restaurant/reservation';
 import RestInputBox from 'src/components/RestaurantInputBox';
 import SelectBox from 'src/components/Selectbox';
 import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
@@ -124,7 +124,7 @@ export default function RestaurantInfo() {
         restIdNumber = 1;
     }
 
-    const DeleteReservationCancleResponse = (result: ResponseDto | null) => {
+    const DeleteReservationCancelResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
@@ -314,8 +314,8 @@ const onReservationCancelClickHandler = () =>
     const confirmed = window.confirm("정말로 취소하시겠습니까?");
     if (confirmed) 
     {
-        DeleteReservationCancleRequest(RestaurantId,cookies.accessToken)
-        .then(DeleteReservationCancleResponse)
+        DeleteReservationCancelRequest(RestaurantId,cookies.accessToken)
+        .then(DeleteReservationCancelResponse)
     } 
     else 
     {
