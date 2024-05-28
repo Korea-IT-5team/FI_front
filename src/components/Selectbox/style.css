@@ -1,4 +1,4 @@
-/* .select-box {
+.select-box {
     display: flex;
     align-items: center;
 
@@ -39,7 +39,7 @@
     width: 24px;
     height: 24px;
 
-    background-image: url('../../assets/image/arrow-drop-down-icon.png');
+    /* background-image: url('../../assets/image/arrow-drop-down-icon.png'); */
     background-size: 100% 100%;
 
     cursor: pointer;
@@ -50,7 +50,7 @@
     width: 24px;
     height: 24px;
 
-    background-image: url('../../assets/image/arrow-drop-up-icon.png');
+    /* background-image: url('../../assets/image/arrow-drop-up-icon.png'); */
     background-size: 100% 100%;
 
     cursor: pointer;
@@ -89,4 +89,4 @@
 .select-list-item-box:hover {
     background-color: rgba(238, 238, 238, 0.2);
     cursor: pointer;
-} */
+}
