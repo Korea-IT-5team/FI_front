@@ -125,7 +125,7 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        if (result?.code === 'AF') navigator(AUTH_ABSOLUTE_PATH);
+        // if (result?.code === 'AF') navigator(AUTH_ABSOLUTE_PATH);
         return;
     }
 

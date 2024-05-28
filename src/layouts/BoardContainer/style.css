@@ -9,18 +9,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-<<<<<<< HEAD
-    border-bottom: 1px solid rgba(238, 238, 238, 1); 
-    padding: 10px 20px;
-    background-color: rgba(255, 148, 45, 0.8);
-=======
 
     padding: 15px 20px;
 
     border-bottom: 1px solid rgba(238, 238, 238, 1);
     
     background-color: rgba(255, 148, 45, 0.95);
->>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
 }
 
 .board-navigation-icon {
