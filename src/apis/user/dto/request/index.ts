@@ -13,3 +13,13 @@ export interface PatchUserInfoRequestDto {
 export interface DeleteUserRequestDto {
     password: string;
 }
+
+// description: 로그인 유저 정보 Request Body DTO
+export interface GetUserInfoRequestDto {
+    userEmailId: string;
+    nickname: string;
+    userName: string;
+    userTelNumber: string;
+    userAddress: string;
+    userRole: string;
+}

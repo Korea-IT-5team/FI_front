@@ -1,11 +1,11 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 export interface InputBoxProps {
-    label: string;
+    label?: string;
     type: 'text' | 'password';
     value: string;
     placeholder: string;
-    onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+    onChangeHandler?: (event: ChangeEvent<HTMLInputElement>) => void;
     buttonTitle?: string;
     buttonStatus?: boolean;
     onButtonClickHandler?: () => void;

@@ -4,8 +4,8 @@ import { useCookies } from 'react-cookie';
 import { Outlet } from 'react-router';
 
 
-//   component: mypage 공통부분  //
-export default function MyPage() {
+//   component: 로그인, 회원가입 공통부분  //
+export default function Authentication() {
     //                    render                    //
     return (
         <div id="authentication-wrapper">

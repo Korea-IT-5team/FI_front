@@ -3,6 +3,9 @@ import { findEmailRequest, telNumberAuthCheckRequest, telNumberAuthRequest } fro
 import { FindEmailRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import "./style.css";
+import InputBox from 'src/components/InputBox';
+import { FIND_EMAIL_FINALLY_ABSOLUTE_PATH } from 'src/constant';
+import { useNavigate } from 'react-router';
 
 // component: 이메일 찾기 // 
 export default function FindEmailInput() {
@@ -30,6 +33,7 @@ export default function FindEmailInput() {
     const findEmailButtonClass = `${isFindEmailActive ? 'primary' : 'disable'}-button full-width`;
 
   // function // 
+    const navigator = useNavigate();
     const userTelNumberResponse = (result: ResponseDto | null) => {
 
         const userTelNumberMessage =
@@ -130,7 +134,7 @@ export default function FindEmailInput() {
         telNumberAuthCheckRequest(requestBody).then(userTelNumberCheckResponse);
     };
 
-    const onSignUpButtonClickHandler = () => {
+    const onEmailButtonClickHandler = () => {
         if (!isFindEmailActive) return;
         if (!userName || !userTelNumber || !authNumber) {
             alert('모든 내용을 입력해주세요.');
@@ -143,16 +147,26 @@ export default function FindEmailInput() {
             authNumber: authNumber
         }
         findEmailRequest(requestBody).then(findEmailResponse);
+
+        navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH);
     };
     
     return (
         <div className='find-email-container'>
             <div className='find-email-title'>이메일 찾기</div>
             <div className='find-email-box'>
-                <div className='find-email-search'>email@email.com</div>
+                <div className='find-email-input'>
+
+                    <InputBox type="text" value={userName} placeholder="이름을 입력해주세요" onChangeHandler={onUserNameChangeHandler} message={UserNameMessage} error />
+
+                    <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonTitle="인증번호 전송" buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
+
+                    {isUserTelNumberCheck && 
+                    <InputBox type="text" value={authNumber} placeholder="인증번호 6자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
+
+                </div>
                 <div className='find-email-button'>
-                    <div className='find-email-login'>로그인하기</div>
-                    <div className='find-email-password'>비밀번호 재설정</div>
+                    <div className={findEmailButtonClass} onClick={onEmailButtonClickHandler}>이메일 찾기</div> 
                 </div>
             </div>
         </div>

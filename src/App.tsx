@@ -1,15 +1,9 @@
 import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
-import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, FIND_EMAIL_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MY_PAGE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, PASSWORD_RESET_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
-import Authentication from './layouts/AuthenticationContainer';
+import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESTAURANT_INFO_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_RESERVATION_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
 import Board from './layouts/BoardContainer';
 import MyPage from './layouts/MyPageContainer';
 import BusinessRegistration from './views/Authentication/BusinessRegistration';
-import { default as FindEmail, default as FindEmailInput } from './views/Authentication/FindEmail/FIndEmailInput';
-import FindEmailFinally from './views/Authentication/FindEmail/FindEmailFinally';
-import PasswordResetCheck from './views/Authentication/PasswordReset/PasswordResetCheck';
-import PasswordResetFinally from './views/Authentication/PasswordReset/PasswordResetFinally';
-import { default as PasswordReset, default as PasswordResetInput } from './views/Authentication/PasswordReset/PasswordResetInput';
 import SignIn, { Sns } from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
 import Main from './views/Main';
@@ -27,6 +21,13 @@ import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
 import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
+import PasswordResetInput from './views/Authentication/PasswordResetInput';
+import PasswordResetCheck from './views/Authentication/PasswordResetCheck';
+import PasswordResetFinally from './views/Authentication/PasswordResetFinally';
+import Authentication from './layouts/Authentication';
+import FindEmailInput from './views/Authentication/FIndEmailInput';
+import FindEmailFinally from './views/Authentication/FindEmailFinally';
+import MyPageSite from './views/Mypage/MyPageSite';
 
 
 // component: root 경로 컴포넌트
@@ -52,15 +53,11 @@ function App() {
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
-        <Route path={FIND_EMAIL_PATH} element={<FindEmail />} >
-          <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
-          <Route path={FIND_EMAIL_FINALLY_PATH} element={<FindEmailFinally />} />
-        </Route>
-        <Route path={PASSWORD_RESET_PATH} element={<PasswordReset />} > 
-          <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
-          <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
-          <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
-        </Route>
+        <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
+        <Route path={FIND_EMAIL_FINALLY_PATH} element={<FindEmailFinally />} />
+        <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
+        <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
+        <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} /> 
       </Route>
       <Route path={RESTAURANT_PATH} element={<RestaurantTopBar/>} >
         <Route path={RESTAURANT_LIST_PATH} element={<Restaurantlist/>}/>  
@@ -70,6 +67,7 @@ function App() {
         {/* <Route path={RESTAURANT_RESERVATION_INFO_PATH} element={<RestaurantReservationInfo />} /> */}
       </Route> 
       <Route path={MY_PAGE_PATH} element={<MyPage />} >
+        <Route path={MY_PAGE_SITE_PATH} element={<MyPageSite />} />
         <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
         <Route path={USER_DELETE_PATH} element={<UserDelete />} />
       </Route>  
