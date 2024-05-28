@@ -133,14 +133,14 @@ export default function BoardContainer() {
         setPath(path);
     }, [pathname]);
 
-    useEffect(() => {
-        if (!cookies.accessToken) {
-            navigator(SIGN_IN_ABSOLUTE_PATH);
-            return;
-        }
+    // useEffect(() => {
+    //     if (!cookies.accessToken) {
+    //         navigator(SIGN_IN_ABSOLUTE_PATH);
+    //         return;
+    //     }
 
-        getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-    }, [cookies.accessToken]);
+    //     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
+    // }, [cookies.accessToken]);
     
     //   render   //
     return (
