@@ -9,16 +9,13 @@ import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, Po
 import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
 import RestInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/Selectbox';
-<<<<<<< HEAD
-import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
-=======
-import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
->>>>>>> 608271d7aea915b6d8a8a1d4cc1dda0553997695
+// import SelectBox from 'src/components/Selectbox';
+// import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
+import SelectBox from 'src/components/SelectBox';
 
 //              interface                   //
 
@@ -138,7 +135,7 @@ export default function RestaurantInfo() {
                     result.code === 'NR' ? '존재하지 않는 식당입니다.' :
                         result.code === 'AF' ? '권한이 없습니다.' :
                             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-        
+
         if (!result || result.code !== 'SU') {
             alert(message);
             return;
@@ -227,8 +224,8 @@ export default function RestaurantInfo() {
             return;
         }
 
-        GetRestaurantFavoriteStatusRequest(RestaurantId,cookies.accessToken)
-        .then(GetRestaurantFavoriteStatusResponse)
+        GetRestaurantFavoriteStatusRequest(RestaurantId, cookies.accessToken)
+            .then(GetRestaurantFavoriteStatusResponse)
     }, [location]);
 
     //               constant                     //
@@ -373,135 +370,132 @@ export default function RestaurantInfo() {
     };
 
     const onReservationClickHandler = () => {
-        navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH);
+        // navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH);
     };
 
-const onReservationCancelClickHandler = () => 
-{
-    const confirmed = window.confirm("정말로 취소하시겠습니까?");
-    if (confirmed) 
-    {
-        DeleteReservationRequest(RestaurantId,cookies.accessToken)
-        .then(DeleteReservationResponse)
-    } 
-    else 
-    {
-        return;
+    const onReservationCancelClickHandler = () => {
+        const confirmed = window.confirm("정말로 취소하시겠습니까?");
+        if (confirmed) {
+            DeleteReservationRequest(RestaurantId, cookies.accessToken)
+                .then(DeleteReservationResponse)
+        }
+        else {
+            return;
+        }
+    };
+
+    const onFavoriteClickHandler = () => {
+        if (!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;
+
+        PostRestaurantFavoriteRequest(RestaurantId, cookies.accessToken)
+            .then(PostRestaurantFavoriteResponse)
     }
-};
-
-const onFavoriteClickHandler = () => {
-    if(!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;
-
-    PostRestaurantFavoriteRequest(RestaurantId,cookies.accessToken)
-    .then(PostRestaurantFavoriteResponse)
-}
 
 
-const onCancleFavoriteClickHandler = () => {
-    if(!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;
+    const onCancleFavoriteClickHandler = () => {
+        if (!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;
 
-    DeleteRestaurantFavoriteRequest(RestaurantId,cookies.accessToken)
-    .then(DeleteRestaurantFavoriteResponse)
-}
+        DeleteRestaurantFavoriteRequest(RestaurantId, cookies.accessToken)
+            .then(DeleteRestaurantFavoriteResponse)
+    }
 
-  //            render              //
-  return (
-    
-    <>
-        {restIdNumber ? (
-            <div id="restaurant-info">
+    //            render              //
+    return (
+
+        <>
+            {restIdNumber ? (
+                <div id="restaurant-info">
                     {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                    <button onClick={onSetRestIdNumberHandler}>수정</button>)}
+                        <button onClick={onSetRestIdNumberHandler}>수정</button>)}
                     <div id="restaurant_image">{restaurantImage}</div>
-                        <div>
-                            <div>{restaurantName}</div>
-                        ({loginUserRole === "ROLE_USER" && reservationStatus &&(
+                    <div>
+                        <div>{restaurantName}</div>
+                        ({loginUserRole === "ROLE_USER" && reservationStatus && (
                             <button onClick={onReservationCancelClickHandler}>예약취소</button>)})
-                            
+
                         ({loginUserRole === "ROLE_USER" && !reservationStatus && (
                             <button onClick={onReservationClickHandler}>예약</button>)})
-                           
-                        </div>
+
+                    </div>
                     <div>{restaurantFoodCategory}</div>
                     <div>{grade}</div>
                     {loginUserRole === "ROLE_USER" && favoriteStatus ?
-                    (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) : 
-                    (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
+                        (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
+                        (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
                     }
-                    
+
                     <div>{restaurantLocation}</div>
                     <div>{restaurantSnsAddress}</div>
                     <div>{restaurantPostalCode}</div>
                     <div>{restaurantTelNumber}</div>
-                    
+
                     <div>{restaurantOperationHours}</div>
                     <div>{restaurantFeatures}</div>
                     <div>{restaurantNotice}</div>
                     <div>{restaurantRepresentativeMenu}</div>
-                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && 
-                    (<div>{restaurantBusinessRegistrationNumber}</div>)}
-                    
-                    <ReviewList value={restaurantReviewList}/>   
-            </div>
+                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId &&
+                        (<div>{restaurantBusinessRegistrationNumber}</div>)}
+
+                    <ReviewList value={restaurantReviewList} />
+                </div>
             ) : (
                 <div id="restaurant-info">
                     <div id="restaurant-left">
                         <div id="restaurant-left-up">
-                            <RestInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
-                            placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
-                                <div>
-                                    <RestInputBox label="식당 이름" type="text" value={restaurantName}
-                                    placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
-                                </div>
-                            <div>  
+                            <RestInputBox label="식당 이미지" type="file" value={restaurantImage} accept={'image/*'}
+                                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} />
+                            <div>
+                                <RestInputBox label="식당 이름" type="text" value={restaurantName}
+                                    placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler} />
+                            </div>
+                            <div>
                                 <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                             </div>
-                        </div> 
-    
+                        </div>
+
                         <div id="restaurant-left-down">
                             <RestInputBox label="식당 주소" type="text" value={restaurantLocation}
-                            placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
+                                placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler} />
 
                             <RestInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
-                            placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
+                                placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler} />
 
                             <RestInputBox label="식당 우편번호" type="text" value={restaurantPostalCode}
-                            placeholder="우편번호를 입력해주세요" onChangeHandler={onPostalCodeChangeHandler}/>
+                                placeholder="우편번호를 입력해주세요" onChangeHandler={onPostalCodeChangeHandler} />
 
                             <RestInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber}
-                            placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
+                                placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} />
                         </div>
                     </div>
-    
-                    <div id="restaurant-right"> 
-                        <div id="restaurant-right-up">  
+
+                    <div id="restaurant-right">
+                        <div id="restaurant-right-up">
                             <RestInputBox label="운영 시간" type="text" value={restaurantOperationHours}
-                            placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
+                                placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler} />
 
                             <RestInputBox label="식당 특징" type="text" value={restaurantFeatures}
-                            placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
-        
+                                placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler} />
+
                             <RestInputBox label="식당 공지" type="text" value={restaurantNotice}
-                            placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
+                                placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler} />
 
                             <RestInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
-                            placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler}/>
-                            
+                                placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} />
+
                             <RestInputBox label="사업자 등록번호" type="text" value={restaurantBusinessRegistrationNumber}
-                            placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}
-                            onKeydownHandler={onBusinessNumberKeydownHandler}/>
+                                placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}
+                                onKeydownHandler={onBusinessNumberKeydownHandler} />
 
                             {restaurantWriterId ?
-                              <button onClick={onUpdateClickHandler}
-                              className={ButtonClass}>수정하기</button> : 
-                              <button onClick={onUploadClickHandler}
-                              className={ButtonClass}>등록하기</button>}
-                        </div>           
+                                <button onClick={onUpdateClickHandler}
+                                    className={ButtonClass}>수정하기</button> :
+                                <button onClick={onUploadClickHandler}
+                                    className={ButtonClass}>등록하기</button>}
+                        </div>
                     </div>
                 </div>
-                )
+            )
             }
-    </>
-  )
+        </>
+    )
 }

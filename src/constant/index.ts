@@ -34,6 +34,7 @@ export const MY_PAGE_PATH = '/my-page';
 export const MY_PAGE_SITE_PATH = 'site';
 export const USER_INFO_UPDATE_PATH = 'user-info-update';
 export const USER_DELETE_PATH = 'user-delete';
+export const USER_DELETE_FINALLY_PATH = 'user-delete-finally';
 
 export const BOARD_PATH = '/board';
 export const NOTICE_PATH = 'notice';
@@ -81,6 +82,7 @@ export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;
 export const MY_PAGE_SITE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${MY_PAGE_SITE_PATH}`;
 export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
+export const USER_DELETE_FINALLY_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}/${USER_DELETE_FINALLY_PATH}`;
 
 export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
 
@@ -110,6 +112,7 @@ export const NICKNAME_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/nickname-ch
 export const FIND_EMAIL_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-email`;
 export const PASSWORD_RESET_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-reset`;
 export const PASSWORD_UPDATE_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-update`;
+export const BUSINESS_REGISTRATION_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/business-registration`;
 
 // description: USER 모듈 내의 기능 URL
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
