@@ -12,13 +12,13 @@ import './style.css';
 export default function NoticeWrite() {
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
+
   const { loginUserRole } = useUserStore();
-  const { noticeNumber } = useParams();
+
   const [cookies] = useCookies();
-  const [noticeWriterId, setNoticeWriterId] = useState<string>('');
-  const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
-  const [noticeContents, setNoticeContents] = useState<string>('');
+  
   const [noticeTitle, setNoticeTitle] = useState<string>('');
+  const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
   const navigator = useNavigate();

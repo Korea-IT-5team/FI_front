@@ -12,8 +12,6 @@ import './style.css';
 export default function NoticeDetail() {
 
     //                    state                    //
-    const commentRef = useRef<HTMLTextAreaElement | null>(null);
-    
     const { loginUserEmailId, loginUserRole } = useUserStore();
     const { noticeNumber } = useParams();
     
@@ -125,10 +123,10 @@ export default function NoticeDetail() {
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
                 <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
-                <div className='notice-detail-title-box'>
-                    <div className="notice-detail-title">공지 제목</div>
-                </div>
-                <div className='notice-detail-contents-box'>
+                <div className='notice-detail-top-box'>
+                    <div className='notice-detail-title-box'>
+                        <div className="notice-detail-title">공지 제목 {noticeTitle}</div>
+                    </div>
                     <div className='notice-detail-info-box'>
                         <div className='notice-detail-info'>작성자 {noticeWriterNickname}</div>
                         <div className='notice-detail-info-divider'>{'\|'}</div>
@@ -136,7 +134,9 @@ export default function NoticeDetail() {
                         <div className='notice-detail-info-divider'>{'\|'}</div>
                         <div className='notice-detail-info'>조회수 {viewCount}</div>
                     </div>
-                    <div className="notice-detail-content">{noticeContents}</div>
+                </div>
+                <div className='notice-detail-bottom-box'>
+                    <div className="notice-detail-content">공지 내용 {noticeContents}</div>
                     { loginUserEmailId === noticeWriterId && loginUserRole === 'USER_ADMIN' &&
                     (<div className="notice-detail-button-box">
                         <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
