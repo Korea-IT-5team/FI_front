@@ -9,8 +9,13 @@ import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, Po
 import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
 import RestInputBox from 'src/components/RestaurantInputBox';
+<<<<<<< HEAD
 // import SelectBox from 'src/components/Selectbox';
 // import { RESTAURANT_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+=======
+import SelectBox from 'src/components/SelectBox';
+import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH } from 'src/constant';
+>>>>>>> 76a94411450efa619398d75f1b398bb5f2d5655f
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';

@@ -13,13 +13,6 @@
   max-width: 800px;
 }
 
-.my-page-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 .my-page-box {
   display: flex;
   justify-content: space-between;
