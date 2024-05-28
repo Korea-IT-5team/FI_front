@@ -10,7 +10,7 @@ export default function board() {
     return (
         <div id='board-wrapper'>
             <div className='board-head-box'>
-                <div className='board-icon-image '></div>
+                <div className='board-navigation-bar'>☰</div>
                 <div className='board-title'>{"Food Insight"}</div>
                 <div className='board-sign-in-box'>
                     <div className='board-admin'>관리자</div> 

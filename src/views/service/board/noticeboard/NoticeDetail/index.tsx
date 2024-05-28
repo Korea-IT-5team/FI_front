@@ -124,11 +124,18 @@ export default function NoticeDetail() {
     return (
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
-            <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
+                <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
                 <div className='notice-detail-title-box'>
                     <div className="notice-detail-title">공지 제목</div>
                 </div>
                 <div className='notice-detail-contents-box'>
+                    <div className='notice-detail-info-box'>
+                        <div className='notice-detail-info'>작성자 {noticeWriterNickname}</div>
+                        <div className='notice-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-info'>작성일 {noticeWriteDatetime}</div>
+                        <div className='notice-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-info'>조회수 {viewCount}</div>
+                    </div>
                     <div className="notice-detail-content">{noticeContents}</div>
                     { loginUserEmailId === noticeWriterId && loginUserRole === 'USER_ADMIN' &&
                     (<div className="notice-detail-button-box">
