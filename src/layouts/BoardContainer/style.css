@@ -63,4 +63,5 @@
 .board-sign-out:hover {
     color: rgba(64, 64, 64, 0.5);
     cursor: pointer;
+    opacity: 0.05;
 }

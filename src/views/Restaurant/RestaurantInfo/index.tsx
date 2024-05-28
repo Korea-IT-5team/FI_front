@@ -5,9 +5,13 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest, PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
+<<<<<<< HEAD
+import { DeleteReservationCancelRequest } from 'src/apis/restaurant/reservation';
+=======
 import { DeleteRestaurantFavoriteRequest, GetRestaurantFavoriteStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
 import { GetRestaurantFavoriteStatusResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
+>>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
 import RestInputBox from 'src/components/RestaurantInputBox';
 <<<<<<< HEAD
 // import SelectBox from 'src/components/Selectbox';
@@ -133,7 +137,11 @@ export default function RestaurantInfo() {
         restIdNumber = 1;
     }
 
+<<<<<<< HEAD
+    const DeleteReservationCancelResponse = (result: ResponseDto | null) => {
+=======
     const DeleteReservationResponse = (result: ResponseDto | null) => {
+>>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
@@ -378,6 +386,21 @@ export default function RestaurantInfo() {
         // navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH);
     };
 
+<<<<<<< HEAD
+const onReservationCancelClickHandler = () => 
+{
+    const confirmed = window.confirm("정말로 취소하시겠습니까?");
+    if (confirmed) 
+    {
+        DeleteReservationCancelRequest(RestaurantId,cookies.accessToken)
+        .then(DeleteReservationCancelResponse)
+    } 
+    else 
+    {
+        return;
+    }
+};
+=======
     const onReservationCancelClickHandler = () => {
         const confirmed = window.confirm("정말로 취소하시겠습니까?");
         if (confirmed) {
@@ -388,6 +411,7 @@ export default function RestaurantInfo() {
             return;
         }
     };
+>>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
 
     const onFavoriteClickHandler = () => {
         if (!loginUserEmailId || !RestaurantId || !cookies.accessToken) return;

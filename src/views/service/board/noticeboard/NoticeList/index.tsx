@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
+import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { AUTH_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types'
+import { getSearchNoticeBoardListRequest } from 'src/apis/board';
 
 // component //
 function ListItem ({
@@ -22,6 +23,8 @@ function ListItem ({
 
   //   event handler   //
   const onClickHandler = () => navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
+
+
 
   //   render   //
   return(
@@ -44,7 +47,7 @@ export default function NoticeList() {
   const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [boardList, setBoardList] = useState<NoticeBoardListItem[]>([]);
   const [viewList, setViewList] = useState<NoticeBoardListItem[]>([]);
-  const [totalLenght, setTotalLength] = useState<number>(0);
+  const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageList, setPageList] = useState<number[]>([1]);
@@ -76,6 +79,24 @@ export default function NoticeList() {
     setPageList(pageList);
   };
 
+//   const changeNoticeBoardList = (boardList: NoticeBoardListItem[]) => {
+//     if (isToggleOn) boardList = boardList.filter(board => !board.status);
+//     setBoardList(boardList);
+
+//     const totalLength = boardList.length;
+//     setTotalLength(totalLength);
+
+//     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
+//     setTotalPage(totalPage);
+
+//     const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
+//     setTotalSection(totalSection);
+
+//     changePage(boardList, totalLength);
+
+//     changeSection(totalPage);
+// };
+
   const getNoticeBoardListResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -93,7 +114,51 @@ export default function NoticeList() {
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
   };
+
+  const getSearchNoticeBoardListResponse = (result: GetSearchNoticeBoardListResponseDto | ResponseDto | null) => {
+
+    const message = 
+        !result ? '서버에 문제가 있습니다.' : 
+        result.code === 'VF' ? '검색어를 입력하세요.' :
+        result.code === 'AF' ? '인증에 실패했습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    
+    if (!result || result.code !== 'SU') {
+        alert(message);
+        // if (result?.code === 'AF') navigator(AUTH_ABSOLUTE_PATH);
+        return;
+    }
+
+    const { noticeBoardList } = result as GetSearchNoticeBoardListResponseDto;
+    // changeNoticeBoardList(noticeBoardList);
+    setCurrentPage(!noticeBoardList.length ? 0 : 1);
+    setCurrentSection(!noticeBoardList.length ? 0 : 1);
+
+};
+  //                    event handler                       //
+
+  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchWord = event.target.value;
+    setSearchWord(searchWord);
+};
+const onSearchButtonClickHandler = () => {
+  if (!searchWord) return;
+  // if (!cookies.accessToken) return;
+
+  getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
+};
+
+
+  //                  effect                  //
+
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getSearchNoticeBoardListRequest(searchWord,cookies.accessToken).then(getSearchNoticeBoardListResponse);
+},[isToggleOn]);
   // 공지 리스트
+  //                    render                      //
+
+  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <div id='notice-list-wrapper'>
       <div className='notice-list-top'>
@@ -122,9 +187,9 @@ export default function NoticeList() {
                 </div>
                 <div className='notice-list-search-box'>
                     <div className='notice-list-search-input-box'>
-                        <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord}/>
+                        <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
                     </div>
-                    <div>검색</div>
+                    <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
                 </div>
             </div>
     </div>
