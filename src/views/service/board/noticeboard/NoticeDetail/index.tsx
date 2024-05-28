@@ -13,17 +13,18 @@ export default function NoticeDetail() {
 
     //                    state                    //
     const commentRef = useRef<HTMLTextAreaElement | null>(null);
-
+    
     const { loginUserEmailId, loginUserRole } = useUserStore();
     const { noticeNumber } = useParams();
-
+    
     const [cookies] = useCookies();
     const [noticeTitle, setNoticeTitle] = useState<string>('');
-    const [noticedetailrId, setNoticedetailrId] = useState<string>('');
-    const [noticedetailDatetime, setNoticedetailDatetime] = useState<string>('');
+    const [noticeWriterId, setNoticeWriterId] = useState<string>('');
+    const [noticeWriterNickname, setNoticeWriterNickname] = useState<string>('');
+    const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
     const [noticeContents, setNoticeContents] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
-
+    
     //                    function                    //
     const navigator = useNavigate();
 
@@ -69,10 +70,11 @@ export default function NoticeDetail() {
             return;
         }
 
-        const { noticeTitle, noticeWriterId, noticeWriteDatetime, noticeContents, viewCount } = result as GetNoticeBoardResponseDto;
+        const { noticeTitle, noticeWriterId, noticeWriterNickname, noticeWriteDatetime, noticeContents, viewCount } = result as GetNoticeBoardResponseDto;
         setNoticeTitle(noticeTitle);
-        setNoticedetailrId(noticeWriterId);
-        setNoticedetailDatetime(noticeWriteDatetime);
+        setNoticeWriterId(noticeWriterId);
+        setNoticeWriterNickname(noticeWriterNickname);
+        setNoticeWriteDatetime(noticeWriteDatetime);
         setNoticeContents(noticeContents);
         setViewCount(viewCount);
     };
@@ -99,12 +101,12 @@ export default function NoticeDetail() {
     };
 
     const onUpdateClickHandler = () => {
-        if (!noticeNumber || loginUserEmailId !== noticedetailrId) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriterId) return;
         navigator(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));
     };
 
     const onDeleteClickHandler = () => {
-        if (!noticeNumber || loginUserEmailId !== noticedetailrId || !cookies.accessToken) return;
+        if (!noticeNumber || loginUserEmailId !== noticeWriterId || !cookies.accessToken) return;
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
 
@@ -122,13 +124,18 @@ export default function NoticeDetail() {
     return (
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
-                <div className="notice-detail-title-box">공지 제목</div>
+            <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
+                <div className='notice-detail-title-box'>
+                    <div className="notice-detail-title">공지 제목</div>
+                </div>
                 <div className='notice-detail-contents-box'>
-                    <div className="notice-detail-content">공지 내용</div>
-                    <div className="notice-detail-button-box">
-                        <div className="second-button full-width">수정</div>
-                        <div className="error-button full-width">삭제</div>
-                    </div>
+                    <div className="notice-detail-content">{noticeContents}</div>
+                    { loginUserEmailId === noticeWriterId && loginUserRole === 'USER_ADMIN' &&
+                    (<div className="notice-detail-button-box">
+                        <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
+                        <div className="error-button full-width" onClick={onDeleteClickHandler}>삭제</div>
+                    </div>)
+                    }
                 </div>
             </div>
         </div>
