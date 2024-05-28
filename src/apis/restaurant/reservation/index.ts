@@ -16,22 +16,17 @@ export const GetUserReservationListRequest = async (accessToken:string) =>
 
 
 // function : 예약자 내역 목록확인 API 함수
-export const GetCeoReservationListRequest = async (restaurantId:number,accessToken:string) => 
+export const GetCeoReservationListRequest = async (restaurantName:string,accessToken:string) => 
 {
-      const result = await axios.get(GET_RESERVATION_CEO_LIST_URL(restaurantId), bearerAuthorization(accessToken))
+      const result = await axios.get(GET_RESERVATION_CEO_LIST_URL(restaurantName), bearerAuthorization(accessToken))
         .then(requestHandler<GetReservationListResponseDto>)
         .catch(requestErrorHandler)
         return result;
 } 
 
 
-<<<<<<< HEAD
 // function : 식당 예약 API 함수 
-export const PostReservationUploadRequest = async (restaurantId:number, requestBody: PostReservationRequestDto,accessToken:string) => 
-=======
-// fuction : 식당 예약 API 함수 
-export const PostReservationRequest = async (restaurantId:number, requestBody: PostReservationRequestDto,accessToken:string) => 
->>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
+export const PostReservationRequest = async (restaurantId:number|string, requestBody: PostReservationRequestDto,accessToken:string) => 
 {
       const result = await axios.post(POST_RESERVATION_REQUEST_URL(restaurantId), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
@@ -39,13 +34,8 @@ export const PostReservationRequest = async (restaurantId:number, requestBody: P
         return result;
 } 
 
-<<<<<<< HEAD
 // function : 식당 예약 취소 API 함수 
-export const DeleteReservationCancelRequest = async (restaurantId:number,accessToken:string) => 
-=======
-// fuction : 식당 예약 취소 API 함수 
-export const DeleteReservationRequest = async (restaurantId:number,accessToken:string) => 
->>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
+export const DeleteReservationRequest = async (restaurantId:number|string,accessToken:string) => 
 {
       const result = await axios.delete(DELETE_RESERVATION_REQUEST_URL(restaurantId), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)

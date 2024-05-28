@@ -8,4 +8,6 @@ export interface GetUserInfoResponseDto extends ResponseDto {
   userTelNumber: string;
   userAddress: string;
   userRole: string;
+  userReservationStatus: boolean;
+  userFavoriteStatus: boolean;
 }

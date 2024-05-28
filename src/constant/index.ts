@@ -14,6 +14,8 @@ export const PASSWORD_RESET_FINALLY_PATH = 'password-reset-finally';
 
 export const RESTAURANT_PATH = '/restaurant';
 export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
+export const RESTAURANT_INFO_WRITE_PATH = 'info/write';
+export const RESTAURANT_INFO_UPDATE_PATH = 'info/update/:restaurantId';
 export const RESTAURANT_LIST_PATH = 'list';
 
 export const REVIEW_PATH = 'review';
@@ -23,7 +25,7 @@ export const RESTAURANT_REVIEW_WRITE_PATH = 'reviewWrite/:restaurantId';
 export const RESTAURANT_REVIEW_UPDATE_PATH = 'reviewUpdate/:reviewNumber';
 
 export const RESERVATION_PATH = 'reservation';
-export const DO_RESERVATION_PATH = 'DoReservation';
+export const DO_RESERVATION_PATH = 'doReservation/:restaurantId';
 export const RESERVATION_LIST_PATH = 'reservationList';
 
 export const FAVORITE_PATH = 'favorite';
@@ -64,15 +66,17 @@ export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET
 export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
+export const RESTAURANT_INFO_WRITE_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_INFO_WRITE_PATH}`;
+export const RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/update/${restaurantId}`;
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
-
-export const RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESERVATION_PATH}/${DO_RESERVATION_PATH}`;
-export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH =  `${RESTAURANT_PATH}/${RESERVATION_PATH}/${RESERVATION_LIST_PATH}`;
-
+                                                                                                                                
+export const RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${RESERVATION_PATH}/doReservation/${restaurantId}`;
+export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${RESERVATION_PATH}/${RESERVATION_LIST_PATH}`;
+                                                                                                                                                                                                           
 export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH = `${RESTAURANT_PATH}/${REVIEW_PATH}/${RESTAURANT_REVIEW_DETAILS_LIST_PATH}`;
 export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewDetail/${reviewNumber}`;
-export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_WRITE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewWrite/${restaurantId}`;
-export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_UPDATE_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewUpdate/${reviewNumber}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewWrite/${restaurantId}`;
+export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewUpdate/${reviewNumber}`;
 
 export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${FAVORITE_PATH}/${RESTAURANT_FAVORITE_LIST_PATH}`;
 
@@ -135,12 +139,12 @@ export const GET_REVIEW_DETAIL_URL = (reviewNumber:number|string) => `${SERVER_R
 
 export const POST_REVIEW_REQUEST_URL = (restaurantId: number | string) => `${SERVER_REVIEW_MODULE_URL}/write/${restaurantId}`;
 export const PATCH_REVIEW_REQUEST_URL = (reviewNumber: number | string) => `${SERVER_REVIEW_MODULE_URL}/update/${reviewNumber}`;
-export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number) => `${SERVER_REVIEW_MODULE_URL}/delete/${reviewNumber}`;
+export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number | string) => `${SERVER_REVIEW_MODULE_URL}/delete/${reviewNumber}`;
 
 // description: RESERVATION 모듈 내의 기능 URL
 export const SERVER_RESERVATION_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/reservation`;
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
-export const GET_RESERVATION_CEO_LIST_URL = (restaurantId: number | string) =>  `${SERVER_RESERVATION_MODULE_URL}/ceo-list/${restaurantId}`;
+export const GET_RESERVATION_CEO_LIST_URL = (restaurantName: string) =>  `${SERVER_RESERVATION_MODULE_URL}/ceo-list/${restaurantName}`;
 export const GET_RESERVATION_URL = (reservationNumber: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${reservationNumber}`;
 export const POST_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
 export const DELETE_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
@@ -150,7 +154,6 @@ export const SERVER_FAVORITE_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/favor
 export const GET_FAVORITE_LIST_URL = `${SERVER_FAVORITE_MODULE_URL}/list`;
 export const POST_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
 export const DELETE_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
-export const GET_FAVORITE_STATUS_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
 
 // description: INQUIRY BOARD 모듈 내의 기능 URL
 export const SERVER_INQUIRY_BOARD_MODULE_URL = `${SERVER_API_URL}/inquiry-board`;

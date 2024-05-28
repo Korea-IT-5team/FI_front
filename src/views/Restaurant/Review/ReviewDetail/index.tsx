@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './style.css';
-import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_UPDATE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH} from 'src/constant';
 import { DeleteReviewRequest, GetReviewDetailRequest } from 'src/apis/restaurant/review';
 import { GetReviewDetailResponseDto } from 'src/apis/restaurant/review/dto/response';
 
@@ -12,7 +11,6 @@ import { GetReviewDetailResponseDto } from 'src/apis/restaurant/review/dto/respo
 export default function ReviewDetail()
 {
   //           state             //
-  const{setReviewNumber,ReviewNumber} = useUserStore();
   const{reviewNumber} = useParams();
 
   const[cookies] = useCookies();
@@ -43,14 +41,13 @@ export default function ReviewDetail()
         return;
     }
 
-    const{reviewNumber,reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating} = 
+    const{reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating} = 
     result as GetReviewDetailResponseDto;
     setReviewRestaurantId(reviewRestaurantId);
     setReviewDate(reviewDate);
     setReviewImage(reviewImage);
     setReviewContents(reviewContents);
     setRating(rating);
-    setReviewNumber(reviewNumber);
   };
 
   const DeleteReviewResponse = (result: ResponseDto | null) => {
@@ -79,23 +76,24 @@ export default function ReviewDetail()
 
   const onUpdateClickHandler = () => 
   {
-      navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_UPDATE_PATH(ReviewNumber));
+      if(!reviewNumber) return;
+      navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
   };
 
   const onDeleteClickHandler = () => 
   {
-    if(!ReviewNumber || !cookies.accessToken) return;
+    if(!reviewNumber || !cookies.accessToken) return;
     const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
     if(!isConfirm) return;
 
-    DeleteReviewRequest(ReviewNumber, cookies.accessToken)
+    DeleteReviewRequest(reviewNumber, cookies.accessToken)
     .then(DeleteReviewResponse);
   }
   
   //              effect                //
   useEffect(()=> {
     if(!cookies.accessToken || !reviewNumber) return;
-    GetReviewDetailRequest(Number(reviewNumber),cookies.accessToken)  
+    GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
     .then(GetReviewDetailResponse);
   },[location]);
 

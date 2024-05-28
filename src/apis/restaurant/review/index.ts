@@ -6,7 +6,7 @@ import { PatchReviewRequestDto, PostReviewRequestDto } from './dto/request';
 import { GetReviewDetailResponseDto, GetReviewDetailsResponseDto } from './dto/response';
 
 // function : 식당 리뷰 작성 API 함수 
-export const PostReviewRequest = async (restaurantId: number, requestBody: PostReviewRequestDto, accessToken: string) => {
+export const PostReviewRequest = async (restaurantId: number|string, requestBody: PostReviewRequestDto, accessToken: string) => {
   const result = await axios.post(POST_REVIEW_REQUEST_URL(restaurantId), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
@@ -14,7 +14,7 @@ export const PostReviewRequest = async (restaurantId: number, requestBody: PostR
 } 
 
 // function : 식당 리뷰 수정 API 함수 
-export const PatchReviewRequest = async (reviewNumber: number, requestBody: PatchReviewRequestDto, accessToken: string) => {
+export const PatchReviewRequest = async (reviewNumber: number|string, requestBody: PatchReviewRequestDto, accessToken: string) => {
   const result = await axios.patch(PATCH_REVIEW_REQUEST_URL(reviewNumber), requestBody, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
@@ -23,7 +23,7 @@ export const PatchReviewRequest = async (reviewNumber: number, requestBody: Patc
 
 
   // function : 식당 리뷰 삭제 API 함수 
-export const DeleteReviewRequest = async (reviewNumber: number, accessToken: string) => {
+export const DeleteReviewRequest = async (reviewNumber: number|string, accessToken: string) => {
   const result = await axios.delete(DELETE_REVIEW_REQUEST_URL(reviewNumber), bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
@@ -39,7 +39,7 @@ export const GetReviewDetailsRequest = async (accessToken: string) => {
 }
 
 // function : 식당 리뷰 내역 확인 API 함수
-export const GetReviewDetailRequest  = async (reviewNumber:number, accessToken: string) => {
+export const GetReviewDetailRequest  = async (reviewNumber:number|string, accessToken: string) => {
   const result = await axios.get(GET_REVIEW_DETAIL_URL(reviewNumber), bearerAuthorization(accessToken))
     .then(requestHandler<GetReviewDetailResponseDto>)
     .catch(requestErrorHandler)

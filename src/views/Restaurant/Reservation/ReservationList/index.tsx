@@ -53,10 +53,10 @@ function ListItem ({
 }
 
 //                    component                    //
-export default function RestaurantReservationList() {
+export default function ReservationList() {
 
     //                    state                    //
-    const {loginUserRole,RestaurantId} = useUserStore();
+    const {loginUserRole,restaurantName} = useUserStore();
     const [cookies] = useCookies();
     const [restaurantReservationList, setRestaurantReservationList] = useState<RestaurantReservationListItem[]>([]);
     const [viewList, setViewList] = useState<RestaurantReservationListItem[]>([]);
@@ -66,7 +66,6 @@ export default function RestaurantReservationList() {
     const [pageList, setPageList] = useState<number[]>([1]);
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
-    const [searchWord, setSearchWord] = useState<string>('');
     const location = useLocation();
 
     //                    function                    //
@@ -155,7 +154,7 @@ export default function RestaurantReservationList() {
         loginUserRole === "ROLE_USER" ? 
         GetUserReservationListRequest(cookies.accessToken)
         .then(GetReservationListResponse):
-        GetCeoReservationListRequest(RestaurantId,cookies.accessToken)
+        GetCeoReservationListRequest(restaurantName,cookies.accessToken)
         .then(GetReservationListResponse)
         ;
     }, [location]);
@@ -172,7 +171,7 @@ export default function RestaurantReservationList() {
     
   
     //                    render                    //
-    const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+   
     return (
         <div id='reservation-list-wrapper'>
             <div className='reservation-list-top'>

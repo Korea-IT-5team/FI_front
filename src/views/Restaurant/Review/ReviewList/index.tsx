@@ -1,23 +1,17 @@
-import {  useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
-import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import { PostReviewRequest } from 'src/apis/restaurant/review';
-import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
-import { RESTAURANT_REVIEW_ABSOLUTE_DETAILS_WRITE_PATH } from 'src/constant';
+import { RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 
 interface Props {
     value: RestaurantReviewListItem[];
+    restaurantId: string | undefined;
 }
 
 //               component: 리뷰 리스트             // 
-export default function ReviewList({ value }: Props) {
+export default function ReviewList({ value,restaurantId }: Props) {
     //                      state                           //
-    const {loginUserRole, RestaurantId } = useUserStore();
+    const {loginUserRole} = useUserStore();
 
 
     //                  function                            //
@@ -28,7 +22,8 @@ export default function ReviewList({ value }: Props) {
 
     //              event handler                           //
     const onWriteClickHandler = () => {
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_WRITE_PATH(RestaurantId));
+        if(!restaurantId) return;
+        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
     }
 
     //                                  render                            //

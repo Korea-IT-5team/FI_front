@@ -5,7 +5,6 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetReviewDetailsRequest } from 'src/apis/restaurant/review';
 import { GetReviewDetailsResponseDto } from 'src/apis/restaurant/review/dto/response';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { ReviewDetailsListItem } from 'src/types';
 import './style.css';
 
@@ -37,7 +36,6 @@ function ListItem ({
 //                    component                    //
 export default function ReviewDetailsList() {
     //                    state                    //
-    const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
     const [reviewDetailsList, setReviewDetailsList] = useState<ReviewDetailsListItem[]>([]);
     const [viewList, setViewList] = useState<ReviewDetailsListItem[]>([]);
