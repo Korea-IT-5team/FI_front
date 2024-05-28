@@ -252,7 +252,7 @@ export default function SignUp() {
   };
 
   const onAuthNumberButtonClickHandler = () => {
-    if(!authNumberButtonStatus) return;
+    // if(!authNumberButtonStatus) return;
     if(!authNumber) return;
 
     const requestBody: CheckTelNumberAuthRequestDto = {
@@ -275,7 +275,7 @@ export default function SignUp() {
     if (snsId) setSnsId(snsId);
 
     navigator(BUSINESS_REGISTRATION_ABSOLUTE_PATH);
-};
+  };
 
   //   render   //
   return(

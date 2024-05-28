@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { GetReviewDetailsListRequest } from 'src/apis/restaurant/review';
+import { GetReviewDetailsRequest } from 'src/apis/restaurant/review';
 import { GetReviewDetailsResponseDto } from 'src/apis/restaurant/review/dto/response';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { ReviewDetailsListItem } from 'src/types';
 import './style.css';
@@ -20,7 +20,7 @@ function ListItem ({
     const navigator = useNavigate();
 
     //                    event handler                    //
-    const onClickHandler = () => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_PATH(reviewNumber));
+    const onClickHandler = () => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber));
 
     //                    render                    //
     return (
@@ -90,7 +90,7 @@ export default function ReviewDetailsList() {
         changeSection(totalPage);
     };
 
-    const GetReviewDetailsListResponse = (result: GetReviewDetailsResponseDto | ResponseDto | null) => {
+    const GetReviewDetailsResponse = (result: GetReviewDetailsResponseDto | ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -126,12 +126,11 @@ export default function ReviewDetailsList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
-        GetReviewDetailsListRequest(cookies.accessToken)
-        .then(GetReviewDetailsListResponse);
+        GetReviewDetailsRequest(cookies.accessToken)
+        .then(GetReviewDetailsResponse);
     }, [location]);
 
     useEffect(() => {

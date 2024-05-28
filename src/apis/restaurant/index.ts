@@ -26,7 +26,7 @@ return result;
 
 
 // function : 식당 정보 등록 API 함수 
-export const PostRestaurantUploadRequestDto = async (requestBody: PostRestaurantInfoRequestDto, accessToken: string) => {
+export const PostRestaurantInfoRequest = async (requestBody: PostRestaurantInfoRequestDto, accessToken: string) => {
 const result = await axios.post(POST_RESTAURANT_INFO_UPLOAD, requestBody, bearerAuthorization(accessToken))
 .then(requestHandler<ResponseDto>)
 .catch(requestErrorHandler)
@@ -35,7 +35,7 @@ return result;
 
 
 // function : 식당 정보 수정 API 함수 
-export const PatchRestaurantUpdateRequestDto = async (requestBody: PatchRestaurantInfoRequestDto, accessToken: string) => {
+export const PatchRestaurantInfoRequest = async (requestBody: PatchRestaurantInfoRequestDto, accessToken: string) => {
 const result = await axios.patch(PATCH_RESTAURANT_INFO_UPDATE, requestBody, bearerAuthorization(accessToken))
 .then(requestHandler<ResponseDto>)
 .catch(requestErrorHandler)

@@ -9,38 +9,64 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+<<<<<<< HEAD
     border-bottom: 1px solid rgba(238, 238, 238, 1); 
     padding: 10px 20px;
     background-color: rgba(255, 148, 45, 0.8);
+=======
+
+    padding: 15px 20px;
+
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+    
+    background-color: rgba(255, 148, 45, 0.95);
+>>>>>>> a9a56f98a07d593c0668f6b2ee208473665b7a8f
 }
 
-.board-icon-image {
-    width: 40px; 
-    height: 40px; 
-    background-size: contain; 
-    margin: 5px; 
-    background-image: url("../../assets/image/main-icon-bar.png");
+.board-navigation-icon {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+
+    font-size: 30px;
+
+    color: rgba(255, 255, 255, 1);
+}
+
+.board-navigation-icon:hover {
+    cursor: pointer;
 }
 
 .board-title {
-    font-size: 40px;
+    font-family: 'Ubuntu';
+    font-size: 45px;
     font-weight: bold;
-    color: rgba(64, 64, 64, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .board-sign-in-box {
     display: flex;
-    align-items: center; 
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.board-admin, .board-sign-in {
+.board-role-visible {
     display: flex;
-    color: rgba(64, 64, 64, 1);
-    font-size: 22px; 
-    margin: 5px 10px; 
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.board-sign-in:hover {
+.board-divider {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.board-sign-out:hover {
     color: rgba(64, 64, 64, 0.5);
     cursor: pointer;
     opacity: 0.05;

@@ -12,13 +12,13 @@ import './style.css';
 export default function NoticeWrite() {
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
+
   const { loginUserRole } = useUserStore();
-  const { noticeNumber } = useParams();
+
   const [cookies] = useCookies();
-  const [noticeWriteId, setNoticeWriterId] = useState<string>('');
-  const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
-  const [noticeContents, setNoticeContents] = useState<string>('');
+  
   const [noticeTitle, setNoticeTitle] = useState<string>('');
+  const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
   const navigator = useNavigate();
@@ -79,7 +79,7 @@ export default function NoticeWrite() {
         </div>
         <div className='notice-write-contents-box'>
           <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
-          <div className='primary-button'>작성</div>
+          <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
         </div>
       </div>
     </div>
