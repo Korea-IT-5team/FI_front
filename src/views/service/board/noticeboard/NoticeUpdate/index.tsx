@@ -71,14 +71,14 @@ export default function NoticeUpdate() {
     if (!noticeNumber) return;
     navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
   };
-  
+
   //                    event handler                    //
-  const NoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onNoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const noticeTitle = event.target.value;
     setNoticeTitle(noticeTitle);
   };
 
-  const NoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const contents = event.target.value;
     if (contents.length > 1000) return;
     setNoticeContents(noticeContents);
@@ -86,19 +86,19 @@ export default function NoticeUpdate() {
     if (!contentsRef.current) return;
     contentsRef.current.style.height = 'auto';
     contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
-};
+  };
 
-const NoticeUpdateButtonClickHandler = () => {
-  if (!cookies.accessToken || !noticeNumber) return;
-  if(!noticeTitle.trim() || !noticeContents.trim()) return;
+  const NoticeUpdateButtonClickHandler = () => {
+    if (!cookies.accessToken || !noticeNumber) return;
+    if (!noticeTitle.trim() || !noticeContents.trim()) return;
 
-  const requestBody: PatchNoticeBoardRequestDto = {noticeTitle, noticeContents};
-  patchNoticeBoardRequest(noticeNumber, requestBody, cookies.accessToken).then(patchNoticeBoardResponse);
-};
+    const requestBody: PatchNoticeBoardRequestDto = { noticeTitle, noticeContents };
+    patchNoticeBoardRequest(noticeNumber, requestBody, cookies.accessToken).then(patchNoticeBoardResponse);
+  };
 
-//                    effect                    //
-let effectFlag = false;
-useEffect(() => {
+  //                    effect                    //
+  let effectFlag = false;
+  useEffect(() => {
     if (!noticeNumber || !cookies.accessToken) return;
     if (!loginUserRole) return;
     if (effectFlag) return;
@@ -109,11 +109,21 @@ useEffect(() => {
     }
     getNoticeBoardRequest(noticeNumber, cookies.accessToken)
       .then(getNoticeBoardResponse);
-}, [loginUserRole]);
+  }, [loginUserRole]);
 
 
-//                    render                    //
+  //                    render                    //
   return (
-    <div >공지 수정</div>
-  )
+    <div id='notice-update-wrapper'>
+      <div className='notice-update-main-box'>
+        <div className='notice-update-title-box'>
+          <input className='notice-update-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
+        </div>
+        <div className='notice-update-contents-box'>
+          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <div className='primary-button'>수정</div>
+        </div>
+      </div>
+    </div>
+  );
 };
