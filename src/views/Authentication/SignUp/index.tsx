@@ -341,8 +341,6 @@ export default function SignUp() {
 
     signUpRequest(requestBody).then(signUpResponse);
 
-    // navigator(SIGN_IN_ABSOLUTE_PATH);
-
   };
 
   //   render   //
