@@ -5,7 +5,6 @@ import ResponseDto from 'src/apis/response.dto';
 import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/SelectBox/Index';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 
@@ -174,9 +173,9 @@ export default function RestaurantInfoWrite()
                                     <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
                                     placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
                                 </div>
-                            <div>  
+                            {/* <div>  
                                 <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
-                            </div>
+                            </div> */}
                         </div> 
     
                         <div id="restaurant-left-down">
