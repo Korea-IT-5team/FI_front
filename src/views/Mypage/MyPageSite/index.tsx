@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { getSignInUserRequest } from 'src/apis/user';
-import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { getMyInfoRequest } from 'src/apis/user';
+import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import "./style.css";
 
@@ -23,11 +23,10 @@ export default function MyPageSite() {
   // function //
   const navigator = useNavigate();
 
-  const GetUserInfoResponse = (result : GetUserInfoResponseDto | ResponseDto | null) => {
+  const GetMyInfoResponse = (result : GetMyInfoResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'AF' ? '권한이 없습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
@@ -41,24 +40,25 @@ export default function MyPageSite() {
     }
 
     if (!cookies.accessToken) return;
-    getSignInUserRequest(cookies.accessToken).then(GetUserInfoResponse);
+    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
 
-    const {userEmailId, nickname, userName, userTelNumber, userAddress} = result as GetUserInfoResponseDto;
-    setEmailId(userEmailId);
+    const {userEmailId, nickname, userName, userTelNumber, userAddress} = result as GetMyInfoResponseDto;
     setNickname(nickname);
+    setEmailId(userEmailId);
     setUserName(userName);
     setUserTelNumber(userTelNumber);
     setUserAddress(userAddress);
     setUserRole(userRole);
+
   };
 
-  // effect //
+  //   effect   //
   useEffect(() => {
     if (!cookies.accessToken) return;
-    getSignInUserRequest(cookies.accessToken).then(GetUserInfoResponse);
+    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
   }, []);
 
-  // render //
+  //   render   //
   return (
     <div id='authentication-wrapper'>
       <div className='my-page-big-box'>
@@ -71,12 +71,11 @@ export default function MyPageSite() {
               <div className='my-page-info'>{userName}</div>
               <div className='my-page-info'>{userTelNumber}</div>
               <div className='my-page-info'>{userAddress}</div>
-              <div className='my-page-info'>{userRole}</div>
             </div>
             <div className='my-page-link'>
               <div className='my-page-link-box' onClick={() => navigator(USER_INFO_UPDATE_ABSOLUTE_PATH)}>회원정보 수정</div>
               <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_LIST_ABSOLUTE_PATH)}>찜한 식당 목록</div>
-              {/* <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH)}>예약 내역</div> */}
+              <div className='my-page-link-box' onClick={() => {}}>예약 내역</div>
               <div className='my-page-link-box'>리뷰 내역</div>
             </div>
             <div className='my-page-delete' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH)}>회원탈퇴</div>
