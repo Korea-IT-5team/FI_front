@@ -29,7 +29,7 @@ export default function FindEmailInput() {
     const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-    const isFindEmailActive = isUserTelNumberError && isAuthNumberError;
+    const isFindEmailActive = isUserTelNumberCheck && isUserTelNumberPattern && isAuthNumberCheck;
     const findEmailButtonClass = `${isFindEmailActive ? 'primary' : 'disable'}-button full-width`;
 
   // function // 
@@ -148,7 +148,7 @@ export default function FindEmailInput() {
         }
         findEmailRequest(requestBody).then(findEmailResponse);
 
-        navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH);
+        // navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH);
     };
     
     return (
