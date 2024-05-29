@@ -16,14 +16,15 @@ export interface InputBoxProps {
 export default function RestaurantInputBox({ label, type, value, placeholder, onChangeHandler, onKeydownHandler }: InputBoxProps) {
 
     return (
-        <div className="input-box">
-            <div className="input-label label">{label}</div>
-            <div className="input-content-box">
+        <div className="restaurant-input-box">
+            <div className="restaurant-input-label label">{label}</div>
+            <div className="restaurant-input-content-box">
                 <input
                     className="restaurant-input"
                     type={type}
                     value={value}
                     placeholder={placeholder}
+                    maxLength={300}
                     onChange={onChangeHandler}
                     onKeyDown={onKeydownHandler}
                 />

@@ -37,7 +37,7 @@ export default function RestaurantList()
   
       if (!result || result.code !== 'SU') 
       {
-          alert(message);
+          //alert(message);
           return;
       }
   
@@ -106,7 +106,7 @@ export default function RestaurantList()
     effectFlag = true;
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, []);
+  }, [location]);
 
   let effectFlag2 = false;
   useEffect(() => {
@@ -125,22 +125,22 @@ export default function RestaurantList()
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <>
-      <div className="side-navigation-container">
-          <div className='search-input-click'>
-              <input className="search-input" placeholder='오늘의 맛집은?' value={searchWord} onChange={onSearchWordChangeHandler}></input>
+      <div className="restaurantlist-side-navigation-container">
+          <div className='restaurantlist-search-input-click'>
+              <input className="restaurantlist-search-input" placeholder='오늘의 맛집은?' value={searchWord} onChange={onSearchWordChangeHandler}></input>
               <div className={searchButtonClass} onClick={onSearchClickHandler}>검색</div>
           </div>
-          {loginUserRole === 'ROLE_CEO' && <div className="registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
+          {loginUserRole === 'ROLE_CEO' && <div className="restaurantlist-registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
       </div>
       <div className="restaurant-list">
             {!restaurantList || restaurantList.length === 0 ? 
-            ( <div className="select-item">해당하는 식당 정보가 없습니다.</div> ) 
+            ( <div className="restaurantlist-select-item">해당하는 식당 정보가 없습니다.</div> ) 
                                                   : 
             (
               restaurantList.slice(0, 12).map((item) => (
-              <div className='select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                  <div className='select-item'>{item.restaurantImage}</div>
-                  <div className='select-item'>{item.restaurantName}</div>
+              <div className='restaurantlist-select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
+                  <div className='restaurantlist-select-item'>{item.restaurantImage}</div>
+                  <div className='restaurantlist-select-item'>{item.restaurantName}</div>
               </div>
             )))
           }

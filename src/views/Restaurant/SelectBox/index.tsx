@@ -51,7 +51,7 @@ export default function SelectBox({ value, onChange }: Prop) {
     return (
         <div className='select-box'>
             { value === '' ? 
-            <div className='select-none'>음식</div> :
+            <div className='select-none'>주음식</div> :
             <div className='select-item'>{name}</div>
             }
             <div className={buttonClass} onClick={onButtonClickHandler}></div>

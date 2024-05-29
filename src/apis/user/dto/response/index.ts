@@ -1,5 +1,5 @@
 import ResponseDto from "src/apis/response.dto";
-
+//GetUserInfoResponseDto
 // description: 로그인 유저 정보 반환 Response Body DTO
 export interface GetUserInfoResponseDto extends ResponseDto {
   userEmailId: string;
@@ -10,4 +10,5 @@ export interface GetUserInfoResponseDto extends ResponseDto {
   userRole: string;
   userReservationStatus: boolean;
   userFavoriteStatus: boolean;
+  businessRegistrationNumber: string;
 }

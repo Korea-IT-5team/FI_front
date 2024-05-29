@@ -18,33 +18,33 @@
     
 }
 
-.input::placeholder {
+.restaurant-input::placeholder {
     color: rgba(138, 146, 166, 1);
 }
 
-.sns-container-title {
+.restaurant-sns-container-title {
     color: rgba(138, 146, 166, 1);
 }
 
-.sns-button-container {
+.restaurant-sns-button-container {
     display: flex;
     gap: 24px;
 }
 
-.input-box {
+.restaurant-input-box {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
 }
 
-.input-label{
+.restaurant-input-label{
     color:rgba(0, 0, 0, 1);
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
 }
 
 
-.input-content-box{
+.restaurant-input-content-box{
     gap: 10px;
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
@@ -53,7 +53,7 @@
     
 }
 
-.input-primary-button {
+/* .restaurant-input-primary-button {
     box-sizing: border-box;
     width: 110px;
     padding: 8px 0px;
@@ -71,11 +71,11 @@
     text-align: center;
 }
 
-.input-primary-button:hover {
+.restaurant-input-primary-button:hover {
     cursor: pointer;
 }
 
-.input-disable-button {
+.restaurant-input-disable-button {
     box-sizing: border-box;
     width: 110px;
     padding: 8px 0px;
@@ -93,9 +93,9 @@
     text-align: center;
 }
 
-.input-message {
+.restaurant-input-message {
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-}
+} */

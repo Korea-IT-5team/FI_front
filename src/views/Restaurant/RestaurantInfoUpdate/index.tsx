@@ -6,8 +6,9 @@ import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/r
 import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/SelectBox';
+import SelectBox from 'src/views/Restaurant/SelectBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import './style.css';
 
 export default function RestaurantInfoUpdate() 
 {   
@@ -31,7 +32,6 @@ export default function RestaurantInfoUpdate()
     const [restaurantFoodCategoryCheck, setRestaurantFoodCategoryCheck] = useState<boolean>(false);
     const [restaurantPostalCodeCheck, setRestaurantPostalCodeCheck] = useState<boolean>(false);
     const [restaurantLocationCheck, setRestaurantLocationCheck] = useState<boolean>(false);
-    const [restaurantBusinessRegistrationNumberCheck, setRestaurantBusinessRegistrationNumberCheck] = useState<boolean>(false);
     const location = useLocation();
     const navigator = useNavigate();
 
@@ -43,7 +43,7 @@ export default function RestaurantInfoUpdate()
                 result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
-            alert(message);
+            //alert(message);
             return;
         }
 
@@ -91,7 +91,7 @@ export default function RestaurantInfoUpdate()
 
         if (!restaurantImage || !restaurantName || !restaurantFoodCategory
             || !restaurantPostalCode || !restaurantLocation || !restaurantId) {
-            alert('필수 정보를 입력하지 않았습니다.');
+            //alert('필수 정보를 입력하지 않았습니다.');
             return;
         }
 
@@ -176,13 +176,9 @@ export default function RestaurantInfoUpdate()
         setRestaurantRepresentativeMenu(value);
     }
 
-    const onBusinessNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setRestaurantBusinessRegistrationNumber(value);
-        setRestaurantBusinessRegistrationNumberCheck(!(value.length === 0));
-    }
 
-    const onBusinessNumberKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+
+    const onRepresentativeMenuKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key !== 'Enter') return;
         
         onUpdateClickHandler()
@@ -190,75 +186,67 @@ export default function RestaurantInfoUpdate()
     };
 
     //                                  effect                                              //
-
+    let effectFlag = false;
     useEffect(() => {
         if (!cookies.accessToken || !restaurantId) {
             return;
         }
+    if(effectFlag) return;
+    effectFlag = true;
 
         GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
             .then(GetRestaurantInfoResponse);
     }, [location]);
 
 
-    const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck && restaurantBusinessRegistrationNumberCheck;
-    const ButtonClass = `${isRestUploadUpActive ? 'primary' : 'disable'}-button full-width`;
+    const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck;
+    const ButtonClass = `${isRestUploadUpActive ? 'restaurantinfo-primary' : 'restaurantinfo-disable'}-button`;
 
     //                                      render                                              //
     return (
-    <>
-        <div id="restaurant-info">
-                    <div id="restaurant-left">
-                        <div id="restaurant-left-up">
-                            <RestaurantInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
-                            placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
-                                <div>
-                                    <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
-                                    placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
-                                </div>
-                            <div>  
-                                <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
-                            </div>
-                        </div> 
-    
-                        <div id="restaurant-left-down">
-                            <RestaurantInputBox label="식당 주소" type="text" value={restaurantLocation}
-                            placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
-
-                            <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
-                            placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
-
-                            <RestaurantInputBox label="식당 우편번호" type="text" value={restaurantPostalCode}
-                            placeholder="우편번호를 입력해주세요" onChangeHandler={onPostalCodeChangeHandler}/>
-
-                            <RestaurantInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber}
-                            placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
-                        </div>
-                    </div>
-    
-                    <div id="restaurant-right"> 
-                        <div id="restaurant-right-up">  
-                            <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}
-                            placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
-
-                            <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures}
-                            placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
+        <>
+            <div className="restaurantinfowrite-title">식당 정보 수정</div>
+            <div className="restaurantinfowrite-box">
+                <RestaurantInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
+                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
+                                       
+                <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
+                placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
         
-                            <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice}
-                            placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
-
-                            <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
-                            placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler}/>
-                            
-                            <RestaurantInputBox label="사업자 등록번호" type="text" value={restaurantBusinessRegistrationNumber}
-                            placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}
-                            onKeydownHandler={onBusinessNumberKeydownHandler}/>
-
-                            <button onClick={onUpdateClickHandler}
-                            className={ButtonClass}>수정하기</button>
-                        </div>           
-                    </div>
+                <div className="restaurantinfowrite-selectbox">                 
+                    <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
+                </div>  
+                                   
+                <RestaurantInputBox label="식당 주소" type="text" value={restaurantLocation}
+                placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
+        
+                <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
+                placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
+        
+                <RestaurantInputBox label="식당 우편번호" type="text" value={restaurantPostalCode}
+                placeholder="우편번호를 입력해주세요" onChangeHandler={onPostalCodeChangeHandler}/>
+        
+                <RestaurantInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber}
+                placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
+                                 
+                <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}
+                placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
+        
+                <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures}
+                placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
+                
+                <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice}
+                placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
+        
+                <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
+                placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} 
+                onKeydownHandler={onRepresentativeMenuKeydownHandler}/>
+        
+                <div className="restaurantinfo-registered-button-box">
+                    <button onClick={onUpdateClickHandler}
+                    className={ButtonClass}>수정하기</button>
                 </div>
-    </>
-  )
+            </div>
+        </>
+    )
 }

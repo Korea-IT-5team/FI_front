@@ -1,4 +1,4 @@
-.top-bar-container {
+.restaurantlist-top-bar-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -7,22 +7,22 @@
     padding: 0 24px;
 }
 
-.top-bar-left{
+.restaurantlist-top-bar-left{
     font-size: 36px;
 }
 
 
-.top-bar-title{
+.restaurantlist-top-bar-title{
     font-size: 48px;
 }
 
 
 
-.top-bar-right{
+.restaurantlist-top-bar-right{
     font-size: 36px;
 }
 
-.side-navigation-container{
+.restaurantlist-side-navigation-container{
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -31,12 +31,12 @@
     margin: 0 auto; /* 가로로 중앙 정렬 */
 }
 
-.search-input-click{
+.restaurantlist-search-input-click{
     display: flex;
     flex-direction: row;
 }
 
 
-.select-item{
+.restaurantlist-select-item{
     text-align: center;
 }
