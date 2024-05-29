@@ -80,7 +80,7 @@ export default function NoticeUpdate() {
 
   const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const contents = event.target.value;
-    if (contents.length > 1000) return;
+    if (contents.length > 500) return;
     setNoticeContents(noticeContents);
 
     if (!contentsRef.current) return;
@@ -113,7 +113,7 @@ export default function NoticeUpdate() {
           <input className='notice-update-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
         <div className='notice-update-contents-box'>
-          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
           <div className='primary-button' onClick={onNoticeUpdateButtonClickHandler}>수정</div>
         </div>
       </div>
