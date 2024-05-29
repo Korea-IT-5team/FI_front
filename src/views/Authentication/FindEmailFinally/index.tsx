@@ -12,7 +12,7 @@ export default function FindEmailFinally() {
     // function //
     const navigator = useNavigate();
 
-    // 이메일 데이터 받아오기
+    
     
     return (
         <div id='authentication-wrapper'>
