@@ -45,8 +45,8 @@ export interface NewPasswordRequestDto {
 }
 
 // description: 사업자등록 번호 Request Body DTO
-export interface businessRegistrationRequestDto {
-    businessRegistration: string;
+export interface businessRegistrationNumberRequestDto {
+    businessRegistrationNumber: string;
 }
 
 // description: 회원가입 Request Body DTO
@@ -59,6 +59,6 @@ export interface SignUpRequestDto {
     authNumber: string;
     userAddress: string;
     joinPath: string;
-    snsId?: string;
-    businessRegistration?: string;
+    snsId: string | null;
+    businessRegistrationNumber: string;
 }
