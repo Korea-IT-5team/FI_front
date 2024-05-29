@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
-import { AUTH_PATH, BOARD_PATH, BUSINESS_REGISTRATION_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import { AUTH_PATH, BOARD_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_FINALLY_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
 import Authentication from './layouts/AuthenticationContainer';
 import MyPage from './layouts/MyPageContainer';
-import BusinessRegistration from './views/Authentication/BusinessRegistration';
 import FindEmailInput from './views/Authentication/FIndEmailInput';
 import FindEmailFinally from './views/Authentication/FindEmailFinally';
 import PasswordResetCheck from './views/Authentication/PasswordResetCheck';
 import PasswordResetFinally from './views/Authentication/PasswordResetFinally';
 import PasswordResetInput from './views/Authentication/PasswordResetInput';
 import SignIn, { Sns } from './views/Authentication/SignIn';
-import SignUp from './views/Authentication/SignUp';
 import Main from './views/Main';
 import MyPageSite from './views/Mypage/MyPageSite';
 import UserDelete from './views/Mypage/UserDelete';
@@ -40,6 +38,7 @@ import RestaurantInfoWrite from './views/Restaurant/RestaurantInfoWrite';
 import RestaurantInfoUpdate from './views/Restaurant/RestaurantInfoUpdate';
 import RestaurantList from './views/Restaurant/RestaurantList';
 import BoardContainer from './layouts/BoardContainer';
+import SignUp from './views/Authentication/SignUp';
 
 
 // component: root 경로 컴포넌트
@@ -66,8 +65,7 @@ function App() {
         <Route path={MAIN_PATH} element={<Main/>} />
         <Route path={AUTH_PATH} element={<Authentication />} >
           <Route path={SIGN_IN_PATH} element={<SignIn />} />
-          <Route path={SIGN_UP_PATH} element={<SignUp />} />
-          <Route path={BUSINESS_REGISTRATION_PATH} element={<BusinessRegistration />} />
+          <Route path={SIGN_UP_PATH} element={<SignUp/>} />
           <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
           <Route path={FIND_EMAIL_FINALLY_PATH} element={<FindEmailFinally />} />
           <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
