@@ -72,7 +72,7 @@ export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LI
                                                                                                                                 
 export const RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${RESERVATION_PATH}/doReservation/${restaurantId}`;
 export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${RESERVATION_PATH}/${RESERVATION_LIST_PATH}`;
-                                                                                                                                                                                                           
+
 export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH = `${RESTAURANT_PATH}/${REVIEW_PATH}/${RESTAURANT_REVIEW_DETAILS_LIST_PATH}`;
 export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH = (reviewNumber: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewDetail/${reviewNumber}`;
 export const RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${REVIEW_PATH}/reviewWrite/${restaurantId}`;

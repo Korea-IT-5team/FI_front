@@ -4,26 +4,24 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { AUTH_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { AUTH_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import { NoticeBoardListItem } from 'src/types'
+import { NoticeBoardListItem } from 'src/types';
 import { getSearchNoticeBoardListRequest } from 'src/apis/board';
 
-// component //
+//     component     //
 function ListItem ({
   noticeNumber,
   noticeTitle,
-  noticeWriteId,
   noticeWriteDatetime,
   noticeViewCount
 }: NoticeBoardListItem) {
 
-  //    function    //
+  //        function       //
   const navigator = useNavigate();
 
-  //   event handler   //
+  //      event handler      //
   const onClickHandler = () => navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
-
 
 
   //   render   //
@@ -45,7 +43,7 @@ export default function NoticeList() {
   const [cookies] = useCookies();
 
   const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
-  const [boardList, setBoardList] = useState<NoticeBoardListItem[]>([]);
+  const [noticeBoardList, setBoardList] = useState<NoticeBoardListItem[]>([]);
   const [viewList, setViewList] = useState<NoticeBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -79,24 +77,6 @@ export default function NoticeList() {
     setPageList(pageList);
   };
 
-//   const changeNoticeBoardList = (boardList: NoticeBoardListItem[]) => {
-//     if (isToggleOn) boardList = boardList.filter(board => !board.status);
-//     setBoardList(boardList);
-
-//     const totalLength = boardList.length;
-//     setTotalLength(totalLength);
-
-//     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-//     setTotalPage(totalPage);
-
-//     const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-//     setTotalSection(totalSection);
-
-//     changePage(boardList, totalLength);
-
-//     changeSection(totalPage);
-// };
-
   const getNoticeBoardListResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -125,7 +105,7 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        // if (result?.code === 'AF') navigator(AUTH_ABSOLUTE_PATH);
+        if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
         return;
     }
 
@@ -136,36 +116,68 @@ export default function NoticeList() {
 
 };
   //                    event handler                       //
+  const onWriteButtonClickHandler = () => {
+    if (loginUserRole !== 'ROLE_USER') return;
+    navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+  }
+
+  const onPageClickHandler = (page: number) => {
+    setCurrentPage(page);
+};
+
+  const onPreSectionClickHandler = () => {
+    if (currentSection <= 1) return;
+    setCurrentSection(currentSection - 1); 
+    setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+};
+
+const onNextSectionClickHandler = () => {
+  if (currentSection === totalSection) return;
+  setCurrentSection(currentSection + 1);
+  setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+};
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
 };
-const onSearchButtonClickHandler = () => {
-  if (!searchWord) return;
-  // if (!cookies.accessToken) return;
+  const onSearchButtonClickHandler = () => {
+    if (!searchWord) return;
+    if (!cookies.accessToken) return;
 
-  getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
-};
+    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
+  };
 
 
   //                  effect                  //
 
-  useEffect(() => {
-    if (!cookies.accessToken) return;
-    getSearchNoticeBoardListRequest(searchWord,cookies.accessToken).then(getSearchNoticeBoardListResponse);
-},[isToggleOn]);
-  // 공지 리스트
-  //                    render                      //
+  // 로그인하고 나서 공지글 써보고 주석 풀어라
 
+  // useEffect(() => {
+  //   if (!cookies.accessToken) return;
+  //   getSearchNoticeBoardListRequest(searchWord,cookies.accessToken).then(getSearchNoticeBoardListResponse);
+  // },[isToggleOn]);
+
+  // useEffect(() => {
+  //   changePage(noticeBoardList, totalLength);
+  // },[currentPage]);
+
+  // useEffect(() => {
+  //   if (!noticeBoardList.length) return;
+  //   changeSection(totalPage);
+  // }, [currentSection]); 
+  
+  //                    render                      //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <div id='notice-list-wrapper'>
       <div className='notice-list-top'>
-        <div className='notice-list-size-text'>전체
-        <span className='emphasis'>999건</span>| 페이지 <span className='emphasis'>2/820</span></div>
+        <div className='notice-list-size-text'>전체 
+        <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         <div className='notice-list-top-right'>
-          <div className='primary-button'>공지 작성</div>
+          {loginUserRole === 'ROLE_ADMIN' &&
+          (<div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>)
+          } 
         </div>
       </div>
       <div className='notice-list-table'>
@@ -177,13 +189,15 @@ const onSearchButtonClickHandler = () => {
       <div className='notice-list-bottom'>
                 <div style={{ width: '299px' }}></div>
                 <div className='notice-list-pageNation'>
-                    <div className='notice-list-page-left'></div>
+                    <div className='notice-list-page-left' onClick={onPreSectionClickHandler}></div>
                     <div className='notice-list-page-box'>
-                        
-                        <div className='notice-list-page-active'></div> 
-                        <div className='notice-list-page'>5</div>
+                        {pageList.map(page => 
+                        page === currentPage ? 
+                        <div className='notice-list-page-active'>{page}</div> :
+                        <div className='notice-list-page'  onClick={() =>onPageClickHandler(page)}>{page}</div>
+                        )}
                     </div>
-                    <div className='notice-list-page-right'></div>
+                    <div className='notice-list-page-right' onClick={onNextSectionClickHandler}></div>
                 </div>
                 <div className='notice-list-search-box'>
                     <div className='notice-list-search-input-box'>
