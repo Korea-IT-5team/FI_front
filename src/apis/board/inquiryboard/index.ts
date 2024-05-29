@@ -2,7 +2,7 @@ import axios from 'axios';
 import { PatchInquiryBoardRequestDto, PostCommentRequestDto, PostInquiryBoardRequestDto } from './dto/request';
 import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
 import { bearerAuthorization, requestErrorHandler, requestHandler } from 'src/apis';
-import { GetInquiryBoardListResponseDto, GetInquiryBoardResponseDto, GetSearchInquiryBoardListResponseDto } from './dto/response';
+import { GetInquiryBoardListResponseDto,GetInquiryBoardResponseDto,GetSearchInquiryBoardListResponseDto } from './dto/response';
 import ResponseDto from 'src/apis/response.dto';
 
 // function: 문의 게시물 작성 API 함수
@@ -38,7 +38,7 @@ export const getSearchInquiryBoardListRequest = async (word: string, accessToken
     return result;
 };
 
-// function: 문의 게시물 확인 API 함수 
+// function: 문의 게시물 상세 확인 API 함수 
 export const getInquiryBoardRequest = async (inquiryNumber: number | string, accessToken: string) => {
     const result = await axios.get(GET_INQUIRY_BOARD_URL(inquiryNumber), bearerAuthorization(accessToken))
         .then(requestHandler<GetInquiryBoardResponseDto>)

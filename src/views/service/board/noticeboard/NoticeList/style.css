@@ -35,8 +35,9 @@
 
 .notice-list-table {
     display: grid;
+    align-items: center;
     grid-template-columns: 2fr 2fr 1fr 0fr;
-    gap: 10px;
+    gap: 40px;
     padding: 10px;
     background-color: rgba(255, 148, 45, 0.3);
     border: 1px solid rgba(64, 64, 64, 1);
@@ -105,7 +106,7 @@
 }
 
 .notice-list-table-viewcount {
-    width: 42px;
+    width:54px;
 }
 
 .notice-list-bottom {
