@@ -131,10 +131,10 @@ export default function NoticeList() {
     setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
 };
 
-const onNextSectionClickHandler = () => {
-  if (currentSection === totalSection) return;
-  setCurrentSection(currentSection + 1);
-  setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+  const onNextSectionClickHandler = () => {
+    if (currentSection === totalSection) return;
+    setCurrentSection(currentSection + 1);
+    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
 };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -175,12 +175,12 @@ const onNextSectionClickHandler = () => {
         <div className='notice-list-size-text'>전체 
         <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         <div className='notice-list-top-right'>
-          {loginUserRole === 'ROLE_ADMIN' &&
-          (<div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>)
-          } 
+          {loginUserRole === 'ROLE_ADMIN' && ( 
+          <div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>
+          )} 
         </div>
       </div>
-      <div className='notice-list-table'>
+      <div className='notice-list-table-th'>
         <div className='notice-list-table-reception-number'>번호</div>
         <div className='notice-list-table-title'>공지제목</div>
         <div className='notice-list-table-writer-date'>작성일자</div>
