@@ -13,9 +13,7 @@ import { PostCommentRequestDto } from 'src/apis/board/inquiryboard/dto/request';
 export default function InquiryDetail() {
 
     //                    state                    //
-    // const commentRef = useRef<HTMLTextAreaElement | null>(null);
-
-    const { loginUserEmailId, loginUserRole } = useUserStore();
+    const { loginUserEmailId, loginUserRole }  = useUserStore();
     const { inquiryNumber } = useParams();
 
     const [cookies] = useCookies();

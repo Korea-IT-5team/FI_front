@@ -1,51 +1,43 @@
-.input {
+.common-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.common-input-label {
+  text-align: center;
+  color: rgba(138, 146, 166, 1);
+}
+
+.common-input-content-box{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.common-input {
   flex-grow: 1;
   border: 1px solid rgba(238, 238, 238, 1);
   border-radius: 6px;
   outline: none;
-  padding: 8px 16px;
+  padding: 5px;
 
   background-color: rgba(255, 255, 255, 1);
 
   font-family: Inter;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 175%;
 
   color: rgba(35, 45, 66, 1);
 }
-
-.input::placeholder {
+  
+.common-input::placeholder {
   color: rgba(138, 146, 166, 1);
 }
 
-.sns-container-title {
-  color: rgba(138, 146, 166, 1);
-}
-
-.sns-button-container {
-  display: flex;
-  gap: 24px;
-}
-
-.input-box {
-  width: 100%;
-}
-
-.input-label {
-  color: rgba(138, 146, 166, 1);
-}
-
-.input-content-box{
-  display: flex;
-  gap: 10px;
-
-  margin-top: 8px;
-  margin-bottom: 4px;
-}
-
-.input-primary-button {
+.common-input-primary-button {
   box-sizing: border-box;
   width: 110px;
   padding: 8px 0px;
@@ -54,7 +46,6 @@
   background-color: rgba(255, 148, 45, 1);
 
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 175%;
 
@@ -63,11 +54,11 @@
   text-align: center;
 }
 
-.input-primary-button:hover {
+.common-input-primary-button:hover {
   cursor: pointer;
 }
 
-.input-disable-button {
+.common-input-disable-button {
   box-sizing: border-box;
   width: 110px;
   padding: 8px 0px;
@@ -76,7 +67,6 @@
   background-color: rgba(255, 148, 45, 1);
 
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 175%;
 
@@ -85,9 +75,8 @@
   text-align: center;
 }
 
-.input-message {
+.common-input-message {
   font-size: 13px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
 }

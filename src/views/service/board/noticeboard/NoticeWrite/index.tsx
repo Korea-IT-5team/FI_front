@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import { postNoticeBoardRequest } from 'src/apis/board';
 import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 
@@ -34,7 +34,7 @@ export default function NoticeWrite() {
       alert(message);
       return;
     }
-    navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+    navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   };
 
   //                    event handler                    //
@@ -78,8 +78,8 @@ export default function NoticeWrite() {
           <input className='notice-write-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
         <div className='notice-write-contents-box'>
-          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
-          <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
+          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <div className='primary-button notice-write-button' onClick={onPostButtonClickHandler}>작성</div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { checkNicknameRequest, emailCheckRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
 import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
@@ -279,11 +279,11 @@ export default function SignUp() {
 
   //   render   //
   return(
-    <div id='authentication-wrapper'>
-      <div className="authentication-contents">
-        <div className="authentication-sign-title">회원가입</div>
-        <div className="authentication-sign-container">
-          <div className="authentication-input-container">
+    <div id='sign-up-wrapper'>
+      <div className="sign-up-contents-box">
+        <div className="sign-up-title">회원가입</div>
+        <div className="sign-up-container">
+          <div className="sign-up-input-container">
 
               <InputBox label="이메일" type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} buttonTitle="중복 확인" buttonStatus={emailIdButtonStatus} onButtonClickHandler={onEmailIdButtonClickHandler} message={emailIdMessage} error={isEmailIdError} />
 
@@ -302,7 +302,7 @@ export default function SignUp() {
 
               <InputBox label="주소" type="text" value={userAddress} placeholder="주소를 입력해주세요" onChangeHandler={onUserAddressChangeHandler} message={userAddressMessage} error />
           </div>
-          <div className="authentication-button-container">
+          <div className="sign-up-button-container">
               <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>회원가입</div>
               <div className="text-link" onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
           </div>
