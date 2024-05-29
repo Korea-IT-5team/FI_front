@@ -16,6 +16,7 @@ export default function ReviewUpdate()
   
   //                  state                     //
   const {reviewNumber} = useParams();
+  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const {loginUserRole} = useUserStore();
   const [reviewImage, setReviewImage] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
@@ -71,31 +72,35 @@ export default function ReviewUpdate()
     };
 
   //                 event handler                //
-  const onContentsKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== 'Enter') return;
-    UpdateClickHandler();
-  };
-
   const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setReviewImage(value);
   }
 
-  const onRatingChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onRatingChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    if(event.target.value==="선택")
+      {
+        setRating(0);
+      }
+  
+
     const { value } = event.target;
     const result = Number(value);
     setRating(result);
   }
 
-  const onContentsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     setReviewContents(value);
+
+    if(!contentsRef.current) return;
+    contentsRef.current.style.height = 'auto';
+    contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   }
 
 
   const UpdateClickHandler = () => {
     if (!rating || !reviewNumber) {
-        alert('필수 정보를 입력하지 않았습니다.');
         return;
     }
 
@@ -110,7 +115,7 @@ export default function ReviewUpdate()
     .then(PatchReviewResponse);
 }
 
-const ButtonClass = `${rating ? 'primary' : 'disable'}-button full-width`;
+const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
   
   //                effect                  //
   let effectFlag = false;
@@ -133,27 +138,39 @@ const ButtonClass = `${rating ? 'primary' : 'disable'}-button full-width`;
 
   //                render                  //
   return (
-            <>
-                <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
-                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} />
+  <>
+    <div className="review-write-title">리뷰 수정</div>
+        <div className="review-write-box">
+        <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
+        placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} /> 
+   
+        <div className='review-grade'>평점</div>
+        <div id="review-rating-box">
+            <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
+                <option value="선택">선택</option>
+                <option value="1.0">1.0</option>
+                <option value="1.5">1.5</option>
+                <option value="2.0">2.0</option>
+                <option value="2.5">2.5</option>
+                <option value="3.0">3.0</option>
+                <option value="3.5">3.5</option>
+                <option value="4.0">4.0</option>
+                <option value="4.5">4.5</option>
+                <option value="5.0">5.0</option>
+            </select>
+        </div>
 
-                <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
-                    <option value="1.0">1.0</option>
-                    <option value="1.5">1.5</option>
-                    <option value="2.0">2.0</option>
-                    <option value="2.5">2.5</option>
-                    <option value="3.0">3.0</option>
-                    <option value="3.5">3.5</option>
-                    <option value="4.0">4.0</option>
-                    <option value="4.5">4.5</option>
-                    <option value="5.0">5.0</option>
-                </select>
+        <div className='review-write-contents-box'>
+            <textarea ref={contentsRef} className='review-write-contents-textarea'
+                  placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
+                  onChange={onContentsChangeHandler}/>
+        </div>
 
-                <RestaurantInputBox label="내용" type="text" value={reviewContents} onKeydownHandler={onContentsKeydownHandler}
-                placeholder="평점 내용을 입력해주세요" onChangeHandler={onContentsChangeHandler} />
-                    
-                <button onClick={UpdateClickHandler}
-                className={ButtonClass}>수정하기</button> :
-            </>
+        <div className="review-registered-button-box">
+            <button onClick={UpdateClickHandler}
+            className={ButtonClass}>수정하기</button>
+        </div>
+    </div>
+  </>
   )
 }

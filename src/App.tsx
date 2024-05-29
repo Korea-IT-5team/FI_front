@@ -19,7 +19,6 @@ import RestaurantReservation from './views/Restaurant/Reservation/DoReservation'
 import RestaurantReservationList from './views/Restaurant/Reservation/ReservationList';
 import RestaurantInfo from './views/Restaurant/RestaurantInfo';
 import RestaurantList from './views/Restaurant/RestaurantList';
-import RestaurantTopBar from './views/Restaurant/RestaurantTopBar';
 import ReviewDetail from './views/Restaurant/Review/ReviewDetail';
 import ReviewDetailsList from './views/Restaurant/Review/ReviewDetailsList';
 import ReviewUpdate from './views/Restaurant/Review/ReviewUpdate';
@@ -38,6 +37,7 @@ import RestaurantInfoWrite from './views/Restaurant/RestaurantInfoWrite';
 import RestaurantInfoUpdate from './views/Restaurant/RestaurantInfoUpdate';
 import BoardContainer from './layouts/BoardContainer';
 import SignUp from './views/Authentication/SignUp';
+import Restaurant from './layouts/RestaurantContainer';
 
 
 // component: root 경로 컴포넌트
@@ -71,7 +71,7 @@ function App() {
           <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
           <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} />
         </Route>
-        <Route path={RESTAURANT_PATH} element={<RestaurantTopBar/>} > 
+        <Route path={RESTAURANT_PATH} element={<Restaurant/>} > 
           <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList/>} />
           <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
           <Route path={RESTAURANT_INFO_WRITE_PATH} element={<RestaurantInfoWrite />} />

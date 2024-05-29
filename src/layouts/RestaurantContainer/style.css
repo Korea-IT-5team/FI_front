@@ -1,11 +1,13 @@
-#main-wrapper {
+#restaurant-wrapper {
     display: flex;
     flex-direction: column;
     overflow-y: auto; 
+    overflow-x: auto; 
     max-height: 100vh;
+    min-width: 1024px;
   }
   
-  .main-head-box {
+  .restaurant-head-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,33 +16,34 @@
     background-color: rgba(255, 148, 45, 1);
   }
   
-  .main-icon-image {
+  .restaurant-icon-image {
     width: 40px; 
     height: 40px; 
     background-size: contain; 
     margin: 10px;
-    background-image: url("../../../assets/image/main-icon-bar.png");
+    background-image: url("../../assets/image/main-icon-bar.png");
   }
   
-  .main-title {
+  .restaurant-title {
     font-size: 40px;
     font-weight: bold;
-    color: rgba(64, 64, 64, 1);
+    margin-left: 11%;
+    color: rgba(255, 255, 255, 1);
   }
   
-  .main-sign-in {
+  .restaurant-sign-in {
     display: flex;
-    color: rgba(64, 64, 64, 1);
+    color: rgba(255, 255, 255, 1);
     font-size: 25px;
     margin: 30px;
   }
   
-  .main-sign-in:hover {
-    color: rgba(64, 64, 64, 0.5);
+  .restaurant-sign-in:hover {
+    color: rgba(255, 255, 255, 1);
     cursor: pointer;
   }
   
-  .main-container {
+  .restaurant-container {
     display: flex;
     flex-direction: column;
     align-items: center;

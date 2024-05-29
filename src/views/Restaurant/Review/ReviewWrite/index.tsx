@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -15,6 +15,7 @@ export default function ReviewWrite()
   
   //                  state                     //
   const navigator = useNavigate();
+  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const {restaurantId} = useParams();
   const [reviewImage, setReviewImage] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
@@ -46,30 +47,34 @@ export default function ReviewWrite()
 
   //                 event handler                //
 
-  const onContentsKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== 'Enter') return;
-    UploadClickHandler();
-  };
-
   const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setReviewImage(value);
   }
 
-  const onRatingChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onRatingChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+
+    if(event.target.value==="선택")
+    {
+      setRating(0);
+    }
+
     const { value } = event.target;
     const result = Number(value);
     setRating(result);
   }
 
-  const onContentsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     setReviewContents(value);
+
+    if(!contentsRef.current) return;
+    contentsRef.current.style.height = 'auto';
+    contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   }
 
   const UploadClickHandler = () => {
     if (!rating) {
-        alert('필수 정보를 입력하지 않았습니다.');
         return;
     }
 
@@ -85,21 +90,24 @@ export default function ReviewWrite()
     .then(PostReviewResponse);
 }
 
-  console.log(!rating)
-  const ButtonClass = `${rating ? 'primary' : 'disable'}-button full-width`;
+  const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
+ 
   
   //                effect                  //
   
 
   //                render                  //
   return (
-            <>
+          <>
+            <div className="review-write-title">리뷰 작성</div>
+                <div className="review-write-box">
                 <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
                 placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} /> 
                    
-                <div className='grade'>평점</div>
-                <div id="rating-box">
-                    <select id="rating" name="rating" defaultValue={rating} onClick={() => onRatingChangeHandler}>
+                <div className='review-grade'>평점</div>
+                <div id="review-rating-box">
+                    <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
+                        <option value="선택">선택</option>
                         <option value="1.0">1.0</option>
                         <option value="1.5">1.5</option>
                         <option value="2.0">2.0</option>
@@ -112,11 +120,17 @@ export default function ReviewWrite()
                     </select>
                 </div>
 
-                <RestaurantInputBox label="내용" type="text" value={reviewContents} onKeydownHandler={onContentsKeydownHandler}
-                placeholder="평점 내용을 입력해주세요" onChangeHandler={onContentsChangeHandler} />
-                    
-                <button onClick={UploadClickHandler}
-                className={ButtonClass}>등록하기</button>
+                <div className='review-write-contents-box'>
+                    <textarea ref={contentsRef} className='review-write-contents-textarea'
+                              placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
+                              onChange={onContentsChangeHandler}/>
+                </div>
+
+                <div className="review-registered-button-box">
+                    <button onClick={UploadClickHandler}
+                    className={ButtonClass}>등록하기</button>
+                </div>
+              </div>
             </>
   )
 }
