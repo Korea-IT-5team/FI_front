@@ -183,45 +183,4 @@
     line-height: 175%;
 
     color: rgba(64, 64, 64, 1);
-<<<<<<< HEAD
 }
-
-/* .disable-button {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 8px 24px;
-
-    background-color: rgba(255, 148, 45, 0.5);
-    border-radius: 6px;
-
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 175%;
-
-    color: rgba(255, 255, 255, 1);
-}
-
-.disable-button:hover {
-    cursor: pointer;
-    opacity: 0.05;
-} */
-
-/* .primary-button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
-    padding: 1px; 
-}
-
-.primary-button:hover {
-    cursor: pointer;
-    opacity: 0.05;
-} */
-=======
-}
->>>>>>> 06bccf55b259fe202cb02ed21e874436fd1aef7b
