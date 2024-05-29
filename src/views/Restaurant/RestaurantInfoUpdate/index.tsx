@@ -6,7 +6,6 @@ import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/r
 import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/SelectBox/Index';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 
 export default function RestaurantInfoUpdate() 
@@ -216,9 +215,9 @@ export default function RestaurantInfoUpdate()
                                     <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
                                     placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
                                 </div>
-                            <div>  
+                            {/* <div>  
                                 <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
-                            </div>
+                            </div> */}
                         </div> 
     
                         <div id="restaurant-left-down">
