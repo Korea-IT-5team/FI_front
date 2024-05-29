@@ -5,11 +5,13 @@
     flex-direction: column;
     gap: 16px;
 }
-
+/* top */
 .notice-list-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    height: 100px;
 }
 
 .notice-list-size-text {
@@ -25,15 +27,15 @@
 
 
 
-.notice-list-top-admin-text {
+/* .notice-list-top-admin-text {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
 
     color: rgba(64, 64, 64, 1);
-}
+} */
 
-.notice-list-table {
+.notice-list-table-th {
     display: grid;
     align-items: center;
     grid-template-columns: 2fr 2fr 1fr 0fr;
@@ -42,9 +44,15 @@
     background-color: rgba(255, 148, 45, 0.3);
     border: 1px solid rgba(64, 64, 64, 1);
     border-radius: 5px;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+
+    color: rgba(64, 64, 64, 1);
 }
 
-.notice-list-table-th {
+/* .notice-list-table-th {
     display: flex;
     align-items: center;
     gap: 95px;
@@ -55,7 +63,7 @@
     text-align: center;
 
     color: rgba(64, 64, 64, 1);
-}
+} */
 
 .notice-list-table-tr {
     display: flex;
@@ -76,7 +84,7 @@
 .notice-list-table-tr :hover {
     cursor: pointer;
     background-color: rgba(238, 238, 238, 0.2);
-}
+} 
 
 
 .notice-list-table-reception-number {
@@ -95,7 +103,7 @@
 }
 
 .notice-list-table-writer-id {
-    width: 67px;
+    width: 54px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -106,7 +114,7 @@
 }
 
 .notice-list-table-viewcount {
-    width:54px;
+    width: 54px;
 }
 
 .notice-list-bottom {
@@ -157,6 +165,7 @@
     border-radius: 6px;
     padding: 8px 16px;
     width: 168px;
+    
 
     background-color: rgba(255, 255, 255, 1);
 }
