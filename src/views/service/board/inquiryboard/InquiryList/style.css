@@ -1,4 +1,4 @@
-#notice-list-wrapper {
+#inquiry-list-wrapper {
     margin: 0 auto;
     max-width: 1136px;
     display: flex;
@@ -6,39 +6,40 @@
     gap: 16px;
 }
 /* top */
-.notice-list-top {
+.inquiry-list-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-
-    height: 100px;
+    
+    /* height: 100px; */
 }
 
-.notice-list-size-text {
+.inquiry-list-size-text {
     font-size: 16px;
     font-weight: 400;
+    
+   
 
     color: rgba(138, 146, 166, 1);
 }
 
-.notice-list-size-text .emphasis {
+.inquiry-list-size-text .emphasis {
     color: rgba(64, 64, 64, 1);
 }
 
-
-
-/* .notice-list-top-admin-text {
+.inquiry-list-top-admin-text {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
 
     color: rgba(64, 64, 64, 1);
-} */
+}
 
-.notice-list-table-th {
+/* list */
+.inquiry-list-table-th {
     display: grid;
     align-items: center;
-    grid-template-columns: 2fr 2fr 1fr 0fr;
+    grid-template-columns: 2fr 2fr 1fr 2fr 2fr;
     gap: 40px;
     padding: 10px;
     background-color: rgba(255, 148, 45, 0.3);
@@ -52,20 +53,7 @@
     color: rgba(64, 64, 64, 1);
 }
 
-/* .notice-list-table-th {
-    display: flex;
-    align-items: center;
-    gap: 95px;
-    padding: 15px 24px;
-
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
-
-    color: rgba(64, 64, 64, 1);
-} */
-
-.notice-list-table-tr {
+.inquiry-list-table-tr {
     display: flex;
     align-items: center;
     gap: 95px;
@@ -80,61 +68,63 @@
 
     color: rgba(64, 64, 64, 1);
 }
+.inquiry-list-top-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-.notice-list-table-tr :hover {
+.inquiry-list-table-tr :hover {
     cursor: pointer;
     background-color: rgba(238, 238, 238, 0.2);
 } 
 
-
-.notice-list-table-reception-number {
+.inquiry-list-table-reception-number {
     width: 56px;
 }
 
-.notice-list-table-status {
+.inquiry-list-table-status {
     width: 45px;
 }
 
-.notice-list-table-title {
+.inquiry-list-table-title {
     width: 349px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.notice-list-table-writer-id {
+.inquiry-list-table-writer-id {
     width: 54px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.notice-list-table-write-date {
-    width: 54px;
+.inquiry-list-table-write-date {
+    width: 70px;
 }
 
-.notice-list-table-viewcount {
-    width: 54px;
-}
+/* bottom */
 
-.notice-list-bottom {
+.inquiry-list-bottom {
     display: flex;
     justify-content: space-between;
 }
 
-.notice-list-pageNation {
+.inquiry-list-pageNation {
     display: flex;
     align-items: center;
     gap: 24px;
 }
 
-.notice-list-page-box {
+.inquiry-list-page-box {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.notice-list-page {
+.inquiry-list-page {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -144,7 +134,7 @@
     cursor: pointer;
 }
 
-.notice-list-page-active {
+.inquiry-list-page-active {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -154,28 +144,28 @@
     cursor: default;
 }
 
-.notice-list-search-box {
+.inquiry-list-search-box {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.notice-list-search-input-box {
+.inquiry-list-search-input-box {
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 6px;
     padding: 8px 16px;
     width: 168px;
-    
 
     background-color: rgba(255, 255, 255, 1);
 }
 
-.notice-list-search-input {
+.inquiry-list-search-input {
     border: none;
     outline: none;
     background: none;
 
     width: 100%;
+    
 
     font-family: Inter;
     font-size: 16px;
@@ -183,45 +173,4 @@
     line-height: 175%;
 
     color: rgba(64, 64, 64, 1);
-<<<<<<< HEAD
 }
-
-/* .disable-button {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 8px 24px;
-
-    background-color: rgba(255, 148, 45, 0.5);
-    border-radius: 6px;
-
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 175%;
-
-    color: rgba(255, 255, 255, 1);
-}
-
-.disable-button:hover {
-    cursor: pointer;
-    opacity: 0.05;
-} */
-
-/* .primary-button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
-    padding: 1px; 
-}
-
-.primary-button:hover {
-    cursor: pointer;
-    opacity: 0.05;
-} */
-=======
-}
->>>>>>> 06bccf55b259fe202cb02ed21e874436fd1aef7b

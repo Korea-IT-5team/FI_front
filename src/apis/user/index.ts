@@ -1,7 +1,7 @@
-import { BUSINESS_REGISTRATION_REQUEST_URL, GET_SIGN_IN_USER_REQUEST_URL, INFO_DELETE_REQUEST_URL, INFO_UPDATE_REQUEST_URL, PASSWORD_RECHECK_REQUEST_URL } from "src/constant";
+import { GET_MY_INFO_URL, GET_SIGN_IN_USER_REQUEST_URL, INFO_DELETE_REQUEST_URL, INFO_UPDATE_REQUEST_URL, PASSWORD_RECHECK_REQUEST_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import axios from "axios";
-import { GetUserInfoResponseDto } from "./dto/response";
+import { GetMyInfoResponseDto, GetUserInfoResponseDto } from "./dto/response";
 import ResponseDto from "../response.dto";
 
 // function: 로그인 유저 정보 불러오기 API 함수 
@@ -32,6 +32,15 @@ export const patchUserInfoRequest = async (accessToken: string) => {
 export const deleteUserRequest = async (accessToken: string) => {
     const result = await axios.get(INFO_DELETE_REQUEST_URL, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
+// function: 내 정보 불러오기 API 함수 
+export const getMyInfoRequest = async (accessToken: string) => {
+    const result = await axios
+        .get(GET_MY_INFO_URL, bearerAuthorization(accessToken))
+        .then(requestHandler<GetMyInfoResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };

@@ -10,5 +10,15 @@ export interface GetUserInfoResponseDto extends ResponseDto {
   userRole: string;
   userReservationStatus: boolean;
   userFavoriteStatus: boolean;
-  businessRegistrationNumber: string;
+}
+
+// description: 내 정보 불러오기 Response Body DTO
+export interface GetMyInfoResponseDto extends ResponseDto{
+  userEmailId: string;
+  nickname: string;
+  userName: string;
+  userTelNumber: string;
+  userAddress: string;
+  userRole: string;
+  joinPath: String;
 }
