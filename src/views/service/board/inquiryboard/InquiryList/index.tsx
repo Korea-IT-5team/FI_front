@@ -139,17 +139,23 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
     setSearchWord(searchWord);
 };
 
-const onSearchButtonClickHandler = () => {
+  const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
     if (!cookies.accessToken) return;
 
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };
 
+  const onToggleClickHandler = () => {
+    if (loginUserRole !== 'ROLE_ADMIN') return;
+    setToggleOn(!isToggleOn);
+};
+
 
   //                  effect                  //
 
   //                    render                      //
+  const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id='inquiry-list-wrapper'>
@@ -163,8 +169,10 @@ const onSearchButtonClickHandler = () => {
           <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>
         <div className='inquiry-list-top-right'>
-          {/* <div className={toggleClass} onClick={onToggleClickHandler}></div>
-          <div className='qna-list-top-admin-text'>미완료 보기</div> */}
+          {loginUserRole === 'ROLE_ADMIN' &&
+          <>
+          (<div className={toggleClass} onClick={onToggleClickHandler}></div> 
+          <div className='qna-list-top-admin-text'>미완료 보기</div>)</>}
         </div>
       </div>
     </div>

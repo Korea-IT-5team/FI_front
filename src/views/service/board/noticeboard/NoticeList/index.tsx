@@ -175,9 +175,9 @@ const onNextSectionClickHandler = () => {
         <div className='notice-list-size-text'>전체 
         <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         <div className='notice-list-top-right'>
-          {loginUserRole === 'ROLE_ADMIN' &&
-          (<div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>)
-          } 
+          {/* {loginUserRole === 'ROLE_ADMIN' && (  */}
+          <div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>
+          {/* )}  */}
         </div>
       </div>
       <div className='notice-list-table'>
