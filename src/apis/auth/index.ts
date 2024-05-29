@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CheckEmailRequestDto, CheckNicknameDto, FindEmailRequestDto, NewPasswordRequestDto, PasswordResetRequestDto, SignInRequestDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto, businessRegistrationRequestDto} from "./dto/request";
-import { BUSINESS_REGISTRATION_REQUEST_URL, EMAIL_CHECK_REQUEST_URL, FIND_EMAIL_REQUEST_URL, NICKNAME_CHECK_REQUEST_URL, PASSWORD_RESET_REQUEST_URL, PASSWORD_UPDATE_REQUEST_URL, SIGN_IN_REQUEST_URL, SIGN_UP_REQUEST_URL, TEL_NUMBER_AUTH_CHECK_REQUEST_URL, TEL_NUMBER_AUTH_REQUEST_URL } from "src/constant";
+import { CheckEmailRequestDto, CheckNicknameDto, FindEmailRequestDto, NewPasswordRequestDto, PasswordResetRequestDto, SignInRequestDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto, businessRegistrationNumberRequestDto} from "./dto/request";
+import { BUSINESS_REGISTRATION_REQUEST_PATH, EMAIL_CHECK_REQUEST_URL, FIND_EMAIL_REQUEST_URL, NICKNAME_CHECK_REQUEST_URL, PASSWORD_RESET_REQUEST_URL, PASSWORD_UPDATE_REQUEST_URL, SIGN_IN_REQUEST_URL, SIGN_UP_REQUEST_URL, TEL_NUMBER_AUTH_CHECK_REQUEST_URL, TEL_NUMBER_AUTH_REQUEST_URL } from "src/constant";
 import { requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { FindEmailResponseDto, PasswordResetResponseDto, SignInResponseDto } from "./dto/response";
@@ -77,6 +77,15 @@ export const newPasswordRequest = async (requestBody: NewPasswordRequestDto) => 
     return result;
 };
 
+// function: 사업자등록 인증 API 함수 
+export const businessRegistrationNumberRequest = async(requestBody: businessRegistrationNumberRequestDto) => {
+    const result = await axios
+        .post(BUSINESS_REGISTRATION_REQUEST_PATH, requestBody)
+        .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+}
+
 // function : 회원가입 API 함수
 export const signUpRequest = async (requestBody: SignUpRequestDto) => {
     const result = await axios
@@ -85,15 +94,6 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
         .catch(requestErrorHandler);
     return result;
 };
-
-// function: 사업자등록 인증 API 함수 
-export const businessRegistrationRequest = async(requestBody: businessRegistrationRequestDto) => {
-    const result = await axios
-        .post(BUSINESS_REGISTRATION_REQUEST_URL, requestBody)
-        .then(requestHandler<ResponseDto>)
-        .catch(requestErrorHandler);
-    return result;
-}
 
 
 

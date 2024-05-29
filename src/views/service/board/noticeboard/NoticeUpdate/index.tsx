@@ -114,7 +114,7 @@ export default function NoticeUpdate() {
         </div>
         <div className='notice-update-contents-box'>
           <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
-          <div className='primary-button notice-update' onClick={onNoticeUpdateButtonClickHandler}>수정</div>
+          <div className='primary-button' onClick={onNoticeUpdateButtonClickHandler}>수정</div>
         </div>
       </div>
     </div>

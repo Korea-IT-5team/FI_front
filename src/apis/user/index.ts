@@ -1,4 +1,4 @@
-import { BUSINESS_REGISTRATION_REQUEST_URL, GET_SIGN_IN_USER_REQUEST_URL, INFO_DELETE_REQUEST_URL, INFO_UPDATE_REQUEST_URL, PASSWORD_RECHECK_REQUEST_URL } from "src/constant";
+import { GET_SIGN_IN_USER_REQUEST_URL, INFO_DELETE_REQUEST_URL, INFO_UPDATE_REQUEST_URL, PASSWORD_RECHECK_REQUEST_URL } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import axios from "axios";
 import { GetUserInfoResponseDto } from "./dto/response";

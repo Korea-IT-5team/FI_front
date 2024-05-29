@@ -25,6 +25,7 @@ export default function InquiryWrite() {
   const navigator = useNavigate();
 
   const postBoardResponse = (result: ResponseDto | null) => {
+
     const message =
       !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
