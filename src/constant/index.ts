@@ -155,7 +155,7 @@ export const DELETE_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `$
 
 // description: INQUIRY BOARD 모듈 내의 기능 URL
 export const SERVER_INQUIRY_BOARD_MODULE_URL = `${SERVER_API_URL}/inquiry-board`;
-export const POST_INQUIRY_BOARD_REQUEST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/write`;
+export const POST_INQUIRY_BOARD_REQUEST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/`;
 export const GET_INQUIRY_BOARD_LIST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/list`;
 export const GET_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_INQUIRY_BOARD_LIST_URL}/search`;
 export const GET_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;

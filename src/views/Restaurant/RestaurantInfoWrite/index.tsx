@@ -5,7 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/components/SelectBox';
+import SelectBox from 'src/components/SelectBox/Index';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 

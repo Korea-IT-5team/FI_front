@@ -17,31 +17,31 @@ export interface InputBoxProps {
 
 export default function InputBox({ label, type, value, placeholder, onChangeHandler, buttonTitle, buttonStatus, onButtonClickHandler, message, error, onKeydownHandler }: InputBoxProps) {
 
-    const buttonClass = buttonStatus ? 'input-primary-button' : 'input-disable-button';
-    const messageClass = 'input-message ' + (error ? 'error' : 'primary');
+    const buttonClass = buttonStatus ? 'common-input-primary-button' : 'common-input-disable-button';
+    const messageClass = 'common-input-message ' + (error ? 'error' : 'primary');
 
     return (
-        <div className="input-box">
-        <div className="input-label label">{label}</div>
-        <div className="input-content-box">
-            <input
-                className="input"
-                type={type}
-                value={value}
-                placeholder={placeholder}
-                onChange={onChangeHandler}
-                onKeyDown={onKeydownHandler}
-            />
-            { buttonTitle && 
-            // onButtonClickHandler => undefined가 올 수 있음 
-            <div className={buttonClass} onClick={onButtonClickHandler}>
-                {buttonTitle}
-            </div> 
-            }
+        <div className="common-input-box">
+            <div className="common-input-label label">{label}</div>
+            <div className="common-input-content-box">
+                <input
+                    className="common-input"
+                    type={type}
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={onChangeHandler}
+                    onKeyDown={onKeydownHandler}
+                />
+                { buttonTitle && 
+                // onButtonClickHandler => undefined가 올 수 있음 
+                <div className={buttonClass} onClick={onButtonClickHandler}>
+                    {buttonTitle}
+                </div> 
+                }
+            </div>
+            <div className={messageClass}>
+                {message}
+            </div>
         </div>
-        <div className={messageClass}>
-            {message}
-        </div>
-    </div>
     );
 }
