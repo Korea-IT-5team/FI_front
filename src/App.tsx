@@ -25,7 +25,7 @@ import ReviewDetailsList from './views/Restaurant/Review/ReviewDetailsList';
 import ReviewUpdate from './views/Restaurant/Review/ReviewUpdate';
 import ReviewWrite from './views/Restaurant/Review/ReviewWrite';
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
-import { default as InquiryList, default as InquiryMyList } from './views/service/board/inquiryboard/InquiryMyList';
+import { default as InquiryList, default as InquiryMyList } from './views/service/board/inquiryboard/InquiryList';
 import InquiryUpdate from './views/service/board/inquiryboard/InquiryUpdate';
 import InquiryWrite from './views/service/board/inquiryboard/InquiryWrite';
 import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';

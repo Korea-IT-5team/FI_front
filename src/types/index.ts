@@ -32,7 +32,6 @@ export interface RestaurantReservationListItem {
 export interface NoticeBoardListItem {
   noticeNumber: number;
   noticeTitle: string;
-  noticeWriteId: string;
   noticeWriteDatetime: string;
   noticeViewCount: number;
 }
@@ -50,3 +49,12 @@ export interface ReviewDetailsListItem{
   reviewRestaurantId:number,
   reviewDate:string
 }
+
+// export interface InquiryBoardDetailItem {
+//   inquiryNumber: number;
+//   inquiryTitle: string;
+//   inquiryWriterId: string;
+//   inquiryWriteDatetime: string;
+//   inquiryContents: string;
+//   comment: string;
+// }

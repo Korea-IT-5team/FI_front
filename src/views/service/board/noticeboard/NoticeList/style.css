@@ -35,8 +35,9 @@
 
 .notice-list-table {
     display: grid;
+    align-items: center;
     grid-template-columns: 2fr 2fr 1fr 0fr;
-    gap: 10px;
+    gap: 40px;
     padding: 10px;
     background-color: rgba(255, 148, 45, 0.3);
     border: 1px solid rgba(64, 64, 64, 1);
@@ -105,7 +106,7 @@
 }
 
 .notice-list-table-viewcount {
-    width: 42px;
+    width:54px;
 }
 
 .notice-list-bottom {
@@ -173,41 +174,4 @@
     line-height: 175%;
 
     color: rgba(64, 64, 64, 1);
-}
-
-.disable-button {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 8px 24px;
-
-    background-color: rgba(255, 148, 45, 0.5);
-    border-radius: 6px;
-
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 175%;
-
-    color: rgba(255, 255, 255, 1);
-}
-
-.disable-button:hover {
-    cursor: pointer;
-    opacity: 0.05;
-}
-
-.primary-button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 10px;
-    padding: 1px; 
-}
-
-.primary-button:hover {
-    cursor: pointer;
-    opacity: 0.05;
 }
