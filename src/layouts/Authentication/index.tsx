@@ -1,6 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import "./style.css";
-import { useCookies } from 'react-cookie';
 import { Outlet } from 'react-router';
 
 

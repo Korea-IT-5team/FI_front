@@ -7,11 +7,6 @@ import RestInputbox from "src/components/RestaurantInputBox";
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
 
-
-import React from 'react'
-import { PostReservationUploadRequest } from "src/apis/restaurant/reservation";
-
-
 export default function RestaurantReservation() {
 
   //                    state                    //
@@ -19,7 +14,7 @@ const[reservationDate,setReservationDate] = useState<string>('');
 const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
-const { loginUserEmailId, loginUserRole,restaurantId,setRestaurantId ,setReservationStatus} = useUserStore();
+const {RestaurantId ,setReservationStatus} = useUserStore();
 const [cookies] = useCookies();
 const navigator = useNavigate();
 
@@ -27,7 +22,7 @@ const navigator = useNavigate();
 
 //                  function                           //
 
-const PostReservationUploadResponse = (result: ResponseDto | null) => 
+const PostReservationResponse = (result: ResponseDto | null) => 
 {
       const message = 
           !result ? '서버에 문제가 있습니다.':
@@ -43,7 +38,7 @@ const PostReservationUploadResponse = (result: ResponseDto | null) =>
       }
       
       setReservationStatus(true);
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
+      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(RestaurantId));
 }
 
 //                    event handler                    //
@@ -85,7 +80,8 @@ const onReservationClickHandler = () =>
       reservationTime: reservationTime,
       reservationPeople: reservationPeople,
     }
-    PostReservationUploadRequest(restaurantId, requestBody,cookies.accessToken).then(PostReservationUploadResponse);
+
+    // PostReservationRequest(RestaurantId, requestBody,cookies.accessToken).then(PostReservationResponse);
 }
 
 

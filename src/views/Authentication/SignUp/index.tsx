@@ -1,18 +1,21 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { checkNicknameRequest, emailCheckRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, TelNumberAuthCheckRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/InputBox';
 import { useAuthStore } from 'src/stores';
 import "./style.css";
 import { BUSINESS_REGISTRATION_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import { useNavigate } from 'react-router';
-
+import { useNavigate, useParams } from 'react-router';
+import { useCookies } from 'react-cookie';
+import { useSearchParams } from 'react-router-dom';
 
 //   component: 회원가입   //
 export default function SignUp() {
 
   //   state   //
+  const [searchParam, setSearchParam] = useSearchParams();
+
   const { 
     emailId, setEmailId,
     password, setPassword,
@@ -20,7 +23,8 @@ export default function SignUp() {
     userTelNumber, setUserTelNumber,
     authNumber, setAuthNumber,
     userAddress, setUserAddress,
-    userName, setUserName
+    userName, setUserName,
+    setJoinPath, setSnsId
     } = useAuthStore();
   const [passwordCheck, setPasswordCheck] = useState<string>('');
 
@@ -52,7 +56,7 @@ export default function SignUp() {
   const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
   const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-  const isSignUpActive = isEmailIdCheck && isEmailIdPattern && isPasswordPattern && isEqualPassword && isUserTelNumberCheck && isNicknameCheck && isUserTelNumberPattern && isAuthNumberCheck;
+  const isSignUpActive = isEmailIdCheck && isEmailIdPattern && isEqualPassword && isPasswordPattern && isNicknameCheck && isUserTelNumberCheck && isUserTelNumberPattern && isAuthNumberCheck;
   const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
 
   // function //
@@ -120,24 +124,6 @@ export default function SignUp() {
     setAuthNumberMessage(authNumberMessage);
     setAuthNumberCheck(authNumberCheck);
     setAuthNumberError(authNumberError);
-  };
-
-  const signUpResponse = (result: ResponseDto | null) => {
-
-    const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-        result.code === 'DE' ? '중복된 이메일입니다.' :
-        result.code === 'DN' ? '중복된 닉네임입니다.' :
-        result.code === 'SF' ? '인증번호 전송 실패했습니다.' :
-        result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
-
-    const isSuccess = result && result.code === 'SU';
-    if (!isSuccess) {
-        alert(message);
-        return;
-    }
   };
 
   // event handler // 
@@ -266,10 +252,10 @@ export default function SignUp() {
   };
 
   const onAuthNumberButtonClickHandler = () => {
-    if(!authNumberButtonStatus) return;
+    // if(!authNumberButtonStatus) return;
     if(!authNumber) return;
 
-    const requestBody: TelNumberAuthCheckRequestDto = {
+    const requestBody: CheckTelNumberAuthRequestDto = {
       userTelNumber: userTelNumber,
       authNumber
     };
@@ -283,20 +269,13 @@ export default function SignUp() {
         return;
     }
 
-    const requestBody: SignUpRequestDto = {
-      userEmailId: emailId,
-      password: password,
-      nickname: nickname,
-      userName: userName,
-      userTelNumber: userTelNumber,
-      authNumber: authNumber,
-      userAddress: userAddress
-    }
-    signUpRequest(requestBody).then(signUpResponse);
-    navigator(BUSINESS_REGISTRATION_ABSOLUTE_PATH);
-};
+    const joinPath = searchParam.get('joinPath');
+    if (joinPath) setJoinPath(joinPath);
+    const snsId = searchParam.get('snsId');
+    if (snsId) setSnsId(snsId);
 
-// 카카오, 네이버 회원가입 버튼
+    navigator(BUSINESS_REGISTRATION_ABSOLUTE_PATH);
+  };
 
   //   render   //
   return(
@@ -332,4 +311,3 @@ export default function SignUp() {
   </div>  
   );
 }
-

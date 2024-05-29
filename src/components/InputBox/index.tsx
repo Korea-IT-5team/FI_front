@@ -1,4 +1,5 @@
 import { ChangeEvent, KeyboardEvent } from "react";
+import "./style.css"
 
 export interface InputBoxProps {
     label?: string;
@@ -17,7 +18,7 @@ export interface InputBoxProps {
 export default function InputBox({ label, type, value, placeholder, onChangeHandler, buttonTitle, buttonStatus, onButtonClickHandler, message, error, onKeydownHandler }: InputBoxProps) {
 
     const buttonClass = buttonStatus ? 'input-primary-button' : 'input-disable-button';
-    const messageClass = 'input-message' + (error ? 'error' : 'primary');
+    const messageClass = 'input-message ' + (error ? 'error' : 'primary');
 
     return (
         <div className="input-box">

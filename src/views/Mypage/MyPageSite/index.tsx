@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_RESERVATION_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { getSignInUserRequest } from 'src/apis/user';
+import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 
 // component : 마이페이지 // 
 export default function MyPageSite() {
@@ -52,11 +52,6 @@ export default function MyPageSite() {
     setUserRole(userRole);
   };
 
-  // effect //
-  // useEffect(() => {
-  //   if (!cookies.accessToken) return;
-  // }, []);
-
   useEffect(() => {
     if (!cookies.accessToken) return;
     getSignInUserRequest(cookies.accessToken).then(GetUserInfoRespons);
@@ -80,7 +75,8 @@ export default function MyPageSite() {
             <div className='my-page-link'>
               <div className='my-page-link-box' onClick={() => navigator(USER_INFO_UPDATE_ABSOLUTE_PATH)}>회원정보 수정</div>
               <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_LIST_ABSOLUTE_PATH)}>찜한 식당 목록</div>
-              <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_RESERVATION_ABSOLUTE_PATH)}>예약 내역</div>
+              <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH)}>예약 내역</div>
+              <div className='my-page-link-box' >예약 내역</div>
               <div className='my-page-link-box'>리뷰 내역</div>
             </div>
             <div className='my-page-delete' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH)}>회원탈퇴</div>

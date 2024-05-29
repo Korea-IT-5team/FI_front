@@ -10,7 +10,7 @@ export interface TelNumberAuthRequestDto {
 }
 
 // description: 전화번호 인증 번호 확인 Request Body DTO
-export interface TelNumberAuthCheckRequestDto {
+export interface CheckTelNumberAuthRequestDto {
     userTelNumber: string;
     authNumber: string;
 }
@@ -44,6 +44,11 @@ export interface NewPasswordRequestDto {
     linkCode: string;
 }
 
+// description: 사업자등록 번호 Request Body DTO
+export interface businessRegistrationRequestDto {
+    businessRegistration: string;
+}
+
 // description: 회원가입 Request Body DTO
 export interface SignUpRequestDto {
     userEmailId: string;
@@ -53,4 +58,7 @@ export interface SignUpRequestDto {
     userTelNumber: string;
     authNumber: string;
     userAddress: string;
+    joinPath: string;
+    snsId?: string;
+    businessRegistration?: string;
 }

@@ -3,7 +3,7 @@ import { PatchNoticeBoardRequestDto, PostNoticeBoardRequestDto } from './noticeb
 import { DELETE_NOTICE_BOARD_URL, GET_NOTICE_BOARD_LIST_SEARCH_URL, GET_NOTICE_BOARD_LIST_URL, GET_NOTICE_BOARD_URL, NOTICE_BOARD_INCREASE_VIEW_COUNT_URL, PATCH_NOTICE_BOARD_URL, POST_NOTICE_BOARD_REQUEST_URL } from 'src/constant';
 import { bearerAuthorization, requestErrorHandler, requestHandler } from '..';
 import ResponseDto from '../response.dto';
-import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardResponseDto } from './noticeboard/dto/response';
+import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from './noticeboard/dto/response';
 
 // function: 공지 게시물 작성 API 함수
 export const postNoticeBoardRequest = async (requestBody: PostNoticeBoardRequestDto, accessToken: string) => {
@@ -25,7 +25,7 @@ export const getNoticeBoardListRequest = async (accessToken: string) => {
 export const getSearchNoticeBoardListRequest = async (word: string, accessToken: string) => {
     const config = { ...bearerAuthorization(accessToken), params: { word } };
     const result = await axios.get(GET_NOTICE_BOARD_LIST_SEARCH_URL, config)
-        .then(requestHandler<GetSearchNoticeBoardResponseDto>)
+        .then(requestHandler<GetSearchNoticeBoardListResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };

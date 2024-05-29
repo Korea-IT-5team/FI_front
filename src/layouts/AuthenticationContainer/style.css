@@ -1,0 +1,23 @@
+#authentication-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+    max-height: 100vh;
+}
+
+.authentication-head-box {
+    text-align: center;
+
+    padding: 15px 20px;
+
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+    
+    background-color: rgba(255, 148, 45, 0.95);
+}
+
+.authentication-title {
+    font-family: 'Ubuntu';
+    font-size: 45px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}
