@@ -163,8 +163,8 @@ const onSearchButtonClickHandler = () => {
           <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>
         <div className='inquiry-list-top-right'>
-        
-        
+          {/* <div className={toggleClass} onClick={onToggleClickHandler}></div>
+          <div className='qna-list-top-admin-text'>미완료 보기</div> */}
         </div>
       </div>
     </div>
