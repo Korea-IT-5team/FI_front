@@ -18,7 +18,7 @@ import FavoriteList from './views/Restaurant/Favorite/FavoriteList';
 import RestaurantReservation from './views/Restaurant/Reservation/DoReservation';
 import RestaurantReservationList from './views/Restaurant/Reservation/ReservationList';
 import RestaurantInfo from './views/Restaurant/RestaurantInfo';
-import Restaurantlist from './views/Restaurant/RestaurantList';
+import RestaurantList from './views/Restaurant/RestaurantList';
 import RestaurantTopBar from './views/Restaurant/RestaurantTopBar';
 import ReviewDetail from './views/Restaurant/Review/ReviewDetail';
 import ReviewDetailsList from './views/Restaurant/Review/ReviewDetailsList';
@@ -36,7 +36,6 @@ import DoReservation from './views/Restaurant/Reservation/DoReservation';
 import ReservationList from './views/Restaurant/Reservation/ReservationList';
 import RestaurantInfoWrite from './views/Restaurant/RestaurantInfoWrite';
 import RestaurantInfoUpdate from './views/Restaurant/RestaurantInfoUpdate';
-import RestaurantList from './views/Restaurant/RestaurantList';
 import BoardContainer from './layouts/BoardContainer';
 import SignUp from './views/Authentication/SignUp';
 
