@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetCeoReservationListRequest, GetUserReservationListRequest } from 'src/apis/restaurant/reservation';
 import { GetReservationListResponseDto } from 'src/apis/restaurant/reservation/dto/response';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReservationListItem } from 'src/types';
 import './style.css';
@@ -23,12 +23,14 @@ function ListItem ({
 }: RestaurantReservationListItem) {
 
     //                    function                    //
+    const navigator = useNavigate();
 
     //                    event handler                    //
+    const onClickHandler = () => navigator(RESTAURANT_INFO_ABSOLUTE_PATH(reservationRestaurantId));  
 
     //                    render                    //
     return (
-        <div className='reservation-list-table-tr' >
+        <div className='reservation-list-table-tr' onClick={onClickHandler} >
           <div>
             <div className='reservation-list-table-reception-number'>예약번호 : {reservationNumber}</div>
             <div className='reservation-list-table-restaurant-name'>예약한 식당명 : {reservationRestaurantName}</div>
@@ -56,7 +58,7 @@ function ListItem ({
 export default function ReservationList() {
 
     //                    state                    //
-    const {loginUserRole,restaurantName} = useUserStore();
+    const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
     const [restaurantReservationList, setRestaurantReservationList] = useState<RestaurantReservationListItem[]>([]);
     const [viewList, setViewList] = useState<RestaurantReservationListItem[]>([]);
@@ -67,6 +69,7 @@ export default function ReservationList() {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
     const location = useLocation();
+    const na = useNavigate
 
     //                    function                    //
     const navigator = useNavigate();
@@ -154,7 +157,7 @@ export default function ReservationList() {
         loginUserRole === "ROLE_USER" ? 
         GetUserReservationListRequest(cookies.accessToken)
         .then(GetReservationListResponse):
-        GetCeoReservationListRequest(restaurantName,cookies.accessToken)
+        GetCeoReservationListRequest(cookies.accessToken)
         .then(GetReservationListResponse)
         ;
     }, [location]);
@@ -207,3 +210,4 @@ export default function ReservationList() {
         </div>
     );
 }
+//수정

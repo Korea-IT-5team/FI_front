@@ -12,7 +12,6 @@ export interface RestaurantReviewListItem {
   reviewImage: string;
   rating: number;
   reviewContents: string;
-  reviewWriterId: string;
   reviewWriterNickname: string;
   reviewDate: string;
 }

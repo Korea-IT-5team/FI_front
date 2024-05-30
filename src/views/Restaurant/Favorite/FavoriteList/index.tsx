@@ -105,6 +105,7 @@ export default function FavoriteList() {
         changeSection(totalPage);
     };
 
+    //!!!
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
 
         const message =
@@ -126,6 +127,7 @@ export default function FavoriteList() {
         setCurrentPage(!restaurantList.length ? 0 : 1);
         setCurrentSection(!restaurantList.length ? 0 : 1);
     };
+    //!!!
 
     //                    event handler                    //
     
@@ -145,6 +147,7 @@ export default function FavoriteList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
+    //!!!
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
@@ -152,6 +155,7 @@ export default function FavoriteList() {
         GetFavoriteRestaurantListRequest(cookies.accessToken)
         .then(GetFavoriteRestaurantListResponse);
     }, [location]);
+    //!!!
 
     useEffect(() => {
         if (!restaurantList.length) return;
@@ -200,3 +204,4 @@ export default function FavoriteList() {
         </div>
     );
 }
+//수정
