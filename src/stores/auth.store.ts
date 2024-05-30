@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 interface AuthStore { 
-    emailId: string;
-    setEmailId: (emailId: string) => void;
+    userEmailId: string;
+    setEmailId: (userEmailId: string) => void;
     password: string;
     setPassword: (password: string) => void;
     nickname: string;
@@ -22,8 +22,8 @@ interface AuthStore {
 }
 
 const useAuthStore = create<AuthStore>(set => ({
-    emailId: '',
-    setEmailId: (emailId: string) => set(state => ({ ...state, emailId})),
+    userEmailId: '',
+    setEmailId: (userEmailId: string) => set(state => ({ ...state, userEmailId})),
 
     password: '',
     setPassword: (password: string) => set(state => ({ ...state, password})),
