@@ -27,14 +27,16 @@ const navigator = useNavigate();
 
 //                  function                           //
 
+//!!!
 const PostReservationResponse = (result: ResponseDto | null) => 
 {
       const message = 
           !result ? '서버에 문제가 있습니다.':
-          result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' : 
-          result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-          result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
+            result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' : 
+              result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                result.code === 'AF' ? '권한이 없습니다.' :
+                  result.code === 'NU' ? '존재하지 않는 사용자입니다.' :
+                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
       
       if (!result || result.code !== 'SU') 
       {
@@ -46,6 +48,7 @@ const PostReservationResponse = (result: ResponseDto | null) =>
       if(!restaurantId) return;
       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
 }
+//!!!
 
 //                    event handler                    //
 
@@ -71,12 +74,12 @@ const onCheckClickHandler = () =>
     setIsChecked(!isChecked);
 }
 
+//!!!
 const onReservationClickHandler = () => 
 {
     if(!reservationDate || !reservationTime || !reservationPeople 
       || !isChecked)
     {
-        alert('필수 정보를 입력하지 않았습니다.');
         return;
     }
 
@@ -90,7 +93,7 @@ const onReservationClickHandler = () =>
     if(!restaurantId) return;
     PostReservationRequest(restaurantId, requestBody,cookies.accessToken).then(PostReservationResponse);
 }
-
+//!!!
 
 //                      render                        //
 const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
@@ -141,3 +144,4 @@ const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full
     </>
   )
 }
+//수정

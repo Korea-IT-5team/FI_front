@@ -24,3 +24,4 @@ export interface GetRestaurantInfoResponseDto extends ResponseDto {
   restaurantWriterId: string;
   restaurantReviewList: RestaurantReviewListItem[]
 }
+//수정
