@@ -146,7 +146,18 @@ export default function FindEmailInput() {
             userName: userName,
             userTelNumber: userTelNumber
         }
-        findEmailRequest(requestBody).then(findEmailResponse);
+        // findEmailRequest(requestBody).then(findEmailResponse);
+        findEmailRequest(requestBody)
+            .then((result) => {
+                // 데이터를 성공적으로 찾았을 때
+                if (result && result.code === 'SU') {
+                    // 이메일 찾기 완료 페이지로 이동
+                    navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH, { state: { emailId: result.code } });
+                } else {
+                    // 데이터를 찾지 못했을 때, 사용자에게 메시지 표시
+                    alert('이메일을 찾을 수 없습니다.');
+                }
+            });
 
         // navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH);
     };
