@@ -5,9 +5,8 @@ import ResponseDto from 'src/apis/response.dto';
 import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/views/Restaurant/SelectBox';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
+import SelectBox from 'src/views/Restaurant/SelectBox';
 import './style.css';
 
 export default function RestaurantInfoWrite() 
@@ -15,7 +14,6 @@ export default function RestaurantInfoWrite()
     //                                      state                                               //
     const [cookies] = useCookies();
     const [restaurantImage, setRestaurantImage] = useState('');
-    const {SetRestaurantName} = useUserStore();
     const [restaurantName, setRestaurantName] = useState('');
     const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
     const [restaurantPostalCode, setRestaurantPostalCode] = useState('');
@@ -37,6 +35,7 @@ export default function RestaurantInfoWrite()
 
     //                                      function                                            //
 
+    //!!!
     const PostRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -50,12 +49,12 @@ export default function RestaurantInfoWrite()
         }
 
         alert("등록이 완료되었습니다.");
-        SetRestaurantName(restaurantName);
         navigator(RESTAURANT_LIST_ABSOLUTE_PATH)
     }
+    //!!!
 
 
-
+    //!!!
     //                                      event handler                                       //
     // 식당 정보 등록
     const onUploadClickHandler = () => {
@@ -83,7 +82,7 @@ export default function RestaurantInfoWrite()
         PostRestaurantInfoRequest(requestBody, cookies.accessToken)
             .then(PostRestaurantInfoResponse);
     }
-
+    //!!!
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
@@ -213,3 +212,4 @@ export default function RestaurantInfoWrite()
 </>
   )
 }
+//완료

@@ -127,7 +127,7 @@ export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
 export const SERVER_RESTAURANT_MODULE_URL = `${SERVER_API_URL}/restaurant`;
 export const GET_SEARCH_RESTAURANT_LIST_URL = `${SERVER_RESTAURANT_MODULE_URL}/search`;
 export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}`;
-export const POST_RESTAURANT_INFO_UPLOAD = `${GET_RESTAURANT_URL}/info-upload`;
+export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
 export const PATCH_RESTAURANT_INFO_UPDATE = `${GET_RESTAURANT_URL}/info-update`;
 
 // description: REVIEW 모듈 내의 기능 URL
@@ -143,10 +143,11 @@ export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number | string) => `${S
 // description: RESERVATION 모듈 내의 기능 URL
 export const SERVER_RESERVATION_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/reservation`;
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
-export const GET_RESERVATION_CEO_LIST_URL = (restaurantName: string) =>  `${SERVER_RESERVATION_MODULE_URL}/ceo-list/${restaurantName}`;
+export const GET_RESERVATION_CEO_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/ceo-list`;
 export const GET_RESERVATION_URL = (reservationNumber: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${reservationNumber}`;
 export const POST_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
 export const DELETE_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
+export const GET_RESERVATION_CHECK_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
 
 // description: FAVORITE 모듈 내의 기능 URL
 export const SERVER_FAVORITE_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/favorite`;

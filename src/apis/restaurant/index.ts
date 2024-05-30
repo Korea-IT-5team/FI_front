@@ -5,7 +5,7 @@ import ResponseDto from "../response.dto";
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from "./dto/request";
 import { GetRestaurantInfoResponseDto, GetRestaurantListResponseDto } from "./dto/response";
 
-// !!!
+//!!!
 // function : 식당 목록 검색 API 함수
 export const GetRestaurantListRequest = async (word: string, accessToken: string) => {
 const config = {...bearerAuthorization(accessToken), params:{ word:word }};
@@ -26,14 +26,15 @@ return result;
 }
 //!!!
 
-
+//!!!
 // function : 식당 정보 등록 API 함수 
 export const PostRestaurantInfoRequest = async (requestBody: PostRestaurantInfoRequestDto, accessToken: string) => {
 const result = await axios.post(POST_RESTAURANT_INFO_UPLOAD, requestBody, bearerAuthorization(accessToken))
 .then(requestHandler<ResponseDto>)
 .catch(requestErrorHandler)
 return result;
-} 
+}
+//!!!
 
 
 // function : 식당 정보 수정 API 함수 

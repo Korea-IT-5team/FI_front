@@ -5,7 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import { DeleteRestaurantFavoriteRequest, GetFavoriteCheckStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
-import { DeleteReservationRequest } from 'src/apis/restaurant/reservation';
+import { DeleteReservationRequest, GetReservationCheckStatusRequest } from 'src/apis/restaurant/reservation';
 import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
@@ -79,8 +79,9 @@ export default function RestaurantInfo() {
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
                     result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-                        result.code === 'AF' ? '권한이 없습니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                        result.code === 'NU' ? '존재하지 않는 사용자입니다.' :
+                            result.code === 'AF' ? '권한이 없습니다.' :
+                                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -127,6 +128,7 @@ export default function RestaurantInfo() {
         setUserFavoriteStatus(false);
     }
 
+    //!!!
     const GetFavoriteCheckStatusResponse = (result: ResponseDto | null) => {
 
         const message = 
@@ -147,6 +149,28 @@ export default function RestaurantInfo() {
     
         setUserFavoriteStatus(true);
     };
+
+    const GetReservationCheckStatusResponse = (result: ResponseDto | null) => {
+
+        const message = 
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'AF' ? '인증에 실패했습니다.' :
+                    result.code === 'DBE' ? '서버에 문제가 있습니다.':
+                        result.code === 'NU'? '존재하지 않는 사용자입니다.': '';
+    
+        if (!result || result.code !== 'SU') 
+        {
+            if(!result || result.code !== 'NU')
+            {
+                // alert(message);
+            }
+
+            return;
+        }
+    
+        setUserReservationStatus(true);
+    };
+    //!!!
 
     //!!!
     //          effect              //
@@ -181,6 +205,8 @@ export default function RestaurantInfo() {
 
     GetFavoriteCheckStatusRequest(restaurantId,cookies.accessToken)
         .then(GetFavoriteCheckStatusResponse);
+    GetReservationCheckStatusRequest(restaurantId,cookies.accessToken)
+        .then(GetReservationCheckStatusResponse)
     }, [location]);
     //!!!
 
@@ -201,7 +227,7 @@ export default function RestaurantInfo() {
         navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH(restaurantId));
     };
 
-
+//!!!
 const onReservationCancelClickHandler = () => 
 {
     const confirmed = window.confirm("정말로 취소하시겠습니까?");
@@ -219,6 +245,7 @@ const onReservationCancelClickHandler = () =>
         return;
     }
 };
+//!!!
 
    
 //!!!
