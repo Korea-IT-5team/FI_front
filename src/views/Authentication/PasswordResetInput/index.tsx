@@ -7,72 +7,38 @@ import InputBox from 'src/components/InputBox';
 import { PASSWORD_RESET_CHECK_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 
-// component: 비밀번호 찾기 // 
+// component: 비밀번호 재설정 (이메일 비밀번호) // 
 export default function PasswordResetInput() {
 
   // state //
-  const [emailId, setEmailId] = useState<string>('');
+  const [userEmailId, setUserEmailId] = useState<string>('');
   const [userTelNumber, setUserTelNumber] = useState<string>('');
 
-  const [emailIdButtonStatus, setEmailIdButtonStatus] = useState<boolean>(false);
+  const [userEmailIdButtonStatus, setUserEmailIdButtonStatus] = useState<boolean>(false);
   const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
 
-  const [isEmailIdCheck, setEmailIdCheck] = useState<boolean>(false);
-  const [isEmailIdPattern, setEmailIdPattern] = useState<boolean>(false);
+  const [isUserEmailIdCheck, setUserEmailIdCheck] = useState<boolean>(false);
+  const [isUserEmailIdPattern, setUserEmailIdPattern] = useState<boolean>(false);
   const [isUserTelNumberCheck, setUserTelNumberCheck] = useState<boolean>(false);
   const [isUserTelNumberPattern, setUserTelNumberPattern] = useState<boolean>(false);
 
-  const [emailIdMessage, setEmailIdMessage] = useState<string>('');
+  const [userEmailIdMessage, setUserEmailIdMessage] = useState<string>('');
   const [userTelNumberMessage, setUserTelNumberMessage] = useState<string>('');
 
-  const [isEmailIdError, setEmailIdError] = useState<boolean>(false);
+  const [isUserEmailIdError, setUserEmailIdError] = useState<boolean>(false);
   const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
 
-  const isResetPasswordActive = isEmailIdCheck && isEmailIdPattern &&isUserTelNumberCheck && isUserTelNumberPattern;
-  const passwordResetInputButtonClass = `${isResetPasswordActive ? 'primary' : 'disable'}-button full-width`;
+  const passwordResetInputButtonClass = `${isUserEmailIdCheck && isUserTelNumberCheck ? 'primary' : 'disable'}-button full-width`;
 
   // function //
   const navigator = useNavigate();
-
-  const emailCheckResponse = (result: ResponseDto | null) => {
-    
-    const emailMessage = 
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'VF' ? '이메일 형식에 맞지 않습니다.' :
-      result.code === 'DE' ?  '이미 사용중인 이메일입니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-      result.code === 'SU' ? '사용 가능한 이메일입니다.' : '';
-    const emailCheck =  result !== null && result.code === 'SU';
-    const emailError = !emailCheck;
-
-    setEmailIdMessage(emailMessage);
-    setEmailIdCheck(emailCheck);
-    setEmailIdError(emailError);
-  };
-
-  const userTelNumberResponse = (result: ResponseDto | null) => {
-    
-    const userTelNumberMessage = 
-      !result ? '서버에 문제가 있습니다.' : 
-      result.code === 'VF' ? '인증번호를 입력해주세요.' : 
-      result.code === 'SF' ? '인증번호 전송이 실패하였습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-      result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
-    const userTelNumberCheck = result !== null && result.code === 'SU';
-    const UserTelNumberError = !userTelNumberCheck;
-
-    setUserTelNumberMessage(userTelNumberMessage);
-    setUserTelNumberCheck(userTelNumberCheck);
-    setUserTelNumberError(UserTelNumberError);
-  };
 
   const passwordResetResponse = (result: ResponseDto | null) => {
 
     const message = 
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-        result.code === 'NF' ? '사용자 정보 불일치.' :
-        result.code === 'SF' ? '인증번호 전송 실패했습니다.' :
+        result.code === 'AF' ? '사용자 정보와 불일치 합니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
     const isSuccess = result && result.code === 'SU';
@@ -80,15 +46,16 @@ export default function PasswordResetInput() {
         alert(message);
         return;
     }
+    navigator(PASSWORD_RESET_CHECK_ABSOLUTE_PATH(userEmailId));
   };
 
   // event handler //
   const onEmailIdChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target;
-    setEmailId(value);
-    setEmailIdButtonStatus(value !== '');
-    setEmailIdCheck(false);
-    setEmailIdMessage('');
+    setUserEmailId(value);
+    setUserEmailIdButtonStatus(value !== '');
+    setUserEmailIdCheck(false);
+    setUserEmailIdMessage('');
   };
 
   const onUserTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -99,22 +66,19 @@ export default function PasswordResetInput() {
     setUserTelNumberMessage('');
   };
 
-  const onEmailIdButtonClickHandler = () => {
-    if(!emailIdButtonStatus) return;
+  const onUserEmailIdButtonClickHandler = () => {
+    if(!userEmailIdButtonStatus) return;
 
     const emailIdPattern = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
-    const isEmailIdPattern = emailIdPattern.test(emailId);
-    setEmailIdPattern(isEmailIdPattern);
+    const isEmailIdPattern = emailIdPattern.test(userEmailId);
+    setUserEmailIdPattern(isEmailIdPattern);
 
     if (!isEmailIdPattern) {
-      setEmailIdMessage('이메일 형식이 아닙니다.');
-      setEmailIdError(true);
-      setEmailIdCheck(false);
+      setUserEmailIdMessage('이메일 형식이 아닙니다.');
+      setUserEmailIdError(true);
+      setUserEmailIdCheck(false);
       return;
     }
-
-    const requestBody: CheckEmailRequestDto = { userEmailId: emailId };
-    emailCheckRequest(requestBody).then(emailCheckResponse);
   };
 
   const onUserTelNumberButtonClickHandler = () => {
@@ -131,23 +95,21 @@ export default function PasswordResetInput() {
       return;
     }
 
-    const requestBody: TelNumberAuthRequestDto = { userTelNumber: userTelNumber };
-    telNumberAuthRequest(requestBody).then(userTelNumberResponse);
+    setUserTelNumberButtonStatus(false);
+    setUserTelNumberCheck(false);
   };
 
   const onPasswordResetButtonClickHandler = () => {
-    if(!isResetPasswordActive) return;
-    if(!emailId || !userTelNumber) {
+    if(!userEmailId || !userTelNumber) {
         alert('모든 내용을 입력해주세요.');
         return;
     }
 
     const requestBody: PasswordResetRequestDto = {
-      userEmailId: emailId,
+      userEmailId: userEmailId,
       userTelNumber: userTelNumber
     }
     passwordResetRequest(requestBody).then(passwordResetResponse);
-    navigator(PASSWORD_RESET_CHECK_ABSOLUTE_PATH);
   };
 
   return (
@@ -157,8 +119,9 @@ export default function PasswordResetInput() {
         <div className='reset-password-box'>
           <div className='reset-password-input-container'>
 
-            <InputBox type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} buttonTitle="중복 확인" buttonStatus={emailIdButtonStatus} onButtonClickHandler={onEmailIdButtonClickHandler} message={emailIdMessage} error={isEmailIdError} />
-            <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonTitle="인증번호 전송" buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
+            <InputBox type="text" value={userEmailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} buttonStatus={userEmailIdButtonStatus} onButtonClickHandler={onUserEmailIdButtonClickHandler} message={userEmailIdMessage} error={isUserEmailIdError} />
+
+            <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
 
           </div>
           <div className={passwordResetInputButtonClass} onClick={onPasswordResetButtonClickHandler}>재설정 링크 전송</div>
