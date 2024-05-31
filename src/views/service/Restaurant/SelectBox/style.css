@@ -43,7 +43,7 @@
     width: 24px;
     height: 24px;
 
-    background-image: url('../../../assets/image/arrow-drop-down-icon.png');
+    background-image: url('../../../../assets/image/arrow-drop-down-icon.png');
     background-size: 100% 100%;
 
     cursor: pointer;
@@ -54,7 +54,7 @@
     width: 24px;
     height: 24px;
 
-    background-image: url('../../../assets/image/arrow-drop-up-icon.png');
+    background-image: url('../../../../assets/image/arrow-drop-up-icon.png');
     background-size: 100% 100%;
 
     cursor: pointer;
