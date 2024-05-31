@@ -7,7 +7,7 @@ import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import SelectBox from 'src/views/service/Restaurant/SelectBox';
-import './style.css';;
+import './style.css';
 
 export default function RestaurantInfoWrite() 
 {   
