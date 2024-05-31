@@ -38,10 +38,14 @@ import RestaurantInfoUpdate from './views/Restaurant/RestaurantInfoUpdate';
 import BoardContainer from './layouts/BoardContainer';
 import SignUp from './views/Authentication/SignUp';
 import Restaurant from './layouts/RestaurantContainer';
+import { useCookies } from 'react-cookie';
 
 
 // component: root 경로 컴포넌트
 function Index() {
+
+  //                   state                              //
+  const [cookies] = useCookies();
 
   //   function   //
   const navigator = useNavigate();
