@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from 'react';
-import { findEmailRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { FindEmailRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { findEmailRequest } from 'src/apis/auth';
+import { FindEmailRequestDto} from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import "./style.css";
 import InputBox from 'src/components/InputBox';
 import { useNavigate } from 'react-router';
-import { resolveSoa } from 'dns';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
+import { PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
 // component: 이메일 찾기 // 
 export default function FindEmailInput() {
@@ -38,7 +38,6 @@ export default function FindEmailInput() {
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'NF' ? '사용자 정보 불일치합니다.' : 
             result.code === 'NU' ? '사용자 정보가 없습니다.' : 
-            result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
     
         const isSuccess = result && result.code === 'SU';
@@ -96,7 +95,6 @@ export default function FindEmailInput() {
             userTelNumber: userTelNumber
         }
         findEmailRequest(requestBody).then(findEmailResponse);
-        console.log(userEmailId);
 
     };
 
@@ -118,9 +116,10 @@ export default function FindEmailInput() {
                 {userEmailId &&
                 <div>
                     <div className='return-Email-id' >{userEmailId}</div>
-                    {/* <div className='moving-sign-up' >로그인</div> */}
                 </div>
                 }
+                <div className='moving-sign-up' onClick={() => navigator(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>
+                <div className='moving-sign-up' onClick={() => navigator(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)}>비밀번호 재설정</div>
             </div>
         </div>
     )
