@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
@@ -173,10 +173,13 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 };
 
   //                  effect                  //
-//   useEffect(() => {
-//     if (!cookies.accessToken) return;
-//     getSearchInquiryBoardListRequest(searchWord,cookies.accessToken).then(getInquiryBoardListResponse);
-// },[isToggleOn]);
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    if (searchWord)
+      getSearchInquiryBoardListRequest(searchWord,cookies.accessToken).then(getInquiryBoardListResponse);
+    else
+      getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
+  },[isToggleOn]);
 
   useEffect(() => {
       changePage(inquiryBoardList, totalLength);

@@ -30,8 +30,8 @@ export const getInquiryBoardListRequest = async (accessToken: string) => {
 };
 
 // function: 검색 문의 게시물 목록 확인 API 함수 
-export const getSearchInquiryBoardListRequest = async (word: string, accessToken: string) => {
-    const config = { ...bearerAuthorization(accessToken), params: { word } };
+export const getSearchInquiryBoardListRequest = async (searchWord: string, accessToken: string) => {
+    const config = { ...bearerAuthorization(accessToken), params: { searchWord } };
     const result = await axios.get(GET_INQUIRY_BOARD_SEARCH_LIST_URL, config)
         .then(requestHandler<GetSearchInquiryBoardListResponseDto>)
         .catch(requestErrorHandler);
