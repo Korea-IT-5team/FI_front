@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
@@ -24,7 +24,7 @@ function ListItem ({
   const navigator = useNavigate();
   
   //      event handler      //
-  const onClickHandler = () => navigator( INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   //   render   //
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
@@ -40,12 +40,12 @@ function ListItem ({
   // component: 문의사항 목록보기
 export default function InquiryList() {
   //                    state                    //
-  const {loginUserEmailId, loginUserRole} = useUserStore();
+  const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
 
   const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
-  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
+  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -65,7 +65,7 @@ export default function InquiryList() {
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
-    setViewList(viewList);
+    setViewInquiryList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
@@ -82,7 +82,7 @@ export default function InquiryList() {
     if (isToggleOn) inquiryBoardList = inquiryBoardList.filter(inquiryBoardList => !inquiryBoardList.inquiryStatus);
     setInquiryBoardList(inquiryBoardList);
 
-    const totalLength = setInquiryBoardList.length;
+    const totalLength = inquiryBoardList.length;
     setTotalLength(totalLength);
 
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
@@ -109,6 +109,7 @@ const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | Re
   }
 
   const { inquiryBoardList } = result as GetInquiryBoardListResponseDto;
+  changeInquiryBoardList(inquiryBoardList);
 
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
@@ -129,7 +130,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   }
 
   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
-  // changeInquiryBoardList(inquiryBoardList);
+  changeInquiryBoardList(inquiryBoardList);
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
 };
@@ -173,6 +174,22 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 };
 
   //                  effect                  //
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    if (searchWord)
+      getSearchInquiryBoardListRequest(searchWord,cookies.accessToken).then(getInquiryBoardListResponse);
+    else
+      getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
+  },[isToggleOn]);
+
+  useEffect(() => {
+      changePage(inquiryBoardList, totalLength);
+  },[currentPage]);
+
+  useEffect(() => {
+      if (!inquiryBoardList.length) return;
+      changeSection(totalPage);
+  }, [currentSection]);
 
   //                    render                      //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
@@ -204,25 +221,25 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
         <div className='inquiry-list-table-write-date'>작성일자</div>
       </div>
       <div className='inquiry-list-bottom'>
-                <div style={{ width: '299px' }}></div>
-                <div className='inquiry-list-pageNation'>
-                    <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
-                    <div className='inquiry-list-page-box'>
-                        {pageList.map(page => 
-                        page === currentPage ? 
-                        <div className='inquiry-list-page-active'>{page}</div> :
-                        <div className='inquiry-list-page'  onClick={() =>onPageClickHandler(page)}>{page}</div>
-                        )}
-                    </div>
-                    <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
-                </div>
-                <div className='inquiry-list-search-box'>
-                    <div className='inquiry-list-search-input-box'>
-                        <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
-                    </div>
-                    <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-                </div>
+        <div style={{ width: '299px' }}></div>
+        <div className='inquiry-list-pageNation'>
+            <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
+            <div className='inquiry-list-page-box'>
+                {pageList.map(page => 
+                page === currentPage ? 
+                <div className='inquiry-list-page-active'>{page}</div> :
+                <div className='inquiry-list-page'  onClick={() =>onPageClickHandler(page)}>{page}</div>
+                )}
             </div>
+            <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
+        </div>
+        <div className='inquiry-list-search-box'>
+            <div className='inquiry-list-search-input-box'>
+                <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
+            </div>
+            <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+          </div>
+        </div>
       </div>
     
   )
