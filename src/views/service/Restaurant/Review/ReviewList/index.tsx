@@ -37,7 +37,6 @@ export default function ReviewList({ value,restaurantId }: Props) {
                             <div className='select-item'>{item.reviewImage}</div>
                             <div className='select-item'>{item.rating}</div>
                             <div className='select-item'>{item.reviewContents}</div>
-                            <div className='select-item'>{item.reviewWriterId}</div>
                             <div className='select-item'>{item.reviewWriterNickname}</div>
                             <div className='select-item'>{item.reviewDate}</div>
                         </div>
@@ -47,3 +46,4 @@ export default function ReviewList({ value,restaurantId }: Props) {
         </>
     )
 }
+//수정

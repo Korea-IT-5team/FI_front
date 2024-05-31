@@ -4,9 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
-import { getSignInUserRequest } from 'src/apis/user';
-import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import './style.css';
@@ -16,7 +14,6 @@ export default function RestaurantList()
 {
 
   //            state               //
-  const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [cookies] = useCookies();
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
@@ -31,7 +28,7 @@ export default function RestaurantList()
   {
       const message =
           !result ? '서버에 문제가 있습니다.' :
-            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' : // 지워야함
               result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
   
@@ -45,24 +42,6 @@ export default function RestaurantList()
       SetRestaurantList(restaurantList);
   };
 
-  const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
-
-    const message = 
-        !result ? '서버에 문제가 있습니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
-    if (!result || result.code !== 'SU') 
-    {
-        // alert(message);
-        // navigator(MAIN_ABSOLUTE_PATH);
-        return;
-    }
-
-   const { userEmailId, userRole } = result as GetUserInfoResponseDto;
-   setLoginUserEmailId(userEmailId);
-   setLoginUserRole(userRole);
-  };
 
 
   //                event handler                   //
@@ -96,22 +75,11 @@ export default function RestaurantList()
 
   
   //          effect              //
-  let effectFlag = false;
-  useEffect(() => {
-    if (!cookies.accessToken) 
-    {
-      return;
-    }
-    if(effectFlag) return;
-    effectFlag = true;
 
-    getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, [location]);
-
-  let effectFlag2 = false;
+  let effectFlag1 = false;
   useEffect(() => {
-    if(effectFlag2) return;
-    effectFlag2 = true;  
+    if(effectFlag1) return;
+    effectFlag1 = true;  
     if (!cookies.accessToken) 
     {
       return;
@@ -149,3 +117,4 @@ export default function RestaurantList()
   );  
   
 }
+//수정
