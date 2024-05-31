@@ -5,6 +5,7 @@
     flex-direction: column;
     gap: 16px;
 }
+
 /* top */
 .inquiry-list-top {
     display: flex;
@@ -33,7 +34,6 @@
     color: rgba(64, 64, 64, 1);
 }
 
-
 /* list */
 .inquiry-list-table-tr {
     display: flex;
@@ -54,7 +54,7 @@
 .inquiry-list-table-th {
     display: grid;
     align-items: center;
-    grid-template-columns: 2fr 2fr 1fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr 1fr 2fr 2fr;
     gap: 40px;
     padding: 10px;
     background-color: rgba(255, 148, 45, 0.3);

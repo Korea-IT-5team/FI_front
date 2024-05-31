@@ -24,7 +24,7 @@ function ListItem ({
   const navigator = useNavigate();
   
   //      event handler      //
-  const onClickHandler = () => navigator( INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   //   render   //
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
@@ -182,7 +182,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       <div className='inquiry-list-top'>
         <div className='inquiry-list-top-left'>
         <div className='inquiry-list-size-text'>전체 
-        <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+        <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         {loginUserRole === 'ROLE_ADMIN' &&
         <>
         (<div className={toggleClass} onClick={onToggleClickHandler}></div> 
