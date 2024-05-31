@@ -71,7 +71,7 @@ export const passwordResetRequest = async (requestBody: PasswordResetRequestDto)
 // function : 새로운 비밀번호 설정 API 함수
 export const newPasswordRequest = async (requestBody: NewPasswordRequestDto) => {
     const result = await axios
-        .post(PASSWORD_UPDATE_REQUEST_URL, requestBody)
+        .put(PASSWORD_UPDATE_REQUEST_URL), requestBody)
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
@@ -94,15 +94,3 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
         .catch(requestErrorHandler);
     return result;
 };
-
-
-
-
-
-
-
-
-
-
-
-

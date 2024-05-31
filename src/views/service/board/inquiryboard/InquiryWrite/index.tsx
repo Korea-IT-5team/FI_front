@@ -18,6 +18,7 @@ export default function InquiryWrite() {
 
   const [cookies] = useCookies();
   
+  const [isInquiryPublic, setIsInquiryPublic] = useState<boolean>(false);
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
@@ -64,6 +65,10 @@ export default function InquiryWrite() {
     postInquiryBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
   };
 
+  const onPublicButtonClickHandler = () => {
+    setIsInquiryPublic(!isInquiryPublic);
+  }
+
   //                    effect                    //
   useEffect(() => {
     if (loginUserRole === 'ROLE_ADMIN') {
@@ -73,6 +78,7 @@ export default function InquiryWrite() {
   }, [loginUserRole]);
 
   //                    render                    //
+  const publicButtonClass = isInquiryPublic ? 'public-button' : 'un-public-button';
   return (
     <div id='inquiry-write-wrapper'>
       <div className='inquiry-write-main-box'>
@@ -81,7 +87,10 @@ export default function InquiryWrite() {
         </div>
         <div className='inquiry-write-contents-box'>
           <textarea ref={contentsRef} className='inquiry-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={inquiryContents} onChange={onInquiryContentsChangeHandler} />
-          <div className='primary-button inquiry-write-button' onClick={onPostButtonClickHandler}>작성</div>
+          <div className='inquiry-bottom-button-box'>
+            <div className={publicButtonClass} onClick={onPublicButtonClickHandler}>{ isInquiryPublic ? '공개' : '비공개' }</div>
+            <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
+          </div>
         </div>
       </div>
     </div>

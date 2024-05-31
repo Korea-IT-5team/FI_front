@@ -1,11 +1,12 @@
 import { ChangeEvent, useState } from 'react';
-import { findEmailRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { FindEmailRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { findEmailRequest } from 'src/apis/auth';
+import { FindEmailRequestDto} from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import "./style.css";
 import InputBox from 'src/components/InputBox';
-import { FIND_EMAIL_FINALLY_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
+import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
+import { PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
 // component: 이메일 찾기 // 
 export default function FindEmailInput() {
@@ -13,58 +14,23 @@ export default function FindEmailInput() {
     // state //
     const [userName, setUserName] = useState<string>('');
     const [userTelNumber, setUserTelNumber] = useState<string>('');
-    const [authNumber, setAuthNumber] = useState<string>('');
+    const [userEmailId, setUserEmailId] = useState<string>('');
 
     const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
-    const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
 
+    const [isUserNameCheck, setUserNameCheck] = useState<boolean>(false);
     const [isUserTelNumberCheck, setUserTelNumberCheck] = useState<boolean>(false);
     const [isUserTelNumberPattern, setUserTelNumberPattern] = useState<boolean>(false);
-    const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
 
     const [UserNameMessage, setUserNameMessage] = useState<string>('');
     const [userTelNumberMessage, setUserTelNumberMessage] = useState<string>('');
-    const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
 
     const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
-    const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-    const isFindEmailActive = isUserTelNumberCheck && isUserTelNumberPattern && isAuthNumberCheck;
-    const findEmailButtonClass = `${isFindEmailActive ? 'primary' : 'disable'}-button full-width`;
+    const findEmailButtonClass = `${isUserNameCheck && isUserTelNumberCheck ? 'primary' : 'disable'}-button full-width`;
 
   // function // 
     const navigator = useNavigate();
-    const userTelNumberResponse = (result: ResponseDto | null) => {
-
-        const userTelNumberMessage =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '인증번호를 입력해주세요.' :
-            result.code === 'SF' ? '인증번호 전송이 실패하였습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-            result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
-        const userTelNumberCheck = result !== null && result.code === 'SU';
-        const UserTelNumberError = !userTelNumberCheck;
-
-        setUserTelNumberMessage(userTelNumberMessage);
-        setUserTelNumberCheck(userTelNumberCheck);
-        setUserTelNumberError(UserTelNumberError);
-    };
-
-    const userTelNumberCheckResponse = (result: ResponseDto | null) => {
-
-        const authNumberMessage =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '인증번호를 입력해주세요.' :
-            result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-            result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
-        const authNumberCheck = result !== null && result.code === 'SU';
-        const authNumberError = !authNumberCheck;
-
-        setAuthNumberMessage(authNumberMessage);
-        setAuthNumberCheck(authNumberCheck);
-        setAuthNumberError(authNumberError);
-    };
 
     const findEmailResponse = (result: ResponseDto | null) => {
 
@@ -72,7 +38,6 @@ export default function FindEmailInput() {
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'NF' ? '사용자 정보 불일치합니다.' : 
             result.code === 'NU' ? '사용자 정보가 없습니다.' : 
-            result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
     
         const isSuccess = result && result.code === 'SU';
@@ -80,12 +45,16 @@ export default function FindEmailInput() {
             alert(message);
             return;
         }
+
+        const {userEmailId} = result as GetMyInfoResponseDto;
+        setUserEmailId(userEmailId);
     };
 
     // event handler // 
     const onUserNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setUserName(value);
+        setUserNameCheck(false)
         setUserNameMessage('');
     };
 
@@ -94,16 +63,7 @@ export default function FindEmailInput() {
         setUserTelNumber(value);
         setUserTelNumberButtonStatus(value !== '');
         setUserTelNumberCheck(false);
-        setAuthNumberCheck(false);
         setUserTelNumberMessage('');
-    };
-
-    const onAuthNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setAuthNumber(value);
-        setAuthNumberButtonStatus(value !== '');
-        setAuthNumberCheck(false);
-        setAuthNumberMessage('');
     };
 
     const onUserTelNumberButtonClickHandler = () => {
@@ -120,24 +80,12 @@ export default function FindEmailInput() {
             return;
         }
 
-        const requestBody: TelNumberAuthRequestDto = { userTelNumber: userTelNumber };
-        telNumberAuthRequest(requestBody).then(userTelNumberResponse);
+        setUserTelNumberButtonStatus(false);
+        setUserTelNumberCheck(false);
     };
 
-    const onAuthNumberButtonClickHandler = () => {
-        if (!authNumberButtonStatus) return;
-        if (!authNumber) return;
-
-        const requestBody: CheckTelNumberAuthRequestDto = {
-            userTelNumber: userTelNumber,
-            authNumber: authNumber
-        };
-        telNumberAuthCheckRequest(requestBody).then(userTelNumberCheckResponse);
-    };
-
-    const onEmailButtonClickHandler = () => {
-        if (!isFindEmailActive) return;
-        if (!userName || !userTelNumber || !authNumber) {
+    const onFindEmailButtonClickHandler = () => {
+        if (!userName || !userTelNumber) {
             alert('모든 내용을 입력해주세요.');
             return;
         }
@@ -146,22 +94,11 @@ export default function FindEmailInput() {
             userName: userName,
             userTelNumber: userTelNumber
         }
-        // findEmailRequest(requestBody).then(findEmailResponse);
-        findEmailRequest(requestBody)
-            .then((result) => {
-                // 데이터를 성공적으로 찾았을 때
-                if (result && result.code === 'SU') {
-                    // 이메일 찾기 완료 페이지로 이동
-                    navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH, { state: { emailId: result.code } });
-                } else {
-                    // 데이터를 찾지 못했을 때, 사용자에게 메시지 표시
-                    alert('이메일을 찾을 수 없습니다.');
-                }
-            });
+        findEmailRequest(requestBody).then(findEmailResponse);
 
-        // navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH);
     };
-    
+
+   // render //
     return (
         <div className='find-email-container'>
             <div className='find-email-title'>이메일 찾기</div>
@@ -170,15 +107,19 @@ export default function FindEmailInput() {
 
                     <InputBox type="text" value={userName} placeholder="이름을 입력해주세요" onChangeHandler={onUserNameChangeHandler} message={UserNameMessage} error />
 
-                    <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonTitle="인증번호 전송" buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
-
-                    {isUserTelNumberCheck && 
-                    <InputBox type="text" value={authNumber} placeholder="인증번호 6자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
+                    <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
 
                 </div>
                 <div className='find-email-button'>
-                    <div className={findEmailButtonClass} onClick={onEmailButtonClickHandler}>이메일 찾기</div> 
+                    <div className={findEmailButtonClass} onClick={onFindEmailButtonClickHandler}>이메일 찾기</div> 
                 </div>
+                {userEmailId &&
+                <div>
+                    <div className='return-Email-id' >{userEmailId}</div>
+                </div>
+                }
+                <div className='moving-sign-up' onClick={() => navigator(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>
+                <div className='moving-sign-up' onClick={() => navigator(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)}>비밀번호 재설정</div>
             </div>
         </div>
     )

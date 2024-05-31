@@ -85,7 +85,11 @@ export default function FavoriteList() {
     };
 
 
-    const changeRestaurantList = (restaurantList: RestaurantListItem[]) => {
+    const changeRestaurantList = (restaurantList: RestaurantListItem[] | undefined) => {
+
+        if (!restaurantList) {
+            return;
+        }
         
         setRestaurantList(restaurantList);
 
@@ -106,6 +110,8 @@ export default function FavoriteList() {
 
     //!!!
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
+
+        console.log('result : ' + JSON.stringify(result));
 
         const message =
         !result ? '서버에 문제가 있습니다.' :

@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
@@ -14,8 +14,9 @@ import { InquiryBoardListItem } from 'src/types';
 function ListItem ({
   inquiryNumber,
   inquiryStatus,
+  inquiryPublic,
   inquiryTitle,
-  inquiryWriterId,
+  inquiryWriterNickname,
   inquiryWriteDatetime
 }: InquiryBoardListItem) {
 
@@ -23,27 +24,28 @@ function ListItem ({
   const navigator = useNavigate();
   
   //      event handler      //
-  const onClickHandler = () => navigator( INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   //   render   //
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
       <div className='inquiry-list-table-status'>{inquiryStatus}</div>
+      <div className='inquiry-list-table-public'>{inquiryPublic}</div>
       <div className='inquiry-list-table-title'>{inquiryTitle}</div>
-      <div className='inquiry-list-table-writer-id'>{inquiryWriterId}</div>
+      <div className='inquiry-list-table-writer-nickname'>{inquiryWriterNickname}</div>
       <div className='inquiry-list-table-write-date'>{inquiryWriteDatetime}</div>
     </div>
   );
 }
-  // component: 문의사항 목록보기 //
+  // component: 문의사항 목록보기
 export default function InquiryList() {
   //                    state                    //
-  const {loginUserEmailId, loginUserRole} = useUserStore();
+  const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
 
   const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
-  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
+  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -63,7 +65,7 @@ export default function InquiryList() {
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
-    setViewList(viewList);
+    setViewInquiryList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
@@ -80,7 +82,7 @@ export default function InquiryList() {
     if (isToggleOn) inquiryBoardList = inquiryBoardList.filter(inquiryBoardList => !inquiryBoardList.inquiryStatus);
     setInquiryBoardList(inquiryBoardList);
 
-    const totalLength = setInquiryBoardList.length;
+    const totalLength = inquiryBoardList.length;
     setTotalLength(totalLength);
 
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
@@ -97,16 +99,15 @@ export default function InquiryList() {
 const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | ResponseDto | null) => {
   const message =
     !result ? '서버에 문제가 있습니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
   if (!result || result.code !== 'SU') {
-    alert(message);
-    if (result?.code === 'AF') navigator(SIGN_IN_ABSOLUTE_PATH);
+    // alert(message);
     return;
   }
 
   const { inquiryBoardList } = result as GetInquiryBoardListResponseDto;
+  changeInquiryBoardList(inquiryBoardList);
 
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
@@ -117,20 +118,17 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const message = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
   
   if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      // alert(message);
       return;
   }
 
   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
-  // changeInquiryBoardList(inquiryBoardList);
+  changeInquiryBoardList(inquiryBoardList);
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
-
 };
 
   //                    event handler                       //
@@ -146,7 +144,6 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    if (!cookies.accessToken) return;
 
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
 };
@@ -172,55 +169,77 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 };
 
   //                  effect                  //
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    if (searchWord)
+      getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
+    else
+      getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
+  },[isToggleOn]);
+
+  useEffect(() => {
+      changePage(inquiryBoardList, totalLength);
+  },[currentPage]);
+
+  useEffect(() => {
+      if (!inquiryBoardList.length) return;
+      changeSection(totalPage);
+  }, [currentSection]);
 
   //                    render                      //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id='inquiry-list-wrapper'>
-      <div className='inquiry-list-top'>
+      <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
-        <div className='inquiry-list-size-text'>전체 
-        <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
-        {loginUserRole === 'ROLE_ADMIN' &&
-        <>
-        (<div className={toggleClass} onClick={onToggleClickHandler}></div> 
-        <div className='inquiry-list-top-admin-text'>미완료 보기</div>
-        )
-        </>} 
+          <div className='inquiry-list-size-text'>전체 
+          <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         </div>
-        {loginUserRole === 'ROLE_USER' && ( 
-          <div className='primary-button' onClick={onWriteButtonClickHandler}>문의하기</div>
-        )} 
-        
+        <div className='inquiry-list-top-right'>
+          {loginUserRole === 'ROLE_ADMIN' &&
+          (<>
+          <div className={toggleClass} onClick={onToggleClickHandler}></div> 
+          <div className='inquiry-list-top-admin-text'>미답변 보기</div>
+          </>)} 
+          {loginUserRole === 'ROLE_USER' && ( 
+            <div className='primary-button' onClick={onWriteButtonClickHandler}>문의하기</div>
+          )}
+        </div>
       </div>
       <div className='inquiry-list-table-th'>
-        <div className='inquiry-list-table-reception-number'>번호</div>
-        <div className='inquiry-list-table-status'>상태</div>
-        <div className='inquiry-list-table-title'>문의 제목</div>
-        <div className='inquiry-list-table-writer-id'>작성자</div>
-        <div className='inquiry-list-table-write-date'>작성일자</div>
+        <div className='inquiry-list-table-top'>
+          <div className='inquiry-list-table-reception-number'>번호</div>
+          <div className='inquiry-list-table-status'>상태</div>
+          <div className='inquiry-list-table-public'>공개</div>
+          <div className='inquiry-list-table-title'>문의 제목</div>
+          <div className='inquiry-list-table-writer-nickname'>작성자</div>
+          <div className='inquiry-list-table-write-date'>작성일자</div>
+        </div>
+        <div className='inquiry-list-table-contents'>
+          {viewInquiryList.map(item => <ListItem { ...item} />)}
+        </div> 
       </div>
       <div className='inquiry-list-bottom'>
-                <div style={{ width: '299px' }}></div>
-                <div className='inquiry-list-pageNation'>
-                    <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
-                    <div className='inquiry-list-page-box'>
-                        {pageList.map(page => 
-                        page === currentPage ? 
-                        <div className='inquiry-list-page-active'>{page}</div> :
-                        <div className='inquiry-list-page'  onClick={() =>onPageClickHandler(page)}>{page}</div>
-                        )}
-                    </div>
-                    <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
-                </div>
-                <div className='inquiry-list-search-box'>
-                    <div className='inquiry-list-search-input-box'>
-                        <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
-                    </div>
-                    <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-                </div>
+        <div style={{ width: '332px'}}></div>
+        <div className='inquiry-list-pageNation'>
+            <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
+            <div className='inquiry-list-page-box'>
+                {pageList.map(page => 
+                page === currentPage ? 
+                <div className='inquiry-list-page-active'>{page}</div> :
+                <div className='inquiry-list-page' onClick={() =>onPageClickHandler(page)}>{page}</div>
+                )}
             </div>
+            <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
+        </div>
+        <div className='inquiry-list-search-box'>
+            <div className='inquiry-list-search-input-box'>
+                <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
+            </div>
+            <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+          </div>
+        </div>
       </div>
     
   )

@@ -21,7 +21,7 @@ function TopBar({ path }: Props) {
   // state //
   const [nickname, setNickName] = useState<string>('');
 
-  const { loginUserRole } = useUserStore();
+  const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
   const { pathname } = useLocation();
 
@@ -46,6 +46,8 @@ useEffect (() => {
   // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
   const onLogoutClickHandler = () => {
     removeCookie('accessToken', { path: '/' });
+    setLoginUserEmailId('');
+    setLoginUserRole('');
     window.location.reload();
   };
 
@@ -55,9 +57,9 @@ useEffect (() => {
     } else {
     navigator(MAIN_ABSOLUTE_PATH);}
   }        
-    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH)
+  const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
+  const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
 
 
 // render // 
@@ -70,7 +72,7 @@ useEffect (() => {
         {loginUserRole === 'ROLE_USER' &&
         <div className="top-bar-role">
             <div className="sign-in-wrapper">
-                <div className="user-mypage-button person"></div>
+                <div className="user-my-page-button person"></div>
                 <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
             </div>
             <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
@@ -79,7 +81,7 @@ useEffect (() => {
         {loginUserRole === 'ROLE_ADMIN' && 
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
-              <div className="user-mypage-button person"></div>
+              <div className="user-my-page-button person"></div>
               <div className="user-button" onClick={onAdminPageClickHandler}>관리자님</div>
           </div>
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
@@ -122,7 +124,7 @@ function SideNavigation({ path }: Props) {
         <div className='side-navigation-title'>식당 리스트</div>
       </div>
       <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-        <div className='side-navigation-icon mypaga'></div>
+        <div className='side-navigation-icon my-paga'></div>
         <div className='side-navigation-title'>마이페이지</div>
       </div>
       <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>

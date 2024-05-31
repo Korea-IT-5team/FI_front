@@ -183,7 +183,8 @@ export default function NoticeList() {
       <div className='notice-list-table-th'>
         <div className='notice-list-table-reception-number'>번호</div>
         <div className='notice-list-table-title'>공지제목</div>
-        <div className='notice-list-table-writer-date'>작성일자</div>
+        <div className='notice-list-table-writer-nickname'>작성자</div>
+        <div className='notice-list-table-write-date'>작성일자</div>
         <div className='notice-list-table-viewcount'>조회수</div>
       </div>
       <div className='notice-list-bottom'>
