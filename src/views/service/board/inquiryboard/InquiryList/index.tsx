@@ -199,7 +199,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       <div className='inquiry-list-top'>
         <div className='inquiry-list-top-left'>
         <div className='inquiry-list-size-text'>전체 
-        <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+        <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         {loginUserRole === 'ROLE_ADMIN' &&
         <>
         (<div className={toggleClass} onClick={onToggleClickHandler}></div> 
