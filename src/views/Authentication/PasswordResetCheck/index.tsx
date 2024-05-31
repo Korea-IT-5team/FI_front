@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css"; 
-import { emailCheckRequest, newPasswordRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
+import { emailCheckRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
 import { CheckEmailRequestDto, NewPasswordRequestDto, PasswordResetRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { useNavigate, useParams } from 'react-router';
@@ -89,7 +89,7 @@ export default function PasswordResetCheck() {
     const requestBody: NewPasswordRequestDto = {
       password: password
     }
-    newPasswordRequest(requestBody).then(passwordResetCheckResponse);
+    // newPasswordRequest(requestBody).then(passwordResetCheckResponse);
   };
   
   // render //

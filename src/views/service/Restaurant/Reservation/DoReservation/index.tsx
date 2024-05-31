@@ -144,4 +144,3 @@ const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full
     </>
   )
 }
-//수정

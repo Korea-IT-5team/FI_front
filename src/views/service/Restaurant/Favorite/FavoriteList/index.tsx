@@ -61,7 +61,6 @@ export default function FavoriteList() {
     const [pageList, setPageList] = useState<number[]>([1]);
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
-    const location = useLocation();
 
     //                    function                    //
     const navigator = useNavigate();
@@ -160,7 +159,7 @@ export default function FavoriteList() {
 
         GetFavoriteRestaurantListRequest(cookies.accessToken)
         .then(GetFavoriteRestaurantListResponse);
-    }, [location]);
+    }, []);
     //!!!
 
     useEffect(() => {
@@ -210,4 +209,4 @@ export default function FavoriteList() {
         </div>
     );
 }
-//수정
+//##수정

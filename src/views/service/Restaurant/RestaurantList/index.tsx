@@ -18,7 +18,6 @@ export default function RestaurantList()
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
   const {loginUserRole } = useUserStore();
-  const location = useLocation();
   
 
   //                    function                    //
@@ -87,7 +86,7 @@ export default function RestaurantList()
     
     GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
-  }, [location]);
+  }, []);
 
   //                  render                  //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';

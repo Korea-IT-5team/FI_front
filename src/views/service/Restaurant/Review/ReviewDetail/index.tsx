@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH} from 'src/constant';
 import { DeleteReviewRequest, GetReviewDetailRequest } from 'src/apis/restaurant/review';
-import { GetReviewDetailResponseDto } from 'src/apis/restaurant/review/dto/response';
+import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
 
 //          component           //
 export default function ReviewDetail()
@@ -19,16 +19,17 @@ export default function ReviewDetail()
   const[reviewImage,setReviewImage] = useState<string>('');
   const[reviewContents,setReviewContents] = useState<string>('');
   const[rating,setRating] = useState<number>();
-  const location = useLocation();
+
 
   //              function               //
   const navigator = useNavigate();
 
-  const GetReviewDetailResponse = (result: GetReviewDetailResponseDto | ResponseDto | null) => 
+  //!!!
+  const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
   {
     const message = 
       !result ? '서버에 문제가 있습니다.' : 
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if(!result || result.code !== 'SU')
     {
@@ -42,21 +43,22 @@ export default function ReviewDetail()
     }
 
     const{reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating} = 
-    result as GetReviewDetailResponseDto;
+    result as GetReviewResponseDto;
     setReviewRestaurantId(reviewRestaurantId);
     setReviewDate(reviewDate);
     setReviewImage(reviewImage);
     setReviewContents(reviewContents);
     setRating(rating);
   };
+  //!!!
 
+  //!!!
   const DeleteReviewResponse = (result: ResponseDto | null) => {
     const message =
         !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-                result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                result.code === 'AF' ? '권한이 없습니다.' :
+                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
         alert(message);
@@ -65,6 +67,7 @@ export default function ReviewDetail()
 
     navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
   };
+  //!!!
 
   //            event handler            //
  
@@ -80,6 +83,7 @@ export default function ReviewDetail()
       navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
   };
 
+  //!!!
   const onDeleteClickHandler = () => 
   {
     if(!reviewNumber || !cookies.accessToken) return;
@@ -89,13 +93,16 @@ export default function ReviewDetail()
     DeleteReviewRequest(reviewNumber, cookies.accessToken)
     .then(DeleteReviewResponse);
   }
+  //!!!
   
+  //!!!
   //              effect                //
   useEffect(()=> {
     if(!cookies.accessToken || !reviewNumber) return;
     GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
     .then(GetReviewDetailResponse);
-  },[location]);
+  },[]);
+  //!!!
 
  
   //           render            //
@@ -124,3 +131,4 @@ export default function ReviewDetail()
     </div>
   )
 }
+//###수정

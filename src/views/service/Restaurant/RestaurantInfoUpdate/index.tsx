@@ -32,11 +32,11 @@ export default function RestaurantInfoUpdate()
     const [restaurantFoodCategoryCheck, setRestaurantFoodCategoryCheck] = useState<boolean>(false);
     const [restaurantPostalCodeCheck, setRestaurantPostalCodeCheck] = useState<boolean>(false);
     const [restaurantLocationCheck, setRestaurantLocationCheck] = useState<boolean>(false);
-    const location = useLocation();
     const navigator = useNavigate();
 
     //                                      function                                            //
 
+    //!!!
     const GetRestaurantInfoResponse = (result: GetRestaurantInfoResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -65,7 +65,9 @@ export default function RestaurantInfoUpdate()
         setRestaurantRepresentativeMenu(restaurantRepresentativeMenu);
         setRestaurantBusinessRegistrationNumber(restaurantBusinessRegistrationNumber);
     }
+    //!!!
 
+    //!!!
     const PatchRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -82,10 +84,10 @@ export default function RestaurantInfoUpdate()
         if(!restaurantId) return;
         navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId))
     }
+    //!!!
 
-
-
-    //                                      event handler                                       //
+//                                      event handler                                       //
+    //!!!
     // 식당 정보 수정
     const onUpdateClickHandler = () => {
 
@@ -97,7 +99,6 @@ export default function RestaurantInfoUpdate()
 
         const requestBody: PatchRestaurantInfoRequestDto =
         {
-            restaurantId: Number(restaurantId),
             restaurantImage: restaurantImage,
             restaurantName: restaurantName,
             restaurantFoodCategory: restaurantFoodCategory,
@@ -110,9 +111,10 @@ export default function RestaurantInfoUpdate()
             restaurantNotice: restaurantNotice,
             restaurantRepresentativeMenu: restaurantRepresentativeMenu,
         }
-        PatchRestaurantInfoRequest(requestBody, cookies.accessToken)
+        PatchRestaurantInfoRequest(restaurantId, requestBody, cookies.accessToken)
             .then(PatchRestaurantInfoResponse);
     }
+    //!!!
 
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -185,8 +187,9 @@ export default function RestaurantInfoUpdate()
         
     };
 
+    //!!!
     //                                  effect                                              //
-    let effectFlag = false;
+    let effectFlag = false; 
     useEffect(() => {
         if (!cookies.accessToken || !restaurantId) {
             return;
@@ -196,7 +199,8 @@ export default function RestaurantInfoUpdate()
 
         GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
             .then(GetRestaurantInfoResponse);
-    }, [location]);
+    }, []);
+    //!!!
 
 
     const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck;
@@ -250,3 +254,5 @@ export default function RestaurantInfoUpdate()
         </>
     )
 }
+
+//수정###

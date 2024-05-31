@@ -36,15 +36,14 @@ return result;
 }
 //!!!
 
-
+//!!!
 // function : 식당 정보 수정 API 함수 
-export const PatchRestaurantInfoRequest = async (requestBody: PatchRestaurantInfoRequestDto, accessToken: string) => {
-const result = await axios.patch(PATCH_RESTAURANT_INFO_UPDATE, requestBody, bearerAuthorization(accessToken))
+export const PatchRestaurantInfoRequest = async (restaurantId: number|string, requestBody: PatchRestaurantInfoRequestDto, accessToken: string) => {
+const result = await axios.patch(PATCH_RESTAURANT_INFO_UPDATE(restaurantId), requestBody, bearerAuthorization(accessToken))
 .then(requestHandler<ResponseDto>)
 .catch(requestErrorHandler)
 return result;
-} 
+}
+//!!!
 
-
-
-//수정4
+//수정###

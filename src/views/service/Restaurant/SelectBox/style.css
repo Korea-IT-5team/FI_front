@@ -1,4 +1,4 @@
-/* .select-box {
+.select-box {
     display: flex;
     align-items: center;
     margin-left: 37%;
@@ -94,6 +94,4 @@
     background-color: rgba(238, 238, 238, 0.2);
     cursor: pointer;
 }
-/*
-
-*/ 
+ 
