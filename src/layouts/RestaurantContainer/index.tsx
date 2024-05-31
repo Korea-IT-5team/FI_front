@@ -17,7 +17,6 @@ export default function Restaurant()
   const {loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const[cookies, removeCookie] = useCookies();
   const navigator = useNavigate();
-  const location = useLocation();
 
   //            function                     //
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
@@ -60,7 +59,7 @@ export default function Restaurant()
   effectFlag = true;
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, [location]);
+  }, []);
 
   // path에 대한 객체를 반환
 
@@ -84,4 +83,4 @@ export default function Restaurant()
     </>
   )
 }
-//수정
+//수정##
