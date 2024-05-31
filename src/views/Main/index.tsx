@@ -55,9 +55,9 @@ useEffect (() => {
     } else {
     navigator(MAIN_ABSOLUTE_PATH);}
   }        
-    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH)
+  const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
+  const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
 
 
 // render // 

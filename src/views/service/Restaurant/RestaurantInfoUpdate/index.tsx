@@ -9,7 +9,6 @@ import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import './style.css';
-import SelectBox from '../SelectBox';
 
 export default function RestaurantInfoUpdate() 
 {   
