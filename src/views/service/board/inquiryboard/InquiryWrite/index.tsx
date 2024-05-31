@@ -18,6 +18,7 @@ export default function InquiryWrite() {
 
   const [cookies] = useCookies();
   
+  const [inquiryPublic, setInquiryPublic] = useState<String>('');
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
@@ -81,6 +82,7 @@ export default function InquiryWrite() {
         </div>
         <div className='inquiry-write-contents-box'>
           <textarea ref={contentsRef} className='inquiry-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={inquiryContents} onChange={onInquiryContentsChangeHandler} />
+          <div className='second-button'></div>
           <div className='primary-button inquiry-write-button' onClick={onPostButtonClickHandler}>작성</div>
         </div>
       </div>
