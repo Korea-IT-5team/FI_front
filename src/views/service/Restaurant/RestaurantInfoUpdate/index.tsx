@@ -6,9 +6,9 @@ import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/r
 import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/views/Restaurant/SelectBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import './style.css';
+import SelectBox from '../SelectBox';
 
 export default function RestaurantInfoUpdate() 
 {   
