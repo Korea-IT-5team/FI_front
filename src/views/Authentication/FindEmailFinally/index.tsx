@@ -19,10 +19,6 @@ export default function FindEmailFinally() {
         setEmailId(userEmailId);
     };
 
-    // useEffect (() => {
-    //     findEmailRequest(requestBody).then(getFindEmailResponse);
-    // }, []);
-
     // function //
     const navigator = useNavigate();
     
