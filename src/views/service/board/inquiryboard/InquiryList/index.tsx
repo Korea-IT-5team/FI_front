@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
@@ -99,12 +99,10 @@ export default function InquiryList() {
 const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | ResponseDto | null) => {
   const message =
     !result ? '서버에 문제가 있습니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
   if (!result || result.code !== 'SU') {
-    alert(message);
-    if (result?.code === 'AF') navigator(SIGN_IN_ABSOLUTE_PATH);
+    // alert(message);
     return;
   }
 
@@ -120,12 +118,10 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const message = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
   
   if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      // alert(message);
       return;
   }
 
@@ -148,7 +144,6 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    if (!cookies.accessToken) return;
 
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
 };
@@ -177,7 +172,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   useEffect(() => {
     if (!cookies.accessToken) return;
     if (searchWord)
-      getSearchInquiryBoardListRequest(searchWord,cookies.accessToken).then(getInquiryBoardListResponse);
+      getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else
       getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
   },[isToggleOn]);
@@ -196,39 +191,44 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id='inquiry-list-wrapper'>
-      <div className='inquiry-list-top'>
+      <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
-        <div className='inquiry-list-size-text'>전체 
-        <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
-        {loginUserRole === 'ROLE_ADMIN' &&
-        <>
-        (<div className={toggleClass} onClick={onToggleClickHandler}></div> 
-        <div className='inquiry-list-top-admin-text'>미답변 보기</div>
-        )
-        </>} 
+          <div className='inquiry-list-size-text'>전체 
+          <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
         </div>
-        {loginUserRole === 'ROLE_USER' && ( 
-          <div className='primary-button' onClick={onWriteButtonClickHandler}>문의하기</div>
-        )} 
-        
+        <div className='inquiry-list-top-right'>
+          {loginUserRole === 'ROLE_ADMIN' &&
+          (<>
+          <div className={toggleClass} onClick={onToggleClickHandler}></div> 
+          <div className='inquiry-list-top-admin-text'>미답변 보기</div>
+          </>)} 
+          {loginUserRole === 'ROLE_USER' && ( 
+            <div className='primary-button' onClick={onWriteButtonClickHandler}>문의하기</div>
+          )}
+        </div>
       </div>
       <div className='inquiry-list-table-th'>
-        <div className='inquiry-list-table-reception-number'>번호</div>
-        <div className='inquiry-list-table-status'>상태</div>
-        <div className='inquiry-list-table-public'>공개</div>
-        <div className='inquiry-list-table-title'>문의 제목</div>
-        <div className='inquiry-list-table-writer-nickname'>작성자</div>
-        <div className='inquiry-list-table-write-date'>작성일자</div>
+        <div className='inquiry-list-table-top'>
+          <div className='inquiry-list-table-reception-number'>번호</div>
+          <div className='inquiry-list-table-status'>상태</div>
+          <div className='inquiry-list-table-public'>공개</div>
+          <div className='inquiry-list-table-title'>문의 제목</div>
+          <div className='inquiry-list-table-writer-nickname'>작성자</div>
+          <div className='inquiry-list-table-write-date'>작성일자</div>
+        </div>
+        <div className='inquiry-list-table-contents'>
+          {viewInquiryList.map(item => <ListItem { ...item} />)}
+        </div> 
       </div>
       <div className='inquiry-list-bottom'>
-        <div style={{ width: '299px' }}></div>
+        <div style={{ width: '332px'}}></div>
         <div className='inquiry-list-pageNation'>
             <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
             <div className='inquiry-list-page-box'>
                 {pageList.map(page => 
                 page === currentPage ? 
                 <div className='inquiry-list-page-active'>{page}</div> :
-                <div className='inquiry-list-page'  onClick={() =>onPageClickHandler(page)}>{page}</div>
+                <div className='inquiry-list-page' onClick={() =>onPageClickHandler(page)}>{page}</div>
                 )}
             </div>
             <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
