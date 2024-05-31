@@ -139,12 +139,8 @@
 .reservation-list-page-left{
     width: 40px;
     height: 40px;
-<<<<<<< HEAD
 
     background-image: url('../../../../../assets/image/page-right.png');
-=======
-    background-image: url('../../../../../assets/image/page-left.png');
->>>>>>> bd7b85ae09eab6fbcad21e06fe67a2f66e3622c2
     background-size: 100% 100%;
 
     cursor: pointer;
