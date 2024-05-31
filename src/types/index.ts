@@ -12,7 +12,6 @@ export interface RestaurantReviewListItem {
   reviewImage: string;
   rating: number;
   reviewContents: string;
-  reviewWriterId: string;
   reviewWriterNickname: string;
   reviewDate: string;
 }
@@ -39,8 +38,9 @@ export interface NoticeBoardListItem {
 export interface InquiryBoardListItem {
   inquiryNumber: number;
   inquiryStatus: boolean;
+  inquiryPublic: boolean;
   inquiryTitle: string;
-  inquiryWriterId: string;
+  inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
 }
 

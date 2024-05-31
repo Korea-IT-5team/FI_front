@@ -14,8 +14,9 @@ import { InquiryBoardListItem } from 'src/types';
 function ListItem ({
   inquiryNumber,
   inquiryStatus,
+  inquiryPublic,
   inquiryTitle,
-  inquiryWriterId,
+  inquiryWriterNickname,
   inquiryWriteDatetime
 }: InquiryBoardListItem) {
 
@@ -29,13 +30,14 @@ function ListItem ({
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
       <div className='inquiry-list-table-status'>{inquiryStatus}</div>
+      <div className='inquiry-list-table-public'>{inquiryPublic}</div>
       <div className='inquiry-list-table-title'>{inquiryTitle}</div>
-      <div className='inquiry-list-table-writer-id'>{inquiryWriterId}</div>
+      <div className='inquiry-list-table-writer-nickname'>{inquiryWriterNickname}</div>
       <div className='inquiry-list-table-write-date'>{inquiryWriteDatetime}</div>
     </div>
   );
 }
-  // component: 문의사항 목록보기 //
+  // component: 문의사항 목록보기
 export default function InquiryList() {
   //                    state                    //
   const {loginUserRole} = useUserStore();
@@ -131,7 +133,6 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   changeInquiryBoardList(inquiryBoardList);
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
-
 };
 
   //                    event handler                       //
@@ -202,7 +203,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
         {loginUserRole === 'ROLE_ADMIN' &&
         <>
         (<div className={toggleClass} onClick={onToggleClickHandler}></div> 
-        <div className='inquiry-list-top-admin-text'>미완료 보기</div>
+        <div className='inquiry-list-top-admin-text'>미답변 보기</div>
         )
         </>} 
         </div>
@@ -211,15 +212,13 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
         )} 
         
       </div>
-      <div className='inquiry-list-table'> 
-        <div className='inquiry-list-table-th'>
-          <div className='inquiry-list-table-reception-number'>번호</div>
-          <div className='inquiry-list-table-status'>상태</div>
-          <div className='inquiry-list-table-title'>문의 제목</div>
-          <div className='inquiry-list-table-writer-id'>작성자</div>
-          <div className='inquiry-list-table-write-date'>작성일자</div>
-        </div>
-        {viewInquiryList.map(item => <ListItem { ...item} />)}
+      <div className='inquiry-list-table-th'>
+        <div className='inquiry-list-table-reception-number'>번호</div>
+        <div className='inquiry-list-table-status'>상태</div>
+        <div className='inquiry-list-table-public'>공개</div>
+        <div className='inquiry-list-table-title'>문의 제목</div>
+        <div className='inquiry-list-table-writer-nickname'>작성자</div>
+        <div className='inquiry-list-table-write-date'>작성일자</div>
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '299px' }}></div>
