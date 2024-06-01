@@ -1,6 +1,5 @@
-.input {
-    flex-grow: 1;
-    border: 1px solid rgba(238, 238, 238, 1);
+.restaurant-input {
+    border: 1px solid rgba(200, 200, 200, 1);
     border-radius: 6px;
     outline: none;
     padding: 8px 16px;
@@ -14,38 +13,47 @@
     line-height: 175%;
 
     color: rgba(35, 45, 66, 1);
+
+    width: 30%;
+    
 }
 
-.input::placeholder {
+.restaurant-input::placeholder {
     color: rgba(138, 146, 166, 1);
 }
 
-.sns-container-title {
+.restaurant-sns-container-title {
     color: rgba(138, 146, 166, 1);
 }
 
-.sns-button-container {
+.restaurant-sns-button-container {
     display: flex;
     gap: 24px;
 }
 
-.input-box {
+.restaurant-input-box {
     width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
-.input-label {
-    color: rgba(138, 146, 166, 1);
-}
-
-.input-content-box{
+.restaurant-input-label{
+    color:rgba(0, 0, 0, 1);
     display: flex;
-    gap: 10px;
+    justify-content: center; /* 수평 가운데 정렬 */
+}
 
+
+.restaurant-input-content-box{
+    gap: 10px;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
     margin-top: 8px;
     margin-bottom: 4px;
+    
 }
 
-.input-primary-button {
+/* .restaurant-input-primary-button {
     box-sizing: border-box;
     width: 110px;
     padding: 8px 0px;
@@ -63,11 +71,11 @@
     text-align: center;
 }
 
-.input-primary-button:hover {
+.restaurant-input-primary-button:hover {
     cursor: pointer;
 }
 
-.input-disable-button {
+.restaurant-input-disable-button {
     box-sizing: border-box;
     width: 110px;
     padding: 8px 0px;
@@ -85,9 +93,9 @@
     text-align: center;
 }
 
-.input-message {
+.restaurant-input-message {
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-}
+} */

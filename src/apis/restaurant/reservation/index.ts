@@ -16,9 +16,9 @@ export const GetUserReservationListRequest = async (accessToken:string) =>
 
 
 // function : 예약자 내역 목록확인 API 함수
-export const GetCeoReservationListRequest = async (restaurantId:number,accessToken:string) => 
+export const GetCeoReservationListRequest = async (restaurantName:string,accessToken:string) => 
 {
-      const result = await axios.get(GET_RESERVATION_CEO_LIST_URL(restaurantId), bearerAuthorization(accessToken))
+      const result = await axios.get(GET_RESERVATION_CEO_LIST_URL(restaurantName), bearerAuthorization(accessToken))
         .then(requestHandler<GetReservationListResponseDto>)
         .catch(requestErrorHandler)
         return result;

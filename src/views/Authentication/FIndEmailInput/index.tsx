@@ -14,6 +14,7 @@ export default function FindEmailInput() {
     const [userName, setUserName] = useState<string>('');
     const [userTelNumber, setUserTelNumber] = useState<string>('');
     const [authNumber, setAuthNumber] = useState<string>('');
+    const [userEmailId, setUserEmailId] = useState<string>('');
 
     const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
     const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
@@ -29,19 +30,20 @@ export default function FindEmailInput() {
     const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
     const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
 
-    const isFindEmailActive = isUserTelNumberError && isAuthNumberError;
+    const isFindEmailActive = isUserTelNumberCheck && isUserTelNumberPattern && isAuthNumberCheck;
     const findEmailButtonClass = `${isFindEmailActive ? 'primary' : 'disable'}-button full-width`;
 
   // function // 
     const navigator = useNavigate();
+
     const userTelNumberResponse = (result: ResponseDto | null) => {
 
         const userTelNumberMessage =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '인증번호를 입력해주세요.' :
-                    result.code === 'SF' ? '인증번호 전송이 실패하였습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-                            result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+            result.code === 'VF' ? '인증번호를 입력해주세요.' :
+            result.code === 'SF' ? '인증번호 전송이 실패하였습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+            result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
         const userTelNumberCheck = result !== null && result.code === 'SU';
         const UserTelNumberError = !userTelNumberCheck;
 
@@ -54,10 +56,10 @@ export default function FindEmailInput() {
 
         const authNumberMessage =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '인증번호를 입력해주세요.' :
-                    result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-                            result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+            result.code === 'VF' ? '인증번호를 입력해주세요.' :
+            result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+            result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
         const authNumberCheck = result !== null && result.code === 'SU';
         const authNumberError = !authNumberCheck;
 
@@ -71,6 +73,7 @@ export default function FindEmailInput() {
         const message = 
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'NF' ? '사용자 정보 불일치합니다.' : 
+            result.code === 'NU' ? '사용자 정보가 없습니다.' : 
             result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
     
@@ -129,7 +132,7 @@ export default function FindEmailInput() {
 
         const requestBody: CheckTelNumberAuthRequestDto = {
             userTelNumber: userTelNumber,
-            authNumber
+            authNumber: authNumber
         };
         telNumberAuthCheckRequest(requestBody).then(userTelNumberCheckResponse);
     };
@@ -143,14 +146,14 @@ export default function FindEmailInput() {
 
         const requestBody: FindEmailRequestDto = {
             userName: userName,
-            userTelNumber: userTelNumber,
-            authNumber: authNumber
+            userTelNumber: userTelNumber
         }
         findEmailRequest(requestBody).then(findEmailResponse);
 
         navigator(FIND_EMAIL_FINALLY_ABSOLUTE_PATH);
     };
-    
+
+   // render //
     return (
         <div className='find-email-container'>
             <div className='find-email-title'>이메일 찾기</div>
