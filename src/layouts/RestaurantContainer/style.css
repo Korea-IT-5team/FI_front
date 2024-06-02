@@ -29,6 +29,7 @@
     font-weight: bold;
     margin-left: 11%;
     color: rgba(255, 255, 255, 1);
+    font-family: 'Nanum Gothic';
   }
   
   .restaurant-sign-in {
@@ -36,6 +37,8 @@
     color: rgba(255, 255, 255, 1);
     font-size: 25px;
     margin: 30px;
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
   }
   
   .restaurant-sign-in:hover {

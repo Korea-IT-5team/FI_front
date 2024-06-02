@@ -1,14 +1,14 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import './style.css';
-import { useUserStore } from 'src/stores';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH} from 'src/constant';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
 import { GetReviewDetailRequest, PatchReviewRequest } from 'src/apis/restaurant/review';
+import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
 import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import './style.css';
 
 //                  component                 //
 export default function ReviewUpdate()
@@ -181,4 +181,3 @@ export default function ReviewUpdate()
   </>
   )
 }
-///!!!최근수정
