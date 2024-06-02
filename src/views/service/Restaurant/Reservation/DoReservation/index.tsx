@@ -5,6 +5,7 @@ import ResponseDto from "src/apis/response.dto";
 import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/request";
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import { useUserStore } from "src/stores";
+import './style.css';
 
 
 import { PostReservationRequest } from "src/apis/restaurant/reservation";
@@ -22,6 +23,7 @@ const {setUserReservationStatus} = useUserStore();
 const {restaurantId} = useParams();
 const [cookies] = useCookies();
 const navigator = useNavigate();
+const [selected, setSelected] = useState<number | null>(null);
 
 
 
@@ -66,7 +68,9 @@ const onHourMinuteChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
 
 const onPeopleClickHandler = (value: number) => 
 {
-    setRreservationPeople(value);
+    setSelected(value);
+    
+      setRreservationPeople(value);
 };
 
 const onCheckClickHandler = () => 
@@ -95,52 +99,70 @@ const onReservationClickHandler = () =>
 }
 //!!!
 
+
+
 //                      render                        //
 const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
-const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
+const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-reservation-disable'}-button`;
 
   return (
     <>
-       <div className="reservation-npeople">
-          <div className="reservation">예약자 정보</div>
-       </div>
-       <div className="reservation-box">
-          <div className="calendar">
-            <div>달력</div>
-          </div>
-          <div className="date-time-people">
+      
+      <div className="do-reservation-information-title">예약자 정보</div>
+      
+      <div className="do-reservation-box">
+          <div className="do-reservation-date-time-people">
             <RestaurantInputBox label="날짜" type="text" value={reservationDate} placeholder="날짜를 입력해주세요"
             onChangeHandler={onMonthDayChangeHandler}/>
             <RestaurantInputBox label="시간" type="text" value={reservationTime} placeholder="시간을 입력해주세요"
             onChangeHandler={onHourMinuteChangeHandler}/>                
-            <div>인원수</div>
-            <div className="people">
-              <div className="select-list-item-box">
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(1)}>1명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(2)}>2명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(3)}>3명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(4)}>4명</div>
-              </div>
-              <div className="select-list-item-box">
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(5)}>5명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(6)}>6명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(7)}>7명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(8)}>8명</div>
-              </div>
-              <div className="select-list-item-box">
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(9)}>9명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(10)}>10명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(11)}>11명</div>
-                  <div className="select-item"  onClick={() => onPeopleClickHandler(12)}>12명</div>
-              </div>
+            <div className="do-reservation-people">인원수</div>
+              
+            <div className="do-reservation-people-box">
+                <table className="do-reservation-table">
+                <tr>
+                {[1, 2, 3, 4].map((number) => (
+                  <td
+                    key={number}
+                    className={`do-reservation-select-item ${selected === number ? 'selected' : ''}`}
+                    onClick={() => onPeopleClickHandler(number)}
+                  >
+                    {number}명
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                {[5, 6, 7, 8].map((number) => (
+                  <td
+                    key={number}
+                    className={`do-reservation-select-item ${selected === number ? 'selected' : ''}`}
+                    onClick={() => onPeopleClickHandler(number)}
+                  >
+                    {number}명
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                {[9, 10, 11, 12].map((number) => (
+                  <td
+                    key={number}
+                    className={`do-reservation-select-item ${selected === number ? 'selected' : ''}`}
+                    onClick={() => onPeopleClickHandler(number)}
+                  >
+                    {number}명
+                  </td>
+                ))}
+              </tr>
+                </table>
             </div>
-            <div>
-                <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
-                <div>인증 약관 전체 동의</div>
-            </div>
-            <div className={signUpButtonClass} onClick={onReservationClickHandler}>예약하기</div>
           </div>
-       </div>
+
+          <div className="do-reservation-checkbox">
+              <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
+              <div className="do-reservation-checkfont">인증 약관 전체 동의</div>
+          </div>
+          <div className={signUpButtonClass} onClick={onReservationClickHandler}>예약하기</div>   
+      </div>
     </>
   )
 }

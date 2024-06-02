@@ -159,20 +159,20 @@ export default function RestaurantInfoWrite()
     };
    
     const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck && restaurantBusinessRegistrationNumberCheck;
-    const ButtonClass = `${isRestUploadUpActive ? 'restaurantinfo-primary' : 'restaurantinfo-disable'}-button`; 
+    const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`; 
 
     //                                      render                                              //
     return (
 <>
-    <div className="restaurantinfowrite-title">식당 정보 등록</div>
-    <div className="restaurantinfowrite-box">
+    <div className="restaurant-info-write-title">식당 정보 등록</div>
+    <div className="restaurant-info-write-box">
         <RestaurantInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
         placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
                                
         <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
         placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
 
-        <div className="restaurantinfowrite-selectbox">                 
+        <div className="restaurant-info-write-selectbox">                 
             <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
         </div>  
                            
@@ -204,7 +204,7 @@ export default function RestaurantInfoWrite()
         placeholder="사업자 등록번호를 입력해주세요" onChangeHandler={onBusinessNumberChangeHandler}
         onKeydownHandler={onBusinessNumberKeydownHandler}/>
 
-        <div className="restaurantinfo-registered-button-box">
+        <div className="restaurant-info-registered-button-box">
             <button onClick={onUploadClickHandler}
             className={ButtonClass}>등록하기</button>
         </div>
@@ -212,4 +212,3 @@ export default function RestaurantInfoWrite()
 </>
   )
 }
-//완료

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetFavoriteRestaurantListRequest } from 'src/apis/restaurant/favorite';
 import { GetFavoriteRestaurantListResponseDto } from 'src/apis/restaurant/favorite/dto/response';
@@ -209,4 +209,3 @@ export default function FavoriteList() {
         </div>
     );
 }
-//##수정
