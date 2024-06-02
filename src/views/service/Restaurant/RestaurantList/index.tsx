@@ -23,6 +23,7 @@ export default function RestaurantList()
   //                    function                    //
   const navigator = useNavigate();
 
+  //!!!
   const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => 
   {
       const message =
@@ -40,6 +41,7 @@ export default function RestaurantList()
       const { restaurantList } = result as GetRestaurantListResponseDto;
       SetRestaurantList(restaurantList);
   };
+  //!!!
 
 
 
@@ -50,6 +52,7 @@ export default function RestaurantList()
       setSearchWord(searchWord);
   };
 
+  //!!!
   const onSearchClickHandler = () =>
   {
       if (!searchWord) return;
@@ -58,6 +61,7 @@ export default function RestaurantList()
       GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
   };
+  //!!!
 
   const onRegistrationClickHandler = () =>
   {     
@@ -74,7 +78,7 @@ export default function RestaurantList()
 
   
   //          effect              //
-
+  //!!!
   let effectFlag1 = false;
   useEffect(() => {
     if(effectFlag1) return;
@@ -87,7 +91,7 @@ export default function RestaurantList()
     GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
   }, []);
-
+  //!!!
   //                  render                  //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
@@ -114,5 +118,4 @@ export default function RestaurantList()
       </div>
     </>
   );  
-  
 }
