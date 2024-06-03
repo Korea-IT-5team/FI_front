@@ -19,26 +19,24 @@ interface Props {
 function TopBar({ path }: Props) {
 
   // state //
-  const [nickname, setNickName] = useState<string>('');
+  const [nickname, setNickname] = useState<string>('');
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
   const { pathname } = useLocation();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
-
     if (!result) return;        
 
     const { nickname } = result as GetMyInfoResponseDto;
-    setNickName(nickname);
+    setNickname(nickname);
+  };
 
-};
-
-useEffect (() => {
+  useEffect (() => {
     if (!cookies.accessToken) return;
 
     getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-}, [cookies.accessToken]);
+  }, [cookies.accessToken]);
 
   // function //
   const navigator = useNavigate();
@@ -53,10 +51,11 @@ useEffect (() => {
 
   const onLogoClickHandler = () => {
     if(pathname === MAIN_ABSOLUTE_PATH){    
-        window.location.reload();
+      window.location.reload();
     } else {
     navigator(MAIN_ABSOLUTE_PATH);}
-  }        
+  }
+
   const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
   const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
@@ -66,9 +65,10 @@ useEffect (() => {
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon-image'></div>
+        <div className='main-icon-image'>
+☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
-        <div className='main-top-bar=button'>
+        <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
         <div className="top-bar-role">
             <div className="sign-in-wrapper">
@@ -82,7 +82,7 @@ useEffect (() => {
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
               <div className="user-my-page-button person"></div>
-              <div className="user-button" onClick={onAdminPageClickHandler}>관리자님</div>
+              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
           </div>
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
