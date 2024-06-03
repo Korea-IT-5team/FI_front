@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css"; 
-import { emailCheckRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
+import { emailCheckRequest, newPasswordRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
 import { CheckEmailRequestDto, NewPasswordRequestDto, PasswordResetRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { useNavigate, useParams } from 'react-router';
@@ -80,7 +80,7 @@ export default function PasswordResetCheck() {
   };
 
   const onPasswordResetCheckButtonClickHandler = () => {
-    // if(!isResetPasswordCheckActive) return;
+    if(!isResetPasswordCheckActive || !userEmailId) return;
     if(!password || !passwordCheck) {
         alert('모든 내용을 입력해주세요.');
         return;
@@ -89,7 +89,7 @@ export default function PasswordResetCheck() {
     const requestBody: NewPasswordRequestDto = {
       password: password
     }
-    // newPasswordRequest(requestBody).then(passwordResetCheckResponse);
+    newPasswordRequest(userEmailId, requestBody).then(passwordResetCheckResponse);
   };
   
   // render //
@@ -100,8 +100,8 @@ export default function PasswordResetCheck() {
         <div className='reset-password-box'>
           <div className='reset-password-input-container'>
 
-            <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} />
-            <InputBox type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} />
+            <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+            <InputBox type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
 
           </div>
           <div className={passwordResetCheckButtonClass} onClick={onPasswordResetCheckButtonClickHandler}>재설정</div>
