@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
@@ -11,8 +11,9 @@ import "./style.css";
 export default function MyPageSite() {
 
   // state // 
+  const { userEmailId } = useParams();
   const [cookies] = useCookies();
-  const [userEmailId, setEmailId] = useState<string>('');
+  const [emailId, setEmailId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [userTelNumber, setUserTelNumber] = useState<string>('');
@@ -66,7 +67,7 @@ export default function MyPageSite() {
           <div className='my-page-box'>
             <div className='my-page-info-box'>
               <div className='my-page-info'>{nickname}</div>
-              <div className='my-page-info'>{userEmailId}</div>
+              <div className='my-page-info'>{emailId}</div>
               <div className='my-page-info'>{userName}</div>
               <div className='my-page-info'>{userTelNumber}</div>
               <div className='my-page-info'>{userAddress}</div>
