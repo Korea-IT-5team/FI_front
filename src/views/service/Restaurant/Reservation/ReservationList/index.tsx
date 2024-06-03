@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetCeoReservationListRequest, GetUserReservationListRequest } from 'src/apis/restaurant/reservation';
 import { GetReservationListResponseDto } from 'src/apis/restaurant/reservation/dto/response';
@@ -15,7 +15,6 @@ function ListItem ({
   reservationStatus,
   reservationRestaurantId,
   reservationRestaurantName,
-  reservationUserId,
   reservationDate,
   reservationTime,
   reservationPeople,
@@ -68,8 +67,6 @@ export default function ReservationList() {
     const [pageList, setPageList] = useState<number[]>([1]);
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
-    const location = useLocation();
-    const na = useNavigate
 
     //                    function                    //
     const navigator = useNavigate();
@@ -113,6 +110,7 @@ export default function ReservationList() {
         changeSection(totalPage);
     };
 
+    //!!!###
     const GetReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
 
         const message =
@@ -131,6 +129,7 @@ export default function ReservationList() {
         setCurrentPage(!restaurantReservationList.length ? 0 : 1);
         setCurrentSection(!restaurantReservationList.length ? 0 : 1);
     };
+    //!!!###
 
     //                    event handler                    //
     
@@ -150,6 +149,7 @@ export default function ReservationList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
+    //!!!###
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
@@ -160,7 +160,8 @@ export default function ReservationList() {
         GetCeoReservationListRequest(cookies.accessToken)
         .then(GetReservationListResponse)
         ;
-    }, [location]);
+    }, []);
+    //!!!###
 
     useEffect(() => {
         if (!restaurantReservationList.length) return;
@@ -210,4 +211,3 @@ export default function ReservationList() {
         </div>
     );
 }
-//수정

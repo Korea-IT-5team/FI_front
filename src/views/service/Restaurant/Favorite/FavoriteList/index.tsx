@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetFavoriteRestaurantListRequest } from 'src/apis/restaurant/favorite';
 import { GetFavoriteRestaurantListResponseDto } from 'src/apis/restaurant/favorite/dto/response';
@@ -61,7 +61,6 @@ export default function FavoriteList() {
     const [pageList, setPageList] = useState<number[]>([1]);
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
-    const location = useLocation();
 
     //                    function                    //
     const navigator = useNavigate();
@@ -86,7 +85,11 @@ export default function FavoriteList() {
     };
 
 
-    const changeRestaurantList = (restaurantList: RestaurantListItem[]) => {
+    const changeRestaurantList = (restaurantList: RestaurantListItem[] | undefined) => {
+
+        if (!restaurantList) {
+            return;
+        }
         
         setRestaurantList(restaurantList);
 
@@ -108,6 +111,8 @@ export default function FavoriteList() {
     //!!!
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
 
+        console.log('result : ' + JSON.stringify(result));
+
         const message =
         !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
@@ -122,10 +127,10 @@ export default function FavoriteList() {
             return;
         }
 
-        const { restaurantList } = result as GetFavoriteRestaurantListResponseDto;
-        changeRestaurantList(restaurantList);
-        setCurrentPage(!restaurantList.length ? 0 : 1);
-        setCurrentSection(!restaurantList.length ? 0 : 1);
+        const { restaurantFavoriteList } = result as GetFavoriteRestaurantListResponseDto;
+        changeRestaurantList(restaurantFavoriteList);
+        setCurrentPage(!restaurantFavoriteList.length ? 0 : 1);
+        setCurrentSection(!restaurantFavoriteList.length ? 0 : 1);
     };
     //!!!
 
@@ -154,7 +159,7 @@ export default function FavoriteList() {
 
         GetFavoriteRestaurantListRequest(cookies.accessToken)
         .then(GetFavoriteRestaurantListResponse);
-    }, [location]);
+    }, []);
     //!!!
 
     useEffect(() => {
@@ -204,4 +209,3 @@ export default function FavoriteList() {
         </div>
     );
 }
-//수정

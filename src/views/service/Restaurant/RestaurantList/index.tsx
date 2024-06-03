@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
@@ -18,12 +18,12 @@ export default function RestaurantList()
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
   const {loginUserRole } = useUserStore();
-  const location = useLocation();
   
 
   //                    function                    //
   const navigator = useNavigate();
 
+  //!!!
   const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => 
   {
       const message =
@@ -41,6 +41,7 @@ export default function RestaurantList()
       const { restaurantList } = result as GetRestaurantListResponseDto;
       SetRestaurantList(restaurantList);
   };
+  //!!!
 
 
 
@@ -51,6 +52,7 @@ export default function RestaurantList()
       setSearchWord(searchWord);
   };
 
+  //!!!
   const onSearchClickHandler = () =>
   {
       if (!searchWord) return;
@@ -59,6 +61,7 @@ export default function RestaurantList()
       GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
   };
+  //!!!
 
   const onRegistrationClickHandler = () =>
   {     
@@ -75,7 +78,7 @@ export default function RestaurantList()
 
   
   //          effect              //
-
+  //!!!
   let effectFlag1 = false;
   useEffect(() => {
     if(effectFlag1) return;
@@ -87,8 +90,8 @@ export default function RestaurantList()
     
     GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
-  }, [location]);
-
+  }, []);
+  //!!!
   //                  render                  //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
@@ -115,6 +118,4 @@ export default function RestaurantList()
       </div>
     </>
   );  
-  
 }
-//수정

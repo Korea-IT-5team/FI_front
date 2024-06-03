@@ -37,7 +37,7 @@ export default function RestaurantInfo() {
     const [restaurantWriterId, setRestaurantWriterId] = useState('');
     const [restaurantReviewList, setRestaurantReviewList] = useState<RestaurantReviewListItem[]>([]);
     const [grade, setGrade] = useState<number>();
-    const location = useLocation();
+
 
     //                    function                    //
     const navigator = useNavigate();
@@ -181,7 +181,7 @@ export default function RestaurantInfo() {
 
         GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
             .then(GetRestaurantInfoResponse);
-    }, [location]);
+    }, []);
     //!!!
 
 
@@ -192,7 +192,7 @@ export default function RestaurantInfo() {
 
         const total = restaurantReviewList.reduce((sum, restaurantReviewList) => sum + restaurantReviewList.rating, 0);
         setGrade(total / restaurantReviewList.length);
-    }, [location]);
+    }, []);
 
     //!!!
     let effectFlag = false;
@@ -207,7 +207,7 @@ export default function RestaurantInfo() {
         .then(GetFavoriteCheckStatusResponse);
     GetReservationCheckStatusRequest(restaurantId,cookies.accessToken)
         .then(GetReservationCheckStatusResponse)
-    }, [location]);
+    }, []);
     //!!!
 
     //               constant                     //
@@ -300,4 +300,3 @@ const onCancleFavoriteClickHandler = () => {
         </>
   )
 }
-//수정

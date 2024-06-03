@@ -1,14 +1,14 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import './style.css';
-import { useUserStore } from 'src/stores';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH} from 'src/constant';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
 import { GetReviewDetailRequest, PatchReviewRequest } from 'src/apis/restaurant/review';
-import { GetReviewDetailResponseDto } from 'src/apis/restaurant/review/dto/response';
+import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
+import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import './style.css';
 
 //                  component                 //
 export default function ReviewUpdate()
@@ -22,13 +22,13 @@ export default function ReviewUpdate()
   const [rating, setRating] = useState<number>(0);
   const [reviewContents, setReviewContents] = useState<string>("");
   const [cookies] = useCookies();
-  const location = useLocation();
-  
+
 
 
   //                function                    //
   const navigator = useNavigate();
 
+  ///!!!최근수정
   const PatchReviewResponse = (result: ResponseDto | null) => {
           const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -45,10 +45,12 @@ export default function ReviewUpdate()
 
           if(!reviewNumber) return;
           navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
-    }
+  }
+  ///!!!최근수정
 
-    const GetReviewDetailResponse = (result: GetReviewDetailResponseDto | ResponseDto | null) => 
-    {
+  ///!!!최근수정
+  const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
+  {
           const message = 
             !result ? '서버에 문제가 있습니다.' : 
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
@@ -64,12 +66,13 @@ export default function ReviewUpdate()
           }
       
           const{reviewImage,reviewContents,rating} = 
-          result as GetReviewDetailResponseDto;
+          result as GetReviewResponseDto;
          
           setReviewImage(reviewImage);
           setReviewContents(reviewContents);
           setRating(rating);
-    };
+  };
+  ///!!!최근수정
 
   //                 event handler                //
   const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +102,7 @@ export default function ReviewUpdate()
   }
 
 
+  ///!!!최근수정
   const UpdateClickHandler = () => {
     if (!rating || !reviewNumber) {
         return;
@@ -113,13 +117,15 @@ export default function ReviewUpdate()
 
     PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
     .then(PatchReviewResponse);
-}
+  }
+  ///!!!최근수정
 
-const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
+  const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
   
   //                effect                  //
   let effectFlag = false;
 
+  ///!!!최근수정
   useEffect(()=>{
     if(!reviewNumber || !cookies.accessToken) return;
     if(!loginUserRole) return;
@@ -134,7 +140,8 @@ const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
 
     GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
     .then(GetReviewDetailResponse);
-  },[location])
+  },[])
+  ///!!!최근수정
 
   //                render                  //
   return (

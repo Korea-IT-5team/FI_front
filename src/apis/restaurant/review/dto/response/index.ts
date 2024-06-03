@@ -1,15 +1,16 @@
 import ResponseDto from "src/apis/response.dto";
-import { ReviewDetailsListItem } from "src/types";
+import { RestaurantReviewListItem } from "src/types";
+
 
 // description: 식당 리뷰 내역 목록 확인 Response Body DTO
-export interface GetReviewDetailsResponseDto extends ResponseDto
+export interface GetReviewListResponseDto extends ResponseDto
 {
-    reviewDetailsList : ReviewDetailsListItem[]
+    restaurantReviewList: RestaurantReviewListItem[];
 }
 
 
 // description: 식당 리뷰 내역 확인 Response Body Dto
-export interface  GetReviewDetailResponseDto extends ResponseDto
+export interface  GetReviewResponseDto  extends ResponseDto
 {
     reviewNumber:number,
     reviewRestaurantId:number,
@@ -17,4 +18,5 @@ export interface  GetReviewDetailResponseDto extends ResponseDto
     reviewImage:string,
     reviewContents:string,
     rating:number,
+    reviewWriterNickname:string,
 }

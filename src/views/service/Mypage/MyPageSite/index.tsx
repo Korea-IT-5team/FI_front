@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
-import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH, RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import "./style.css";
 
 // component : 마이페이지 // 
@@ -40,7 +40,6 @@ export default function MyPageSite() {
     }
 
     if (!cookies.accessToken) return;
-    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
 
     const {userEmailId, nickname, userName, userTelNumber, userAddress} = result as GetMyInfoResponseDto;
     setNickname(nickname);
@@ -74,9 +73,9 @@ export default function MyPageSite() {
             </div>
             <div className='my-page-link'>
               <div className='my-page-link-box' onClick={() => navigator(USER_INFO_UPDATE_ABSOLUTE_PATH)}>회원정보 수정</div>
-              <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_LIST_ABSOLUTE_PATH)}>찜한 식당 목록</div>
-              <div className='my-page-link-box' onClick={() => {}}>예약 내역</div>
-              <div className='my-page-link-box'>리뷰 내역</div>
+              <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH)}>찜한 식당 목록</div>
+              <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH)}>예약 내역</div>
+              <div className='my-page-link-box'onClick={() => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH)}>리뷰 내역</div>
             </div>
             <div className='my-page-delete' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH)}>회원탈퇴</div>
           </div>

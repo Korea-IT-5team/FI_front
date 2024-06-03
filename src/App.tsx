@@ -14,6 +14,8 @@ import MyPageSite from './views/service/Mypage/MyPageSite';
 import UserDelete from './views/service/Mypage/UserDelete';
 import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
 import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
+import RestaurantReservation from './views/service/Restaurant/Reservation/DoReservation';
+import RestaurantReservationList from './views/service/Restaurant/Reservation/ReservationList';
 import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
 import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';

@@ -44,5 +44,4 @@ export const GetFavoriteCheckStatusRequest = async (restaurantId:number|string,a
     return result;
 }
 //!!!
-
-//수정
+//###수정

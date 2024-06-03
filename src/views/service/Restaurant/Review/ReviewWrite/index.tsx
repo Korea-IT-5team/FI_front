@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -26,6 +26,7 @@ export default function ReviewWrite()
 
   //                function                    //
 
+  //!!!
   const PostReviewResponse = (result: ResponseDto | null) => {
     const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -42,6 +43,7 @@ export default function ReviewWrite()
     if(!restaurantId) return;
     navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
   }
+  //!!!
 
    
 
@@ -73,6 +75,7 @@ export default function ReviewWrite()
     contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   }
 
+  //!!!
   const UploadClickHandler = () => {
     if (!rating) {
         return;
@@ -89,6 +92,7 @@ export default function ReviewWrite()
     PostReviewRequest(restaurantId, requestBody, cookies.accessToken)
     .then(PostReviewResponse);
 }
+//!!!
 
   const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
  

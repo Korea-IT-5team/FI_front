@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getSignInUserRequest } from 'src/apis/user';
 import { GetUserInfoResponseDto } from 'src/apis/user/dto/response';
@@ -17,19 +17,19 @@ export default function Restaurant()
   const {loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const[cookies, removeCookie] = useCookies();
   const navigator = useNavigate();
-  const location = useLocation();
 
+
+  //!!!
   //            function                     //
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
     const message = 
         !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' : //나중에 지워야함
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') 
     {
-        alert(message);
+        //alert(message);
         return;
     }
 
@@ -37,6 +37,7 @@ export default function Restaurant()
     setLoginUserEmailId(userEmailId);
     setLoginUserRole(userRole);
 };
+//!!!
 
 
   //            event handler               //
@@ -48,7 +49,7 @@ export default function Restaurant()
 
   
  
-
+  //!!!
   //          effect              //
   let effectFlag = false;
   useEffect(() => {
@@ -60,7 +61,8 @@ export default function Restaurant()
   effectFlag = true;
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  }, [location]);
+  }, []);
+  //!!!
 
   // path에 대한 객체를 반환
 
@@ -84,4 +86,7 @@ export default function Restaurant()
     </>
   )
 }
-//수정
+//수정##
+//CSS완료
+//사장쪽 점검빼고 완료
+//AF 비회원일때는 어떻게 처리???

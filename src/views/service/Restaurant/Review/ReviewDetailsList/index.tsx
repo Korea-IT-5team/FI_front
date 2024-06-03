@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetReviewDetailsRequest } from 'src/apis/restaurant/review';
-import { GetReviewDetailsResponseDto } from 'src/apis/restaurant/review/dto/response';
+import { GetReviewListResponseDto } from 'src/apis/restaurant/review/dto/response';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
-import { ReviewDetailsListItem } from 'src/types';
+import { RestaurantReviewListItem } from 'src/types';
 import './style.css';
 
 //                    component                    //
@@ -13,7 +13,7 @@ function ListItem ({
     reviewNumber,
     reviewRestaurantId,
     reviewDate
-}: ReviewDetailsListItem) {
+}: RestaurantReviewListItem) {
 
     //                    function                    //
     const navigator = useNavigate();
@@ -37,20 +37,19 @@ function ListItem ({
 export default function ReviewDetailsList() {
     //                    state                    //
     const [cookies] = useCookies();
-    const [reviewDetailsList, setReviewDetailsList] = useState<ReviewDetailsListItem[]>([]);
-    const [viewList, setViewList] = useState<ReviewDetailsListItem[]>([]);
+    const [reviewDetailsList, setReviewDetailsList] = useState<RestaurantReviewListItem[]>([]);
+    const [viewList, setViewList] = useState<RestaurantReviewListItem[]>([]);
     const [totalLenght, setTotalLength] = useState<number>(0);
     const [totalPage, setTotalPage] = useState<number>(1);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageList, setPageList] = useState<number[]>([1]);
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
-    const location = useLocation();
 
     //                    function                    //
     const navigator = useNavigate();
 
-    const changePage = (reviewDetailsList: ReviewDetailsListItem[], totalLenght: number) => {
+    const changePage = (reviewDetailsList: RestaurantReviewListItem[], totalLenght: number) => {
         if(!currentPage) return;
         const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
         let endIndex = currentPage * COUNT_PER_PAGE;
@@ -70,7 +69,7 @@ export default function ReviewDetailsList() {
     };
 
 
-    const changeReviewDetailsList = (reviewDetailsList: ReviewDetailsListItem[]) => {
+    const changeReviewDetailsList = (reviewDetailsList: RestaurantReviewListItem[]) => {
         setReviewDetailsList(reviewDetailsList);
 
         const totalLenght = reviewDetailsList.length;
@@ -88,11 +87,12 @@ export default function ReviewDetailsList() {
         changeSection(totalPage);
     };
 
-    const GetReviewDetailsResponse = (result: GetReviewDetailsResponseDto | ResponseDto | null) => {
+    //!!!
+    const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') 
         {
@@ -101,11 +101,12 @@ export default function ReviewDetailsList() {
             return;
         }
 
-        const { reviewDetailsList } = result as GetReviewDetailsResponseDto;
-        changeReviewDetailsList(reviewDetailsList);
-        setCurrentPage(!reviewDetailsList.length ? 0 : 1);
-        setCurrentSection(!reviewDetailsList.length ? 0 : 1);
+        const { restaurantReviewList } = result as GetReviewListResponseDto;
+        changeReviewDetailsList(restaurantReviewList);
+        setCurrentPage(!restaurantReviewList.length ? 0 : 1);
+        setCurrentSection(!restaurantReviewList.length ? 0 : 1);
     };
+    //!!!
 
     //                    event handler                    //
     const onPageClickHandler = (page: number) => {
@@ -124,12 +125,14 @@ export default function ReviewDetailsList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
+    //!!!
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
         GetReviewDetailsRequest(cookies.accessToken)
         .then(GetReviewDetailsResponse);
-    }, [location]);
+    }, []);
+    //!!!
 
     useEffect(() => {
         if (!reviewDetailsList.length) return;

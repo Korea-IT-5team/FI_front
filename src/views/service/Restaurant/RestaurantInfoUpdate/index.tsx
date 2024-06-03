@@ -1,13 +1,13 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import './style.css';
 
 export default function RestaurantInfoUpdate() 
@@ -32,11 +32,11 @@ export default function RestaurantInfoUpdate()
     const [restaurantFoodCategoryCheck, setRestaurantFoodCategoryCheck] = useState<boolean>(false);
     const [restaurantPostalCodeCheck, setRestaurantPostalCodeCheck] = useState<boolean>(false);
     const [restaurantLocationCheck, setRestaurantLocationCheck] = useState<boolean>(false);
-    const location = useLocation();
     const navigator = useNavigate();
 
     //                                      function                                            //
 
+    //!!!
     const GetRestaurantInfoResponse = (result: GetRestaurantInfoResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -65,7 +65,9 @@ export default function RestaurantInfoUpdate()
         setRestaurantRepresentativeMenu(restaurantRepresentativeMenu);
         setRestaurantBusinessRegistrationNumber(restaurantBusinessRegistrationNumber);
     }
+    //!!!
 
+    //!!!
     const PatchRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -82,10 +84,10 @@ export default function RestaurantInfoUpdate()
         if(!restaurantId) return;
         navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId))
     }
+    //!!!
 
-
-
-    //                                      event handler                                       //
+//                                      event handler                                       //
+    //!!!
     // 식당 정보 수정
     const onUpdateClickHandler = () => {
 
@@ -97,7 +99,6 @@ export default function RestaurantInfoUpdate()
 
         const requestBody: PatchRestaurantInfoRequestDto =
         {
-            restaurantId: Number(restaurantId),
             restaurantImage: restaurantImage,
             restaurantName: restaurantName,
             restaurantFoodCategory: restaurantFoodCategory,
@@ -110,9 +111,10 @@ export default function RestaurantInfoUpdate()
             restaurantNotice: restaurantNotice,
             restaurantRepresentativeMenu: restaurantRepresentativeMenu,
         }
-        PatchRestaurantInfoRequest(requestBody, cookies.accessToken)
+        PatchRestaurantInfoRequest(restaurantId, requestBody, cookies.accessToken)
             .then(PatchRestaurantInfoResponse);
     }
+    //!!!
 
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -185,8 +187,9 @@ export default function RestaurantInfoUpdate()
         
     };
 
+    //!!!
     //                                  effect                                              //
-    let effectFlag = false;
+    let effectFlag = false; 
     useEffect(() => {
         if (!cookies.accessToken || !restaurantId) {
             return;
@@ -196,24 +199,25 @@ export default function RestaurantInfoUpdate()
 
         GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
             .then(GetRestaurantInfoResponse);
-    }, [location]);
+    }, []);
+    //!!!
 
 
     const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck;
-    const ButtonClass = `${isRestUploadUpActive ? 'restaurantinfo-primary' : 'restaurantinfo-disable'}-button`;
+    const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
 
     //                                      render                                              //
     return (
         <>
-            <div className="restaurantinfowrite-title">식당 정보 수정</div>
-            <div className="restaurantinfowrite-box">
+            <div className="restaurant-info-write-title">식당 정보 수정</div>
+            <div className="restaurant-info-write-box">
                 <RestaurantInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
                 placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
                                        
                 <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
                 placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
         
-                <div className="restaurantinfowrite-selectbox">                 
+                <div className="restaurant-info-write-selectbox">                 
                     <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                 </div>  
                                    
@@ -242,7 +246,7 @@ export default function RestaurantInfoUpdate()
                 placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} 
                 onKeydownHandler={onRepresentativeMenuKeydownHandler}/>
         
-                <div className="restaurantinfo-registered-button-box">
+                <div className="restaurant-info-registered-button-box">
                     <button onClick={onUpdateClickHandler}
                     className={ButtonClass}>수정하기</button>
                 </div>

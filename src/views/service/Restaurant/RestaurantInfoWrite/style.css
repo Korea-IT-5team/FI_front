@@ -1,11 +1,11 @@
 
 
-.restaurantinfowrite-selectbox{
+.restaurant-info-write-selectbox{
     width: 100%;
 }
 
 
-.restaurantinfo-primary-button {
+.restaurant-info-primary-button {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -26,13 +26,13 @@
     color: rgba(255, 255, 255, 1);
 }
 
-.restaurantinfo-primary-button:hover {
+.restaurant-info-primary-button:hover {
     cursor: pointer;
     opacity: 0.85;
     border: 1px solid #ffffff;
 }
 
-.restaurantinfo-disable-button {
+.restaurant-info-disable-button {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -53,12 +53,12 @@
     color: rgba(255, 255, 255, 1);
 }
 
-.restaurantinfo-registered-button-box{
+.restaurant-info-registered-button-box{
     margin-left: 43%;
     margin-bottom: 5%;
 }
 
-.restaurantinfowrite-box{
+.restaurant-info-write-box{
     border: 1px solid rgba(200, 200, 200, 1);
     width: 50%;
     margin-left: 25%;
@@ -66,14 +66,12 @@
     margin-bottom: 5%;
 }
 
-.restaurantinfowrite-title{
+.restaurant-info-write-title{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 20px;
+    font-family: 'Nanum Gothic';
 
     color: rgba(64, 64, 64, 1);
 }
-/*
-!!!수정
-*/
