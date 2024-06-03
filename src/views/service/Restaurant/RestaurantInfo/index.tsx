@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
@@ -147,6 +147,7 @@ export default function RestaurantInfo() {
             return;
         }
     
+        console.log('하고있니???..')
         setUserFavoriteStatus(true);
     };
 
@@ -252,7 +253,7 @@ const onReservationCancelClickHandler = () =>
 const onFavoriteClickHandler = () => {
     if(!loginUserEmailId || !restaurantId || !cookies.accessToken) return;
 
-    PostRestaurantFavoriteRequest(restaurantId,cookies.accessToken)
+    PostRestaurantFavoriteRequest(restaurantId, cookies.accessToken)
     .then(PostRestaurantFavoriteResponse)
 }
 //!!!
@@ -263,6 +264,7 @@ const onCancleFavoriteClickHandler = () => {
     DeleteRestaurantFavoriteRequest(restaurantId,cookies.accessToken)
     .then(DeleteRestaurantFavoriteResponse)
 }
+console.log(userFavoriteStatus);
 //!!!
     //                      render                      //
     return (
