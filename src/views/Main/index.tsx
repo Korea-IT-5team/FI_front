@@ -195,12 +195,12 @@ return (
         <Outlet />
     </div>
     <div className='main-container'>
-      <div className='main-banner-box'></div>
+      <div className='main-banner'></div>
       <div className='main-image-box'>
-        <div className='food-image'>식당1</div>
-        <div className='food-image'>식당2</div>
-        <div className='food-image'>식당3</div>
-        <div className='food-image'>식당4</div>
+        <div className='restaurant-image'>식당1</div>
+        <div className='restaurant-image'>식당2</div>
+        <div className='restaurant-image'>식당3</div>
+        <div className='restaurant-image'>식당4</div>
       </div>
     </div>
   </div>
