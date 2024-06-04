@@ -12,7 +12,6 @@ export interface RestaurantReviewListItem {
   reviewImage: string;
   rating: number;
   reviewContents: string;
-  reviewWriterId: string;
   reviewWriterNickname: string;
   reviewDate: string;
 }
@@ -22,7 +21,6 @@ export interface RestaurantReservationListItem {
   reservationStatus: boolean;
   reservationRestaurantId: number;
   reservationRestaurantName: string;
-  reservationUserId: string;
   reservationDate: string;
   reservationTime: string;
   reservationPeople: number;
@@ -39,16 +37,23 @@ export interface NoticeBoardListItem {
 export interface InquiryBoardListItem {
   inquiryNumber: number;
   inquiryStatus: boolean;
+  inquiryPublic: boolean;
   inquiryTitle: string;
-  inquiryWriterId: string;
+  inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
 }
 
-export interface ReviewDetailsListItem{
-  reviewNumber:number,
-  reviewRestaurantId:number,
-  reviewDate:string
+//###수정
+export interface RestaurantReviewListItem {
+  reviewNumber: number,
+  reviewRestaurantId: number,
+  reviewDate: string,
+  reviewImage: string,
+  rating: number,
+  reviewContents: string,
+  reviewWriterNickname: string
 }
+//###수정
 
 // export interface InquiryBoardDetailItem {
 //   inquiryNumber: number;

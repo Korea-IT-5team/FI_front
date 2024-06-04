@@ -20,13 +20,23 @@ function TopBar({ path }: Props) {
     //   state   //
     const { loginUserRole } = useUserStore();
 
-    const [cookies, setCookie, removeCookie] = useCookies();
+    const [cookies, removeCookie] = useCookies();
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
+    //   effect   //
+    useEffect(() => {
+        if (!cookies.accessToken) {
+            setIsLoggedIn(isLoggedIn);
+        }
+    })
 
     //   function   //
     const navigator = useNavigate();
 
     //   event handler   //
+    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
+    
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
         navigator(MAIN_ABSOLUTE_PATH);
@@ -51,8 +61,11 @@ function TopBar({ path }: Props) {
                         <div className='board-divider'>{'\|'}</div>
                     </div>
                     }
+                    { isLoggedIn ?
+                        <div className='board-sign-out' onClick={onLogoutClickHandler}>로그아웃</div> :
+                        <div className='board-sign-in' onClick={onSignInClickHandler}>로그인/회원가입</div>
+                    }
                     {/* { 비회원인 경우 - '로그인/회원가입' / 회원+관리자인 경우 - '로그아웃' } */}
-                    <div className='board-sign-out' onClick={onLogoutClickHandler}>로그아웃</div>
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@ export default function InquiryDetail() {
     const navigator = useNavigate();
 
     const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
-      const message =
+    const message =
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '잘못된 접수번호입니다.' : 
         result.code === 'NB' ? '존재하지 않는 접수번호입니다.' :
@@ -36,21 +36,21 @@ export default function InquiryDetail() {
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
-          alert(message);
-          if (result?.code === 'AF') {
-              navigator(SIGN_IN_ABSOLUTE_PATH);
-              return;
-          }
-          navigator(NOTICE_BOARD_LIST_PATH);
-          return;
-      }
-      
-      const { inquiryTitle, inquiryWriterId, inquiryWriteDatetime, inquiryContents, comment } = result as GetInquiryBoardResponseDto;
-      setInquiryTitle(inquiryTitle);
-      setInquiryWriterId(inquiryWriterId);
-      setInquiryWriteDatetime(inquiryWriteDatetime);
-      setInquiryContents(inquiryContents);
-      setInquiryComment(inquiryComment);
+        alert(message);
+        if (result?.code === 'AF') {
+            navigator(SIGN_IN_ABSOLUTE_PATH);
+            return;
+        }
+        navigator(NOTICE_BOARD_LIST_PATH);
+        return;
+    }
+
+    const { inquiryTitle, inquiryWriterId, inquiryWriteDatetime, inquiryContents, comment } = result as GetInquiryBoardResponseDto;
+    setInquiryTitle(inquiryTitle);
+    setInquiryWriterId(inquiryWriterId);
+    setInquiryWriteDatetime(inquiryWriteDatetime);
+    setInquiryContents(inquiryContents);
+    setInquiryComment(inquiryComment);
     };
 
     const postInquiryCommentResponse = (result: ResponseDto | null) => {

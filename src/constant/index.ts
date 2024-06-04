@@ -6,9 +6,8 @@ export const AUTH_PATH = '/authentication';
 export const SIGN_IN_PATH = 'sign-in';
 export const SIGN_UP_PATH = 'sign-up';
 export const FIND_EMAIL_INPUT_PATH = 'find-email-input';
-export const FIND_EMAIL_FINALLY_PATH = 'find-email-finally';
 export const PASSWORD_RESET_INPUT_PATH = 'password-reset-input';
-export const PASSWORD_RESET_CHECK_PATH = 'password-reset-check';
+export const PASSWORD_RESET_CHECK_PATH = 'password-reset-check/:userEmailId';
 export const PASSWORD_RESET_FINALLY_PATH = 'password-reset-finally';
 
 export const RESTAURANT_PATH = '/restaurant';
@@ -57,16 +56,15 @@ export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
 export const SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
 export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_INPUT_PATH}`;
-export const FIND_EMAIL_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_FINALLY_PATH}`;
 export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
-export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}`;
+export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}/${userEmailId}`;
 export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
 export const RESTAURANT_INFO_WRITE_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_INFO_WRITE_PATH}`;
 export const RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/update/${restaurantId}`;
 export const RESTAURANT_LIST_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_LIST_PATH}`;
-                                                                                                                                
+
 export const RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/${RESERVATION_PATH}/doReservation/${restaurantId}`;
 export const RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${RESERVATION_PATH}/${RESERVATION_LIST_PATH}`;
 export const RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH = `${RESTAURANT_PATH}/${REVIEW_PATH}/${RESTAURANT_REVIEW_DETAILS_LIST_PATH}`;
@@ -111,13 +109,14 @@ export const EMAIL_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-check`;
 export const NICKNAME_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/nickname-check`;
 export const FIND_EMAIL_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-email`;
 export const PASSWORD_RESET_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-reset`;
-export const PASSWORD_UPDATE_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-update`;
+export const PASSWORD_UPDATE_REQUEST_URL = (userEmailId: string) => `${SERVER_AUTH_MODULE_URL}/${userEmailId}`;
+export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-recheck`;
 export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/business-registration`;
 
 // description: USER 모듈 내의 기능 URL
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
-export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_USER_MODULE_URL}/password-recheck`;
+// export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_USER_MODULE_URL}/password-recheck`;
 export const INFO_UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-update`;
 export const INFO_DELETE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-delete`;
 export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
@@ -126,8 +125,10 @@ export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
 export const SERVER_RESTAURANT_MODULE_URL = `${SERVER_API_URL}/restaurant`;
 export const GET_SEARCH_RESTAURANT_LIST_URL = `${SERVER_RESTAURANT_MODULE_URL}/search`;
 export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}`;
-export const POST_RESTAURANT_INFO_UPLOAD = `${GET_RESTAURANT_URL}/info-upload`;
-export const PATCH_RESTAURANT_INFO_UPDATE = `${GET_RESTAURANT_URL}/info-update`;
+export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
+//###
+export const PATCH_RESTAURANT_INFO_UPDATE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-update`;
+//###
 
 // description: REVIEW 모듈 내의 기능 URL
 export const SERVER_REVIEW_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/review`;
@@ -142,16 +143,18 @@ export const DELETE_REVIEW_REQUEST_URL = (reviewNumber: number | string) => `${S
 // description: RESERVATION 모듈 내의 기능 URL
 export const SERVER_RESERVATION_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/reservation`;
 export const GET_RESERVATION_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/list`;
-export const GET_RESERVATION_CEO_LIST_URL = (restaurantName: string) =>  `${SERVER_RESERVATION_MODULE_URL}/ceo-list/${restaurantName}`;
+export const GET_RESERVATION_CEO_LIST_URL = `${SERVER_RESERVATION_MODULE_URL}/ceo-list`;
 export const GET_RESERVATION_URL = (reservationNumber: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${reservationNumber}`;
 export const POST_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
 export const DELETE_RESERVATION_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
+export const GET_RESERVATION_CHECK_REQUEST_URL = (restaurantId: number | string) => `${SERVER_RESERVATION_MODULE_URL}/${restaurantId}`;
 
 // description: FAVORITE 모듈 내의 기능 URL
 export const SERVER_FAVORITE_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/favorite`;
 export const GET_FAVORITE_LIST_URL = `${SERVER_FAVORITE_MODULE_URL}/list`;
 export const POST_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
 export const DELETE_FAVORITE_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
+export const GET_FAVORITE_CHECK_REQUEST_URL = (restaurantId: number | string) => `${SERVER_FAVORITE_MODULE_URL}/${restaurantId}`;
 
 // description: INQUIRY BOARD 모듈 내의 기능 URL
 export const SERVER_INQUIRY_BOARD_MODULE_URL = `${SERVER_API_URL}/inquiry-board`;
@@ -178,3 +181,4 @@ export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERV
 
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
+//###수정

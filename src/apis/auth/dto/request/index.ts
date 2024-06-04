@@ -40,7 +40,7 @@ export interface PasswordResetRequestDto {
 // description: 새로운 비밀번호 설정 Request Body DTO
 export interface NewPasswordRequestDto {
     password: string;
-    linkCode: string;
+    // linkCode: string;
 }
 
 // description: 사업자등록 번호 Request Body DTO

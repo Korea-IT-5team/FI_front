@@ -1,16 +1,17 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css"; 
-import { emailCheckRequest, newPasswordRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
+import { emailCheckRequest, newPasswordRequest, telNumberAuthRequest } from 'src/apis/auth';
 import { CheckEmailRequestDto, NewPasswordRequestDto, PasswordResetRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import InputBox from 'src/components/InputBox';
 import { PASSWORD_RESET_FINALLY_ABSOLUTE_PATH } from 'src/constant';
 
-// component: 비밀번호 찾기 // 
+// component: 비밀번호 재설정 // 
 export default function PasswordResetCheck() {
 
   // state //
+  const { userEmailId } = useParams();
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
 
@@ -31,6 +32,7 @@ export default function PasswordResetCheck() {
     const message = 
         !result ? '서버에 문제가 있습니다.' :
         result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
+        result.code === 'NU' ? '유저 정보를 찾을 수 없습니다.' : 
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
     const isSuccess = result && result.code === 'SU';
@@ -38,6 +40,7 @@ export default function PasswordResetCheck() {
         alert(message);
         return;
     }
+    // navigator(PASSWORD_RESET_FINALLY_ABSOLUTE_PATH);
   };
 
   // event handler //
@@ -76,34 +79,17 @@ export default function PasswordResetCheck() {
     setPasswordCheckMessage(passwordCheckMessage);
   };
 
-  const handleRefreshCaptcha = () => {
-    // 캡차 이미지 새로고침 코드
-  };
-
-  const isCaptCha = () => {
-    // 캡차 이미지 검증 코드
-    return true; // 임시로 항상 true를 반환
-  };
-
   const onPasswordResetCheckButtonClickHandler = () => {
-    if(!isResetPassworCheckdActive) return;
+    if(!isResetPassworCheckdActive || !userEmailId) return;
     if(!password || !passwordCheck) {
         alert('모든 내용을 입력해주세요.');
         return;
     }
-    if (!isCaptCha()) {
-      alert('자동입력 방지문자가 일치하지 않습니다.');
-      return;
-    } else {
-      alert('자동입력 방지문자가 일치합니다.');
-    }
 
     const requestBody: NewPasswordRequestDto = {
-      password: password,
-      linkCode: ''
+      password: password
     }
-    newPasswordRequest(requestBody).then(passwordResetCheckResponse);
-    navigator(PASSWORD_RESET_FINALLY_ABSOLUTE_PATH);
+    newPasswordRequest(userEmailId, requestBody).then(passwordResetCheckResponse);
   };
   
   // render //
@@ -114,19 +100,9 @@ export default function PasswordResetCheck() {
         <div className='reset-password-box'>
           <div className='reset-password-input-container'>
 
-            <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-            <InputBox type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
+            <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} />
+            <InputBox type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} />
 
-          </div>
-          <div className='automatic-prevention'>
-            <div className='automatic-prevention-title'>아래 이미지를 보이는 대로 입력해주세요</div>
-            <div className='automatic-prevention-image'>
-              <img id="captchaImg" src="captchaImg" title="캡차 이미지" alt="캡차 이미지" />
-              <button type="button" id="refresh_btn" className="btn btn-sm btn-gray w-50 ms-2" onClick={handleRefreshCaptcha}>새로고침</button>
-            </div>
-            <div className='automatic-prevention-input'>
-              <input id="captcha" type="text" className="form-control input-control" />
-            </div>
           </div>
           <div className={passwordResetCheckButtonClass} onClick={onPasswordResetCheckButtonClickHandler}>재설정</div>
         </div>

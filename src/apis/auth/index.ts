@@ -69,13 +69,13 @@ export const passwordResetRequest = async (requestBody: PasswordResetRequestDto)
 };
 
 // function : 새로운 비밀번호 설정 API 함수
-export const newPasswordRequest = async (requestBody: NewPasswordRequestDto) => {
+export const newPasswordRequest = async (userEmailId: string, requestBody: NewPasswordRequestDto) => {
     const result = await axios
-        .post(PASSWORD_UPDATE_REQUEST_URL, requestBody)
+        .put(PASSWORD_UPDATE_REQUEST_URL(userEmailId), requestBody)
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
-};
+}; 
 
 // function: 사업자등록 인증 API 함수 
 export const businessRegistrationNumberRequest = async(requestBody: businessRegistrationNumberRequestDto) => {
@@ -94,15 +94,3 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
         .catch(requestErrorHandler);
     return result;
 };
-
-
-
-
-
-
-
-
-
-
-
-
