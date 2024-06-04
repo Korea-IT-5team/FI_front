@@ -57,7 +57,7 @@ export const SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
 export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_INPUT_PATH}`;
 export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
-export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}/${userEmailId}`;
+export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}`;
 export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
@@ -117,8 +117,8 @@ export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/bus
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
 // export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_USER_MODULE_URL}/password-recheck`;
-export const INFO_UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-update`;
-export const INFO_DELETE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-delete`;
+export const PATCH_INFO_UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-update/{userEmailId}`;
+export const DELETE_INFO_DELETE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-delete`;
 export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
 
 // description: RESTAURANT 모듈 내의 기능 URL

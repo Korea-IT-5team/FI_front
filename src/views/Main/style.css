@@ -50,7 +50,7 @@
   height: auto; 
 }
 
-.main-banner-box {
+.main-banner {
   width: 100%;
   height: 500px; 
   background-image: url('../../assets/image/main_image.jpg');
@@ -62,13 +62,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
   gap: 20px; 
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 }
 
-.food-image {
+.restaurant-image {
   background-color: rgba(245, 245, 245, 1); 
   padding: 20px;
   text-align: center;
-  border-radius: 5px; 
+  border-radius: 5px;
 } 
