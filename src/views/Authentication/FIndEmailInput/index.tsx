@@ -104,11 +104,9 @@ export default function FindEmailInput() {
             <div className='find-email-title'>이메일 찾기</div>
             <div className='find-email-box'>
                 <div className='find-email-input'>
-
                     <InputBox type="text" value={userName} placeholder="이름을 입력해주세요" onChangeHandler={onUserNameChangeHandler} message={UserNameMessage} error />
 
                     <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
-
                 </div>
                 <div className='find-email-button'>
                     <div className={findEmailButtonClass} onClick={onFindEmailButtonClickHandler}>이메일 찾기</div> 
@@ -118,8 +116,11 @@ export default function FindEmailInput() {
                     <div className='return-Email-id' >{userEmailId}</div>
                 </div>
                 }
-                <div className='moving-sign-up' onClick={() => navigator(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>
-                <div className='moving-sign-up' onClick={() => navigator(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)}>비밀번호 재설정</div>
+                <div className='navigation-button'>
+                    <div className='moving-sign-up' onClick={() => navigator(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>
+                    <div className="find-divider">{'\|'}</div>
+                    <div className='moving-password-reset' onClick={() => navigator(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)}>비밀번호 재설정</div>
+                </div>
             </div>
         </div>
     )

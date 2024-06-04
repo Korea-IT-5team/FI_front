@@ -39,7 +39,7 @@
 
     align-items: center;
 
-    gap: 24px;
+    gap: 20px;
 }
 
 .authentication-input-container {
@@ -47,6 +47,8 @@
 
     display: flex;
     flex-direction: column;
+
+    gap: 10px;
 }
 
 .authentication-button-container {
