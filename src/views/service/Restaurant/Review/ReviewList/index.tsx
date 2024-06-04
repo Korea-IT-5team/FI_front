@@ -30,15 +30,15 @@ export default function ReviewList({ value,restaurantId }: Props) {
     return (
         <>
             {loginUserRole === "ROLE_USER" && (<div onClick={onWriteClickHandler}>리뷰작성</div>)}
-            <div className='select-list'>
+            <div className='review-select-list'>
                 {value.map((item) => (
-                    <div className='select-list-item-box' key={item.reviewNumber}>
+                    <div className='review-select-list-item-box' key={item.reviewNumber}>
                         <div>
-                            <div className='select-item'>{item.reviewImage}</div>
-                            <div className='select-item'>{item.rating}</div>
-                            <div className='select-item'>{item.reviewContents}</div>
-                            <div className='select-item'>{item.reviewWriterNickname}</div>
-                            <div className='select-item'>{item.reviewDate}</div>
+                            <div className='review-select-item'>{item.reviewImage}</div>
+                            <div className='review-select-item'>{item.rating}</div>
+                            <div className='review-select-item'>{item.reviewContents}</div>
+                            <div className='review-select-item'>{item.reviewWriterNickname}</div>
+                            <div className='review-select-item'>{item.reviewDate}</div>
                         </div>
                     </div>
                 ))}
