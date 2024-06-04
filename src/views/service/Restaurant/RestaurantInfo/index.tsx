@@ -193,7 +193,7 @@ export default function RestaurantInfo() {
 
         const total = restaurantReviewList.reduce((sum, restaurantReviewList) => sum + restaurantReviewList.rating, 0);
         setGrade(total / restaurantReviewList.length);
-    }, []);
+    }, [restaurantReviewList]);
 
     //!!!
     let effectFlag = false;
@@ -264,7 +264,7 @@ const onCancleFavoriteClickHandler = () => {
     DeleteRestaurantFavoriteRequest(restaurantId,cookies.accessToken)
     .then(DeleteRestaurantFavoriteResponse)
 }
-console.log(userFavoriteStatus);
+console.log(grade);
 //!!!
     //                      render                      //
     return (

@@ -45,6 +45,7 @@ export const GetReviewDetailsRequest = async (accessToken: string) => {
 }
 //!!!
 
+
 //!!!
 // function : 식당 리뷰 내역 확인 API 함수
 export const GetReviewDetailRequest  = async (reviewNumber:number|string, accessToken: string) => {
