@@ -23,7 +23,7 @@ export default function RestaurantList()
   //                    function                    //
   const navigator = useNavigate();
 
-  //!!!
+  //시작
   const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => 
   {
       const message =
@@ -41,7 +41,7 @@ export default function RestaurantList()
       const { restaurantList } = result as GetRestaurantListResponseDto;
       SetRestaurantList(restaurantList);
   };
-  //!!!
+  //완료
 
 
 
@@ -52,7 +52,7 @@ export default function RestaurantList()
       setSearchWord(searchWord);
   };
 
-  //!!!
+  //시작
   const onSearchClickHandler = () =>
   {
       if (!searchWord) return;
@@ -61,7 +61,8 @@ export default function RestaurantList()
       GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
   };
-  //!!!
+  //완료
+ 
 
   const onRegistrationClickHandler = () =>
   {     
@@ -78,7 +79,7 @@ export default function RestaurantList()
 
   
   //          effect              //
-  //!!!
+  //시작
   let effectFlag1 = false;
   useEffect(() => {
     if(effectFlag1) return;
@@ -91,7 +92,7 @@ export default function RestaurantList()
     GetRestaurantListRequest(searchWord, cookies.accessToken)
       .then(GetRestaurantListResponse);
   }, []);
-  //!!!
+  //완료
   //                  render                  //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
@@ -101,7 +102,7 @@ export default function RestaurantList()
               <input className="restaurantlist-search-input" placeholder='오늘의 맛집은?' value={searchWord} onChange={onSearchWordChangeHandler}></input>
               <div className={searchButtonClass} onClick={onSearchClickHandler}>검색</div>
           </div>
-          {loginUserRole === 'ROLE_CEO' && <div className="restaurantlist-registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
+          {loginUserRole === 'ROLE_USER' && <div className="restaurantlist-registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
       </div>
       <div className="restaurant-list">
             {!restaurantList || restaurantList.length === 0 ? 

@@ -23,7 +23,7 @@ function ListItem ({
     //                    event handler                    //
     const onClickHandler = () => navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));  
       
-
+    console.log(restaurantId);
     //                    render                    //
     return (
         <div className='favorite-list-table-tr' onClick={onClickHandler}>
