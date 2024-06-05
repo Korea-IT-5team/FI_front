@@ -7,7 +7,7 @@ import { deleteUserRequest } from 'src/apis/user';
 import { MAIN_ABSOLUTE_PATH } from 'src/constant';
 import InputBox from 'src/components/InputBox';
 import { useUserStore } from 'src/stores';
-import { DeleteUserRequestDto } from 'src/apis/user/dto/request';
+import { DeleteUserRequestDto, PasswordRecheckRequestDto } from 'src/apis/user/dto/request';
 
 // component: 회원탈퇴 // 
 export default function UserDelete() {
@@ -15,7 +15,7 @@ export default function UserDelete() {
   // state //
   const { userEmailId } = useParams();
   const { loginUserRole } = useUserStore();
-  const [cookies] = useCookies();
+  const [cookies, setCookie, removeCookie] = useCookies();
   // const [userEmailId, setUserEmailId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
@@ -30,17 +30,17 @@ export default function UserDelete() {
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '권한이 없습니다.' :
       result.code === 'NU' ? '사용자 정보가 일치하지 않습니다.' :
-      result.code === 'VF' ? '비밀번호가 유효하지 않습니다.' :
+      result.code === 'VF' ? '비밀번호를 입력해주세요.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    const isSuccess = result && result.code === 'SU';
-    if (!isSuccess) {
+    if (!result || result.code !== 'SU'){
       alert(message);
       return;
     }
 
-    // 성공 안됨
     alert('회원탈퇴가 성공하였습니다.');
+
+    removeCookie('accessToken', { path: '/' });
     navigator(MAIN_ABSOLUTE_PATH);
   };
 
@@ -65,13 +65,15 @@ export default function UserDelete() {
     const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
     if (!isConfirm) return;
 
-    deleteUserRequest(userEmailId, cookies.accessToken).then(deleteUserResponse);
+    const requestData: DeleteUserRequestDto = { password };
+    deleteUserRequest(userEmailId, requestData, cookies.accessToken).then(deleteUserResponse);
+
   };
 
   // effect // 
   useEffect(() => {
     if (!cookies.accessToken || !userEmailId) return;
-  }, []);
+  }, [cookies.accessToken]);
 
   // render // 
   return (
