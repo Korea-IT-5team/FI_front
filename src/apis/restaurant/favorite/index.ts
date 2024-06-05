@@ -8,7 +8,7 @@ import { GetFavoriteRestaurantListResponseDto } from './dto/response/index';
 //!!!
 // function : 식당 찜 저장 API 함수
 export const PostRestaurantFavoriteRequest = async (restaurantId: number|string, accessToken: string) => {
-    const result = await axios.post(POST_FAVORITE_REQUEST_URL(restaurantId), bearerAuthorization(accessToken))
+    const result = await axios.post(POST_FAVORITE_REQUEST_URL(restaurantId), {}, bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;

@@ -118,11 +118,9 @@ export default function PasswordResetInput() {
         <div className='reset-password-title'>비밀번호 재설정</div>
         <div className='reset-password-box'>
           <div className='reset-password-input-container'>
-
             <InputBox type="text" value={userEmailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} buttonStatus={userEmailIdButtonStatus} onButtonClickHandler={onUserEmailIdButtonClickHandler} message={userEmailIdMessage} error={isUserEmailIdError} />
 
             <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
-
           </div>
           <div className={passwordResetInputButtonClass} onClick={onPasswordResetButtonClickHandler}>재설정 링크 전송</div>
         </div>
