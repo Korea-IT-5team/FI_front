@@ -26,7 +26,7 @@ export default function ReviewWrite()
 
   //                function                    //
 
-  //!!!
+  //시작
   const PostReviewResponse = (result: ResponseDto | null) => {
     const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -43,7 +43,7 @@ export default function ReviewWrite()
     if(!restaurantId) return;
     navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
   }
-  //!!!
+  //완료
 
    
 
@@ -75,7 +75,7 @@ export default function ReviewWrite()
     contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   }
 
-  //!!!
+  //시작
   const UploadClickHandler = () => {
     if (!rating) {
         return;
@@ -92,7 +92,7 @@ export default function ReviewWrite()
     PostReviewRequest(restaurantId, requestBody, cookies.accessToken)
     .then(PostReviewResponse);
 }
-//!!!
+//완료
 
   const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
  
@@ -138,3 +138,4 @@ export default function ReviewWrite()
             </>
   )
 }
+//기능부분완료

@@ -5,7 +5,7 @@ import { DELETE_REVIEW_REQUEST_URL, GET_REVIEW_DETAILS_LIST_URL, GET_REVIEW_DETA
 import { PatchReviewRequestDto, PostReviewRequestDto } from './dto/request';
 import { GetReviewListResponseDto, GetReviewResponseDto } from './dto/response';
 
-//!!!
+//시작
 // function : 식당 리뷰 작성 API 함수 
 export const PostReviewRequest = async (restaurantId: number|string, requestBody: PostReviewRequestDto, accessToken: string) => {
   const result = await axios.post(POST_REVIEW_REQUEST_URL(restaurantId), requestBody, bearerAuthorization(accessToken))
@@ -13,7 +13,7 @@ export const PostReviewRequest = async (restaurantId: number|string, requestBody
     .catch(requestErrorHandler)
   return result;
 }
-//!!!
+//완료
 
 //!!!
 // function : 식당 리뷰 수정 API 함수 

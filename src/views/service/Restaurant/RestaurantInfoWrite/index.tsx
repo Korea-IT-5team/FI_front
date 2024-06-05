@@ -25,17 +25,11 @@ export default function RestaurantInfoWrite()
     const [restaurantNotice, setRestaurantNotice] = useState('');
     const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState('');
     const [restaurantBusinessRegistrationNumber, setRestaurantBusinessRegistrationNumber] = useState('');
-    const [restaurantImageCheck, setRestaurantImageCheck] = useState<boolean>(false);
-    const [restaurantNameCheck, setRestaurantNameCheck] = useState<boolean>(false);
-    const [restaurantFoodCategoryCheck, setRestaurantFoodCategoryCheck] = useState<boolean>(false);
-    const [restaurantPostalCodeCheck, setRestaurantPostalCodeCheck] = useState<boolean>(false);
-    const [restaurantLocationCheck, setRestaurantLocationCheck] = useState<boolean>(false);
-    const [restaurantBusinessRegistrationNumberCheck, setRestaurantBusinessRegistrationNumberCheck] = useState<boolean>(false);
     const navigator = useNavigate();
 
     //                                      function                                            //
 
-    //!!!
+    //시작
     const PostRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -51,10 +45,10 @@ export default function RestaurantInfoWrite()
         alert("등록이 완료되었습니다.");
         navigator(RESTAURANT_LIST_ABSOLUTE_PATH)
     }
-    //!!!
+    //완료
 
 
-    //!!!
+    //시작
     //                                      event handler                                       //
     // 식당 정보 등록
     const onUploadClickHandler = () => {
@@ -82,36 +76,31 @@ export default function RestaurantInfoWrite()
         PostRestaurantInfoRequest(requestBody, cookies.accessToken)
             .then(PostRestaurantInfoResponse);
     }
-    //!!!
+    //완료
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setRestaurantImage(value);
-        setRestaurantImageCheck(!(value.length === 0));
     }
 
 
     const onNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setRestaurantName(value);
-        setRestaurantNameCheck(!(value.length === 0));
     }
 
     const onFoodCategoryChangeHandler = (selectFood: string) => {
         setRestaurantFoodCategory(selectFood);
-        setRestaurantFoodCategoryCheck(!(selectFood.length === 0));
     };
 
     const onPostalCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setRestaurantPostalCode(value);
-        setRestaurantPostalCodeCheck(!(value.length === 0));
     }
 
     const onLocationChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setRestaurantLocation(value);
-        setRestaurantLocationCheck(!(value.length === 0));
     }
 
     const onTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -148,7 +137,6 @@ export default function RestaurantInfoWrite()
     const onBusinessNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setRestaurantBusinessRegistrationNumber(value);
-        setRestaurantBusinessRegistrationNumberCheck(!(value.length === 0));
     }
 
     const onBusinessNumberKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -158,7 +146,7 @@ export default function RestaurantInfoWrite()
         
     };
    
-    const isRestUploadUpActive = restaurantImageCheck && restaurantNameCheck && restaurantFoodCategoryCheck && restaurantPostalCodeCheck && restaurantLocationCheck && restaurantBusinessRegistrationNumberCheck;
+    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPostalCode && restaurantLocation && restaurantBusinessRegistrationNumber;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`; 
 
     //                                      render                                              //
@@ -166,7 +154,7 @@ export default function RestaurantInfoWrite()
 <>
     <div className="restaurant-info-write-title">식당 정보 등록</div>
     <div className="restaurant-info-write-box">
-        <RestaurantInputBox label="식당 이미지" type="file" value={restaurantImage}  accept={'image/*'}
+        <RestaurantInputBox label="식당 이미지" type="file"  accept={'image/*'}
         placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
                                
         <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
@@ -212,4 +200,4 @@ export default function RestaurantInfoWrite()
 </>
   )
 }
-///???????????????????
+///완료

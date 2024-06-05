@@ -19,7 +19,7 @@ export default function Restaurant()
   const navigator = useNavigate();
 
 
-  //!!!
+  //시작
   //            function                     //
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
@@ -37,7 +37,7 @@ export default function Restaurant()
     setLoginUserEmailId(userEmailId);
     setLoginUserRole(userRole);
 };
-//!!!
+//완료
 
 
   //            event handler               //
@@ -49,7 +49,7 @@ export default function Restaurant()
 
   
  
-  //!!!
+  //시작
   //          effect              //
   let effectFlag = false;
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function Restaurant()
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, []);
-  //!!!
+  //완료
 
   // path에 대한 객체를 반환
 
@@ -86,7 +86,4 @@ export default function Restaurant()
     </>
   )
 }
-//수정##
-//CSS완료
-//사장쪽 점검빼고 완료
-//AF 비회원일때는 어떻게 처리???
+//기능부분완료

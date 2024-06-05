@@ -19,7 +19,6 @@ const[reservationDate,setReservationDate] = useState<string>('');
 const[reservationTime,setReservationTime] = useState<string>('');
 const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
-const {setUserReservationStatus} = useUserStore();
 const {restaurantId} = useParams();
 const [cookies] = useCookies();
 const navigator = useNavigate();
@@ -29,7 +28,7 @@ const [selected, setSelected] = useState<number | null>(null);
 
 //                  function                           //
 
-//!!!
+//시작
 const PostReservationResponse = (result: ResponseDto | null) => 
 {
       const message = 
@@ -46,11 +45,10 @@ const PostReservationResponse = (result: ResponseDto | null) =>
           return;
       }
       
-      setUserReservationStatus(true);
       if(!restaurantId) return;
       navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
 }
-//!!!
+//완료
 
 //                    event handler                    //
 
@@ -78,7 +76,7 @@ const onCheckClickHandler = () =>
     setIsChecked(!isChecked);
 }
 
-//!!!
+//시작
 const onReservationClickHandler = () => 
 {
     if(!reservationDate || !reservationTime || !reservationPeople 
@@ -97,7 +95,7 @@ const onReservationClickHandler = () =>
     if(!restaurantId) return;
     PostReservationRequest(restaurantId, requestBody,cookies.accessToken).then(PostReservationResponse);
 }
-//!!!
+//완료
 
 
 
@@ -166,3 +164,4 @@ const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-res
     </>
   )
 }
+//##기능부분완료
