@@ -58,6 +58,15 @@
     font-weight: 400;
 }
 
+.return-Email-id {
+    text-align: center;
+
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(64, 64, 64, 1);
+}
+
 .navigation-button {
     width: 100%;
 

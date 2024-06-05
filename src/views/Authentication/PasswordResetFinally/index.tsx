@@ -17,7 +17,7 @@ export default function PasswordResetFinally() {
         <div className='reset-password-input'>
           <div className='reset-password-title'>비밀번호가 성공적으로 변경되었습니다.</div>
         </div>
-        <div className='reset-password-link-title' onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인 하기</div>
+        <div className='reset-password-link-title' onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
       </div>
     </div>
   )

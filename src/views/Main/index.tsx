@@ -65,8 +65,7 @@ function TopBar({ path }: Props) {
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon-image'>
-☰</div>
+        <div className='main-icon'>☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
@@ -183,7 +182,6 @@ export default function Main() {
     }
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  
 }, [cookies.accessToken]);
 
 // render //
@@ -207,5 +205,3 @@ return (
 );
 
 }
-
-

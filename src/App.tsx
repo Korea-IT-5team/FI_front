@@ -98,8 +98,7 @@ function App() {
           <Route path={USER_DELETE_PATH} element={<UserDelete />} />
         </Route>  
         <Route path={BOARD_PATH} element={<BoardContainer />} >
-
-      
+          
           <Route path={NOTICE_PATH} >
             <Route path={NOTICE_BOARD_LIST_PATH} element={<NoticeList />} />
             <Route path={NOTICE_BOARD_WRITE_PATH} element={<NoticeWrite />} />

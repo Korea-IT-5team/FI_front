@@ -16,11 +16,9 @@
   padding: 10px 20px;
 
   background-color: rgba(255, 148, 45, 0.8);
-
-  border-bottom: 1px solid rgba(238, 238, 238, 1);
 }
 
-.main-icon-image {
+.main-icon {
   width: 40px;
   
   font-family: 'Nanum Gothic';
@@ -51,6 +49,7 @@
 .main-container {
   width: 100%;
   height: auto;
+  gap: 24px;
 
   display: flex;
   flex-direction: column;

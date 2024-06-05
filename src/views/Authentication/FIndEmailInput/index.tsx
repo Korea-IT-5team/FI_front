@@ -113,7 +113,7 @@ export default function FindEmailInput() {
                 </div>
                 {userEmailId &&
                 <div>
-                    <div className='return-Email-id' >{userEmailId}</div>
+                    <div className='return-Email-id' >* {userEmailId}</div>
                 </div>
                 }
                 <div className='navigation-button'>

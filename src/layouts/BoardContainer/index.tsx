@@ -55,13 +55,13 @@ function TopBar({ path }: Props) {
                 { isSideNavOpen && <SideNavigation path={path} /> }
                 <div className='board-title'>{"Food Insight"}</div>
                 <div className='board-sign-in-box'>
-                    { loginUserRole === 'USER_ADMIN' &&
+                    { loginUserRole === 'ROLE_ADMIN' &&
                     <div className='board-role-visible'>
                         <div className='board-role'>관리자</div> 
                         <div className='board-divider'>{'\|'}</div>
                     </div>
                     }
-                    { isLoggedIn ?
+                    { !isLoggedIn ?
                         <div className='board-sign-out' onClick={onLogoutClickHandler}>로그아웃</div> :
                         <div className='board-sign-in' onClick={onSignInClickHandler}>로그인/회원가입</div>
                     }

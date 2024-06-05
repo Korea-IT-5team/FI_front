@@ -71,15 +71,15 @@ export default function Restaurant()
     <>
       <div id="restaurant-wrapper">
           <div className='restaurant-head-box'>
-              <div className='restaurant-icon-image'></div>
+              <div className='restaurant-icon'>☰</div>
               <div className='restaurant-title'>{"Food Insight"}</div>
               {loginUserRole === '' 
-               ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>로그인/회원가입</div>
-               : loginUserRole === 'ROLE_CEO'
-               ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사장 로그아웃</div>
-               : loginUserRole === 'ROLE_USER' 
-               ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사용자 로그아웃</div>
-               : null}
+                ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>로그인/회원가입</div>
+                : loginUserRole === 'ROLE_CEO'
+                ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사장 로그아웃</div>
+                : loginUserRole === 'ROLE_USER' 
+                ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사용자 로그아웃</div>
+                : null}
           </div>
           <Outlet />
       </div> 

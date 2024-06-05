@@ -39,6 +39,7 @@ export interface InquiryBoardListItem {
   inquiryStatus: boolean;
   inquiryPublic: boolean;
   inquiryTitle: string;
+  // inquiryWriterId: string;
   inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
 }
