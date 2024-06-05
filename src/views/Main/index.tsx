@@ -183,7 +183,6 @@ export default function Main() {
     }
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-  
 }, [cookies.accessToken]);
 
 // render //
@@ -207,5 +206,3 @@ return (
 );
 
 }
-
-
