@@ -49,6 +49,7 @@
 .main-container {
   width: 100%;
   height: auto;
+  gap: 24px;
 
   display: flex;
   flex-direction: column;
