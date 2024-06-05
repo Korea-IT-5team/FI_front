@@ -8,13 +8,12 @@
 .board-head-box {
     display: flex;
     align-items: center;
+  
     justify-content: space-between;
-
-    padding: 15px 20px;
-
-    border-bottom: 1px solid rgba(238, 238, 238, 1);
-    
-    background-color: rgba(255, 148, 45, 0.95);
+  
+    padding: 10px 20px;
+  
+    background-color: rgba(255, 148, 45, 0.8);
 }
 
 .board-navigation-icon {

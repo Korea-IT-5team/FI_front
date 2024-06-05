@@ -100,7 +100,7 @@ export default function SignUp() {
       result.code === 'VF' ? '인증번호를 입력해주세요.' : 
       result.code === 'SF' ? '인증번호 전송이 실패하였습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-      result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+      result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
     const userTelNumberCheck = result !== null && result.code === 'SU';
     const UserTelNumberError = !userTelNumberCheck;
 

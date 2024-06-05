@@ -99,10 +99,8 @@ export default function PasswordResetCheck() {
         <div className='reset-password-title'>비밀번호 재설정</div>
         <div className='reset-password-box'>
           <div className='reset-password-input-container'>
-
-            <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-            <InputBox type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
-
+            <InputBox type="password" value={password} placeholder="새 비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
+            <InputBox type="password" value={passwordCheck} placeholder="새 비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
           </div>
           <div className={passwordResetCheckButtonClass} onClick={onPasswordResetCheckButtonClickHandler}>재설정</div>
         </div>
