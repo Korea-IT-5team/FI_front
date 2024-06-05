@@ -113,7 +113,7 @@ export const EMAIL_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/email-check`;
 export const NICKNAME_CHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/nickname-check`;
 export const FIND_EMAIL_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-email`;
 export const PASSWORD_RESET_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-reset`;
-export const PASSWORD_UPDATE_REQUEST_URL = (userEmailId: string) => `${SERVER_AUTH_MODULE_URL}/${userEmailId}`;
+export const PASSWORD_UPDATE_REQUEST_URL = (userEmailId: string) => `${SERVER_AUTH_MODULE_URL}/password-update/${userEmailId}`;
 export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-recheck`;
 export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/business-registration`;
 
