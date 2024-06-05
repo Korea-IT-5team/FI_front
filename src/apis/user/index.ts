@@ -22,16 +22,16 @@ export const passwordRecheckRequest = async (accessToken: string) => {
 };
 
 // function: 회원정보 수정 API 함수 
-export const patchUserInfoRequest = async (requestBody: PatchUserInfoRequestDto,  accessToken: string) => {
-    const result = await axios.patch(PATCH_INFO_UPDATE_REQUEST_URL, requestBody, bearerAuthorization(accessToken))
+export const patchUserInfoRequest = async (userEmailId: string, requestBody: PatchUserInfoRequestDto,  accessToken: string) => {
+    const result = await axios.patch(PATCH_INFO_UPDATE_REQUEST_URL(userEmailId), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
 
 // function: 회원탈퇴 API 함수 
-export const deleteUserRequest = async (accessToken: string) => {
-    const result = await axios.get(DELETE_INFO_DELETE_REQUEST_URL, bearerAuthorization(accessToken))
+export const deleteUserRequest = async (userEmailId: string, accessToken: string) => {
+    const result = await axios.delete(DELETE_INFO_DELETE_REQUEST_URL(userEmailId), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;
