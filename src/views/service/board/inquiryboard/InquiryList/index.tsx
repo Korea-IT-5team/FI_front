@@ -170,7 +170,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 
   //                  effect                  //
   useEffect(() => {
-    if (!cookies.accessToken) return;
+    // if (!cookies.accessToken) return;
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else

@@ -19,4 +19,14 @@ export interface GetMyInfoResponseDto extends ResponseDto{
   userRole: string;
   joinPath: String;
 }
-//수정5
+
+// description: 내 정보 수정하기 Response Body DTO
+export interface PatchUserInfoResponseDto extends ResponseDto{
+  nickname: string;
+  userEmailId: string;
+  userName: string;
+  userTelNumber: string;
+  userAddress: string;
+  userRole: string;
+  joinPath: String;
+}
