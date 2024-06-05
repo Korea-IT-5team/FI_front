@@ -1,0 +1,103 @@
+.restaurant-input {
+    border: 1px solid rgba(200, 200, 200, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 8px 16px;
+
+    background-color: rgba(255, 255, 255, 1);
+
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(35, 45, 66, 1);
+    width: 400px;
+
+}
+
+.restaurant-input::placeholder {
+    color: rgba(138, 146, 166, 1);
+}
+
+.restaurant-sns-container-title {
+    color: rgba(138, 146, 166, 1);
+}
+
+.restaurant-sns-button-container {
+    display: flex;
+    gap: 24px;
+}
+
+.restaurant-input-box {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.restaurant-input-label{
+    color:rgba(0, 0, 0, 1);
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.restaurant-input-content-box{
+    gap: 10px;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+/* .restaurant-input-primary-button {
+    box-sizing: border-box;
+    width: 110px;
+    padding: 8px 0px;
+    border-radius: 6px;
+
+    background-color: rgba(58, 87, 232, 0.2);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(45, 66, 178, 1);
+
+    text-align: center;
+}
+
+.restaurant-input-primary-button:hover {
+    cursor: pointer;
+}
+
+.restaurant-input-disable-button {
+    box-sizing: border-box;
+    width: 110px;
+    padding: 8px 0px;
+    border-radius: 6px;
+
+    background-color: rgba(238, 238, 238, 1);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(138, 146, 166, 1);
+
+    text-align: center;
+}
+
+.restaurant-input-message {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+} */

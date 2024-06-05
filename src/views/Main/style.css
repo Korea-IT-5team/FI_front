@@ -1,0 +1,74 @@
+#main-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  max-height: 100vh;
+}
+
+.main-head-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(238, 238, 238, 1);
+  background-color: rgba(255, 148, 45, 0.8);
+}
+
+.main-icon-image {
+  width: 40px;
+  
+  font-family: 'Nanum Gothic';
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.main-title {
+  font-family: 'Ubuntu';
+  font-size: 40px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+}
+
+.main-top-bar-button {
+  display: flex;
+
+  font-family: 'Nanum Gothic';
+  font-size: 17px;
+  color: rgba(255, 255, 255, 1);
+}
+
+.main-top-bar-button:hover {
+  color: rgba(245, 245, 245, 0.7);
+  cursor: pointer;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto; 
+}
+
+.main-banner-box {
+  width: 100%;
+  height: 500px; 
+  background-image: url('../../assets/image/main_image.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.main-image-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.food-image {
+  background-color: rgba(245, 245, 245, 1); 
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px; 
+} 

@@ -1,0 +1,188 @@
+#inquiry-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 1600px;
+    padding: 16px;
+    gap: 16px;
+}
+
+.inquiry-list-top-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.inquiry-list-top-left {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 12px;
+}
+
+.inquiry-list-size-text {
+    font-size: 16px;
+    font-weight: 400;
+    
+    color: rgba(138, 146, 166, 1);
+}
+
+.inquiry-list-size-text.emphasis {
+    color: rgba(64, 64, 64, 1);
+}
+
+.inquiry-list-top-right {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.inquiry-list-top-admin-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.inquiry-list-table-th {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.inquiry-list-table-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+
+    background-color: rgba(255, 148, 45, 0.3);
+    border-radius: 6px;
+}
+
+.inquiry-list-table-tr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 95px;
+
+    border-top: 1px solid rgba(238, 238, 238, 1);
+    padding: 20px 20px;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.inquiry-list-table-tr:hover {
+    cursor: pointer;
+    background-color: rgba(238, 238, 238, 0.2);
+} 
+
+.inquiry-list-table-reception-number {
+    width: 60px;
+}
+
+.inquiry-list-table-status {
+    width: 60px;
+}
+
+.inquiry-list-table-public {
+    width: 60px;
+}
+
+.inquiry-list-table-title {
+    width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.inquiry-list-table-writer-nickname {
+    width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.inquiry-list-table-write-date {
+    width: 80px;
+}
+
+.inquiry-list-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inquiry-list-pageNation {
+    display: flex;
+    text-align: center;
+    gap: 24px;
+}
+
+.inquiry-list-page-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.inquiry-list-page {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(138, 146, 166, 1);
+
+    cursor: pointer;
+}
+
+.inquiry-list-page-active {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(64, 64, 64, 1);
+
+    cursor: default;
+}
+
+.inquiry-list-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.inquiry-list-search-input-box {
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    padding: 5px;
+    width: 250px;
+
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.inquiry-list-search-input {
+    border: none;
+    outline: none;
+    background: none;
+
+    width: 100%;
+    
+    font-family: 'Nanum Gothic';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(64, 64, 64, 1);
+}

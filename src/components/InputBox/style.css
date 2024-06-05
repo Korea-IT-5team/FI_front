@@ -1,0 +1,83 @@
+.common-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.common-input-label {
+    text-align: center;
+    color: rgba(138, 146, 166, 1);
+}
+
+.common-input-content-box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+.common-input {
+    flex-grow: 1;
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+    outline: none;
+    padding: 5px;
+
+    background-color: rgba(255, 255, 255, 1);
+
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(35, 45, 66, 1);
+}
+
+.common-input::placeholder {
+    color: rgba(138, 146, 166, 1);
+}
+
+.common-input-primary-button {
+    box-sizing: border-box;
+    width: 110px;
+    padding: 8px 0px;
+    border-radius: 6px;
+
+    background-color: rgba(255, 148, 45, 1);
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(255, 255, 255, 1);
+
+    text-align: center;
+}
+
+.common-input-primary-button:hover {
+    cursor: pointer;
+}
+
+.common-input-disable-button {
+    box-sizing: border-box;
+    width: 110px;
+    padding: 8px 0px;
+    border-radius: 6px;
+
+    background-color: rgba(255, 148, 45, 1);
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(138, 146, 166, 1);
+
+    text-align: center;
+}
+
+.common-input-message {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: normal;
+}
