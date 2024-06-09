@@ -110,7 +110,7 @@ export default function ReservationList() {
         changeSection(totalPage);
     };
 
-    //!!!###
+    //시작
     const GetReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
 
         const message =
@@ -129,7 +129,7 @@ export default function ReservationList() {
         setCurrentPage(!restaurantReservationList.length ? 0 : 1);
         setCurrentSection(!restaurantReservationList.length ? 0 : 1);
     };
-    //!!!###
+    //완료
 
     //                    event handler                    //
     
@@ -149,7 +149,7 @@ export default function ReservationList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //!!!###
+    //시작
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
@@ -161,7 +161,7 @@ export default function ReservationList() {
         .then(GetReservationListResponse)
         ;
     }, []);
-    //!!!###
+    //완료
 
     useEffect(() => {
         if (!restaurantReservationList.length) return;
@@ -211,3 +211,4 @@ export default function ReservationList() {
         </div>
     );
 }
+//기능부분완료

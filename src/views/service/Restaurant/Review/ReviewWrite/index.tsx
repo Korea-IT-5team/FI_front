@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { PostReviewRequest } from 'src/apis/restaurant/review';
 import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import './style.css';
 
@@ -33,7 +32,8 @@ export default function ReviewWrite()
             result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
                 result.code === 'NR' ? '존재하지 않는 식당입니다.' :
                     result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                        result.code === 'DE' ? '이미 리뷰를 작성했습니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
         alert(message);
@@ -51,7 +51,18 @@ export default function ReviewWrite()
 
   const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setReviewImage(value);
+
+    const file = event.target.files?.[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result?.toString();
+            if (base64String) {
+              setReviewImage(base64String);
+            }
+        };
+        reader.readAsDataURL(file);
+    }
   }
 
   const onRatingChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -105,8 +116,10 @@ export default function ReviewWrite()
           <>
             <div className="review-write-title">리뷰 작성</div>
                 <div className="review-write-box">
-                <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
-                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} /> 
+                <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+                {reviewImage && (
+                <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                )}
                    
                 <div className='review-grade'>평점</div>
                 <div id="review-rating-box">

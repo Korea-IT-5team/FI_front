@@ -111,7 +111,7 @@ export default function RestaurantList()
             (
               restaurantList.slice(0, 12).map((item) => (
               <div className='restaurantlist-select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                  <div className='restaurantlist-select-item'>{item.restaurantImage}</div>
+                  <img src={item.restaurantImage} className='restaurantlist-select-item' />
                   <div className='restaurantlist-select-item'>{item.restaurantName}</div>
               </div>
             )))

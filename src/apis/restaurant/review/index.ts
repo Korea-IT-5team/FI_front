@@ -15,7 +15,7 @@ export const PostReviewRequest = async (restaurantId: number|string, requestBody
 }
 //완료
 
-//!!!
+//시작
 // function : 식당 리뷰 수정 API 함수 
 export const PatchReviewRequest = async (reviewNumber: number|string, requestBody: PatchReviewRequestDto, accessToken: string) => {
   const result = await axios.patch(PATCH_REVIEW_REQUEST_URL(reviewNumber), requestBody, bearerAuthorization(accessToken))
@@ -23,9 +23,9 @@ export const PatchReviewRequest = async (reviewNumber: number|string, requestBod
     .catch(requestErrorHandler)
   return result;
 }
-//!!!
+//완료
 
-//!!!
+//시작
 // function : 식당 리뷰 삭제 API 함수 
 export const DeleteReviewRequest = async (reviewNumber: number|string, accessToken: string) => {
   const result = await axios.delete(DELETE_REVIEW_REQUEST_URL(reviewNumber), bearerAuthorization(accessToken))
@@ -33,9 +33,9 @@ export const DeleteReviewRequest = async (reviewNumber: number|string, accessTok
     .catch(requestErrorHandler)
   return result;
 }
-//!!!
+//완료
 
-//!!!
+//시작
 // function : 식당 리뷰 내역 목록 확인 API 함수
 export const GetReviewDetailsRequest = async (accessToken: string) => {
   const result = await axios.get(GET_REVIEW_DETAILS_LIST_URL, bearerAuthorization(accessToken))
@@ -43,10 +43,10 @@ export const GetReviewDetailsRequest = async (accessToken: string) => {
     .catch(requestErrorHandler)
   return result;
 }
-//!!!
+//완료
 
 
-//!!!
+//시작
 // function : 식당 리뷰 내역 확인 API 함수
 export const GetReviewDetailRequest  = async (reviewNumber:number|string, accessToken: string) => {
   const result = await axios.get(GET_REVIEW_DETAIL_URL(reviewNumber), bearerAuthorization(accessToken))
@@ -54,5 +54,6 @@ export const GetReviewDetailRequest  = async (reviewNumber:number|string, access
     .catch(requestErrorHandler)
   return result;
 }
-//!!!
-//##수정
+//완료
+
+//기능부분완료

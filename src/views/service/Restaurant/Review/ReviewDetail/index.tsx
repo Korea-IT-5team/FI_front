@@ -25,7 +25,7 @@ export default function ReviewDetail()
   //              function               //
   const navigator = useNavigate();
 
-  //!!!
+  //시작
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
   {
     const message = 
@@ -43,7 +43,7 @@ export default function ReviewDetail()
         return;
     }
 
-    const{reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating} = 
+    const{reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating,reviewWriterNickname} = 
     result as GetReviewResponseDto;
     setReviewRestaurantId(reviewRestaurantId);
     setReviewWriterNickname(reviewWriterNickname);
@@ -52,9 +52,9 @@ export default function ReviewDetail()
     setReviewContents(reviewContents);
     setRating(rating);
   };
-  //!!!
+  //완료
 
-  //!!!
+  //시작
   const DeleteReviewResponse = (result: ResponseDto | null) => {
     const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -69,7 +69,7 @@ export default function ReviewDetail()
 
     navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
   };
-  //!!!
+  //완료
 
   //            event handler            //
  
@@ -85,7 +85,7 @@ export default function ReviewDetail()
       navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
   };
 
-  //!!!
+  //시작
   const onDeleteClickHandler = () => 
   {
     if(!reviewNumber || !cookies.accessToken) return;
@@ -95,27 +95,16 @@ export default function ReviewDetail()
     DeleteReviewRequest(reviewNumber, cookies.accessToken)
     .then(DeleteReviewResponse);
   }
-  //!!!
+  //완료
   
-  //!!!
+  //시작
   //              effect                //
   useEffect(()=> {
     if(!cookies.accessToken || !reviewNumber) return;
     GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
     .then(GetReviewDetailResponse);
   },[]);
-  //!!!
-
-
-    // reviewNumber:number,
-    // reviewRestaurantId:number,
-    // reviewDate:string,
-    // reviewImage:string,
-    // reviewContents:string,
-    // rating:number,
-    // reviewWriterNickname:string,
-  
-  
+  //완료
  
  
   //           render            //
@@ -131,7 +120,7 @@ export default function ReviewDetail()
           <div className='review-detail-info'>평점: {rating} </div>   
         </div>
         
-        <div className='review-detail-image-box'>이미지: {reviewImage}</div>
+        <img src={reviewImage} className='review-image' />
         <div className='review-detail-contents-box'>내용: {reviewContents}</div>
       </div>
       <div className='review-detail-button-box'>
@@ -144,3 +133,4 @@ export default function ReviewDetail()
     </div>
   )
 }
+//기능부분완료

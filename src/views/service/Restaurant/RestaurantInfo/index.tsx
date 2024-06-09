@@ -5,14 +5,14 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest } from 'src/apis/restaurant';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import { DeleteRestaurantFavoriteRequest, GetFavoriteCheckStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
+import { GetFavoriteCheckResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest, GetReservationCheckStatusRequest } from 'src/apis/restaurant/reservation';
+import { GetReservationCheckResponseDto } from 'src/apis/restaurant/reservation/dto/response';
 import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
-import { GetFavoriteCheckResponseDto } from 'src/apis/restaurant/favorite/dto/response';
-import { GetReservationCheckResponseDto } from 'src/apis/restaurant/reservation/dto/response';
 
 //              interface                   //
 
@@ -218,7 +218,8 @@ export default function RestaurantInfo() {
         }
 
         const total = restaurantReviewList.reduce((sum, restaurantReviewList) => sum + restaurantReviewList.rating, 0);
-        setGrade(total / restaurantReviewList.length);
+        const average = total / restaurantReviewList.length;
+        setGrade(parseFloat(average.toFixed(1)));
     }, [restaurantReviewList]);
     //완료
 
@@ -298,23 +299,23 @@ const onCancleFavoriteClickHandler = () => {
             <div id="restaurant-info">
                     {loginUserRole === "ROLE_USER" && loginUserEmailId === restaurantWriterId && (
                         <button onClick={onSetRestIdNumberHandler}>수정</button>)}
-                    <div id="restaurant_image">{restaurantImage}</div>
+                    <img src={restaurantImage} className='restaurant_image' />
                     <div>
                         <div>{restaurantName}</div>
                         {loginUserRole === "ROLE_USER" &&  
-                        loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
+                        (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
                             (<button onClick={onReservationCancelClickHandler}>예약취소</button>):
                             (<button onClick={onReservationClickHandler}>예약</button>)
-                        }
+                        )}
 
                     </div>
                         <div>{restaurantFoodCategory}</div>
-                        <div>{grade}</div>
+                        {grade ? (<div>{grade}</div>) : (<div></div>)}
                         {loginUserRole === "ROLE_USER" && 
-                        loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ? 
+                        (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ? 
                             (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>):
                             (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
-                        }
+                        )}
 
                     <div>{restaurantLocation}</div>
                     <div>{restaurantSnsAddress}</div>
