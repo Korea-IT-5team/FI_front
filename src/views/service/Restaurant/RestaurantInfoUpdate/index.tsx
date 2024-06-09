@@ -110,8 +110,17 @@ export default function RestaurantInfoUpdate()
 
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setRestaurantImage(value);
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result?.toString();
+                if (base64String) {
+                    setRestaurantImage(base64String);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
     }
 
 
@@ -199,8 +208,10 @@ export default function RestaurantInfoUpdate()
         <>
             <div className="restaurant-info-write-title">식당 정보 수정</div>
             <div className="restaurant-info-write-box">
-                <RestaurantInputBox label="식당 이미지" type="file"   accept={'image/*'}
-                placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
+                <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+                {restaurantImage && (
+                    <img src={restaurantImage} alt="Restaurant" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                )}
                
                                        
                 <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}

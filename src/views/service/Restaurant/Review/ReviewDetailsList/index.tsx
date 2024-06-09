@@ -10,9 +10,13 @@ import './style.css';
 
 //                    component                    //
 function ListItem ({ 
-    reviewNumber,
-    reviewRestaurantId,
-    reviewDate
+  reviewNumber,
+  reviewRestaurantId,
+  reviewImage,
+  rating,
+  reviewContents,
+  reviewWriterNickname,
+  reviewDate,
 }: RestaurantReviewListItem) {
 
     //                    function                    //
@@ -24,11 +28,12 @@ function ListItem ({
     //                    render                    //
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
-            <div className='review-list-table-reviewNumber-number'></div>
-            <div className='review-list-table-title' style={{ textAlign: 'left' }}></div>
-            <div className='review-list-table-writer-id'></div>
-            <div className='review-list-table-write-date'></div>
-            <div className='review-list-table-viewcount'></div>
+            <img src={reviewImage} className='review-image' />
+            <div className='review-list-table-reviewNumber-number'>리뷰 번호 : {reviewNumber}</div>
+            <div className='review-list-table-title' style={{ textAlign: 'left' }}>평점 : {rating}</div>
+            <div className='review-list-table-viewcount'>리뷰 내용: {reviewContents}</div>
+            <div className='review-list-table-writer-id'>리뷰 작성자 닉네임: {reviewWriterNickname}</div>
+            <div className='review-list-table-write-date'>리뷰 날짜: {reviewDate}</div>
         </div>
     );
 }
@@ -87,7 +92,7 @@ export default function ReviewDetailsList() {
         changeSection(totalPage);
     };
 
-    //!!!
+    //시작
     const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
 
         const message =
@@ -106,7 +111,7 @@ export default function ReviewDetailsList() {
         setCurrentPage(!restaurantReviewList.length ? 0 : 1);
         setCurrentSection(!restaurantReviewList.length ? 0 : 1);
     };
-    //!!!
+    //완료
 
     //                    event handler                    //
     const onPageClickHandler = (page: number) => {
@@ -125,7 +130,7 @@ export default function ReviewDetailsList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //!!!
+    //시작
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
@@ -133,7 +138,7 @@ export default function ReviewDetailsList() {
         GetReviewDetailsRequest(cookies.accessToken)
         .then(GetReviewDetailsResponse);
     },[]);
-    //!!!
+    //완료
 
     useEffect(() => {
         if (!reviewDetailsList.length) return;
@@ -180,3 +185,4 @@ export default function ReviewDetailsList() {
         </div>
     );
 }
+//기능부분완료

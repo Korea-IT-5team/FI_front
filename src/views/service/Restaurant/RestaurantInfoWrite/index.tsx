@@ -35,7 +35,8 @@ export default function RestaurantInfoWrite()
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
                     result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                        result.code === 'DE' ? '이미 식당정보를 등록하셨습니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -79,8 +80,17 @@ export default function RestaurantInfoWrite()
     //완료
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setRestaurantImage(value);
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result?.toString();
+                if (base64String) {
+                    setRestaurantImage(base64String);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
     }
 
 
@@ -154,8 +164,10 @@ export default function RestaurantInfoWrite()
 <>
     <div className="restaurant-info-write-title">식당 정보 등록</div>
     <div className="restaurant-info-write-box">
-        <RestaurantInputBox label="식당 이미지" type="file"  accept={'image/*'}
-        placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler}/>
+        <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+            {restaurantImage && (
+                <img src={restaurantImage} alt="Restaurant" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+            )}
                                
         <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}
         placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>

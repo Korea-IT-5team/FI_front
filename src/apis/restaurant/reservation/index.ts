@@ -5,7 +5,7 @@ import { DELETE_RESERVATION_REQUEST_URL, GET_RESERVATION_CEO_LIST_URL, GET_RESER
 import { PostReservationRequestDto } from './dto/request';
 import { GetReservationCheckResponseDto, GetReservationListResponseDto } from './dto/response';
 
-//!!!
+//시작
 // function : 본인예약 내역 목록확인 API 함수
 export const GetUserReservationListRequest = async (accessToken:string) => 
 {
@@ -14,9 +14,9 @@ export const GetUserReservationListRequest = async (accessToken:string) =>
         .catch(requestErrorHandler)
         return result;
 }
-//!!!
+//완료
 
-//!!!
+//시작
 // function : 예약자 내역 목록확인 API 함수
 export const GetCeoReservationListRequest = async (accessToken:string) => 
 {
@@ -25,7 +25,7 @@ export const GetCeoReservationListRequest = async (accessToken:string) =>
         .catch(requestErrorHandler)
         return result;
 }
-//!!!
+//완료
 
 //시작
 // function : 식당 예약 API 함수 
@@ -59,3 +59,5 @@ export const GetReservationCheckStatusRequest = async (restaurantId:number|strin
         return result;
 }
 //완료
+
+//기능부분완료

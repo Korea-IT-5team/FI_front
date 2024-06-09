@@ -23,12 +23,11 @@ function ListItem ({
     //                    event handler                    //
     const onClickHandler = () => navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));  
       
-    console.log(restaurantId);
     //                    render                    //
     return (
         <div className='favorite-list-table-tr' onClick={onClickHandler}>
           <div>
-            <div className='favorite-list-table-restaurant-name'>{restaurantImage}</div>
+            <img src={restaurantImage} className='favorite-list-table-restaurant-image' />
             <div className='favorite-list-table-user-name'>{restaurantName}</div>
           </div>
           <div className='favorite-list-table-status'>
@@ -108,7 +107,7 @@ export default function FavoriteList() {
         changeSection(totalPage);
     };
 
-    //!!!
+    //시작
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
 
         console.log('result : ' + JSON.stringify(result));
@@ -132,7 +131,7 @@ export default function FavoriteList() {
         setCurrentPage(!restaurantFavoriteList.length ? 0 : 1);
         setCurrentSection(!restaurantFavoriteList.length ? 0 : 1);
     };
-    //!!!
+    //완료
 
     //                    event handler                    //
     
@@ -152,7 +151,7 @@ export default function FavoriteList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //!!!
+    //시작
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
@@ -160,7 +159,7 @@ export default function FavoriteList() {
         GetFavoriteRestaurantListRequest(cookies.accessToken)
         .then(GetFavoriteRestaurantListResponse);
     }, []);
-    //!!!
+    //완료
 
     useEffect(() => {
         if (!restaurantList.length) return;
@@ -209,3 +208,4 @@ export default function FavoriteList() {
         </div>
     );
 }
+//기능부분완료

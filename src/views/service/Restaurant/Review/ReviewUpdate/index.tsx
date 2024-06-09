@@ -5,7 +5,6 @@ import ResponseDto from 'src/apis/response.dto';
 import { GetReviewDetailRequest, PatchReviewRequest } from 'src/apis/restaurant/review';
 import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
 import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
@@ -19,7 +18,7 @@ export default function ReviewUpdate()
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const {loginUserRole} = useUserStore();
   const [reviewImage, setReviewImage] = useState<string>("");
-  const [rating, setRating] = useState<number>(0);
+  const [rating, setRating] = useState<number>();
   const [reviewContents, setReviewContents] = useState<string>("");
   const [cookies] = useCookies();
 
@@ -28,7 +27,7 @@ export default function ReviewUpdate()
   //                function                    //
   const navigator = useNavigate();
 
-  ///!!!최근수정
+  //시작
   const PatchReviewResponse = (result: ResponseDto | null) => {
           const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -46,9 +45,9 @@ export default function ReviewUpdate()
           if(!reviewNumber) return;
           navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
   }
-  ///!!!최근수정
+  //완료
 
-  ///!!!최근수정
+  //시작
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
   {
           const message = 
@@ -70,21 +69,31 @@ export default function ReviewUpdate()
          
           setReviewImage(reviewImage);
           setReviewContents(reviewContents);
-          setRating(rating);
   };
-  ///!!!최근수정
+  //완료
 
   //                 event handler                //
   const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setReviewImage(value);
+
+    const file = event.target.files?.[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result?.toString();
+            if (base64String) {
+              setReviewImage(base64String);
+            }
+        };
+        reader.readAsDataURL(file);
+    }
   }
 
   const onRatingChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     if(event.target.value==="선택")
-      {
+    {
         setRating(0);
-      }
+    }
   
 
     const { value } = event.target;
@@ -102,7 +111,7 @@ export default function ReviewUpdate()
   }
 
 
-  ///!!!최근수정
+  //시작
   const UpdateClickHandler = () => {
     if (!rating || !reviewNumber) {
         return;
@@ -118,14 +127,14 @@ export default function ReviewUpdate()
     PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
     .then(PatchReviewResponse);
   }
-  ///!!!최근수정
+  //완료
 
   const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
   
   //                effect                  //
   let effectFlag = false;
 
-  ///!!!최근수정
+  ///시작
   useEffect(()=>{
     if(!reviewNumber || !cookies.accessToken) return;
     if(!loginUserRole) return;
@@ -141,15 +150,17 @@ export default function ReviewUpdate()
     GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
     .then(GetReviewDetailResponse);
   },[])
-  ///!!!최근수정
+  //완료
 
   //                render                  //
   return (
   <>
     <div className="review-write-title">리뷰 수정</div>
         <div className="review-write-box">
-        <RestaurantInputBox label="리뷰 이미지" type="file" value={reviewImage}
-        placeholder="이미지를 삽입해주세요" onChangeHandler={onImageChangeHandler} /> 
+        <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+        {reviewImage && (
+        <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
+        )} 
    
         <div className='review-grade'>평점</div>
         <div id="review-rating-box">
@@ -181,3 +192,4 @@ export default function ReviewUpdate()
   </>
   )
 }
+//기능부분완료

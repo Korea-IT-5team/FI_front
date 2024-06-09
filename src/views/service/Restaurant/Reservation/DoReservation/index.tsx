@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router";
 import ResponseDto from "src/apis/response.dto";
 import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/request";
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
-import { useUserStore } from "src/stores";
 import './style.css';
 
 
