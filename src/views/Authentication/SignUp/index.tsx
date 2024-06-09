@@ -128,11 +128,11 @@ export default function SignUp() {
   const businessRegistrationNumberResponse = (result: ResponseDto | null) => {
         
     const businessRegistrationNumberMessage = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'DB' ? '이미 사용중인 사업자번호 입니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-        result.code === 'SU' ? '사업자번호가 확인되었습니다.' : '' ;
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'DB' ? '이미 사용중인 사업자번호 입니다.' :
+      result.code === 'AF' ? '권한이 없습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+      result.code === 'SU' ? '사업자번호가 확인되었습니다.' : '' ;
     const businessRegistrationNumberError = !(result && result.code ==='SU');
     const businessRegistrationNumberCheck = !businessRegistrationNumberError;
 
@@ -140,25 +140,25 @@ export default function SignUp() {
     setBusinessRegistrationNumberError(businessRegistrationNumberError);
     setBusinessRegistrationNumberCheck(businessRegistrationNumberCheck);
   }
-    const signUpResponse = (result: ResponseDto | null) => {
 
-      const message = 
-          !result ? '서버에 문제가 있습니다.' :
-          result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-          result.code === 'DE' ? '중복된 이메일입니다.' :
-          result.code === 'DN' ? '중복된 닉네임입니다.' :
-          result.code === 'SF' ? '인증번호 전송 실패했습니다.' :
-          result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '' ;
-  
-      const isSuccess = result && result.code === 'SU';
-      if (!isSuccess) {
-          alert(message);
-          return;
-      }
-  
-      navigator(SIGN_IN_ABSOLUTE_PATH);
-  
+  const signUpResponse = (result: ResponseDto | null) => {
+
+    const message = 
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
+      result.code === 'DE' ? '중복된 이메일입니다.' :
+      result.code === 'DN' ? '중복된 닉네임입니다.' :
+      result.code === 'SF' ? '인증번호 전송 실패했습니다.' :
+      result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '' ;
+
+    const isSuccess = result && result.code === 'SU';
+    if (!isSuccess) {
+      alert(message);
+      return;
+    }
+
+    navigator(SIGN_IN_ABSOLUTE_PATH);
   };
 
   // event handler // 
@@ -314,7 +314,6 @@ export default function SignUp() {
 
   const onSignUpButtonClickHandler = () => {
     if(!isSignUpActive) return;
-    console.log("request");
     if(!emailId || !password || !passwordCheck || !nickname || !userName || !userTelNumber ||!authNumber || !userAddress) {
       alert('모든 내용을 입력해주세요.');
       return;
@@ -323,7 +322,6 @@ export default function SignUp() {
     let joinPath = searchParam.get('joinPath');
     joinPath = joinPath === null ? 'HOME' : joinPath;
     const snsId = searchParam.get('snsId');
-
 
     const requestBody: SignUpRequestDto = {
       userEmailId: emailId,
@@ -339,7 +337,6 @@ export default function SignUp() {
     }
 
     signUpRequest(requestBody).then(signUpResponse);
-
   };
 
   //   render   //
@@ -367,7 +364,7 @@ export default function SignUp() {
 
               <InputBox type="text" value={userAddress} placeholder="주소를 입력해주세요" onChangeHandler={onUserAddressChangeHandler} message={userAddressMessage} />
 
-              <InputBox type="text" value={businessRegistrationNumber} placeholder="사업자등록번호를 입력해주세요" buttonTitle="중복확인" buttonStatus={businessRegistrationNumberButtonStatus} onChangeHandler={onBusinessRegistrationNumberChangeHandler} onButtonClickHandler={onBusinessRegistrationButtonClickHandler} message={businessRegistrationNumberMessage} error={isBusinessRegistrationNumberError}/>
+              <InputBox type="text" value={businessRegistrationNumber} placeholder="사업자등록번호를 입력해주세요" buttonTitle="중복 확인" buttonStatus={businessRegistrationNumberButtonStatus} onChangeHandler={onBusinessRegistrationNumberChangeHandler} onButtonClickHandler={onBusinessRegistrationButtonClickHandler} message={businessRegistrationNumberMessage} error={isBusinessRegistrationNumberError}/>
           </div>
           <div className="sign-up-button-container">
               <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>회원가입</div>

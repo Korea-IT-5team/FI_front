@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
@@ -11,6 +11,7 @@ import "./style.css";
 export default function MyPageSite() {
 
   // state // 
+  // const { userEmailId: paramUserEmailId } = useParams<{ userEmailId: string }>();
   const [cookies] = useCookies();
   const [userEmailId, setEmailId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
@@ -18,7 +19,6 @@ export default function MyPageSite() {
   const [userTelNumber, setUserTelNumber] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('');
   const [userRole, setUserRole] = useState<string>('');
-  const [status, setStatus] = useState<boolean>(false);
 
   // function //
   const navigator = useNavigate();
@@ -72,12 +72,12 @@ export default function MyPageSite() {
               <div className='my-page-info'>{userAddress}</div>
             </div>
             <div className='my-page-link'>
-              <div className='my-page-link-box' onClick={() => navigator(USER_INFO_UPDATE_ABSOLUTE_PATH)}>회원정보 수정</div>
+              <div className='my-page-link-box' onClick={() => navigator(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
               <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH)}>찜한 식당 목록</div>
               <div className='my-page-link-box' onClick={() => navigator(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH)}>예약 내역</div>
               <div className='my-page-link-box'onClick={() => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH)}>리뷰 내역</div>
             </div>
-            <div className='my-page-delete' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH)}>회원탈퇴</div>
+            <div className='my-page-delete' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
           </div>
         </div>
       </div>

@@ -13,9 +13,8 @@
     line-height: 175%;
 
     color: rgba(35, 45, 66, 1);
+    width: 400px;
 
-    width: 60%;
-    
 }
 
 .restaurant-input::placeholder {
@@ -41,6 +40,10 @@
     color:rgba(0, 0, 0, 1);
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 
@@ -50,7 +53,6 @@
     justify-content: center; /* 수평 가운데 정렬 */
     margin-top: 8px;
     margin-bottom: 4px;
-    
 }
 
 /* .restaurant-input-primary-button {

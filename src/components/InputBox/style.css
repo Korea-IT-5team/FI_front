@@ -1,37 +1,37 @@
 .common-input-box {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
 
-.common-input-label {
-    text-align: center;
-    color: rgba(138, 146, 166, 1);
+    gap: 5px;
 }
 
 .common-input-content-box {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+
+    gap: 5px;
 }
 
-
 .common-input {
-    flex-grow: 1;
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 6px;
-    outline: none;
+    height: 26px;
+
     padding: 5px;
+
+    flex-grow: 1;
+    outline: none;
 
     background-color: rgba(255, 255, 255, 1);
 
-    font-family: Inter;
-    font-size: 16px;
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
     font-weight: 400;
     line-height: 175%;
-
-    color: rgba(35, 45, 66, 1);
+    color: rgba(64, 64, 64, 1);
 }
 
 .common-input::placeholder {
@@ -39,45 +39,49 @@
 }
 
 .common-input-primary-button {
-    box-sizing: border-box;
-    width: 110px;
-    padding: 8px 0px;
-    border-radius: 6px;
+    width: 90px;
+    height: 28px;
+
+    text-align: center;
+
+    padding: 5px;
 
     background-color: rgba(255, 148, 45, 1);
 
-    font-size: 16px;
+    border-radius: 6px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
     font-weight: 400;
     line-height: 175%;
-
     color: rgba(255, 255, 255, 1);
-
-    text-align: center;
 }
 
 .common-input-primary-button:hover {
     cursor: pointer;
 }
 
-.common-input-disable-button {
-    box-sizing: border-box;
-    width: 110px;
-    padding: 8px 0px;
-    border-radius: 6px;
-
-    background-color: rgba(255, 148, 45, 1);
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 175%;
-
-    color: rgba(138, 146, 166, 1);
+.common-input-second-button {
+    width: 90px;
+    height: 28px;
 
     text-align: center;
+
+    padding: 5px;
+
+    background-color: rgba(245, 138, 35, 0.8);
+    
+    border-radius: 6px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 175%;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .common-input-message {
-    font-size: 13px;
+    font-family: 'Nanum Gothic';
+    font-size: 12px;
     font-weight: 400;
-    line-height: normal;
 }

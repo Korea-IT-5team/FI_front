@@ -19,26 +19,24 @@ interface Props {
 function TopBar({ path }: Props) {
 
   // state //
-  const [nickname, setNickName] = useState<string>('');
+  const [nickname, setNickname] = useState<string>('');
 
-  const { loginUserRole } = useUserStore();
+  const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
   const { pathname } = useLocation();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
-
     if (!result) return;        
 
     const { nickname } = result as GetMyInfoResponseDto;
-    setNickName(nickname);
+    setNickname(nickname);
+  };
 
-};
-
-useEffect (() => {
+  useEffect (() => {
     if (!cookies.accessToken) return;
 
     getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-}, [cookies.accessToken]);
+  }, [cookies.accessToken]);
 
   // function //
   const navigator = useNavigate();
@@ -46,31 +44,35 @@ useEffect (() => {
   // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
   const onLogoutClickHandler = () => {
     removeCookie('accessToken', { path: '/' });
+    setLoginUserEmailId('');
+    setLoginUserRole('');
     window.location.reload();
   };
 
   const onLogoClickHandler = () => {
-    if(pathname === MAIN_ABSOLUTE_PATH){
-        window.location.reload();
+    if(pathname === MAIN_ABSOLUTE_PATH){    
+      window.location.reload();
     } else {
     navigator(MAIN_ABSOLUTE_PATH);}
-  }        
-    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH)
+  }
+
+  const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
+  const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
 
 
 // render // 
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon-image'></div>
+        <div className='main-icon-image'>
+☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
         <div className="top-bar-role">
             <div className="sign-in-wrapper">
-                <div className="user-mypage-button person"></div>
+                <div className="user-my-page-button person"></div>
                 <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
             </div>
             <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
@@ -79,8 +81,8 @@ useEffect (() => {
         {loginUserRole === 'ROLE_ADMIN' && 
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
-              <div className="user-mypage-button person"></div>
-              <div className="user-button" onClick={onAdminPageClickHandler}>관리자님</div>
+              <div className="user-my-page-button person"></div>
+              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
           </div>
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
@@ -122,7 +124,7 @@ function SideNavigation({ path }: Props) {
         <div className='side-navigation-title'>식당 리스트</div>
       </div>
       <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-        <div className='side-navigation-icon mypaga'></div>
+        <div className='side-navigation-icon my-paga'></div>
         <div className='side-navigation-title'>마이페이지</div>
       </div>
       <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
@@ -193,17 +195,15 @@ return (
         <Outlet />
     </div>
     <div className='main-container'>
-      <div className='main-banner-box'></div>
+      <div className='main-banner'></div>
       <div className='main-image-box'>
-        <div className='food-image'>식당1</div>
-        <div className='food-image'>식당2</div>
-        <div className='food-image'>식당3</div>
-        <div className='food-image'>식당4</div>
+        <div className='restaurant-image'>식당1</div>
+        <div className='restaurant-image'>식당2</div>
+        <div className='restaurant-image'>식당3</div>
+        <div className='restaurant-image'>식당4</div>
       </div>
     </div>
   </div>
 );
 
 }
-
-

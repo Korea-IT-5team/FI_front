@@ -46,6 +46,7 @@ function SnsContainer({ title }: SnsContainerProps) {
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
         window.location.href = 'http://localhost:9999/api/v1/auth/oauth2/' + type;
     };
+    
     // render: sns화면 //
     return (
         <div className="authentication-sns-container">

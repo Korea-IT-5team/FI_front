@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetCeoReservationListRequest, GetUserReservationListRequest } from 'src/apis/restaurant/reservation';
 import { GetReservationListResponseDto } from 'src/apis/restaurant/reservation/dto/response';
@@ -211,4 +211,3 @@ export default function ReservationList() {
         </div>
     );
 }
-//수정###
