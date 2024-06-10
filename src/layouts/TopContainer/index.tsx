@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
@@ -40,7 +40,7 @@ function TopBar({ path }: Props) {
     }, [cookies.accessToken]);
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
     const onLogoutClickHandler = () => {
@@ -54,13 +54,13 @@ function TopBar({ path }: Props) {
         if (pathname === MAIN_ABSOLUTE_PATH) {
             window.location.reload();
         } else {
-            navigator(MAIN_ABSOLUTE_PATH);
+            navigation(MAIN_ABSOLUTE_PATH);
         }
     }
 
-    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
+    const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
+    const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+    const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
     const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
@@ -83,7 +83,7 @@ function TopBar({ path }: Props) {
                     <div className="top-bar-role">
                         <div className="sign-in-wrapper">
                             <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
-                        </div>
+                        </div> 
                         <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                     </div>
                     }
@@ -144,18 +144,18 @@ export default function TopContainer() {
     const [path, setPath] = useState<Path>('');
 
     // function // 
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '인증에 실패했습니다.' :
-                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
-            navigator(SIGN_IN_ABSOLUTE_PATH);
+            navigation(SIGN_IN_ABSOLUTE_PATH);
             return;
         }
 
@@ -177,7 +177,7 @@ export default function TopContainer() {
     useEffect(() => {
 
         if (!cookies.accessToken) {
-            navigator(MAIN_ABSOLUTE_PATH);
+            navigation(MAIN_ABSOLUTE_PATH);
             return;
         }
 

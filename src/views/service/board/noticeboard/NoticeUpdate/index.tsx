@@ -36,15 +36,14 @@ export default function NoticeUpdate() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      // navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
 
     const { noticeWriterId, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
     if (noticeWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
-      // 관리자가 아닐경우 
-      // navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+      navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
