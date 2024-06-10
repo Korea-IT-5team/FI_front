@@ -8,7 +8,7 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_
 import { RestaurantListItem } from 'src/types';
 import './style.css';
 
-//                    component                    //
+// component //
 function ListItem ({ 
     restaurantId,
     restaurantImage,
@@ -17,40 +17,27 @@ function ListItem ({
     restaurantLocation,
 }: RestaurantListItem) {
 
-    //                    function                    //
+    // function //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+    // event handler //
     const onClickHandler = () => navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));  
       
-    //                    render                    //
+    // render //
     return (
         <div className='favorite-list-table-tr' onClick={onClickHandler}>
-          <div>
             <img src={restaurantImage} className='favorite-list-table-restaurant-image' />
-            <div className='favorite-list-table-user-name'>{restaurantName}</div>
-          </div>
-          <div className='favorite-list-table-status'>
-              <div className='disable-bedge'>상태</div>
-              <div className='disable-bedge'></div>
-          </div>
-          <div>
-            <div className='favorite-list-reservation-date'>음식 종류 : {restaurantFoodCategory}</div>
-            <div className='favorite-list-reservation-time'>식당 위치 : {restaurantLocation}</div>
-          </div>
-
-          <div className='favorite-list-table-title' style={{ textAlign: 'left' }}>{5}</div>
-          <div className='favorite-list-table-writer-id'>{2}</div>
-          <div className='favorite-list-table-write-date'>{3}</div>
-          <div className='favorite-list-table-viewcount'>{4}</div>
+            <div className=''>{restaurantName}</div>
+            <div className=''>{restaurantFoodCategory}</div>
+            <div className=''>{restaurantLocation}</div>
         </div>
     );
 }
 
-//                    component                    //
+// component //
 export default function FavoriteList() {
 
-    //                    state                    //
+    // state //
     const [cookies] = useCookies();
     const [restaurantList, setRestaurantList] = useState<RestaurantListItem[]>([]);
     const [viewList, setViewList] = useState<RestaurantListItem[]>([]);
@@ -61,7 +48,7 @@ export default function FavoriteList() {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
 
-    //                    function                    //
+    // function //
     const navigator = useNavigate();
 
     const changePage = (restaurantList: RestaurantListItem[], totalLenght: number) => {
@@ -107,10 +94,7 @@ export default function FavoriteList() {
         changeSection(totalPage);
     };
 
-    //시작
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
-
-        console.log('result : ' + JSON.stringify(result));
 
         const message =
         !result ? '서버에 문제가 있습니다.' :
@@ -131,10 +115,8 @@ export default function FavoriteList() {
         setCurrentPage(!restaurantFavoriteList.length ? 0 : 1);
         setCurrentSection(!restaurantFavoriteList.length ? 0 : 1);
     };
-    //완료
 
-    //                    event handler                    //
-    
+    // event handler //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -151,15 +133,13 @@ export default function FavoriteList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //시작
-    //                    effect                    //
+    // effect //
     useEffect(() => {
         if (!cookies.accessToken) return;
 
         GetFavoriteRestaurantListRequest(cookies.accessToken)
-        .then(GetFavoriteRestaurantListResponse);
+            .then(GetFavoriteRestaurantListResponse);
     }, []);
-    //완료
 
     useEffect(() => {
         if (!restaurantList.length) return;
@@ -172,7 +152,7 @@ export default function FavoriteList() {
     }, [currentSection]);
     
   
-    //                    render                    //
+    // render //
     return (
         <div id='favorite-list-wrapper'>
             <div className='favorite-list-top'>
@@ -182,12 +162,10 @@ export default function FavoriteList() {
             </div>
             <div className='favorite-list-table'>
                 <div className='favorite-list-table-th'>
-                    <div className='favorite-list-table-reception-number'>식당 사진</div>
-                    <div className='favorite-list-table-status'>식당 이름</div>
-                    <div className='favorite-list-table-title'>제목</div>
-                    <div className='favorite-list-table-writer-id'>음식종류</div>
-                    <div className='favorite-list-table-write-date'>식당위치</div>
-                    <div className='favorite-list-table-viewcount'>조회수</div>
+                    <div className=''>식당 사진</div>
+                    <div className=''>식당 이름</div>
+                    <div className=''>음식종류</div>
+                    <div className=''>식당위치</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>
@@ -208,4 +186,4 @@ export default function FavoriteList() {
         </div>
     );
 }
-//기능부분완료
+//#수정###

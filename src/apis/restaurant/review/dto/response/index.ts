@@ -12,11 +12,11 @@ export interface GetReviewListResponseDto extends ResponseDto
 // description: 식당 리뷰 내역 확인 Response Body Dto
 export interface  GetReviewResponseDto  extends ResponseDto
 {
-    reviewNumber:number,
-    reviewRestaurantId:number,
-    reviewDate:string,
-    reviewImage:string,
-    reviewContents:string,
-    rating:number,
-    reviewWriterNickname:string,
+    reviewNumber: number,
+    reviewRestaurantId: number,
+    reviewDate: string,
+    reviewImage: string,
+    reviewContents: string,
+    rating: number,
+    reviewWriterNickname: string
 }

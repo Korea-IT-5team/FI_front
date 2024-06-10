@@ -9,11 +9,11 @@ import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/
 import { useUserStore } from 'src/stores';
 import './style.css';
 
-//                  component                 //
+// component //
 export default function ReviewUpdate()
 {
   
-  //                  state                     //
+  // state //
   const {reviewNumber} = useParams();
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const {loginUserRole} = useUserStore();
@@ -24,172 +24,161 @@ export default function ReviewUpdate()
 
 
 
-  //                function                    //
+  // function //
   const navigator = useNavigate();
 
-  //시작
   const PatchReviewResponse = (result: ResponseDto | null) => {
-          const message =
+        const message =
             !result ? '서버에 문제가 있습니다.' :
-              result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-                result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+                    result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                        result.code === 'AF' ? '권한이 없습니다.' :
+                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-          if (!result || result.code !== 'SU') {
+        if (!result || result.code !== 'SU') {
             alert(message);
             return;
-          }
+        }
 
-
-          if(!reviewNumber) return;
-          navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
+        if(!reviewNumber) return;
+        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
   }
-  //완료
-
-  //시작
+ 
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
   {
-          const message = 
+        const message = 
             !result ? '서버에 문제가 있습니다.' : 
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
       
-          if(!result || result.code !== 'SU'){
-              alert(message);
-              if(result?.code === 'AF')
-              {
+        if(!result || result.code !== 'SU'){
+            alert(message);
+            if(result?.code === 'AF')
+            {
                 navigator(MAIN_ABSOLUTE_PATH);
                 return;
-              }
-              return;
-          }
-      
-          const{reviewImage,reviewContents,rating} = 
-          result as GetReviewResponseDto;
-         
-          setReviewImage(reviewImage);
-          setReviewContents(reviewContents);
-  };
-  //완료
-
-  //                 event handler                //
-  const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    const file = event.target.files?.[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64String = reader.result?.toString();
-            if (base64String) {
-              setReviewImage(base64String);
             }
-        };
-        reader.readAsDataURL(file);
-    }
+            return;
+        }
+      
+        const{reviewImage,reviewContents} = 
+        result as GetReviewResponseDto;
+         
+        setReviewImage(reviewImage);
+        setReviewContents(reviewContents);
+  };
+
+  // event handler //
+  const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const base64String = reader.result?.toString();
+                if (base64String) {
+                  setReviewImage(base64String);
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
   }
 
   const onRatingChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    if(event.target.value==="선택")
-    {
-        setRating(0);
-    }
-  
+        if(event.target.value==="선택")
+        {
+            setRating(0);
+        }
 
-    const { value } = event.target;
-    const result = Number(value);
-    setRating(result);
+        const { value } = event.target;
+        const result = Number(value);
+        setRating(result);
   }
 
   const onContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = event.target;
-    setReviewContents(value);
+        const { value } = event.target;
+        setReviewContents(value);
 
-    if(!contentsRef.current) return;
-    contentsRef.current.style.height = 'auto';
-    contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
+        if(!contentsRef.current) return;
+        contentsRef.current.style.height = 'auto';
+        contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   }
 
-
-  //시작
   const UpdateClickHandler = () => {
-    if (!rating || !reviewNumber) {
-        return;
-    }
+        if (!rating || !reviewNumber) {
+            return;
+        }
 
-    const requestBody: PatchReviewRequestDto =
-    {
-        reviewImage: reviewImage,
-        rating: rating,
-        reviewContents: reviewContents
-    }
+        const requestBody: PatchReviewRequestDto =
+        {
+            reviewImage: reviewImage,
+            rating: rating,
+            reviewContents: reviewContents
+        }
 
-    PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
-    .then(PatchReviewResponse);
+        PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
+            .then(PatchReviewResponse);
   }
-  //완료
-
   const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
   
-  //                effect                  //
+  // effect //
   let effectFlag = false;
 
-  ///시작
   useEffect(()=>{
-    if(!reviewNumber || !cookies.accessToken) return;
-    if(!loginUserRole) return;
-    if(effectFlag) return;
-    effectFlag = true;
+      if(!reviewNumber || !cookies.accessToken) return;
+      if(!loginUserRole) return;
+      if(effectFlag) return;
+      effectFlag = true;
 
-    if(loginUserRole !== 'ROLE_USER')
-    {
-        navigator(MAIN_ABSOLUTE_PATH);
-        return;
-    }
+      if(loginUserRole !== 'ROLE_USER')
+      {
+          navigator(MAIN_ABSOLUTE_PATH);
+          return;
+      }
 
-    GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
-    .then(GetReviewDetailResponse);
+      GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
+          .then(GetReviewDetailResponse);
   },[])
-  //완료
 
-  //                render                  //
+  // render //
   return (
-  <>
-    <div className="review-write-title">리뷰 수정</div>
-        <div className="review-write-box">
-        <input type="file" accept="image/*" onChange={onImageChangeHandler} />
-        {reviewImage && (
-        <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
-        )} 
+        <>
+            <div className="review-write-title">리뷰 수정</div>
+            <div className="review-write-box">
+                <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+                {reviewImage && (
+                <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                )} 
    
-        <div className='review-grade'>평점</div>
-        <div id="review-rating-box">
-            <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
-                <option value="선택">선택</option>
-                <option value="1.0">1.0</option>
-                <option value="1.5">1.5</option>
-                <option value="2.0">2.0</option>
-                <option value="2.5">2.5</option>
-                <option value="3.0">3.0</option>
-                <option value="3.5">3.5</option>
-                <option value="4.0">4.0</option>
-                <option value="4.5">4.5</option>
-                <option value="5.0">5.0</option>
-            </select>
-        </div>
+                <div className='review-grade'>평점</div>
+                <div id="review-rating-box">
+                    <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
+                        <option value="선택">선택</option>
+                        <option value="1.0">1.0</option>
+                        <option value="1.5">1.5</option>
+                        <option value="2.0">2.0</option>
+                        <option value="2.5">2.5</option>
+                        <option value="3.0">3.0</option>
+                        <option value="3.5">3.5</option>
+                        <option value="4.0">4.0</option>
+                        <option value="4.5">4.5</option>
+                        <option value="5.0">5.0</option>
+                    </select>
+                </div>
 
-        <div className='review-write-contents-box'>
-            <textarea ref={contentsRef} className='review-write-contents-textarea'
-                  placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
-                  onChange={onContentsChangeHandler}/>
-        </div>
+                <div className='review-write-contents-box'>
+                    <textarea ref={contentsRef} className='review-write-contents-textarea'
+                        placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
+                        onChange={onContentsChangeHandler}/>
+                </div>
 
-        <div className="review-registered-button-box">
-            <button onClick={UpdateClickHandler}
-            className={ButtonClass}>수정하기</button>
-        </div>
-    </div>
-  </>
+                <div className="review-registered-button-box">
+                    <button onClick={UpdateClickHandler}
+                    className={ButtonClass}>수정하기</button>
+                </div>
+            </div>
+        </>
   )
 }
-//기능부분완료
+//수정####
