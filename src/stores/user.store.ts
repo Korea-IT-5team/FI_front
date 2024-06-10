@@ -5,6 +5,8 @@ interface UserStore {
     setLoginUserEmailId: (loginUserEmailId: string) => void,
     loginUserRole: string,
     setLoginUserRole: (loginUserRole: string) => void,
+    businessRegistrationNumber: string,
+    setBusinessRegistrationNumber: (businessRegistrationNumber: string) => void,
 
 }
 
@@ -13,7 +15,9 @@ const useUserStore = create<UserStore>(set => ({
     setLoginUserEmailId: (loginUserEmailId: string) => set(state => ({ ...state, loginUserEmailId})),
     loginUserRole: '',
     setLoginUserRole: (loginUserRole:string) => set(state => ({...state, loginUserRole})),
+    businessRegistrationNumber: '',
+    setBusinessRegistrationNumber: (businessRegistrationNumber:string) => set(state => ({...state, businessRegistrationNumber})),
 }));
 
 export default useUserStore;
-//###수정
+//수정###

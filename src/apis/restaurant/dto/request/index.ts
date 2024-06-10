@@ -10,7 +10,6 @@ export interface PostRestaurantInfoRequestDto {
     restaurantOperationHours: string;
     restaurantFeatures: string;
     restaurantNotice: string;
-    restaurantBusinessRegistrationNumber: string;
     restaurantRepresentativeMenu: string;
 }
 

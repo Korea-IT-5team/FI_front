@@ -20,9 +20,8 @@ function TopBar({ path }: Props) {
 
     // state //
     const [nickname, setNickname] = useState<string>('');
+    const { setLoginUserEmailId, setLoginUserRole, loginUserRole } = useUserStore();
     const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false);
-
-    const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
     const [cookies, setCookie, removeCookie] = useCookies();
     const { pathname } = useLocation();
 
@@ -143,7 +142,7 @@ export default function TopContainer() {
 
     // state //
     const { pathname } = useLocation();
-    const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
+    const { setLoginUserEmailId, setLoginUserRole, setBusinessRegistrationNumber } = useUserStore();
     const [cookies] = useCookies();
     const [path, setPath] = useState<Path>('');
 
@@ -158,14 +157,13 @@ export default function TopContainer() {
                     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
-            alert(message);
-            navigator(SIGN_IN_ABSOLUTE_PATH);
             return;
         }
 
-        const { userEmailId, userRole } = result as GetUserInfoResponseDto;
+        const { userEmailId, userRole, business_registration_number } = result as GetUserInfoResponseDto;
         setLoginUserEmailId(userEmailId);
         setLoginUserRole(userRole);
+        setBusinessRegistrationNumber(business_registration_number);
     };
 
     // effect //
@@ -178,12 +176,14 @@ export default function TopContainer() {
         setPath(path);
     }, [pathname]);
 
+    let effectFlag = false;
     useEffect(() => {
-
-        if (!cookies.accessToken) {
-            navigator(MAIN_ABSOLUTE_PATH);
-            return;
-        }
+    if (!cookies.accessToken) 
+    {
+        return;
+    }
+    if(effectFlag) return;
+    effectFlag = true;
 
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
     }, [cookies.accessToken]);

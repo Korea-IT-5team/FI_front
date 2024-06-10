@@ -44,7 +44,6 @@ export interface InquiryBoardListItem {
   inquiryWriteDatetime: string;
 }
 
-//###수정
 export interface RestaurantReviewListItem {
   reviewNumber: number,
   reviewRestaurantId: number,
@@ -54,7 +53,6 @@ export interface RestaurantReviewListItem {
   reviewContents: string,
   reviewWriterNickname: string
 }
-//###수정
 
 // export interface InquiryBoardDetailItem {
 //   inquiryNumber: number;

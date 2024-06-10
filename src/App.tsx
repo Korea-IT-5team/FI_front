@@ -12,8 +12,6 @@ import MyPageSite from './views/service/Mypage/MyPageSite';
 import UserDelete from './views/service/Mypage/UserDelete';
 import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
 import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
-import RestaurantReservation from './views/service/Restaurant/Reservation/DoReservation';
-import RestaurantReservationList from './views/service/Restaurant/Reservation/ReservationList';
 import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
 import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';
@@ -32,7 +30,6 @@ import DoReservation from './views/service/Restaurant/Reservation/DoReservation'
 import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
 import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
 import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
-import Restaurant from './layouts/RestaurantContainer';
 import SignUp from './views/Authentication/SignUp';
 import { useCookies } from 'react-cookie';
 import Authentication from './layouts/AuthenticationContainer';
@@ -74,7 +71,7 @@ function App() {
       </Route>
       
       <Route element={<TopContainer />} >
-        <Route path={RESTAURANT_PATH} element={<Restaurant/>} > 
+        <Route path={RESTAURANT_PATH}> 
           <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList/>} />
           <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
           <Route path={RESTAURANT_INFO_WRITE_PATH} element={<RestaurantInfoWrite />} />

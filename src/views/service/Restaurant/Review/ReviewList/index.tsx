@@ -9,21 +9,19 @@ interface Props {
     restaurantId: string | undefined;
 }
 
-//               component: 리뷰 리스트             // 
+// component: 리뷰 리스트 // 
 export default function ReviewList({ value,restaurantId }: Props) {
-    //                      state                           //
+
+    // state //
     const {loginUserRole} = useUserStore();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 1; // 한 번에 표시할 리뷰의 수
 
 
-    //                  function                            //
+    // function //
     const navigator = useNavigate();
 
-    //          effect              //
-
-
-    //              event handler                           //
+    // event handler //
     const onWriteClickHandler = () => {
         if(!restaurantId) return;
         navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
@@ -36,7 +34,7 @@ export default function ReviewList({ value,restaurantId }: Props) {
     // 현재 페이지에 해당하는 리뷰들을 계산
     const currentItems = value.slice(0, currentPage * itemsPerPage);
 
-    //                                  render                            //
+    // render //
     return (
         <>
             {loginUserRole === "ROLE_USER" && (<div onClick={onWriteClickHandler}>리뷰작성</div>)}
@@ -45,10 +43,10 @@ export default function ReviewList({ value,restaurantId }: Props) {
                     <div className='review-select-list-item-box' key={item.reviewNumber}>
                         <div>
                             <img src={item.reviewImage} className='review-select-item' />
-                            <div className='review-select-item'>{item.rating}</div>
-                            <div className='review-select-item'>{item.reviewContents}</div>
-                            <div className='review-select-item'>{item.reviewWriterNickname}</div>
-                            <div className='review-select-item'>{item.reviewDate}</div>
+                            <div className='review-select-item'>평점: {item.rating}</div>
+                            <div className='review-select-item'>내용: {item.reviewContents}</div>
+                            <div className='review-select-item'>작성자: {item.reviewWriterNickname}</div>
+                            <div className='review-select-item'>작성일: {item.reviewDate}</div>
                         </div>
                     </div>
                 ))}
@@ -59,4 +57,4 @@ export default function ReviewList({ value,restaurantId }: Props) {
         </>
     )
 }
-// 기능부분완료
+//수정####

@@ -7,10 +7,10 @@ import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
 import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH } from 'src/constant';
 import './style.css';
 
-//          component           //
+// component //
 export default function ReviewDetail()
 {
-  //           state             //
+  // state //
   const{reviewNumber} = useParams();
 
   const[cookies] = useCookies();
@@ -22,115 +22,103 @@ export default function ReviewDetail()
   const[reviewWriterNickname, setReviewWriterNickname] = useState<string>('');
 
 
-  //              function               //
+  // function //
   const navigator = useNavigate();
 
-  //시작
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
   {
-    const message = 
-      !result ? '서버에 문제가 있습니다.' : 
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        const message = 
+            !result ? '서버에 문제가 있습니다.' : 
+                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if(!result || result.code !== 'SU')
-    {
-        //alert(message);
-        if(result?.code === 'AF')
+        if(!result || result.code !== 'SU')
         {
-          navigator(MAIN_ABSOLUTE_PATH);
-          return;
+            //alert(message);
+            if(result?.code === 'AF')
+            {
+                navigator(MAIN_ABSOLUTE_PATH);
+                return;
+            }
+            return;
         }
-        return;
-    }
 
-    const{reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating,reviewWriterNickname} = 
-    result as GetReviewResponseDto;
-    setReviewRestaurantId(reviewRestaurantId);
-    setReviewWriterNickname(reviewWriterNickname);
-    setReviewDate(reviewDate);
-    setReviewImage(reviewImage);
-    setReviewContents(reviewContents);
-    setRating(rating);
+        const{reviewRestaurantId,reviewDate,reviewImage,reviewContents,rating,reviewWriterNickname} = 
+        result as GetReviewResponseDto;
+        setReviewRestaurantId(reviewRestaurantId);
+        setReviewWriterNickname(reviewWriterNickname);
+        setReviewDate(reviewDate);
+        setReviewImage(reviewImage);
+        setReviewContents(reviewContents);
+        setRating(rating);
   };
-  //완료
-
-  //시작
+  
   const DeleteReviewResponse = (result: ResponseDto | null) => {
-    const message =
-        !result ? '서버에 문제가 있습니다.' :
-            result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        const message =
+            !result ? '서버에 문제가 있습니다.' :
+                result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+                    result.code === 'AF' ? '권한이 없습니다.' :
+                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-    if (!result || result.code !== 'SU') {
-        alert(message);
-        return;
-    }
+        if (!result || result.code !== 'SU') {
+            alert(message);
+            return;
+        }
 
-    navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
+        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
   };
-  //완료
 
-  //            event handler            //
- 
-
+  // event handler //
   const onListClickHandler = () => 
   {
-      navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
+        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
   };
 
   const onUpdateClickHandler = () => 
   {
-      if(!reviewNumber) return;
-      navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
+        if(!reviewNumber) return;
+        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
   };
 
-  //시작
   const onDeleteClickHandler = () => 
   {
-    if(!reviewNumber || !cookies.accessToken) return;
-    const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
-    if(!isConfirm) return;
+        if(!reviewNumber || !cookies.accessToken) return;
+        const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+        if(!isConfirm) return;
 
-    DeleteReviewRequest(reviewNumber, cookies.accessToken)
-    .then(DeleteReviewResponse);
+        DeleteReviewRequest(reviewNumber, cookies.accessToken)
+            .then(DeleteReviewResponse);
   }
-  //완료
   
-  //시작
-  //              effect                //
+  // effect //
   useEffect(()=> {
-    if(!cookies.accessToken || !reviewNumber) return;
-    GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
-    .then(GetReviewDetailResponse);
+        if(!cookies.accessToken || !reviewNumber) return;
+        GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
+            .then(GetReviewDetailResponse);
   },[]);
-  //완료
  
- 
-  //           render            //
+  // render //
   return (
     <div id='review-detail-wrapper'>
-      <div className='review-detail-main-box'>
-
-        <div className='review-detail-info-box'>
-          <div className='review-detail-info'>작성자: {reviewWriterNickname}</div>   
-          <div className='review-detail-info-divider'>{'\|'}</div>   
-          <div className='review-detail-info'>작성일: {reviewDate}</div>   
-          <div className='review-detail-info-divider'>{'\|'}</div>   
-          <div className='review-detail-info'>평점: {rating} </div>   
-        </div>
+        <div className='review-detail-main-box'>
+            <div className='review-detail-info-box'>
+                <div className='review-detail-info'>작성자: {reviewWriterNickname}</div>   
+                <div className='review-detail-info-divider'>{'\|'}</div>   
+                <div className='review-detail-info'>작성일: {reviewDate}</div>   
+                <div className='review-detail-info-divider'>{'\|'}</div>   
+                <div className='review-detail-info'>평점: {rating} </div>   
+            </div>
         
-        <img src={reviewImage} className='review-image' />
-        <div className='review-detail-contents-box'>내용: {reviewContents}</div>
-      </div>
-      <div className='review-detail-button-box'>
-        <div className='review-detail-primary-button' onClick={onListClickHandler}>목록보기</div> 
-        <div className='review-detail-owner-button-box'>
-          <div className='review-detail-second-button' onClick={onUpdateClickHandler}>수정</div>
-          <div className='review-detail-error-button' onClick={onDeleteClickHandler}>삭제</div>
+            <img src={reviewImage} className='' />
+            <div className='review-detail-contents-box'>내용: {reviewContents}</div>
         </div>
-      </div>
+        <div className='review-detail-button-box'>
+            <div className='review-detail-primary-button' onClick={onListClickHandler}>목록보기</div> 
+            <div className='review-detail-owner-button-box'>
+                <div className='review-detail-second-button' onClick={onUpdateClickHandler}>수정</div>
+                <div className='review-detail-error-button' onClick={onDeleteClickHandler}>삭제</div>
+            </div>
+        </div>
     </div>
   )
 }
-//기능부분완료
+//수정####
