@@ -22,8 +22,8 @@ export const getNoticeBoardListRequest = async (accessToken: string) => {
 };
 
 // function: 검색 공지 게시물 목록 확인 API 함수 
-export const getSearchNoticeBoardListRequest = async (word: string, accessToken: string) => {
-    const config = { ...bearerAuthorization(accessToken), params: { word } };
+export const getSearchNoticeBoardListRequest = async (searchWord: string, accessToken: string) => {
+    const config = { ...bearerAuthorization(accessToken), params: { searchWord } };
     const result = await axios.get(GET_NOTICE_BOARD_LIST_SEARCH_URL, config)
         .then(requestHandler<GetSearchNoticeBoardListResponseDto>)
         .catch(requestErrorHandler);

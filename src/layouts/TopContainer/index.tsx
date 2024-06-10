@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
@@ -39,7 +39,7 @@ function TopBar({ path }: Props) {
     }, [cookies.accessToken]);
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
     const onLogoutClickHandler = () => {
@@ -53,43 +53,41 @@ function TopBar({ path }: Props) {
         if (pathname === MAIN_ABSOLUTE_PATH) {
             window.location.reload();
         } else {
-            navigator(MAIN_ABSOLUTE_PATH);
+            navigation(MAIN_ABSOLUTE_PATH);
         }
     }
 
-    const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
+    const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
+    const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+    const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
     const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
     // render // 
     return (
         <>
-            <div className='main-head-box'>
-                <div className='main-icon' onClick={toggleSideNav}>☰</div>
-                <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
-                <div className='main-top-bar-button'>
+            <div className='top-head-box'>
+                <div className='top-side-navigation-icon' onClick={toggleSideNav}>☰</div>
+                <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
+                <div className='top-bar-button'>
                     {loginUserRole === 'ROLE_USER' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="user-my-page-button person"></div>
-                                <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
-                            </div>
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    <div className="top-bar-role">
+                        <div className="sign-in-wrapper">
+                            <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
                         </div>
+                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    </div>
                     }
                     {loginUserRole === 'ROLE_ADMIN' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="user-my-page-button person"></div>
-                                <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
-                            </div>
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                        </div>
+                    <div className="top-bar-role">
+                        <div className="sign-in-wrapper">
+                            <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
+                        </div> 
+                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    </div>
                     }
                     {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' &&
-                        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+                    <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
                     }
                 </div>
             </div>
@@ -100,10 +98,6 @@ function TopBar({ path }: Props) {
 
 // component //
 function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
-
-    const restaurantList = `side-navigation-item${path === '식당리스트' ? 'active' : ''};`
-    const myPageSite = `side-navigation-item${path === '마이페이지' ? 'active' : ''};`
-    const inquiryBoard = `side-navigation-item${path === '문의사항' ? 'active' : ''};`
 
     const { pathname } = useLocation();
 
@@ -121,17 +115,19 @@ function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: b
     // render //
     return (
         <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
-            <div className={restaurantList} onClick={onRestaurantListClickHandler}>
-                <div className='side-navigation-icon food'></div>
-                <div className='side-navigation-title'>식당 리스트</div>
-            </div>
-            <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-                <div className='side-navigation-icon my-page'></div>
-                <div className='side-navigation-title'>마이페이지</div>
-            </div>
-            <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
-                <div className='side-navigation-icon board'></div>
-                <div className='side-navigation-title'>문의사항</div>
+            <div className='main-side-navigation-contents'>
+                <div className='main-side-navigation-item' onClick={onRestaurantListClickHandler}>
+                    <div className='main-side-navigation-icon food'></div>
+                    <div className='main-side-navigation-title'>식당 리스트</div>
+                </div>
+                <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
+                    <div className='main-side-navigation-icon my-page'></div>
+                    <div className='main-side-navigation-title'>마이페이지</div>
+                </div>
+                <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
+                    <div className='main-side-navigation-icon board'></div>
+                    <div className='main-side-navigation-title'>문의사항</div>
+                </div>
             </div>
         </div>
     );
@@ -147,16 +143,21 @@ export default function TopContainer() {
     const [path, setPath] = useState<Path>('');
 
     // function // 
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '인증에 실패했습니다.' :
-                    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
+<<<<<<< HEAD
+=======
+            alert(message);
+            navigation(SIGN_IN_ABSOLUTE_PATH);
+>>>>>>> de7177a110b5358e2a1fdc50c09871c098d3fd30
             return;
         }
 
@@ -178,21 +179,29 @@ export default function TopContainer() {
 
     let effectFlag = false;
     useEffect(() => {
+<<<<<<< HEAD
     if (!cookies.accessToken) 
     {
         return;
     }
     if(effectFlag) return;
     effectFlag = true;
+=======
+
+        if (!cookies.accessToken) {
+            navigation(MAIN_ABSOLUTE_PATH);
+            return;
+        }
+>>>>>>> de7177a110b5358e2a1fdc50c09871c098d3fd30
 
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
     }, [cookies.accessToken]);
 
     // render //
     return (
-        <div id="main-wrapper">
+        <div id="top-wrapper">
             <TopBar path={path} />
-            <div className="main-container">
+            <div className="top-container">
                 <Outlet />
             </div>
         </div>

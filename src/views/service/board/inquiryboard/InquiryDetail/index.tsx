@@ -48,9 +48,10 @@ export default function InquiryDetail() {
             return;
     }
 
-    const { inquiryTitle, inquiryWriterId, inquiryWriteDatetime, inquiryContents, inquiryComment, status  } = result as GetInquiryBoardResponseDto;
+    const { inquiryTitle, inquiryWriterId, inquiryWriteDatetime, inquiryContents, inquiryComment, inquiryWriterNickname, status  } = result as GetInquiryBoardResponseDto;
     setInquiryTitle(inquiryTitle);
     setInquiryWriterId(inquiryWriterId);
+    setInquiryWriterNickname(inquiryWriterNickname);
     setInquiryWriteDatetime(inquiryWriteDatetime);
     setInquiryContents(inquiryContents);
     setInquiryComment(inquiryComment);
