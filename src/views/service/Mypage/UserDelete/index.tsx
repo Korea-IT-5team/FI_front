@@ -77,25 +77,18 @@ export default function UserDelete() {
 
   // render // 
   return (
-    <div id='authentication-wrapper'>
-      <div className='user-delete-container'>
-        <div className='user-delete-box'>
-          <div className='user-delete-title'>회원 탈퇴</div>
-          <div className='user-delete-title-2'>회원 탈퇴 시 주의사항</div>
-          <div className='user-delete-title-box'>
-            <div className='user-delete-title-3'>1. 해당 휴대폰번호로 30일간 재가입 불가능</div>
-            <div className='user-delete-title-3'>2. 회원정보 및 게시물 삭제</div>
-          </div>
+    <div id='resign-wrapper'>
+      <div className='resign-container'>
+        <div className='resign-title'>회원 탈퇴</div>
+        <div className='resign-box'>
+          <div className='resign-content caution-title'>회원 탈퇴 시 주의사항</div>
+          <div className='resign-content caution-contents'>1. 회원 정보 및 모든 게시물(리뷰, 문의) 삭제 처리됨</div>
+          <div className='resign-content caution-contents'>2. 30일간 동일한 전화번호로 가입 불가능</div>
         </div>
-        <div className='user-delete-password'>
-
-          <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-        
+        <div className='resign-password'>
+          <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />      
         </div>
-        <div className='user-delete-button-box'>
-          <div className='error-button' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
-        </div>
-        
+        <div className='error-button' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
       </div>
     </div>
   )

@@ -67,30 +67,28 @@ function TopBar({ path }: Props) {
     // render // 
     return (
         <>
-            <div className='main-head-box'>
-                <div className='main-icon' onClick={toggleSideNav}>☰</div>
-                <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
-                <div className='main-top-bar-button'>
+            <div className='top-head-box'>
+                <div className='top-side-navigation-icon' onClick={toggleSideNav}>☰</div>
+                <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
+                <div className='top-bar-button'>
                     {loginUserRole === 'ROLE_USER' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="user-my-page-button person"></div>
-                                <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
-                            </div>
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    <div className="top-bar-role">
+                        <div className="sign-in-wrapper">
+                            <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
                         </div>
+                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    </div>
                     }
                     {loginUserRole === 'ROLE_ADMIN' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="user-my-page-button person"></div>
-                                <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
-                            </div>
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    <div className="top-bar-role">
+                        <div className="sign-in-wrapper">
+                            <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
                         </div>
+                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    </div>
                     }
                     {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' &&
-                        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+                    <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
                     }
                 </div>
             </div>
@@ -101,10 +99,6 @@ function TopBar({ path }: Props) {
 
 // component //
 function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
-
-    const restaurantList = `side-navigation-item${path === '식당리스트' ? 'active' : ''};`
-    const myPageSite = `side-navigation-item${path === '마이페이지' ? 'active' : ''};`
-    const inquiryBoard = `side-navigation-item${path === '문의사항' ? 'active' : ''};`
 
     const { pathname } = useLocation();
 
@@ -122,17 +116,19 @@ function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: b
     // render //
     return (
         <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
-            <div className={restaurantList} onClick={onRestaurantListClickHandler}>
-                <div className='side-navigation-icon food'></div>
-                <div className='side-navigation-title'>식당 리스트</div>
-            </div>
-            <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-                <div className='side-navigation-icon my-page'></div>
-                <div className='side-navigation-title'>마이페이지</div>
-            </div>
-            <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
-                <div className='side-navigation-icon board'></div>
-                <div className='side-navigation-title'>문의사항</div>
+            <div className='main-side-navigation-contents'>
+                <div className='main-side-navigation-item' onClick={onRestaurantListClickHandler}>
+                    <div className='main-side-navigation-icon food'></div>
+                    <div className='main-side-navigation-title'>식당 리스트</div>
+                </div>
+                <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
+                    <div className='main-side-navigation-icon my-page'></div>
+                    <div className='main-side-navigation-title'>마이페이지</div>
+                </div>
+                <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
+                    <div className='main-side-navigation-icon board'></div>
+                    <div className='main-side-navigation-title'>문의사항</div>
+                </div>
             </div>
         </div>
     );
@@ -190,9 +186,9 @@ export default function TopContainer() {
 
     // render //
     return (
-        <div id="main-wrapper">
+        <div id="top-wrapper">
             <TopBar path={path} />
-            <div className="main-container">
+            <div className="top-container">
                 <Outlet />
             </div>
         </div>
