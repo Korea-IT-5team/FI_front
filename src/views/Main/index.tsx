@@ -20,6 +20,7 @@ function TopBar({ path }: Props) {
 
   // state //
   const [nickname, setNickname] = useState<string>('');
+  const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false);
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
@@ -60,12 +61,13 @@ function TopBar({ path }: Props) {
   const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
   const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
 
+  const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
 // render // 
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon'>☰</div>
+        <div className='main-icon' onClick={toggleSideNav}>☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
@@ -91,12 +93,13 @@ function TopBar({ path }: Props) {
         }
         </div>
       </div>
+      <SideNavigation path={path} isOpen={isSideNavOpen} toggleSideNav={toggleSideNav} />
     </>
   );
 }
 
 // component //
-function SideNavigation({ path }: Props) {
+function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
 
   const restaurantList = `side-navigation-item${path === '식당리스트' ? 'active' : ''};`
   const myPageSite = `side-navigation-item${path === '마이페이지' ? 'active' : ''};`
@@ -117,13 +120,13 @@ function SideNavigation({ path }: Props) {
 
   // render //
   return (
-    <div className='side-navigation-container'>
+    <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
       <div className={restaurantList} onClick={onRestaurantListClickHandler}>
         <div className='side-navigation-icon food'></div>
         <div className='side-navigation-title'>식당 리스트</div>
       </div>
       <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-        <div className='side-navigation-icon my-paga'></div>
+        <div className='side-navigation-icon my-page'></div>
         <div className='side-navigation-title'>마이페이지</div>
       </div>
       <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
@@ -188,7 +191,6 @@ export default function Main() {
 return (
   <div id="main-wrapper">
     <TopBar path={path} />
-    <SideNavigation path={path} />
     <div className="main-container">
         <Outlet />
     </div>
