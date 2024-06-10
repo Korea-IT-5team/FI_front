@@ -153,11 +153,6 @@ export default function TopContainer() {
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
-<<<<<<< HEAD
-=======
-            alert(message);
-            navigation(SIGN_IN_ABSOLUTE_PATH);
->>>>>>> de7177a110b5358e2a1fdc50c09871c098d3fd30
             return;
         }
 
@@ -177,22 +172,7 @@ export default function TopContainer() {
         setPath(path);
     }, [pathname]);
 
-    let effectFlag = false;
     useEffect(() => {
-<<<<<<< HEAD
-    if (!cookies.accessToken) 
-    {
-        return;
-    }
-    if(effectFlag) return;
-    effectFlag = true;
-=======
-
-        if (!cookies.accessToken) {
-            navigation(MAIN_ABSOLUTE_PATH);
-            return;
-        }
->>>>>>> de7177a110b5358e2a1fdc50c09871c098d3fd30
 
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
     }, [cookies.accessToken]);

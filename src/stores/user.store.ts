@@ -20,8 +20,4 @@ const useUserStore = create<UserStore>(set => ({
 }));
 
 export default useUserStore;
-<<<<<<< HEAD
 //수정###
-=======
-
->>>>>>> de7177a110b5358e2a1fdc50c09871c098d3fd30
