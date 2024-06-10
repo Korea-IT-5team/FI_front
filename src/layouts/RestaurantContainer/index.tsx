@@ -10,8 +10,7 @@ import './style.css';
 
 
 //   component: Restaurant 공통부분   //
-export default function Restaurant()
-{
+export default function Restaurant() {
 
   //            state               //
   const {loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();

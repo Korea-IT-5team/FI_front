@@ -109,49 +109,49 @@
 }
 
 .side-navigation-item {
-    display: flex;
-    flex-direction: row;
+display: flex;
+flex-direction: row;
 
-    align-items: center;
+align-items: center;
 
-    gap: 10px;
+gap: 10px;
 }
 
 .food {
-    width: 30px;
-    height: 30px;
+width: 30px;
+height: 30px;
 
-    background-image: url('../../assets/image/restaurant-icon.png');
-    background-size: cover;
+background-image: url('../../assets/image/restaurant-icon.png');
+background-size: cover;
 }
 
 .my-page {
-    width: 30px;
-    height: 30px;
+width: 30px;
+height: 30px;
 
-    background-image: url('../../assets/image/my-page-icon.png');
-    background-size: cover;
+background-image: url('../../assets/image/my-page-icon.png');
+background-size: cover;
 }
 
 .board {
-    width: 30px;
-    height: 30px;
+width: 30px;
+height: 30px;
 
-    background-image: url('../../assets/image/board-icon.png');
-    background-size: cover;
+background-image: url('../../assets/image/board-icon.png');
+background-size: cover;
 }
 
 .side-navigation-title {
-    font-family: 'Nanum Gothic';
-    font-size: 18px;
-    font-weight: 500;
-    color: rgba(50, 50, 50, 1);
+font-family: 'Nanum Gothic';
+font-size: 18px;
+font-weight: 500;
+color: rgba(50, 50, 50, 1);
 }
 
 .side-navigation-item:hover {
-    cursor: pointer;
+cursor: pointer;
 }
 
 .show {
-    display: flex;
+display: flex;
 }
