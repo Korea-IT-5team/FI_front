@@ -27,5 +27,4 @@ export interface PatchRestaurantInfoRequestDto {
     restaurantNotice: string;
     restaurantRepresentativeMenu: string;
 }
-//###수정
 

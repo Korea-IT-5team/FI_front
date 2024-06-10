@@ -186,4 +186,3 @@ export default function FavoriteList() {
         </div>
     );
 }
-//#수정###

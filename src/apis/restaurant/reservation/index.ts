@@ -12,7 +12,7 @@ export const GetUserReservationListRequest = async (accessToken: string) =>
       .then(requestHandler<GetReservationListResponseDto>)
       .catch(requestErrorHandler)
       return result;
-}
+} 
 
 // function : 예약자 내역 목록확인 API 함수
 export const GetCeoReservationListRequest = async (accessToken: string) => 
@@ -21,7 +21,7 @@ export const GetCeoReservationListRequest = async (accessToken: string) =>
       .then(requestHandler<GetReservationListResponseDto>)
       .catch(requestErrorHandler)
       return result;
-}
+} 
 
 // function : 식당 예약 API 함수 
 export const PostReservationRequest = async (restaurantId: number|string, requestBody: PostReservationRequestDto, accessToken: string) => 
@@ -30,7 +30,7 @@ export const PostReservationRequest = async (restaurantId: number|string, reques
       .then(requestHandler<ResponseDto>)
       .catch(requestErrorHandler)
       return result;
-}
+} 
 
 // function : 식당 예약 취소 API 함수 
 export const DeleteReservationRequest = async (restaurantId: number|string, accessToken: string) => 
@@ -39,7 +39,7 @@ export const DeleteReservationRequest = async (restaurantId: number|string, acce
       .then(requestHandler<ResponseDto>)
       .catch(requestErrorHandler)
       return result;
-}
+} 
 
 // function : 예약 상태 확인 API 함수
 export const GetReservationCheckStatusRequest = async (restaurantId: number|string, accessToken: string) => 
@@ -48,5 +48,4 @@ export const GetReservationCheckStatusRequest = async (restaurantId: number|stri
       .then(requestHandler<GetReservationCheckResponseDto>)
       .catch(requestErrorHandler)
       return result;
-}
-//수정#
+} 

@@ -10,15 +10,15 @@ export const PostRestaurantFavoriteRequest = async (restaurantId: number|string,
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;
-}
-
+} 
+ 
 // function : 식당 찜 저장 삭제 API 함수
 export const DeleteRestaurantFavoriteRequest = async (restaurantId: number|string, accessToken: string) => {
     const result = await axios.delete(DELETE_FAVORITE_REQUEST_URL(restaurantId), bearerAuthorization(accessToken))
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler);
     return result;
-}
+} 
 
 // function : 찜(저장) 내역 확인 API 함수
 export const GetFavoriteRestaurantListRequest = async (accessToken: string) => {
@@ -26,7 +26,7 @@ export const GetFavoriteRestaurantListRequest = async (accessToken: string) => {
     .then(requestHandler<GetFavoriteRestaurantListResponseDto>)
     .catch(requestErrorHandler);
     return result;
-}
+} 
 
 // function : 찜 상태 확인 API 함수
 export const GetFavoriteCheckStatusRequest = async (restaurantId: number|string, accessToken: string) => {
@@ -34,5 +34,4 @@ export const GetFavoriteCheckStatusRequest = async (restaurantId: number|string,
     .then(requestHandler<GetFavoriteCheckResponseDto>)
     .catch(requestErrorHandler);
     return result;
-}
-//수정#
+} 

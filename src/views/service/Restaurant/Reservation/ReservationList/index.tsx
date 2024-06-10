@@ -173,8 +173,8 @@ export default function ReservationList() {
                     <div className=''>예약번호</div>
                     <div className=''>상태</div>
                     <div className=''>식당 이름</div>
-                    <div className=''>작성일</div>
-                    <div className=''>작성시간</div>
+                    <div className=''>예약일</div>
+                    <div className=''>예약시간</div>
                     <div className=''>인원수</div>
                     <div className=''>작성자</div>
                 </div>
@@ -197,4 +197,3 @@ export default function ReservationList() {
         </div>
     );
 }
-//#수정####

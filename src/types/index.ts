@@ -32,7 +32,6 @@ export interface NoticeBoardListItem {
   noticeTitle: string;
   noticeWriteDatetime: string;
   noticeViewCount: number;
-  // 추가
   noticeWriteNickname: string;
 }
 
