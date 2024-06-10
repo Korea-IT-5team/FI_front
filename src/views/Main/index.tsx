@@ -67,7 +67,7 @@ function TopBar({ path }: Props) {
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon' onClick={toggleSideNav}>☰</div>
+        <div className='main-side-navigation-icon' onClick={toggleSideNav}>☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
@@ -101,10 +101,6 @@ function TopBar({ path }: Props) {
 // component //
 function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
 
-  const restaurantList = `side-navigation-item${path === '식당리스트' ? 'active' : ''};`
-  const myPageSite = `side-navigation-item${path === '마이페이지' ? 'active' : ''};`
-  const inquiryBoard = `side-navigation-item${path === '문의사항' ? 'active' : ''};`
-
   const {pathname} = useLocation();
 
   // function //
@@ -121,17 +117,19 @@ function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: b
   // render //
   return (
     <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
-      <div className={restaurantList} onClick={onRestaurantListClickHandler}>
-        <div className='side-navigation-icon food'></div>
-        <div className='side-navigation-title'>식당 리스트</div>
-      </div>
-      <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-        <div className='side-navigation-icon my-page'></div>
-        <div className='side-navigation-title'>마이페이지</div>
-      </div>
-      <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
-        <div className='side-navigation-icon board'></div>
-        <div className='side-navigation-title'>문의사항</div>
+      <div className='side-navigation-contents'>
+        <div className='side-navigation-item' onClick={onRestaurantListClickHandler}>
+          <div className='side-navigation-icon food'></div>
+          <div className='side-navigation-title'>식당 리스트</div>
+        </div>
+        <div className='side-navigation-item' onClick={onMyPageSiteClickHandler}>
+          <div className='side-navigation-icon my-page'></div>
+          <div className='side-navigation-title'>마이페이지</div>
+        </div>
+        <div className='side-navigation-item' onClick={onInquiryBoardClickHandler}>
+          <div className='side-navigation-icon board'></div>
+          <div className='side-navigation-title'>문의사항</div>
+        </div>
       </div>
     </div>
   );
@@ -196,12 +194,7 @@ return (
     </div>
     <div className='main-container'>
       <div className='main-banner'></div>
-      <div className='main-image-box'>
-        <div className='restaurant-image'>식당1</div>
-        <div className='restaurant-image'>식당2</div>
-        <div className='restaurant-image'>식당3</div>
-        <div className='restaurant-image'>식당4</div>
-      </div>
+      <div className='main-image-box'></div>
     </div>
   </div>
 );
