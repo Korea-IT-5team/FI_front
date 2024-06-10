@@ -32,6 +32,8 @@ export interface NoticeBoardListItem {
   noticeTitle: string;
   noticeWriteDatetime: string;
   noticeViewCount: number;
+  // 추가
+  noticeWriteNickname: string;
 }
 
 export interface InquiryBoardListItem {
@@ -39,7 +41,7 @@ export interface InquiryBoardListItem {
   inquiryStatus: boolean;
   inquiryPublic: boolean;
   inquiryTitle: string;
-  // inquiryWriterId: string;
+  inquiryWriterId: string;
   inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
 }

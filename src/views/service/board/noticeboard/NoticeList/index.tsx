@@ -1,10 +1,11 @@
+
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
+import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { AUTH_PATH, COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getSearchNoticeBoardListRequest } from 'src/apis/board';
@@ -14,7 +15,9 @@ function ListItem ({
   noticeNumber,
   noticeTitle,
   noticeWriteDatetime,
-  noticeViewCount
+  noticeViewCount,
+  // 닉네임 추가해둠
+  noticeWriteNickname
 }: NoticeBoardListItem) {
 
   //        function       //
@@ -23,12 +26,12 @@ function ListItem ({
   //      event handler      //
   const onClickHandler = () => navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
 
-
   //   render   //
   return(
     <div className='notice-list-table-tr' onClick={onClickHandler}>
       <div className='notice-list-table-reception-number'>{noticeNumber}</div>
-      <div className='qna-list-table-title'>{noticeTitle}</div>
+      <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
+      <div className='qna-list-table-write-nickname'>{noticeWriteNickname}</div>
       <div className='qna-list-table-write-date'>{noticeWriteDatetime}</div>
       <div className='qna-list-table-viewCount'>{noticeViewCount}</div>
     </div>
@@ -37,13 +40,14 @@ function ListItem ({
 
 // component: 공지사항 목록보기 //
 export default function NoticeList() {
+
   //                    state                    //
-  const {loginUserEmailId, loginUserRole} = useUserStore();
+  const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
 
-  const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
-  const [noticeBoardList, setBoardList] = useState<NoticeBoardListItem[]>([]);
+  const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
+  // const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [viewList, setViewList] = useState<NoticeBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -77,6 +81,23 @@ export default function NoticeList() {
     setPageList(pageList);
   };
 
+  // 추가
+  const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
+    // setNoticeBoardList(noticeList);
+    const totalLength = noticeList.length;
+    setTotalLength(totalLength);
+
+    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
+    setTotalPage(totalPage);
+
+    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
+    setTotalSection(totalSection);
+
+    changePage(noticeList, totalLength);
+
+    changeSection(totalPage);
+};
+
   const getNoticeBoardListResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -85,7 +106,7 @@ export default function NoticeList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(SIGN_IN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -110,11 +131,12 @@ export default function NoticeList() {
     }
 
     const { noticeBoardList } = result as GetSearchNoticeBoardListResponseDto;
-    // changeNoticeBoardList(noticeBoardList);
+    changeNoticeBoardList(noticeBoardList);
+
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
-
 };
+
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if (loginUserRole !== 'ROLE_ADMIN') return;
@@ -123,24 +145,25 @@ export default function NoticeList() {
 
   const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
-};
+  };
 
   const onPreSectionClickHandler = () => {
     if (currentSection <= 1) return;
-    setCurrentSection(currentSection - 1); 
+    setCurrentSection(currentSection - 1);
     setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-};
+  };
 
   const onNextSectionClickHandler = () => {
     if (currentSection === totalSection) return;
     setCurrentSection(currentSection + 1);
     setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-};
+  };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
-};
+  };
+
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
     if (!cookies.accessToken) return;
@@ -148,24 +171,22 @@ export default function NoticeList() {
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
   };
 
-
   //                  effect                  //
 
-  // 로그인하고 나서 공지글 써보고 주석 풀어라
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
+  },[isToggleOn]);
 
-  // useEffect(() => {
-  //   if (!cookies.accessToken) return;
-  //   getSearchNoticeBoardListRequest(searchWord,cookies.accessToken).then(getSearchNoticeBoardListResponse);
-  // },[isToggleOn]);
+  useEffect(() => {
+    if (!noticeBoardList.length) return;
+    changePage(noticeBoardList, totalLength);
+  },[currentPage]);
 
-  // useEffect(() => {
-  //   changePage(noticeBoardList, totalLength);
-  // },[currentPage]);
-
-  // useEffect(() => {
-  //   if (!noticeBoardList.length) return;
-  //   changeSection(totalPage);
-  // }, [currentSection]); 
+  useEffect(() => {
+    if (!noticeBoardList.length) return;
+    changeSection(totalPage);
+  }, [currentSection]); 
   
   //                    render                      //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
@@ -180,33 +201,36 @@ export default function NoticeList() {
           )} 
         </div>
       </div>
-      <div className='notice-list-table-th'>
-        <div className='notice-list-table-reception-number'>번호</div>
-        <div className='notice-list-table-title'>공지제목</div>
-        <div className='notice-list-table-writer-nickname'>작성자</div>
-        <div className='notice-list-table-write-date'>작성일자</div>
-        <div className='notice-list-table-viewcount'>조회수</div>
+      <div className='notice-list-table'>
+        <div className='notice-list-table-th'>
+          <div className='notice-list-table-reception-number'>번호</div>
+          <div className='notice-list-table-title'>공지제목</div>
+          <div className='notice-list-table-writer-nickname'>작성자</div>
+          <div className='notice-list-table-write-date'>작성일자</div>
+          <div className='notice-list-table-viewcount'>조회수</div>
+        </div>
+        {viewList.map(item => <ListItem {...item} />)}
       </div>
       <div className='notice-list-bottom'>
-                <div style={{ width: '299px' }}></div>
-                <div className='notice-list-pageNation'>
-                    <div className='notice-list-page-left' onClick={onPreSectionClickHandler}></div>
-                    <div className='notice-list-page-box'>
-                        {pageList.map(page => 
-                        page === currentPage ? 
-                        <div className='notice-list-page-active'>{page}</div> :
-                        <div className='notice-list-page'  onClick={() =>onPageClickHandler(page)}>{page}</div>
-                        )}
-                    </div>
-                    <div className='notice-list-page-right' onClick={onNextSectionClickHandler}></div>
-                </div>
-                <div className='notice-list-search-box'>
-                    <div className='notice-list-search-input-box'>
-                        <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
-                    </div>
-                    <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-                </div>
-            </div>
+        <div style={{ width: '299px' }}></div>
+        <div className='notice-list-pageNation'>
+          <div className='notice-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='notice-list-page-box'>
+            {pageList.map(page =>
+              page === currentPage ?
+                <div className='notice-list-page-active'>{page}</div> :
+                <div className='notice-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            )}
+          </div>
+          <div className='notice-list-page-right' onClick={onNextSectionClickHandler}></div>
+        </div>
+        <div className='notice-list-search-box'>
+          <div className='notice-list-search-input-box'>
+            <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+          </div>
+          <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
+        </div>
+      </div>
     </div>
   )
 
