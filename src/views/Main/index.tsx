@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
@@ -59,7 +59,7 @@ function TopBar({ path }: Props) {
 
   const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
   const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
