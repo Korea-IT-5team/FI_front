@@ -101,7 +101,7 @@
   border-radius: 5px;
 }
 
-.side-navigation-container {
+.main-side-navigation-container {
   width: 250px;
   height: 700px;
 
@@ -118,7 +118,7 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.side-navigation-contents {
+.main-side-navigation-contents {
   display: flex;
   flex-direction: column;
 
@@ -126,7 +126,7 @@
   gap: 30px;
 }
 
-.side-navigation-item {
+.main-side-navigation-item {
   display: flex;
   flex-direction: row;
 
@@ -159,14 +159,14 @@
   background-size: cover;
 }
 
-.side-navigation-title {
+.main-side-navigation-title {
   font-family: 'Nanum Gothic';
   font-size: 18px;
   font-weight: 500;
   color: rgba(50, 50, 50, 1);
 }
 
-.side-navigation-item:hover {
+.main-side-navigation-item:hover {
   cursor: pointer;
 }
 
