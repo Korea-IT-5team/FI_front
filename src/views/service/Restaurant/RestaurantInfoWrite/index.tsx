@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -6,9 +6,9 @@ import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
 import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
 import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import './style.css';
-import { useUserStore } from 'src/stores';
 
 export default function RestaurantInfoWrite() 
 {   
@@ -190,4 +190,3 @@ export default function RestaurantInfoWrite()
             </>
   )
 }
-//수정####

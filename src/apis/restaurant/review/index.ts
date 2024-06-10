@@ -11,7 +11,7 @@ export const PostReviewRequest = async (restaurantId: number|string, requestBody
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
+} 
 
 // function : 식당 리뷰 수정 API 함수 
 export const PatchReviewRequest = async (reviewNumber: number|string, requestBody: PatchReviewRequestDto, accessToken: string) => {
@@ -19,7 +19,7 @@ export const PatchReviewRequest = async (reviewNumber: number|string, requestBod
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
+} 
 
 // function : 식당 리뷰 삭제 API 함수 
 export const DeleteReviewRequest = async (reviewNumber: number|string, accessToken: string) => {
@@ -27,7 +27,7 @@ export const DeleteReviewRequest = async (reviewNumber: number|string, accessTok
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
+} 
 
 // function : 식당 리뷰 내역 목록 확인 API 함수
 export const GetReviewDetailsRequest = async (accessToken: string) => {
@@ -35,7 +35,7 @@ export const GetReviewDetailsRequest = async (accessToken: string) => {
     .then(requestHandler<GetReviewListResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
+} 
 
 // function : 식당 리뷰 내역 확인 API 함수
 export const GetReviewDetailRequest  = async (reviewNumber: number|string, accessToken: string) => {
@@ -43,5 +43,4 @@ export const GetReviewDetailRequest  = async (reviewNumber: number|string, acces
     .then(requestHandler<GetReviewResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
-//수정#
+} 

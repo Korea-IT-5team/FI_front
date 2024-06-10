@@ -212,6 +212,8 @@ export default function RestaurantInfo() {
     GetReservationCheckStatusRequest(restaurantId,cookies.accessToken)
         .then(GetReservationCheckStatusResponse)
     }, []);
+
+    
     // event handler //
 
     const onSetRestIdNumberHandler = () => {
@@ -292,4 +294,3 @@ const onCancleFavoriteClickHandler = () => {
             </>
   )
 }
-//수정####

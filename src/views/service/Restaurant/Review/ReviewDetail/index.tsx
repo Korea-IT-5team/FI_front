@@ -121,4 +121,3 @@ export default function ReviewDetail()
     </div>
   )
 }
-//수정####

@@ -57,4 +57,3 @@ export default function ReviewList({ value,restaurantId }: Props) {
         </>
     )
 }
-//수정####

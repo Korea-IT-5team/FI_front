@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import './style.css';
-import { useUserStore } from "src/stores";
 
 interface Prop {
     value: string;
@@ -66,5 +65,3 @@ export default function SelectBox({ value, onChange }: Prop) {
         </div>
     );
 }
-//수정#######
-//css완료

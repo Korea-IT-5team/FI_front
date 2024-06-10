@@ -7,9 +7,9 @@ import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
 import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import './style.css';
-import { useUserStore } from 'src/stores';
 
 export default function RestaurantInfoUpdate() 
 {   
@@ -240,4 +240,3 @@ export default function RestaurantInfoUpdate()
         </>
     )
 }
-//수정###

@@ -156,5 +156,3 @@ const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-res
     </>
   )
 }
-//수정#
-//css완료###

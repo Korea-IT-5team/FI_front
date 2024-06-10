@@ -1,18 +1,26 @@
 import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
 import { AUTH_PATH, BOARD_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import Authentication from './layouts/AuthenticationContainer';
+import TopContainer from './layouts/TopContainer';
 import FindEmailInput from './views/Authentication/FIndEmailInput';
 import PasswordResetCheck from './views/Authentication/PasswordResetCheck';
 import PasswordResetFinally from './views/Authentication/PasswordResetFinally';
 import PasswordResetInput from './views/Authentication/PasswordResetInput';
 import SignIn, { Sns } from './views/Authentication/SignIn';
+import SignUp from './views/Authentication/SignUp';
 import Main from './views/Main';
 import MyPageSite from './views/service/Mypage/MyPageSite';
 import UserDelete from './views/service/Mypage/UserDelete';
 import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
 import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
+import DoReservation from './views/service/Restaurant/Reservation/DoReservation';
+import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
 import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
+import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
+import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
 import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';
 import ReviewDetailsList from './views/service/Restaurant/Review/ReviewDetailsList';
@@ -26,14 +34,6 @@ import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
 import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
-import DoReservation from './views/service/Restaurant/Reservation/DoReservation';
-import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
-import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
-import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
-import SignUp from './views/Authentication/SignUp';
-import { useCookies } from 'react-cookie';
-import Authentication from './layouts/AuthenticationContainer';
-import TopContainer from './layouts/TopContainer';
 
 
 // component: root 경로 컴포넌트
@@ -89,7 +89,8 @@ function App() {
           <Route path={FAVORITE_PATH}>    
             <Route path={RESTAURANT_FAVORITE_LIST_PATH} element={<FavoriteList />} />
           </Route>
-        </Route> 
+        </Route>
+         
         <Route path={MY_PAGE_PATH} >
           <Route path={MY_PAGE_SITE_PATH} element={<MyPageSite />} /> 
           <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />

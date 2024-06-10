@@ -32,5 +32,3 @@ export default function RestaurantInputBox({ label, type, value, placeholder, on
         </div>
     );
 }
-//수정###
-//css완료

@@ -12,7 +12,7 @@ export const GetRestaurantListRequest = async (word: string, accessToken: string
     .then(requestHandler<GetRestaurantListResponseDto>)
     .catch(requestErrorHandler);
     return result;
-}
+} 
 
 // function : 특정 식당 정보 검색 API 함수
 export const GetRestaurantInfoRequest = async (restaurantId: number|string, accessToken: string) => {
@@ -20,7 +20,7 @@ export const GetRestaurantInfoRequest = async (restaurantId: number|string, acce
     .then(requestHandler<GetRestaurantInfoResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
+} 
 
 // function : 식당 정보 등록 API 함수 
 export const PostRestaurantInfoRequest = async (requestBody: PostRestaurantInfoRequestDto, accessToken: string) => {
@@ -28,7 +28,7 @@ export const PostRestaurantInfoRequest = async (requestBody: PostRestaurantInfoR
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
+} 
 
 // function : 식당 정보 수정 API 함수 
 export const PatchRestaurantInfoRequest = async (restaurantId: number|string, requestBody: PatchRestaurantInfoRequestDto, accessToken: string) => {
@@ -36,5 +36,4 @@ export const PatchRestaurantInfoRequest = async (restaurantId: number|string, re
     .then(requestHandler<ResponseDto>)
     .catch(requestErrorHandler)
     return result;
-}
-//수정#
+} 
