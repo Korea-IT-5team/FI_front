@@ -5,3 +5,11 @@ import { RestaurantListItem } from "src/types";
 export interface GetFavoriteRestaurantListResponseDto extends ResponseDto {
   restaurantFavoriteList: RestaurantListItem[];
 }
+
+
+// description: 찜 상태 확인 Response Body DTO
+export interface GetFavoriteCheckResponseDto extends ResponseDto
+{
+    favoriteUserId: string
+    favoriteRestaurantId: number
+}

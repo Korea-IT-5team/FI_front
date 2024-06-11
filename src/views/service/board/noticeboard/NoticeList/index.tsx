@@ -80,8 +80,8 @@ export default function NoticeList() {
   const getNoticeBoardListResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-          result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -117,7 +117,7 @@ export default function NoticeList() {
 };
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_USER') return;
+    if (loginUserRole !== 'ROLE_ADMIN') return;
     navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
   }
 

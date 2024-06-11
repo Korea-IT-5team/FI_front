@@ -21,6 +21,7 @@ export default function InquiryUpdate() {
   const [cookies] = useCookies();
 
   const [inquiryWriterId, setInquiryWriterId] = useState<string>('');
+  // const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
@@ -31,24 +32,32 @@ export default function InquiryUpdate() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
-      return;
-    }
-
-    const { inquiryWriterId, inquiryContents, inquiryTitle } = result as GetInquiryBoardResponseDto;
-    if (inquiryWriterId !== loginUserEmailId) {
-      alert('권한이 없습니다.');
       navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
+
+    const { inquiryWriterId, inquiryContents, inquiryTitle, status } = result as GetInquiryBoardResponseDto;
+
+    // 요기 수정 
+    if (!cookies.accessToken) {
+      alert('권한이 없습니다.');
+      // navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      return;
+    }
+    if (status) {
+      alert('답변이 완료된 게시물 입니다.');
+      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      return;
+  }
     setInquiryWriterId(inquiryWriterId);
+    // setInquiryWriterNickname(inquiryWriterNickname);
     setInquiryTitle(inquiryTitle)
     setInquiryContents(inquiryContents);
   };
@@ -57,11 +66,11 @@ export default function InquiryUpdate() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'VF' ? '모든 값을 입력해주세요.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-              result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '권한이 없습니다.' :
+      result.code === 'VF' ? '모든 값을 입력해주세요.' :
+      result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+      result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -91,7 +100,7 @@ export default function InquiryUpdate() {
   const onInquiryUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !inquiryNumber) return;
     if (!inquiryTitle.trim() || !inquiryContents.trim()) return;
-
+      console.log("sd");
     const requestBody: PatchInquiryBoardRequestDto = { inquiryTitle, inquiryContents };
     patchInquiryBoardRequest(inquiryNumber, requestBody, cookies.accessToken).then(patchInquiryBoardResponse);
   };
@@ -103,7 +112,7 @@ export default function InquiryUpdate() {
       if(!loginUserRole) return;
       if(effectFlag) return;
       effectFlag = true;
-      if(loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_CEO') {
+      if(loginUserRole !== 'ROLE_USER') {
         navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
         return;
       }

@@ -97,7 +97,7 @@ export default function ReviewDetailsList() {
         if (!result || result.code !== 'SU') 
         {
             //alert(message);
-            if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+            // if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
             return;
         }
 
@@ -129,9 +129,10 @@ export default function ReviewDetailsList() {
     //                    effect                    //
     useEffect(() => {
         if (!cookies.accessToken) return;
+        
         GetReviewDetailsRequest(cookies.accessToken)
         .then(GetReviewDetailsResponse);
-    }, []);
+    },[]);
     //!!!
 
     useEffect(() => {

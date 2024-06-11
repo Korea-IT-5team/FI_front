@@ -5,3 +5,10 @@ import { RestaurantReservationListItem } from "src/types";
 export interface GetReservationListResponseDto extends ResponseDto {
   restaurantReservationList: RestaurantReservationListItem[];
 }
+
+// description: 식당 예약 상태 확인 Response Body DTO
+export interface GetReservationCheckResponseDto extends ResponseDto
+{
+    reservationUserId: string
+    reservationRestaurantId: number
+}

@@ -19,7 +19,7 @@ export default function Restaurant()
   const navigator = useNavigate();
 
 
-  //!!!
+  //시작
   //            function                     //
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
@@ -37,7 +37,7 @@ export default function Restaurant()
     setLoginUserEmailId(userEmailId);
     setLoginUserRole(userRole);
 };
-//!!!
+//완료
 
 
   //            event handler               //
@@ -49,7 +49,7 @@ export default function Restaurant()
 
   
  
-  //!!!
+  //시작
   //          effect              //
   let effectFlag = false;
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function Restaurant()
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, []);
-  //!!!
+  //완료
 
   // path에 대한 객체를 반환
 
@@ -71,22 +71,19 @@ export default function Restaurant()
     <>
       <div id="restaurant-wrapper">
           <div className='restaurant-head-box'>
-              <div className='restaurant-icon-image'></div>
+              <div className='restaurant-icon'>☰</div>
               <div className='restaurant-title'>{"Food Insight"}</div>
               {loginUserRole === '' 
-               ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>로그인/회원가입</div>
-               : loginUserRole === 'ROLE_CEO'
-               ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사장 로그아웃</div>
-               : loginUserRole === 'ROLE_USER' 
-               ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사용자 로그아웃</div>
-               : null}
+                ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>로그인/회원가입</div>
+                : loginUserRole === 'ROLE_CEO'
+                ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사장 로그아웃</div>
+                : loginUserRole === 'ROLE_USER' 
+                ? <div className="restaurant-sign-in" onClick={onLogClickHandler}>사용자 로그아웃</div>
+                : null}
           </div>
           <Outlet />
       </div> 
     </>
   )
 }
-//수정##
-//CSS완료
-//사장쪽 점검빼고 완료
-//AF 비회원일때는 어떻게 처리???
+//기능부분완료

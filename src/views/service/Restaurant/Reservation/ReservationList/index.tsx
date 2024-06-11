@@ -120,7 +120,7 @@ export default function ReservationList() {
         if (!result || result.code !== 'SU') 
         {
             // alert(message);
-            if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+            // if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
             return;
         }
 

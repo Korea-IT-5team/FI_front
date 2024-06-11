@@ -48,7 +48,7 @@ export const getInquiryBoardRequest = async (inquiryNumber: number | string, acc
 
 // function: 문의 게시물 수정 API 함수 
 export const patchInquiryBoardRequest = async (inquiryNumber: number | string, requestBody: PatchInquiryBoardRequestDto, accessToken: string) => {
-    const result = await axios.put(PATCH_INQUIRY_BOARD_REQUEST_URL(inquiryNumber), requestBody, bearerAuthorization(accessToken))
+    const result = await axios.patch(PATCH_INQUIRY_BOARD_REQUEST_URL(inquiryNumber), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler)
     return result;
