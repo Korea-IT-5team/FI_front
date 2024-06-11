@@ -19,12 +19,12 @@ function ListItem ({
   inquiryWriterNickname,
   inquiryWriteDatetime
 }: InquiryBoardListItem) {
-
   //        function       //
   const navigator = useNavigate();
   
   //      event handler      //
   const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+
   //   render   //
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
@@ -37,9 +37,10 @@ function ListItem ({
     </div>
   );
 }
-  // component: 문의사항 목록보기
+
+// component: 문의사항 목록보기 //
 export default function InquiryList() {
-  //                    state                    //
+  //   state   //
   const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
@@ -56,7 +57,7 @@ export default function InquiryList() {
 
   const [searchWord, setSearchWord] = useState<string>('');
 
-  //                    function                    //
+  //   function   //
   const navigator = useNavigate();
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
@@ -94,81 +95,78 @@ export default function InquiryList() {
     changePage(inquiryBoardList, totalLength);
 
     changeSection(totalPage);
-};
+  };
 
-const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | ResponseDto | null) => {
-  const message =
-    !result ? '서버에 문제가 있습니다.' :
+  const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | ResponseDto | null) => {
+    const message =
+      !result ? '서버에 문제가 있습니다.' :
         result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-  if (!result || result.code !== 'SU') {
-    // alert(message);
-    return;
-  }
-
-  const { inquiryBoardList } = result as GetInquiryBoardListResponseDto;
-  changeInquiryBoardList(inquiryBoardList);
-
-  setCurrentPage(!inquiryBoardList.length ? 0 : 1);
-  setCurrentSection(!inquiryBoardList.length ? 0 : 1);
-};
-
-const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResponseDto | ResponseDto | null) => {
-
-  const message = 
-      !result ? '서버에 문제가 있습니다.' : 
-      result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  
-  if (!result || result.code !== 'SU') {
-      // alert(message);
+    if (!result || result.code !== 'SU') {
       return;
-  }
+    }
 
-  const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
-  changeInquiryBoardList(inquiryBoardList);
-  setCurrentPage(!inquiryBoardList.length ? 0 : 1);
-  setCurrentSection(!inquiryBoardList.length ? 0 : 1);
-};
+    const { inquiryBoardList } = result as GetInquiryBoardListResponseDto;
+    changeInquiryBoardList(inquiryBoardList);
+    setCurrentPage(!inquiryBoardList.length ? 0 : 1);
+    setCurrentSection(!inquiryBoardList.length ? 0 : 1);
+  };
+
+  const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResponseDto | ResponseDto | null) => {
+    const message = 
+        !result ? '서버에 문제가 있습니다.' : 
+        result.code === 'VF' ? '검색어를 입력하세요.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    
+    if (!result || result.code !== 'SU') {
+        // alert(message);
+        return;
+    }
+
+    const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
+    changeInquiryBoardList(inquiryBoardList);
+    setCurrentPage(!inquiryBoardList.length ? 0 : 1);
+    setCurrentSection(!inquiryBoardList.length ? 0 : 1);
+  };
 
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if (loginUserRole !== 'ROLE_USER') return;
     navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
-};
+  };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
-};
+  };
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-};
+  };
 
   const onToggleClickHandler = () => {
     if (loginUserRole !== 'ROLE_ADMIN') return;
     setToggleOn(!isToggleOn);
-};
+  };
 
   const onPreSectionClickHandler = () => {
     if (currentSection <= 1) return;
     setCurrentSection(currentSection - 1); 
     setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-};
+  };
 
   const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
-};
+  };
+
   const onNextSectionClickHandler = () => {
     if (currentSection === totalSection) return;
     setCurrentSection(currentSection + 1);
     setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-};
+  };
 
-  //                  effect                  //
+  //   effect   //
   useEffect(() => {
     // if (!cookies.accessToken) return;
     if (searchWord)
@@ -186,7 +184,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       changeSection(totalPage);
   }, [currentSection]);
 
-  //                    render                      //
+  //   render   //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
@@ -199,11 +197,11 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
         <div className='inquiry-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' &&
           (<>
-          <div className={toggleClass} onClick={onToggleClickHandler}></div> 
-          <div className='inquiry-list-top-admin-text'>미답변 보기</div>
+            <div className={toggleClass} onClick={onToggleClickHandler}></div> 
+            <div className='inquiry-list-top-admin-text'>미답변 보기</div>
           </>)} 
           {loginUserRole === 'ROLE_USER' && ( 
-            <div className='primary-button' onClick={onWriteButtonClickHandler}>문의하기</div>
+            <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>글쓰기</div>
           )}
         </div>
       </div>
@@ -222,7 +220,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px'}}></div>
-        <div className='inquiry-list-pageNation'>
+        <div className='inquiry-list-pagenation'>
             <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
             <div className='inquiry-list-page-box'>
                 {pageList.map(page => 
