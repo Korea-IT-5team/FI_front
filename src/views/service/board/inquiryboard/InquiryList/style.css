@@ -125,7 +125,6 @@
 
 .inquiry-list-table-writer-nickname {
     width: 60px;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
