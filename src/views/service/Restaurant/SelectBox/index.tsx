@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import './style.css';
-import { useUserStore } from "src/stores";
 
 interface Prop {
     value: string;
     onChange: (value: string) => void;
 }
 
-//                    component                    //
+// component //
 export default function SelectBox({ value, onChange }: Prop) {
 
     const listItem = [
@@ -27,12 +26,11 @@ export default function SelectBox({ value, onChange }: Prop) {
         { name: '중식' , value: '중식' }
     ];
 
-    //                    state                    //
+    // state //
     const [show, setShow] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
-    const { loginUserEmailId, loginUserRole } = useUserStore();
     
-    //                    event handler                    //
+    // event handler //
     const onButtonClickHandler = () => {
         setShow(!show);
     };
@@ -46,7 +44,7 @@ export default function SelectBox({ value, onChange }: Prop) {
     };
 
   
-    //                    render                    //
+    // render //
     const buttonClass = show ? 'select-close-button' : 'select-open-button';
     return (
         <div className='select-box'>

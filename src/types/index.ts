@@ -32,6 +32,7 @@ export interface NoticeBoardListItem {
   noticeTitle: string;
   noticeWriteDatetime: string;
   noticeViewCount: number;
+  noticeWriteNickname: string;
 }
 
 export interface InquiryBoardListItem {
@@ -39,12 +40,11 @@ export interface InquiryBoardListItem {
   inquiryStatus: boolean;
   inquiryPublic: boolean;
   inquiryTitle: string;
-  // inquiryWriterId: string;
+  inquiryWriterId: string;
   inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
 }
 
-//###수정
 export interface RestaurantReviewListItem {
   reviewNumber: number,
   reviewRestaurantId: number,
@@ -54,7 +54,6 @@ export interface RestaurantReviewListItem {
   reviewContents: string,
   reviewWriterNickname: string
 }
-//###수정
 
 // export interface InquiryBoardDetailItem {
 //   inquiryNumber: number;

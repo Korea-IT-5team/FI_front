@@ -8,34 +8,38 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIE
 import { RestaurantReviewListItem } from 'src/types';
 import './style.css';
 
-//                    component                    //
+// component //
 function ListItem ({ 
     reviewNumber,
-    reviewRestaurantId,
-    reviewDate
+    reviewImage,
+    rating,
+    reviewContents,
+    reviewWriterNickname,
+    reviewDate,
 }: RestaurantReviewListItem) {
 
-    //                    function                    //
+    // function //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+    // event handler //
     const onClickHandler = () => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber));
 
-    //                    render                    //
+    // render //
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
-            <div className='review-list-table-reviewNumber-number'></div>
-            <div className='review-list-table-title' style={{ textAlign: 'left' }}></div>
-            <div className='review-list-table-writer-id'></div>
-            <div className='review-list-table-write-date'></div>
-            <div className='review-list-table-viewcount'></div>
+            <div className=''>{reviewNumber}</div>
+            <img src={reviewImage} className='' />
+            <div className='' style={{ textAlign: 'left' }}>{rating}</div>
+            <div className=''>{reviewContents}</div>
+            <div className=''>{reviewWriterNickname}</div>
+            <div className=''>{reviewDate}</div>
         </div>
     );
 }
 
-//                    component                    //
+// component //
 export default function ReviewDetailsList() {
-    //                    state                    //
+    // state //
     const [cookies] = useCookies();
     const [reviewDetailsList, setReviewDetailsList] = useState<RestaurantReviewListItem[]>([]);
     const [viewList, setViewList] = useState<RestaurantReviewListItem[]>([]);
@@ -46,7 +50,7 @@ export default function ReviewDetailsList() {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
 
-    //                    function                    //
+    // function //
     const navigator = useNavigate();
 
     const changePage = (reviewDetailsList: RestaurantReviewListItem[], totalLenght: number) => {
@@ -87,7 +91,6 @@ export default function ReviewDetailsList() {
         changeSection(totalPage);
     };
 
-    //!!!
     const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
 
         const message =
@@ -106,9 +109,8 @@ export default function ReviewDetailsList() {
         setCurrentPage(!restaurantReviewList.length ? 0 : 1);
         setCurrentSection(!restaurantReviewList.length ? 0 : 1);
     };
-    //!!!
 
-    //                    event handler                    //
+    // event handler //
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
     };
@@ -125,15 +127,13 @@ export default function ReviewDetailsList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //!!!
-    //                    effect                    //
+    // effect //
     useEffect(() => {
         if (!cookies.accessToken) return;
         
         GetReviewDetailsRequest(cookies.accessToken)
-        .then(GetReviewDetailsResponse);
+            .then(GetReviewDetailsResponse);
     },[]);
-    //!!!
 
     useEffect(() => {
         if (!reviewDetailsList.length) return;
@@ -145,8 +145,7 @@ export default function ReviewDetailsList() {
         changeSection(totalPage);
     }, [currentSection]);
     
-  
-    //                    render                    //
+    // render //
     return (
         <div id='review-list-wrapper'>
             <div className='review-list-top'>
@@ -154,12 +153,12 @@ export default function ReviewDetailsList() {
             </div>
             <div className='review-list-table'>
                 <div className='review-list-table-th'>
-                    <div className='review-list-table-reception-number'>접수번호</div>
-                    <div className='review-list-table-status'>상태</div>
-                    <div className='review-list-table-title'>제목</div>
-                    <div className='review-list-table-writer-id'>작성자</div>
-                    <div className='review-list-table-write-date'>작성일</div>
-                    <div className='review-list-table-viewcount'>조회수</div>
+                    <div className=''>리뷰번호</div>
+                    <div className=''>이미지</div>
+                    <div className=''>평점</div>
+                    <div className=''>내용</div>
+                    <div className=''>작성자</div>
+                    <div className=''>작성일</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>

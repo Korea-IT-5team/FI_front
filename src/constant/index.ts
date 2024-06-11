@@ -41,7 +41,7 @@ export const BOARD_PATH = '/board';
 export const NOTICE_PATH = 'notice';
 export const NOTICE_BOARD_LIST_PATH = 'list';
 export const NOTICE_BOARD_WRITE_PATH = 'write';
-export const NOTICE_BOARD_UPDATE_PATH = 'update';
+export const NOTICE_BOARD_UPDATE_PATH = 'update/:noticeNumber';
 export const NOTICE_DETAILS_PATH = ':noticeNumber';
 
 export const INQUIRY_PATH = 'inquiry';
@@ -89,7 +89,7 @@ export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
 
 export const NOTICE_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_LIST_PATH}`;
 export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
-export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
+export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/update/${noticeNumber}`;
 export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
 
 export const INQUIRY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_LIST_PATH}`;
@@ -176,14 +176,13 @@ export const GET_MY_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${G
 
 // description : Notice board 모듈 내의 기능 URL
 export const SERVER_NOTICE_BOARD_MODULE_URL = `${SERVER_API_URL}/notice-board`;
-export const POST_NOTICE_BOARD_REQUEST_URL = `${SERVER_NOTICE_BOARD_MODULE_URL}/write`;
+export const POST_NOTICE_BOARD_REQUEST_URL = `${SERVER_NOTICE_BOARD_MODULE_URL}/`;
 export const GET_NOTICE_BOARD_LIST_URL = `${SERVER_NOTICE_BOARD_MODULE_URL}/list`;
 export const GET_NOTICE_BOARD_LIST_SEARCH_URL = `${GET_NOTICE_BOARD_LIST_URL}/search`;
 export const GET_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
-export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}/view-count`;
+export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}/increase-view-count`;
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
-export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
+export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/update/${noticeNumber}`;
 
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
-//###수정

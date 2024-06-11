@@ -7,6 +7,7 @@ export interface GetUserInfoResponseDto extends ResponseDto {
   userTelNumber: string;
   userAddress: string;
   userRole: string;
+  business_registration_number: string;
 }
 
 // description: 내 정보 불러오기 Response Body DTO

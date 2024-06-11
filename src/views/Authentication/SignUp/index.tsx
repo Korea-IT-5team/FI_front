@@ -129,7 +129,7 @@ export default function SignUp() {
         
     const businessRegistrationNumberMessage = 
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'DB' ? '이미 사용중인 사업자번호 입니다.' :
+      result.code === 'DR' ? '이미 사용중인 사업자번호 입니다.' : //수정
       result.code === 'AF' ? '권한이 없습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '사업자번호가 확인되었습니다.' : '' ;
