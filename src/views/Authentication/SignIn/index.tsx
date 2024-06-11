@@ -46,6 +46,7 @@ function SnsContainer({ title }: SnsContainerProps) {
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
         window.location.href = 'http://localhost:9999/api/v1/auth/oauth2/' + type;
     };
+    
     // render: sns화면 //
     return (
         <div className="authentication-sns-container">
@@ -76,10 +77,10 @@ export default function SignIn() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
-                    result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-                        result.code === 'TF' ? '서버에 문제가 있습니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
+            result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
+            result.code === 'TF' ? '서버에 문제가 있습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
         setMessage(message);
 
         const isSuccess = result && result.code === 'SU';

@@ -31,21 +31,23 @@ export const RESTAURANT_FAVORITE_LIST_PATH = 'favoriteList';
 
 export const MY_PAGE_PATH = '/my-page';
 export const MY_PAGE_SITE_PATH = 'site';
-export const USER_INFO_UPDATE_PATH = 'user-info-update';
-export const USER_DELETE_PATH = 'user-delete';
+// export const USER_INFO_UPDATE_PATH = 'user-info-update';
+export const USER_INFO_UPDATE_PATH = 'user-info-update/:userEmailId';
+// export const USER_DELETE_PATH = 'user-delete';
+export const USER_DELETE_PATH = 'info-delete/:userEmailId';
 export const USER_DELETE_FINALLY_PATH = 'user-delete-finally';
 
 export const BOARD_PATH = '/board';
 export const NOTICE_PATH = 'notice';
 export const NOTICE_BOARD_LIST_PATH = 'list';
 export const NOTICE_BOARD_WRITE_PATH = 'write';
-export const NOTICE_BOARD_UPDATE_PATH = 'update';
+export const NOTICE_BOARD_UPDATE_PATH = 'update/:noticeNumber';
 export const NOTICE_DETAILS_PATH = ':noticeNumber';
 
 export const INQUIRY_PATH = 'inquiry';
 export const INQUIRY_BOARD_LIST_PATH = 'list';
 export const INQUIRY_BOARD_WRITE_PATH = 'write';
-export const INQUIRY_BOARD_UPDATE_PATH =  'update';
+export const INQUIRY_BOARD_UPDATE_PATH = 'update/:inquiryNumber';
 export const INQUIRY_MY_BOARD_LIST_PATH = 'my-board';
 export const INQUIRY_DETAILS_PATH = ':inquiryNumber';
 
@@ -57,7 +59,7 @@ export const SIGN_IN_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_IN_PATH}`;
 export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_INPUT_PATH}`;
 export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
-export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/${PASSWORD_RESET_CHECK_PATH}/${userEmailId}`;
+export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/password-reset-check/${userEmailId}`;
 export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
@@ -77,20 +79,22 @@ export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${FAVO
 
 export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;
 export const MY_PAGE_SITE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${MY_PAGE_SITE_PATH}`;
-export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
-export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
+// export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
+export const USER_INFO_UPDATE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/user-info-update/${userEmailId}`;
+// export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
+export const USER_DELETE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/info-delete/${userEmailId}`;
 export const USER_DELETE_FINALLY_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}/${USER_DELETE_FINALLY_PATH}`;
 
 export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
 
 export const NOTICE_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_LIST_PATH}`;
 export const NOTICE_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_WRITE_PATH}`;
-export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${NOTICE_BOARD_UPDATE_PATH}/${noticeNumber}`;
+export const NOTICE_BOARD_UPDATE_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/update/${noticeNumber}`;
 export const NOTICE_DETAILS_ABSOLUTE_PATH = (noticeNumber: number | string) => `${BOARD_PATH}/${NOTICE_PATH}/${noticeNumber}`;
 
 export const INQUIRY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_LIST_PATH}`;
 export const INQUIRY_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_WRITE_PATH}`;
-export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_BOARD_UPDATE_PATH}/${inquiryNumber}`;
+export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: string | number) => `${BOARD_PATH}/${INQUIRY_PATH}/update/${inquiryNumber}`;
 export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
 export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
 
@@ -116,9 +120,10 @@ export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/bus
 // description: USER 모듈 내의 기능 URL
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
-// export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_USER_MODULE_URL}/password-recheck`;
-export const INFO_UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-update`;
-export const INFO_DELETE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-delete`;
+// export const PATCH_INFO_UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-update`;
+export const PATCH_INFO_UPDATE_REQUEST_URL = (userEmailId: string) => `${SERVER_USER_MODULE_URL}/info-update/${userEmailId}`;
+// export const DELETE_INFO_DELETE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-delete`;
+export const DELETE_INFO_DELETE_REQUEST_URL = (userEmailId: string) => `${SERVER_USER_MODULE_URL}/info-delete/${userEmailId}`;
 export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
 
 // description: RESTAURANT 모듈 내의 기능 URL
@@ -164,21 +169,20 @@ export const GET_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_INQUIRY_BOARD_LIST_URL}/
 export const GET_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
 export const POST_INQUIRY_BOARD_COMMENT_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}/comment`;
 export const DELETE_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
-export const PATCH_INQUIRY_BOARD_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
+export const PATCH_INQUIRY_BOARD_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/update/${inquiryNumber}`;
 export const GET_MY_INQUIRY_BOARD_LIST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/my-list`;
 export const GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_MY_INQUIRY_BOARD_LIST_URL}/search`;
 export const GET_MY_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${GET_MY_INQUIRY_BOARD_LIST_URL}/${inquiryNumber}`;
 
 // description : Notice board 모듈 내의 기능 URL
 export const SERVER_NOTICE_BOARD_MODULE_URL = `${SERVER_API_URL}/notice-board`;
-export const POST_NOTICE_BOARD_REQUEST_URL = `${SERVER_NOTICE_BOARD_MODULE_URL}/write`;
+export const POST_NOTICE_BOARD_REQUEST_URL = `${SERVER_NOTICE_BOARD_MODULE_URL}/`;
 export const GET_NOTICE_BOARD_LIST_URL = `${SERVER_NOTICE_BOARD_MODULE_URL}/list`;
 export const GET_NOTICE_BOARD_LIST_SEARCH_URL = `${GET_NOTICE_BOARD_LIST_URL}/search`;
 export const GET_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
-export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}/view-count`;
+export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}/increase-view-count`;
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
-export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
+export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/update/${noticeNumber}`;
 
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
-//###수정

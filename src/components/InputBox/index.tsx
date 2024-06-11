@@ -17,12 +17,11 @@ export interface InputBoxProps {
 
 export default function InputBox({ label, type, value, placeholder, onChangeHandler, buttonTitle, buttonStatus, onButtonClickHandler, message, error, onKeydownHandler }: InputBoxProps) {
 
-    const buttonClass = buttonStatus ? 'common-input-primary-button' : 'common-input-disable-button';
+    const buttonClass = buttonStatus ? 'common-input-primary-button' : 'common-input-second-button';
     const messageClass = 'common-input-message ' + (error ? 'error' : 'primary');
 
     return (
         <div className="common-input-box">
-            <div className="common-input-label label">{label}</div>
             <div className="common-input-content-box">
                 <input
                     className="common-input"
