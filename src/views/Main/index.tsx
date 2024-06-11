@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import "./style.css";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useUserStore } from 'src/stores';
-import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
+import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import "./style.css";
 
 type Path = '식당리스트' | '마이페이지' | '문의사항' | '';
 
@@ -78,6 +78,14 @@ function TopBar({ path }: Props) {
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
         }
+        {loginUserRole === 'ROLE_CEO' &&
+        <div className="top-bar-role">
+          <div className="sign-in-wrapper">
+            <div className="top-button" onClick={onAdminPageClickHandler}>사장</div>
+          </div> 
+          <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+        </div>
+        }
         {loginUserRole === 'ROLE_ADMIN' && 
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
@@ -86,7 +94,7 @@ function TopBar({ path }: Props) {
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
         }
-        {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && 
+        {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
         <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
         }
         </div>

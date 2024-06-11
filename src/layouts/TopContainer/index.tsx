@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import "./style.css";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from 'src/constant';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useUserStore } from 'src/stores';
-import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
+import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import "./style.css";
 
 type Path = '식당리스트' | '마이페이지' | '문의사항' | '';
 
@@ -62,6 +62,7 @@ function TopBar({ path }: Props) {
     const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
     const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
+
 
     // render // 
     return (
