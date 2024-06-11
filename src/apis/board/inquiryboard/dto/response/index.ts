@@ -14,13 +14,6 @@ export interface GetSearchInquiryBoardListResponseDto extends ResponseDto {
 // description: 문의 게시물 확인 Response Body DTO
 export interface GetInquiryBoardResponseDto extends ResponseDto {
   inquiryNumber: number;
-<<<<<<< HEAD
-  inquiryTitle: string;
-  inquiryWriterId: string;
-  inquiryWriteDatetime: string;
-  inquiryContents: string;
-  comment: string;
-=======
   status:boolean;
   inquiryTitle: string;
   inquiryWriterId: string;
@@ -28,7 +21,6 @@ export interface GetInquiryBoardResponseDto extends ResponseDto {
   inquiryWriteDatetime: string;
   inquiryContents: string;
   inquiryComment: string | null;
->>>>>>> b88bcb312c2ed9b43ea64afcd48f3ca1ef3512a1
 }
 
 // description: 문의 게시물 목록 확인 Response Body DTO

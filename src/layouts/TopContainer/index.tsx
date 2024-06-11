@@ -78,6 +78,14 @@ function TopBar({ path }: Props) {
                         <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                     </div>
                     }
+                    {loginUserRole === 'ROLE_CEO' &&
+                    <div className="top-bar-role">
+                        <div className="sign-in-wrapper">
+                            <div className="top-button" onClick={onAdminPageClickHandler}>사장</div>
+                        </div> 
+                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                    </div>
+                    }
                     {loginUserRole === 'ROLE_ADMIN' &&
                     <div className="top-bar-role">
                         <div className="sign-in-wrapper">
@@ -86,7 +94,7 @@ function TopBar({ path }: Props) {
                         <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                     </div>
                     }
-                    {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' &&
+                    {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
                     <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
                     }
                 </div>
