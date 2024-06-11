@@ -1,26 +1,19 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { postNoticeBoardRequest } from 'src/apis/board';
 import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 
-//                    component                    //
 export default function NoticeWrite() {
-  //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-
   const { loginUserRole } = useUserStore();
-
   const [cookies] = useCookies();
-  
   const [noticeTitle, setNoticeTitle] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
-
-  //                    function                    //
   const navigator = useNavigate();
 
   const postBoardResponse = (result: ResponseDto | null) => {
@@ -37,10 +30,8 @@ export default function NoticeWrite() {
     navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   };
 
-  //                    event handler                    //
   const onNoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const noticeTitle = event.target.value;
-    setNoticeTitle(noticeTitle);
+    setNoticeTitle(event.target.value);
   };
 
   const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,23 +45,22 @@ export default function NoticeWrite() {
   };
 
   const onPostButtonClickHandler = () => {
-    if (!noticeTitle.trim() || !noticeTitle.trim()) return;
-    if (!cookies.accessToken) return;
+    if (!noticeTitle.trim() || !noticeContents.trim()) return;
+    if (!cookies.accessToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
 
     const requestBody: PostNoticeBoardRequestDto = { noticeTitle, noticeContents };
-
     postNoticeBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
   };
 
-  //                    effect                    //
   useEffect(() => {
-    if (loginUserRole === 'ROLE_ADMIN') {
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
-      return;
+    if (loginUserRole !== 'ROLE_ADMIN') {
+      navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     }
   }, [loginUserRole]);
 
-  //                    render                    //
   return (
     <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>
