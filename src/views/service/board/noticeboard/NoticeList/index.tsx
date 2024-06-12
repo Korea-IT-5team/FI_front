@@ -30,10 +30,10 @@ function ListItem ({
   return(
     <div className='notice-list-table-tr' onClick={onClickHandler}>
       <div className='notice-list-table-reception-number'>{noticeNumber}</div>
-      <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
-      <div className='qna-list-table-write-nickname'>{noticeWriterNickname}</div>
-      <div className='qna-list-table-write-date'>{noticeWriteDatetime}</div>
-      <div className='qna-list-table-viewCount'>{viewCount}</div>
+      <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
+      <div className='notice-list-table-write-nickname'>{noticeWriterNickname}</div>
+      <div className='notice-list-table-write-date'>{noticeWriteDatetime}</div>
+      <div className='notice-list-table-viewcount'>{viewCount}</div>
     </div>
   );
 }
