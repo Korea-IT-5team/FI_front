@@ -6,13 +6,11 @@
     gap: 16px;
 }
 
-
 .review-list-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
-
 
 .review-list-size-text {
     font-size: 16px;
@@ -21,18 +19,15 @@
     color: rgba(138, 146, 166, 1);
 }
 
-
 .review-list-size-text .emphasis {
     color: rgba(64, 64, 64, 1);
 }
-
 
 .review-list-top-right {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 
 .review-list-top-admin-text {
     font-size: 14px;
@@ -52,7 +47,6 @@
     background-color: rgba(255, 255, 255, 1);
 }
 
-
 .review-list-table-th {
     display: flex;
     align-items: center;
@@ -65,8 +59,6 @@
 
     color:rgba(64, 64, 64, 1);
 }
-
-
 
 .review-list-table-tr {
     display: flex;
@@ -90,40 +82,6 @@
 }
 
 
-.review-list-table-reviewNumber-number
-{
-    width: 56px;
-}
-
-.review-list-table-status{
-    width:45px;
-}
-
-.review-list-table-title{
-    width:349px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.review-list-table-writer-id
-{
-    width:67px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.review-list-table-write-date{
-    width: 54px;
-}
-
-.review-list-table-viewcount{
-    width: 42px;
-}
-
 .review-list-bottom {
     display: flex;
     justify-content: space-between;
@@ -134,7 +92,6 @@
     align-items: center;
     gap:24px;
 }
-
 
 .review-list-page-left{
     width: 40px;

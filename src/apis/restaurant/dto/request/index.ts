@@ -10,7 +10,6 @@ export interface PostRestaurantInfoRequestDto {
     restaurantOperationHours: string;
     restaurantFeatures: string;
     restaurantNotice: string;
-    restaurantBusinessRegistrationNumber: string;
     restaurantRepresentativeMenu: string;
 }
 
@@ -28,5 +27,4 @@ export interface PatchRestaurantInfoRequestDto {
     restaurantNotice: string;
     restaurantRepresentativeMenu: string;
 }
-//###수정
 

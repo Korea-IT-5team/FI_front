@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
@@ -20,6 +20,7 @@ function TopBar({ path }: Props) {
 
   // state //
   const [nickname, setNickname] = useState<string>('');
+  const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false);
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
@@ -58,49 +59,45 @@ function TopBar({ path }: Props) {
 
   const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
+  const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
 // render // 
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon'>☰</div>
+        <div className='main-side-navigation-icon' onClick={toggleSideNav}>☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
         <div className="top-bar-role">
-            <div className="sign-in-wrapper">
-                <div className="user-my-page-button person"></div>
-                <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
-            </div>
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+          <div className="sign-in-wrapper">
+            <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+          </div>
+          <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
         }
         {loginUserRole === 'ROLE_ADMIN' && 
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
-              <div className="user-my-page-button person"></div>
-              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+            <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
           </div>
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
         }
         {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && 
-            <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
         }
         </div>
       </div>
+      <MainSideNavigation path={path} isOpen={isSideNavOpen} toggleSideNav={toggleSideNav} />
     </>
   );
 }
 
 // component //
-function SideNavigation({ path }: Props) {
-
-  const restaurantList = `side-navigation-item${path === '식당리스트' ? 'active' : ''};`
-  const myPageSite = `side-navigation-item${path === '마이페이지' ? 'active' : ''};`
-  const inquiryBoard = `side-navigation-item${path === '문의사항' ? 'active' : ''};`
+function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
 
   const {pathname} = useLocation();
 
@@ -117,18 +114,20 @@ function SideNavigation({ path }: Props) {
 
   // render //
   return (
-    <div className='side-navigation-container'>
-      <div className={restaurantList} onClick={onRestaurantListClickHandler}>
-        <div className='side-navigation-icon food'></div>
-        <div className='side-navigation-title'>식당 리스트</div>
-      </div>
-      <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-        <div className='side-navigation-icon my-paga'></div>
-        <div className='side-navigation-title'>마이페이지</div>
-      </div>
-      <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
-        <div className='side-navigation-icon board'></div>
-        <div className='side-navigation-title'>문의사항</div>
+    <div className={`main-side-navigation-container${isOpen ? ' show' : ''}`}>
+      <div className='main-side-navigation-contents'>
+        <div className='main-side-navigation-item' onClick={onRestaurantListClickHandler}>
+          <div className='main-side-navigation-icon food'></div>
+          <div className='main-side-navigation-title'>식당 리스트</div>
+        </div>
+        <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
+          <div className='main-side-navigation-icon my-page'></div>
+          <div className='main-side-navigation-title'>마이페이지</div>
+        </div>
+        <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
+          <div className='main-side-navigation-icon board'></div>
+          <div className='main-side-navigation-title'>문의사항</div>
+        </div>
       </div>
     </div>
   );
@@ -188,20 +187,13 @@ export default function Main() {
 return (
   <div id="main-wrapper">
     <TopBar path={path} />
-    <SideNavigation path={path} />
     <div className="main-container">
         <Outlet />
     </div>
     <div className='main-container'>
       <div className='main-banner'></div>
-      <div className='main-image-box'>
-        <div className='restaurant-image'>식당1</div>
-        <div className='restaurant-image'>식당2</div>
-        <div className='restaurant-image'>식당3</div>
-        <div className='restaurant-image'>식당4</div>
-      </div>
+      <div className='main-image-box'></div>
     </div>
   </div>
 );
-
 }

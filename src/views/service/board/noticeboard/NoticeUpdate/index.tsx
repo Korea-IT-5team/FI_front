@@ -5,7 +5,7 @@ import { getNoticeBoardRequest, patchNoticeBoardRequest } from 'src/apis/board';
 import { PatchNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 
@@ -17,9 +17,7 @@ export default function NoticeUpdate() {
 
   const { loginUserEmailId, loginUserRole } = useUserStore();
   const { noticeNumber } = useParams();
-
   const [cookies] = useCookies();
-
   const [noticeWriterId, setNoticeWriterId] = useState<string>('');
   const [noticeTitle, setNoticeTitle] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
@@ -31,10 +29,10 @@ export default function NoticeUpdate() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
-          result.code === 'AF' ? '인증에 실패했습니다.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-              result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -45,9 +43,10 @@ export default function NoticeUpdate() {
     const { noticeWriterId, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
     if (noticeWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
+
     setNoticeWriterId(noticeWriterId);
     setNoticeTitle(noticeTitle)
     setNoticeContents(noticeContents);
@@ -57,11 +56,11 @@ export default function NoticeUpdate() {
 
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-          result.code === 'VF' ? '모든 값을 입력해주세요.' :
-            result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-              result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'AF' ? '권한이 없습니다.' :
+      result.code === 'VF' ? '모든 값을 입력해주세요.' :
+      result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
+      result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -79,29 +78,40 @@ export default function NoticeUpdate() {
   };
 
   const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const contents = event.target.value;
-    if (contents.length > 500) return;
+    const noticeContents = event.target.value;
+    if (noticeContents.length > 500) return;
     setNoticeContents(noticeContents);
 
     if (!contentsRef.current) return;
     contentsRef.current.style.height = 'auto';
     contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
+    
   };
 
   const onNoticeUpdateButtonClickHandler = () => {
+
     if (!cookies.accessToken || !noticeNumber) return;
     if (!noticeTitle.trim() || !noticeContents.trim()) return;
 
     const requestBody: PatchNoticeBoardRequestDto = { noticeTitle, noticeContents };
     patchNoticeBoardRequest(noticeNumber, requestBody, cookies.accessToken).then(patchNoticeBoardResponse);
+  
   };
 
   //                    effect                    //
+  // 한번만 동작하게 하기
+  let effectFlag = false;
   useEffect(() => {
-    if (loginUserRole === 'ROLE_ADMIN') {
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
-      return;
-    }
+      if (!noticeNumber || !cookies.accessToken) return;
+      if (!loginUserRole) return;
+      if (effectFlag) return;
+      effectFlag = true;
+      if (loginUserRole !== 'ROLE_ADMIN') {
+          alert('권한이 없습니다.');
+          navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+          return;
+      }
+      getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse);
   }, [loginUserRole]);
 
 
