@@ -86,7 +86,7 @@ export default function RestaurantList()
               <input className="restaurant-list-search-input" placeholder='오늘의 맛집은?' value={searchWord} onChange={onSearchWordChangeHandler}></input>
               <div className={searchButtonClass} onClick={onSearchClickHandler}>검색</div>
           </div>
-          {loginUserRole === 'ROLE_USER' && <div className="restaurant-list-registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
+          {loginUserRole === 'ROLE_CEO' && <div className="restaurant-list-registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
       </div>
       <div className="restaurant-list">
             {!restaurantList || restaurantList.length === 0 ? 

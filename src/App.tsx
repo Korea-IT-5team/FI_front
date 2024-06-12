@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Route, Routes, useNavigate } from 'react-router';
@@ -15,25 +16,26 @@ import Main from './views/Main';
 import MyPageSite from './views/service/Mypage/MyPageSite';
 import UserDelete from './views/service/Mypage/UserDelete';
 import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
-import FavoriteList from './views/service/restaurant/Favorite/FavoriteList';
-import DoReservation from './views/service/restaurant/Reservation/DoReservation';
-import ReservationList from './views/service/restaurant/Reservation/ReservationList';
-import RestaurantInfo from './views/service/restaurant/RestaurantInfo';
-import RestaurantInfoUpdate from './views/service/restaurant/RestaurantInfoUpdate';
-import RestaurantInfoWrite from './views/service/restaurant/RestaurantInfoWrite';
-import RestaurantList from './views/service/restaurant/RestaurantList';
-import ReviewDetail from './views/service/restaurant/Review/ReviewDetail';
-import ReviewDetailsList from './views/service/restaurant/Review/ReviewDetailsList';
-import ReviewUpdate from './views/service/restaurant/Review/ReviewUpdate';
-import ReviewWrite from './views/service/restaurant/Review/ReviewWrite';
+import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
+import DoReservation from './views/service/Restaurant/Reservation/DoReservation';
+import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
+import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
+import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
+import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
+import RestaurantList from './views/service/Restaurant/RestaurantList';
+import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';
+import ReviewDetailsList from './views/service/Restaurant/Review/ReviewDetailsList';
+import ReviewUpdate from './views/service/Restaurant/Review/ReviewUpdate';
+import ReviewWrite from './views/service/Restaurant/Review/ReviewWrite';
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
-import { default as InquiryList, default as InquiryMyList } from './views/service/board/inquiryboard/InquiryList';
 import InquiryUpdate from './views/service/board/inquiryboard/InquiryUpdate';
 import InquiryWrite from './views/service/board/inquiryboard/InquiryWrite';
 import NoticeDetail from './views/service/board/noticeboard/NoticeDetail';
 import NoticeList from './views/service/board/noticeboard/NoticeList';
 import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
+import InquiryList from './views/service/board/inquiryboard/InquiryList';
+import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
 
 
 // component: root 경로 컴포넌트

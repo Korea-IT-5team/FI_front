@@ -37,7 +37,8 @@ export interface NoticeBoardListItem {
 
 export interface InquiryBoardListItem {
   inquiryNumber: number;
-  inquiryStatus: boolean;
+  // inquiryStatus: boolean;
+  status: boolean;
   inquiryPublic: boolean;
   inquiryTitle: string;
   inquiryWriterId: string;

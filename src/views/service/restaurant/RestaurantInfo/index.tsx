@@ -260,7 +260,7 @@ const onCancleFavoriteClickHandler = () => {
     return (
             <>
                 <div id="restaurant-info">
-                    {loginUserRole === "ROLE_USER" && loginUserEmailId === restaurantWriterId && (
+                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
                         <button onClick={onSetRestIdNumberHandler}>수정</button>)}
                     <img src={restaurantImage} className='' />
                     <div>

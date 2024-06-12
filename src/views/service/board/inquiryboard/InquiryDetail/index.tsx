@@ -22,15 +22,15 @@ export default function InquiryDetail() {
     const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
     const [inquiryWriteDatetime, setInquiryWriteDatetime] = useState<string>('');
     const [inquiryContents, setInquiryContents] = useState<string>('');
-    const [inquiryComment, setInquiryComment] = useState<string | null>(null);
     const [status, setStatus] = useState<boolean>(false);
+    const [inquiryComment, setInquiryComment] = useState<string | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
 
     //                    function                    //
     const navigator = useNavigate();
 
     const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
-
+        
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 접수번호입니다.' : 
@@ -91,23 +91,23 @@ export default function InquiryDetail() {
             alert(message);
             return;
         }
-        navigator(INQUIRY_BOARD_LIST_PATH);
+        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     //                    event handler                    //
+    // 관리자일 경우에만 답글 달기
     const onCommentChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         if (status || loginUserRole !== 'ROLE_ADMIN') return;
-        const comment = event.target.value;
+        const inquiryComment = event.target.value;
         setInquiryComment(inquiryComment);
 
-        const commentRows = comment.split('\n').length;
-        console.log(comment);
+        const commentRows = inquiryComment.split('\n').length;
         setCommentRows(commentRows);
     };
         
     const onCommentSubmitClickHandler = () => {
         if (!inquiryComment || !inquiryComment.trim()) return;
-        if (! inquiryNumber || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
+        if (!inquiryNumber || loginUserRole !== 'ROLE_ADMIN' || !cookies.accessToken) return;
         
         const requestBody: PostCommentRequestDto = { inquiryComment };
         postCommentRequest(inquiryNumber, requestBody, cookies.accessToken).then(postInquiryCommentResponse);
@@ -119,7 +119,7 @@ export default function InquiryDetail() {
 
     // 수정버튼
     const onUpdateClickHandler = () => {
-        if (!inquiryNumber) return;
+        if (!inquiryNumber || loginUserEmailId !== inquiryWriterId || status ) return;
         navigator(INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH(inquiryNumber));
     };
 
@@ -140,16 +140,16 @@ export default function InquiryDetail() {
     
     //                    render                    //
     // const coverWriterId = inquiryWriterId !== '' && (inquiryWriterId[0] + '*'.repeat(inquiryWriterId.length - 1));
-    const coverWriterId = (inquiryWriterId && inquiryWriterId !== '') 
-    ? (inquiryWriterId[0] + '*'.repeat(inquiryWriterId.length - 1)) 
-    : '';
+    // const coverWriterId = (inquiryWriterId && inquiryWriterId !== '') 
+    // ? (inquiryWriterId[0] + '*'.repeat(inquiryWriterId.length - 1)) 
+    // : '';
     return (
         <div id='inquiry-detail-wrapper'>
             <div className='inquiry-detail-main-box'>
                 <div className='inquiry-detail-top-box'>
                     <div className='inquiry-detail-title-box'>{inquiryTitle}</div>
                     <div className='inquiry-detail-info-box'>
-                        <div className='inquiry-detail-info'>작성자 {coverWriterId}</div>
+                        <div className='inquiry-detail-info'>작성자 {inquiryWriterNickname}</div>
                         <div className='inquiry-detail-info-divider'>{'\|'}</div>
                         <div className='inquiry-detail-info'>작성일 {inquiryWriteDatetime}</div>
                     </div>
@@ -159,7 +159,7 @@ export default function InquiryDetail() {
             {loginUserRole === 'ROLE_ADMIN' && !status &&
             <div className='inquiry-detail-comment-write-box'>
                 <div className='inquiry-detail-comment-textarea-box'>
-                    <textarea style={{height: `${28 * commentRows}px`}} className='inquiry-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={inquiryComment == null ? '' : inquiryComment} onChange={onCommentChangeHandler} />
+                    <textarea style={{height: `${28 * commentRows}px`}} className='inquiry-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={inquiryComment === null ? '' : inquiryComment} onChange={onCommentChangeHandler} />
                 </div>
                 <div className='primary-button' onClick={onCommentSubmitClickHandler}>답글달기</div>
             </div>
@@ -172,12 +172,12 @@ export default function InquiryDetail() {
             }
             <div className='inquiry-detail-button-box'>
                 <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
-                {/* {loginUserEmailId === inquiryWriterNickname && loginUserRole === 'ROLE_USER' && */}
+                {loginUserEmailId === inquiryWriterId && loginUserRole === 'ROLE_USER' &&
                 <div className='inquiry-detail-owner-button-box'>
-                    <div className='second-button' onClick={onUpdateClickHandler}>수정</div>
+                    {! status && <div className='second-button' onClick={onUpdateClickHandler}>수정</div>}
                     <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
                 </div>
-                {/* } */}
+                }
             </div>
         </div>
     );
