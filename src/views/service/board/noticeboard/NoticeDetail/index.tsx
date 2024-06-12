@@ -38,7 +38,7 @@ export default function NoticeDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                // navigator(SIGN_IN_ABSOLUTE_PATH);
+                navigator(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
             navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
