@@ -31,8 +31,8 @@ export interface NoticeBoardListItem {
   noticeNumber: number;
   noticeTitle: string;
   noticeWriteDatetime: string;
-  noticeViewCount: number;
-  noticeWriteNickname: string;
+  viewCount: number;
+  noticeWriterNickname: string;
 }
 
 export interface InquiryBoardListItem {

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { PatchNoticeBoardRequestDto, PostNoticeBoardRequestDto } from './noticeboard/dto/request';
+import { PatchNoticeBoardRequestDto, PostNoticeBoardRequestDto } from './dto/request';
 import { DELETE_NOTICE_BOARD_URL, GET_NOTICE_BOARD_LIST_SEARCH_URL, GET_NOTICE_BOARD_LIST_URL, GET_NOTICE_BOARD_URL, NOTICE_BOARD_INCREASE_VIEW_COUNT_URL, PATCH_NOTICE_BOARD_URL, POST_NOTICE_BOARD_REQUEST_URL } from 'src/constant';
-import { bearerAuthorization, requestErrorHandler, requestHandler } from '..';
-import ResponseDto from '../response.dto';
-import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from './noticeboard/dto/response';
+import { bearerAuthorization, requestErrorHandler, requestHandler } from '../..';
+import ResponseDto from '../../response.dto';
+import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto, GetSearchNoticeBoardListResponseDto } from './dto/response';
 
 // function: 공지 게시물 작성 API 함수
 export const postNoticeBoardRequest = async (requestBody: PostNoticeBoardRequestDto, accessToken: string) => {
