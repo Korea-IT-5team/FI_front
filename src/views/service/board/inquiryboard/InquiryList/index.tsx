@@ -14,7 +14,6 @@ import { InquiryBoardListItem } from 'src/types';
 function ListItem ({
   inquiryNumber,
   status,
-  // inquiryStatus,
   inquiryPublic,
   inquiryTitle,
   inquiryWriterNickname,
@@ -28,6 +27,7 @@ function ListItem ({
   const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
 
   //   render   //
+  
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
@@ -52,8 +52,8 @@ function ListItem ({
 
 // component: 문의사항 목록보기 //
 export default function InquiryList() {
-
   //   state   //
+  const [inquiries, setInquiries] = useState([]);
   const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
@@ -66,6 +66,8 @@ export default function InquiryList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
+
+  const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
@@ -264,3 +266,7 @@ export default function InquiryList() {
     </div>
   )
 }
+
+
+
+

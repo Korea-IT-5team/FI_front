@@ -230,3 +230,4 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       </div>
       )
 }
+
