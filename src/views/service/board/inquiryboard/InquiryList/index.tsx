@@ -33,8 +33,8 @@ function ListItem ({
       <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
       <div className='inquiry-list-table-status'>
           {status ? 
-          <div className='disable-bedge'>완료</div> :
-          <div className='primary-bedge'>접수</div>
+          <div className='disable-bedge'>답변</div> :
+          <div className='primary-bedge'>미답변</div>
           }
       </div>
       <div className='inquiry-list-table-public'>
@@ -191,7 +191,7 @@ export default function InquiryList() {
  
   //   effect   //
   useEffect(() => {
-    // if (!cookies.accessToken) return;
+    // 비로그인 상태도 볼 수 있게 토큰값은 없애두기
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else
