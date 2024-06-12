@@ -15,6 +15,7 @@ export interface GetSearchInquiryBoardListResponseDto extends ResponseDto {
 export interface GetInquiryBoardResponseDto extends ResponseDto {
   inquiryNumber: number;
   status:boolean;
+  inquiryPublic: boolean;
   inquiryTitle: string;
   inquiryWriterId: string;
   inquiryWriterNickname: string;

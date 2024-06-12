@@ -8,7 +8,6 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOT
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
-import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
 function ListItem ({
@@ -16,7 +15,6 @@ function ListItem ({
   noticeTitle,
   noticeWriteDatetime,
   viewCount,
-  noticeWriteNickname
   noticeWriterNickname
 }: NoticeBoardListItem) {
 
