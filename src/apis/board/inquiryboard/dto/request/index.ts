@@ -2,7 +2,7 @@
 export interface PostInquiryBoardRequestDto {
   inquiryTitle: string;
   inquiryContents: string;
-  isInquiryPublic: boolean;
+  inquiryPublic: boolean;
 }
 
 // description: 문의 게시물 답글 작성 Request Body DTO

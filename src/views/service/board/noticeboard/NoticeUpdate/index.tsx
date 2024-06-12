@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { getNoticeBoardRequest, patchNoticeBoardRequest } from 'src/apis/board';
+import { getNoticeBoardRequest, patchNoticeBoardRequest } from 'src/apis/board/noticeboard';
 import { PatchNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';

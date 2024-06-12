@@ -19,10 +19,8 @@ import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
 import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
 import DoReservation from './views/service/Restaurant/Reservation/DoReservation';
 import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
-import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
 import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
-import RestaurantList from './views/service/Restaurant/RestaurantList';
 import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';
 import ReviewDetailsList from './views/service/Restaurant/Review/ReviewDetailsList';
 import ReviewUpdate from './views/service/Restaurant/Review/ReviewUpdate';
@@ -36,6 +34,8 @@ import NoticeUpdate from './views/service/board/noticeboard/NoticeUpdate';
 import NoticeWrite from './views/service/board/noticeboard/NoticeWrite';
 import InquiryList from './views/service/board/inquiryboard/InquiryList';
 import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
+import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
+import RestaurantList from './views/service/Restaurant/RestaurantList';
 
 
 // component: root 경로 컴포넌트
@@ -74,7 +74,7 @@ function App() {
       
       <Route element={<TopContainer />} >
         <Route path={RESTAURANT_PATH}> 
-          <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList/>} />
+          <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
           <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
           <Route path={RESTAURANT_INFO_WRITE_PATH} element={<RestaurantInfoWrite />} />
           <Route path={RESTAURANT_INFO_UPDATE_PATH} element={<RestaurantInfoUpdate />} />

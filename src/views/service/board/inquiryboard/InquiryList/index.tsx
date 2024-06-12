@@ -14,7 +14,6 @@ import { InquiryBoardListItem } from 'src/types';
 function ListItem ({
   inquiryNumber,
   status,
-  // inquiryStatus,
   inquiryPublic,
   inquiryTitle,
   inquiryWriterNickname,
@@ -28,13 +27,14 @@ function ListItem ({
   const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
 
   //   render   //
+  
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
       <div className='inquiry-list-table-status'>
           {status ? 
-          <div className='disable-bedge'>완료</div> :
-          <div className='primary-bedge'>접수</div>
+          <div className='disable-bedge'>답변</div> :
+          <div className='primary-bedge'>미답변</div>
           }
       </div>
       <div className='inquiry-list-table-public'>
@@ -52,8 +52,8 @@ function ListItem ({
 
 // component: 문의사항 목록보기 //
 export default function InquiryList() {
-
   //   state   //
+  const [inquiries, setInquiries] = useState([]);
   const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
@@ -66,6 +66,8 @@ export default function InquiryList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
+
+  const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
@@ -191,7 +193,7 @@ export default function InquiryList() {
  
   //   effect   //
   useEffect(() => {
-    // if (!cookies.accessToken) return;
+    // 비로그인 상태도 볼 수 있게 토큰값은 없애두기
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else
@@ -215,7 +217,8 @@ export default function InquiryList() {
       <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
           <div className='inquiry-list-size-text'>전체
-            <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+            <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
+          </div>
         </div>
         <div className='inquiry-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' &&
@@ -224,16 +227,16 @@ export default function InquiryList() {
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
             </>)}
           {loginUserRole === 'ROLE_USER' && (
-            <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>글쓰기</div>
+            <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>
       </div>
-      <div className='inquiry-list-table-th'>
+      <div className='inquiry-list-table'>
         <div className='inquiry-list-table-top'>
           <div className='inquiry-list-table-reception-number'>번호</div>
           <div className='inquiry-list-table-status'>상태</div>
           <div className='inquiry-list-table-public'>공개</div>
-          <div className='inquiry-list-table-title'>문의 제목</div>
+          <div className='inquiry-list-table-title'>제목</div>
           <div className='inquiry-list-table-writer-nickname'>작성자</div>
           <div className='inquiry-list-table-write-date'>작성일자</div>
         </div>
@@ -264,3 +267,7 @@ export default function InquiryList() {
     </div>
   )
 }
+
+
+
+

@@ -4,20 +4,21 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getSearchNoticeBoardListRequest } from 'src/apis/board';
+import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
 function ListItem ({
   noticeNumber,
   noticeTitle,
   noticeWriteDatetime,
-  noticeViewCount,
-  // 닉네임 추가해둠
-  noticeWriteNickname
+  viewCount,
+  noticeWriterNickname
 }: NoticeBoardListItem) {
+
+  console.log(viewCount);
 
   //        function       //
   const navigator = useNavigate();
@@ -29,10 +30,10 @@ function ListItem ({
   return(
     <div className='notice-list-table-tr' onClick={onClickHandler}>
       <div className='notice-list-table-reception-number'>{noticeNumber}</div>
-      <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
-      <div className='qna-list-table-write-nickname'>{noticeWriteNickname}</div>
-      <div className='qna-list-table-write-date'>{noticeWriteDatetime}</div>
-      <div className='qna-list-table-viewCount'>{noticeViewCount}</div>
+      <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
+      <div className='notice-list-table-write-nickname'>{noticeWriterNickname}</div>
+      <div className='notice-list-table-write-date'>{noticeWriteDatetime}</div>
+      <div className='notice-list-table-viewcount'>{viewCount}</div>
     </div>
   );
 }
@@ -42,19 +43,18 @@ export default function NoticeList() {
 
   //                    state                    //
   const {loginUserRole} = useUserStore();
-
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
   // const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
-  const [viewList, setViewList] = useState<NoticeBoardListItem[]>([]);
+  const [viewNoticeList, setViewNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  const [isToggleOn, setToggleOn] = useState<boolean>(false);
+  // const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -67,7 +67,7 @@ export default function NoticeList() {
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = noticeBoardList.slice(startIndex, endIndex);
-    setViewList(viewList);
+    setViewNoticeList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
@@ -83,6 +83,7 @@ export default function NoticeList() {
   // 추가
   const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
     // setNoticeBoardList(noticeList);
+
     const totalLength = noticeList.length;
     setTotalLength(totalLength);
 
@@ -105,11 +106,12 @@ export default function NoticeList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
       return;
     }
 
     const { noticeBoardList } = result as GetNoticeBoardListResponseDto;
+    changeNoticeBoardList(noticeBoardList);
 
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
@@ -125,7 +127,7 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
         return;
     }
 
@@ -174,13 +176,17 @@ export default function NoticeList() {
 
   useEffect(() => {
     if (!cookies.accessToken) return;
-    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
-  },[isToggleOn]);
+    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
+      .then(getSearchNoticeBoardListResponse)
+      .catch(error => {
+        // 에러 처리
+        console.error('검색 중 오류가 발생했습니다:', error);
+      });
+  }, [searchWord, cookies.accessToken]);
 
   useEffect(() => {
-    if (!noticeBoardList.length) return;
     changePage(noticeBoardList, totalLength);
-  },[currentPage]);
+},[currentPage]);
 
   useEffect(() => {
     if (!noticeBoardList.length) return;
@@ -191,28 +197,33 @@ export default function NoticeList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <div id='notice-list-wrapper'>
-      <div className='notice-list-top'>
-        <div className='notice-list-size-text'>전체 
-        <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+      <div className='notice-list-top-box'>
+        <div className='notice-list-top-left'>
+          <div className='notice-list-size-text'>전체 
+            <span className='emphasis'> {totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
+          </div>
+        </div>
         <div className='notice-list-top-right'>
-          {loginUserRole === 'ROLE_ADMIN' && ( 
+          {loginUserRole === 'ROLE_ADMIN' && (
           <div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>
           )} 
         </div>
       </div>
       <div className='notice-list-table'>
-        <div className='notice-list-table-th'>
+        <div className='notice-list-table-top'>
           <div className='notice-list-table-reception-number'>번호</div>
-          <div className='notice-list-table-title'>공지제목</div>
+          <div className='notice-list-table-title'>제목</div>
           <div className='notice-list-table-writer-nickname'>작성자</div>
           <div className='notice-list-table-write-date'>작성일자</div>
           <div className='notice-list-table-viewcount'>조회수</div>
         </div>
-        {viewList.map(item => <ListItem {...item} />)}
+        <div className='notice-list-table-contents'>
+          {viewNoticeList.map(item => <ListItem {...item} />)}
+        </div>
       </div>
       <div className='notice-list-bottom'>
-        <div style={{ width: '299px' }}></div>
-        <div className='notice-list-pageNation'>
+        <div style={{ width: '332' }}></div>
+        <div className='notice-list-pagenation'>
           <div className='notice-list-page-left' onClick={onPreSectionClickHandler}></div>
           <div className='notice-list-page-box'>
             {pageList.map(page =>
