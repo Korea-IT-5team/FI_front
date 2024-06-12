@@ -9,6 +9,9 @@ import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getNoticeBoardListRequest, getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
+import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
+
+
 //     component     //
 function ListItem ({
   noticeNumber,
