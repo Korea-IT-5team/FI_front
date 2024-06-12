@@ -17,14 +17,24 @@ function ListItem ({
   inquiryPublic,
   inquiryTitle,
   inquiryWriterNickname,
-  inquiryWriteDatetime
+  inquiryWriteDatetime,
+  inquiryWriterId
 }: InquiryBoardListItem) {
+  console.log(inquiryWriterId);
+  
+  const { loginUserEmailId } = useUserStore();
 
   //        function       //
   const navigator = useNavigate();
   
   //      event handler      //
-  const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  const onClickHandler = () => {
+    if (inquiryPublic && inquiryWriterId !== loginUserEmailId) {
+      alert('비공개 게시물입니다.');
+      return;
+    }
+    navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  }
 
   //   render   //
   
@@ -33,14 +43,14 @@ function ListItem ({
       <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
       <div className='inquiry-list-table-status'>
           {status ? 
-          <div className='disable-bedge'>답변</div> :
-          <div className='primary-bedge'>미답변</div>
+          <div className='primary-bedge'>답변</div> :
+          <div className='disable-bedge'>미답변</div> 
           }
       </div>
       <div className='inquiry-list-table-public'>
           {inquiryPublic ?
-          <div className='disable-bedge'>공개</div> :
-          <div className='primary-bedge'>비공개</div>
+          <div className='disable-bedge'>비공개</div> :
+          <div className='primary-bedge'>공개</div>
           }
       </div>
       <div className='inquiry-list-table-title' style={{ textAlign: 'left' }}>{inquiryTitle}</div>
@@ -52,8 +62,8 @@ function ListItem ({
 
 // component: 문의사항 목록보기 //
 export default function InquiryList() {
+
   //   state   //
-  const [inquiries, setInquiries] = useState([]);
   const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
@@ -67,7 +77,7 @@ export default function InquiryList() {
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
-  const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
+  // const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
@@ -141,7 +151,7 @@ export default function InquiryList() {
     
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -186,7 +196,7 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    if (!cookies.accessTToken) return;
+    if (!cookies.accessToken) return;
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };

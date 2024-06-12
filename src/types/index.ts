@@ -32,13 +32,11 @@ export interface NoticeBoardListItem {
   noticeTitle: string;
   noticeWriteDatetime: string;
   viewCount: number;
-  noticeWriteNickname: string;
   noticeWriterNickname: string;
 }
 
 export interface InquiryBoardListItem {
   inquiryNumber: number;
-  // inquiryStatus: boolean;
   status: boolean;
   inquiryPublic: boolean;
   inquiryTitle: string;
