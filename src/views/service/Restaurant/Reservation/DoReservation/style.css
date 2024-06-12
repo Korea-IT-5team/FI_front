@@ -1,0 +1,128 @@
+.do-reservation-information{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: 'Nanum Gothic';
+
+    color: rgba(64, 64, 64, 1);
+}
+
+.do-reservation-box{
+    border: 1px solid rgba(200, 200, 200, 1);
+    width: 50%;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;  
+    box-sizing: border-box; 
+    margin: 0 auto; 
+}
+
+.do-reservation-people{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    font-family: 'Nanum Gothic';
+
+    color: rgba(64, 64, 64, 1);
+}
+
+
+
+.do-reservation-people-box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.do-reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.do-reservation-table td {
+    border: 1px solid rgba(200, 200, 200, 1);
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.1s ease; 
+    font-weight: bold;
+    font-family: 'Nanum Gothic';
+}
+
+.do-reservation-table td:hover {
+    background-color: rgba(255, 148, 45, 0.5);
+    cursor: pointer; 
+}
+
+
+.do-reservation-select-item.selected {
+    background-color: rgba(255, 148, 45, 0.5);
+  }
+
+.do-reservation-checkbox{
+    display: flex;
+    gap:10px;
+    margin-top: 50px;
+}
+
+.do-reservation-checkfont{
+    font-weight: bold;
+    font-family: 'Nanum Gothic';
+}
+
+.do-reservation-primary-button{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    padding: 8px 24px;
+
+    background-color: rgba(255, 148, 45, 1);
+    border-radius: 6px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(255, 255, 255, 1);
+}
+
+.do-reservation-disable-button{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    padding: 8px 24px;
+
+    background-color: rgba(138, 138, 138, 1);
+    border-radius: 6px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 175%;
+
+    color: rgba(255, 255, 255, 1);
+}
+
+.do-reservation-primary-button:hover {
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+
+
+
+
