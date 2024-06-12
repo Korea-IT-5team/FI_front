@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
+import { getNoticeBoardListRequest, getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
 function ListItem ({
@@ -17,8 +17,6 @@ function ListItem ({
   viewCount,
   noticeWriterNickname
 }: NoticeBoardListItem) {
-
-  console.log(viewCount);
 
   //        function       //
   const navigator = useNavigate();
@@ -46,7 +44,6 @@ export default function NoticeList() {
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
-  // const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [viewNoticeList, setViewNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -54,7 +51,6 @@ export default function NoticeList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  // const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -172,9 +168,7 @@ export default function NoticeList() {
   };
 
   //                  effect                  //
-
   useEffect(() => {
-    if (!cookies.accessToken) return;
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
       .then(getSearchNoticeBoardListResponse)
       .catch(error => {
@@ -184,7 +178,7 @@ export default function NoticeList() {
   }, [searchWord, cookies.accessToken]);
 
   useEffect(() => {
-    if (!noticeBoardList.length) return;
+    // if (!noticeBoardList.length) return;
     changePage(noticeBoardList, totalLength);
 },[currentPage]);
 
