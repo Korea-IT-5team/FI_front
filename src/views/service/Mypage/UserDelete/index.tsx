@@ -14,7 +14,7 @@ export default function UserDelete() {
 
   // state //
   const { userEmailId } = useParams();
-  const { loginUserRole } = useUserStore();
+  const { loginUserRole, setLoginUserEmailId, setLoginUserRole} = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
   // const [userEmailId, setUserEmailId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -42,6 +42,8 @@ export default function UserDelete() {
 
     removeCookie('accessToken', { path: '/' });
     navigator(MAIN_ABSOLUTE_PATH);
+    setLoginUserEmailId("");
+    setLoginUserRole("");
   };
 
   // event handler // 
