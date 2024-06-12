@@ -7,17 +7,18 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getSearchNoticeBoardListRequest } from 'src/apis/board';
+import { getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
 function ListItem ({
   noticeNumber,
   noticeTitle,
   noticeWriteDatetime,
-  noticeViewCount,
-  // 닉네임 추가해둠
+  viewCount,
   noticeWriteNickname
 }: NoticeBoardListItem) {
+
+  console.log(viewCount);
 
   //        function       //
   const navigator = useNavigate();
@@ -32,7 +33,7 @@ function ListItem ({
       <div className='qna-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
       <div className='qna-list-table-write-nickname'>{noticeWriteNickname}</div>
       <div className='qna-list-table-write-date'>{noticeWriteDatetime}</div>
-      <div className='qna-list-table-viewCount'>{noticeViewCount}</div>
+      <div className='qna-list-table-viewCount'>{viewCount}</div>
     </div>
   );
 }
