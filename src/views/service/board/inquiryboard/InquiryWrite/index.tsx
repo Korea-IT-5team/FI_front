@@ -13,11 +13,8 @@ export default function InquiryWrite() {
 
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-
   const { loginUserRole } = useUserStore();
-
   const [cookies] = useCookies();
-  
   const [isInquiryPublic, setIsInquiryPublic] = useState<boolean>(false);
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
