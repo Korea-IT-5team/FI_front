@@ -1,13 +1,14 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { postNoticeBoardRequest } from 'src/apis/board';
 import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 
+//                    component                    //
 export default function NoticeWrite() {
 
   //                    state                    //
@@ -16,6 +17,8 @@ export default function NoticeWrite() {
   const [cookies] = useCookies();
   const [noticeTitle, setNoticeTitle] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
+
+  //                    function                    //
   const navigator = useNavigate();
 
   const postNoticeBoardResponse = (result: ResponseDto | null) => {
@@ -32,8 +35,10 @@ export default function NoticeWrite() {
     navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   };
 
+  //                    event handler                    //
   const onNoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setNoticeTitle(event.target.value);
+    const noticeTitle = event.target.value;
+    setNoticeTitle(noticeTitle);
   };
 
   const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -55,12 +60,15 @@ export default function NoticeWrite() {
     postNoticeBoardRequest(requestBody, cookies.accessToken).then(postNoticeBoardResponse);
   };
 
+  //                    effect                    //
   useEffect(() => {
-    if (loginUserRole !== 'ROLE_ADMIN') {
-      navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    if (loginUserRole === 'ROLE_ADMIN') {
+      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      return;
     }
   }, [loginUserRole]);
 
+  //                    render                    //
   return (
     <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>

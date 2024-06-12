@@ -26,7 +26,7 @@ export default function NoticeDetail() {
     //                    function                    //
     const navigator = useNavigate();
 
-    const increaseViewCountResponse = (result: GetNoticeBoardResponseDto | ResponseDto | null) => {
+    const increaseViewCountResponse = (result: ResponseDto | null) => {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
@@ -38,7 +38,7 @@ export default function NoticeDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                navigator(SIGN_IN_ABSOLUTE_PATH);
+                // navigator(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
             navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
@@ -61,7 +61,7 @@ export default function NoticeDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                navigator(SIGN_IN_ABSOLUTE_PATH);
+                // navigator(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
             navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);

@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/apis/board';
+import { getSearchNoticeBoardListRequest } from 'src/apis/board';
 
 //     component     //
 function ListItem ({
@@ -81,10 +81,9 @@ export default function NoticeList() {
   };
 
   // 추가
-  const changeNoticeBoardList = (noticeBoardList: NoticeBoardListItem[]) => {
+  const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
     // setNoticeBoardList(noticeList);
-
-    const totalLength = noticeBoardList.length;
+    const totalLength = noticeList.length;
     setTotalLength(totalLength);
 
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
@@ -93,7 +92,7 @@ export default function NoticeList() {
     const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
     setTotalSection(totalSection);
 
-    changePage(noticeBoardList, totalLength);
+    changePage(noticeList, totalLength);
 
     changeSection(totalPage);
 };
@@ -111,7 +110,6 @@ export default function NoticeList() {
     }
 
     const { noticeBoardList } = result as GetNoticeBoardListResponseDto;
-    changeNoticeBoardList(noticeBoardList);
 
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
@@ -127,12 +125,13 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        // if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
         return;
     }
 
     const { noticeBoardList } = result as GetSearchNoticeBoardListResponseDto;
     changeNoticeBoardList(noticeBoardList);
+
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
 };
@@ -166,7 +165,7 @@ export default function NoticeList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    // if (!cookies.accessToken) return;
+    if (!cookies.accessToken) return;
 
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
   };
@@ -174,14 +173,12 @@ export default function NoticeList() {
   //                  effect                  //
 
   useEffect(() => {
-    // if (!cookies.accessToken) return;
-    if (searchWord)
+    if (!cookies.accessToken) return;
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
-    else
-    getNoticeBoardListRequest(cookies.accessToken).then(getNoticeBoardListResponse);
   },[isToggleOn]);
 
   useEffect(() => {
+    if (!noticeBoardList.length) return;
     changePage(noticeBoardList, totalLength);
   },[currentPage]);
 

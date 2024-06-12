@@ -89,11 +89,13 @@ export default function NoticeUpdate() {
   };
 
   const onNoticeUpdateButtonClickHandler = () => {
+
     if (!cookies.accessToken || !noticeNumber) return;
     if (!noticeTitle.trim() || !noticeContents.trim()) return;
 
     const requestBody: PatchNoticeBoardRequestDto = { noticeTitle, noticeContents };
     patchNoticeBoardRequest(noticeNumber, requestBody, cookies.accessToken).then(patchNoticeBoardResponse);
+  
   };
 
   //                    effect                    //
