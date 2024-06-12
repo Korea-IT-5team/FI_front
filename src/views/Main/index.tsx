@@ -120,6 +120,8 @@ function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpe
     else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   };
 
+
+
   // render //
   return (
     <div className={`main-side-navigation-container${isOpen ? ' show' : ''}`}>
