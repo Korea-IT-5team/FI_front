@@ -83,7 +83,7 @@ export default function NoticeList() {
 
   // 추가
   const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
-    // setNoticeBoardList(noticeList);
+    setNoticeBoardList(noticeList);
     const totalLength = noticeList.length;
     setTotalLength(totalLength);
 
@@ -179,7 +179,9 @@ export default function NoticeList() {
   },[isToggleOn]);
 
   useEffect(() => {
+    console.log('durl1');
     if (!noticeBoardList.length) return;
+    console.log('durl2');
     changePage(noticeBoardList, totalLength);
   },[currentPage]);
 
