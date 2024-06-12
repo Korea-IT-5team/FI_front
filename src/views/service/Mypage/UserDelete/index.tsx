@@ -64,7 +64,7 @@ export default function UserDelete() {
 
   const onUserDeleteButtonClickHandler = () => {
     if (!userEmailId || !cookies.accessToken) return;
-    const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
+    const isConfirm = window.confirm('정말로 삭제하시겠습니까? 삭제하면 회원의 모든 내역이 사라집니다.');
     if (!isConfirm) return;
 
     const requestData: DeleteUserRequestDto = { password };
