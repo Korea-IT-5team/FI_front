@@ -9,6 +9,7 @@ import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
+
 //     component     //
 function ListItem ({
   noticeNumber,
@@ -17,8 +18,6 @@ function ListItem ({
   viewCount,
   noticeWriterNickname
 }: NoticeBoardListItem) {
-
-  console.log(viewCount);
 
   //        function       //
   const navigator = useNavigate();
@@ -46,7 +45,6 @@ export default function NoticeList() {
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
-  // const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [viewNoticeList, setViewNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -54,7 +52,6 @@ export default function NoticeList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  // const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -82,8 +79,7 @@ export default function NoticeList() {
 
   // 추가
   const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
-    // setNoticeBoardList(noticeList);
-
+    setNoticeBoardList(noticeList);
     const totalLength = noticeList.length;
     setTotalLength(totalLength);
 
@@ -173,9 +169,7 @@ export default function NoticeList() {
   };
 
   //                  effect                  //
-
   useEffect(() => {
-    if (!cookies.accessToken) return;
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
       .then(getSearchNoticeBoardListResponse)
       .catch(error => {
@@ -185,6 +179,7 @@ export default function NoticeList() {
   }, [searchWord, cookies.accessToken]);
 
   useEffect(() => {
+    // if (!noticeBoardList.length) return;
     changePage(noticeBoardList, totalLength);
 },[currentPage]);
 
