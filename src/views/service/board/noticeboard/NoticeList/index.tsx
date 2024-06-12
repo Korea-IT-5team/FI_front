@@ -7,7 +7,6 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
@@ -16,7 +15,6 @@ function ListItem ({
   noticeTitle,
   noticeWriteDatetime,
   viewCount,
-  noticeWriteNickname
   noticeWriterNickname
 }: NoticeBoardListItem) {
 
@@ -194,28 +192,33 @@ export default function NoticeList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <div id='notice-list-wrapper'>
-      <div className='notice-list-top'>
-        <div className='notice-list-size-text'>전체 
-        <span className='emphasis'>{totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+      <div className='notice-list-top-box'>
+        <div className='notice-list-top-left'>
+          <div className='notice-list-size-text'>전체 
+            <span className='emphasis'> {totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
+          </div>
+        </div>
         <div className='notice-list-top-right'>
-          {loginUserRole === 'ROLE_ADMIN' && ( 
+          {loginUserRole === 'ROLE_ADMIN' && (
           <div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>
           )} 
         </div>
       </div>
       <div className='notice-list-table'>
-        <div className='notice-list-table-th'>
+        <div className='notice-list-table-top'>
           <div className='notice-list-table-reception-number'>번호</div>
-          <div className='notice-list-table-title'>공지제목</div>
+          <div className='notice-list-table-title'>제목</div>
           <div className='notice-list-table-writer-nickname'>작성자</div>
           <div className='notice-list-table-write-date'>작성일자</div>
           <div className='notice-list-table-viewcount'>조회수</div>
         </div>
-        {viewNoticeList.map(item => <ListItem {...item} />)}
+        <div className='notice-list-table-contents'>
+          {viewNoticeList.map(item => <ListItem {...item} />)}
+        </div>
       </div>
       <div className='notice-list-bottom'>
-        <div style={{ width: '299px' }}></div>
-        <div className='notice-list-pageNation'>
+        <div style={{ width: '332' }}></div>
+        <div className='notice-list-pagenation'>
           <div className='notice-list-page-left' onClick={onPreSectionClickHandler}></div>
           <div className='notice-list-page-box'>
             {pageList.map(page =>
