@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
@@ -41,7 +41,6 @@ export default function NoticeList() {
 
   //                    state                    //
   const {loginUserRole} = useUserStore();
-  console.log(loginUserRole);
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
@@ -53,7 +52,7 @@ export default function NoticeList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  const [isToggleOn, setToggleOn] = useState<boolean>(false);
+  // const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -65,8 +64,8 @@ export default function NoticeList() {
     const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
-    const viewNoticeList = noticeBoardList.slice(startIndex, endIndex);
-    setViewNoticeList(viewNoticeList);
+    const viewList = noticeBoardList.slice(startIndex, endIndex);
+    setViewNoticeList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
@@ -82,6 +81,7 @@ export default function NoticeList() {
   // 추가
   const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
     // setNoticeBoardList(noticeList);
+
     const totalLength = noticeList.length;
     setTotalLength(totalLength);
 
@@ -104,11 +104,12 @@ export default function NoticeList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
       return;
     }
 
     const { noticeBoardList } = result as GetNoticeBoardListResponseDto;
+    changeNoticeBoardList(noticeBoardList);
 
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
@@ -124,7 +125,7 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
         return;
     }
 
@@ -173,13 +174,17 @@ export default function NoticeList() {
 
   useEffect(() => {
     if (!cookies.accessToken) return;
-    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
-  },[isToggleOn]);
+    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
+      .then(getSearchNoticeBoardListResponse)
+      .catch(error => {
+        // 에러 처리
+        console.error('검색 중 오류가 발생했습니다:', error);
+      });
+  }, [searchWord, cookies.accessToken]);
 
   useEffect(() => {
-    if (!noticeBoardList.length) return;
     changePage(noticeBoardList, totalLength);
-  },[currentPage]);
+},[currentPage]);
 
   useEffect(() => {
     if (!noticeBoardList.length) return;
