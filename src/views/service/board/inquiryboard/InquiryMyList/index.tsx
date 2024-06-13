@@ -25,11 +25,11 @@ function ListItem ({
   
   //   render   //
   return(
-    <div className='inquiry-myList-table-tr' onClick={onClickHandler}>
-      <div className='inquiry-myList-table-reception-number'>{inquiryNumber}</div>
-      <div className='inquiry-myList-table-status'>{status}</div>
-      <div className='inquiry-myList-table-title'>{inquiryTitle}</div>
-      <div className='inquiry-myList-table-write-date'>{inquiryWriteDatetime}</div>
+    <div className='inquiry-my-list-table-tr' onClick={onClickHandler}>
+      <div className='inquiry-my-list-table-reception-number'>{inquiryNumber}</div>
+      <div className='inquiry-my-list-table-status'>{status}</div>
+      <div className='inquiry-my-list-table-title'>{inquiryTitle}</div>
+      <div className='inquiry-my-list-table-write-date'>{inquiryWriteDatetime}</div>
     </div>
   );
 }
@@ -185,44 +185,48 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
-        <div id='inquiry-myList-wrapper'>
-          <div className='inquiry-myList-top'>나의 문의 내역</div>
-          <div className='inquiry-myList-top-box'>
-            <div className='inquiry-myList-top-left'>
-              <div className='inquiry-myList-size-text'>전체 
+        <div id='inquiry-my-list-wrapper'>
+          <div className='inquiry-my-list-top'>나의 문의 내역</div>
+          <div className='inquiry-my-list-top-box'>
+            <div className='inquiry-my-list-top-left'>
+              <div className='inquiry-my-list-size-text'>전체 
               <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
-              <div className={toggleClass} onClick={onToggleClickHandler}>미완료 보기</div> 
-            <div className='inquiry-myList-top-right'></div>
-              <div className='primary-button' onClick={onWriteButtonClickHandler}>문의하기</div>
+            <div className='inquiry-my-list-top-right'>
+              <div className='inquiry-my-list-toggle-box'>
+                <div className='inquiry-my-list-top-text'>미답변 보기</div>
+                <div className={toggleClass} onClick={onToggleClickHandler}></div>
+              </div>
+              <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의하기</div>
+            </div>
           </div>
-        <div className='inquiry-myList-table-th'>
-        <div className='inquiry-myList-table-top'>
-          <div className='inquiry-myList-table-reception-number'>번호</div>
-          <div className='inquiry-myList-table-status'>상태</div>
-          <div className='inquiry-myList-table-title'>문의 제목</div>
-          <div className='inquiry-myList-table-write-date'>작성일자</div>
+        <div className='inquiry-my-list-table-th'>
+        <div className='inquiry-my-list-table-top'>
+          <div className='inquiry-my-list-table-reception-number'>번호</div>
+          <div className='inquiry-my-list-table-status'>상태</div>
+          <div className='inquiry-my-list-table-title'>문의 제목</div>
+          <div className='inquiry-my-list-table-write-date'>작성일자</div>
         </div>
-        <div className='inquiry-myList-table-contents'>
+        <div className='inquiry-my-list-table-contents'>
           {viewInquiryList.map(item => <ListItem { ...item} />)}
         </div> 
       </div>
-      <div className='inquiry-myList-bottom'>
+      <div className='inquiry-my-list-bottom'>
         <div style={{ width: '332px'}}></div>
-        <div className='inquiry-myList-pageNation'>
-            <div className='inquiry-myList-page-left' onClick={onPreSectionClickHandler}></div>
-            <div className='inquiry-myList-page-box'>
+        <div className='inquiry-my-list-pageNation'>
+            <div className='inquiry-my-list-page-left' onClick={onPreSectionClickHandler}></div>
+            <div className='inquiry-my-list-page-box'>
                 {pageList.map(page => 
                 page === currentPage ? 
-                <div className='inquiry-myList-page-active'>{page}</div> :
-                <div className='inquiry-myList-page' onClick={() =>onPageClickHandler(page)}>{page}</div>
+                <div className='inquiry-my-list-page-active'>{page}</div> :
+                <div className='inquiry-my-list-page' onClick={() =>onPageClickHandler(page)}>{page}</div>
                 )}
             </div>
-            <div className='inquiry-myList-page-right' onClick={onNextSectionClickHandler}></div>
+            <div className='inquiry-my-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        <div className='inquiry-myList-search-box'>
-            <div className='inquiry-myList-search-input-box'>
-                <input className='inquiry-myList-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
+        <div className='inquiry-my-list-search-box'>
+            <div className='inquiry-my-list-search-input-box'>
+                <input className='inquiry-my-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
             </div>
             <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
           </div>
