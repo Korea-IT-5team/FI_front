@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_RESTAURANT_URL, GET_SEARCH_RESTAURANT_LIST_URL, PATCH_RESTAURANT_INFO_UPDATE, POST_RESTAURANT_INFO_UPLOAD } from "src/constant";
+import { DELETE_RESTAURANT_INFO_DELETE, GET_RESTAURANT_URL, GET_SEARCH_RESTAURANT_LIST_URL, PATCH_RESTAURANT_INFO_UPDATE, POST_RESTAURANT_INFO_UPLOAD } from "src/constant";
 import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
 import ResponseDto from "../response.dto";
 import { PatchRestaurantInfoRequestDto, PostRestaurantInfoRequestDto } from "./dto/request";
@@ -37,3 +37,11 @@ export const PatchRestaurantInfoRequest = async (restaurantId: number|string, re
     .catch(requestErrorHandler)
     return result;
 } 
+
+// function : 식당 정보 삭제 API 함수
+export const DeleteRestaurantInfoRequest = async (restaurantId: number|string, accessToken: string) => {
+    const result = await axios.delete(DELETE_RESTAURANT_INFO_DELETE(restaurantId), bearerAuthorization(accessToken))
+    .then(requestHandler<ResponseDto>)
+    .catch(requestErrorHandler)
+    return result;
+}
