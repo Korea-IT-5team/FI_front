@@ -29,9 +29,9 @@ function ListItem ({
     <div className='notice-list-table-tr' onClick={onClickHandler}>
       <div className='notice-list-table-reception-number'>{noticeNumber}</div>
       <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
-      <div className='notice-list-table-write-nickname'>{noticeWriterNickname}</div>
+      <div className='notice-list-table-writer-nickname'>{noticeWriterNickname}</div>
       <div className='notice-list-table-write-date'>{noticeWriteDatetime}</div>
-      <div className='notice-list-table-viewcount'>{viewCount}</div>
+      <div className='notice-list-table-view-count'>{viewCount}</div>
     </div>
   );
 }
@@ -192,6 +192,7 @@ export default function NoticeList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <div id='notice-list-wrapper'>
+      <div className='notice-list-top'>공지사항</div>
       <div className='notice-list-top-box'>
         <div className='notice-list-top-left'>
           <div className='notice-list-size-text'>전체 

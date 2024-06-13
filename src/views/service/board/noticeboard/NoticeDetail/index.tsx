@@ -125,30 +125,27 @@ export default function NoticeDetail() {
     //                    render                    //
     return (
         <div id='notice-detail-wrapper'>
-        <div className='notice-detail-main-box'>
-            <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
-            <div className='notice-detail-top-box'>
-                <div className='notice-detail-title-box'>
+            <div className='notice-detail-main-box'>
+                <div className='notice-detail-top-box'>
                     <div className="notice-detail-title">{noticeTitle}</div>
+                    <div className='notice-detail-info-box'>
+                        <div className='notice-detail-info'>작성자 {noticeWriterNickname}</div>
+                        <div className='notice-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-info'>작성일 {noticeWriteDatetime}</div>
+                        <div className='notice-detail-info-divider'>{'\|'}</div>
+                        <div className='notice-detail-info'>조회수 {viewCount}</div>
+                    </div>
                 </div>
-                <div className='notice-detail-info-box'>
-                    <div className='notice-detail-info'>작성자 {noticeWriterNickname}</div>
-                    <div className='notice-detail-info-divider'>{'\|'}</div>
-                    <div className='notice-detail-info'>작성일 {noticeWriteDatetime}</div>
-                    <div className='notice-detail-info-divider'>{'\|'}</div>
-                    <div className='notice-detail-info'>조회수 {viewCount}</div>
-                </div>
+                <div className="notice-detail-contents-box">{noticeContents}</div>
             </div>
             <div className='notice-detail-bottom-box'>
-                <div className="notice-detail-content">{noticeContents}</div>
+                <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
                 { loginUserEmailId === noticeWriterId && loginUserRole === 'ROLE_ADMIN' &&
                 (<div className="notice-detail-button-box">
                     <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
                     <div className="error-button full-width" onClick={onDeleteClickHandler}>삭제</div>
-                </div>)
-                }
+                </div>)}
             </div>
         </div>
-    </div>
     );
 }

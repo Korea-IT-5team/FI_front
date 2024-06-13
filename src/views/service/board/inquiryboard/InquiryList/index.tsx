@@ -220,6 +220,7 @@ export default function InquiryList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id='inquiry-list-wrapper'>
+      <div className='inquiry-list-top'>문의</div>
       <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
           <div className='inquiry-list-size-text'>전체
