@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
+import { getNoticeBoardListRequest, getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
 function ListItem ({
@@ -17,8 +17,6 @@ function ListItem ({
   viewCount,
   noticeWriterNickname            
 }: NoticeBoardListItem) {
-
-  console.log(viewCount);
 
   //        function       //
   const navigator = useNavigate();
@@ -43,7 +41,7 @@ export default function NoticeList() {
 
   //                    state                    //
   const {loginUserRole} = useUserStore();
-  console.log(loginUserRole);
+  
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
@@ -54,7 +52,6 @@ export default function NoticeList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  // const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -172,16 +169,15 @@ export default function NoticeList() {
   };
 
   //                  effect                  //
-
   useEffect(() => {
-    if (!cookies.accessToken) return;
+    if (cookies.accessToken) return;
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
       .then(getSearchNoticeBoardListResponse)
       .catch(error => {
         // 에러 처리
         console.error('검색 중 오류가 발생했습니다:', error);
       });
-  }, [searchWord, cookies.accessToken]);
+  }, [searchWord]);
 
   useEffect(() => {
     if (!noticeBoardList.length) return;
@@ -200,7 +196,7 @@ export default function NoticeList() {
       <div className='notice-list-top-box'>
         <div className='notice-list-top-left'>
           <div className='notice-list-size-text'>전체 
-            <span className='emphasis'> {totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
+            <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
           </div>
         </div>
         <div className='notice-list-top-right'>
@@ -215,7 +211,7 @@ export default function NoticeList() {
           <div className='notice-list-table-title'>제목</div>
           <div className='notice-list-table-writer-nickname'>작성자</div>
           <div className='notice-list-table-write-date'>작성일자</div>
-          <div className='notice-list-table-viewcount'>조회수</div>
+          <div className='notice-list-table-view-count'>조회수</div>
         </div>
         <div className='notice-list-table-contents'>
           {viewNoticeList.map(item => <ListItem {...item} />)}

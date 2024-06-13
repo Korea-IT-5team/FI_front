@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
-import { Cookies, useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
 
@@ -20,7 +20,6 @@ function ListItem ({
   inquiryWriteDatetime,
   inquiryWriterId
 }: InquiryBoardListItem) {
-  console.log(inquiryWriterId);
   
   const { loginUserEmailId } = useUserStore();
 
@@ -77,7 +76,6 @@ export default function InquiryList() {
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
-  // const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
@@ -164,7 +162,7 @@ export default function InquiryList() {
 
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_USER') return;
+    if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
     navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
@@ -200,10 +198,9 @@ export default function InquiryList() {
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };
- 
+
   //   effect   //
   useEffect(() => {
-    // 비로그인 상태도 볼 수 있게 토큰값은 없애두기
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else
@@ -236,7 +233,7 @@ export default function InquiryList() {
               <div className={toggleClass} onClick={onToggleClickHandler}></div>
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
             </>)}
-          {loginUserRole === 'ROLE_USER' && (
+          {loginUserRole === 'ROLE_USER' || 'ROLE_CEO' && (
             <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>
