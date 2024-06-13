@@ -9,7 +9,6 @@ import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
-
 //     component     //
 function ListItem ({
   noticeNumber,
@@ -48,7 +47,6 @@ export default function NoticeList() {
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
-  // const [noticeNumber, setNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [viewNoticeList, setViewNoticeList] = useState<NoticeBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
