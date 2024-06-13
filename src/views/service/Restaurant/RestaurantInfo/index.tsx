@@ -42,7 +42,7 @@ export default function RestaurantInfo() {
     const [grade, setGrade] = useState<number>();
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const GetRestaurantInfoResponse = (result: GetRestaurantInfoResponseDto | ResponseDto | null) => {
         const message =
@@ -218,13 +218,13 @@ export default function RestaurantInfo() {
 
     const onSetRestIdNumberHandler = () => {
         if(!restaurantId) return;
-        navigator(RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH(restaurantId))
+        navigation(RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH(restaurantId))
     }
 
     const onReservationClickHandler = () => {
 
         if(!restaurantId) return;
-        navigator(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH(restaurantId));
+        navigation(RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH(restaurantId));
     };
 
 const onReservationCancelClickHandler = () => 

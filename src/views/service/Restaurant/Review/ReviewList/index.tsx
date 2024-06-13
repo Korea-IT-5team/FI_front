@@ -19,12 +19,12 @@ export default function ReviewList({ value,restaurantId }: Props) {
 
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // event handler //
     const onWriteClickHandler = () => {
         if(!restaurantId) return;
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
     }
 
     const onLoadMoreClickHandler = () => {

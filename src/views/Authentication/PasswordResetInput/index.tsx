@@ -29,7 +29,7 @@ export default function PasswordResetInput() {
   const passwordResetInputButtonClass = `${userEmailId && userTelNumber ? 'primary' : 'disable'}-button full-width`;
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const passwordResetResponse = (result: ResponseDto | null) => {
 
@@ -44,7 +44,7 @@ export default function PasswordResetInput() {
         alert(message);
         return;
     }
-    navigator(PASSWORD_RESET_CHECK_ABSOLUTE_PATH(userEmailId));
+    navigation(PASSWORD_RESET_CHECK_ABSOLUTE_PATH(userEmailId));
   };
 
   // event handler //

@@ -20,7 +20,7 @@ const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
 const {restaurantId} = useParams();
 const [cookies] = useCookies();
-const navigator = useNavigate();
+const navigation = useNavigate();
 const [selected, setSelected] = useState<number | null>(null);
 
 
@@ -43,7 +43,7 @@ const PostReservationResponse = (result: ResponseDto | null) =>
       }
       
       if(!restaurantId) return;
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
+      navigation(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
 }
 
 // event handler //
