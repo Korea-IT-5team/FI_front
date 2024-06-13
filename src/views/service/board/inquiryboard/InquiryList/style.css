@@ -9,6 +9,16 @@
     gap: 17px;
 }
 
+.inquiry-list-top {
+    text-align: center;
+  
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+  }
+
 .inquiry-list-top-box {
     width: 100%;
 
