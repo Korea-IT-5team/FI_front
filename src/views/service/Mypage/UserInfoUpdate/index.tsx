@@ -25,7 +25,7 @@ export default function UserInfoUpdate() {
   const [userRole, setUserRole] = useState<string>('');
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const GetMyInfoResponse = (result : GetMyInfoResponseDto | ResponseDto | null) => {
     const message =
@@ -36,11 +36,11 @@ export default function UserInfoUpdate() {
     if (!result || result.code !== 'SU') {
       alert(message);
       if (result?.code === 'AF') {
-        navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+        navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
         return;
       }
       
-      navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
 
@@ -77,7 +77,7 @@ export default function UserInfoUpdate() {
     }
 
     alert('정보가 성공적으로 수정되었습니다.');
-    navigator(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+    navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
   };
 
   // event handler //
@@ -107,7 +107,7 @@ export default function UserInfoUpdate() {
     if (effectFlag.current) return;
     effectFlag.current = true;
     if (loginUserRole !== 'ROLE_USER') {
-      navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
     getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);

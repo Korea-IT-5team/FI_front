@@ -21,10 +21,10 @@ function ListItem ({
   inquiryWriterId
 }: InquiryBoardListItem) {
   
-  const { loginUserRole,loginUserEmailId } = useUserStore();
+  const { loginUserRole, loginUserEmailId } = useUserStore();
 
   //        function       //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   //      event handler      //
   const onClickHandler = () => {
@@ -32,7 +32,7 @@ function ListItem ({
       alert('비공개 게시물입니다.');
       return;
     }
-    navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+    navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   }
 
   //   render   //
@@ -81,7 +81,7 @@ export default function InquiryList() {
   const [searchWord, setSearchWord] = useState<string>('');
 
   //   function   //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
@@ -128,7 +128,7 @@ export default function InquiryList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
@@ -149,7 +149,7 @@ export default function InquiryList() {
     
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -162,8 +162,8 @@ export default function InquiryList() {
 
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_CEO') return;
-    navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
+    if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
+    navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
   const onToggleClickHandler = () => {
@@ -194,7 +194,6 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    // if (!cookies.accessToken) return;
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };
@@ -206,8 +205,6 @@ export default function InquiryList() {
     else
       getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
   },[isToggleOn]);
-
-
 
   useEffect(() => {
       changePage(inquiryBoardList, totalLength);
@@ -223,6 +220,7 @@ export default function InquiryList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id='inquiry-list-wrapper'>
+      <div className='inquiry-list-top'>문의</div>
       <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
           <div className='inquiry-list-size-text'>전체
@@ -232,10 +230,12 @@ export default function InquiryList() {
         <div className='inquiry-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' &&
             (<>
-              <div className={toggleClass} onClick={onToggleClickHandler}></div>
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
+              <div className={toggleClass} onClick={onToggleClickHandler}></div>
             </>)}
-          {loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO' &&(
+
+          {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&(
+
             <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>

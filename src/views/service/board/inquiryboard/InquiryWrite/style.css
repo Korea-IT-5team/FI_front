@@ -1,33 +1,32 @@
-* {
-    margin: 0px;
-}
-
 #inquiry-write-wrapper {
     display: flex;
-    flex-direction: column;
     overflow-x: hidden;
+
     margin-top: 50px;
-    background-color: rgba(245, 245, 245, 1);
+
+    border: 1px solid rgba(240, 240, 240, 1);
+    border-radius: 8px;
 }
 
 .inquiry-write-main-box {
+    width: 100%;
+    min-width: 1000px;
+
     display: flex;
     flex-direction: column;
 
-    min-width: 1000px;
-    padding: 50px;
-
+    padding: 45px;
     gap: 30px;
 }
 
 .inquiry-write-title-box {
-    display: flex;
+    width: 100%;
+
     align-items: center;
     flex-grow: 1;
 
+    background-color: rgba(240, 240, 240, 1);
     border-radius: 8px;
-
-    background-color: rgba(250, 250, 250, 1);
 }
 
 .inquiry-write-title-input {
@@ -36,57 +35,60 @@
     background: none;
     
     width: 100%;
+    padding: 0px5px;
 
     font-family: 'Nanum Gothic';
     font-size: 20px;
-    font-weight: 500;
-    line-height: 250%;
-
-    color: rgba(64, 64, 64, 1);
+    font-weight: 400;
+    line-height: 200%;
+    color: rgba(50, 50, 50, 1);
 }
 
 .inquiry-write-contents-box {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-
-    width: 100%;
 
     gap: 30px;
 }
 
 .inquiry-write-contents-textarea {
     border: none;
-    border-radius: 8px;
-
     outline: none;
     background: none;
     resize: none;
-
-    width: 100%;
+    
+    width: 1000px;
     min-height: 300px;
 
     font-family: 'Nanum Gothic';
     font-size: 17px;
     font-weight: 400;
-    line-height: 175%;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
 
-    background-color: rgba(250, 250, 250, 1);
+    background-color: rgba(240, 240, 240, 1);
+    border-radius: 8px;
 }
 
 .inquiry-bottom-button-box {
     display: flex;
     flex-direction: row;
     align-items: center;
+
     gap: 15px;
 }
 
 .public-button {
     width: 50px;
     height: 20px;
-    padding: 5px;
+
     align-items: center;
     text-align: center;
+
+    padding: 5px;
 
     background-color: rgba(245, 138, 35, 0.6);
     border-radius: 5px;
@@ -101,9 +103,11 @@
 .un-public-button {
     width: 50px;
     height: 20px;
-    padding: 5px;
+
     align-items: center;
     text-align: center;
+
+    padding: 5px;
 
     background-color: rgba(245, 138, 35, 1);
     border-radius: 5px;

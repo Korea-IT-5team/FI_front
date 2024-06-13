@@ -23,7 +23,7 @@ export default function NoticeUpdate() {
   const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const getNoticeBoardResponse = (result: GetNoticeBoardResponseDto | ResponseDto | null) => {
 
@@ -36,14 +36,14 @@ export default function NoticeUpdate() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
 
     const { noticeWriterId, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
     if (noticeWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
-      navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -68,7 +68,7 @@ export default function NoticeUpdate() {
     }
 
     if (!noticeNumber) return;
-    navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
+    navigation(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
   };
 
   //                    event handler                    //
@@ -108,7 +108,7 @@ export default function NoticeUpdate() {
       effectFlag = true;
       if (loginUserRole !== 'ROLE_ADMIN') {
           alert('권한이 없습니다.');
-          navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+          navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
           return;
       }
       getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse);

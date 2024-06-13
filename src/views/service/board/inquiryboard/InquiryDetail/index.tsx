@@ -27,7 +27,7 @@ export default function InquiryDetail() {
     const [commentRows, setCommentRows] = useState<number>(1);
 
     //                    function                    //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
         
@@ -41,10 +41,10 @@ export default function InquiryDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                navigator(SIGN_IN_ABSOLUTE_PATH);
+                navigation(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
-            navigator(INQUIRY_BOARD_LIST_PATH);
+            navigation(INQUIRY_BOARD_LIST_PATH);
             return;
     }
 
@@ -90,7 +90,7 @@ export default function InquiryDetail() {
             alert(message);
             return;
         }
-        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     //                    event handler                    //
@@ -112,12 +112,12 @@ export default function InquiryDetail() {
     };
     
     const onListClickHandler = () => {
-        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     const onUpdateClickHandler = () => {
         if (!inquiryNumber || loginUserEmailId !== inquiryWriterId || status ) return;
-        navigator(INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH(inquiryNumber));
+        navigation(INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH(inquiryNumber));
     };
 
     const onDeleteClickHandler = () => {
@@ -139,7 +139,7 @@ export default function InquiryDetail() {
         <div id='inquiry-detail-wrapper'>
             <div className='inquiry-detail-main-box'>
                 <div className='inquiry-detail-top-box'>
-                    <div className='inquiry-detail-title-box'>{inquiryTitle}</div>
+                    <div className='inquiry-detail-title'>{inquiryTitle}</div>
                     <div className='inquiry-detail-info-box'>
                         <div className='inquiry-detail-info'>작성자 {inquiryWriterNickname}</div>
                         <div className='inquiry-detail-info-divider'>{'\|'}</div>
@@ -148,7 +148,7 @@ export default function InquiryDetail() {
                 </div>
                 <div className='inquiry-detail-contents-box'>{inquiryContents}</div>
             </div>
-            {loginUserRole === 'ROLE_ADMIN' && !status &&
+            { loginUserRole === 'ROLE_ADMIN' && !status &&
             <div className='inquiry-detail-comment-write-box'>
                 <div className='inquiry-detail-comment-textarea-box'>
                     <textarea style={{height: `${28 * commentRows}px`}} className='inquiry-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={inquiryComment === null ? '' : inquiryComment} onChange={onCommentChangeHandler} />
@@ -156,7 +156,7 @@ export default function InquiryDetail() {
                 <div className='primary-button' onClick={onCommentSubmitClickHandler}>답글달기</div>
             </div>
             }
-            {status && 
+            { status && 
             <div className='inquiry-detail-comment-box'>
                 <div className='primary-bedge'>답변</div>
                 <div className='inquiry-detail-comment'>{inquiryComment}</div>
@@ -164,9 +164,9 @@ export default function InquiryDetail() {
             }
             <div className='inquiry-detail-button-box'>
                 <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
-                {loginUserEmailId === inquiryWriterId && (loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&
+                { loginUserEmailId === inquiryWriterId && (loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&
                 <div className='inquiry-detail-owner-button-box'>
-                    {! status && <div className='second-button' onClick={onUpdateClickHandler}>수정</div>}
+                    { !status && <div className='second-button' onClick={onUpdateClickHandler}>수정</div> }
                     <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
                 </div>
                 }

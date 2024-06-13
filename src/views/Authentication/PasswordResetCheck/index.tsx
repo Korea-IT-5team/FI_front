@@ -25,7 +25,7 @@ export default function PasswordResetCheck() {
   const passwordResetCheckButtonClass = `${isResetPasswordCheckActive ? 'primary' : 'disable'}-button full-width`;
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const passwordResetCheckResponse = (result: ResponseDto | null) => {
 
@@ -40,7 +40,7 @@ export default function PasswordResetCheck() {
         alert(message);
         return;
     }
-    navigator(PASSWORD_RESET_FINALLY_ABSOLUTE_PATH);
+    navigation(PASSWORD_RESET_FINALLY_ABSOLUTE_PATH);
   };
 
   // event handler //
