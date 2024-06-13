@@ -221,6 +221,10 @@ export default function RestaurantInfo() {
         navigation(RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH(restaurantId))
     }
 
+    const onDeleteRestIdNumberHandler = () => {
+        if(!restaurantId) return;
+    }
+
     const onReservationClickHandler = () => {
 
         if(!restaurantId) return;
@@ -262,6 +266,8 @@ const onCancleFavoriteClickHandler = () => {
                 <div id="restaurant-info">
                     {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
                         <button onClick={onSetRestIdNumberHandler}>수정</button>)}
+                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
+                        <button onClick={onDeleteRestIdNumberHandler}>삭제</button>)}
                     <img src={restaurantImage} className='' />
                     <div>
                         <div>식당 이름 :{restaurantName}</div>
