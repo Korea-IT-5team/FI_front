@@ -30,7 +30,6 @@ export default function MyPageSite() {
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-      alert(message);
       if (result?.code === 'AF') {
         navigation(MAIN_ABSOLUTE_PATH);
         return;
@@ -53,7 +52,7 @@ export default function MyPageSite() {
 
   //   effect   //
   useEffect(() => {
-    if (!cookies.accessToken) return;
+    //if (!cookies.accessToken) return;
     getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
   }, []);
 

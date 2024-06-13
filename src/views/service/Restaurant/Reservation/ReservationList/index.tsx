@@ -176,7 +176,7 @@ export default function ReservationList() {
                     <div className=''>예약일</div>
                     <div className=''>예약시간</div>
                     <div className=''>인원수</div>
-                    <div className=''>작성자</div>
+                    <div className=''>예약자</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>

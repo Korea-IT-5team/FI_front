@@ -13,9 +13,9 @@ function ListItem ({
     reviewNumber,
     reviewImage,
     rating,
-    reviewContents,
     reviewWriterNickname,
     reviewDate,
+    reviewRestaurantName
 }: RestaurantReviewListItem) {
 
     // function //
@@ -27,10 +27,9 @@ function ListItem ({
     // render //
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
-            <div className=''>{reviewNumber}</div>
+            <div>{reviewRestaurantName}</div>
             <img src={reviewImage} className='' />
             <div className='' style={{ textAlign: 'left' }}>{rating}</div>
-            <div className=''>{reviewContents}</div>
             <div className=''>{reviewWriterNickname}</div>
             <div className=''>{reviewDate}</div>
         </div>
@@ -153,10 +152,9 @@ export default function ReviewDetailsList() {
             </div>
             <div className='review-list-table'>
                 <div className='review-list-table-th'>
-                    <div className=''>리뷰번호</div>
+                    <div className=''>리뷰 식당 이름</div>
                     <div className=''>이미지</div>
                     <div className=''>평점</div>
-                    <div className=''>내용</div>
                     <div className=''>작성자</div>
                     <div className=''>작성일</div>
                 </div>
