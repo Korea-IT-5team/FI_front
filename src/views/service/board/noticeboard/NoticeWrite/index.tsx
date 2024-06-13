@@ -19,7 +19,7 @@ export default function NoticeWrite() {
   const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const postNoticeBoardResponse = (result: ResponseDto | null) => {
     const message =
@@ -32,7 +32,7 @@ export default function NoticeWrite() {
       alert(message);
       return;
     }
-    navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   };
 
   //                    event handler                    //
@@ -63,7 +63,7 @@ export default function NoticeWrite() {
   //                    effect                    //
   useEffect(() => {
     if (loginUserRole === 'ROLE_ADMIN') {
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
   }, [loginUserRole]);

@@ -7,7 +7,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
-import { getNoticeBoardListRequest, getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
+import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 
 //     component     //
 function ListItem ({
@@ -19,10 +19,10 @@ function ListItem ({
 }: NoticeBoardListItem) {
 
   //        function       //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   //      event handler      //
-  const onClickHandler = () => navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
+  const onClickHandler = () => navigation(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
 
   //   render   //
   return(
@@ -56,7 +56,7 @@ export default function NoticeList() {
   const [searchWord, setSearchWord] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const changePage = (noticeBoardList: NoticeBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
@@ -77,7 +77,6 @@ export default function NoticeList() {
     setPageList(pageList);
   };
 
-  // 추가
   const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
     setNoticeBoardList(noticeList);
     const totalLength = noticeList.length;
@@ -102,7 +101,7 @@ export default function NoticeList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
@@ -123,7 +122,7 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        if (result?.code === 'AF') navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
         return;
     }
 
@@ -137,7 +136,7 @@ export default function NoticeList() {
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if (loginUserRole !== 'ROLE_ADMIN') return;
-    navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+    navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
   }
 
   const onPageClickHandler = (page: number) => {
@@ -163,7 +162,6 @@ export default function NoticeList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    if (!cookies.accessToken) return;
 
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
   };
@@ -173,10 +171,9 @@ export default function NoticeList() {
     if (searchWord)
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
       .then(getNoticeBoardListResponse)
-      
     else
       getNoticeBoardListRequest(cookies.accessToken).then(getNoticeBoardListResponse)
-  }, [searchWord]);
+  }, []);
 
   useEffect(() => {
     if (!noticeBoardList.length) return;

@@ -21,10 +21,10 @@ function ListItem ({
   inquiryWriterId
 }: InquiryBoardListItem) {
   
-  const { loginUserRole,loginUserEmailId } = useUserStore();
+  const { loginUserRole, loginUserEmailId } = useUserStore();
 
   //        function       //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   //      event handler      //
   const onClickHandler = () => {
@@ -32,7 +32,7 @@ function ListItem ({
       alert('비공개 게시물입니다.');
       return;
     }
-    navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+    navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   }
 
   //   render   //
@@ -81,7 +81,7 @@ export default function InquiryList() {
   const [searchWord, setSearchWord] = useState<string>('');
 
   //   function   //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
@@ -128,7 +128,7 @@ export default function InquiryList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
@@ -149,7 +149,7 @@ export default function InquiryList() {
     
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -163,7 +163,7 @@ export default function InquiryList() {
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
-    navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
+    navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
   const onToggleClickHandler = () => {

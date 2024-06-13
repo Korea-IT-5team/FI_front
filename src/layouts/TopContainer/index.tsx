@@ -8,7 +8,7 @@ import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSO
 import { useUserStore } from 'src/stores';
 import "./style.css";
 
-type Path = '식당리스트' | '마이페이지' | '문의사항' | '';
+type Path = '식당리스트' | '마이페이지' | '문의사항' | '공지사항' |'';
 
 // interface //
 interface Props {
@@ -41,7 +41,6 @@ function TopBar({ path }: Props) {
     // function //
     const navigation = useNavigate();
 
-    // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
     const onLogoutClickHandler = () => {
         removeCookie('accessToken', { path: '/' });
         setLoginUserEmailId('');
@@ -60,7 +59,8 @@ function TopBar({ path }: Props) {
     const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
     const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
     const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
-
+    const onCeoPageClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+    
     const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
 
@@ -119,6 +119,10 @@ function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: b
     const onInquiryBoardClickHandler = () => {
         if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
         else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+    }
+    const onNoticeBoardClickHandler = () => {
+        if (pathname === NOTICE_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
+        else navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     // render //
@@ -136,6 +140,10 @@ function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: b
                 <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
                     <div className='main-side-navigation-icon board'></div>
                     <div className='main-side-navigation-title'>문의사항</div>
+                </div>
+                <div className='main-side-navigation-item' onClick={onNoticeBoardClickHandler}>
+                    <div className='main-side-navigation-icon board'></div>
+                    <div className='main-side-navigation-title'>공지사항</div>
                 </div>
             </div>
         </div>
@@ -175,8 +183,9 @@ export default function TopContainer() {
     useEffect(() => {
         const path =
             pathname === RESTAURANT_LIST_ABSOLUTE_PATH ? '식당리스트' :
-                pathname === MY_PAGE_SITE_ABSOLUTE_PATH ? '마이페이지' :
-                    pathname.startsWith(INQUIRY_BOARD_LIST_ABSOLUTE_PATH) ? '문의사항' : '';
+            pathname === MY_PAGE_SITE_ABSOLUTE_PATH ? '마이페이지' :
+            pathname.startsWith(INQUIRY_BOARD_LIST_ABSOLUTE_PATH) ? '문의사항' :
+            pathname.startsWith(NOTICE_BOARD_LIST_ABSOLUTE_PATH) ? '공지사항' : '';
 
         setPath(path);
     }, [pathname]);

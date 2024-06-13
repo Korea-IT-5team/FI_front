@@ -17,7 +17,7 @@ export function Sns() {
     const [cookies, setCookie] = useCookies();
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // effect //
     useEffect(() => {
@@ -25,7 +25,7 @@ export function Sns() {
         const expiration = new Date(Date.now() + (Number(expires) * 1000));
         setCookie('accessToken', accessToken, { path: '/', expires: expiration });
 
-        navigator(SIGN_IN_ABSOLUTE_PATH);
+        navigation(SIGN_IN_ABSOLUTE_PATH);
     }, []);
 
     //   render   //
@@ -71,7 +71,7 @@ export default function SignIn() {
     const [message, setMessage] = useState<string>('');
 
     // function // 
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const signInResponse = (result: SignInResponseDto | ResponseDto | null) => {
 
@@ -90,7 +90,7 @@ export default function SignIn() {
         const expiration = new Date(Date.now() + (expires * 1000));
         setCookie('accessToken', accessToken, { path: '/', expires: expiration })
 
-        navigator(MAIN_PATH);
+        navigation(MAIN_PATH);
     };
 
     // event handler //
@@ -142,15 +142,15 @@ export default function SignIn() {
                     </div>
                     <div className="find-container">
                         <div className="find-email">
-                            <div className="text-link" onClick={() => { navigator(FIND_EMAIL_INPUT_ABSOLUTE_PATH) }}>이메일 찾기</div>
+                            <div className="text-link" onClick={() => { navigation(FIND_EMAIL_INPUT_ABSOLUTE_PATH) }}>이메일 찾기</div>
                         </div>
                         <div className="find-divider">{'\|'}</div>
                         <div className="reset-password">
-                            <div className="text-link" onClick={() => { navigator(PASSWORD_RESET_INPUT_ABSOLUTE_PATH) }}>비밀번호 재설정</div>
+                            <div className="text-link" onClick={() => { navigation(PASSWORD_RESET_INPUT_ABSOLUTE_PATH) }}>비밀번호 재설정</div>
                         </div>
                         <div className="find-divider">{'\|'}</div>
                         <div className="user-sign-up">
-                            <div className="text-link" onClick={() => { navigator(SIGN_UP_ABSOLUTE_PATH) }}>회원가입</div>
+                            <div className="text-link" onClick={() => { navigation(SIGN_UP_ABSOLUTE_PATH) }}>회원가입</div>
                         </div>
                     </div>
                     <SnsContainer title="SNS 로그인" />
