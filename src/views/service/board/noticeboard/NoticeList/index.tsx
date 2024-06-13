@@ -168,7 +168,11 @@ export default function NoticeList() {
 
   //                  effect                  //
   useEffect(() => {
+<<<<<<< HEAD
+    if (!cookies.accessToken) return;
+=======
     if (searchWord)
+>>>>>>> 42dc9737509210dbb7ddf5ca11779c7af3fbfcd8
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
       .then(getNoticeBoardListResponse)
     else
