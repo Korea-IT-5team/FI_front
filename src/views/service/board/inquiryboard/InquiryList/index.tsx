@@ -196,7 +196,7 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    if (!cookies.accessToken) return;
+    // if (!cookies.accessToken) return;
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };
