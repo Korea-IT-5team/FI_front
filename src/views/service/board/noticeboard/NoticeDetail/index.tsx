@@ -61,7 +61,7 @@ export default function NoticeDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                // navigator(SIGN_IN_ABSOLUTE_PATH);
+                navigator(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
             navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
@@ -83,8 +83,7 @@ export default function NoticeDetail() {
             result.code === 'AF' ? '권한이 없습니다.' :
             result.code === 'VF' ? '올바르지 않은 접수번호입니다.' :
             result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
-                                '';
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
         if (!result || result.code !== 'SU') {
             alert(message);
             return;
@@ -112,7 +111,7 @@ export default function NoticeDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken || !noticeNumber) return;
+        if (!noticeNumber) return;
         increaseViewCountRequest(noticeNumber, cookies.accessToken)
             .then(increaseViewCountResponse);
     }, []);

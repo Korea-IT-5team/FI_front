@@ -22,6 +22,7 @@ function ListItem ({
   
   //      event handler      //
   const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  
   //   render   //
   return(
     <div className='inquiry-myList-table-tr' onClick={onClickHandler}>
@@ -94,10 +95,10 @@ export default function InquiryMyList() {
 const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | ResponseDto | null) => {
   const message =
     !result ? '서버에 문제가 있습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+    result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
   if (!result || result.code !== 'SU') {
-    // alert(message);
+    alert(message);
     return;
   }
 
@@ -116,7 +117,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
   
   if (!result || result.code !== 'SU') {
-      // alert(message);
+      alert(message);
       return;
   }
 
@@ -139,7 +140,6 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
 };
 
@@ -165,7 +165,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 
   //                  effect                  //
   useEffect(() => {
-    // if (!cookies.accessToken) return;
+    if (!cookies.accessToken) return;
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else

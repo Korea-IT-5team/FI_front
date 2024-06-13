@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
-import { Cookies, useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
 
@@ -20,7 +20,6 @@ function ListItem ({
   inquiryWriteDatetime,
   inquiryWriterId
 }: InquiryBoardListItem) {
-  console.log(inquiryWriterId);
   
   const { loginUserRole,loginUserEmailId } = useUserStore();
 
@@ -77,7 +76,6 @@ export default function InquiryList() {
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
-  // const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
@@ -203,7 +201,6 @@ export default function InquiryList() {
 
   //   effect   //
   useEffect(() => {
-    // 비로그인 상태도 볼 수 있게 토큰값은 없애두기
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else

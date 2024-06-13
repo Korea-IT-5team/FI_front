@@ -296,7 +296,6 @@ export default function SignUp() {
   };
 
   const onAuthNumberButtonClickHandler = () => {
-    // if(!authNumberButtonStatus) return;
     if(!authNumber) return;
 
     const requestBody: CheckTelNumberAuthRequestDto = {
