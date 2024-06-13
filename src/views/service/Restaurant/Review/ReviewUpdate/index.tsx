@@ -25,7 +25,7 @@ export default function ReviewUpdate()
 
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const PatchReviewResponse = (result: ResponseDto | null) => {
         const message =
@@ -41,7 +41,7 @@ export default function ReviewUpdate()
         }
 
         if(!reviewNumber) return;
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
   }
  
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
@@ -54,7 +54,7 @@ export default function ReviewUpdate()
             alert(message);
             if(result?.code === 'AF')
             {
-                navigator(MAIN_ABSOLUTE_PATH);
+                navigation(MAIN_ABSOLUTE_PATH);
                 return;
             }
             return;
@@ -133,7 +133,7 @@ export default function ReviewUpdate()
 
       if(loginUserRole !== 'ROLE_USER')
       {
-          navigator(MAIN_ABSOLUTE_PATH);
+          navigation(MAIN_ABSOLUTE_PATH);
           return;
       }
 

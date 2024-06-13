@@ -28,7 +28,7 @@ export default function RestaurantInfoUpdate()
     const [restaurantNotice, setRestaurantNotice] = useState('');
     const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState('');
     const { businessRegistrationNumber } = useUserStore();
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // function //
     const GetRestaurantInfoResponse = (result: GetRestaurantInfoResponseDto | ResponseDto | null) => {
@@ -73,7 +73,7 @@ export default function RestaurantInfoUpdate()
         }
 
         if(!restaurantId) return;
-        navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId))
+        navigation(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId))
     }
 
     // event handler //

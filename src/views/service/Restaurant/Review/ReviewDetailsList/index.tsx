@@ -19,10 +19,10 @@ function ListItem ({
 }: RestaurantReviewListItem) {
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // event handler //
-    const onClickHandler = () => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber));
+    const onClickHandler = () => navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber));
 
     // render //
     return (
@@ -51,7 +51,7 @@ export default function ReviewDetailsList() {
     const [currentSection, setCurrentSection] = useState<number>(1);
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const changePage = (reviewDetailsList: RestaurantReviewListItem[], totalLenght: number) => {
         if(!currentPage) return;
@@ -100,7 +100,7 @@ export default function ReviewDetailsList() {
         if (!result || result.code !== 'SU') 
         {
             //alert(message);
-            if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+            if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
             return;
         }
 
