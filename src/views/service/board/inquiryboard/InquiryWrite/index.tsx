@@ -23,7 +23,7 @@ export default function InquiryWrite() {
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const postBoardResponse = (result: ResponseDto | null) => {
 
@@ -37,7 +37,7 @@ export default function InquiryWrite() {
       alert(message);
       return;
     }
-    navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+    navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   };
 
   //                    event handler                    //
@@ -72,11 +72,11 @@ export default function InquiryWrite() {
   //                    effect                    //
   useEffect(() => {
     if (!cookies.accessToken) {
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     if (loginUserRole === 'ROLE_ADMIN') {
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
   }, [loginUserRole]);

@@ -27,7 +27,7 @@ export default function InquiryDetail() {
     const [commentRows, setCommentRows] = useState<number>(1);
 
     //                    function                    //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
         
@@ -41,10 +41,10 @@ export default function InquiryDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                navigator(SIGN_IN_ABSOLUTE_PATH);
+                navigation(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
-            navigator(INQUIRY_BOARD_LIST_PATH);
+            navigation(INQUIRY_BOARD_LIST_PATH);
             return;
     }
 
@@ -90,7 +90,7 @@ export default function InquiryDetail() {
             alert(message);
             return;
         }
-        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     //                    event handler                    //
@@ -112,12 +112,12 @@ export default function InquiryDetail() {
     };
     
     const onListClickHandler = () => {
-        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     const onUpdateClickHandler = () => {
         if (!inquiryNumber || loginUserEmailId !== inquiryWriterId || status ) return;
-        navigator(INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH(inquiryNumber));
+        navigation(INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH(inquiryNumber));
     };
 
     const onDeleteClickHandler = () => {

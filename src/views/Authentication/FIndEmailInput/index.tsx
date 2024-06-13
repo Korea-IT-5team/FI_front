@@ -29,7 +29,7 @@ export default function FindEmailInput() {
     const findEmailButtonClass = `${userName && userTelNumber ? 'primary' : 'disable'}-button full-width`;
 
   // function // 
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const findEmailResponse = (result: ResponseDto | null) => {
 
@@ -115,9 +115,9 @@ export default function FindEmailInput() {
                 </div>
                 }
                 <div className='navigation-button'>
-                    <div className='moving-sign-up' onClick={() => navigator(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>
+                    <div className='moving-sign-up' onClick={() => navigation(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>
                     <div className="find-divider">{'\|'}</div>
-                    <div className='moving-password-reset' onClick={() => navigator(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)}>비밀번호 재설정</div>
+                    <div className='moving-password-reset' onClick={() => navigation(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)}>비밀번호 재설정</div>
                 </div>
             </div>
         </div>

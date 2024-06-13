@@ -25,7 +25,7 @@ export default function InquiryUpdate() {
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
 
@@ -38,7 +38,7 @@ export default function InquiryUpdate() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -47,12 +47,12 @@ export default function InquiryUpdate() {
     // 요기 수정 
     if (!cookies.accessToken) {
       alert('권한이 없습니다.');
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     if (status) {
       alert('답변이 완료된 게시물 입니다.');
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
   }
     setInquiryWriterId(inquiryWriterId);
@@ -76,7 +76,7 @@ export default function InquiryUpdate() {
     }
 
     if (!inquiryNumber) return;
-    navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+    navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   };
 
   //                    event handler                    //
@@ -110,7 +110,7 @@ export default function InquiryUpdate() {
       if(effectFlag) return;
       effectFlag = true;
       if(loginUserRole !== 'ROLE_USER') {
-        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
         return;
       }
       getInquiryBoardRequest(inquiryNumber, cookies.accessToken).then(getInquiryBoardResponse);

@@ -59,7 +59,7 @@ export default function SignUp() {
   const signUpButtonClass = `${isSignUpActive ? 'primary' : 'disable'}-button full-width`;
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const emailCheckResponse = (result: ResponseDto | null) => {
     
@@ -158,7 +158,7 @@ export default function SignUp() {
       return;
     }
 
-    navigator(SIGN_IN_ABSOLUTE_PATH);
+    navigation(SIGN_IN_ABSOLUTE_PATH);
   };
 
   // event handler // 
@@ -367,7 +367,7 @@ export default function SignUp() {
           </div>
           <div className="sign-up-button-container">
               <div className={signUpButtonClass} onClick={onSignUpButtonClickHandler}>회원가입</div>
-              <div className="text-link" onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
+              <div className="text-link" onClick={() => {navigation(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
           </div>
         </div>
     </div>

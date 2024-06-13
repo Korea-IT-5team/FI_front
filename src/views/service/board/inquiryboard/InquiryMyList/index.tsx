@@ -18,16 +18,21 @@ function ListItem ({
 }: InquiryBoardListItem) {
 
   //        function       //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   //      event handler      //
-  const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  const onClickHandler = () => navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   
   //   render   //
   return(
     <div className='inquiry-my-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-my-list-table-reception-number'>{inquiryNumber}</div>
-      <div className='inquiry-my-list-table-status'>{status}</div>
+      <div className='inquiry-my-list-table-status'>
+        {status ? 
+        <div className='primary-bedge'>답변</div> :
+        <div className='disable-bedge'>미답변</div> 
+        }
+      </div>
       <div className='inquiry-my-list-table-title'>{inquiryTitle}</div>
       <div className='inquiry-my-list-table-write-date'>{inquiryWriteDatetime}</div>
     </div>
@@ -35,6 +40,7 @@ function ListItem ({
 }
 //            component: 나의 문의사항 목록보기                 //
 export default function InquiryMyList() {
+  
   //                    state                    //
   const {loginUserRole} = useUserStore();
 
@@ -53,7 +59,7 @@ export default function InquiryMyList() {
   const [searchWord, setSearchWord] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
@@ -130,7 +136,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if (loginUserRole !== 'ROLE_USER') return;
-    navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
+    navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
 };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

@@ -16,13 +16,12 @@ export default function UserDelete() {
   const { userEmailId } = useParams();
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole} = useUserStore();
   const [cookies, setCookie, removeCookie] = useCookies();
-  // const [userEmailId, setUserEmailId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
   const [passwordMessage, setPasswordMessage] = useState<string>('');
   
   // function // 
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const deleteUserResponse = (result: ResponseDto | null) => {
     
@@ -41,7 +40,7 @@ export default function UserDelete() {
     alert('회원탈퇴가 성공하였습니다.');
 
     removeCookie('accessToken', { path: '/' });
-    navigator(MAIN_ABSOLUTE_PATH);
+    navigation(MAIN_ABSOLUTE_PATH);
     setLoginUserEmailId("");
     setLoginUserRole("");
   };

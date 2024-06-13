@@ -24,7 +24,7 @@ export default function NoticeDetail() {
     const [viewCount, setViewCount] = useState<number>(0);
     
     //                    function                    //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
 
@@ -38,10 +38,10 @@ export default function NoticeDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                navigator(SIGN_IN_ABSOLUTE_PATH);
+                navigation(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
-            navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+            navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
@@ -61,10 +61,10 @@ export default function NoticeDetail() {
         if (!result || result.code !== 'SU') {
             alert(message);
             if (result?.code === 'AF') {
-                navigator(SIGN_IN_ABSOLUTE_PATH);
+                navigation(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
-            navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+            navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
@@ -88,17 +88,17 @@ export default function NoticeDetail() {
             alert(message);
             return;
         }
-        navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     //                    event handler                    //    
     const onListClickHandler = () => {
-        navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     const onUpdateClickHandler = () => {
         if (!noticeNumber || loginUserEmailId !== noticeWriterId) return;
-        navigator(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));
+        navigation(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));
     };
 
     const onDeleteClickHandler = () => {
