@@ -206,8 +206,6 @@ export default function InquiryList() {
       getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
   },[isToggleOn]);
 
-
-
   useEffect(() => {
       changePage(inquiryBoardList, totalLength);
   },[currentPage]);
