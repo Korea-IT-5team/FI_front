@@ -134,7 +134,7 @@ export default function InquiryDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken || !inquiryNumber) return;
+        if (!inquiryNumber) return;
         getInquiryBoardRequest(inquiryNumber, cookies.accessToken).then(getInquiryBoardResponse)
     }, []);
     
