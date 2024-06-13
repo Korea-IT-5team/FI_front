@@ -18,8 +18,6 @@ function ListItem ({
   noticeWriterNickname            
 }: NoticeBoardListItem) {
 
-  console.log(viewCount);
-
   //        function       //
   const navigator = useNavigate();
 
@@ -43,7 +41,7 @@ export default function NoticeList() {
 
   //                    state                    //
   const {loginUserRole} = useUserStore();
-  console.log(loginUserRole);
+  
   const [cookies] = useCookies();
 
   const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
@@ -54,7 +52,6 @@ export default function NoticeList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  // const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
@@ -172,7 +169,6 @@ export default function NoticeList() {
   };
 
   //                  effect                  //
-
   useEffect(() => {
     if (searchWord)
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
@@ -199,7 +195,7 @@ export default function NoticeList() {
       <div className='notice-list-top-box'>
         <div className='notice-list-top-left'>
           <div className='notice-list-size-text'>전체 
-            <span className='emphasis'> {totalLength}건</span>| 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
+            <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
           </div>
         </div>
         <div className='notice-list-top-right'>
@@ -214,7 +210,7 @@ export default function NoticeList() {
           <div className='notice-list-table-title'>제목</div>
           <div className='notice-list-table-writer-nickname'>작성자</div>
           <div className='notice-list-table-write-date'>작성일자</div>
-          <div className='notice-list-table-viewcount'>조회수</div>
+          <div className='notice-list-table-view-count'>조회수</div>
         </div>
         <div className='notice-list-table-contents'>
           {viewNoticeList.map(item => <ListItem {...item} />)}

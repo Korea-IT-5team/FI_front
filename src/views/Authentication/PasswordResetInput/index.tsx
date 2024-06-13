@@ -17,9 +17,7 @@ export default function PasswordResetInput() {
   const [userEmailIdButtonStatus, setUserEmailIdButtonStatus] = useState<boolean>(false);
   const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
 
-  const [isUserEmailIdCheck, setUserEmailIdCheck] = useState<boolean>(false);
   const [isUserEmailIdPattern, setUserEmailIdPattern] = useState<boolean>(false);
-  const [isUserTelNumberCheck, setUserTelNumberCheck] = useState<boolean>(false);
   const [isUserTelNumberPattern, setUserTelNumberPattern] = useState<boolean>(false);
 
   const [userEmailIdMessage, setUserEmailIdMessage] = useState<string>('');
@@ -28,7 +26,7 @@ export default function PasswordResetInput() {
   const [isUserEmailIdError, setUserEmailIdError] = useState<boolean>(false);
   const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
 
-  const passwordResetInputButtonClass = `${isUserEmailIdCheck && isUserTelNumberCheck ? 'primary' : 'disable'}-button full-width`;
+  const passwordResetInputButtonClass = `${userEmailId && userTelNumber ? 'primary' : 'disable'}-button full-width`;
 
   // function //
   const navigator = useNavigate();
@@ -54,7 +52,6 @@ export default function PasswordResetInput() {
     const {value} = event.target;
     setUserEmailId(value);
     setUserEmailIdButtonStatus(value !== '');
-    setUserEmailIdCheck(false);
     setUserEmailIdMessage('');
   };
 
@@ -62,7 +59,6 @@ export default function PasswordResetInput() {
     const { value } = event.target;
     setUserTelNumber(value);
     setUserTelNumberButtonStatus(value !== '');
-    setUserTelNumberCheck(false);
     setUserTelNumberMessage('');
   };
 
@@ -76,7 +72,6 @@ export default function PasswordResetInput() {
     if (!isEmailIdPattern) {
       setUserEmailIdMessage('이메일 형식이 아닙니다.');
       setUserEmailIdError(true);
-      setUserEmailIdCheck(false);
       return;
     }
   };
@@ -91,12 +86,10 @@ export default function PasswordResetInput() {
     if (!isUserTelNumberPattern) {
       setUserTelNumberMessage('전화번호 형식이 아닙니다.');
       setUserTelNumberError(true);
-      setUserTelNumberCheck(false);
       return;
     }
 
     setUserTelNumberButtonStatus(false);
-    setUserTelNumberCheck(false);
   };
 
   const onPasswordResetButtonClickHandler = () => {

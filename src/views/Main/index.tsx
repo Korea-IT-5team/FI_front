@@ -42,7 +42,6 @@ function TopBar({ path }: Props) {
   // function //
   const navigator = useNavigate();
 
-  // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
   const onLogoutClickHandler = () => {
     removeCookie('accessToken', { path: '/' });
     setLoginUserEmailId('');
@@ -60,6 +59,7 @@ function TopBar({ path }: Props) {
   const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
   const onAdminPageClickHandler = () => navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+  const onCeoPageClickHandler = () => navigator(RESTAURANT_LIST_ABSOLUTE_PATH);
 
   const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
@@ -81,7 +81,7 @@ function TopBar({ path }: Props) {
         {loginUserRole === 'ROLE_CEO' &&
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
-            <div className="top-button" onClick={onAdminPageClickHandler}>사장</div>
+            <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
           </div> 
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
@@ -119,8 +119,6 @@ function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpe
     if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
     else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   };
-
-
 
   // render //
   return (
