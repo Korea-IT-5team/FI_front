@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getNoticeBoardListRequest, getNoticeBoardRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
@@ -102,7 +102,7 @@ export default function NoticeList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -123,7 +123,7 @@ export default function NoticeList() {
     
     if (!result || result.code !== 'SU') {
         alert(message);
-        if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+        if (result?.code === 'AF') navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
         return;
     }
 
@@ -170,13 +170,12 @@ export default function NoticeList() {
 
   //                  effect                  //
   useEffect(() => {
-    if (cookies.accessToken) return;
+    if (searchWord)
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
-      .then(getSearchNoticeBoardListResponse)
-      .catch(error => {
-        // 에러 처리
-        console.error('검색 중 오류가 발생했습니다:', error);
-      });
+      .then(getNoticeBoardListResponse)
+      
+    else
+      getNoticeBoardListRequest(cookies.accessToken).then(getNoticeBoardListResponse)
   }, [searchWord]);
 
   useEffect(() => {

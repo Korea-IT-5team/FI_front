@@ -116,6 +116,12 @@ export default function NoticeDetail() {
             .then(increaseViewCountResponse);
     }, []);
 
+    useEffect(() => {
+        if (!noticeNumber) return;
+        getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse)
+    }, []);
+
+
     //                    render                    //
     return (
         <div id='notice-detail-wrapper'>
