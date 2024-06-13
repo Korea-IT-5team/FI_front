@@ -28,10 +28,11 @@
 .inquiry-detail-top-box {
     display: flex;
     flex-direction: column;
+
     gap: 13px;
 }
 
-.inquiry-detail-title-box {
+.inquiry-detail-title {
     padding: 0px 5px;
 
     font-family: 'Nanum Gothic';

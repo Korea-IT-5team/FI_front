@@ -9,6 +9,16 @@
     gap: 17px;
 }
 
+.notice-list-top {
+    text-align: center;
+  
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+  }
+
 .notice-list-top-box {
     width: 100%;
 
@@ -91,7 +101,6 @@
 
 .notice-list-table-writer-nickname {
     width: 60px;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }

@@ -11,18 +11,17 @@ import "./style.css";
 export default function MyPageSite() {
 
   // state // 
-  // const { userEmailId } = useParams();
   const [cookies] = useCookies();
+  
   const [userEmailId, setEmailId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [userTelNumber, setUserTelNumber] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('');
   const [userRole, setUserRole] = useState<string>('');
-  // const [status, setStatus] = useState<boolean>(false);
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const GetMyInfoResponse = (result : GetMyInfoResponseDto | ResponseDto | null) => {
     const message =
@@ -32,10 +31,10 @@ export default function MyPageSite() {
 
     if (!result || result.code !== 'SU') {
       if (result?.code === 'AF') {
-        navigator(MAIN_ABSOLUTE_PATH);
+        navigation(MAIN_ABSOLUTE_PATH);
         return;
       }
-      navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
 
@@ -71,14 +70,14 @@ export default function MyPageSite() {
             <div className='my-page-info'>{userAddress}</div>
           </div>
           <div className='my-page-nav-box'>
-            <div className='my-page-nav' onClick={() => navigator(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
-            <div className='my-page-nav' onClick={() => navigator(RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH)}>찜한 식당 목록</div>
-            <div className='my-page-nav' onClick={() => navigator(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH)}>예약 내역</div>
-            <div className='my-page-nav' onClick={() => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH)}>리뷰 내역</div>
-            <div className='my-page-nav' onClick={() => navigator(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의내역</div>
+            <div className='my-page-nav' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
+            <div className='my-page-nav' onClick={() => navigation(RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH)}>찜한 식당 목록</div>
+            <div className='my-page-nav' onClick={() => navigation(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH)}>예약 내역</div>
+            <div className='my-page-nav' onClick={() => navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH)}>리뷰 내역</div>
+            <div className='my-page-nav' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의내역</div>
           </div>
         </div>
-        <div className='my-page-resign' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+        <div className='my-page-resign' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
       </div>
     </div>
   )

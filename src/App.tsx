@@ -45,10 +45,10 @@ function Index() {
   const [cookies] = useCookies();
 
   //   function   //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   //   effect   //
-  useEffect(() => navigator(MAIN_ABSOLUTE_PATH), []);
+  useEffect(() => navigation(MAIN_ABSOLUTE_PATH), []);
 
   //   render   //
   return <></>;

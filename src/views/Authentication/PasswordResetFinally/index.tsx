@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 export default function PasswordResetFinally() {
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   // render //  
   return (
@@ -15,7 +15,7 @@ export default function PasswordResetFinally() {
       <div className='password-reset-final-title'>비밀번호 재설정</div>
       <div className='password-reset-final-box'>
         <div className='password-reset-final-contents'>비밀번호가 성공적으로 변경되었습니다.</div>
-        <div className='password-reset-final-link-button' onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
+        <div className='password-reset-final-link-button' onClick={() => {navigation(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
       </div>
     </div>
   )

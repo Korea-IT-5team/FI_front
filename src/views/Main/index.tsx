@@ -8,7 +8,7 @@ import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSO
 import { useUserStore } from 'src/stores';
 import "./style.css";
 
-type Path = '식당리스트' | '마이페이지' | '문의사항' | '';
+type Path = '식당리스트' | '마이페이지' | '문의사항' | '공지사항' |'';
 
 // interface //
 interface Props {
@@ -40,7 +40,7 @@ function TopBar({ path }: Props) {
   }, [cookies.accessToken]);
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const onLogoutClickHandler = () => {
     removeCookie('accessToken', { path: '/' });
@@ -53,13 +53,13 @@ function TopBar({ path }: Props) {
     if(pathname === MAIN_ABSOLUTE_PATH){    
       window.location.reload();
     } else {
-    navigator(MAIN_ABSOLUTE_PATH);}
+    navigation(MAIN_ABSOLUTE_PATH);}
   }
 
-  const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-  const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onAdminPageClickHandler = () => navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
-  const onCeoPageClickHandler = () => navigator(RESTAURANT_LIST_ABSOLUTE_PATH);
+  const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
+  const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+  const onCeoPageClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
 
   const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
@@ -119,6 +119,10 @@ function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpe
     if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
     else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   };
+  const onNoticeBoardClickHandler = () => {
+    if (pathname === NOTICE_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
+    else navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+  };
 
   // render //
   return (
@@ -133,8 +137,12 @@ function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpe
           <div className='main-side-navigation-title'>마이페이지</div>
         </div>
         <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
-          <div className='main-side-navigation-icon board'></div>
+          <div className='main-side-navigation-icon inquiry'></div>
           <div className='main-side-navigation-title'>문의사항</div>
+        </div>
+        <div className='main-side-navigation-item' onClick={onNoticeBoardClickHandler}>
+          <div className='main-side-navigation-icon notice'></div>
+          <div className='main-side-navigation-title'>공지사항</div>
         </div>
       </div>
     </div>
@@ -151,7 +159,7 @@ export default function Main() {
   const [path, setPath] = useState<Path>('');
 
   // function // 
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
@@ -162,7 +170,7 @@ export default function Main() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(SIGN_IN_ABSOLUTE_PATH);
+      navigation(SIGN_IN_ABSOLUTE_PATH);
       return;
     }
 
@@ -176,7 +184,8 @@ export default function Main() {
     const path =
       pathname === RESTAURANT_LIST_ABSOLUTE_PATH ? '식당리스트' :
       pathname === MY_PAGE_SITE_ABSOLUTE_PATH ? '마이페이지' :
-      pathname.startsWith(INQUIRY_BOARD_LIST_ABSOLUTE_PATH) ? '문의사항' : '';
+      pathname.startsWith(INQUIRY_BOARD_LIST_ABSOLUTE_PATH) ? '문의사항' :
+      pathname.startsWith(NOTICE_BOARD_LIST_ABSOLUTE_PATH) ? '공지사항' : '';
 
     setPath(path);
   }, [pathname]);
@@ -184,7 +193,7 @@ export default function Main() {
   useEffect(() => {
 
     if (!cookies.accessToken) {
-      navigator(MAIN_ABSOLUTE_PATH);
+      navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
