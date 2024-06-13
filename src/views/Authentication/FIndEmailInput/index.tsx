@@ -18,7 +18,6 @@ export default function FindEmailInput() {
 
     const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
 
-    const [isUserNameCheck, setUserNameCheck] = useState<boolean>(false);
     const [isUserTelNumberCheck, setUserTelNumberCheck] = useState<boolean>(false);
     const [isUserTelNumberPattern, setUserTelNumberPattern] = useState<boolean>(false);
 
@@ -27,7 +26,7 @@ export default function FindEmailInput() {
 
     const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
 
-    const findEmailButtonClass = `${isUserNameCheck && isUserTelNumberCheck ? 'primary' : 'disable'}-button full-width`;
+    const findEmailButtonClass = `${userName && userTelNumber ? 'primary' : 'disable'}-button full-width`;
 
   // function // 
     const navigator = useNavigate();
@@ -54,7 +53,6 @@ export default function FindEmailInput() {
     const onUserNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setUserName(value);
-        setUserNameCheck(false)
         setUserNameMessage('');
     };
 

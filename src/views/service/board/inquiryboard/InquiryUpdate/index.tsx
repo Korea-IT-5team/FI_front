@@ -5,7 +5,7 @@ import { getInquiryBoardRequest, patchInquiryBoardRequest } from 'src/apis/board
 import { PatchInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
 import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 
@@ -21,7 +21,6 @@ export default function InquiryUpdate() {
   const [cookies] = useCookies();
 
   const [inquiryWriterId, setInquiryWriterId] = useState<string>('');
-  // const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
@@ -48,7 +47,7 @@ export default function InquiryUpdate() {
     // 요기 수정 
     if (!cookies.accessToken) {
       alert('권한이 없습니다.');
-      // navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     if (status) {
@@ -57,7 +56,6 @@ export default function InquiryUpdate() {
       return;
   }
     setInquiryWriterId(inquiryWriterId);
-    // setInquiryWriterNickname(inquiryWriterNickname);
     setInquiryTitle(inquiryTitle)
     setInquiryContents(inquiryContents);
   };
@@ -100,7 +98,6 @@ export default function InquiryUpdate() {
   const onInquiryUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !inquiryNumber) return;
     if (!inquiryTitle.trim() || !inquiryContents.trim()) return;
-      console.log("sd");
     const requestBody: PatchInquiryBoardRequestDto = { inquiryTitle, inquiryContents };
     patchInquiryBoardRequest(inquiryNumber, requestBody, cookies.accessToken).then(patchInquiryBoardResponse);
   };
