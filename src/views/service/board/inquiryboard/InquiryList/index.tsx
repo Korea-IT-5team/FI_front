@@ -229,8 +229,8 @@ export default function InquiryList() {
         <div className='inquiry-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' &&
             (<>
-              <div className={toggleClass} onClick={onToggleClickHandler}></div>
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
+              <div className={toggleClass} onClick={onToggleClickHandler}></div>
             </>)}
 
           {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&(

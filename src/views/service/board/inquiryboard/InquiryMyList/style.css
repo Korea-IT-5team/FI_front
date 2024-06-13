@@ -1,0 +1,214 @@
+#inquiry-my-list-wrapper {
+  width: 1300px;
+  min-width: 800px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+  gap: 17px;
+}
+
+.inquiry-my-list-top {
+  text-align: center;
+
+  font-family: 'Nanum Gothic';
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
+.inquiry-my-list-top-box {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inquiry-my-list-top-left {
+  display: flex;
+  align-items: end;
+}
+
+.inquiry-my-list-size-text {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(138, 146, 166, 1);
+}
+
+.inquiry-my-list-top-right {
+  display: flex;
+  flex-direction: row;
+
+  gap: 10px;
+}
+
+.inquiry-my-list-toggle-box {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+
+  gap: 5px;
+}
+
+.inquiry-my-list-top-text {
+  font-family: 'Nanum Gothic';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
+.inquiry {
+  width: 80px;
+  height: 35px;
+
+  padding: 3px;
+
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.inquiry-my-list-table {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  font-family: 'Nanum Gothic';
+  font-size: 17px;
+  font-weight: bold;
+  color: rgba(50, 50, 50, 1);
+}
+
+.inquiry-my-list-table-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px;
+
+  background-color: rgba(255, 148, 45, 0.2);
+  border-radius: 6px;
+}
+
+.inquiry-my-list-table-tr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+  gap: 95px;
+  padding: 13px 13px;
+
+  border-top: 1px solid rgba(238, 238, 238, 1);
+
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
+.inquiry-my-list-table-tr:hover {
+  cursor: pointer;
+  background-color: rgba(238, 238, 238, 0.2);
+} 
+
+.inquiry-my-list-table-reception-number {
+  width: 60px;
+}
+
+.inquiry-my-list-table-status {
+  width: 60px;
+}
+
+.inquiry-my-list-table-public {
+  width: 60px;
+}
+
+.inquiry-my-list-table-title {
+  width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inquiry-my-list-table-writer-nickname {
+  width: 60px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inquiry-my-list-table-write-date {
+  width: 80px;
+}
+
+.inquiry-my-list-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inquiry-my-list-pagenation {
+  display: flex;
+  text-align: center;
+  gap: 24px;
+}
+
+.inquiry-my-list-page-box {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.inquiry-my-list-page {
+  font-family: 'Nanum Gothic';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(138, 146, 166, 1);
+
+  cursor: pointer;
+}
+
+.inquiry-my-list-page-active {
+  font-family: 'Nanum Gothic';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
+.inquiry-my-list-search-box {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.inquiry-my-list-search-input-box {
+  width: 250px;
+
+  padding: 5px;
+
+  border: 1px solid rgba(238, 238, 238, 1);
+  border-radius: 6px;
+}
+
+.inquiry-my-list-search-input {
+  width: 100%;
+
+  border: none;
+
+  font-family: 'Nanum Gothic';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
