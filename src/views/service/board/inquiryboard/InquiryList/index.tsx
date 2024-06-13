@@ -196,7 +196,6 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    // if (!cookies.accessToken) return;
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };
@@ -209,8 +208,6 @@ export default function InquiryList() {
     else
       getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
   },[isToggleOn]);
-
-
 
   useEffect(() => {
       changePage(inquiryBoardList, totalLength);
@@ -238,7 +235,7 @@ export default function InquiryList() {
               <div className={toggleClass} onClick={onToggleClickHandler}></div>
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
             </>)}
-          {loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO' &&(
+          {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') && (
             <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>

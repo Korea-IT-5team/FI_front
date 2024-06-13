@@ -112,10 +112,16 @@ export default function NoticeDetail() {
 
     //                    effect                    //
     useEffect(() => {
-        if (!cookies.accessToken || !noticeNumber) return;
+        if (!noticeNumber) return;
         increaseViewCountRequest(noticeNumber, cookies.accessToken)
             .then(increaseViewCountResponse);
     }, []);
+
+    useEffect(() => {
+        if (!noticeNumber) return;
+        getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse)
+    }, []);
+
 
     //                    render                    //
     return (
