@@ -13,14 +13,6 @@ export const getSignInUserRequest = async (accessToken: string) => {
     return result;
 };
 
-// function: 비밀번호 재확인 API 함수 
-// export const passwordRecheckRequest = async (requestBody:PasswordRecheckRequestDto, accessToken: string) => {
-//     const result = await axios.post(PASSWORD_RECHECK_REQUEST_URL, requestBody, bearerAuthorization(accessToken))
-//         .then(requestHandler<ResponseDto>)
-//         .catch(requestErrorHandler);
-//     return result;
-// };
-
 // function: 회원정보 수정 API 함수 
 export const patchUserInfoRequest = async (userEmailId: string, requestBody: PatchUserInfoRequestDto,  accessToken: string) => {
     const result = await axios.patch(PATCH_INFO_UPDATE_REQUEST_URL(userEmailId), requestBody, bearerAuthorization(accessToken))

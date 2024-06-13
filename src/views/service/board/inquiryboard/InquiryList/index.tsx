@@ -162,7 +162,7 @@ export default function InquiryList() {
 
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_CEO') return;
+    if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
     navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
@@ -194,7 +194,6 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    // if (!cookies.accessToken) return;
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
   };
@@ -235,7 +234,7 @@ export default function InquiryList() {
               <div className={toggleClass} onClick={onToggleClickHandler}></div>
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
             </>)}
-          {loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO' &&(
+          {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&(
             <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>
