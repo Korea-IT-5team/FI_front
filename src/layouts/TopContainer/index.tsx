@@ -138,11 +138,11 @@ function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: b
                     <div className='main-side-navigation-title'>마이페이지</div>
                 </div>
                 <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
-                    <div className='main-side-navigation-icon board'></div>
+                    <div className='main-side-navigation-icon inquiry'></div>
                     <div className='main-side-navigation-title'>문의사항</div>
                 </div>
                 <div className='main-side-navigation-item' onClick={onNoticeBoardClickHandler}>
-                    <div className='main-side-navigation-icon board'></div>
+                    <div className='main-side-navigation-icon notice'></div>
                     <div className='main-side-navigation-title'>공지사항</div>
                 </div>
             </div>
