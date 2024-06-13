@@ -21,7 +21,7 @@ export default function RestaurantList()
   
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => 
   {
@@ -58,12 +58,12 @@ export default function RestaurantList()
   const onRegistrationClickHandler = () =>
   {     
       if (!cookies.accessToken) return;
-      navigator(RESTAURANT_INFO_WRITE_ABSOLUTE_PATH);
+      navigation(RESTAURANT_INFO_WRITE_ABSOLUTE_PATH);
   };  
 
   const onItemClickHandler = (item: number) =>
   {     
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(item));
+      navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
   };  
 
   // effect //

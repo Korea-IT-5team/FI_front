@@ -13,7 +13,7 @@ export default function ReviewWrite()
 {
   
   // state //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const {restaurantId} = useParams();
   const [reviewImage, setReviewImage] = useState<string>("");
@@ -37,7 +37,7 @@ export default function ReviewWrite()
       }
 
       if(!restaurantId) return;
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
+      navigation(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
   }
   
   // event handler //

@@ -26,7 +26,7 @@ export default function RestaurantInfoWrite()
     const [restaurantNotice, setRestaurantNotice] = useState('');
     const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState('');
     const { businessRegistrationNumber } = useUserStore();
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // function //
     const PostRestaurantInfoResponse = (result: ResponseDto | null) => {
@@ -43,7 +43,7 @@ export default function RestaurantInfoWrite()
         }
 
         alert("등록이 완료되었습니다.");
-        navigator(RESTAURANT_LIST_ABSOLUTE_PATH)
+        navigation(RESTAURANT_LIST_ABSOLUTE_PATH)
     }
     
     // event handler //
