@@ -21,7 +21,7 @@ export const postCommentRequest = async (inquiryNumber: number | string, request
     return result;
 };
 
-// function: 문의 게시물 목록 불러오기 API 함수 
+// function: 문의 게시물 목록 확인 API 함수 
 export const getInquiryBoardListRequest = async (accessToken: string) => {
     const result = await axios.get(GET_INQUIRY_BOARD_LIST_URL, bearerAuthorization(accessToken))
         .then(requestHandler<GetInquiryBoardListResponseDto>)
