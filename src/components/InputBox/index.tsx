@@ -32,7 +32,6 @@ export default function InputBox({ label, type, value, placeholder, onChangeHand
                     onKeyDown={onKeydownHandler}
                 />
                 { buttonTitle && 
-                // onButtonClickHandler => undefined가 올 수 있음 
                 <div className={buttonClass} onClick={onButtonClickHandler}>
                     {buttonTitle}
                 </div> 
