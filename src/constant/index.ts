@@ -31,9 +31,7 @@ export const RESTAURANT_FAVORITE_LIST_PATH = 'favoriteList';
 
 export const MY_PAGE_PATH = '/my-page';
 export const MY_PAGE_SITE_PATH = 'site';
-// export const USER_INFO_UPDATE_PATH = 'user-info-update';
 export const USER_INFO_UPDATE_PATH = 'user-info-update/:userEmailId';
-// export const USER_DELETE_PATH = 'user-delete';
 export const USER_DELETE_PATH = 'info-delete/:userEmailId';
 export const USER_DELETE_FINALLY_PATH = 'user-delete-finally';
 
@@ -79,9 +77,7 @@ export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${FAVO
 
 export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;
 export const MY_PAGE_SITE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${MY_PAGE_SITE_PATH}`;
-// export const USER_INFO_UPDATE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_INFO_UPDATE_PATH}`;
 export const USER_INFO_UPDATE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/user-info-update/${userEmailId}`;
-// export const USER_DELETE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}`;
 export const USER_DELETE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/info-delete/${userEmailId}`;
 export const USER_DELETE_FINALLY_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}/${USER_DELETE_FINALLY_PATH}`;
 
@@ -120,9 +116,7 @@ export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/bus
 // description: USER 모듈 내의 기능 URL
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
 export const GET_SIGN_IN_USER_REQUEST_URL = `${SERVER_USER_MODULE_URL}/`;
-// export const PATCH_INFO_UPDATE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-update`;
 export const PATCH_INFO_UPDATE_REQUEST_URL = (userEmailId: string) => `${SERVER_USER_MODULE_URL}/info-update/${userEmailId}`;
-// export const DELETE_INFO_DELETE_REQUEST_URL = `${SERVER_USER_MODULE_URL}/info-delete`;
 export const DELETE_INFO_DELETE_REQUEST_URL = (userEmailId: string) => `${SERVER_USER_MODULE_URL}/info-delete/${userEmailId}`;
 export const GET_MY_INFO_URL = `${SERVER_USER_MODULE_URL}/information`;
 
