@@ -124,6 +124,26 @@
     gap: 24px;
 }
 
+.notice-list-page-left {
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-left.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.notice-list-page-right {
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-right.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
 .notice-list-page-box {
     display: flex;
     align-items: center;
@@ -145,7 +165,7 @@
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: red;
 }
 
 .notice-list-search-box {

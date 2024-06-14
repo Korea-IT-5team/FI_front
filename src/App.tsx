@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
-import { AUTH_PATH, BOARD_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import { AUTH_PATH, BOARD_PATH, CEO_DELETE_PATH, CEO_INFO_UPDATE_PATH, CEO_PAGE_PATH, CEO_PAGE_SITE_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
 import Authentication from './layouts/AuthenticationContainer';
 import TopContainer from './layouts/TopContainer';
 import FindEmailInput from './views/Authentication/FIndEmailInput';
@@ -36,6 +36,8 @@ import InquiryList from './views/service/board/inquiryboard/InquiryList';
 import InquiryMyList from './views/service/board/inquiryboard/InquiryMyList';
 import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
+import CeoPageSite from './views/service/CeoPage/CeoPageSite';
+import CeoInfoUpdate from './views/service/CeoPage/CeoInfoUpdate';
 
 
 // component: root 경로 컴포넌트
@@ -92,11 +94,15 @@ function App() {
             <Route path={RESTAURANT_FAVORITE_LIST_PATH} element={<FavoriteList />} />
           </Route>
         </Route>
-         
         <Route path={MY_PAGE_PATH} >
           <Route path={MY_PAGE_SITE_PATH} element={<MyPageSite />} /> 
           <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
           <Route path={USER_DELETE_PATH} element={<UserDelete />} />
+        </Route>  
+        <Route path={CEO_PAGE_PATH} >
+          <Route path={CEO_PAGE_SITE_PATH} element={<CeoPageSite />} /> 
+          <Route path={CEO_INFO_UPDATE_PATH} element={<CeoInfoUpdate />} /> 
+          <Route path={CEO_DELETE_PATH} element={<UserDelete />} /> 
         </Route>  
         <Route path={BOARD_PATH} >
           <Route path={NOTICE_PATH} >

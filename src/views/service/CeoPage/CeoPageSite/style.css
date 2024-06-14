@@ -1,0 +1,100 @@
+.my-page-container {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.my-page-title {
+  margin-top: 30px;
+
+  font-family: 'Nanum Gothic';
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.my-page-box {
+  height: 300px;
+  max-width: 800px;
+
+  display: flex;
+  flex-direction: row;
+
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+
+  border-top: 1px solid rgba(238, 238, 238, 1);
+}
+
+.my-page-info-box {
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
+.my-page-info {
+  padding: 10px;
+
+  background-color: rgba(240, 240, 240, 1);
+  border-radius: 7px;
+}
+
+.my-page-nav-box {
+  width: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+  text-align: center;
+
+  font-family: 'Nanum Gothic';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
+.my-page-nav {
+  padding: 10px;
+
+  background-color: rgba(240, 240, 240, 1);
+  border-radius: 7px;
+}
+
+.my-page-nav:hover {
+  cursor: pointer;
+  background-color: rgba(255, 148, 45, 0.25);
+}
+
+.my-page-resign {
+  width: 150px;
+
+  padding: 10px;
+
+  background-color: rgba(255, 148, 45, 0.7);
+  border-radius: 8px;
+
+  text-align: center;
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(255, 255, 255, 1);
+}
+
+.my-page-resign:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}
