@@ -9,7 +9,6 @@
     gap: 17px;
 }
 
-
 .favorite-list-top {
     text-align: center;
 
@@ -19,7 +18,6 @@
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
 }
-
 
 .favorite-list-size-text {
     font-size: 16px;
@@ -40,7 +38,6 @@
     font-weight: bold;
     color: rgba(50, 50, 50, 1);
 }
-
 
 .favorite-list-table-top {
     display: flex;
@@ -76,7 +73,6 @@
     cursor: pointer;
     background-color: rgba(238, 238, 238, 0.2);
 }
-
 
 .favorite-list-table-image {
     width: 80px;
