@@ -17,7 +17,7 @@
     font-weight: bold;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
-  }
+}
 
 .inquiry-list-top-box {
     width: 100%;
@@ -152,6 +152,26 @@
     display: flex;
     text-align: center;
     gap: 24px;
+}
+
+.inquiry-list-page-left {
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-left.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.inquiry-list-page-right {
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-right.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
 }
 
 .inquiry-list-page-box {

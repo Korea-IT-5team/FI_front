@@ -18,6 +18,7 @@ export default function RestaurantList()
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
   const {loginUserRole } = useUserStore();
+  const [displayCount, setDisplayCount] = useState<number>(8); // 한 번에 보여줄 식당 목록 개수
   
 
   // function //
@@ -66,6 +67,12 @@ export default function RestaurantList()
       navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
   };  
 
+
+  // 더보기 버튼 클릭 핸들러 //
+  const onLoadMoreClickHandler = () => {
+      setDisplayCount(prevCount => prevCount + 8); // 현재 보여주고 있는 개수에 8개를 더함
+  };
+
   // effect //
   let effectFlag1 = false;
   useEffect(() => {
@@ -93,7 +100,7 @@ export default function RestaurantList()
             {!restaurantList || restaurantList.length === 0 ? 
             ( <div className="restaurant-list-select-item">해당하는 식당 정보가 없습니다.</div> ) : 
             (
-              restaurantList.slice(0, 12).map((item) => (
+              restaurantList.slice(0, displayCount).map((item) => (
               <div className='restaurant-list-select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
                   <img src={item.restaurantImage} className='restaurant-list-select-item' />
                   <div className='restaurant-list-select-item'>{item.restaurantName}</div>
@@ -103,6 +110,10 @@ export default function RestaurantList()
             )))
           }
       </div>
+      {/* 더보기 버튼 추가 */}
+      {restaurantList.length > displayCount && (
+        <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
+      )}
     </>
   );  
 }
