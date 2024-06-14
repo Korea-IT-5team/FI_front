@@ -7,7 +7,7 @@ import { deleteUserRequest } from 'src/apis/user';
 import { MAIN_ABSOLUTE_PATH } from 'src/constant';
 import InputBox from 'src/components/InputBox';
 import { useUserStore } from 'src/stores';
-import { DeleteUserRequestDto, PasswordRecheckRequestDto } from 'src/apis/user/dto/request';
+import { DeleteUserRequestDto } from 'src/apis/user/dto/request';
 
 // component: 회원탈퇴 // 
 export default function UserDelete() {

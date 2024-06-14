@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import "./style.css";
 
@@ -59,7 +59,7 @@ function TopBar({ path }: Props) {
   const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
   const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
-  const onCeoPageClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+  const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
 
   const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
@@ -108,6 +108,7 @@ function TopBar({ path }: Props) {
 function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
 
   const {pathname} = useLocation();
+  const { loginUserRole } = useUserStore();
 
   // function //
   const navigation = useNavigate();
@@ -115,6 +116,7 @@ function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpe
   // event handler //
   const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
   const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onCeoPageSiteClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
   const onInquiryBoardClickHandler = () => {
     if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
     else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
@@ -132,10 +134,18 @@ function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpe
           <div className='main-side-navigation-icon food'></div>
           <div className='main-side-navigation-title'>식당 리스트</div>
         </div>
-        <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
-          <div className='main-side-navigation-icon my-page'></div>
-          <div className='main-side-navigation-title'>마이페이지</div>
-        </div>
+        {loginUserRole === 'ROLE_USER' &&
+          <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
+            <div className='main-side-navigation-icon my-page'></div>
+            <div className='main-side-navigation-title'>마이페이지</div>
+          </div>
+        }
+        {loginUserRole === 'ROLE_CEO' &&
+          <div className='main-side-navigation-item' onClick={onCeoPageSiteClickHandler}>
+            <div className='main-side-navigation-icon my-page'></div>
+            <div className='main-side-navigation-title'>사장페이지</div>
+          </div>
+        }
         <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
           <div className='main-side-navigation-icon inquiry'></div>
           <div className='main-side-navigation-title'>문의사항</div>
