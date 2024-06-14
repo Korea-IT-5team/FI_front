@@ -34,7 +34,6 @@ export interface GetInquiryBoardListItem {
   inquiryWriteDatetime: string;
 }
 
-
 // description: 나의 문의 게시물 목록 확인 Response Body DTO
 export interface GetMyInquiryBoardListResponseDto extends ResponseDto {
   inquiryBoardList: InquiryBoardListItem[];

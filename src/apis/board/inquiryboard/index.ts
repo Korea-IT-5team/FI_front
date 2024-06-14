@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { PatchInquiryBoardRequestDto, PostCommentRequestDto, PostInquiryBoardRequestDto } from './dto/request';
-import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
+import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, GET_MY_INQUIRY_BOARD_LIST_URL, GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
 import { bearerAuthorization, requestErrorHandler, requestHandler } from 'src/apis';
-import { GetInquiryBoardListResponseDto,GetInquiryBoardResponseDto,GetSearchInquiryBoardListResponseDto } from './dto/response';
+import { GetInquiryBoardListResponseDto,GetInquiryBoardResponseDto,GetMyInquiryBoardListResponseDto,GetSearchInquiryBoardListResponseDto } from './dto/response';
 import ResponseDto from 'src/apis/response.dto';
 
 // function: 문의 게시물 작성 API 함수
@@ -58,6 +58,23 @@ export const patchInquiryBoardRequest = async (inquiryNumber: number | string, r
 export const deleteInquiryBoardRequest = async (inquiryNumber: number | string, accessToken: string) => {
     const result = await axios.delete(DELETE_INQUIRY_BOARD_URL(inquiryNumber), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
+// function: 나의 문의 게시물 목록 확인 API 함수 
+export const getMyInquiryBoardListRequest = async (accessToken: string) => {
+    const result = await axios.get(GET_MY_INQUIRY_BOARD_LIST_URL, bearerAuthorization(accessToken))
+        .then(requestHandler<GetMyInquiryBoardListResponseDto>)
+        .catch(requestErrorHandler);
+    return result;
+};
+
+// function: 나의 검색 문의 게시물 목록 확인 API 함수 
+export const getMySearchInquiryBoardListRequest = async (searchWord: string, accessToken: string) => {
+    const config = { ...bearerAuthorization(accessToken), params: { searchWord } };
+    const result = await axios.get(GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL, config)
+        .then(requestHandler<GetSearchInquiryBoardListResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };
