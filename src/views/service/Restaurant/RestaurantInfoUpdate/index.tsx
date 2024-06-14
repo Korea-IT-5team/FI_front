@@ -80,7 +80,7 @@ export default function RestaurantInfoUpdate()
     const onUpdateClickHandler = () => {
 
         if (!restaurantImage || !restaurantName || !restaurantFoodCategory
-            || !restaurantPostalCode || !restaurantLocation || !restaurantId) {
+            || !restaurantPostalCode || !restaurantLocation || !restaurantId || !restaurantTelNumber) {
             //alert('필수 정보를 입력하지 않았습니다.');
             return;
         }
@@ -184,7 +184,7 @@ export default function RestaurantInfoUpdate()
         .then(GetRestaurantInfoResponse);
     }, []);
     
-    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPostalCode && restaurantLocation;
+    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPostalCode && restaurantLocation && restaurantTelNumber;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
 
     // render //
