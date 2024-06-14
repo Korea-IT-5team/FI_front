@@ -260,16 +260,14 @@ export default function InquiryList() {
         <div style={{ width: '332px' }}></div>
 
         <div className='inquiry-list-pagenation'>
-          <div className='page-left' onClick={onPreSectionClickHandler}></div>
-
-
+          <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
             {pageList.map(page => page === currentPage ?
               <div className='inquiry-list-page-active'>{page}</div> :
               <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
