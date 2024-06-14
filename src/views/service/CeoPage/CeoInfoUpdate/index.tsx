@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import "./style.css";
-import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
@@ -10,8 +10,8 @@ import { PatchUserInfoRequestDto } from 'src/apis/user/dto/request';
 import { useUserStore } from 'src/stores';
 import InputBox from 'src/components/InputBox';
 
-// component: 회원정보 수정 //
-export default function UserInfoUpdate() {
+// component: 사장 회원정보 수정 //
+export default function CeoInfoUpdate() {
 
   // state // 
   const [cookies] = useCookies();
@@ -21,6 +21,7 @@ export default function UserInfoUpdate() {
   const [userName, setUserName] = useState<string>('');
   const [userTelNumber, setUserTelNumber] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('');
+  const [businessRegistrationNumber, setBusinessRegistrationNumber] = useState<string>('');
   const [userRole, setUserRole] = useState<string>('');
 
   // function //
@@ -39,18 +40,19 @@ export default function UserInfoUpdate() {
         return;
       }
       
-      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+      navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
 
     if (!cookies.accessToken) return;
 
-    const {userEmailId, nickname, userName, userTelNumber, userAddress} = result as GetMyInfoResponseDto;
+    const {userEmailId, nickname, userName, userTelNumber, userAddress, businessRegistrationNumber} = result as GetMyInfoResponseDto;
     setNickname(nickname);
     setEmailId(userEmailId);
     setUserName(userName);
     setUserTelNumber(userTelNumber);
     setUserAddress(userAddress);
+    setBusinessRegistrationNumber(businessRegistrationNumber);
     setUserRole(userRole);
 
   };
@@ -76,7 +78,7 @@ export default function UserInfoUpdate() {
     }
 
     alert('정보가 성공적으로 수정되었습니다.');
-    navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+    navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
   };
 
   // event handler //
@@ -85,7 +87,7 @@ export default function UserInfoUpdate() {
     setNickname(nickname);
   };
 
-  const onUserAddressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onCeoAddressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const userAddress = event.target.value;
     setUserAddress(userAddress);
   };
@@ -105,8 +107,8 @@ export default function UserInfoUpdate() {
     if (!loginUserRole) return;
     if (effectFlag.current) return;
     effectFlag.current = true;
-    if (loginUserRole !== 'ROLE_USER') {
-      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+    if (loginUserRole !== 'ROLE_CEO') {
+      navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
     getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
@@ -116,14 +118,15 @@ export default function UserInfoUpdate() {
   return (
     <div id='my-page-wrapper'>
       <div className='my-page-container'>
-        <div className='my-page-title'>회원 정보 수정</div>
+        <div className='my-page-title'>사장 정보 수정</div>
         <div className='my-page-update-box'>
           <div className='my-page-info-box'>
             <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
             <div className='my-page-info'>{userEmailId}</div>
             <div className='my-page-info'>{userName}</div>
             <div className='my-page-info'>{userTelNumber}</div>
-            <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+            <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onCeoAddressChangeHandler} />
+            <div className='my-page-info'>{businessRegistrationNumber}</div>
           </div>
           <div className='my-page-update' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>
