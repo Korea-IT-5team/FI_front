@@ -88,15 +88,17 @@ export default function RestaurantList()
           </div>
           {loginUserRole === 'ROLE_CEO' && <div className="restaurant-list-registration-button" onClick={onRegistrationClickHandler}>등록하기</div>}
       </div>
+
       <div className="restaurant-list">
             {!restaurantList || restaurantList.length === 0 ? 
-            ( <div className="restaurant-list-select-item">해당하는 식당 정보가 없습니다.</div> ) 
-                                                  : 
+            ( <div className="restaurant-list-select-item">해당하는 식당 정보가 없습니다.</div> ) : 
             (
               restaurantList.slice(0, 12).map((item) => (
               <div className='restaurant-list-select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
                   <img src={item.restaurantImage} className='restaurant-list-select-item' />
                   <div className='restaurant-list-select-item'>{item.restaurantName}</div>
+                  <div className='restaurant-list-select-item'>{item.restaurantFoodCategory}</div>
+                  <div className='restaurant-list-select-item'>{item.restaurantLocation}</div>
               </div>
             )))
           }

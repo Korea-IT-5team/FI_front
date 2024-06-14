@@ -296,41 +296,41 @@ export default function RestaurantInfo() {
 
     // render //
     return (
-            <>
-                <div id="restaurant-info">
-                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                        <button onClick={onSetRestIdNumberHandler}>수정</button>)}
-                    {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                        <button onClick={onDeleteRestIdNumberHandler}>삭제</button>)}
-                    <img src={restaurantImage} className='' />
-                    <div>
-                        <div>식당 이름 :{restaurantName}</div>
-                        {loginUserRole === "ROLE_USER" &&  
+        <>
+            <div id="restaurant-info">
+                {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
+                    <button onClick={onSetRestIdNumberHandler}>수정</button>)}
+                {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
+                    <button onClick={onDeleteRestIdNumberHandler}>삭제</button>)}
+                <img src={restaurantImage} className='' />
+                <div>
+                    <div>식당 이름 :{restaurantName}</div>
+                    {loginUserRole === "ROLE_USER" &&
                         (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
-                            (<button onClick={onReservationCancelClickHandler}>예약취소</button>):
+                            (<button onClick={onReservationCancelClickHandler}>예약취소</button>) :
                             (<button onClick={onReservationClickHandler}>예약</button>)
                         )}
-                    </div>
-                        
-                    <div>주음식 : {restaurantFoodCategory}</div>
-                    {grade ? (<div>평점 : {grade}</div>) : (<div></div>)}
-                    {loginUserRole === "ROLE_USER" && 
-                    (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ? 
-                        (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>):
+                </div>
+
+                <div>주음식 : {restaurantFoodCategory}</div>
+                {grade ? (<div>평점 : {grade}</div>) : (<div></div>)}
+                {loginUserRole === "ROLE_USER" &&
+                    (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ?
+                        (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
                         (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
                     )}
 
-                    <div>위치 : {restaurantLocation}</div>
-                    <div>SNS 위치 : {restaurantSnsAddress}</div>
-                    <div>우편번호 :{restaurantPostalCode}</div>
-                    <div>전화번호 : {restaurantTelNumber}</div>
+                <div>위치 : {restaurantLocation}</div>
+                <div>SNS 위치 : {restaurantSnsAddress}</div>
+                <div>우편번호 :{restaurantPostalCode}</div>
+                <div>전화번호 : {restaurantTelNumber}</div>
 
-                    <div>운영시간 : {restaurantOperationHours}</div>
-                    <div>특징 : {restaurantFeatures}</div>
-                    <div>공지사항 : {restaurantNotice}</div>
-                    <div>대표메뉴 : {restaurantRepresentativeMenu}</div>
-                    <ReviewList value={restaurantReviewList} restaurantId={restaurantId}/>   
-                </div>   
-            </>
-  )
+                <div>운영시간 : {restaurantOperationHours}</div>
+                <div>특징 : {restaurantFeatures}</div>
+                <div>공지사항 : {restaurantNotice}</div>
+                <div>대표메뉴 : {restaurantRepresentativeMenu}</div>
+                <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
+            </div>
+        </>
+    )
 }

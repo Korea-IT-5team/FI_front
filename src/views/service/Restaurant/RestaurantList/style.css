@@ -1,42 +1,81 @@
-.restaurantlist-top-bar-container {
+.restaurant-list-side-navigation-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-
-    padding: 0 24px;
-}
-
-.restaurantlist-top-bar-left{
-    font-size: 36px;
-}
-
-
-.restaurantlist-top-bar-title{
-    font-size: 48px;
-}
-
-
-
-.restaurantlist-top-bar-right{
-    font-size: 36px;
-}
-
-.restaurantlist-side-navigation-container{
-    width: 80%;
+    margin-bottom: 20px;
+  }
+  
+  .restaurant-list-search-input-click {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center; 
-    margin: 0 auto; /* 가로로 중앙 정렬 */
-}
-
-.restaurantlist-search-input-click{
-    display: flex;
-    flex-direction: row;
-}
-
-
-.restaurantlist-select-item{
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .restaurant-list-search-input {
+    width: 300px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .restaurant-list-search-input::placeholder {
+    color: #ccc;
+  }
+  
+  .restaurant-list-search-input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .restaurant-list-registration-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .restaurant-list-registration-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .restaurant-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .restaurant-list-select-item {
     text-align: center;
-}
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .restaurant-list-select-list-item-box {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .restaurant-list-select-list-item-box:hover {
+    transform: translateY(-5px);
+  }
+  
+  .restaurant-list-select-list-item-box img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .restaurant-list-select-list-item-box .restaurant-list-select-item {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+  }
+  
