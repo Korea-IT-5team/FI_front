@@ -17,7 +17,6 @@ function ListItem ({
   inquiryNumber,
   status,
   inquiryTitle,
-  inquiryWriteDatetime
   inquiryWriteDatetime,
   inquiryWriterId
 }: InquiryBoardListItem & { index: number }) {
