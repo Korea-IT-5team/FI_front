@@ -28,7 +28,6 @@ function ListItem ({
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
             <div>{reviewRestaurantName}</div>
-            <img src={reviewImage} className='' />
             <div className='' style={{ textAlign: 'left' }}>{rating}</div>
             <div className=''>{reviewWriterNickname}</div>
             <div className=''>{reviewDate}</div>
@@ -152,7 +151,6 @@ export default function ReviewDetailsList() {
             <div className='review-list-table'>
                 <div className='review-list-table-th'>
                     <div className=''>리뷰 식당 이름</div>
-                    <div className=''>이미지</div>
                     <div className=''>평점</div>
                     <div className=''>작성자</div>
                     <div className=''>작성일</div>
