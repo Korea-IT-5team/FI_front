@@ -30,15 +30,13 @@ function ListItem ({
     // render //
     return (
         <div className='reservation-list-table-tr' onClick={onClickHandler} >
-            <div>
-                <div className='reservation-list-table-reservation-number'>{reservationNumber}</div>
-                <div className='reservation-list-table-reservation-status'>{reservationStatus}</div>
-                <div className='reservation-list-table-reservation-restaurant-name'>{reservationRestaurantName}</div>
-                <div className='reservation-list-table-reservation-date'>{reservationDate}</div>
-                <div className='reservation-list-table-reservation-time'>{reservationTime}</div>
-                <div className='reservation-list-table-reservation-people'>{reservationPeople}</div>
-                <div className='reservation-list-table-reservation-user-name'>{reservationUserName}</div>
-            </div>
+            <div className='reservation-list-table-reservation-number'>{reservationNumber}</div>
+            <div className='reservation-list-table-reservation-status'>{reservationStatus}</div>
+            <div className='reservation-list-table-reservation-restaurant-name'>{reservationRestaurantName}</div>
+            <div className='reservation-list-table-reservation-date'>{reservationDate}</div>
+            <div className='reservation-list-table-reservation-time'>{reservationTime}</div>
+            <div className='reservation-list-table-reservation-people'>{reservationPeople}</div>
+            <div className='reservation-list-table-reservation-user-name'>{reservationUserName}</div>
         </div>
     );
 }
@@ -172,7 +170,6 @@ export default function ReservationList() {
                 {viewList.map(item => <ListItem {...item} />)}
             </div>
             <div className='reservation-list-bottom'>
-                <div style={{ width: '332px' }}></div>
                 <div className='reservation-list-pagenation'>
                     <div className='reservation-list-page-left' onClick={onPreSectionClickHandler}></div>
                     <div className='reservation-list-page-box'>
