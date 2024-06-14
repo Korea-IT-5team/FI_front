@@ -12,6 +12,7 @@ import { InquiryBoardListItem } from 'src/types';
         
 //     component     //
 function ListItem ({
+  index,
   inquiryNumber,
   status,
   inquiryPublic,
@@ -19,7 +20,7 @@ function ListItem ({
   inquiryWriterNickname,
   inquiryWriteDatetime,
   inquiryWriterId
-}: InquiryBoardListItem) {
+}: InquiryBoardListItem & { index: number }) {
   
   const { loginUserRole, loginUserEmailId } = useUserStore();
 
@@ -39,7 +40,7 @@ function ListItem ({
   
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
-      <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
+      <div className='inquiry-list-table-reception-number'>{index + 1}</div>
       <div className='inquiry-list-table-status'>
           {status ? 
           <div className='primary-bedge'>답변</div> :
@@ -252,13 +253,15 @@ export default function InquiryList() {
           <div className='inquiry-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-list-table-contents'>
-          {viewInquiryList.map(item => <ListItem {...item} />)}
+          {viewInquiryList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
         </div>
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px' }}></div>
+<<<<<<< kdi
         <div className='inquiry-list-pagenation'>
           <div className='page-left' onClick={onPreSectionClickHandler}></div>
+
           <div className='inquiry-list-page-box'>
             {pageList.map(page =>
               page === currentPage ?
@@ -278,7 +281,3 @@ export default function InquiryList() {
     </div>
   )
 }
-
-
-
-

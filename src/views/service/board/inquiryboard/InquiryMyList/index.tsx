@@ -2,7 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+
+import { getInquiryBoardListRequest, getMySearchInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+
 import { GetInquiryBoardListResponseDto, GetMyInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
@@ -11,12 +13,15 @@ import { InquiryBoardListItem } from 'src/types';
 
 //     component     //
 function ListItem ({
+  index,
   inquiryNumber,
   status,
   inquiryTitle,
   inquiryWriteDatetime,
   inquiryWriterId
-}: InquiryBoardListItem) {
+
+}: InquiryBoardListItem & { index: number }) {
+
 
   //        function       //
   const navigation = useNavigate();
@@ -27,7 +32,7 @@ function ListItem ({
   //   render   //
   return(
     <div className='inquiry-my-list-table-tr' onClick={onClickHandler}>
-      <div className='inquiry-my-list-table-reception-number'>{inquiryNumber}</div>
+      <div className='inquiry-my-list-table-reception-number'>{index + 1}</div>
       <div className='inquiry-my-list-table-status'>
         {status ? 
         <div className='primary-bedge'>답변</div> :
@@ -131,10 +136,11 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
   changeInquiryBoardList(inquiryBoardList);
 
-  // 사용자의 이메일 ID와 작성자의 ID가 일치하는 항목만 필터링하여 저장
+
   // 검색이 안 먹음
-  // const filteredList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
-  // setInquiryBoardList(filteredList);
+  // const viewInquiryList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
+  // setViewInquiryList(viewInquiryList);
+
 
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
@@ -196,6 +202,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   }, [currentSection]);
 
 
+
   const filteredMyInquiryBoardList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
 
   //                    render                      //
@@ -225,7 +232,9 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
           <div className='inquiry-my-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-my-list-table-contents'>
-          {filteredMyInquiryBoardList.map(item => <ListItem key={item.inquiryNumber} { ...item} />)}
+
+          {filteredMyInquiryBoardList.map((item, index) => <ListItem { ...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
+
         </div> 
       </div>
       <div className='inquiry-my-list-bottom'>
