@@ -93,8 +93,6 @@ export default function InquiryList() {
     setViewInquiryList(viewList);
   };
 
-  
-
   const changeSection = (totalPage: number )=> {
     if (!currentSection) return;
     const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
@@ -163,6 +161,8 @@ export default function InquiryList() {
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
 
+
+
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
@@ -178,17 +178,62 @@ export default function InquiryList() {
     setCurrentPage(page);
   };
 
+  // const onPreSectionClickHandler = () => {
+  //   if (currentSection <= 1) return;
+  //   setCurrentSection(currentSection - 1); 
+  //   setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+  // };
+
   const onPreSectionClickHandler = () => {
-    if (currentSection <= 1) return;
-    setCurrentSection(currentSection - 1); 
-    setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+    if (currentSection <= 1 && currentPage <= 1) {
+      // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
+      return;
+    }
+    if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
+      // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
+      if (currentSection > 1) {
+        setCurrentSection(currentSection - 1);
+        setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
+      }
+    } else {
+      // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
+      setCurrentPage(currentPage - 1);
+    }
   };
+  
+
+  // const onNextSectionClickHandler = () => {
+  //   if (currentSection === totalSection) return;
+  //   setCurrentSection(currentSection + 1);
+  //   setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+  // };
 
   const onNextSectionClickHandler = () => {
-    if (currentSection === totalSection) return;
-    setCurrentSection(currentSection + 1);
-    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+    if (currentSection >= totalSection && currentPage >= totalPage) {
+      // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
+      return;
+    }
+    if (currentPage === currentSection * COUNT_PER_SECTION) {
+      // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
+      setCurrentSection(currentSection + 1);
+      setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
+    } else {
+      // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
+      setCurrentPage(currentPage + 1);
+    }
   };
+
+//   const onNextSectionClickHandler = () => {
+//     const lastPageOfCurrentSection = currentSection * COUNT_PER_SECTION;
+//     if (currentPage < lastPageOfCurrentSection) {
+//         setCurrentPage(currentPage + 1);
+//     } else if (currentSection < totalSection) {
+//         setCurrentSection(currentSection + 1);
+//         setCurrentPage(lastPageOfCurrentSection + 1);
+//     }
+// };
+
+
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
@@ -260,15 +305,16 @@ export default function InquiryList() {
         <div style={{ width: '332px' }}></div>
 
         <div className='inquiry-list-pagenation'>
-          <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
             {pageList.map(page => page === currentPage ?
               <div className='inquiry-list-page-active'>{page}</div> :
               <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
+
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
             <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
