@@ -11,12 +11,13 @@ import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/
 
 //     component     //
 function ListItem ({
+  index,
   noticeNumber,
   noticeTitle,
   noticeWriteDatetime,
   viewCount,
   noticeWriterNickname            
-}: NoticeBoardListItem) {
+}: NoticeBoardListItem & { index: number }) {
 
   //        function       //
   const navigation = useNavigate();
@@ -27,7 +28,7 @@ function ListItem ({
   //   render   //
   return(
     <div className='notice-list-table-tr' onClick={onClickHandler}>
-      <div className='notice-list-table-reception-number'>{noticeNumber}</div>
+      <div className='notice-list-table-reception-number'>{index + 1}</div>
       <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
       <div className='notice-list-table-writer-nickname'>{noticeWriterNickname}</div>
       <div className='notice-list-table-write-date'>{noticeWriteDatetime}</div>
@@ -211,7 +212,7 @@ export default function NoticeList() {
           <div className='notice-list-table-view-count'>조회수</div>
         </div>
         <div className='notice-list-table-contents'>
-          {viewNoticeList.map(item => <ListItem {...item} />)}
+          {viewNoticeList.map((item, index) => <ListItem {...item}  index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.noticeNumber} />)}
         </div>
       </div>
       <div className='notice-list-bottom'>
