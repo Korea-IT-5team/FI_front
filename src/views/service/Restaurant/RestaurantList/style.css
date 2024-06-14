@@ -46,8 +46,9 @@
   
   .restaurant-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열로 설정 */
     gap: 20px;
+    justify-items: center; /* 아이템을 중앙에 배치 */
   }
   
   .restaurant-list-select-item {
@@ -79,3 +80,15 @@
     text-align: center;
   }
   
+  .load-more-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.1s ease;
+  }
