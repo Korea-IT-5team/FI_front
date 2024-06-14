@@ -139,7 +139,6 @@ export default function ReservationList() {
 
     // effect //
     useEffect(() => {
-        if (!cookies.accessToken) return;
 
         loginUserRole === "ROLE_USER" ? 
         GetUserReservationListRequest(cookies.accessToken)
