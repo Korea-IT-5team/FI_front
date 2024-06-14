@@ -13,24 +13,23 @@ function ListItem ({
     reviewNumber,
     reviewImage,
     rating,
-    reviewContents,
     reviewWriterNickname,
     reviewDate,
+    reviewRestaurantName
 }: RestaurantReviewListItem) {
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // event handler //
-    const onClickHandler = () => navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber));
+    const onClickHandler = () => navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber));
 
     // render //
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
-            <div className=''>{reviewNumber}</div>
+            <div>{reviewRestaurantName}</div>
             <img src={reviewImage} className='' />
             <div className='' style={{ textAlign: 'left' }}>{rating}</div>
-            <div className=''>{reviewContents}</div>
             <div className=''>{reviewWriterNickname}</div>
             <div className=''>{reviewDate}</div>
         </div>
@@ -51,7 +50,7 @@ export default function ReviewDetailsList() {
     const [currentSection, setCurrentSection] = useState<number>(1);
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const changePage = (reviewDetailsList: RestaurantReviewListItem[], totalLenght: number) => {
         if(!currentPage) return;
@@ -100,7 +99,7 @@ export default function ReviewDetailsList() {
         if (!result || result.code !== 'SU') 
         {
             //alert(message);
-            if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+            if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
             return;
         }
 
@@ -129,7 +128,6 @@ export default function ReviewDetailsList() {
 
     // effect //
     useEffect(() => {
-        if (!cookies.accessToken) return;
         
         GetReviewDetailsRequest(cookies.accessToken)
             .then(GetReviewDetailsResponse);
@@ -153,10 +151,9 @@ export default function ReviewDetailsList() {
             </div>
             <div className='review-list-table'>
                 <div className='review-list-table-th'>
-                    <div className=''>리뷰번호</div>
+                    <div className=''>리뷰 식당 이름</div>
                     <div className=''>이미지</div>
                     <div className=''>평점</div>
-                    <div className=''>내용</div>
                     <div className=''>작성자</div>
                     <div className=''>작성일</div>
                 </div>

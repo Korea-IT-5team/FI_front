@@ -133,13 +133,21 @@ background-image: url('../../assets/image/my-page-icon.png');
 background-size: cover;
 }
 
-.board {
+.main-side-navigation-icon.inquiry {
 width: 30px;
 height: 30px;
 
-background-image: url('../../assets/image/board-icon.png');
+background-image: url('../../assets/image/inquiry-board-icon.png');
 background-size: cover;
 }
+
+.main-side-navigation-icon.notice {
+    width: 30px;
+    height: 30px;
+    
+    background-image: url('../../assets/image/notice-board-icon.png');
+    background-size: cover;
+    }
 
 .side-navigation-title {
 font-family: 'Nanum Gothic';

@@ -22,10 +22,10 @@ function ListItem ({
 }: RestaurantReservationListItem) {
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // event handler //
-    const onClickHandler = () => navigator(RESTAURANT_INFO_ABSOLUTE_PATH(reservationRestaurantId));  
+    const onClickHandler = () => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(reservationRestaurantId));  
 
     // render //
     return (
@@ -59,7 +59,7 @@ export default function ReservationList() {
     const [currentSection, setCurrentSection] = useState<number>(1);
 
     // function //
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const changePage = (restaurantReservationList: RestaurantReservationListItem[], totalLenght: number) => {
         if(!currentPage) return;
@@ -109,7 +109,7 @@ export default function ReservationList() {
         if (!result || result.code !== 'SU') 
         {
             // alert(message);
-            if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+            if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
             return;
         }
 
@@ -139,7 +139,6 @@ export default function ReservationList() {
 
     // effect //
     useEffect(() => {
-        if (!cookies.accessToken) return;
 
         loginUserRole === "ROLE_USER" ? 
         GetUserReservationListRequest(cookies.accessToken)
@@ -176,7 +175,7 @@ export default function ReservationList() {
                     <div className=''>예약일</div>
                     <div className=''>예약시간</div>
                     <div className=''>인원수</div>
-                    <div className=''>작성자</div>
+                    <div className=''>예약자</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>

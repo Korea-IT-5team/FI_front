@@ -20,8 +20,9 @@ const[reservationPeople,setRreservationPeople] = useState<number>();
 const[isChecked,setIsChecked] = useState<boolean>(false);
 const {restaurantId} = useParams();
 const [cookies] = useCookies();
-const navigator = useNavigate();
+const navigation = useNavigate();
 const [selected, setSelected] = useState<number | null>(null);
+const [range, setRange] = useState<{ start: number, end: number }>({ start: 1, end: 12 });
 
 
 
@@ -43,7 +44,7 @@ const PostReservationResponse = (result: ResponseDto | null) =>
       }
       
       if(!restaurantId) return;
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
+      navigation(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
 }
 
 // event handler //
@@ -95,6 +96,15 @@ const onReservationClickHandler = () =>
 const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
 const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-reservation-disable'}-button`;
 
+const handleRangeChange = (direction: 'prev' | 'next') => {
+  setRange(prevRange => {
+    const newStart = direction === 'prev' ? Math.max(1, prevRange.start - 12) : Math.min(49, prevRange.start + 12); // 범위 시작 값을 1 ~ 49 사이로 유지
+    const newEnd = direction === 'prev' ? Math.max(12, prevRange.end - 12) : Math.min(60, prevRange.end + 12); // 범위 끝 값을 12 ~ 60 사이로 유지
+    return { start: newStart, end: newEnd };
+  });
+};
+
+
   return (
     <>
       
@@ -109,45 +119,34 @@ const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-res
             <div className="do-reservation-people">인원수</div>
               
             <div className="do-reservation-people-box">
-                <table className="do-reservation-table">
-                <tr>
-                {[1, 2, 3, 4].map((number) => (
-                  <td
-                    key={number}
-                    className={`do-reservation-select-item ${selected === number ? 'selected' : ''}`}
-                    onClick={() => onPeopleClickHandler(number)}
-                  >
-                    {number}명
-                  </td>
-                ))}
-              </tr>
-              <tr>
-                {[5, 6, 7, 8].map((number) => (
-                  <td
-                    key={number}
-                    className={`do-reservation-select-item ${selected === number ? 'selected' : ''}`}
-                    onClick={() => onPeopleClickHandler(number)}
-                  >
-                    {number}명
-                  </td>
-                ))}
-              </tr>
-              <tr>
-                {[9, 10, 11, 12].map((number) => (
-                  <td
-                    key={number}
-                    className={`do-reservation-select-item ${selected === number ? 'selected' : ''}`}
-                    onClick={() => onPeopleClickHandler(number)}
-                  >
-                    {number}명
-                  </td>
-                ))}
-              </tr>
-                </table>
+                <div className="people-range">
+                    <button className="do-reservation-arrow" onClick={() => handleRangeChange('prev')}>{'<'}</button>
+                    <table className="do-reservation-table">
+                        <tbody>
+                            {[...Array(3)].map((_, rowIndex) => (
+                              <tr key={rowIndex}>
+                                  {Array.from({ length: 4 }, (_, colIndex) => {
+                                      const num = rowIndex * 4 + colIndex + range.start;
+                                          return (
+                                              <td
+                                              key={num}
+                                              className={`do-reservation-select-item ${selected === num ? 'selected' : ''}`}
+                                              onClick={() => onPeopleClickHandler(num)}
+                                              >
+                                              {num}명
+                                              </td>
+                                          );
+                                  })}
+                              </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <button className="do-reservation-arrow" onClick={() => handleRangeChange('next')}>{'>'}</button>
+                  </div>
+                </div>
             </div>
-          </div>
 
-          <div className="do-reservation-checkbox">
+            <div className="do-reservation-checkbox">
               <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
               <div className="do-reservation-checkfont">인증 약관 전체 동의</div>
           </div>

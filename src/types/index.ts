@@ -14,6 +14,7 @@ export interface RestaurantReviewListItem {
   reviewContents: string;
   reviewWriterNickname: string;
   reviewDate: string;
+  reviewRestaurantName: String;
 }
 
 export interface RestaurantReservationListItem {

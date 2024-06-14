@@ -127,7 +127,7 @@ export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_R
 export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
 
 export const PATCH_RESTAURANT_INFO_UPDATE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-update`;
-
+export const DELETE_RESTAURANT_INFO_DELETE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-delete`;
 
 // description: REVIEW 모듈 내의 기능 URL
 export const SERVER_REVIEW_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/review`;
