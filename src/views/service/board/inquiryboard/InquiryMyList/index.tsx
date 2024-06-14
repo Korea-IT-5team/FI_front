@@ -147,36 +147,56 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
     navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
 };
 
-  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = event.target.value;
-    setSearchWord(searchWord);
-};
+//   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+//     const searchWord = event.target.value;
+//     setSearchWord(searchWord);
+// };
 
-  const onSearchButtonClickHandler = () => {
-    if (!searchWord) return;
+//   const onSearchButtonClickHandler = () => {
+//     if (!searchWord) return;
 
-    getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-};
+//     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+// };
 
   const onToggleClickHandler = () => {
     if (loginUserRole !== 'ROLE_USER') return;
     setToggleOn(!isToggleOn);
 };
 
-  const onPreSectionClickHandler = () => {
-    if (currentSection <= 1) return;
-    setCurrentSection(currentSection - 1); 
-    setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+const onPreSectionClickHandler = () => {
+  if (currentSection <= 1 && currentPage <= 1) {
+    // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
+    return;
+  }
+  if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
+    // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
+    if (currentSection > 1) {
+      setCurrentSection(currentSection - 1);
+      setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
+    }
+  } else {
+    // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
+    setCurrentPage(currentPage - 1);
+  }
 };
 
   const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
 };
 
-  const onNextSectionClickHandler = () => {
-    if (currentSection === totalSection) return;
+const onNextSectionClickHandler = () => {
+  if (currentSection >= totalSection && currentPage >= totalPage) {
+    // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
+    return;
+  }
+  if (currentPage === currentSection * COUNT_PER_SECTION) {
+    // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
     setCurrentSection(currentSection + 1);
-    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+    setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
+  } else {
+    // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
+    setCurrentPage(currentPage + 1);
+  }
 };
 
   //                  effect                  //
@@ -195,8 +215,6 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       if (!inquiryBoardList.length) return;
       changeSection(totalPage);
   }, [currentSection]);
-
-
 
   const filteredMyInquiryBoardList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
 
@@ -228,7 +246,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
         </div>
         <div className='inquiry-my-list-table-contents'>
 
-          {filteredMyInquiryBoardList.map((item, index) => <ListItem { ...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
+          {filteredMyInquiryBoardList.map((item, index) => <ListItem { ...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - index + 1 } key={item.inquiryNumber} />)}
 
         </div> 
       </div>
