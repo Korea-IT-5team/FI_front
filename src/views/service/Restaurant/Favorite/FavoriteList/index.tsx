@@ -25,11 +25,13 @@ function ListItem ({
 
     // render //
     return (
-        <div className='favorite-list-table-tr' onClick={onClickHandler}>
-            <img src={restaurantImage} className='favorite-list-table-restaurant-image' />
-            <div className=''>{restaurantName}</div>
-            <div className=''>{restaurantFoodCategory}</div>
-            <div className=''>{restaurantLocation}</div>
+        <div className='favorite-list-card' onClick={onClickHandler}> {/* 수정됨: 클래스 네임 변경 */}
+            <img src={restaurantImage} className='favorite-list-card-image' />
+            <div className='favorite-list-card-content'>
+                <div className='favorite-list-card-name'>{restaurantName}</div>
+                <div className='favorite-list-card-category'>{restaurantFoodCategory}</div>
+                <div className='favorite-list-card-location'>{restaurantLocation}</div>
+            </div>
         </div>
     );
 }
@@ -77,15 +79,15 @@ export default function FavoriteList() {
         }
         setRestaurantList(restaurantList);
 
-        const totalLenght = restaurantList.length;
+        const totalLength = restaurantList.length; // 수정됨: 변수명 변경
         setTotalLength(totalLength);
 
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
+        const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1; // 수정됨: 변수명 변경
         setTotalPage(totalPage);
 
         const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
         setTotalSection(totalSection);
-        changePage(restaurantList, totalLenght);
+        changePage(restaurantList, totalLength);
         changeSection(totalPage);
     };
 
@@ -148,13 +150,7 @@ export default function FavoriteList() {
             <div className='favorite-list-top-box'>
                 <div className='favorite-list-size-text'>전체<span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
-            <div className='favorite-list-table'>
-                <div className='favorite-list-table-top'>
-                    <div className='favorite-list-table-image'>식당 사진</div>
-                    <div className='favorite-list-table-name'>식당 이름</div>
-                    <div className='favorite-list-table-category'>음식종류</div>
-                    <div className='favorite-list-table-location'>식당위치</div>
-                </div>
+            <div className='favorite-list-grid'>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>
             <div className='favorite-list-bottom'>
