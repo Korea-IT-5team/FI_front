@@ -235,7 +235,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       <div className='inquiry-my-list-bottom'>
         <div style={{ width: '332px'}}></div>
         <div className='inquiry-my-list-pageNation'>
-            <div className='inquiry-my-list-page-left' onClick={onPreSectionClickHandler}></div>
+            <div className='page-left' onClick={onPreSectionClickHandler}></div>
             <div className='inquiry-my-list-page-box'>
                 {pageList.map(page => 
                 page === currentPage ? 
@@ -243,7 +243,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
                 <div className='inquiry-my-list-page' onClick={() =>onPageClickHandler(page)}>{page}</div>
                 )}
             </div>
-            <div className='inquiry-my-list-page-right' onClick={onNextSectionClickHandler}></div>
+            <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         {/* <div className='inquiry-my-list-search-box'>
             <div className='inquiry-my-list-search-input-box'>
