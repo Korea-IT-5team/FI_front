@@ -179,4 +179,4 @@ export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SER
 export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/update/${noticeNumber}`;
 
 export const COUNT_PER_PAGE = 10;
-export const COUNT_PER_SECTION = 10;
+export const COUNT_PER_SECTION = 1;
