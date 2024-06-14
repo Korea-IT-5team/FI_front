@@ -15,8 +15,7 @@ function ListItem ({
   inquiryNumber,
   status,
   inquiryTitle,
-  inquiryWriteDatetime,
-  inquiryWriterId
+  inquiryWriteDatetime
 }: InquiryBoardListItem & { index: number }) {
 
   //        function       //
@@ -122,19 +121,17 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const message = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '검색어를 입력하세요.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
   
   if (!result || result.code !== 'SU') {
-      alert(message);
-      return;
+    alert(message);
+    if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
+    return;
   }
 
   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
   changeInquiryBoardList(inquiryBoardList);
-
-  // 검색이 안 먹음
-  // const viewInquiryList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
-  // setViewInquiryList(viewInquiryList);
 
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
@@ -240,12 +237,12 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
             </div>
             <div className='inquiry-my-list-page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        <div className='inquiry-my-list-search-box'>
+        {/* <div className='inquiry-my-list-search-box'>
             <div className='inquiry-my-list-search-input-box'>
                 <input className='inquiry-my-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
             </div>
             <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-          </div>
+        </div> */}
         </div>
       </div>
       )
