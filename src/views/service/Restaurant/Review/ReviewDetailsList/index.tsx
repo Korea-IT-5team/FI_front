@@ -128,7 +128,6 @@ export default function ReviewDetailsList() {
 
     // effect //
     useEffect(() => {
-        if (!cookies.accessToken) return;
         
         GetReviewDetailsRequest(cookies.accessToken)
             .then(GetReviewDetailsResponse);

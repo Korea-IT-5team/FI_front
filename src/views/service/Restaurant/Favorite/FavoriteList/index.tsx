@@ -135,7 +135,6 @@ export default function FavoriteList() {
 
     // effect //
     useEffect(() => {
-        if (!cookies.accessToken) return;
 
         GetFavoriteRestaurantListRequest(cookies.accessToken)
             .then(GetFavoriteRestaurantListResponse);
