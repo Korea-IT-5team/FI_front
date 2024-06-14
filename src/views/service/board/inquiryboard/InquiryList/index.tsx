@@ -12,7 +12,7 @@ import { InquiryBoardListItem } from 'src/types';
         
 //     component     //
 function ListItem ({
-  inquiryNumber,
+  inquiryNumber,  
   status,
   inquiryPublic,
   inquiryTitle,
@@ -258,10 +258,9 @@ export default function InquiryList() {
         <div className='inquiry-list-pagenation'>
           <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
-            {pageList.map(page =>
-              page === currentPage ?
-                <div className='inquiry-list-page-active'>{page}</div> :
-                <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            {pageList.map(page => page === currentPage ?
+              <div className='inquiry-list-page-active'>{page}</div> :
+              <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
           <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>

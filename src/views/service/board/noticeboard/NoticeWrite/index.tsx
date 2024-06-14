@@ -73,10 +73,10 @@ export default function NoticeWrite() {
     <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>
         <div className='notice-write-title-box'>
-          <input className='notice-write-title-input' placeholder='공지를 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
+          <input className='notice-write-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
         <div className='notice-write-contents-box'>
-          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요.' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
           <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
         </div>
       </div>
