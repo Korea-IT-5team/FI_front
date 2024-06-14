@@ -23,7 +23,26 @@ export default function SelectBox({ value, onChange }: Prop) {
         { name: '치킨' , value: '치킨' },
         { name: '한식' , value: '한식' },
         { name: '마라탕' , value: '마라탕' },
-        { name: '중식' , value: '중식' }
+        { name: '중식' , value: '중식' },
+        { name: '분식' , value: '분식' },
+        { name: '냉면' , value: '냉면' },
+        { name: '밀면' , value: '밀면' },
+        { name: '샌드위치' , value: '샌드위치' },
+        { name: '타코' , value: '타코' },
+        { name: '쌀국수' , value: '쌀국수' },
+        { name: '케밥' , value: '케밥' },
+        { name: '샤브샤브' , value: '샤브샤브' },
+        { name: '빙수' , value: '빙수' },
+        { name: '피쉬앤칩스' , value: '피쉬앤칩스' },
+        { name: '칼국수' , value: '칼국수' },
+        { name: '타파스' , value: '타파스' },
+        { name: '타이푸드' , value: '타이푸드' },
+        { name: '파에야' , value: '파에야' },
+        { name: '카레' , value: '카레' },
+        { name: '베트남음식' , value: '베트남음식' },
+        { name: '그리스음식' , value: '그리스음식' },
+        { name: '순두부찌개' , value: '순두부찌개' },
+        { name: '불고기' , value: '불고기' },
     ];
 
     // state //
