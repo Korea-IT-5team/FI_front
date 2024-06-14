@@ -51,7 +51,7 @@ export default function RestaurantInfoWrite()
     const onUploadClickHandler = () => {
 
         if (!restaurantImage || !restaurantName || !restaurantFoodCategory
-            || !restaurantPostalCode || !restaurantLocation ) {
+            || !restaurantPostalCode || !restaurantLocation || !restaurantTelNumber) {
             return;
         }
 
@@ -136,7 +136,7 @@ export default function RestaurantInfoWrite()
         setRestaurantRepresentativeMenu(value);
     }
    
-    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPostalCode && restaurantLocation ;
+    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPostalCode && restaurantLocation && restaurantTelNumber;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`; 
 
     // render //

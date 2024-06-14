@@ -325,10 +325,10 @@ export default function RestaurantInfo() {
                 <div>우편번호 :{restaurantPostalCode}</div>
                 <div>전화번호 : {restaurantTelNumber}</div>
 
-                <div>운영시간 : {restaurantOperationHours}</div>
-                <div>특징 : {restaurantFeatures}</div>
-                <div>공지사항 : {restaurantNotice}</div>
-                <div>대표메뉴 : {restaurantRepresentativeMenu}</div>
+                {restaurantOperationHours && <div>운영시간 : {restaurantOperationHours}</div>}
+                {restaurantFeatures && <div>특징 : {restaurantFeatures}</div>}
+                {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
+                {restaurantRepresentativeMenu && <div>대표메뉴 : {restaurantRepresentativeMenu}</div>}
                 <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
             </div>
         </>
