@@ -195,7 +195,8 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       changeSection(totalPage);
   }, [currentSection]);
 
-  const filteredMyInquiryBoadList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
+
+  const filteredMyInquiryBoardList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
 
   //                    render                      //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
@@ -224,7 +225,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
           <div className='inquiry-my-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-my-list-table-contents'>
-          {filteredMyInquiryBoadList.map(item => <ListItem key={item.inquiryNumber} { ...item} />)}
+          {filteredMyInquiryBoardList.map(item => <ListItem key={item.inquiryNumber} { ...item} />)}
         </div> 
       </div>
       <div className='inquiry-my-list-bottom'>
