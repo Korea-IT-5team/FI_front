@@ -93,6 +93,8 @@ export default function InquiryList() {
     setViewInquiryList(viewList);
   };
 
+  
+
   const changeSection = (totalPage: number )=> {
     if (!currentSection) return;
     const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
@@ -256,8 +258,11 @@ export default function InquiryList() {
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px' }}></div>
-        <div className='inquiry-list-pagenation'> 
-          <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
+
+        <div className='inquiry-list-pagenation'>
+          <div className='page-left' onClick={onPreSectionClickHandler}></div>
+
+
           <div className='inquiry-list-page-box'>
             {pageList.map(page =>
               page === currentPage ?
@@ -265,7 +270,7 @@ export default function InquiryList() {
                 <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
