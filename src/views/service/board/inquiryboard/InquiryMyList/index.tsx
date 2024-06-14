@@ -2,7 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
+
 import { getInquiryBoardListRequest, getMySearchInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+
 import { GetInquiryBoardListResponseDto, GetMyInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
@@ -17,7 +19,9 @@ function ListItem ({
   inquiryTitle,
   inquiryWriteDatetime,
   inquiryWriterId
+
 }: InquiryBoardListItem & { index: number }) {
+
 
   //        function       //
   const navigation = useNavigate();
@@ -132,9 +136,11 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
   changeInquiryBoardList(inquiryBoardList);
 
+
   // 검색이 안 먹음
   // const viewInquiryList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
   // setViewInquiryList(viewInquiryList);
+
 
   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
@@ -195,6 +201,8 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
       changeSection(totalPage);
   }, [currentSection]);
 
+
+
   const filteredMyInquiryBoardList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId);
 
   //                    render                      //
@@ -224,7 +232,9 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
           <div className='inquiry-my-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-my-list-table-contents'>
+
           {filteredMyInquiryBoardList.map((item, index) => <ListItem { ...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
+
         </div> 
       </div>
       <div className='inquiry-my-list-bottom'>
