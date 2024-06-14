@@ -264,10 +264,9 @@ export default function InquiryList() {
 
 
           <div className='inquiry-list-page-box'>
-            {pageList.map(page =>
-              page === currentPage ?
-                <div className='inquiry-list-page-active'>{page}</div> :
-                <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            {pageList.map(page => page === currentPage ?
+              <div className='inquiry-list-page-active'>{page}</div> :
+              <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
           <div className='page-right' onClick={onNextSectionClickHandler}></div>
