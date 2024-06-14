@@ -17,7 +17,6 @@ export default function ReviewList({ value,restaurantId }: Props) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 1; // 한 번에 표시할 리뷰의 수
 
-
     // function //
     const navigation = useNavigate();
 
@@ -31,7 +30,6 @@ export default function ReviewList({ value,restaurantId }: Props) {
         setCurrentPage(prevPage => prevPage + 1);
     }
 
-    // 현재 페이지에 해당하는 리뷰들을 계산
     const currentItems = value.slice(0, currentPage * itemsPerPage);
 
     // render //
@@ -41,13 +39,11 @@ export default function ReviewList({ value,restaurantId }: Props) {
             <div className='review-select-list'>
                 {currentItems.map((item) => (
                     <div className='review-select-list-item-box' key={item.reviewNumber}>
-                        <div>
-                            <img src={item.reviewImage} className='review-select-item' />
-                            <div className='review-select-item'>평점: {item.rating}</div>
-                            <div className='review-select-item'>내용: {item.reviewContents}</div>
-                            <div className='review-select-item'>작성자: {item.reviewWriterNickname}</div>
-                            <div className='review-select-item'>작성일: {item.reviewDate}</div>
-                        </div>
+                        <img src={item.reviewImage} className='review-select-item' />
+                        <div className='review-select-item'>평점: {item.rating}</div>
+                        <div className='review-select-item'>내용: {item.reviewContents}</div>
+                        <div className='review-select-item'>작성자: {item.reviewWriterNickname}</div>
+                        <div className='review-select-item'>작성일: {item.reviewDate}</div>
                     </div>
                 ))}
             </div>

@@ -27,11 +27,10 @@ function ListItem ({
     // render //
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
-            <div>{reviewRestaurantName}</div>
-            <img src={reviewImage} className='' />
-            <div className='' style={{ textAlign: 'left' }}>{rating}</div>
-            <div className=''>{reviewWriterNickname}</div>
-            <div className=''>{reviewDate}</div>
+            <div className='review-list-table-restaurant-name'>{reviewRestaurantName}</div>
+            <div className='review-list-table-rating' style={{ textAlign: 'left' }}>{rating}</div>
+            <div className='review-list-table-writer-nickname'>{reviewWriterNickname}</div>
+            <div className='review-list-table-write-date'>{reviewDate}</div>
         </div>
     );
 }
@@ -86,19 +85,15 @@ export default function ReviewDetailsList() {
         setTotalSection(totalSection);
 
         changePage(reviewDetailsList, totalLenght);
-
         changeSection(totalPage);
     };
 
     const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
                 result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
-        if (!result || result.code !== 'SU') 
-        {
-            //alert(message);
+        if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
             return;
         }
@@ -128,7 +123,6 @@ export default function ReviewDetailsList() {
 
     // effect //
     useEffect(() => {
-        
         GetReviewDetailsRequest(cookies.accessToken)
             .then(GetReviewDetailsResponse);
     },[]);
@@ -146,21 +140,20 @@ export default function ReviewDetailsList() {
     // render //
     return (
         <div id='review-list-wrapper'>
-            <div className='review-list-top'>
-                <div className='review-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+            <div className='review-list-top'>나의 리뷰 내역</div>
+            <div className='review-list-top-box'>
+                <div className='review-list-size-text'>전체<span className='emphasis'> {totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
             <div className='review-list-table'>
-                <div className='review-list-table-th'>
-                    <div className=''>리뷰 식당 이름</div>
-                    <div className=''>이미지</div>
-                    <div className=''>평점</div>
-                    <div className=''>작성자</div>
-                    <div className=''>작성일</div>
+                <div className='review-list-table-top'>
+                    <div className='review-list-table-restaurant-name'>식당 이름</div>
+                    <div className='review-list-table-rating'>평점</div>
+                    <div className='review-list-table-writer-nickname'>작성자</div>
+                    <div className='review-list-table-write-date'>작성일</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>
             <div className='review-list-bottom'>
-                <div style={{ width: '299px' }}></div>
                 <div className='review-list-pagenation'>
                     <div className='review-list-page-left' onClick={onPreSectionClickHandler}></div>
                     <div className='review-list-page-box'>
