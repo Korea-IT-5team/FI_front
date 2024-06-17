@@ -59,7 +59,7 @@ export default function MyPageSite() {
   return (
     <div id='my-page-wrapper'>
       <div className='my-page-container'>
-        <div className='my-page-title'>회원 정보</div>
+        <div className='my-page-title'>마이 페이지</div>
         <div className='my-page-box'>
           <div className='my-page-info-box'>
             <div className='my-page-info'>{nickname}</div>
