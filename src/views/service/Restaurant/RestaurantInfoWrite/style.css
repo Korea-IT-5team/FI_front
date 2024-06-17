@@ -1,9 +1,31 @@
+#restaurant-info-write-update {
+    height: 100vh;
 
+    overflow: hidden;
+}
+
+.restaurant-info-write-title {
+    width: 1300px;
+
+    text-align: center;
+
+    margin: 20px 0px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 100%;
+}
+
+.restaurant-info-write-box {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
 .restaurant-info-write-selectbox{
     width: 100%;
 }
-
 
 .restaurant-info-primary-button {
     box-sizing: border-box;
@@ -56,22 +78,4 @@
 .restaurant-info-registered-button-box{
     margin-left: 43%;
     margin-bottom: 5%;
-}
-
-.restaurant-info-write-box{
-    border: 1px solid rgba(200, 200, 200, 1);
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 2%;
-    margin-bottom: 5%;
-}
-
-.restaurant-info-write-title{
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: 20px;
-    font-family: 'Nanum Gothic';
-
-    color: rgba(64, 64, 64, 1);
 }

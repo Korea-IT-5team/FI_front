@@ -66,7 +66,7 @@ export default function FavoriteList() {
             </div>
             <div className='favorite-list-grid'>
                 {restaurantList.slice(0, displayCount).map(item => (
-                    <div className='favorite-list-card' onClick={() => onClickHandler(item.restaurantId)}> {/* 수정됨: 클래스 네임 변경 */}
+                    <div className='favorite-list-card' onClick={() => onClickHandler(item.restaurantId)}>
                         <img src={item.restaurantImage} className='favorite-list-card-image' />
                         <div className='favorite-list-card-content'>
                         <div className='favorite-list-card-name'>{item.restaurantName}</div>
