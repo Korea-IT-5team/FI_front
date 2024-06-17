@@ -1,4 +1,4 @@
-/* .my-page-container {
+.my-page-container {
   display: flex;
   flex-direction: column;
 
@@ -70,4 +70,4 @@
 .my-page-update:hover {
   cursor: pointer;
   opacity: 0.85;
-} */
+}
