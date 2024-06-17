@@ -59,24 +59,42 @@ export default function MyPageSite() {
   return (
     <div id='my-page-wrapper'>
       <div className='my-page-container'>
-        <div className='my-page-title'>마이 페이지</div>
+        <div className='my-page-top'>
+          <div className='my-page-top-title'>마이페이지</div>
+          <div className='short-divider-line'></div>
+        </div>
+        <div className='my-page-title-box'>
+          <div className='my-page-title' onClick={() => navigation(MY_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
+          <div className='my-page-title' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
+          <div className='my-page-title' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+        </div>
         <div className='my-page-box'>
-          <div className='my-page-info-box'>
-            <div className='my-page-info'>{nickname}</div>
-            <div className='my-page-info'>{userEmailId}</div>
-            <div className='my-page-info'>{userName}</div>
-            <div className='my-page-info'>{userTelNumber}</div>
-            <div className='my-page-info'>{userAddress}</div>
-          </div>
           <div className='my-page-nav-box'>
-            <div className='my-page-nav' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
             <div className='my-page-nav' onClick={() => navigation(RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH)}>찜한 식당 목록</div>
             <div className='my-page-nav' onClick={() => navigation(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH)}>예약 내역</div>
             <div className='my-page-nav' onClick={() => navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH)}>리뷰 내역</div>
             <div className='my-page-nav' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의내역</div>
           </div>
         </div>
-        <div className='my-page-resign' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+        <div className='short-divider-line'></div>
+        <div className='my-page-info-container'>
+          <div className='my-page-info-box'> 회원정보
+            <div className='my-page-info-first'>
+              <div className='my-page-info-second'>
+                <div className='my-page-info'>아이디</div>
+                <div className='my-page-info'>{userEmailId}</div>
+                <div className='my-page-info'>닉네임</div>
+                <div className='my-page-info'>{nickname}</div>
+              </div>
+              <div className='my-page-info-second'>
+                <div className='my-page-info'>이름</div>
+                <div className='my-page-info'>{userName}</div>
+                <div className='my-page-info'>전화번호</div>
+                <div className='my-page-info'>{userTelNumber}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

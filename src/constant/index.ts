@@ -133,6 +133,7 @@ export const SERVER_RESTAURANT_MODULE_URL = `${SERVER_API_URL}/restaurant`;
 export const GET_SEARCH_RESTAURANT_LIST_URL = `${SERVER_RESTAURANT_MODULE_URL}/search`;
 export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}`;
 export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
+export const GET_RESTAURANT_ID_URL = `${SERVER_RESTAURANT_MODULE_URL}/restaurantid`;
 
 export const PATCH_RESTAURANT_INFO_UPDATE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-update`;
 export const DELETE_RESTAURANT_INFO_DELETE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-delete`;

@@ -185,6 +185,21 @@ export default function NoticeList() {
     if (!searchWord) return;
 
     getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
+
+    setSearchWord('');
+  };
+
+  const onEnterKeyHandler = (event: { key: string; preventDefault: () => void; }) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+  
+      if (searchWord) {
+        getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
+          .then(getSearchNoticeBoardListResponse);
+
+          setSearchWord('');
+      }
+    }
   };
 
   //                  effect                  //
@@ -250,7 +265,8 @@ export default function NoticeList() {
         </div>
         <div className='notice-list-search-box'>
           <div className='notice-list-search-input-box'>
-            <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+            <input className='notice-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} 
+            onKeyDown={onEnterKeyHandler} />
           </div>
           <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>
