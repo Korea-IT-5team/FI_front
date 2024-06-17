@@ -161,7 +161,7 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
 };
 
   const onToggleClickHandler = () => {
-    if (loginUserRole !== 'ROLE_USER') return;
+    if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
     setToggleOn(!isToggleOn);
 };
 
