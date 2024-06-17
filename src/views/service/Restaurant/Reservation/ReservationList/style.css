@@ -1,5 +1,5 @@
 #reservation-list-wrapper {
-    width: 1000px;
+    width: 1200px;
     min-width: 700px;
 
     display: flex;
@@ -86,7 +86,7 @@
 }
 
 .reservation-list-table-reservation-restaurant-name {
-    width: 70px;
+    width: 100px;
 }
 
 .reservation-list-table-reservation-date {
@@ -103,6 +103,10 @@
 
 .reservation-list-table-reservation-user-name {
     width: 50px;
+}
+
+.reservation-list-table-reservation-restaurant-location {
+    width: 100px;
 }
 
 .reservation-list-bottom {
@@ -132,7 +136,7 @@
     width: 40px;
     height: 40px;
 
-    background-image: url('../../../../../assets/image/page-left.png');
+    background-image: url('../../../../../assets/image/page-right.png');
     background-size: 100% 100%;
 
     cursor: pointer;

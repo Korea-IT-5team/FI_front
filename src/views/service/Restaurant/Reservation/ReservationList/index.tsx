@@ -19,6 +19,7 @@ function ListItem ({
     reservationTime,
     reservationPeople,
     reservationUserName,
+    reservationRestaurantLocation,
 }: RestaurantReservationListItem) {
 
     // function //
@@ -33,6 +34,7 @@ function ListItem ({
             <div className='reservation-list-table-reservation-number'>{reservationNumber}</div>
             <div className='reservation-list-table-reservation-status'>{reservationStatus}</div>
             <div className='reservation-list-table-reservation-restaurant-name'>{reservationRestaurantName}</div>
+            <div className='reservation-list-table-reservation-restaurant-location'>{reservationRestaurantLocation}</div> 
             <div className='reservation-list-table-reservation-date'>{reservationDate}</div>
             <div className='reservation-list-table-reservation-time'>{reservationTime}</div>
             <div className='reservation-list-table-reservation-people'>{reservationPeople}</div>
@@ -162,6 +164,7 @@ export default function ReservationList() {
                     <div className='reservation-list-table-reservation-number'>예약 번호</div>
                     <div className='reservation-list-table-reservation-status'>예약 상태</div>
                     <div className='reservation-list-table-reservation-restaurant-name'>식당 이름</div>
+                    <div className='reservation-list-table-reservation-restaurant-location'>식당 위치</div> 
                     <div className='reservation-list-table-reservation-date'>예약일</div>
                     <div className='reservation-list-table-reservation-time'>예약시간</div>
                     <div className='reservation-list-table-reservation-people'>인원</div>

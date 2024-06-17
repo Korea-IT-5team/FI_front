@@ -37,6 +37,11 @@
     transition: transform 0.3s;
 }
 
+
+.favorite-list-card :hover{
+    cursor: pointer;
+}
+
 .favorite-list-card:hover {
     transform: scale(1.05);
 }
@@ -61,58 +66,11 @@
     margin-bottom: 5px;
 }
 
-.favorite-list-card-category,
+
 .favorite-list-card-location {
     font-size: 14px;
     color: rgba(100, 100, 100, 1);
     margin-bottom: 5px;
 }
 
-.favorite-list-bottom {
-    display: flex;
-    justify-content: space-between;
-}
 
-.favorite-list-pagenation {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.favorite-list-page-left {
-    width: 40px;
-    height: 40px;
-    background-image: url('../../../../../assets/image/page-left.png');
-    background-size: 100% 100%;
-    cursor: pointer;
-}
-
-.favorite-list-page-right {
-    width: 40px;
-    height: 40px;
-    background-image: url('../../../../../assets/image/page-right.png');
-    background-size: 100% 100%;
-    cursor: pointer;
-}
-
-.favorite-list-page-box {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-
-.favorite-list-page {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: rgba(138, 146, 166, 1);
-    cursor: pointer;
-}
-
-.favorite-list-page-active {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    color: rgba(64, 64, 64, 1);
-    cursor: default;
-}
