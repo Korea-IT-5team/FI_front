@@ -42,7 +42,7 @@ export default function CeoPageSite() {
 
     if (!cookies.accessToken) return;
 
-    const {userEmailId, nickname, userName, userTelNumber, userAddress, businessRegistrationNumber} = result as GetMyInfoResponseDto;
+    const {userEmailId, userName, businessRegistrationNumber} = result as GetMyInfoResponseDto;
     setEmailId(userEmailId);
     setUserName(userName);
     setUserRole(userRole);
