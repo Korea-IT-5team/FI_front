@@ -12,7 +12,6 @@ export interface GetRestaurantInfoResponseDto extends ResponseDto {
   restaurantImage: string;
   restaurantName: string;
   restaurantFoodCategory: string;
-  restaurantPostalCode: string;
   restaurantLocation: string;
   restaurantTelNumber: string;
   restaurantSnsAddress: string;

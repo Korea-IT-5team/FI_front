@@ -13,9 +13,14 @@ import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
+import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 
 // component : 특정 식당 정보 //
 export default function RestaurantInfo() {
+    useKakaoLoader({
+        appkey: "1121641ff4fa6668d61874ed79c1709e",
+        libraries: ["clusterer", "drawing", "services"],
+      })
 
     // state //
     const { loginUserEmailId, loginUserRole } = useUserStore();
@@ -24,7 +29,6 @@ export default function RestaurantInfo() {
     const [restaurantImage, setRestaurantImage] = useState('');
     const [restaurantName, setRestaurantName] = useState('');
     const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
-    const [restaurantPostalCode, setRestaurantPostalCode] = useState('');
     const [restaurantLocation, setRestaurantLocation] = useState('');
     const [restaurantTelNumber, setRestaurantTelNumber] = useState('');
     const [restaurantSnsAddress, setRestaurantSnsAddress] = useState('');
@@ -55,7 +59,7 @@ export default function RestaurantInfo() {
         }
 
         const { restaurantImage, restaurantName, restaurantFoodCategory,
-            restaurantPostalCode, restaurantLocation, restaurantTelNumber,
+            restaurantLocation, restaurantTelNumber,
             restaurantSnsAddress, restaurantOperationHours, restaurantFeatures,
             restaurantNotice, restaurantRepresentativeMenu, restaurantBusinessRegistrationNumber,
             restaurantWriterId, restaurantReviewList
@@ -63,7 +67,6 @@ export default function RestaurantInfo() {
         setRestaurantImage(restaurantImage);
         setRestaurantName(restaurantName);
         setRestaurantFoodCategory(restaurantFoodCategory);
-        setRestaurantPostalCode(restaurantPostalCode);
         setRestaurantLocation(restaurantLocation);
         setRestaurantTelNumber(restaurantTelNumber);
         setRestaurantSnsAddress(restaurantSnsAddress);
@@ -323,6 +326,20 @@ export default function RestaurantInfo() {
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon location'></div>
                     <div className='restaurant-information'>위치 : {restaurantLocation}</div>
+                    <Map // 지도를 표시할 Container
+                        id="map"
+                        center={{
+                            // 지도의 중심좌표
+                            lat: 33.450701,
+                            lng: 126.570667,
+                        }}
+                        style={{
+                            // 지도의 크기
+                            width: "100%",
+                            height: "350px",
+                        }}
+                        level={3} // 지도의 확대 레벨
+                        />
                 </div>
 
                 <div className='restaurant-info-icon-box'>
@@ -355,7 +372,6 @@ export default function RestaurantInfo() {
                     {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
                 </div>
                 
-
                 <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
             </div>
         </>
