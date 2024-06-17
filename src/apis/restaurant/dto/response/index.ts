@@ -24,3 +24,8 @@ export interface GetRestaurantInfoResponseDto extends ResponseDto {
   restaurantWriterId: string;
   restaurantReviewList: RestaurantReviewListItem[];
 }
+
+// description: 사장 식당 아이디 Response Body DTO
+export interface GetRestaurantIdResponseDto extends ResponseDto {
+  restaurantId: number;
+}
