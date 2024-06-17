@@ -123,7 +123,7 @@ export default function NoticeUpdate() {
           <input className='notice-update-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
         <div className='notice-update-contents-box'>
-          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요.' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
           <div className='primary-button' onClick={onNoticeUpdateButtonClickHandler}>수정</div>
         </div>
       </div>

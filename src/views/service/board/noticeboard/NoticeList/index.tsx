@@ -11,12 +11,13 @@ import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/
 
 //     component     //
 function ListItem ({
+  index,
   noticeNumber,
   noticeTitle,
   noticeWriteDatetime,
   viewCount,
   noticeWriterNickname            
-}: NoticeBoardListItem) {
+}: NoticeBoardListItem & { index: number }) {
 
   //        function       //
   const navigation = useNavigate();
@@ -27,7 +28,7 @@ function ListItem ({
   //   render   //
   return(
     <div className='notice-list-table-tr' onClick={onClickHandler}>
-      <div className='notice-list-table-reception-number'>{noticeNumber}</div>
+      <div className='notice-list-table-reception-number'>{index + 1}</div>
       <div className='notice-list-table-title' style={{ textAlign: 'left' }}>{noticeTitle}</div>
       <div className='notice-list-table-writer-nickname'>{noticeWriterNickname}</div>
       <div className='notice-list-table-write-date'>{noticeWriteDatetime}</div>
@@ -144,15 +145,35 @@ export default function NoticeList() {
   };
 
   const onPreSectionClickHandler = () => {
-    if (currentSection <= 1) return;
-    setCurrentSection(currentSection - 1);
-    setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+    if (currentSection <= 1 && currentPage <= 1) {
+      // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
+      return;
+    }
+    if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
+      // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
+      if (currentSection > 1) {
+        setCurrentSection(currentSection - 1);
+        setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
+      }
+    } else {
+      // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const onNextSectionClickHandler = () => {
-    if (currentSection === totalSection) return;
-    setCurrentSection(currentSection + 1);
-    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+    if (currentSection >= totalSection && currentPage >= totalPage) {
+      // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
+      return;
+    }
+    if (currentPage === currentSection * COUNT_PER_SECTION) {
+      // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
+      setCurrentSection(currentSection + 1);
+      setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
+    } else {
+      // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -211,13 +232,13 @@ export default function NoticeList() {
           <div className='notice-list-table-view-count'>조회수</div>
         </div>
         <div className='notice-list-table-contents'>
-          {viewNoticeList.map(item => <ListItem {...item} />)}
+          {viewNoticeList.map((item, index) => <ListItem {...item}  index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.noticeNumber} />)}
         </div>
       </div>
       <div className='notice-list-bottom'>
         <div style={{ width: '332px' }}></div>
         <div className='notice-list-pagenation'>
-          <div className='notice-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='notice-list-page-box'>
             {pageList.map(page =>
               page === currentPage ?
@@ -225,7 +246,7 @@ export default function NoticeList() {
                 <div className='notice-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='notice-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
         <div className='notice-list-search-box'>
           <div className='notice-list-search-input-box'>

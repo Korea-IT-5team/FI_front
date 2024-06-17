@@ -32,8 +32,12 @@ export const RESTAURANT_FAVORITE_LIST_PATH = 'favoriteList';
 export const MY_PAGE_PATH = '/my-page';
 export const MY_PAGE_SITE_PATH = 'site';
 export const USER_INFO_UPDATE_PATH = 'user-info-update/:userEmailId';
-export const USER_DELETE_PATH = 'info-delete/:userEmailId';
-export const USER_DELETE_FINALLY_PATH = 'user-delete-finally';
+export const USER_DELETE_PATH = 'user-delete/:userEmailId';
+
+export const CEO_PAGE_PATH = '/ceo-page';
+export const CEO_PAGE_SITE_PATH = 'site';
+export const CEO_INFO_UPDATE_PATH = 'ceo-info-update/:userEmailId';
+export const CEO_DELETE_PATH = 'ceo-delete/:userEmailId';
 
 export const BOARD_PATH = '/board';
 export const NOTICE_PATH = 'notice';
@@ -78,8 +82,12 @@ export const RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH = `${RESTAURANT_PATH}/${FAVO
 export const MY_PAGE_ABSOLUTE_PATH = MY_PAGE_PATH;
 export const MY_PAGE_SITE_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${MY_PAGE_SITE_PATH}`;
 export const USER_INFO_UPDATE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/user-info-update/${userEmailId}`;
-export const USER_DELETE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/info-delete/${userEmailId}`;
-export const USER_DELETE_FINALLY_ABSOLUTE_PATH = `${MY_PAGE_PATH}/${USER_DELETE_PATH}/${USER_DELETE_FINALLY_PATH}`;
+export const USER_DELETE_ABSOLUTE_PATH = (userEmailId: string) => `${MY_PAGE_PATH}/user-delete/${userEmailId}`;
+
+export const CEO_PAGE_ABSOLUTE_PATH = CEO_PAGE_PATH;
+export const CEO_PAGE_SITE_ABSOLUTE_PATH = `${CEO_PAGE_PATH}/${CEO_PAGE_SITE_PATH}`;
+export const CEO_INFO_UPDATE_ABSOLUTE_PATH = (userEmailId: string) => `${CEO_PAGE_PATH}/ceo-info-update/${userEmailId}`;
+export const CEO_DELETE_ABSOLUTE_PATH = (userEmailId: string) => `${CEO_PAGE_PATH}/ceo-delete/${userEmailId}`;
 
 export const BOARD_ABSOLUTE_PATH = BOARD_PATH;
 
@@ -127,7 +135,7 @@ export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_R
 export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
 
 export const PATCH_RESTAURANT_INFO_UPDATE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-update`;
-
+export const DELETE_RESTAURANT_INFO_DELETE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-delete`;
 
 // description: REVIEW 모듈 내의 기능 URL
 export const SERVER_REVIEW_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/review`;
@@ -178,5 +186,5 @@ export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | stri
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
 export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/update/${noticeNumber}`;
 
-export const COUNT_PER_PAGE = 10;
-export const COUNT_PER_SECTION = 10;
+export const COUNT_PER_PAGE = 4;
+export const COUNT_PER_SECTION = 4;

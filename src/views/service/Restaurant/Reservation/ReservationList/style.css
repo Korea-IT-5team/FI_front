@@ -1,17 +1,23 @@
 #reservation-list-wrapper {
-    margin: 0 auto;
-    max-width: 1136px;
+    width: 1200px;
+    min-width: 700px;
+
     display: flex;
     flex-direction: column;
-    gap: 16px;
+
+    padding: 20px;
+    gap: 17px;
 }
 
 .reservation-list-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
+    text-align: center;
 
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+}
 
 .reservation-list-size-text {
     font-size: 16px;
@@ -20,87 +26,113 @@
     color: rgba(138, 146, 166, 1);
 }
 
-
-.reservation-list-size-text .emphasis {
-    color: rgba(64, 64, 64, 1);
-}
-
-
-.reservation-list-top-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.reservation-list-top-admin-text {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(64, 64, 64, 1);
-}
-
 .reservation-list-table {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
 
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 1);
-}
-
-
-.reservation-list-table-th {
-    display: flex;
-    align-items: center;
-    gap: 95px;
-    padding: 15px 24px;
-
-    font-size: 16px;
-    font-weight: 700;
     text-align: center;
-
-    color:rgba(64, 64, 64, 1);
+    font-family: 'Nanum Gothic';
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(50, 50, 50, 1);
 }
 
+.reservation-list-table-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
+    padding: 15px;
+
+    background-color: rgba(255, 148, 45, 0.2);
+    border-radius: 6px;
+
+    text-align: center;
+}
 
 .reservation-list-table-tr {
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    
     gap: 95px;
+    padding: 13px 13px;
 
-    border-top: 1px solid rgba(238,238,238,1);
-    padding: 15px 24px;
+    border-top: 1px solid rgba(238, 238, 238, 1);
 
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
     text-align: center;
-
-    color:rgba(64, 64, 64, 1);
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
 }
 
-.reservation-list-table-tr:hover{
+.reservation-list-table-tr:hover {
     cursor: pointer;
     background-color: rgba(238, 238, 238, 0.2);
 }
 
+.reservation-list-table-reservation-number {
+    width: 70px;
+}
 
+.reservation-list-table-reservation-status {
+    width: 70px;
+}
+
+.reservation-list-table-reservation-restaurant-name {
+    width: 100px;
+}
+
+.reservation-list-table-reservation-date {
+    width: 50px;
+}
+
+.reservation-list-table-reservation-time {
+    width: 65px;
+}
+
+.reservation-list-table-reservation-people {
+    width: 35px;
+}
+
+.reservation-list-table-reservation-user-name {
+    width: 50px;
+}
+
+.reservation-list-table-reservation-restaurant-location {
+    width: 100px;
+}
 
 .reservation-list-bottom {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.reservation-list-pagenation{
+.reservation-list-pagenation {
     display: flex;
     align-items: center;
+
     gap:24px;
 }
 
-.reservation-list-page-left{
+.reservation-list-page-left {
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-left.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.reservation-list-page-right {
     width: 40px;
     height: 40px;
 
@@ -110,68 +142,29 @@
     cursor: pointer;
 }
 
-.reservation-list-page-right{
-    width: 40px;
-    height: 40px;
-
-    background-image: url('../../../../../assets/image/page-right.png');
-    background-size: 100% 100%;
-
-    cursor: pointer;
-}
-
-.reservation-list-page-box{
+.reservation-list-page-box {
     display: flex;
-    gap: 16px;
     align-items: center;
+
+    gap: 16px;
 }
 
-.reservation-list-page{
+.reservation-list-page {
+    font-family: 'Nanum Gothic';
     font-size: 14px;
     font-weight: 400;
-    line-height: 20px;
-
+    line-height: 150%;
     color: rgba(138, 146, 166, 1);
 
     cursor: pointer;
 }
 
-.reservation-list-page-active{
+.reservation-list-page-active {
+    font-family: 'Nanum Gothic';
     font-size: 14px;
     font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(64, 64, 64, 1);
+    line-height: 150%px;
+    color: rgba(50, 50, 50, 1);
 
     cursor: default;
-}
-
-.reservation-list-search-box{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.reservation-list-search-input-box{
-    border: 1px solid rgba(238,238,238,1);
-    border-radius: 6px;
-    padding: 8px 16px;
-    width: 168px;
-
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.reservation-list-search-input{
-    border: none;
-    outline: none;
-    background: none;
-
-    width: 100%;
-
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 175%;
-
-    color: rgba(64, 64, 64, 1);
 }

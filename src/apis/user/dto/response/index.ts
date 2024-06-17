@@ -17,6 +17,7 @@ export interface GetMyInfoResponseDto extends ResponseDto{
   userName: string;
   userTelNumber: string;
   userAddress: string;
+  businessRegistrationNumber: string;
   userRole: string;
   joinPath: String;
 }

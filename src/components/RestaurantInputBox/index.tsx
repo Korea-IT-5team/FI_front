@@ -3,7 +3,7 @@ import './style.css';
 
 export interface InputBoxProps {
     label: string;
-    type: 'text' | 'password' |'file';
+    type: 'text' | 'password' |'file' | 'date';
     value?: string;
     placeholder: string;
     onChangeHandler?: (event: ChangeEvent<HTMLInputElement>) => void;
