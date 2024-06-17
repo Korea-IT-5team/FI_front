@@ -21,7 +21,6 @@
 .my-page-title-box {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 
 .my-page-title {
@@ -89,6 +88,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
   font-family: 'Nanum Gothic';
   font-size: 15px;
   font-weight: 400;
@@ -98,12 +98,10 @@
 
 .my-page-info-first {
   width: 100%;
-  border-top: 2px solid rgba(240, 240, 240, 1);
-  border-collapse: collapse;
-  border-spacing: 0px;
-  table-layout: fixed;
-  font-size: 14px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
 }
 
 .my-page-info-second {
@@ -116,6 +114,9 @@
   padding: 10px;
   background-color: rgba(240, 240, 240, 1);
   border-radius: 7px;
+  min-width: 100px; 
+  text-align: center; 
+  word-break: break-word; 
 }
 
 .my-page-resign {
