@@ -21,7 +21,6 @@ function ListItem ({
   inquiryWriterId
 }: InquiryBoardListItem & { index: number }) {
 
-
   //        function       //
   const navigation = useNavigate();
   
@@ -31,7 +30,7 @@ function ListItem ({
   //   render   //
   return(
     <div className='inquiry-my-list-table-tr' onClick={onClickHandler}>
-      <div className='inquiry-my-list-table-reception-number'>{index + 1}</div>
+      <div className='inquiry-my-list-table-reception-number'>{index}</div>
       <div className='inquiry-my-list-table-status'>
         {status ? 
         <div className='primary-bedge'>답변</div> :
@@ -85,11 +84,14 @@ export default function InquiryMyList() {
     setPageList(pageList);
   };
 
-  const changeInquiryBoardList = (inquiryBoardList: InquiryBoardListItem[]) => {
-    if (isToggleOn) inquiryBoardList = inquiryBoardList.filter(inquiryBoardList => !inquiryBoardList.status);
-    setInquiryBoardList(inquiryBoardList);
+  console.log(inquiryBoardList);
+  
 
-    const totalLength = inquiryBoardList.length;
+  const changeInquiryBoardList = (inquiryMyBoardList: InquiryBoardListItem[]) => {
+    if (isToggleOn) inquiryMyBoardList = inquiryMyBoardList.filter(inquiryBoardList => !inquiryBoardList.status);
+    setInquiryBoardList(inquiryMyBoardList);
+
+    const totalLength = inquiryMyBoardList.length;
     setTotalLength(totalLength);
 
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
@@ -98,12 +100,12 @@ export default function InquiryMyList() {
     const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
     setTotalSection(totalSection);
 
-    changePage(inquiryBoardList, totalLength);
+    changePage(inquiryMyBoardList, totalLength);
 
     changeSection(totalPage);
 };
 
-const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto | ResponseDto | null) => {
+const getMyinquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto | ResponseDto | null) => {
   const message =
     !result ? '서버에 문제가 있습니다.' :
     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
@@ -147,16 +149,16 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
     navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
 };
 
-//   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-//     const searchWord = event.target.value;
-//     setSearchWord(searchWord);
-// };
+  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchWord = event.target.value;
+    setSearchWord(searchWord);
+};
 
-//   const onSearchButtonClickHandler = () => {
-//     if (!searchWord) return;
+  const onSearchButtonClickHandler = () => {
+    if (!searchWord) return;
 
-//     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-// };
+    getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+};
 
   const onToggleClickHandler = () => {
     if (loginUserRole !== 'ROLE_USER') return;
@@ -204,8 +206,13 @@ const onNextSectionClickHandler = () => {
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
     else
-      getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
+      getInquiryBoardListRequest(cookies.accessToken).then(getMyinquiryBoardListResponse);
   },[isToggleOn]);
+
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getInquiryBoardListRequest(cookies.accessToken).then(getMyinquiryBoardListResponse);
+}, [isToggleOn]);
 
   useEffect(() => {
       changePage(inquiryBoardList, totalLength);
@@ -220,7 +227,7 @@ const onNextSectionClickHandler = () => {
 
   //                    render                      //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
-  const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+  // const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
         <div id='inquiry-my-list-wrapper'>
           <div className='inquiry-my-list-top'>나의 문의 내역</div>
@@ -246,7 +253,11 @@ const onNextSectionClickHandler = () => {
         </div>
         <div className='inquiry-my-list-table-contents'>
 
-          {filteredMyInquiryBoardList.map((item, index) => <ListItem { ...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - index + 1 } key={item.inquiryNumber} />)}
+          {filteredMyInquiryBoardList.map((item, index) => (
+          <ListItem
+            { ...item}
+            index={(currentPage - 1) * COUNT_PER_PAGE + index + 1} // 인덱스 수정
+            key={item.inquiryNumber}/>))}
 
         </div> 
       </div>
@@ -258,8 +269,8 @@ const onNextSectionClickHandler = () => {
                 {pageList.map(page => 
                 page === currentPage ? 
                 <div className='inquiry-my-list-page-active'>{page}</div> :
-                <div className='inquiry-my-list-page' onClick={() =>onPageClickHandler(page)}>{page}</div>
-                )}
+                <div className='inquiry-my-list-page'onClick={() => onPageClickHandler(page)}>{page}</div>
+            )}
             </div>
             <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>

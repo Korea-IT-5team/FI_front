@@ -187,5 +187,5 @@ export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | stri
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
 export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/update/${noticeNumber}`;
 
-export const COUNT_PER_PAGE = 4;
-export const COUNT_PER_SECTION = 4;
+export const COUNT_PER_PAGE = 10;
+export const COUNT_PER_SECTION = 10;
