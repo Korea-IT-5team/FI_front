@@ -244,6 +244,21 @@ export default function InquiryList() {
     if (!searchWord) return;
     
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+
+    setSearchWord('');
+  };
+
+  const onEnterKeyHandler = (event: { key: string; preventDefault: () => void; }) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+  
+      if (searchWord) {
+        getSearchInquiryBoardListRequest(searchWord, cookies.accessToken)
+          .then(getSearchInquiryBoardListResponse);
+
+          setSearchWord('');
+      }
+    }
   };
 
   //   effect   //
@@ -317,7 +332,7 @@ export default function InquiryList() {
 
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
-            <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+            <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} onKeyDown={onEnterKeyHandler}/>
           </div>
           <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>
