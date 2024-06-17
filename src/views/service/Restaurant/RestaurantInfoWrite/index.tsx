@@ -17,7 +17,6 @@ export default function RestaurantInfoWrite()
     const [restaurantImage, setRestaurantImage] = useState('');
     const [restaurantName, setRestaurantName] = useState('');
     const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
-    const [restaurantPostalCode, setRestaurantPostalCode] = useState('');
     const [restaurantLocation, setRestaurantLocation] = useState('');
     const [restaurantTelNumber, setRestaurantTelNumber] = useState('');
     const [restaurantSnsAddress, setRestaurantSnsAddress] = useState('');
@@ -51,7 +50,7 @@ export default function RestaurantInfoWrite()
     const onUploadClickHandler = () => {
 
         if (!restaurantImage || !restaurantName || !restaurantFoodCategory
-            || !restaurantPostalCode || !restaurantLocation || !restaurantTelNumber) {
+            || !restaurantLocation || !restaurantTelNumber) {
             return;
         }
 
@@ -60,7 +59,6 @@ export default function RestaurantInfoWrite()
             restaurantImage: restaurantImage,
             restaurantName: restaurantName,
             restaurantFoodCategory: restaurantFoodCategory,
-            restaurantPostalCode: restaurantPostalCode,
             restaurantLocation: restaurantLocation,
             restaurantTelNumber: restaurantTelNumber,
             restaurantSnsAddress: restaurantSnsAddress,
@@ -95,11 +93,6 @@ export default function RestaurantInfoWrite()
     const onFoodCategoryChangeHandler = (selectFood: string) => {
         setRestaurantFoodCategory(selectFood);
     };
-
-    const onPostalCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setRestaurantPostalCode(value);
-    }
 
     const onLocationChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
@@ -136,7 +129,7 @@ export default function RestaurantInfoWrite()
         setRestaurantRepresentativeMenu(value);
     }
    
-    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPostalCode && restaurantLocation && restaurantTelNumber;
+    const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantLocation && restaurantTelNumber;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`; 
 
     // render //
@@ -157,8 +150,6 @@ export default function RestaurantInfoWrite()
                 placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
                 <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
                 placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
-                <RestaurantInputBox label="식당 우편번호" type="text" value={restaurantPostalCode}
-                placeholder="우편번호를 입력해주세요" onChangeHandler={onPostalCodeChangeHandler}/>
                 <RestaurantInputBox label="식당 연락처" type="text" value={restaurantTelNumber}
                 placeholder="연락처를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
                 <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}

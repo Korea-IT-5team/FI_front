@@ -29,7 +29,6 @@ export default function RestaurantInfo() {
     const [restaurantImage, setRestaurantImage] = useState('');
     const [restaurantName, setRestaurantName] = useState('');
     const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
-    const [restaurantPostalCode, setRestaurantPostalCode] = useState('');
     const [restaurantLocation, setRestaurantLocation] = useState('');
     const [restaurantTelNumber, setRestaurantTelNumber] = useState('');
     const [restaurantSnsAddress, setRestaurantSnsAddress] = useState('');
@@ -60,7 +59,7 @@ export default function RestaurantInfo() {
         }
 
         const { restaurantImage, restaurantName, restaurantFoodCategory,
-            restaurantPostalCode, restaurantLocation, restaurantTelNumber,
+            restaurantLocation, restaurantTelNumber,
             restaurantSnsAddress, restaurantOperationHours, restaurantFeatures,
             restaurantNotice, restaurantRepresentativeMenu, restaurantBusinessRegistrationNumber,
             restaurantWriterId, restaurantReviewList
@@ -68,7 +67,6 @@ export default function RestaurantInfo() {
         setRestaurantImage(restaurantImage);
         setRestaurantName(restaurantName);
         setRestaurantFoodCategory(restaurantFoodCategory);
-        setRestaurantPostalCode(restaurantPostalCode);
         setRestaurantLocation(restaurantLocation);
         setRestaurantTelNumber(restaurantTelNumber);
         setRestaurantSnsAddress(restaurantSnsAddress);
@@ -374,7 +372,6 @@ export default function RestaurantInfo() {
                     {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
                 </div>
                 
-
                 <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
             </div>
         </>
