@@ -6,8 +6,8 @@ import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/r
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import './style.css';
 
-import DatePicker from "react-datepicker";
 import { PostReservationRequest } from "src/apis/restaurant/reservation";
+import DatePicker from "react-datepicker";
 
 export default function DoReservation() {
 
