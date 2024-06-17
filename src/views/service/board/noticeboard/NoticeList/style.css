@@ -11,13 +11,13 @@
 
 .notice-list-top {
     text-align: center;
-  
+
     font-family: 'Nanum Gothic';
     font-size: 20px;
     font-weight: bold;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
-  }
+}
 
 .notice-list-top-box {
     width: 100%;
@@ -165,7 +165,7 @@
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
-    color: red;
+    color: rgba(255, 148, 45, 1);
 }
 
 .notice-list-search-box {

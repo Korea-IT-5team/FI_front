@@ -133,6 +133,7 @@ export const SERVER_RESTAURANT_MODULE_URL = `${SERVER_API_URL}/restaurant`;
 export const GET_SEARCH_RESTAURANT_LIST_URL = `${SERVER_RESTAURANT_MODULE_URL}/search`;
 export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}`;
 export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
+export const GET_RESTAURANT_ID_URL = `${SERVER_RESTAURANT_MODULE_URL}/restaurantid`;
 
 export const PATCH_RESTAURANT_INFO_UPDATE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-update`;
 export const DELETE_RESTAURANT_INFO_DELETE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-delete`;
@@ -186,5 +187,5 @@ export const NOTICE_BOARD_INCREASE_VIEW_COUNT_URL = (noticeNumber: number | stri
 export const DELETE_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/${noticeNumber}`;
 export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERVER_NOTICE_BOARD_MODULE_URL}/update/${noticeNumber}`;
 
-export const COUNT_PER_PAGE = 4;
-export const COUNT_PER_SECTION = 4;
+export const COUNT_PER_PAGE = 10;
+export const COUNT_PER_SECTION = 10;
