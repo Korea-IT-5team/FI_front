@@ -303,32 +303,59 @@ export default function RestaurantInfo() {
                 {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
                     <button onClick={onDeleteRestIdNumberHandler}>삭제</button>)}
                 <img src={restaurantImage} className='' />
-                <div>
-                    <div>식당 이름 :{restaurantName}</div>
+                <div className='restaurant-info-top'>
+                    <div className='restaurant-name'>식당 이름 :{restaurantName}</div>
+                    <div className='restaurant-divider'>{'\|'}</div>
                     {loginUserRole === "ROLE_USER" &&
                         (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
                             (<button onClick={onReservationCancelClickHandler}>예약취소</button>) :
                             (<button onClick={onReservationClickHandler}>예약</button>)
                         )}
+                    <div>주음식 : {restaurantFoodCategory}</div>
                 </div>
 
-                <div>주음식 : {restaurantFoodCategory}</div>
                 {grade ? (<div>평점 : {grade}</div>) : (<div></div>)}
                 {loginUserRole === "ROLE_USER" &&
                     (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ?
                         (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
                         (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
                     )}
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon location'></div>
+                    <div className='restaurant-information'>위치 : {restaurantLocation}</div>
+                </div>
 
-                <div>위치 : {restaurantLocation}</div>
-                <div>SNS 위치 : {restaurantSnsAddress}</div>
-                <div>우편번호 :{restaurantPostalCode}</div>
-                <div>전화번호 : {restaurantTelNumber}</div>
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon sns'></div>
+                    <div>SNS : {restaurantSnsAddress}</div>
+                </div>
 
-                {restaurantOperationHours && <div>운영시간 : {restaurantOperationHours}</div>}
-                {restaurantFeatures && <div>특징 : {restaurantFeatures}</div>}
-                {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
-                {restaurantRepresentativeMenu && <div>대표메뉴 : {restaurantRepresentativeMenu}</div>}
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon telnumber'></div>
+                    <div>전화번호 : {restaurantTelNumber}</div>
+                </div>
+
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon time'></div>
+                    {restaurantOperationHours && <div>운영시간 : {restaurantOperationHours}</div>}
+                </div>
+
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon menu'></div>
+                    {restaurantRepresentativeMenu && <div>대표메뉴 : {restaurantRepresentativeMenu}</div>}
+                </div>
+
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon feature'></div>
+                    {restaurantFeatures && <div>특징 : {restaurantFeatures}</div>}
+                </div>
+
+                <div className='restaurant-info-icon-box'>
+                    <div className='restaurant-info-icon notice'></div>
+                    {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
+                </div>
+                
+
                 <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
             </div>
         </>
