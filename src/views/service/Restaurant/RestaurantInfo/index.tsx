@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { DeleteRestaurantInfoRequest, GetRestaurantInfoRequest } from 'src/apis/restaurant';
@@ -13,7 +14,6 @@ import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 
 // component : 특정 식당 정보 //
 export default function RestaurantInfo() {
@@ -304,16 +304,17 @@ export default function RestaurantInfo() {
         DeleteRestaurantFavoriteRequest(restaurantId,cookies.accessToken)
             .then(DeleteRestaurantFavoriteResponse)
     }
-
     // render //
     return (
         <>
             <div id="restaurant-info">
                 {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                    <button onClick={onSetRestIdNumberHandler}>수정</button>)}
-                {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                    <button onClick={onDeleteRestIdNumberHandler}>삭제</button>)}
-                <img src={restaurantImage} className='' />
+                    <div className="button-group">
+                        <button onClick={onSetRestIdNumberHandler}>수정</button>
+                        <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
+                    </div>
+                )}
+                <img src={restaurantImage} className='restaurant-image' />
                 <div className='restaurant-info-top'>
                     <div className='restaurant-name'>식당 이름 :{restaurantName}</div>
                     <div className='restaurant-divider'>{'\|'}</div>
@@ -325,7 +326,7 @@ export default function RestaurantInfo() {
                     <div>주음식 : {restaurantFoodCategory}</div>
                 </div>
 
-                {grade ? (<div>평점 : {grade}</div>) : (<div></div>)}
+                {grade ? (<div className='restaurant-grade'>평점 : {grade}</div>) : (<div></div>)}
                 {loginUserRole === "ROLE_USER" &&
                     (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ?
                         (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
@@ -333,13 +334,13 @@ export default function RestaurantInfo() {
                     )}
                 {center && <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon location'></div>
-                    <div className='restaurant-information'>위치 : {restaurantLocation}</div>
+                    <div className='restaurant-location'>위치 : {restaurantLocation}</div>
                     <Map // 지도를 표시할 Container
                         id="map"
                         center={center}
                         style={{
                             // 지도의 크기
-                            width: "100%",
+                            width: "350px",
                             height: "350px",
                         }}
                         level={3} // 지도의 확대 레벨

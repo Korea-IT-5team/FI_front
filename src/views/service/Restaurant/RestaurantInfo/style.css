@@ -2,17 +2,22 @@
 #restaurant-info {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
   margin-top: 20px;
+  padding: 20px; /* 패딩 추가 */
+  background-color: #f9f9f9; /* 배경색 추가 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }
 
 #restaurant-info img {
-  width: 300px; /* 이미지 너비 조정 */
+  width: 100%; /* 이미지 너비 조정 */
+  max-width: 600px; /* 최대 너비 설정 */
   height: auto; /* 이미지 높이 자동 조정 */
-  margin-bottom: 10px;
-  border-radius: 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
   object-fit: cover; /* 이미지 자르기 및 확대/축소 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }
 
 #restaurant-info > div {
@@ -27,21 +32,21 @@
 }
 
 #restaurant-info button {
-margin-top: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
-  padding: 8px 16px;
-  background-color: #0056b3;
+  padding: 10px 20px;
+  background-color: rgba(255, 148, 45, 1);
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   transition: background-color 0.3s ease;
   margin-left: 10px;
 }
 
 #restaurant-info button:hover {
-  background-color: #0056b3;
+  cursor: pointer;
+  opacity: 0.85;
 }
 
 #restaurant-info > div > div:nth-child(odd) {
@@ -97,9 +102,15 @@ margin-top: 10px;
   margin-top: 10px;
 }
 
+.restaurant-info-icon {
+  margin-right: 10px; /* 아이콘과 텍스트 사이의 간격 조정 */
+}
+
 .restaurant-info-icon-box {
 display: flex;
 flex-direction: row;
+align-items: center; /* 요소들을 가운데 정렬 */
+margin-bottom: 10px;
 }
 
 .restaurant-info-icon.location {
@@ -156,21 +167,40 @@ background-size: cover;
 .restaurant-info-top {
 display: flex;
 flex-direction: row;
-
-gap: 5px;
+gap: 10px; /* 간격 조정 */
+align-items: center; /* 요소들을 가운데 정렬 */
+margin-bottom: 20px;
 }
 
 .restaurant-name {
-margin-top: 10px;
+font-size: 24px; /* 글자 크기 조정 */
+font-weight: bold;
+color: #333;
 }
 
 .restaurant-divider {
 margin-top: 10px;
 
 font-family: 'Nanum Gothic';
-font-size: 14px;
+font-size: 24px;
 font-weight: 400;
 line-height: 150%;
 color: rgba(50, 50, 50, 1);
 }
 
+.restaurant-grade {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #ff9800; /* 색상 변경 */
+}
+
+.button-group {
+  display: flex;
+  gap: 10px; /* 버튼 간격 조정 */
+  margin-bottom: 20px;
+}
+
+.restaurant-location{
+  font-size: 16px; /* 글자 크기 조정 */
+  color: #555;
+}
