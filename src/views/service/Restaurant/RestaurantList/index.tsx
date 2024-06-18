@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -61,6 +61,13 @@ export default function RestaurantList() {
         setDisplayCount(prevCount => prevCount + 8);
     };
 
+     // 추가한 부분: Enter 키 이벤트 핸들러 //
+    const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            onSearchClickHandler();
+        }
+    };
+
     // effect //
     let effectFlag1 = false;
 
@@ -78,7 +85,8 @@ export default function RestaurantList() {
         <div className='restaurant-list-wrapper'>
             <div className="restaurant-list-side-navigation-container">
                 <div className='restaurant-list-search-input-click'>
-                    <input className="restaurant-list-search-input" placeholder='오늘의 맛집은?' value={searchWord} onChange={onSearchWordChangeHandler}></input>
+                    <input className="restaurant-list-search-input" placeholder='오늘의 맛집은?' value={searchWord} 
+                    onChange={onSearchWordChangeHandler} onKeyDown={onSearchKeyPressHandler}></input>
                     <div className={searchButtonClass} onClick={onSearchClickHandler}>검색</div>
                 </div>
                 {loginUserRole === 'ROLE_CEO' && 
