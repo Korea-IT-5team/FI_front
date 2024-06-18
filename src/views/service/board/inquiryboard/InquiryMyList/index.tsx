@@ -106,9 +106,9 @@ export default function InquiryMyList() {
 
     changeSection(totalPage);
 };
-  
 
 const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto | ResponseDto | null) => {
+  
   const message =
     !result ? '서버에 문제가 있습니다.' :
     result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
@@ -125,26 +125,26 @@ const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto 
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
 };
 
-const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResponseDto | ResponseDto | null) => {
+// const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResponseDto | ResponseDto | null) => {
 
-  const message = 
-      !result ? '서버에 문제가 있습니다.' : 
-      result.code === 'VF' ? '검색어를 입력하세요.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+//   const message = 
+//       !result ? '서버에 문제가 있습니다.' : 
+//       result.code === 'VF' ? '검색어를 입력하세요.' :
+//       result.code === 'AF' ? '인증에 실패했습니다.' :
+//       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
   
-  if (!result || result.code !== 'SU') {
-    alert(message);
-    if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
-    return;
-  }
+//   if (!result || result.code !== 'SU') {
+//     alert(message);
+//     if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
+//     return;
+//   }
 
-  const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
-  changeInquiryBoardList(inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId));
+//   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
+//   changeInquiryBoardList(inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId));
 
-  setCurrentPage(!inquiryBoardList.length ? 0 : 1);
-  setCurrentSection(!inquiryBoardList.length ? 0 : 1);
-};
+//   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
+//   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
+// };
 
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
@@ -152,16 +152,16 @@ const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResp
     navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
 };
 
-  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = event.target.value;
-    setSearchWord(searchWord);
-};
+//   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+//     const searchWord = event.target.value;
+//     setSearchWord(searchWord);
+// };
 
-  const onSearchButtonClickHandler = () => {
-    if (!searchWord) return;
+//   const onSearchButtonClickHandler = () => {
+//     if (!searchWord) return;
 
-    getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-};
+//     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+// };
 
   const onToggleClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
@@ -208,27 +208,36 @@ const onNextSectionClickHandler = () => {
 };
 
   //                  effect                  //
-  useEffect(() => {
-    if (searchWord)
-      getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-    else
+    // useEffect(() => {
+    //   if (cookies.accessToken) return;
+    //   if (searchWord)
+    //     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+    //   else
+    //     getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
+    // },[cookies.accessToken]);
+
+    useEffect(() => {
+      if (!cookies.accessToken) return;
       getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
-  },[isToggleOn]);
+  }, [isToggleOn ,cookies.accessToken, loginUserEmailId]);
 
-  useEffect(() => {
-    if (!cookies.accessToken) return;
-    getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
-}, [isToggleOn,cookies.accessToken]);
+    useEffect(() => {
+      changePage(inquiryBoardList, totalLength);
+    }, [currentPage]);
 
-  useEffect(() => {
-    changePage(inquiryBoardList, totalLength);
-  }, [currentPage]);
+    // useEffect(() => {
+      
+    //   if (!inquiryBoardList.length) return; 
+    //   const totalPage = Math.ceil(totalLength / COUNT_PER_PAGE);
+    //   changeSection(totalPage);
+    // }, [currentSection, inquiryBoardList, totalLength]);
 
-  useEffect(() => {
-    if (!inquiryBoardList.length) return;
-    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-    changeSection(totalPage);
+    useEffect(() => {
+      if (!inquiryBoardList.length) return;
+      changeSection(totalPage);
   }, [currentSection]);
+
+
 
 
   //                    render                      //
