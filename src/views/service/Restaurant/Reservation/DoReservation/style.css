@@ -310,17 +310,3 @@
 .popup-open-button:hover {
     opacity: 0.8;
 }
-
-
-.do-reservation-date-input2 {
-    display: inline-block;
-    font-size: 16px;
-    padding: 10px;
-    font-family: 'Nanum Gothic', sans-serif;
-    border-radius: 6px;
-    z-index: 9999; 
-    position: relative; 
-    width: 300px;
-    margin: 0 auto;
-    text-align: left;
-}
