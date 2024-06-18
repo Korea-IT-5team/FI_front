@@ -6,7 +6,6 @@
     gap: 16px;
 }
 
-
 .reservation-list-top {
     display: flex;
     justify-content: space-between;
@@ -32,7 +31,6 @@
     align-items: center;
     gap: 12px;
 }
-
 
 .reservation-list-top-admin-text {
     font-size: 14px;
@@ -90,39 +88,6 @@
 }
 
 
-.reservation-list-table-reception-number
-{
-    width: 56px;
-}
-
-.reservation-list-table-status{
-    width:45px;
-}
-
-.reservation-list-table-title{
-    width:349px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.reservation-list-table-writer-id
-{
-    width:67px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.reservation-list-table-write-date{
-    width: 54px;
-}
-
-.reservation-list-table-viewcount{
-    width: 42px;
-}
 
 .reservation-list-bottom {
     display: flex;
@@ -134,7 +99,6 @@
     align-items: center;
     gap:24px;
 }
-
 
 .reservation-list-page-left{
     width: 40px;

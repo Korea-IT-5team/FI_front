@@ -1,42 +1,49 @@
-.user-delete-container {
-  background-color: rgba(238, 238, 238, 1);
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.user-delete-box {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.user-delete-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.user-delete-title-2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.user-delete-title-box {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.user-delete-title-3 {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.user-delete-password {
-  margin-bottom: 20px;
-}
-
-.user-delete-button-box {
+.resign-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.resign-title {
+  margin-top: 30px;
+
+  font-family: 'Nanum Gothic';
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.resign-box {
+  height: 100px;
+  max-width: 800px;
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+
+  border-top: 1px solid rgba(238, 238, 238, 1);
+}
+
+.caution-title {
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+  font-weight: bold;
+  color: rgba(50, 50, 50, 1);
+}
+
+.caution-contents {
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(50, 50, 50, 1);
+}
+
+.resign-password {
+  width: 80%;
+
+  margin-bottom: 10px;
 }

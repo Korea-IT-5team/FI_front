@@ -81,6 +81,7 @@ export default function MyPageSite() {
             <div className='my-page-delete' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
           </div>
         </div>
+        <div className='my-page-resign' onClick={() => navigator(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
       </div>
     </div>
   )

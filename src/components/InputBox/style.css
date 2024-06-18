@@ -10,17 +10,16 @@
 .common-input-content-box {
     display: flex;
     flex-direction: row;
-
-    gap: 5px;
+    gap: 10px;
 }
 
+
 .common-input {
-    height: 26px;
-
-    padding: 5px;
-
     flex-grow: 1;
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
     outline: none;
+    padding: 5px;
 
     background-color: rgba(255, 255, 255, 1);
 

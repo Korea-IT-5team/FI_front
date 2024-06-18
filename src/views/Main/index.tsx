@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from 'src/stores';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
@@ -59,7 +59,7 @@ function TopBar({ path }: Props) {
 
   const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onAdminPageClickHandler = () => navigator(MAIN_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
   const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
@@ -72,24 +72,22 @@ function TopBar({ path }: Props) {
         <div className='main-top-bar-button'>
         {loginUserRole === 'ROLE_USER' &&
         <div className="top-bar-role">
-            <div className="sign-in-wrapper">
-                <div className="user-my-page-button person"></div>
-                <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
-            </div>
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+          <div className="sign-in-wrapper">
+            <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+          </div>
+          <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
         }
         {loginUserRole === 'ROLE_ADMIN' && 
         <div className="top-bar-role">
           <div className="sign-in-wrapper">
-              <div className="user-my-page-button person"></div>
-              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+            <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
           </div>
           <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
         </div>
         }
         {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && 
-            <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
         }
         </div>
       </div>
@@ -196,14 +194,8 @@ return (
     </div>
     <div className='main-container'>
       <div className='main-banner'></div>
-      <div className='main-image-box'>
-        <div className='restaurant-image'>식당1</div>
-        <div className='restaurant-image'>식당2</div>
-        <div className='restaurant-image'>식당3</div>
-        <div className='restaurant-image'>식당4</div>
-      </div>
+      <div className='main-image-box'></div>
     </div>
   </div>
 );
-
 }

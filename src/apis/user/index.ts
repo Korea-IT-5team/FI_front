@@ -31,7 +31,7 @@ export const patchUserInfoRequest = async (userEmailId: string, requestBody: Pat
 
 // function: 회원탈퇴 API 함수 
 export const deleteUserRequest = async (userEmailId: string, accessToken: string) => {
-    const result = await axios.delete(DELETE_INFO_DELETE_REQUEST_URL(userEmailId), bearerAuthorization(accessToken))
+    const result = await axios.post(DELETE_INFO_DELETE_REQUEST_URL(userEmailId), bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler);
     return result;

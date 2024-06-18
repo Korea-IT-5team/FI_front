@@ -11,13 +11,11 @@ export default function PasswordResetFinally() {
 
   // render //  
   return (
-    <div className='reset-password-container'>
-      <div className='reset-password-title'>비밀번호 재설정</div>
-      <div className='reset-password-box'>
-        <div className='reset-password-input'>
-          <div className='reset-password-title'>비밀번호가 성공적으로 변경되었습니다.</div>
-        </div>
-        <div className='reset-password-link-title' onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
+    <div className='password-reset-final-container'>
+      <div className='password-reset-final-title'>비밀번호 재설정</div>
+      <div className='password-reset-final-box'>
+        <div className='password-reset-final-contents'>비밀번호가 성공적으로 변경되었습니다.</div>
+        <div className='password-reset-final-link-button' onClick={() => {navigator(SIGN_IN_ABSOLUTE_PATH)}}>로그인</div>
       </div>
     </div>
   )

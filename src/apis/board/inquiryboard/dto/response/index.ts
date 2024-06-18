@@ -17,7 +17,7 @@ export interface GetInquiryBoardResponseDto extends ResponseDto {
   status:boolean;
   inquiryTitle: string;
   inquiryWriterId: string;
-  // inquiryWriterNickname: string;
+  inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
   inquiryContents: string;
   inquiryComment: string | null;

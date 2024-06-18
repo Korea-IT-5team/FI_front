@@ -95,34 +95,6 @@
     width: 56px;
 }
 
-.favorite-list-table-status{
-    width:45px;
-}
-
-.favorite-list-table-title{
-    width:349px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.favorite-list-table-writer-id
-{
-    width:67px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-.favorite-list-table-write-date{
-    width: 54px;
-}
-
-.favorite-list-table-viewcount{
-    width: 42px;
-}
 
 .favorite-list-bottom {
     display: flex;

@@ -9,7 +9,7 @@ import { useUserStore } from 'src/stores';
 import { RestaurantReservationListItem } from 'src/types';
 import './style.css';
 
-//                    component                    //
+// component //
 function ListItem ({ 
   reservationNumber,
   reservationStatus,
@@ -21,42 +21,32 @@ function ListItem ({
   reservationUserName,
 }: RestaurantReservationListItem) {
 
-    //                    function                    //
+    // function //
     const navigator = useNavigate();
 
-    //                    event handler                    //
+    // event handler //
     const onClickHandler = () => navigator(RESTAURANT_INFO_ABSOLUTE_PATH(reservationRestaurantId));  
 
-    //                    render                    //
+    // render //
     return (
         <div className='reservation-list-table-tr' onClick={onClickHandler} >
-          <div>
-            <div className='reservation-list-table-reception-number'>예약번호 : {reservationNumber}</div>
-            <div className='reservation-list-table-restaurant-name'>예약한 식당명 : {reservationRestaurantName}</div>
-            <div className='reservation-list-table-user-name'>예약자명 : {reservationUserName}</div>
-            <div className='reservation-list-table-people-count'>인원수 : {reservationPeople}</div>
-          </div>
-          <div className='reservation-list-table-status'>
-              <div className='disable-bedge'>상태</div>
-              <div className='disable-bedge'></div>
-          </div>
-          <div>
-            <div className='reservation-list-reservation-date'>예약일 : {reservationDate}</div>
-            <div className='reservation-list-reservation-time'>예약시간 : {reservationTime}</div>
-          </div>
-
-          <div className='reservation-list-table-title' style={{ textAlign: 'left' }}>{5}</div>
-          <div className='reservation-list-table-writer-id'>{2}</div>
-          <div className='reservation-list-table-write-date'>{3}</div>
-          <div className='reservation-list-table-viewcount'>{4}</div>
+            <div>
+                <div className=''>{reservationNumber}</div>
+                <div className=''>{reservationStatus}</div>
+                <div className=''>{reservationRestaurantName}</div>
+                <div className=''>{reservationDate}</div>
+                <div className=''>{reservationTime}</div>
+                <div className=''>{reservationPeople}</div>
+                <div className=''>{reservationUserName}</div>
+            </div>
         </div>
     );
 }
 
-//                    component                    //
+// component //
 export default function ReservationList() {
 
-    //                    state                    //
+    // state //
     const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
     const [restaurantReservationList, setRestaurantReservationList] = useState<RestaurantReservationListItem[]>([]);
@@ -68,7 +58,7 @@ export default function ReservationList() {
     const [totalSection, setTotalSection] = useState<number>(1);
     const [currentSection, setCurrentSection] = useState<number>(1);
 
-    //                    function                    //
+    // function //
     const navigator = useNavigate();
 
     const changePage = (restaurantReservationList: RestaurantReservationListItem[], totalLenght: number) => {
@@ -110,7 +100,6 @@ export default function ReservationList() {
         changeSection(totalPage);
     };
 
-    //!!!###
     const GetReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
 
         const message =
@@ -129,9 +118,8 @@ export default function ReservationList() {
         setCurrentPage(!restaurantReservationList.length ? 0 : 1);
         setCurrentSection(!restaurantReservationList.length ? 0 : 1);
     };
-    //!!!###
 
-    //                    event handler                    //
+    // event handler //
     
     const onPageClickHandler = (page: number) => {
         setCurrentPage(page);
@@ -149,19 +137,17 @@ export default function ReservationList() {
         setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
-    //!!!###
-    //                    effect                    //
+    // effect //
     useEffect(() => {
         if (!cookies.accessToken) return;
 
         loginUserRole === "ROLE_USER" ? 
         GetUserReservationListRequest(cookies.accessToken)
-        .then(GetReservationListResponse):
+            .then(GetReservationListResponse):
         GetCeoReservationListRequest(cookies.accessToken)
-        .then(GetReservationListResponse)
+            .then(GetReservationListResponse)
         ;
     }, []);
-    //!!!###
 
     useEffect(() => {
         if (!restaurantReservationList.length) return;
@@ -174,23 +160,23 @@ export default function ReservationList() {
     }, [currentSection]);
     
   
-    //                    render                    //
+    // render //
    
     return (
         <div id='reservation-list-wrapper'>
             <div className='reservation-list-top'>
                 <div className='reservation-list-size-text'>전체 <span className='emphasis'>{totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
-                <div className='reservation-list-top-right'>
-                </div>
+                <div className='reservation-list-top-right'></div>
             </div>
             <div className='reservation-list-table'>
                 <div className='reservation-list-table-th'>
-                    <div className='reservation-list-table-reception-number'>예약번호</div>
-                    <div className='reservationa-list-table-status'>상태</div>
-                    <div className='reservation-list-table-title'>제목</div>
-                    <div className='reservation-list-table-writer-id'>작성자</div>
-                    <div className='reservation-list-table-write-date'>작성일</div>
-                    <div className='reservation-list-table-viewcount'>조회수</div>
+                    <div className=''>예약번호</div>
+                    <div className=''>상태</div>
+                    <div className=''>식당 이름</div>
+                    <div className=''>예약일</div>
+                    <div className=''>예약시간</div>
+                    <div className=''>인원수</div>
+                    <div className=''>작성자</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>

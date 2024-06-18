@@ -115,22 +115,18 @@ export default function UserInfoUpdate() {
 
   // render //
   return (
-    <div id='authentication-wrapper'>
-      <div className='my-page-big-box'>
-        <div className='my-page-container'>
-          <div className='my-page-title'>메인페이지</div>
-          <div className='my-page-box'>
-            <div className='my-page-info-box'>
-
-              <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
-              <div className='my-page-info'>{userEmailId}</div>
-              <div className='my-page-info'>{userName}</div>
-              <div className='my-page-info'>{userTelNumber}</div>
-              <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
-
-            </div>
-            <div className='my-page-delete' onClick={onUpdateButtonClickHandler}>수정</div>
+    <div id='my-page-wrapper'>
+      <div className='my-page-container'>
+        <div className='my-page-title'>회원 정보 수정</div>
+        <div className='my-page-update-box'>
+          <div className='my-page-info-box'>
+            <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+            <div className='my-page-info'>{userEmailId}</div>
+            <div className='my-page-info'>{userName}</div>
+            <div className='my-page-info'>{userTelNumber}</div>
+            <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
           </div>
+          <div className='my-page-update' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>
       </div>
     </div>

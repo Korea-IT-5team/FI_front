@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { postNoticeBoardRequest } from 'src/apis/board';
+import { postNoticeBoardRequest } from 'src/apis/board/noticeboard';
 import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
@@ -10,20 +10,18 @@ import './style.css';
 
 //                    component                    //
 export default function NoticeWrite() {
+
   //                    state                    //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-
   const { loginUserRole } = useUserStore();
-
   const [cookies] = useCookies();
-  
   const [noticeTitle, setNoticeTitle] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
   const navigator = useNavigate();
 
-  const postBoardResponse = (result: ResponseDto | null) => {
+  const postNoticeBoardResponse = (result: ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
@@ -53,13 +51,13 @@ export default function NoticeWrite() {
     contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
   };
 
-  const onPostButtonClickHandler = () => {
+  const onPostButtonClickHandler = async () => {
     if (!noticeTitle.trim() || !noticeTitle.trim()) return;
     if (!cookies.accessToken) return;
 
     const requestBody: PostNoticeBoardRequestDto = { noticeTitle, noticeContents };
 
-    postNoticeBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
+    postNoticeBoardRequest(requestBody, cookies.accessToken).then(postNoticeBoardResponse);
   };
 
   //                    effect                    //

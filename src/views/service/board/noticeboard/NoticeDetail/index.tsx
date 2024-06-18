@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router';
 import { useUserStore } from 'src/stores';
 import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { BOARD_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import { deleteNoticeBoardRequest, getNoticeBoardRequest, increaseViewCountRequest } from 'src/apis/board';
+import { BOARD_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { deleteNoticeBoardRequest, getNoticeBoardRequest, increaseViewCountRequest } from 'src/apis/board/noticeboard';
 import './style.css';
 
 //                    component                    //
@@ -30,10 +30,10 @@ export default function NoticeDetail() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '잘못된 공지번호입니다.' :
-                    result.code === 'AF' ? '인증에 실패했습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '잘못된 공지번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -41,7 +41,7 @@ export default function NoticeDetail() {
                 navigator(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
-            navigator(BOARD_ABSOLUTE_PATH);
+            navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
@@ -53,10 +53,10 @@ export default function NoticeDetail() {
     const getNoticeBoardResponse = (result: GetNoticeBoardResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '잘못된 공지번호입니다.' :
-                    result.code === 'AF' ? '인증에 실패했습니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '잘못된 공지번호입니다.' :
+            result.code === 'AF' ? '인증에 실패했습니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -64,7 +64,7 @@ export default function NoticeDetail() {
                 navigator(SIGN_IN_ABSOLUTE_PATH);
                 return;
             }
-            navigator(BOARD_ABSOLUTE_PATH);
+            navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
             return;
         }
 
@@ -72,6 +72,7 @@ export default function NoticeDetail() {
         setNoticeTitle(noticeTitle);
         setNoticeWriterId(noticeWriterId);
         setNoticeWriterNickname(noticeWriterNickname);
+        console.log(noticeWriterNickname);
         setNoticeWriteDatetime(noticeWriteDatetime);
         setNoticeContents(noticeContents);
         setViewCount(viewCount);
@@ -80,22 +81,21 @@ export default function NoticeDetail() {
     const deleteNoticeBoardResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'AF' ? '권한이 없습니다.' :
-                    result.code === 'VF' ? '올바르지 않은 접수번호입니다.' :
-                        result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'VF' ? '올바르지 않은 접수번호입니다.' :
+            result.code === 'NB' ? '존재하지 않는 게시물입니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' :
                                 '';
         if (!result || result.code !== 'SU') {
             alert(message);
             return;
         }
-        navigator(BOARD_ABSOLUTE_PATH);
+        navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
-
 
     //                    event handler                    //    
     const onListClickHandler = () => {
-        navigator(BOARD_ABSOLUTE_PATH);
+        navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
 
     const onUpdateClickHandler = () => {
@@ -121,30 +121,30 @@ export default function NoticeDetail() {
     //                    render                    //
     return (
         <div id='notice-detail-wrapper'>
-            <div className='notice-detail-main-box'>
-                <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
-                <div className='notice-detail-top-box'>
-                    <div className='notice-detail-title-box'>
-                        <div className="notice-detail-title">공지 제목 {noticeTitle}</div>
-                    </div>
-                    <div className='notice-detail-info-box'>
-                        <div className='notice-detail-info'>작성자 {noticeWriterNickname}</div>
-                        <div className='notice-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-info'>작성일 {noticeWriteDatetime}</div>
-                        <div className='notice-detail-info-divider'>{'\|'}</div>
-                        <div className='notice-detail-info'>조회수 {viewCount}</div>
-                    </div>
+        <div className='notice-detail-main-box'>
+            <div className='notice-detail-list-button' onClick={onListClickHandler}>←</div>
+            <div className='notice-detail-top-box'>
+                <div className='notice-detail-title-box'>
+                    <div className="notice-detail-title">{noticeTitle}</div>
                 </div>
-                <div className='notice-detail-bottom-box'>
-                    <div className="notice-detail-content">공지 내용 {noticeContents}</div>
-                    { loginUserEmailId === noticeWriterId && loginUserRole === 'USER_ADMIN' &&
-                    (<div className="notice-detail-button-box">
-                        <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
-                        <div className="error-button full-width" onClick={onDeleteClickHandler}>삭제</div>
-                    </div>)
-                    }
+                <div className='notice-detail-info-box'>
+                    <div className='notice-detail-info'>작성자 {noticeWriterNickname}</div>
+                    <div className='notice-detail-info-divider'>{'\|'}</div>
+                    <div className='notice-detail-info'>작성일 {noticeWriteDatetime}</div>
+                    <div className='notice-detail-info-divider'>{'\|'}</div>
+                    <div className='notice-detail-info'>조회수 {viewCount}</div>
                 </div>
             </div>
+            <div className='notice-detail-bottom-box'>
+                <div className="notice-detail-content">{noticeContents}</div>
+                { loginUserEmailId === noticeWriterId && loginUserRole === 'ROLE_ADMIN' &&
+                (<div className="notice-detail-button-box">
+                    <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
+                    <div className="error-button full-width" onClick={onDeleteClickHandler}>삭제</div>
+                </div>)
+                }
+            </div>
         </div>
+    </div>
     );
 }

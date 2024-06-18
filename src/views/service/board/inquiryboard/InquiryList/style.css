@@ -1,34 +1,33 @@
 #inquiry-list-wrapper {
+    width: 1300px;
+    min-width: 800px;
+
     display: flex;
     flex-direction: column;
-    width: 1600px;
-    padding: 16px;
-    gap: 16px;
+
+    padding: 20px;
+    gap: 17px;
 }
 
 .inquiry-list-top-box {
+    width: 100%;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
 }
 
 .inquiry-list-top-left {
     display: flex;
     flex-direction: row;
     align-items: end;
-    gap: 12px;
 }
 
 .inquiry-list-size-text {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     
     color: rgba(138, 146, 166, 1);
-}
-
-.inquiry-list-size-text.emphasis {
-    color: rgba(64, 64, 64, 1);
 }
 
 .inquiry-list-top-right {
@@ -45,16 +44,29 @@
     color: rgba(64, 64, 64, 1);
 }
 
+.inquiry {
+    width: 80px;
+    height: 40px;
+
+    padding: 3px;
+
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
 .inquiry-list-table-th {
-    display: flex;
-    flex-direction: column;
     width: 100%;
 
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
 
-    color: rgba(64, 64, 64, 1);
+    text-align: center;
+    font-family: 'Nanum Gothic';
+    font-size: 17px;
+    font-weight: bold;
+    color: rgba(50, 50, 50, 1);
 }
 
 .inquiry-list-table-top {
@@ -62,9 +74,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     padding: 15px;
 
-    background-color: rgba(255, 148, 45, 0.3);
+    background-color: rgba(255, 148, 45, 0.2);
     border-radius: 6px;
 }
 
@@ -73,16 +86,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    
     gap: 95px;
+    padding: 13px 13px;
 
     border-top: 1px solid rgba(238, 238, 238, 1);
-    padding: 20px 20px;
 
-    font-size: 16px;
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
     font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(64, 64, 64, 1);
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
 }
 
 .inquiry-list-table-tr:hover {
@@ -125,7 +139,7 @@
     justify-content: space-between;
 }
 
-.inquiry-list-pageNation {
+.inquiry-list-pagenation {
     display: flex;
     text-align: center;
     gap: 24px;
@@ -134,55 +148,51 @@
 .inquiry-list-page-box {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 13px;
 }
 
 .inquiry-list-page {
-    font-size: 14px;
+    font-family: 'Nanum Gothic';
+    font-size: 13px;
     font-weight: 400;
-    line-height: 20px;
-
+    line-height: 150%;
     color: rgba(138, 146, 166, 1);
 
     cursor: pointer;
 }
 
 .inquiry-list-page-active {
-    font-size: 14px;
+    font-family: 'Nanum Gothic';
+    font-size: 13px;
     font-weight: 400;
-    line-height: 20px;
-
-    color: rgba(64, 64, 64, 1);
-
-    cursor: default;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
 }
 
 .inquiry-list-search-box {
     display: flex;
     align-items: center;
+
     gap: 12px;
 }
 
 .inquiry-list-search-input-box {
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 6px;
-    padding: 5px;
     width: 250px;
 
-    background-color: rgba(255, 255, 255, 1);
+    padding: 5px;
+
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
 }
 
 .inquiry-list-search-input {
-    border: none;
-    outline: none;
-    background: none;
-
     width: 100%;
-    
-    font-family: 'Nanum Gothic';
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 175%;
 
-    color: rgba(64, 64, 64, 1);
+    border: none;
+
+    font-family: 'Nanum Gothic';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
 }

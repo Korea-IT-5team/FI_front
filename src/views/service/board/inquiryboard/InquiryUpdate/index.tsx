@@ -21,7 +21,7 @@ export default function InquiryUpdate() {
   const [cookies] = useCookies();
 
   const [inquiryWriterId, setInquiryWriterId] = useState<string>('');
-  // const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
+  const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
@@ -45,10 +45,9 @@ export default function InquiryUpdate() {
 
     const { inquiryWriterId, inquiryContents, inquiryTitle, status } = result as GetInquiryBoardResponseDto;
 
-    // 요기 수정 
-    if (!cookies.accessToken) {
+    if (inquiryWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
-      // navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     if (status) {
@@ -57,7 +56,7 @@ export default function InquiryUpdate() {
       return;
   }
     setInquiryWriterId(inquiryWriterId);
-    // setInquiryWriterNickname(inquiryWriterNickname);
+    setInquiryWriterNickname(inquiryWriterNickname);
     setInquiryTitle(inquiryTitle)
     setInquiryContents(inquiryContents);
   };
@@ -100,7 +99,7 @@ export default function InquiryUpdate() {
   const onInquiryUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !inquiryNumber) return;
     if (!inquiryTitle.trim() || !inquiryContents.trim()) return;
-      console.log("sd");
+    
     const requestBody: PatchInquiryBoardRequestDto = { inquiryTitle, inquiryContents };
     patchInquiryBoardRequest(inquiryNumber, requestBody, cookies.accessToken).then(patchInquiryBoardResponse);
   };
