@@ -32,6 +32,20 @@
     align-items: end;
 }
 
+.notice-list-nav-text {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+.notice-list-text {
+    font-family: 'HakgyoansimWoojuR';
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(138, 146, 166, 1);
+}
+
 .notice-list-size-text {
     font-family: 'HakgyoansimWoojuR';
     font-size: 15px;
