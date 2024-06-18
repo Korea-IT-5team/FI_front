@@ -70,8 +70,8 @@ function TopBar({ path }: Props) {
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-right-container'>
           <div className='top-navigation-box'>
-            <div className='top-navigation'>식당 검색</div>
-            <div className='top-navigation'>고객센터</div>
+            <div className='top-navigation' onClick={() => navigation(RESTAURANT_LIST_ABSOLUTE_PATH)}>식당 검색</div>
+            <div className='top-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>고객센터</div>
           </div>
           <div className='top-divider'>|</div>
           <div className='main-top-bar-button'>
