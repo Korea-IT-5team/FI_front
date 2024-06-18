@@ -168,14 +168,14 @@ const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-res
   <>    
     <div className="do-reservation-information">예약자 정보</div>  
     <div className="do-reservation-box">
-        <div className="do-reservation-input-label">날짜</div>
-        {!isPopupOpen ? <DatePicker
+    {!isPopupOpen && <div className="do-reservation-input-label">날짜</div>}
+    {!isPopupOpen && <DatePicker
             className="do-reservation-date-input"
             selected={reservationDate}
             onChange={onMonthDayChangeHandler}
             dateFormat="yyyy-MM-dd"
             placeholderText="날짜를 선택해주세요"
-        /> : <div className="do-reservation-date-input2">날짜를 선택해주세요</div>}
+        /> }
             
         <div className="do-reservation-input-label">시간</div>
         <div className="do-reservation-time-box">
