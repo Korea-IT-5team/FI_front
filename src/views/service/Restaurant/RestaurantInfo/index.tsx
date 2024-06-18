@@ -13,14 +13,20 @@ import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
 import './style.css';
-import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 
 // component : 특정 식당 정보 //
 export default function RestaurantInfo() {
     useKakaoLoader({
         appkey: "1121641ff4fa6668d61874ed79c1709e",
         libraries: ["clusterer", "drawing", "services"],
-      })
+    })
+
+    const center = {
+        // 지도의 중심좌표
+        lat: 33.450701,
+        lng: 126.570667,
+    }
 
     // state //
     const { loginUserEmailId, loginUserRole } = useUserStore();
@@ -44,6 +50,10 @@ export default function RestaurantInfo() {
     const [reservationUserId, setReservationUserId] = useState<String>("");
     const [reservationRestaurantId, setReservationRestaurantId] = useState<number>();
     const [grade, setGrade] = useState<number>();
+    const [position, setPosition] = useState<{
+        lat: number
+        lng: number
+    }>()
 
     // function //
     const navigation = useNavigate();
@@ -325,21 +335,17 @@ export default function RestaurantInfo() {
                     )}
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon location'></div>
-                    <div className='restaurant-information'>위치 : {restaurantLocation}</div>
                     <Map // 지도를 표시할 Container
                         id="map"
-                        center={{
-                            // 지도의 중심좌표
-                            lat: 33.450701,
-                            lng: 126.570667,
-                        }}
+                        center={center}
                         style={{
                             // 지도의 크기
                             width: "100%",
                             height: "350px",
                         }}
                         level={3} // 지도의 확대 레벨
-                        />
+                        ><MapMarker position={position ?? center} />
+                        </Map>
                 </div>
 
                 <div className='restaurant-info-icon-box'>

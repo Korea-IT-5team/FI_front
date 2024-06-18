@@ -10,6 +10,8 @@ export interface PostRestaurantInfoRequestDto {
     restaurantFeatures: string;
     restaurantNotice: string;
     restaurantRepresentativeMenu: string;
+    restaurantLat:number;
+    restaurantLng:number;
 }
 
 // description: 식당 정보 수정 Request Body DTO
