@@ -35,9 +35,9 @@
     background: none;
     
     width: 100%;
-    padding: 0px5px;
+    padding: 0px 5px;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 20px;
     font-weight: 400;
     line-height: 200%;
@@ -63,14 +63,14 @@
     width: 1000px;
     min-height: 300px;
 
-    font-family: 'Nanum Gothic';
+    background-color: rgba(240, 240, 240, 1);
+    border-radius: 8px;
+
+    font-family: 'HakgyoansimWoojuR';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
-
-    background-color: rgba(240, 240, 240, 1);
-    border-radius: 8px;
 }
 
 .inquiry-bottom-button-box {
