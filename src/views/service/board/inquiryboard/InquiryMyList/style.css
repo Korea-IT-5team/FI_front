@@ -11,10 +11,9 @@
 
 .inquiry-my-list-top {
   text-align: center;
-
-  font-family: 'Nanum Gothic';
-  font-size: 20px;
-  font-weight: bold;
+  font-family: 'KCC-Hanbit';
+  font-size: 25px;
+  font-weight: 400;
   line-height: 150%;
   color: rgba(50, 50, 50, 1);
 }
@@ -33,6 +32,7 @@
 }
 
 .inquiry-my-list-size-text {
+  font-family: 'HakgyoansimWoojuR';
   font-size: 15px;
   font-weight: 400;
   color: rgba(138, 146, 166, 1);
@@ -54,7 +54,7 @@
 }
 
 .inquiry-my-list-top-text {
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;
@@ -67,7 +67,7 @@
 
   padding: 3px;
 
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
@@ -80,7 +80,7 @@
   flex-direction: column;
 
   text-align: center;
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 17px;
   font-weight: bold;
   color: rgba(50, 50, 50, 1);
@@ -109,7 +109,7 @@
 
   border-top: 1px solid rgba(238, 238, 238, 1);
 
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
@@ -135,6 +135,7 @@
 
 .inquiry-my-list-table-title {
   width: 280px;
+
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -142,6 +143,7 @@
 
 .inquiry-my-list-table-writer-nickname {
   width: 60px;
+
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -151,11 +153,11 @@
 }
 
 .inquiry-my-list-bottom {
+  width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  
 }
 
 .inquiry-my-list-pageNation {
@@ -166,34 +168,33 @@
   margin-right: 300px;
 }
 
-
-
 .inquiry-my-list-page-box {
   display: flex;
   align-items: center;
+
   gap: 13px;
 }
 
 .inquiry-my-list-page {
-  font-family: 'Nanum Gothic';
+  margin: 0 5px;
+
+  font-family: 'HakgyoansimWoojuR';
   font-size: 13px;
   font-weight: 400;
   line-height: 150%;
   color: rgba(138, 146, 166, 1);
 
   cursor: pointer;
-
-  margin: 0 5px;
 }
 
 .inquiry-my-list-page-active {
-  font-family: 'Nanum Gothic';
+  margin: 0 5px;
+
+  font-family: 'HakgyoansimWoojuR';
   font-size: 13px;
   font-weight: 400;
   line-height: 150%;
-  color: red;
-
-  margin: 0 5px;
+  color: rgba(255, 148, 45, 1);
 }
 
 .inquiry-my-list-search-box {
@@ -217,7 +218,7 @@
 
   border: none;
 
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;

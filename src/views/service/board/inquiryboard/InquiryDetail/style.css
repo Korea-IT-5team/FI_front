@@ -35,7 +35,7 @@
 .inquiry-detail-title {
     padding: 0px 5px;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 25px;
     font-weight: bold;
     color: rgba(50, 50, 50, 1);
@@ -52,7 +52,7 @@
 }
 
 .inquiry-detail-info {
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
@@ -60,7 +60,7 @@
 }
 
 .inquiry-detail-info-divider {
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
@@ -72,12 +72,13 @@
 
     padding: 0px 5px;
 
+    white-space: pre-wrap;
+
+    font-family: 'HakgyoansimWoojuR';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
-
-    white-space: pre-wrap;
 }
 
 .inquiry-detail-button-box {
@@ -109,13 +110,13 @@
 }
 
 .inquiry-detail-comment {
-    font-family: 'Nanum Gothic';
+    white-space: pre-wrap;
+
+    font-family: 'HakgyoansimWoojuR';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
-
-    white-space: pre-wrap;
 }
 
 .inquiry-detail-comment-write-box {
@@ -147,7 +148,7 @@
 
     width: 100%;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;

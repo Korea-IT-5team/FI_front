@@ -50,7 +50,7 @@ function SnsContainer({ title }: SnsContainerProps) {
     // render: sns화면 //
     return (
         <div className="authentication-sns-container">
-            <div className="sns-container-title label">{title}</div>
+            <div className="sns-container-title">{title}</div>
             <div className="sns-button-container">
                 <div className="sns-button kakao-button" onClick={() => onSnsButtonClickHandler('kakao')}></div>
                 <div className="sns-button naver-button" onClick={() => onSnsButtonClickHandler('naver')}></div>
