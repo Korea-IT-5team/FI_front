@@ -12,7 +12,7 @@ export default function MyPageSite() {
 
   // state // 
   const [cookies] = useCookies();
-  
+
   const [userEmailId, setEmailId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
@@ -47,7 +47,6 @@ export default function MyPageSite() {
     setUserTelNumber(userTelNumber);
     setUserAddress(userAddress);
     setUserRole(userRole);
-
   };
 
   //   effect   //

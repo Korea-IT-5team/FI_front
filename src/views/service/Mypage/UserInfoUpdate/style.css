@@ -45,6 +45,19 @@
   /* border-top: 1px solid rgba(238, 238, 238, 1); */
 }
 
+.my-page-update-contents-title {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start ;
+
+  font-family: 'KCC-Hanbit';
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+}
+
 .my-page-update-contents-box{
   width: 300px;
 
@@ -53,27 +66,12 @@
   
   gap: 20px;
 
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
   color: rgba(50, 50, 50, 1);
 }
-
-/* .my-page-update-box {
-  width: 300px;
-
-  display: flex;
-  flex-direction: column;
-  
-  gap: 20px;
-
-  font-family: 'Nanum Gothic';
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-} */
 
 .my-page-update-info-first {
   width: 100%;
@@ -86,10 +84,14 @@
 }
 
 .my-page-update-info {
+  width: 100%;
   padding: 10px;
-
-  background-color: rgba(240, 240, 240, 1);
-  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 1);
+  /* border-radius: 7px; */
+  min-width: 100px; 
+  text-align: center; 
+  font-family: 'HakgyoansimWoojuR';
+  word-break: break-word; 
 }
 
 .my-page-update {
@@ -101,7 +103,7 @@
   border-radius: 8px;
 
   text-align: center;
-  font-family: 'Nanum Gothic';
+  font-family: 'HakgyoansimWoojuR';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;

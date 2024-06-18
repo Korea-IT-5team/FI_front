@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
@@ -232,6 +232,10 @@ export default function NoticeList() {
             <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
           </div>
         </div>
+        <div className='notice-list-nav-text'>
+          <div className='notice-list-text' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>문의사항</div>
+          <div className='notice-list-text' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의사항</div>
+        </div>
         <div className='notice-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' && (
           <div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>
@@ -273,5 +277,4 @@ export default function NoticeList() {
       </div>
     </div>
   )
-
 }
