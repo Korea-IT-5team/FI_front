@@ -121,8 +121,8 @@ export default function UserInfoUpdate() {
             <div className='my-page-title' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
             <div className='my-page-title' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
         </div>
-        <div className='my-page-update-box'>
-          <div className='my-page-info-box'>
+        <div className='my-page-update-container'>
+          <div className='my-page-update-box'>
             <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
             <div className='my-page-info'>{userEmailId}</div>
             <div className='my-page-info'>{userName}</div>

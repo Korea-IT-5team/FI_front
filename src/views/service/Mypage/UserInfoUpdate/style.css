@@ -14,7 +14,7 @@
   font-weight: bold;
 }
 
-.my-page-update-box {
+.my-page-update-container {
   height: 500px;
   max-width: 800px;
 
@@ -29,7 +29,7 @@
   border-top: 1px solid rgba(238, 238, 238, 1);
 }
 
-.my-page-info-box {
+.my-page-update-box {
   width: 300px;
 
   display: flex;
@@ -44,7 +44,7 @@
   color: rgba(50, 50, 50, 1);
 }
 
-.my-page-info {
+.my-page-update-info {
   padding: 10px;
 
   background-color: rgba(240, 240, 240, 1);
