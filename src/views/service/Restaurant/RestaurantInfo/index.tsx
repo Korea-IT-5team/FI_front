@@ -326,8 +326,6 @@ export default function RestaurantInfo() {
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon location'></div>
                     <div className='restaurant-information'>위치 : {restaurantLocation}</div>
-<<<<<<< HEAD
-=======
                     <Map // 지도를 표시할 Container
                         id="map"
                         center={{
@@ -342,14 +340,12 @@ export default function RestaurantInfo() {
                         }}
                         level={3} // 지도의 확대 레벨
                         />
->>>>>>> 63df486d4b5f9772a3c346373c2bb96798e47ee7
                 </div>
 
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon sns'></div>
                     <div>SNS : {restaurantSnsAddress}</div>
                 </div>
-<<<<<<< HEAD
 
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon telnumber'></div>
@@ -376,35 +372,6 @@ export default function RestaurantInfo() {
                     {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
                 </div>
                 
-
-=======
-
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon telnumber'></div>
-                    <div>전화번호 : {restaurantTelNumber}</div>
-                </div>
-
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon time'></div>
-                    {restaurantOperationHours && <div>운영시간 : {restaurantOperationHours}</div>}
-                </div>
-
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon menu'></div>
-                    {restaurantRepresentativeMenu && <div>대표메뉴 : {restaurantRepresentativeMenu}</div>}
-                </div>
-
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon feature'></div>
-                    {restaurantFeatures && <div>특징 : {restaurantFeatures}</div>}
-                </div>
-
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon notice'></div>
-                    {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
-                </div>
-                
->>>>>>> 63df486d4b5f9772a3c346373c2bb96798e47ee7
                 <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
             </div>
         </>
