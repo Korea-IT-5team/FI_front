@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -128,6 +128,12 @@ export default function RestaurantInfoWrite()
         const { value } = event.target;
         setRestaurantRepresentativeMenu(value);
     }
+
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            onUploadClickHandler();
+        }
+    };
    
     const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantLocation && restaurantTelNumber;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`; 
@@ -151,7 +157,8 @@ export default function RestaurantInfoWrite()
                 <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
                 placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
                 <RestaurantInputBox label="식당 연락처" type="text" value={restaurantTelNumber}
-                placeholder="연락처를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
+                placeholder="연락처를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} 
+                onKeydownHandler={onKeyPressHandler}/>
                 <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}
                 placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
                 <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures}
@@ -159,7 +166,8 @@ export default function RestaurantInfoWrite()
                 <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice}
                 placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
                 <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
-                placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler}/>
+                placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} 
+                onKeydownHandler={onKeyPressHandler}/>
                 <div> 사업자 등록번호: {businessRegistrationNumber} </div>
                 <div className="restaurant-info-registered-button-box">
                     <button onClick={onUploadClickHandler}

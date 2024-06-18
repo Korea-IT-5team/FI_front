@@ -158,9 +158,10 @@ export default function RestaurantInfoUpdate()
         setRestaurantRepresentativeMenu(value);
     }
 
-    const onRepresentativeMenuKeydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key !== 'Enter') return;
-        onUpdateClickHandler()
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            onUpdateClickHandler();
+        }
     };
 
     // effect //
@@ -198,7 +199,8 @@ export default function RestaurantInfoUpdate()
                 <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
                 placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
                 <RestaurantInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber}
-                placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}/>
+                placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} 
+                onKeydownHandler={onKeyPressHandler}/>
                 <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}
                 placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
                 <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures}
@@ -207,7 +209,7 @@ export default function RestaurantInfoUpdate()
                 placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
                 <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
                 placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} 
-                onKeydownHandler={onRepresentativeMenuKeydownHandler}/>
+                onKeydownHandler={onKeyPressHandler}/>
                 <div> 사업자 등록번호: {businessRegistrationNumber} </div>
                 <div className="restaurant-info-registered-button-box">
                     <button onClick={onUpdateClickHandler}

@@ -61,7 +61,6 @@ export default function RestaurantList() {
         setDisplayCount(prevCount => prevCount + 8);
     };
 
-     // 추가한 부분: Enter 키 이벤트 핸들러 //
     const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             onSearchClickHandler();
