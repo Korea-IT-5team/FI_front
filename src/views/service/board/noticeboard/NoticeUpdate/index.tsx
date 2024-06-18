@@ -23,7 +23,7 @@ export default function NoticeUpdate() {
   const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const getNoticeBoardResponse = (result: GetNoticeBoardResponseDto | ResponseDto | null) => {
 
@@ -36,14 +36,14 @@ export default function NoticeUpdate() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
 
     const { noticeWriterId, noticeContents, noticeTitle } = result as GetNoticeBoardResponseDto;
     if (noticeWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
-      navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -68,7 +68,7 @@ export default function NoticeUpdate() {
     }
 
     if (!noticeNumber) return;
-    navigator(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
+    navigation(NOTICE_DETAILS_ABSOLUTE_PATH(noticeNumber));
   };
 
   //                    event handler                    //
@@ -108,7 +108,7 @@ export default function NoticeUpdate() {
       effectFlag = true;
       if (loginUserRole !== 'ROLE_ADMIN') {
           alert('권한이 없습니다.');
-          navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+          navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
           return;
       }
       getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse);
@@ -123,7 +123,7 @@ export default function NoticeUpdate() {
           <input className='notice-update-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
         <div className='notice-update-contents-box'>
-          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <textarea ref={contentsRef} className='notice-update-contents-textarea' placeholder='내용을 입력해주세요.' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
           <div className='primary-button' onClick={onNoticeUpdateButtonClickHandler}>수정</div>
         </div>
       </div>

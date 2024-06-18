@@ -12,7 +12,6 @@ export interface GetRestaurantInfoResponseDto extends ResponseDto {
   restaurantImage: string;
   restaurantName: string;
   restaurantFoodCategory: string;
-  restaurantPostalCode: string;
   restaurantLocation: string;
   restaurantTelNumber: string;
   restaurantSnsAddress: string;
@@ -22,5 +21,12 @@ export interface GetRestaurantInfoResponseDto extends ResponseDto {
   restaurantRepresentativeMenu: string;
   restaurantBusinessRegistrationNumber: string;
   restaurantWriterId: string;
+  restaurantLat: number;
+  restaurantLng: number;
   restaurantReviewList: RestaurantReviewListItem[];
+}
+
+// description: 사장 식당 아이디 Response Body DTO
+export interface GetRestaurantIdResponseDto extends ResponseDto {
+  restaurantId: number;
 }

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import "./style.css";
-import { Outlet, useLocation, useNavigate } from 'react-router';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from 'src/constant';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useUserStore } from 'src/stores';
-import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
+import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { useUserStore } from 'src/stores';
+import "./style.css";
 
-type Path = '식당리스트' | '마이페이지' | '문의사항' | '';
+type Path = '식당리스트' | '마이페이지' | '문의사항' | '공지사항' |'';
 
 // interface //
 interface Props {
@@ -40,9 +40,8 @@ function TopBar({ path }: Props) {
   }, [cookies.accessToken]);
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
-  // 로그아웃 처리 시 원래 있던 쿠기 값을 제거
   const onLogoutClickHandler = () => {
     removeCookie('accessToken', { path: '/' });
     setLoginUserEmailId('');
@@ -54,12 +53,13 @@ function TopBar({ path }: Props) {
     if(pathname === MAIN_ABSOLUTE_PATH){    
       window.location.reload();
     } else {
-    navigator(MAIN_ABSOLUTE_PATH);}
+    navigation(MAIN_ABSOLUTE_PATH);}
   }
 
-  const onSignInClickHandler = () => navigator(SIGN_IN_ABSOLUTE_PATH);
-  const onMyPageClickHandler = () => navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onAdminPageClickHandler = () => navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+  const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
+  const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+  const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
 
   const toggleSideNav = () => setIsSideNavOpen(!isSideNavOpen);
 
@@ -67,73 +67,103 @@ function TopBar({ path }: Props) {
   return (
     <>
       <div className='main-head-box'>
-        <div className='main-icon' onClick={toggleSideNav}>☰</div>
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
-        <div className='main-top-bar-button'>
-        {loginUserRole === 'ROLE_USER' &&
-        <div className="top-bar-role">
-          <div className="sign-in-wrapper">
-            <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+        <div className='main-right-container'>
+          <div className='top-navigation-box'>
+            <div className='top-navigation' onClick={() => navigation(RESTAURANT_LIST_ABSOLUTE_PATH)}>식당 검색</div>
+            <div className='top-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>고객센터</div>
           </div>
-          <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-        </div>
-        }
-        {loginUserRole === 'ROLE_ADMIN' && 
-        <div className="top-bar-role">
-          <div className="sign-in-wrapper">
-            <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+          <div className='top-divider'>|</div>
+          <div className='main-top-bar-button'>
+          {loginUserRole === 'ROLE_USER' &&
+          <div className="top-bar-role">
+            <div className="sign-in-box">
+              <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+            </div>
+            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
           </div>
-          <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-        </div>
-        }
-        {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && 
-        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
-        }
+          }
+          {loginUserRole === 'ROLE_CEO' &&
+          <div className="top-bar-role">
+            <div className="sign-in-wrapper">
+              <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
+            </div> 
+            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+          </div>
+          }
+          {loginUserRole === 'ROLE_ADMIN' && 
+          <div className="top-bar-role">
+            <div className="sign-in-wrapper">
+              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+            </div>
+            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+          </div>
+          }
+          {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
+          <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+          }
+          </div>
         </div>
       </div>
-      <SideNavigation path={path} isOpen={isSideNavOpen} toggleSideNav={toggleSideNav} />
+      {/* <SideNavigation path={path} isOpen={isSideNavOpen} toggleSideNav={toggleSideNav} /> */}
     </>
   );
 }
 
-// component //
-function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
+// // component //
+// function MainSideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
 
-  const restaurantList = `side-navigation-item${path === '식당리스트' ? 'active' : ''};`
-  const myPageSite = `side-navigation-item${path === '마이페이지' ? 'active' : ''};`
-  const inquiryBoard = `side-navigation-item${path === '문의사항' ? 'active' : ''};`
+//   const {pathname} = useLocation();
+//   const { loginUserRole } = useUserStore();
 
-  const {pathname} = useLocation();
+//   // function //
+//   const navigation = useNavigate();
 
-  // function //
-  const navigation = useNavigate();
+//   // event handler //
+//   const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+//   const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+//   const onCeoPageSiteClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+//   const onInquiryBoardClickHandler = () => {
+//     if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
+//     else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+//   };
+//   const onNoticeBoardClickHandler = () => {
+//     if (pathname === NOTICE_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
+//     else navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+//   };
 
-  // event handler //
-  const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
-  const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onInquiryBoardClickHandler = () => {
-    if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
-    else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
-  };
-
-  // render //
-  return (
-    <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
-      <div className={restaurantList} onClick={onRestaurantListClickHandler}>
-        <div className='side-navigation-icon food'></div>
-        <div className='side-navigation-title'>식당 리스트</div>
-      </div>
-      <div className={myPageSite} onClick={onMyPageSiteClickHandler}>
-        <div className='side-navigation-icon my-page'></div>
-        <div className='side-navigation-title'>마이페이지</div>
-      </div>
-      <div className={inquiryBoard} onClick={onInquiryBoardClickHandler}>
-        <div className='side-navigation-icon board'></div>
-        <div className='side-navigation-title'>문의사항</div>
-      </div>
-    </div>
-  );
-}
+//   // render //
+//   return (
+//     <div className={`main-side-navigation-container${isOpen ? ' show' : ''}`}>
+//       <div className='main-side-navigation-contents'>
+//         <div className='main-side-navigation-item' onClick={onRestaurantListClickHandler}>
+//           <div className='main-side-navigation-icon food'></div>
+//           <div className='main-side-navigation-title'>식당 리스트</div>
+//         </div>
+//         {loginUserRole === 'ROLE_USER' &&
+//           <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
+//             <div className='main-side-navigation-icon my-page'></div>
+//             <div className='main-side-navigation-title'>마이페이지</div>
+//           </div>
+//         }
+//         {loginUserRole === 'ROLE_CEO' &&
+//           <div className='main-side-navigation-item' onClick={onCeoPageSiteClickHandler}>
+//             <div className='main-side-navigation-icon my-page'></div>
+//             <div className='main-side-navigation-title'>사장페이지</div>
+//           </div>
+//         }
+//         <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
+//           <div className='main-side-navigation-icon inquiry'></div>
+//           <div className='main-side-navigation-title'>문의사항</div>
+//         </div>
+//         <div className='main-side-navigation-item' onClick={onNoticeBoardClickHandler}>
+//           <div className='main-side-navigation-icon notice'></div>
+//           <div className='main-side-navigation-title'>공지사항</div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 // component //
 export default function Main() {
@@ -145,7 +175,7 @@ export default function Main() {
   const [path, setPath] = useState<Path>('');
 
   // function // 
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
 
@@ -156,7 +186,7 @@ export default function Main() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(SIGN_IN_ABSOLUTE_PATH);
+      navigation(SIGN_IN_ABSOLUTE_PATH);
       return;
     }
 
@@ -170,7 +200,8 @@ export default function Main() {
     const path =
       pathname === RESTAURANT_LIST_ABSOLUTE_PATH ? '식당리스트' :
       pathname === MY_PAGE_SITE_ABSOLUTE_PATH ? '마이페이지' :
-      pathname.startsWith(INQUIRY_BOARD_LIST_ABSOLUTE_PATH) ? '문의사항' : '';
+      pathname.startsWith(INQUIRY_BOARD_LIST_ABSOLUTE_PATH) ? '문의사항' :
+      pathname.startsWith(NOTICE_BOARD_LIST_ABSOLUTE_PATH) ? '공지사항' : '';
 
     setPath(path);
   }, [pathname]);
@@ -178,7 +209,7 @@ export default function Main() {
   useEffect(() => {
 
     if (!cookies.accessToken) {
-      navigator(MAIN_ABSOLUTE_PATH);
+      navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 

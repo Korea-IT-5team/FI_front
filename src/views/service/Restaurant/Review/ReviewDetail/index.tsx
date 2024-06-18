@@ -23,7 +23,7 @@ export default function ReviewDetail()
 
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
   {
@@ -36,7 +36,7 @@ export default function ReviewDetail()
             //alert(message);
             if(result?.code === 'AF')
             {
-                navigator(MAIN_ABSOLUTE_PATH);
+                navigation(MAIN_ABSOLUTE_PATH);
                 return;
             }
             return;
@@ -64,19 +64,19 @@ export default function ReviewDetail()
             return;
         }
 
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
   };
 
   // event handler //
   const onListClickHandler = () => 
   {
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
   };
 
   const onUpdateClickHandler = () => 
   {
         if(!reviewNumber) return;
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
   };
 
   const onDeleteClickHandler = () => 

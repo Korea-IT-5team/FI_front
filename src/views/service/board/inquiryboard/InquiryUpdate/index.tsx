@@ -5,7 +5,7 @@ import { getInquiryBoardRequest, patchInquiryBoardRequest } from 'src/apis/board
 import { PatchInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
 import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 
@@ -21,12 +21,11 @@ export default function InquiryUpdate() {
   const [cookies] = useCookies();
 
   const [inquiryWriterId, setInquiryWriterId] = useState<string>('');
-  const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
 
@@ -39,7 +38,7 @@ export default function InquiryUpdate() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -47,16 +46,15 @@ export default function InquiryUpdate() {
 
     if (inquiryWriterId !== loginUserEmailId) {
       alert('권한이 없습니다.');
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     if (status) {
       alert('답변이 완료된 게시물 입니다.');
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
   }
     setInquiryWriterId(inquiryWriterId);
-    setInquiryWriterNickname(inquiryWriterNickname);
     setInquiryTitle(inquiryTitle)
     setInquiryContents(inquiryContents);
   };
@@ -77,7 +75,7 @@ export default function InquiryUpdate() {
     }
 
     if (!inquiryNumber) return;
-    navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+    navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   };
 
   //                    event handler                    //
@@ -99,7 +97,6 @@ export default function InquiryUpdate() {
   const onInquiryUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !inquiryNumber) return;
     if (!inquiryTitle.trim() || !inquiryContents.trim()) return;
-    
     const requestBody: PatchInquiryBoardRequestDto = { inquiryTitle, inquiryContents };
     patchInquiryBoardRequest(inquiryNumber, requestBody, cookies.accessToken).then(patchInquiryBoardResponse);
   };
@@ -112,7 +109,7 @@ export default function InquiryUpdate() {
       if(effectFlag) return;
       effectFlag = true;
       if(loginUserRole !== 'ROLE_USER') {
-        navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
         return;
       }
       getInquiryBoardRequest(inquiryNumber, cookies.accessToken).then(getInquiryBoardResponse);

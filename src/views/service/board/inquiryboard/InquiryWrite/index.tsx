@@ -18,12 +18,12 @@ export default function InquiryWrite() {
 
   const [cookies] = useCookies();
   
-  const [isInquiryPublic, setIsInquiryPublic] = useState<boolean>(false);
+  const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const postBoardResponse = (result: ResponseDto | null) => {
 
@@ -37,7 +37,7 @@ export default function InquiryWrite() {
       alert(message);
       return;
     }
-    navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+    navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   };
 
   //                    event handler                    //
@@ -60,29 +60,29 @@ export default function InquiryWrite() {
     if (!inquiryTitle.trim() || !inquiryTitle.trim()) return;
     if (!cookies.accessToken) return;
 
-    const requestBody: PostInquiryBoardRequestDto = { inquiryTitle, inquiryContents, isInquiryPublic };
+    const requestBody: PostInquiryBoardRequestDto = { inquiryTitle, inquiryContents, inquiryPublic };
 
     postInquiryBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
   };
 
   const onPublicButtonClickHandler = () => {
-    setIsInquiryPublic(!isInquiryPublic);
+    setInquiryPublic(!inquiryPublic);
   }
 
   //                    effect                    //
   useEffect(() => {
     if (!cookies.accessToken) {
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
     if (loginUserRole === 'ROLE_ADMIN') {
-      navigator(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
   }, [loginUserRole]);
 
   //                    render                    //
-  const publicButtonClass = isInquiryPublic ? 'public-button' : 'un-public-button';
+  const publicButtonClass = inquiryPublic ? 'public-button' : 'un-public-button';
   return (
     <div id='inquiry-write-wrapper'>
       <div className='inquiry-write-main-box'>
@@ -92,7 +92,7 @@ export default function InquiryWrite() {
         <div className='inquiry-write-contents-box'>
           <textarea ref={contentsRef} className='inquiry-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={inquiryContents} onChange={onInquiryContentsChangeHandler} />
           <div className='inquiry-bottom-button-box'>
-            <div className={publicButtonClass} onClick={onPublicButtonClickHandler}>{ isInquiryPublic ? '공개' : '비공개' }</div>
+            <div className={publicButtonClass} onClick={onPublicButtonClickHandler}>{ inquiryPublic ? '공개' : '비공개' }</div>
             <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
           </div>
         </div>

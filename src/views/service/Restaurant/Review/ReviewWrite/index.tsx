@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -13,7 +13,7 @@ export default function ReviewWrite()
 {
   
   // state //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const {restaurantId} = useParams();
   const [reviewImage, setReviewImage] = useState<string>("");
@@ -37,7 +37,7 @@ export default function ReviewWrite()
       }
 
       if(!restaurantId) return;
-      navigator(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
+      navigation(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
   }
   
   // event handler //
@@ -96,6 +96,12 @@ export default function ReviewWrite()
           .then(PostReviewResponse);
 }
 
+const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter') {
+        UploadClickHandler();
+    }
+};
+
 const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
  
   // render //
@@ -128,7 +134,7 @@ const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
                 <div className='review-write-contents-box'>
                     <textarea ref={contentsRef} className='review-write-contents-textarea'
                             placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
-                            onChange={onContentsChangeHandler}/>
+                            onChange={onContentsChangeHandler} onKeyPress={onKeyPressHandler}/>
                 </div>
 
                 <div className="review-registered-button-box">

@@ -1,34 +1,43 @@
-.automatic-prevention {
-    width: 100%;
+.reset-password-container {
+  width: 100%;
 
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 12px;
-}
-
-.automatic-prevention-title {
-    text-align: center;
-
-    font-family: 'Nanum Gothic';
-    font-size: 15px;
-    font-weight: 400;
-    color: rgba(64, 64, 64, 1);
-}
-
-.automatic-prevention-image {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 10px;
-}
-
-.automatic-prevention-input {
   display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.reset-password-title {
+  text-align: center;
+
+  margin-top: 80px;
+
+  font-family: 'KCC-Hanbit';
+  font-size: 25px;
+  font-weight: 400;
+  color: rgba(50, 50, 50, 1);
+}
+
+.reset-password-box {
+  width: 100%;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+  gap: 20px;
+
+  background-color: rgba(255, 255, 255, 1);
+  border-top: 1px solid rgba(238, 238, 238, 1);
+}
+
+.reset-password-input-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
 }

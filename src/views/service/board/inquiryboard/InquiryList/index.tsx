@@ -1,46 +1,56 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
-import { Cookies, useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
 
         
 //     component     //
 function ListItem ({
+  index,
   inquiryNumber,
   status,
-  // inquiryStatus,
   inquiryPublic,
   inquiryTitle,
   inquiryWriterNickname,
-  inquiryWriteDatetime
-}: InquiryBoardListItem) {
+  inquiryWriteDatetime,
+  inquiryWriterId
+}: InquiryBoardListItem & { index: number }) {
+  
+  const { loginUserRole, loginUserEmailId } = useUserStore();
 
   //        function       //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   //      event handler      //
-  const onClickHandler = () => navigator(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  const onClickHandler = () => {
+    if (inquiryPublic && inquiryWriterId !== loginUserEmailId && loginUserRole !== 'ROLE_ADMIN') {
+      alert('비공개 게시물입니다.');
+      return;
+    }
+    navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
+  }
 
   //   render   //
+  
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
-      <div className='inquiry-list-table-reception-number'>{inquiryNumber}</div>
+      <div className='inquiry-list-table-reception-number'>{index + 1}</div>
       <div className='inquiry-list-table-status'>
           {status ? 
-          <div className='disable-bedge'>완료</div> :
-          <div className='primary-bedge'>접수</div>
+          <div className='primary-bedge'>답변</div> :
+          <div className='disable-bedge'>미답변</div> 
           }
       </div>
       <div className='inquiry-list-table-public'>
           {inquiryPublic ?
-          <div className='disable-bedge'>공개</div> :
-          <div className='primary-bedge'>비공개</div>
+          <div className='disable-bedge'>비공개</div> :
+          <div className='primary-bedge'>공개</div>
           }
       </div>
       <div className='inquiry-list-table-title' style={{ textAlign: 'left' }}>{inquiryTitle}</div>
@@ -66,12 +76,13 @@ export default function InquiryList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
+
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
 
   const [searchWord, setSearchWord] = useState<string>('');
 
   //   function   //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
@@ -118,7 +129,7 @@ export default function InquiryList() {
 
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
@@ -139,7 +150,7 @@ export default function InquiryList() {
     
     if (!result || result.code !== 'SU') {
       alert(message);
-      if (result?.code === 'AF') navigator(MAIN_ABSOLUTE_PATH);
+      if (result?.code === 'AF') navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
 
@@ -150,10 +161,12 @@ export default function InquiryList() {
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
 
+
+
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
-    if (loginUserRole !== 'ROLE_USER') return;
-    navigator(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
+    if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
+    navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
   };
 
   const onToggleClickHandler = () => {
@@ -165,16 +178,85 @@ export default function InquiryList() {
     setCurrentPage(page);
   };
 
+  // const onPreSectionClickHandler = () => {
+  //   if (currentSection <= 1) return;
+  //   setCurrentSection(currentSection - 1); 
+  //   setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+  // };
+
   const onPreSectionClickHandler = () => {
-    if (currentSection <= 1) return;
-    setCurrentSection(currentSection - 1); 
-    setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
+    if (currentSection <= 1 && currentPage <= 1) {
+      // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
+      return;
+    }
+    if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
+      // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
+      if (currentSection > 1) {
+        setCurrentSection(currentSection - 1);
+        setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
+      }
+    } else {
+      // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
+      setCurrentPage(currentPage - 1);
+    }
   };
+  
+
+  // const onNextSectionClickHandler = () => {
+  //   if (currentSection === totalSection) return;
+  //   setCurrentSection(currentSection + 1);
+  //   setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+  // };
 
   const onNextSectionClickHandler = () => {
-    if (currentSection === totalSection) return;
-    setCurrentSection(currentSection + 1);
-    setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
+    if (currentSection >= totalSection && currentPage >= totalPage) {
+      // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
+      return;
+    }
+    if (currentPage === currentSection * COUNT_PER_SECTION) {
+      // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
+      setCurrentSection(currentSection + 1);
+      setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
+    } else {
+      // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+//   const onNextSectionClickHandler = () => {
+//     const lastPageOfCurrentSection = currentSection * COUNT_PER_SECTION;
+//     if (currentPage < lastPageOfCurrentSection) {
+//         setCurrentPage(currentPage + 1);
+//     } else if (currentSection < totalSection) {
+//         setCurrentSection(currentSection + 1);
+//         setCurrentPage(lastPageOfCurrentSection + 1);
+//     }
+// };
+
+  // const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const searchWord = event.target.value;
+  //   setSearchWord(searchWord);
+  // };
+
+  // const onSearchButtonClickHandler = () => {
+  //   if (!searchWord) return;
+    
+  //   getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+
+  //   setSearchWord('');
+  // };
+
+  const onEnterKeyHandler = (event: { key: string; preventDefault: () => void; }) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+  
+      if (searchWord) {
+        getSearchInquiryBoardListRequest(searchWord, cookies.accessToken)
+          .then(getSearchInquiryBoardListResponse);
+
+          setSearchWord('');
+      }
+    }
   };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -191,7 +273,6 @@ export default function InquiryList() {
  
   //   effect   //
   useEffect(() => {
-    if (!cookies.accessToken) return;
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
     else
@@ -214,51 +295,56 @@ export default function InquiryList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id='inquiry-list-wrapper'>
+      <div className='inquiry-list-top'>문의</div>
       <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
           <div className='inquiry-list-size-text'>전체
-            <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+            <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
+          </div>
         </div>
         <div className='inquiry-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' &&
             (<>
-              <div className={toggleClass} onClick={onToggleClickHandler}></div>
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
+              <div className={toggleClass} onClick={onToggleClickHandler}></div>
             </>)}
-          {loginUserRole === 'ROLE_USER' && (
-            <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>글쓰기</div>
+
+          {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&(
+
+            <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>
       </div>
-      <div className='inquiry-list-table-th'>
+      <div className='inquiry-list-table'>
         <div className='inquiry-list-table-top'>
           <div className='inquiry-list-table-reception-number'>번호</div>
           <div className='inquiry-list-table-status'>상태</div>
           <div className='inquiry-list-table-public'>공개</div>
-          <div className='inquiry-list-table-title'>문의 제목</div>
+          <div className='inquiry-list-table-title'>제목</div>
           <div className='inquiry-list-table-writer-nickname'>작성자</div>
           <div className='inquiry-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-list-table-contents'>
-          {viewInquiryList.map(item => <ListItem {...item} />)}
+          {viewInquiryList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
         </div>
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px' }}></div>
+
         <div className='inquiry-list-pagenation'>
-          <div className='inquiry-list-page-left' onClick={onPreSectionClickHandler}></div>
+          <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
-            {pageList.map(page =>
-              page === currentPage ?
-                <div className='inquiry-list-page-active'>{page}</div> :
-                <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+            {pageList.map(page => page === currentPage ?
+              <div className='inquiry-list-page-active'>{page}</div> :
+              <div className='inquiry-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
             )}
           </div>
-          <div className='inquiry-list-page-right' onClick={onNextSectionClickHandler}></div>
+          <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
+
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
-            <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} />
+            <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} onKeyDown={onEnterKeyHandler}/>
           </div>
           <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>

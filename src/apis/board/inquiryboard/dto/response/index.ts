@@ -15,6 +15,7 @@ export interface GetSearchInquiryBoardListResponseDto extends ResponseDto {
 export interface GetInquiryBoardResponseDto extends ResponseDto {
   inquiryNumber: number;
   status:boolean;
+  inquiryPublic: boolean;
   inquiryTitle: string;
   inquiryWriterId: string;
   inquiryWriterNickname: string;
@@ -26,12 +27,12 @@ export interface GetInquiryBoardResponseDto extends ResponseDto {
 // description: 문의 게시물 목록 확인 Response Body DTO
 export interface GetInquiryBoardListItem {
   inquiryNumber: number;
-  inquiryStatus: boolean;
+  status: boolean;
+  inquiryPublic: boolean;
   inquiryTitle: string;
   inquiryWriterId: string;
   inquiryWriteDatetime: string;
 }
-
 
 // description: 나의 문의 게시물 목록 확인 Response Body DTO
 export interface GetMyInquiryBoardListResponseDto extends ResponseDto {

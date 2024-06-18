@@ -1,3 +1,95 @@
+/* DatePickerStyles.css */
+
+/* 전체 DatePicker를 감싸는 컨테이너 */
+.react-datepicker {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    border: 1px solid rgba(200, 200, 200, 1);
+    border-radius: 6px;
+    z-index: 9999; /* 필요에 따라 z-index 조정 */
+    position: relative; /* 상대 위치 지정 */
+    background-color: rgba(255, 255, 255, 0); /* 배경을 투명하게 설정 */
+}
+
+/* DatePicker의 헤더 */
+.react-datepicker__header {
+    background-color: rgba(255, 148, 45, 1); /* 달력 헤더 배경색 */
+    border-bottom: none; /* 헤더 아래 선 제거 */
+    padding: 10px;
+}
+
+/* 달력 내부 월 텍스트 */
+.react-datepicker__current-month {
+    font-size: 18px; /* 달력 월 텍스트 크기 */
+    font-weight: bold;
+    color: white; /* 달력 월 텍스트 색상 */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 달력 요일 이름들 */
+.react-datepicker__day-names {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+/* 달력의 각 날짜 버튼 */
+.react-datepicker__day {
+    display: inline-block;
+    width: 50px; /* 날짜 버튼 너비 */
+    height: 50px; /* 날짜 버튼 높이 */
+    line-height: 40px; /* 버튼 텍스트 중앙 정렬 */
+    text-align: center; /* 버튼 텍스트 가운데 정렬 */
+    margin: 2px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    background-color: rgba(255, 255, 255, 1); 
+    margin: 0;
+}
+
+/* 선택된 날짜 버튼 */
+.react-datepicker__day--selected {
+    background-color: rgba(255, 148, 45, 1); /* 선택된 날짜 배경색 */
+    color: white; /* 선택된 날짜 텍스트 색상 */
+}
+
+
+/* 날짜 버튼 호버 효과 */
+.react-datepicker__day:hover {
+    background-color: rgba(255, 148, 45, 1); /* 날짜 버튼 호버 배경색 */
+}
+
+
+/* DatePicker 입력 상자 스타일 */
+.do-reservation-date-input {
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px;
+    font-family: 'Nanum Gothic', sans-serif;
+    border: 1px solid rgba(200, 200, 200, 1);
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 9999; /* 필요에 따라 z-index 조정 */
+    position: relative; /* 상대 위치 지정 */
+    width: 300px; /* 너비 조정 */
+    margin: 0 auto; /* 중앙 배치 */
+}
+
+
+
+
+.do-reservation-input-label{
+    color:rgba(0, 0, 0, 1);
+    display: flex;
+    justify-content: center;
+    font-family: 'Nanum Gothic';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
 .do-reservation-information{
     text-align: center;
     font-size: 30px;
@@ -19,23 +111,16 @@
     justify-content: center;  
     box-sizing: border-box; 
     margin: 0 auto; 
-}
-
-.do-reservation-people{
     text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 10px;
-    font-family: 'Nanum Gothic';
-
-    color: rgba(64, 64, 64, 1);
 }
-
 
 
 .do-reservation-people-box {
-    width: 100%;
-    margin-top: 20px;
+    width: 50%;
+}
+
+.do-reservation-time-box {
+    width: 50%;
 }
 
 .do-reservation-table {
@@ -71,6 +156,7 @@
 .do-reservation-checkfont{
     font-weight: bold;
     font-family: 'Nanum Gothic';
+    margin-top: 3px;
 }
 
 .do-reservation-primary-button{
@@ -122,7 +208,105 @@
     opacity: 0.85;
 }
 
+.do-reservation-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 10px auto;
+    border: none;
+    background-color: rgba(255, 148, 45, 1);
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    font-family: 'Nanum Gothic';
+    transition: background-color 0.1s ease;
+}
+
+.do-reservation-arrow:hover {
+    cursor: pointer;
+    opacity: 0.85;
+}
 
 
+.people-range {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* 버튼과 표 사이의 간격 조절 */
+}
+
+.time-range {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* 버튼과 표 사이의 간격 조절 */
+}
 
 
+/* TermsPopup.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.terms-text {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(64, 64, 64, 1); /* 텍스트 색상 */
+    text-align: justify; /* 텍스트 정렬 방식 */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-close-button {
+    background-color: rgba(255, 148, 45, 1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-close-button:hover {
+    opacity: 0.8;
+}
+
+.popup-open-button {
+    background-color: rgba(255, 148, 45, 1);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Nanum Gothic';
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.popup-open-button:hover {
+    opacity: 0.8;
+}

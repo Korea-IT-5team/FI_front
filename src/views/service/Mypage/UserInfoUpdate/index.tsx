@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import "./style.css";
-import { MY_PAGE_SITE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
@@ -14,7 +14,6 @@ import InputBox from 'src/components/InputBox';
 export default function UserInfoUpdate() {
 
   // state // 
-  // const { userEmailId: paramUserEmailId } = useParams<{ userEmailId: string }>();
   const [cookies] = useCookies();
   const { loginUserRole } = useUserStore();
   const [userEmailId, setEmailId] = useState<string>('');
@@ -25,7 +24,7 @@ export default function UserInfoUpdate() {
   const [userRole, setUserRole] = useState<string>('');
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const GetMyInfoResponse = (result : GetMyInfoResponseDto | ResponseDto | null) => {
     const message =
@@ -36,11 +35,11 @@ export default function UserInfoUpdate() {
     if (!result || result.code !== 'SU') {
       alert(message);
       if (result?.code === 'AF') {
-        navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+        navigation(MAIN_ABSOLUTE_PATH);
         return;
       }
-      // 사이트 이동 안 먹음 이거 수정 필요
-      // navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+      
+      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
 
@@ -77,7 +76,7 @@ export default function UserInfoUpdate() {
     }
 
     alert('정보가 성공적으로 수정되었습니다.');
-    navigator(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+    navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
   };
 
   // event handler //
@@ -107,7 +106,7 @@ export default function UserInfoUpdate() {
     if (effectFlag.current) return;
     effectFlag.current = true;
     if (loginUserRole !== 'ROLE_USER') {
-      navigator(MY_PAGE_SITE_ABSOLUTE_PATH);
+      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
     getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
@@ -117,14 +116,39 @@ export default function UserInfoUpdate() {
   return (
     <div id='my-page-wrapper'>
       <div className='my-page-container'>
-        <div className='my-page-title'>회원 정보 수정</div>
-        <div className='my-page-update-box'>
-          <div className='my-page-info-box'>
-            <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
-            <div className='my-page-info'>{userEmailId}</div>
-            <div className='my-page-info'>{userName}</div>
-            <div className='my-page-info'>{userTelNumber}</div>
-            <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+        <div>
+          <div className='my-page-update-top-title'>회원정보 수정</div>
+          <div className='short-divider-line'></div>
+        </div>
+        <div className='my-page-title-box'>
+          <div className='my-page-title' onClick={() => navigation(MY_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
+          <div className='my-page-title' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
+          <div className='my-page-title' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+        </div>
+        <div className='short-divider-bottom-line'></div>
+        <div className='my-page-update-container'>
+          <div className='my-page-contents-title'>회원정보 수정</div>
+          <div className='my-page-update-contents-box'>
+            <div className='my-page-update-info-first'>
+              <div className='my-page-update-info'>닉네임</div>
+              <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+            </div>
+            <div className='my-page-update-info-first'>
+              <div className='my-page-update-info'>아이디</div>
+              <div className='my-page-update-info'>{userEmailId}</div>
+            </div>
+            <div className='my-page-update-info-first'>
+              <div className='my-page-update-info'>이름</div>
+              <div className='my-page-update-info'>{userName}</div>
+            </div>
+            <div className='my-page-update-info-first'>
+              <div className='my-page-update-info'>전화번호</div>
+              <div className='my-page-update-info'>{userTelNumber}</div>
+            </div>
+            <div className='my-page-update-info-first'>
+              <div className='my-page-update-info'>주소</div>
+              <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+            </div>
           </div>
           <div className='my-page-update' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>

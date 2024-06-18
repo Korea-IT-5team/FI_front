@@ -19,7 +19,7 @@ export default function NoticeWrite() {
   const [noticeContents, setNoticeContents] = useState<string>('');
 
   //                    function                    //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const postNoticeBoardResponse = (result: ResponseDto | null) => {
     const message =
@@ -32,7 +32,7 @@ export default function NoticeWrite() {
       alert(message);
       return;
     }
-    navigator(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   };
 
   //                    event handler                    //
@@ -63,7 +63,7 @@ export default function NoticeWrite() {
   //                    effect                    //
   useEffect(() => {
     if (loginUserRole === 'ROLE_ADMIN') {
-      navigator(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
+      navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
       return;
     }
   }, [loginUserRole]);
@@ -73,10 +73,10 @@ export default function NoticeWrite() {
     <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>
         <div className='notice-write-title-box'>
-          <input className='notice-write-title-input' placeholder='공지를 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
+          <input className='notice-write-title-input' placeholder='제목을 입력해주세요.' value={noticeTitle} onChange={onNoticeTitleChangeHandler} />
         </div>
         <div className='notice-write-contents-box'>
-          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요. / 500자' maxLength={500} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
+          <textarea ref={contentsRef} className='notice-write-contents-textarea' placeholder='내용을 입력해주세요.' maxLength={1000} value={noticeContents} onChange={onNoticeContentsChangeHandler} />
           <div className='primary-button' onClick={onPostButtonClickHandler}>작성</div>
         </div>
       </div>

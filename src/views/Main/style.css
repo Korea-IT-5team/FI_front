@@ -1,13 +1,22 @@
 #main-wrapper {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; 
-    max-height: 100vh;
+  max-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  
+  overflow-y: auto;
 }
 
-.main-side-navigation-icon:hover {
-  cursor: pointer;
-  color: rgba(255, 255, 255, 1);
+.main-head-box {
+  height: 85px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 20px;
+
+  background-color: rgba(255, 148, 45, 0.8);
 }
 
 .main-title {
@@ -16,22 +25,106 @@
     color: rgba(64, 64, 64, 1);
 }
 
-.main-sign-in {
-    display: flex;
-    color: rgba(64, 64, 64, 1);
-    font-size: 25px;
-    margin: 30px;
+.main-right-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 15px;
+
+  font-family: 'HakgyoansimWoojuR';
+  line-height: 150%;
+  color: rgba(255, 255, 255, 1);
 }
 
-.main-sign-in:hover {
-    color: rgba(64, 64, 64, 0.5);
-    cursor: pointer;
+.top-navigation-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 15px;
+
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.top-navigation:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.top-divider {
+  font-family: 'HakgyoansimWoojuR';
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.main-top-bar-button {
+  display: flex;
+  flex-direction: column;
+
+  font-family: 'HakgyoansimWoojuR';
+  font-size: 17px;
+  color: rgba(255, 255, 255, 1);
+}
+
+.logout-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-button:hover {
+  cursor: pointer;
+  color: rgba(245, 245, 245, 0.7);
+}
+
+.top-button:hover {
+  cursor: pointer;
+  color: rgba(245, 245, 245, 0.7);
+}
+
+.logout-button:hover {
+  cursor: pointer;
+  color: rgba(245, 245, 245, 0.7);
 }
 
 .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: auto; 
+  width: 100%;
+  height: auto;
+  gap: 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.main-banner {
+  width: 100%;
+  height: 600px;
+
+  background-image: url('../../assets/image/main-image.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.main-image-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.restaurant-image {
+  text-align: center;
+
+  padding: 20px;
+
+  background-color: rgba(245, 245, 245, 1);
+
+  border-radius: 5px;
 }

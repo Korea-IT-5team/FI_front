@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -25,7 +25,7 @@ export default function ReviewUpdate()
 
 
   // function //
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const PatchReviewResponse = (result: ResponseDto | null) => {
         const message =
@@ -41,7 +41,7 @@ export default function ReviewUpdate()
         }
 
         if(!reviewNumber) return;
-        navigator(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH(reviewNumber))
   }
  
   const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => 
@@ -54,7 +54,7 @@ export default function ReviewUpdate()
             alert(message);
             if(result?.code === 'AF')
             {
-                navigator(MAIN_ABSOLUTE_PATH);
+                navigation(MAIN_ABSOLUTE_PATH);
                 return;
             }
             return;
@@ -120,6 +120,13 @@ export default function ReviewUpdate()
         PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
             .then(PatchReviewResponse);
   }
+
+  const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter') {
+        UpdateClickHandler();
+    }
+};
+
   const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
   
   // effect //
@@ -133,7 +140,7 @@ export default function ReviewUpdate()
 
       if(loginUserRole !== 'ROLE_USER')
       {
-          navigator(MAIN_ABSOLUTE_PATH);
+          navigation(MAIN_ABSOLUTE_PATH);
           return;
       }
 
@@ -170,7 +177,7 @@ export default function ReviewUpdate()
                 <div className='review-write-contents-box'>
                     <textarea ref={contentsRef} className='review-write-contents-textarea'
                         placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
-                        onChange={onContentsChangeHandler}/>
+                        onChange={onContentsChangeHandler} onKeyPress={onKeyPressHandler}/>
                 </div>
 
                 <div className="review-registered-button-box">

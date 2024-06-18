@@ -21,3 +21,12 @@ export interface GetNoticeBoardResponseDto extends ResponseDto {
   noticeContents: string;
   viewCount: number;
 }
+
+// description: 공지 게시물 목록 확인 Response Body DTO
+export interface GetNoticeBoardListItem{
+  noticeNumber: number;
+  noticeTitle: string;
+  noticeWriterId: string;
+  noticeWriteDatetime: string;
+  viewCount: number;
+}
