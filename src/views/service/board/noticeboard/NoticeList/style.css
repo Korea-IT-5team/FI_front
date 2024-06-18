@@ -11,10 +11,9 @@
 
 .notice-list-top {
     text-align: center;
-
-    font-family: 'Nanum Gothic';
+    font-family: 'KCC-Hanbit';
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
 }
@@ -34,9 +33,9 @@
 }
 
 .notice-list-size-text {
+    font-family: 'HakgyoansimWoojuR';
     font-size: 15px;
     font-weight: 400;
-
     color: rgba(138, 146, 166, 1);
 }
 
@@ -47,7 +46,7 @@
     flex-direction: column;
 
     text-align: center;
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 17px;
     font-weight: bold;
     color: rgba(50, 50, 50, 1);
@@ -76,7 +75,7 @@
 
     border-top: 1px solid rgba(238, 238, 238, 1);
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;
@@ -100,7 +99,8 @@
 }
 
 .notice-list-table-writer-nickname {
-    width: 60px;
+    width: 100px;
+    text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -151,7 +151,9 @@
 }
 
 .notice-list-page {
-    font-family: 'Nanum Gothic';
+    margin: 0 5px;
+
+    font-family: 'HakgyoansimWoojuR';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
@@ -161,7 +163,9 @@
 }
 
 .notice-list-page-active {
-    font-family: 'Nanum Gothic';
+    margin: 0 5px;
+
+    font-family: 'HakgyoansimWoojuR';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
@@ -189,7 +193,7 @@
 
     border: none;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
