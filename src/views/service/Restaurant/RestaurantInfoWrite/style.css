@@ -79,3 +79,17 @@
     margin-left: 43%;
     margin-bottom: 5%;
 }
+
+
+.restaurant-info-write-contents{
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    font-family: 'Nanum Gothic';
+    font-size: 15px;
+}
+
+.result{
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    font-family: 'Nanum Gothic';
+}

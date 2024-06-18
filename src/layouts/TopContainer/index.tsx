@@ -68,98 +68,103 @@ function TopBar({ path }: Props) {
     return (
         <>
             <div className='top-head-box'>
-                <div className='top-side-navigation-icon' onClick={toggleSideNav}>☰</div>
                 <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
-                <div className='top-bar-button'>
-                    {loginUserRole === 'ROLE_USER' &&
-                    <div className="top-bar-role">
-                        <div className="sign-in-wrapper">
-                            <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+                <div className='top-right-container'>
+                    <div className='top-navigation-box'>
+                        <div className='top-navigation' onClick={() => navigation(RESTAURANT_LIST_ABSOLUTE_PATH)}>식당 검색</div>
+                        <div className='top-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>고객센터</div>
+                    </div>
+                    <div className='top-divider'>|</div>
+                    <div className='top-bar-button'>
+                        {loginUserRole === 'ROLE_USER' &&
+                        <div className="top-bar-role">
+                            <div className="sign-in-wrapper">
+                                <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+                            </div>
+                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                         </div>
-                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                        }
+                        {loginUserRole === 'ROLE_CEO' &&
+                        <div className="top-bar-role">
+                            <div className="sign-in-wrapper">
+                                <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
+                            </div> 
+                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                        </div>
+                        }
+                        {loginUserRole === 'ROLE_ADMIN' &&
+                        <div className="top-bar-role">
+                            <div className="sign-in-wrapper">
+                                <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
+                            </div> 
+                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                        </div>
+                        }
+                        {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
+                        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+                        }
                     </div>
-                    }
-                    {loginUserRole === 'ROLE_CEO' &&
-                    <div className="top-bar-role">
-                        <div className="sign-in-wrapper">
-                            <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
-                        </div> 
-                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                    </div>
-                    }
-                    {loginUserRole === 'ROLE_ADMIN' &&
-                    <div className="top-bar-role">
-                        <div className="sign-in-wrapper">
-                            <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
-                        </div> 
-                        <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                    </div>
-                    }
-                    {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
-                    <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
-                    }
                 </div>
             </div>
-            <SideNavigation path={path} isOpen={isSideNavOpen} toggleSideNav={toggleSideNav} />
         </>
     );
 }
 
-// component //
-function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
+// // component //
+// function SideNavigation({ path, isOpen, toggleSideNav }: { path: Path, isOpen: boolean, toggleSideNav: () => void }) {
 
-    const { pathname } = useLocation();
-    const { loginUserRole } = useUserStore();
+//     const { pathname } = useLocation();
+//     const { loginUserRole } = useUserStore();
 
-    // function //
-    const navigation = useNavigate();
+//     // function //
+//     const navigation = useNavigate();
 
-    // event handler //
-    const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
-    const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onCeoPageSiteClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
-    const onInquiryBoardClickHandler = () => {
-        if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
-        else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
-    }
-    const onNoticeBoardClickHandler = () => {
-        if (pathname === NOTICE_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
-        else navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
-    };
+//     // event handler //
+//     const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+//     const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+//     const onCeoPageSiteClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+//     const onInquiryBoardClickHandler = () => {
+//         if (pathname === INQUIRY_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
+//         else navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+//     }
+//     const onNoticeBoardClickHandler = () => {
+//         if (pathname === NOTICE_BOARD_LIST_ABSOLUTE_PATH) window.location.reload();
+//         else navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+//     };
 
-    // render //
-    return (
-        <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
-            <div className='main-side-navigation-contents'>
-                <div className='main-side-navigation-item' onClick={onRestaurantListClickHandler}>
-                    <div className='main-side-navigation-icon food'></div>
-                    <div className='main-side-navigation-title'>식당 리스트</div>
-                </div>
-                {loginUserRole === 'ROLE_USER' &&
-                <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
-                    <div className='main-side-navigation-icon my-page'></div>
-                    <div className='main-side-navigation-title'>마이페이지</div>
-                </div>
-                }
+//     // render //
+//     return (
+//         <div className={`side-navigation-container${isOpen ? ' show' : ''}`}>
+//             <div className='main-side-navigation-contents'>
+//                 <div className='main-side-navigation-item' onClick={onRestaurantListClickHandler}>
+//                     <div className='main-side-navigation-icon food'></div>
+//                     <div className='main-side-navigation-title'>식당 리스트</div>
+//                 </div>
+//                 {loginUserRole === 'ROLE_USER' &&
+//                 <div className='main-side-navigation-item' onClick={onMyPageSiteClickHandler}>
+//                     <div className='main-side-navigation-icon my-page'></div>
+//                     <div className='main-side-navigation-title'>마이페이지</div>
+//                 </div>
+//                 }
 
-                {loginUserRole === 'ROLE_CEO' &&
-                <div className='main-side-navigation-item' onClick={onCeoPageSiteClickHandler}>
-                    <div className='main-side-navigation-icon my-page'></div>
-                    <div className='main-side-navigation-title'>사장페이지</div>
-                </div>
-                }
-                <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
-                    <div className='main-side-navigation-icon inquiry'></div>
-                    <div className='main-side-navigation-title'>문의사항</div>
-                </div>
-                <div className='main-side-navigation-item' onClick={onNoticeBoardClickHandler}>
-                    <div className='main-side-navigation-icon notice'></div>
-                    <div className='main-side-navigation-title'>공지사항</div>
-                </div>
-            </div>
-        </div>
-    );
-}
+//                 {loginUserRole === 'ROLE_CEO' &&
+//                 <div className='main-side-navigation-item' onClick={onCeoPageSiteClickHandler}>
+//                     <div className='main-side-navigation-icon my-page'></div>
+//                     <div className='main-side-navigation-title'>사장페이지</div>
+//                 </div>
+//                 }
+//                 <div className='main-side-navigation-item' onClick={onInquiryBoardClickHandler}>
+//                     <div className='main-side-navigation-icon inquiry'></div>
+//                     <div className='main-side-navigation-title'>문의사항</div>
+//                 </div>
+//                 <div className='main-side-navigation-item' onClick={onNoticeBoardClickHandler}>
+//                     <div className='main-side-navigation-icon notice'></div>
+//                     <div className='main-side-navigation-title'>공지사항</div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
 
 // component //
 export default function TopContainer() {
@@ -212,6 +217,9 @@ export default function TopContainer() {
             <TopBar path={path} />
             <div className="top-container">
                 <Outlet />
+            </div>
+            <div >
+
             </div>
         </div>
     );

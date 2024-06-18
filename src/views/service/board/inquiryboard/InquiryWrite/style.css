@@ -37,7 +37,7 @@
     width: 100%;
     padding: 0px 5px;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 20px;
     font-weight: 400;
     line-height: 200%;
@@ -63,14 +63,14 @@
     width: 1000px;
     min-height: 300px;
 
-    font-family: 'Nanum Gothic';
+    background-color: rgba(240, 240, 240, 1);
+    border-radius: 8px;
+
+    font-family: 'HakgyoansimWoojuR';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
-
-    background-color: rgba(240, 240, 240, 1);
-    border-radius: 8px;
 }
 
 .inquiry-bottom-button-box {
@@ -83,7 +83,7 @@
 
 .public-button {
     width: 50px;
-    height: 20px;
+    height: 25px;
 
     align-items: center;
     text-align: center;
@@ -93,7 +93,7 @@
     background-color: rgba(245, 138, 35, 0.6);
     border-radius: 5px;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
@@ -102,7 +102,7 @@
 
 .un-public-button {
     width: 50px;
-    height: 20px;
+    height: 25px;
 
     align-items: center;
     text-align: center;
@@ -112,7 +112,7 @@
     background-color: rgba(245, 138, 35, 1);
     border-radius: 5px;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;

@@ -8,27 +8,15 @@
 }
 
 .top-head-box {
+    height: 85px;
+
     display: flex;
     align-items: center;
-
     justify-content: space-between;
 
     padding: 10px 20px;
 
     background-color: rgba(255, 148, 45, 0.8);
-}
-
-.top-side-navigation-icon {
-    width: 40px;
-    
-    font-family: 'Nanum Gothic';
-    font-size: 30px;
-    color: rgba(255, 255, 255, 0.75);
-}
-
-.top-side-navigation-icon:hover {
-    cursor: pointer;
-    color: rgba(255, 255, 255, 1);
 }
 
 .top-title {
@@ -38,10 +26,22 @@
     color: rgba(255, 255, 255, 1);
 }
 
+.top-right-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  
+    gap: 15px;
+  
+    font-family: 'HakgyoansimWoojuR';
+    line-height: 150%;
+    color: rgba(255, 255, 255, 1);
+}
+
 .top-bar-button {
     display: flex;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'HakgyoansimWoojuR';
     font-size: 17px;
     color: rgba(255, 255, 255, 1);
 }
@@ -49,8 +49,6 @@
 .top-bar-role {
     display: flex;
     flex-direction: column;
-
-    gap: 5px;
 }
 
 .top-button:hover {
@@ -81,85 +79,4 @@
     background-image: url('../../assets/image/main-image.jpg');
     background-size: cover;
     background-position: center;
-}
-
-.side-navigation-container {
-    width: 250px;
-    height: 700px;
-
-    display: none;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-
-    margin-top: 71px;
-
-    background-color: rgba(255, 255, 255, 0.75);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.side-navigation-contents {
-    display: flex;
-    flex-direction: column;
-
-    padding: 30px;
-    gap: 30px;
-}
-
-.side-navigation-item {
-display: flex;
-flex-direction: row;
-
-align-items: center;
-
-gap: 10px;
-}
-
-.food {
-width: 30px;
-height: 30px;
-
-background-image: url('../../assets/image/restaurant-icon.png');
-background-size: cover;
-}
-
-.my-page {
-width: 30px;
-height: 30px;
-
-background-image: url('../../assets/image/my-page-icon.png');
-background-size: cover;
-}
-
-.main-side-navigation-icon.inquiry {
-width: 30px;
-height: 30px;
-
-background-image: url('../../assets/image/inquiry-board-icon.png');
-background-size: cover;
-}
-
-.main-side-navigation-icon.notice {
-    width: 30px;
-    height: 30px;
-    
-    background-image: url('../../assets/image/notice-board-icon.png');
-    background-size: cover;
-    }
-
-.side-navigation-title {
-font-family: 'Nanum Gothic';
-font-size: 18px;
-font-weight: 500;
-color: rgba(50, 50, 50, 1);
-}
-
-.side-navigation-item:hover {
-cursor: pointer;
-}
-
-.show {
-display: flex;
 }

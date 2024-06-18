@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -120,6 +120,13 @@ export default function ReviewUpdate()
         PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
             .then(PatchReviewResponse);
   }
+
+  const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter') {
+        UpdateClickHandler();
+    }
+};
+
   const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
   
   // effect //
@@ -170,7 +177,7 @@ export default function ReviewUpdate()
                 <div className='review-write-contents-box'>
                     <textarea ref={contentsRef} className='review-write-contents-textarea'
                         placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} 
-                        onChange={onContentsChangeHandler}/>
+                        onChange={onContentsChangeHandler} onKeyPress={onKeyPressHandler}/>
                 </div>
 
                 <div className="review-registered-button-box">
