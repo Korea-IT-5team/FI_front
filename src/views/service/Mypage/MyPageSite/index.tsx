@@ -87,11 +87,11 @@ export default function MyPageSite() {
               <div className='my-page-info'>닉네임</div>
               <div className='my-page-info'>{nickname}</div>
             </div>
-            <div className='my-page-info-first'>
+            <div className='my-page-info-second'>
               <div className='my-page-info'>이름</div>
               <div className='my-page-info'>{userName}</div>
             </div>
-            <div className='my-page-info-first'>
+            <div className='my-page-info-second'>
               <div className='my-page-info'>전화번호</div>
               <div className='my-page-info'>{userTelNumber}</div>
             </div>
