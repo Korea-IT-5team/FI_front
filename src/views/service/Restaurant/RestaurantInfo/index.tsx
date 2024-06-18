@@ -22,12 +22,6 @@ export default function RestaurantInfo() {
         libraries: ["clusterer", "drawing", "services"],
     })
 
-    const center = {
-        // 지도의 중심좌표
-        lat: 33.450701,
-        lng: 126.570667,
-    }
-
     // state //
     const { loginUserEmailId, loginUserRole } = useUserStore();
     const [cookies] = useCookies();
@@ -50,7 +44,7 @@ export default function RestaurantInfo() {
     const [reservationUserId, setReservationUserId] = useState<String>("");
     const [reservationRestaurantId, setReservationRestaurantId] = useState<number>();
     const [grade, setGrade] = useState<number>();
-    const [position, setPosition] = useState<{
+    const [center, setCenter] = useState<{
         lat: number
         lng: number
     }>()
@@ -72,7 +66,7 @@ export default function RestaurantInfo() {
             restaurantLocation, restaurantTelNumber,
             restaurantSnsAddress, restaurantOperationHours, restaurantFeatures,
             restaurantNotice, restaurantRepresentativeMenu, restaurantBusinessRegistrationNumber,
-            restaurantWriterId, restaurantReviewList
+            restaurantWriterId, restaurantReviewList, restaurantLat, restaurantLng
         } = result as GetRestaurantInfoResponseDto;
         setRestaurantImage(restaurantImage);
         setRestaurantName(restaurantName);
@@ -87,6 +81,10 @@ export default function RestaurantInfo() {
         setRestaurantBusinessRegistrationNumber(restaurantBusinessRegistrationNumber);
         setRestaurantWriterId(restaurantWriterId);
         setRestaurantReviewList(restaurantReviewList);
+        setCenter({
+            lat: restaurantLat,
+            lng: restaurantLng,
+        });
     }
     
     const DeleteReservationResponse = (result: ResponseDto | null) => {
@@ -333,8 +331,9 @@ export default function RestaurantInfo() {
                         (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
                         (<button onClick={onFavoriteClickHandler}>찜클릭</button>)
                     )}
-                <div className='restaurant-info-icon-box'>
+                {center && <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon location'></div>
+                    <div className='restaurant-information'>위치 : {restaurantLocation}</div>
                     <Map // 지도를 표시할 Container
                         id="map"
                         center={center}
@@ -344,9 +343,10 @@ export default function RestaurantInfo() {
                             height: "350px",
                         }}
                         level={3} // 지도의 확대 레벨
-                        ><MapMarker position={position ?? center} />
+                        >
+                            <MapMarker position={center} />
                         </Map>
-                </div>
+                </div>}
 
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon sns'></div>

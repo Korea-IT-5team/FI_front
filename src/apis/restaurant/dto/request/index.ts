@@ -26,5 +26,7 @@ export interface PatchRestaurantInfoRequestDto {
     restaurantFeatures: string;
     restaurantNotice: string;
     restaurantRepresentativeMenu: string;
+    restaurantLat:number;
+    restaurantLng:number;
 }
 

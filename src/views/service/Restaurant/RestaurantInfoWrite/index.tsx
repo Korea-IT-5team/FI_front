@@ -194,7 +194,7 @@ export default function RestaurantInfoWrite()
                     }}  
                     >
                         <MapMarker position={restaurantPosition ?? center} />
-                    </Map>
+                </Map>
                 <div className="restaurant-info-write-selectbox">                 
                     <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                 </div>
