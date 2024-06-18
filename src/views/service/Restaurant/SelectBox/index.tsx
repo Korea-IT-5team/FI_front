@@ -43,6 +43,7 @@ export default function SelectBox({ value, onChange }: Prop) {
         { name: '그리스음식' , value: '그리스음식' },
         { name: '순두부찌개' , value: '순두부찌개' },
         { name: '불고기' , value: '불고기' },
+        { name: '기타' , value: '기타'}
     ];
 
     // state //
