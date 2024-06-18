@@ -38,6 +38,7 @@ import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
 import CeoPageSite from './views/service/CeoPage/CeoPageSite';
 import CeoInfoUpdate from './views/service/CeoPage/CeoInfoUpdate';
+import BottomContainer from './layouts/BottomContainer';
 
 
 // component: root 경로 컴포넌트
@@ -120,7 +121,6 @@ function App() {
           </Route>
         </Route>  
       </Route>
-  
     </Routes>
   );
 }
