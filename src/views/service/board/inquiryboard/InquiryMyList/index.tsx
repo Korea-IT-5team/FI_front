@@ -130,43 +130,11 @@ const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto 
   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
 };
 
-// const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResponseDto | ResponseDto | null) => {
-
-//   const message = 
-//       !result ? '서버에 문제가 있습니다.' : 
-//       result.code === 'VF' ? '검색어를 입력하세요.' :
-//       result.code === 'AF' ? '인증에 실패했습니다.' :
-//       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-  
-//   if (!result || result.code !== 'SU') {
-//     alert(message);
-//     if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
-//     return;
-//   }
-
-//   const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
-//   changeInquiryBoardList(inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId));
-
-//   setCurrentPage(!inquiryBoardList.length ? 0 : 1);
-//   setCurrentSection(!inquiryBoardList.length ? 0 : 1);
-// };
-
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
     navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
 };
-
-//   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-//     const searchWord = event.target.value;
-//     setSearchWord(searchWord);
-// };
-
-//   const onSearchButtonClickHandler = () => {
-//     if (!searchWord) return;
-
-//     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-// };
 
   const onToggleClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
@@ -175,18 +143,14 @@ const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto 
 
 const onPreSectionClickHandler = () => {
   if (currentSection <= 1 && currentPage <= 1) {
-    // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
     return;
   }
   if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
-    // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
     if (currentSection > 1) {
       setCurrentSection(currentSection - 1);
-      // setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
       setCurrentPage(currentSection * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
     }
   } else {
-    // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
     setCurrentPage(currentPage - 1);
   }
 };
@@ -197,30 +161,19 @@ const onPreSectionClickHandler = () => {
 
 const onNextSectionClickHandler = () => {
   if (currentSection >= totalSection && currentPage >= totalPage) {
-    // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
     return;
   }
   if (currentPage === currentSection * COUNT_PER_SECTION) {
-    // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
     if (currentSection < totalSection) {
       setCurrentSection(currentSection + 1);
       setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
     }
   } else {
-    // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
     setCurrentPage(currentPage + 1);
   }
 };
 
   //                  effect                  //
-    // useEffect(() => {
-    //   if (cookies.accessToken) return;
-    //   if (searchWord)
-    //     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
-    //   else
-    //     getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
-    // },[cookies.accessToken]);
-
     useEffect(() => {
       if (!cookies.accessToken) return;
       getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
@@ -230,13 +183,6 @@ const onNextSectionClickHandler = () => {
       changePage(inquiryBoardList, totalLength);
     }, [currentPage]);
 
-    // useEffect(() => {
-      
-    //   if (!inquiryBoardList.length) return; 
-    //   const totalPage = Math.ceil(totalLength / COUNT_PER_PAGE);
-    //   changeSection(totalPage);
-    // }, [currentSection, inquiryBoardList, totalLength]);
-
     useEffect(() => {
       if (!inquiryBoardList.length) return;
       changeSection(totalPage);
@@ -244,7 +190,6 @@ const onNextSectionClickHandler = () => {
 
   //                    render                      //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
-  // const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return (
         <div id='inquiry-my-list-wrapper'>
           <div className='inquiry-my-list-top'>나의 문의 내역</div>
@@ -258,7 +203,6 @@ const onNextSectionClickHandler = () => {
                 <div className='inquiry-my-list-top-text'>미답변 보기</div>
                 <div className={toggleClass} onClick={onToggleClickHandler}></div>
               </div>
-              <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
             </div>
           </div>
         <div className='inquiry-my-list-table-th'>
@@ -285,12 +229,6 @@ const onNextSectionClickHandler = () => {
             </div>
             <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-        {/* <div className='inquiry-my-list-search-box'>
-            <div className='inquiry-my-list-search-input-box'>
-                <input className='inquiry-my-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler}/>
-            </div>
-            <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
-        </div> */}
         </div>
       </div>
       )
