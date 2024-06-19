@@ -81,26 +81,26 @@ export default function RestaurantList() {
     // render //
     const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
     return(
-        <div className='restaurant-list-wrapper'>
-            <div className="restaurant-list-side-navigation-container">
-                <div className='restaurant-list-search-input-click'>
-                    <input className="restaurant-list-search-input" placeholder='오늘의 맛집은?' value={searchWord} 
-                    onChange={onSearchWordChangeHandler} onKeyDown={onSearchKeyPressHandler}></input>
-                    <div className={searchButtonClass} onClick={onSearchClickHandler}>검색</div>
-                </div>
+        <div id='restaurant-list-wrapper'>
+            <div className='restaurant-list-search-input-box'>
+                <input className="restaurant-list-search-input" placeholder='오늘의 맛집은?' value={searchWord} 
+                onChange={onSearchWordChangeHandler} onKeyDown={onSearchKeyPressHandler}></input>
+                <div className={searchButtonClass} onClick={onSearchClickHandler}>검색</div>
                 {loginUserRole === 'ROLE_CEO' && 
-                    <div className="restaurant-list-regist-button" onClick={onRegistrationClickHandler}>등록하기</div>
+                    <div className="second-button" onClick={onRegistrationClickHandler}>등록하기</div>
                 }
             </div>
-            <div className='restaurant-list'>
+            <div className='restaurant-list-box'>
                 {!restaurantList || restaurantList.length === 0 ?
                 (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
                 (restaurantList.slice(0, displayCount).map((item) => (
-                <div className='restaurant-list-select-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                    <img src={item.restaurantImage} className='restaurant-list-select-item' />
-                    <div className='restaurant-list-select-item'>{item.restaurantName}</div>
-                    <div className='restaurant-list-select-item'>{item.restaurantFoodCategory}</div>
-                    <div className='restaurant-list-select-item'>{item.restaurantLocation}</div>
+                <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
+                    <img src={item.restaurantImage} className='restaurant-list-item' />
+                    <div className='restaurant-list-item-top-box'>
+                        <div className='restaurant-list-item'>{item.restaurantName}</div>
+                        <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
+                    </div>
+                    <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
                 </div>
                 )))}
             </div>
