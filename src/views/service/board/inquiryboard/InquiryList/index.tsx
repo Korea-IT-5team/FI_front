@@ -90,8 +90,10 @@ export default function InquiryList() {
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
 
+
     
     setViewInquiryList(viewList);
+
 
 
   };
