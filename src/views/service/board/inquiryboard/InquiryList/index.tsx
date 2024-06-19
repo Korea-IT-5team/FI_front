@@ -70,7 +70,7 @@ export default function InquiryList() {
   const [cookies] = useCookies();
 
   const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
-  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
+  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -90,7 +90,7 @@ export default function InquiryList() {
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
-    setViewList(viewList);
+    setViewInquiryList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
@@ -310,7 +310,7 @@ export default function InquiryList() {
           <div className='inquiry-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-list-table-contents'>
-          {viewList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
+          {viewInquiryList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
         </div>
       </div>
       <div className='inquiry-list-bottom'>
