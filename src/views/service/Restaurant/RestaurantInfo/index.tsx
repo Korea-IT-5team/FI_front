@@ -9,7 +9,7 @@ import { DeleteRestaurantFavoriteRequest, GetFavoriteCheckStatusRequest, PostRes
 import { GetFavoriteCheckResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { DeleteReservationRequest, GetReservationCheckStatusRequest } from 'src/apis/restaurant/reservation';
 import { GetReservationCheckResponseDto } from 'src/apis/restaurant/reservation/dto/response';
-import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
@@ -304,14 +304,19 @@ export default function RestaurantInfo() {
         DeleteRestaurantFavoriteRequest(restaurantId,cookies.accessToken)
             .then(DeleteRestaurantFavoriteResponse)
     }
+
+    const onWriteClickHandler = () => {
+        if(!restaurantId) return;
+        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
+    }
+
     // render //
     return (
         <>
             <div id="restaurant-info">
-                <img src={restaurantImage} className='restaurant-image' />
-
                 <div className='restaurant-info-top'>
-                    <div className=''>
+                    <img src={restaurantImage} className='restaurant-image' />
+                    <div className='restaurant-info-name-favorite'>
                         <div className='restaurant-info-name-grade'> 
                             <div className='restaurant-info-name'>{restaurantName}</div>
                             {grade ? (<div className='restaurant-info-grade'>{grade}</div>) : (<div></div>)}
@@ -327,73 +332,73 @@ export default function RestaurantInfo() {
                     </div>
                 </div>
 
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon location'></div>
-                    <div className='restaurant-info-location'>위치 : {restaurantLocation}</div>
-                </div>
+                <div className='restaurant-info-icon-map'>
+                    <div className='restaurant-info-icon-box'>
+                        <div className="restaurant-info-button-group">
+                            {loginUserRole === "ROLE_USER" && (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
+                            (<button onClick={onReservationCancelClickHandler}>예약취소</button>) :
+                            (<button onClick={onReservationClickHandler}>예약</button>))}
+                            {loginUserRole === "ROLE_USER" && (<button onClick={onWriteClickHandler}>리뷰작성</button>)}
+                        </div>
 
-                {center && 
-                <Map 
-                    id="map"
-                    center={center}
-                    style={{
-                        width: "350px",
-                        height: "350px",
-                    }}
-                    level={3}
-                    >
-                    <MapMarker position={center} />
-                </Map>}
+                        {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
+                            <div className="restaurant-info-button-group">
+                                <button onClick={onSetRestIdNumberHandler}>수정</button>
+                                <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
+                            </div>
+                        )}
 
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon telnumber'></div>
-                    <div>전화번호 : {restaurantTelNumber}</div>
-                </div>
+                        <div className='restaurant-info-icon-package'>
+                            <div className='restaurant-info-icon location'></div>
+                            <div>위치 : {restaurantLocation}</div>
+                        </div>
 
-                {restaurantSnsAddress && 
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon sns'></div>
-                    <div>SNS : {restaurantSnsAddress}</div>
-                </div>}
+                        <div className='restaurant-info-icon-package'>
+                            <div className='restaurant-info-icon telnumber'></div>
+                            <div>전화번호 : {restaurantTelNumber}</div>
+                        </div>
 
-                {restaurantOperationHours && 
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon time'></div>
-                    <div>운영시간 : {restaurantOperationHours}</div>
-                </div>}
+                        <div className='restaurant-info-icon-package'>
+                            {restaurantSnsAddress && <div className='restaurant-info-icon sns'></div>}
+                            {restaurantSnsAddress && <div>SNS : {restaurantSnsAddress}</div>}
+                        </div>
 
-                {restaurantRepresentativeMenu &&
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon menu'></div>
-                    <div>대표메뉴 : {restaurantRepresentativeMenu}</div>
-                </div>}
+                        <div className='restaurant-info-icon-package'>
+                            {restaurantOperationHours && <div className='restaurant-info-icon time'></div>}
+                            {restaurantOperationHours && <div>운영시간 : {restaurantOperationHours}</div>}
+                        </div>
 
-                {restaurantFeatures &&
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon feature'></div>
-                    <div>특징 : {restaurantFeatures}</div>
-                </div>}
+                        <div className='restaurant-info-icon-package'>
+                            {restaurantRepresentativeMenu && <div className='restaurant-info-icon menu'></div>}
+                            {restaurantRepresentativeMenu && <div>대표메뉴 : {restaurantRepresentativeMenu}</div>}
+                        </div>
 
-                {restaurantNotice && 
-                <div className='restaurant-info-icon-box'>
-                    <div className='restaurant-info-icon notice'></div>
-                    <div>공지사항 : {restaurantNotice}</div>
-                </div>}
+                        <div className='restaurant-info-icon-package'>
+                            {restaurantFeatures && <div className='restaurant-info-icon feature'></div>}
+                            {restaurantFeatures && <div>특징 : {restaurantFeatures}</div>}
+                        </div>
 
-                <div className="button-group">
-                    {loginUserRole === "ROLE_USER" && (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
-                        (<button onClick={onReservationCancelClickHandler}>예약취소</button>) :
-                        (<button onClick={onReservationClickHandler}>예약</button>))}
-                </div>
-
-                {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                    <div className="button-group">
-                        <button onClick={onSetRestIdNumberHandler}>수정</button>
-                        <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
+                        <div className='restaurant-info-icon-package'>
+                            {restaurantNotice && <div className='restaurant-info-icon notice'></div>}
+                            {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
+                        </div>
                     </div>
-                )}
+
+                    {center && 
+                    <Map 
+                        id="map"
+                        center={center}
+                        style={{
+                            width: "350px",
+                            height: "350px",
+                        }}
+                        level={3}
+                        >
+                        <MapMarker position={center} />
+                    </Map>}
+                </div>
                 
-                <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
+                <ReviewList value={restaurantReviewList}/>
             </div>
         </>
     )
