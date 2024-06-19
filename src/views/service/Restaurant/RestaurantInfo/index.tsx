@@ -315,7 +315,7 @@ export default function RestaurantInfo() {
         <>
             <div id="restaurant-info">
                 <div className='restaurant-info-top'>
-                    <img src={restaurantImage} className='restaurant-image' />
+                    <img src={restaurantImage}/>
                     <div className='restaurant-info-name-favorite'>
                         <div className='restaurant-info-name-grade'> 
                             <div className='restaurant-info-name'>{restaurantName}</div>
@@ -389,8 +389,10 @@ export default function RestaurantInfo() {
                         id="map"
                         center={center}
                         style={{
-                            width: "350px",
+                            width: "400px",
                             height: "350px",
+                            border: "5px solid white",
+                            borderRadius: "15px"
                         }}
                         level={3}
                         >

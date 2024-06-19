@@ -24,8 +24,8 @@ export default function ReviewList({ value }: Props) {
 
     // render //
     return (
-        <>
-            <div className='review-select-list'>
+            <>
+                <div className='review-select-list-title'>리뷰 ({value.length})</div>
                 {currentItems.map((item) => (
                     <div className='review-select-list-item-box' key={item.reviewNumber}>
                         <div className='review-select-list-package'>
@@ -35,13 +35,12 @@ export default function ReviewList({ value }: Props) {
                         </div>
 
                         <img src={item.reviewImage} className='review-select-item image' />
-                        <div className='review-select-item contents'>{item.reviewContents}</div>
+                        <div className='review-select-item'>{item.reviewContents}</div>
                     </div>
                 ))}
-            </div>
-            {currentItems.length < value.length && (
-                <div className='review-selecton-see-more' onClick={onLoadMoreClickHandler}>더보기</div>
-            )}   
-        </>
-    )
-}
+                {currentItems.length < value.length && (
+                    <div className='review-selecton-see-more' onClick={onLoadMoreClickHandler}>더보기</div>
+                )}   
+            </>
+            )
+        }
