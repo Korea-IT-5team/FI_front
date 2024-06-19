@@ -3,12 +3,12 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  width: 40%;
+  width: 46%;
   padding: 20px; /* 패딩 추가 */
   background-color: #f9f9f9; /* 배경색 추가 */
   border-radius: 10px; /* 모서리 둥글게 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 #restaurant-info img {
@@ -19,26 +19,19 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }
 
-#restaurant-info > div {
-  display: flex;
-  flex-direction: row;
-  align-items: center; /* 요소들을 왼쪽 정렬 */
-  margin-top: 10px;
-}
-
 #restaurant-info button {
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 10px 20px;
   background-color: rgba(255, 148, 45, 1);
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   transition: background-color 0.3s ease;
-  margin-left: 10px;
+  font-family: 'Nanum Gothic';
   width: 80px;
-  height: 40px;
+  height: 30px;
+  font-style: normal;
 }
 
 .restaurant-info-category-favorite{
@@ -95,70 +88,25 @@
   opacity: 0.85;
 }
 
-#restaurant-info > div > div:nth-child(odd) {
-  font-weight: bold;
-}
-
-#restaurant-info > div > div:nth-child(3) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(3) > button {
-  margin-left: auto; /* 예약 버튼을 오른쪽으로 이동 */
-  margin-right: 20px; /* 오른쪽 여백 설정 */
-}
-
-#restaurant-info > div > div:nth-child(6) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(7) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(8) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(9) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(10) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(11) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(12) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(13) {
-  margin-top: 10px;
-}
-
-#restaurant-info > div > div:nth-child(14) {
-  margin-top: 10px;
-}
-
 .restaurant-info-icon {
   margin-right: 10px; /* 아이콘과 텍스트 사이의 간격 조정 */
 }
 
 .restaurant-info-icon-box {
 display: flex;
-flex-direction: column; /* 세로 방향으로 요소들을 배치 */
-align-items: center; /* 요소들을 가운데 정렬 */
-margin-bottom: 10px;
+flex-direction: column;
+gap:10px
+}
+
+.restaurant-info-icon-package{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
 }
 
 .restaurant-info-icon.location {
 width: 18px;
 height: 18px;
-margin-right: 5x;
 background-image: url('../../../../assets/image/Location-icon.png');
 background-size: cover;
 }
@@ -173,7 +121,7 @@ background-size: cover;
 .restaurant-info-icon.sns {
 width: 16px;
 height: 16px;
-margin-right: 5px;
+
 background-image: url(../../../../assets/image/sns.png);
 background-size: cover;
 }
@@ -208,9 +156,10 @@ background-size: cover;
 
 .restaurant-info-top {
 display: flex;
-flex-direction: row;
-gap: 10px; /* 간격 조정 */
+flex-direction: column;
 align-items: center; /* 요소들을 가운데 정렬 */
+margin-bottom: 30px;
+gap: 10px;
 }
 
 .restaurant-info-name {
@@ -219,22 +168,13 @@ font-weight: bold;
 color: #333;
 }
 
-.button-group {
+.restaurant-info-button-group {
   display: flex;
   gap: 10px; /* 버튼 간격 조정 */
-  margin-bottom: 20px;
 }
 
-
-
-
-.restaurant-info-location{
-  font-size: 16px; /* 글자 크기 조정 */
-  font-family: 'Nanum Gothic';
-  color: rgba(50, 50, 50, 1);
-}
-
-.divider{
-  width: 100%;
-  border-bottom: 10px solid rgba(235, 235, 235, 1);
+.restaurant-info-icon-map{
+  display: flex;
+  flex-direction: row;
+  gap:88px
 }

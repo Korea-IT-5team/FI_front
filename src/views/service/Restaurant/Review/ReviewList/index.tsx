@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 
 interface Props {
     value: RestaurantReviewListItem[];
-    restaurantId: string | undefined;
 }
 
 // component: 리뷰 리스트 // 
-export default function ReviewList({ value,restaurantId }: Props) {
+export default function ReviewList({ value }: Props) {
 
     // state //
     const {loginUserRole} = useUserStore();
@@ -21,10 +19,6 @@ export default function ReviewList({ value,restaurantId }: Props) {
     const navigation = useNavigate();
 
     // event handler //
-    const onWriteClickHandler = () => {
-        if(!restaurantId) return;
-        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
-    }
 
     const onLoadMoreClickHandler = () => {
         setCurrentPage(prevPage => prevPage + 1);
@@ -35,7 +29,6 @@ export default function ReviewList({ value,restaurantId }: Props) {
     // render //
     return (
         <>
-            {loginUserRole === "ROLE_USER" && (<div onClick={onWriteClickHandler}>리뷰작성</div>)}
             <div className='review-select-list'>
                 {currentItems.map((item) => (
                     <div className='review-select-list-item-box' key={item.reviewNumber}>
