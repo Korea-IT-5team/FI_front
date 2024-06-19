@@ -140,16 +140,16 @@ export default function Main() {
 }, [cookies.accessToken]);
 
 // render //
-return (
-  <div id="main-wrapper">
-    <TopBar />
-    <div className="main-container">
+  return (
+    <div id="main-wrapper">
+      <TopBar />
+      <div className="main-container">
         <Outlet />
+      </div>
+      <div className='main-container'>
+        <div className='main-banner'></div>
+        <div className='main-image-box'></div>
+      </div>
     </div>
-    <div className='main-container'>
-      <div className='main-banner'></div>
-      <div className='main-image-box'></div>
-    </div>
-  </div>
-);
+  );
 }
