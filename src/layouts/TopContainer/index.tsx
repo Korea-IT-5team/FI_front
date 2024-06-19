@@ -48,6 +48,15 @@ function TopBar() {
         }
     }
 
+    const onRestaurantListClickHandler = () => {
+        navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+        window.location.reload();
+    }
+    const onNoticeBoardListClickHandler = () => {
+        navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+        window.location.reload();
+    }
+
     const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
     const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
     const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
@@ -60,8 +69,8 @@ function TopBar() {
                 <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
                 <div className='top-right-container'>
                     <div className='top-navigation-box'>
-                        <div className='top-navigation' onClick={() => navigation(RESTAURANT_LIST_ABSOLUTE_PATH)}>식당 검색</div>
-                        <div className='top-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>고객센터</div>
+                        <div className='top-navigation' onClick={onRestaurantListClickHandler}>식당 검색</div>
+                        <div className='top-navigation' onClick={onNoticeBoardListClickHandler}>고객센터</div>
                     </div>
                     <div className='top-divider'>|</div>
                     <div className='top-bar-button'>
@@ -110,14 +119,18 @@ function BottomBar() {
             <div className='bottom-title'>Food Insight</div>
             <div className='bottom-navigation-box'>
                 <div className='bottom-navigation'>회사소개</div>
+                <div className="bottom-divider">{'\|'}</div>
                 <div className='bottom-navigation'>개인정보처리방침</div>
+                <div className="bottom-divider">{'\|'}</div>
                 <div className='bottom-navigation'>이용약관</div>
+                <div className="bottom-divider">{'\|'}</div>
                 <div className='bottom-navigation' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>도움말</div>
+                <div className="bottom-divider">{'\|'}</div>
                 <div className='bottom-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>공지사항</div>
             </div>
             <div className='bottom-detail-title-box'>
                 <div className='bottom-detail-title'>FoodInsight(주)</div>
-                <div className='bottom-detail-title'>대표자</div>
+                <div className='bottom-detail-title'>대표자 김나경</div>
                 <div className='bottom-detail-title'>대한민국(어딘가)</div>
             </div>
             <div className='bottom-detail-title-box'>

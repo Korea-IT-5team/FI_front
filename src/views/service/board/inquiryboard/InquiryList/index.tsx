@@ -64,7 +64,9 @@ export default function InquiryList() {
 
   //   state   //
   const {loginUserRole} = useUserStore();
+
   const [cookies] = useCookies();
+
   const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
   const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
@@ -87,8 +89,7 @@ export default function InquiryList() {
 
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
-
-
+    
     setViewInquiryList(viewList);
 
   };
