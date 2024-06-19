@@ -8,11 +8,18 @@
     margin-bottom: 30px;
 }
 
-.favorite-list-top {
+.favorite-list-title {
     text-align: center;
+<<<<<<< HEAD
     font-family: 'Nanum Gothic';
     font-size: 40px;
     font-weight: bold;
+=======
+
+    font-family: 'KCC-Hanbit';
+    font-size: 25px;
+    font-weight: 400;
+>>>>>>> e2ed2926482b3934da3392ccc8713d6d6add66fa
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
 }
