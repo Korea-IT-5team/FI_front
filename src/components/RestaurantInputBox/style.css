@@ -1,20 +1,20 @@
 .restaurant-input {
-    border: 1px solid rgba(200, 200, 200, 1);
-    border-radius: 6px;
+    width: 400px;
+    
     outline: none;
+
     padding: 8px 16px;
 
     background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(200, 200, 200, 1);
+    border-radius: 6px;
 
-    font-family: Inter;
+    font-family: 'NanumSquareRound';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 175%;
-
+    line-height: 150%;
     color: rgba(35, 45, 66, 1);
-    width: 400px;
-
 }
 
 .restaurant-input::placeholder {
@@ -27,30 +27,35 @@
 
 .restaurant-sns-button-container {
     display: flex;
+
     gap: 24px;
 }
 
 .restaurant-input-box {
     width: 100%;
+
     margin-top: 30px;
     margin-bottom: 20px;
 }
 
 .restaurant-input-label{
-    color:rgba(0, 0, 0, 1);
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    font-family: 'Nanum Gothic';
+    justify-content: center;
+
+    margin-top: 10px;
+
+    font-family: 'NanumSquareRound';
     font-size: 20px;
     font-weight: bold;
-    margin-top: 10px;
+    color:rgba(50, 50, 50, 1);
 }
 
 
 .restaurant-input-content-box{
-    gap: 10px;
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
+    justify-content: center;
+    
+    gap: 10px;
     margin-top: 8px;
     margin-bottom: 4px;
 }

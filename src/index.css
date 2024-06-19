@@ -8,8 +8,8 @@
 }
 
 @font-face {
-  font-family: 'HakgyoansimWoojuR';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
+  font-family: 'NanumSquareRound';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,7 +34,7 @@
 
 body {
   margin: 0;
-  font-family: 'Nanum Gothic', 'Ubuntu', 'Noto Sans Korean';
+  font-family: 'NanumSquareRound', 'KCC-Hanbit', 'Ubuntu';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
