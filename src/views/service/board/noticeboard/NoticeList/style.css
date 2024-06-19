@@ -9,13 +9,32 @@
     gap: 17px;
 }
 
-.notice-list-top {
+.notice-list-title {
     text-align: center;
     font-family: 'KCC-Hanbit';
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
+}
+
+.notice-list-nav-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    gap: 10px;
+
+    font-family: 'HakgyoansimWoojuR';
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(150, 150, 150, 1);
+}
+
+.notice-list-nav:hover {
+    cursor: pointer;
+    opacity: 0.75;
 }
 
 .notice-list-top-box {
@@ -30,20 +49,6 @@
     display: flex;
     flex-direction: row;
     align-items: end;
-}
-
-.notice-list-nav-text {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    gap: 10px;
-}
-
-.notice-list-text {
-    font-family: 'HakgyoansimWoojuR';
-    font-size: 20px;
-    font-weight: 400;
-    color: rgba(138, 146, 166, 1);
 }
 
 .notice-list-size-text {
