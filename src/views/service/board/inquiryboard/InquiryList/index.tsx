@@ -89,7 +89,7 @@ export default function InquiryList() {
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
 
 
-    setViewInquiryList(viewList);
+    setViewList(viewList);
 
   };
 
