@@ -7,7 +7,7 @@ import { getInquiryBoardListRequest, getMyInquiryBoardListRequest, getMySearchIn
 
 import { GetInquiryBoardListResponseDto, GetMyInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
 
@@ -116,6 +116,11 @@ const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto 
   if (!result || result.code !== 'SU') {
     alert(message);
     return;
+  }
+
+  if(loginUserRole == "ROLE_ADMIN")
+  {
+    navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   }
 
   const { inquiryBoardList } = result as GetMyInquiryBoardListResponseDto;
@@ -236,9 +241,6 @@ const onNextSectionClickHandler = () => {
       if (!inquiryBoardList.length) return;
       changeSection(totalPage);
   }, [currentSection]);
-
-
-
 
   //                    render                      //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';

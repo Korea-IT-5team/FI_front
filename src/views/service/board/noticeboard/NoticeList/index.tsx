@@ -146,32 +146,26 @@ export default function NoticeList() {
 
   const onPreSectionClickHandler = () => {
     if (currentSection <= 1 && currentPage <= 1) {
-      // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
       return;
     }
     if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
-      // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
       if (currentSection > 1) {
         setCurrentSection(currentSection - 1);
         setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
       }
     } else {
-      // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
       setCurrentPage(currentPage - 1);
     }
   };
 
   const onNextSectionClickHandler = () => {
     if (currentSection >= totalSection && currentPage >= totalPage) {
-      // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
       return;
     }
     if (currentPage === currentSection * COUNT_PER_SECTION) {
-      // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
       setCurrentSection(currentSection + 1);
       setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
     } else {
-      // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
       setCurrentPage(currentPage + 1);
     }
   };

@@ -54,7 +54,6 @@ export default function CeoInfoUpdate() {
     setUserAddress(userAddress);
     setBusinessRegistrationNumber(businessRegistrationNumber);
     setUserRole(userRole);
-
   };
 
   //   effect   //
@@ -100,7 +99,7 @@ export default function CeoInfoUpdate() {
     patchUserInfoRequest(userEmailId, requestBody, cookies.accessToken).then(PatchUpdateUserInfoResponse);
   };
 
-  // useEffect //
+  // effect //
   let effectFlag = useRef(false);
   useEffect(() => {
     if (!cookies.accessToken) return;
@@ -136,23 +135,23 @@ export default function CeoInfoUpdate() {
             <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
           </div>
           <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-info'>아이디</div>
+            <div className='ceo-page-update-title-info'>아이디</div>
             <div className='ceo-page-update-info'>{userEmailId}</div>
           </div>
           <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-info'>이름</div>
+            <div className='ceo-page-update-title-info'>이름</div>
             <div className='ceo-page-update-info'>{userName}</div>
           </div>
           <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-info'>전화번호</div>
+            <div className='ceo-page-update-title-info'>전화번호</div>
             <div className='ceo-page-update-info'>{userTelNumber}</div>
           </div>
           <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-info'>주소</div>
+            <div className='ceo-page-update-title-info'>주소</div>
             <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onCeoAddressChangeHandler} />
           </div>
           <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-info'>사업자등록번호</div>
+            <div className='ceo-page-update-title-info'>사업자등록번호</div>
             <div className='ceo-page-update-info'>{businessRegistrationNumber}</div>
           </div>
         </div>
@@ -160,6 +159,5 @@ export default function CeoInfoUpdate() {
       </div>
     </div>
   </div>
-
   );
 }

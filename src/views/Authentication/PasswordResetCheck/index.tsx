@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css"; 
-import { emailCheckRequest, newPasswordRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { CheckEmailRequestDto, NewPasswordRequestDto, PasswordResetRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { newPasswordRequest } from 'src/apis/auth';
+import { NewPasswordRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import { useNavigate, useParams } from 'react-router';
 import InputBox from 'src/components/InputBox';
-import { PASSWORD_RESET_FINALLY_ABSOLUTE_PATH } from 'src/constant';
+import { SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
 // component: 비밀번호 재설정 // 
 export default function PasswordResetCheck() {
@@ -40,7 +40,7 @@ export default function PasswordResetCheck() {
         alert(message);
         return;
     }
-    navigation(PASSWORD_RESET_FINALLY_ABSOLUTE_PATH);
+    navigation(SIGN_IN_ABSOLUTE_PATH);
   };
 
   // event handler //
@@ -85,13 +85,14 @@ export default function PasswordResetCheck() {
         alert('모든 내용을 입력해주세요.');
         return;
     }
+    alert('비밀번호가 성공적으로 변경되었습니다.');
 
     const requestBody: NewPasswordRequestDto = {
       password: password
     }
     newPasswordRequest(userEmailId, requestBody).then(passwordResetCheckResponse);
   };
-  
+
   // render //
   return (
     <div id='authentication-wrapper'>
