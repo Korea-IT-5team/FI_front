@@ -161,8 +161,6 @@ export default function InquiryList() {
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
 
-
-
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;

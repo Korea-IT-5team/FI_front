@@ -24,6 +24,7 @@ export default function MyPageSite() {
   const navigation = useNavigate();
 
   const GetMyInfoResponse = (result : GetMyInfoResponseDto | ResponseDto | null) => {
+
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
@@ -98,5 +99,5 @@ export default function MyPageSite() {
         </div>
       </div>
     </div>
-  )
+  );
 }
