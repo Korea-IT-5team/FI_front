@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin: 25px;
+    margin-bottom: 30px;
+    padding: 30px;
+    border: 5px solid white;
+    border-radius: 15px;
 }
 
 .review-select-list-package{
@@ -12,20 +15,32 @@
     gap: 10px;
 }
 
+.review-select-list-title {
+    font-size: 24px; 
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
 .review-select-item{
     font-size: 16px;
+    max-width: 400px; 
+    word-wrap: break-word; 
 }
 
 .review-select-item.nickname{
     color: #333;
+    font-weight: bold;
 }
 
 .review-select-item.rating{
     color: rgba(255, 100, 45, 1);
+    font-weight: bold;
 }
 
 .review-select-item.date{
-    color: rgba(150, 150, 150, 1);
+    color: rgba(125, 125, 125, 1);
+    font-weight: bold;
 }
 
 .review-select-item.image{
