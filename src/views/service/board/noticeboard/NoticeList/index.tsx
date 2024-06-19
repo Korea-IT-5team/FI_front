@@ -225,16 +225,17 @@ export default function NoticeList() {
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return(
     <div id='notice-list-wrapper'>
-      <div className='notice-list-top'>공지사항</div>
+      <div className='notice-list-title'>공지사항</div>
+      <div className='notice-list-nav-box'>
+          <div className='notice-list-nav' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>문의사항</div>
+          <div className='notice-list-nav-divider'>|</div>
+          <div className='notice-list-nav' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의사항</div>
+        </div>
       <div className='notice-list-top-box'>
         <div className='notice-list-top-left'>
           <div className='notice-list-size-text'>전체 
             <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
           </div>
-        </div>
-        <div className='notice-list-nav-text'>
-          <div className='notice-list-text' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>문의사항</div>
-          <div className='notice-list-text' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의사항</div>
         </div>
         <div className='notice-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' && (
