@@ -97,7 +97,7 @@ export default function RestaurantList() {
                 <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
                     <img src={item.restaurantImage} className='restaurant-list-item' />
                     <div className='restaurant-list-item-top-box'>
-                        <div className='restaurant-list-item'>{item.restaurantName}</div>
+                        <div className='restaurant-list-item name'>{item.restaurantName}</div>
                         <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
                     </div>
                     <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
