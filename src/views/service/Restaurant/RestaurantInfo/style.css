@@ -4,19 +4,19 @@
   align-items: center;
   margin-top: 20px;
   width: 46%;
-  padding: 20px; /* 패딩 추가 */
-  background-color: #f9f9f9; /* 배경색 추가 */
-  border-radius: 10px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  padding: 20px; 
+  background-color: #f9f9f9; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   overflow-y: auto;
 }
 
 #restaurant-info img {
-  width: 300px; /* 이미지 너비 조정 */
-  height: 300px; /* 이미지 높이 자동 조정 */
+  width: 300px; 
+  height: 300px; 
   border-radius: 10px;
-  object-fit: cover; /* 이미지 자르기 및 확대/축소 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  object-fit: cover; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 #restaurant-info button {
@@ -32,12 +32,14 @@
   width: 80px;
   height: 30px;
   font-style: normal;
+  font-weight: bold;
 }
 
 .restaurant-info-category-favorite{
   display: flex;
   flex-direction: row;
-  justify-content: center
+  justify-content: center;
+  gap: 5px;
 }
 
 .restaurant-info-food-category{
@@ -89,7 +91,7 @@
 }
 
 .restaurant-info-icon {
-  margin-right: 10px; /* 아이콘과 텍스트 사이의 간격 조정 */
+  margin-right: 10px; 
 }
 
 .restaurant-info-icon-box {
@@ -99,9 +101,9 @@ gap:10px
 }
 
 .restaurant-info-icon-package{
-  display: flex;
-  flex-direction: row;
-  margin-top: 10px;
+display: flex;
+flex-direction: row;
+margin-top: 10px;
 }
 
 .restaurant-info-icon.location {
@@ -154,27 +156,34 @@ background-image: url(../../../../assets/image/notice.png);
 background-size: cover;
 }
 
+.restaurant-info-imformation{
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
 .restaurant-info-top {
 display: flex;
 flex-direction: column;
-align-items: center; /* 요소들을 가운데 정렬 */
+align-items: center; 
 margin-bottom: 30px;
 gap: 10px;
 }
 
 .restaurant-info-name {
-font-size: 36px; /* 글자 크기 조정 */
+font-size: 36px; 
 font-weight: bold;
 color: #333;
 }
 
 .restaurant-info-button-group {
   display: flex;
-  gap: 10px; /* 버튼 간격 조정 */
+  gap: 10px; 
 }
 
 .restaurant-info-icon-map{
   display: flex;
   flex-direction: row;
-  gap:88px
+  gap:88px;
+  margin-bottom: 30px;
 }
