@@ -56,28 +56,29 @@ export default function FavoriteList() {
 
     // render //
     return (
-    <>
         <div id='favorite-list-wrapper'>
-            <div className='favorite-list-title'>찜한 맛집</div>
-            <div className='favorite-list-top-box'>
-                <div className='favorite-list-size-text'>전체<span className='emphasis'> {restaurantList.length}건</span></div>
-            </div>
-            <div className='favorite-list-grid'>
-                {restaurantList.slice(0, displayCount).map(item => (
-                    <div className='favorite-list-card' onClick={() => onClickHandler(item.restaurantId)}>
-                        <img src={item.restaurantImage} className='favorite-list-card-image' />
-                        <div className='favorite-list-card-content'>
-                        <div className='favorite-list-card-name'>{item.restaurantName}</div>
-                        <div className='favorite-list-card-category'>{item.restaurantFoodCategory}</div>
-                        <div className='favorite-list-card-location'>{item.restaurantLocation}</div>
-                    </div>
+            <div className='favorite-list-top'>찜한 맛집</div>
+                <div className='favorite-list-top-box'>
+                    <div className='favorite-list-top-left'>
+                    <div className='favorite-list-size-text'>전체<span className='emphasis'> {restaurantList.length}건</span></div>
                 </div>
-                ))}
+                </div>
+                <div className='favorite-list-box'>
+                    {restaurantList.slice(0, displayCount).map((item) => (
+                        <div className='favorite-list-item-box' onClick={() => onClickHandler(item.restaurantId)}>
+                            
+                            <img src={item.restaurantImage} className='favorite-list-item' />
+                            <div className='favorite-list-item-top-box'>
+                                    <div className='favorite-list-item name'>{item.restaurantName}</div>
+                                    <div className='favorite-list-item category'>{item.restaurantFoodCategory}</div>
+                                </div>
+                                    <div className='favorite-list-item location'>{item.restaurantLocation}</div>
+                            </div>
+                            ))}
+                        </div>
+                    {restaurantList.length > displayCount && (
+                    <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
+                )}
             </div>
-        </div>
-        {restaurantList.length > displayCount && (
-        <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
-        )}
-    </>  
-    );
-}
+            );
+        }
