@@ -22,23 +22,29 @@
   font-size: 30px;
   font-weight: bold;
   line-height: 150%;
+  color: rgba(50, 50, 50, 1);
 }
 
 .ceo-page-navigation-box {
   display: flex;
   flex-direction: row;
-
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .ceo-page-navigation {
+  width: 100px;
+  height: 20px;
+
   padding: 10px;
 
   border: 1px solid rgba(245, 245, 245, 1);
 
-  font-family: 'HakgyoansimWoojuR';
+  font-family: 'KCC-Hanbit';
   font-size: 17px;
   font-weight: bold;
+  color: rgba(50, 50, 50, 1);
 }
 
 .ceo-page-navigation:hover {
@@ -55,25 +61,22 @@
 
   gap: 30px;
   
-  font-family: 'HakgyoansimWoojuR';
+  font-family: 'NanumSquareRound';
   font-size: 17px;
   font-weight: bold;
   color: rgba(50, 50, 50, 1);
 }
 
-/* .ceo-page-contents-nav {
+.ceo-page-contents-nav {
   padding: 10px;
-  
-  background-color: rgba(255, 148, 45, 0.2);
   border-radius: 7px;
 
   text-align: center;
-} */
+}
 
 .ceo-page-nav:hover {
   cursor: pointer;
-  color: rgba(212, 212, 212, 0.5);
-  /* background-color: rgba(255, 148, 45, 0.25); */
+  color: rgba(255, 148, 45, 0.8);
 }
 
 .ceo-page-info-contents-container {
@@ -101,11 +104,9 @@
 
 .ceo-page-contents-box {
   width: 100%;
-  
-  /* display: flex; */
-  flex-direction: column;
-  
+
   display: grid;
+  flex-direction: column;
   grid-template-columns: 1fr 1fr;
 }
 
@@ -114,9 +115,10 @@
 
   display: flex;
   flex-direction: row;
-  word-break: break-word;
 
-  border-top: 1px solid rgba(238, 238, 238, 1); 
+  border-top: 1px solid rgba(238, 238, 238, 1);
+
+  word-break: break-word;
 }
 
 .ceo-page-info-second {
@@ -132,22 +134,34 @@
 
 .ceo-page-info {
   width: 100%;
+  min-width: 100px;
+  
+  text-align: left;
+
   padding: 10px;
+
   background-color: rgba(255, 255, 255, 1);
-  /* border-radius: 7px; */
-  min-width: 100px; 
-  text-align: center; 
-  font-family: 'HakgyoansimWoojuR';
+
+  font-family: 'NanumSquareRound';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
+
   word-break: break-word; 
 }
 
 .ceo-page-resign {
   width: 150px;
+
+  text-align: center;
+
   padding: 10px;
+
   background-color: rgba(255, 148, 45, 0.7);
   border-radius: 8px;
-  text-align: center;
-  font-family: 'Nanum Gothic';
+
+  font-family: 'NanumSquareRound';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;

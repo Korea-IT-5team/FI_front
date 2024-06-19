@@ -3,12 +3,11 @@ import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
-import { AUTH_PATH, BOARD_PATH, CEO_DELETE_PATH, CEO_INFO_UPDATE_PATH, CEO_PAGE_PATH, CEO_PAGE_SITE_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_FINALLY_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
+import { AUTH_PATH, BOARD_PATH, CEO_DELETE_PATH, CEO_INFO_UPDATE_PATH, CEO_PAGE_PATH, CEO_PAGE_SITE_PATH, DO_RESERVATION_PATH, FAVORITE_PATH, FIND_EMAIL_INPUT_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_PATH, INQUIRY_BOARD_WRITE_PATH, INQUIRY_DETAILS_PATH, INQUIRY_MY_BOARD_LIST_PATH, INQUIRY_PATH, MAIN_ABSOLUTE_PATH, MAIN_PATH, MY_PAGE_PATH, MY_PAGE_SITE_PATH, NOTICE_BOARD_LIST_PATH, NOTICE_BOARD_UPDATE_PATH, NOTICE_BOARD_WRITE_PATH, NOTICE_DETAILS_PATH, NOTICE_PATH, PASSWORD_RESET_CHECK_PATH, PASSWORD_RESET_INPUT_PATH, RESERVATION_LIST_PATH, RESERVATION_PATH, RESTAURANT_FAVORITE_LIST_PATH, RESTAURANT_INFO_PATH, RESTAURANT_INFO_UPDATE_PATH, RESTAURANT_INFO_WRITE_PATH, RESTAURANT_LIST_PATH, RESTAURANT_PATH, RESTAURANT_REVIEW_DETAILS_LIST_PATH, RESTAURANT_REVIEW_DETAIL_PATH, RESTAURANT_REVIEW_UPDATE_PATH, RESTAURANT_REVIEW_WRITE_PATH, REVIEW_PATH, SIGN_IN_PATH, SIGN_UP_PATH, SNS_PATH, USER_DELETE_PATH, USER_INFO_UPDATE_PATH } from './constant';
 import Authentication from './layouts/AuthenticationContainer';
 import TopContainer from './layouts/TopContainer';
 import FindEmailInput from './views/Authentication/FIndEmailInput';
 import PasswordResetCheck from './views/Authentication/PasswordResetCheck';
-import PasswordResetFinally from './views/Authentication/PasswordResetFinally';
 import PasswordResetInput from './views/Authentication/PasswordResetInput';
 import SignIn, { Sns } from './views/Authentication/SignIn';
 import SignUp from './views/Authentication/SignUp';
@@ -16,7 +15,6 @@ import Main from './views/Main';
 import MyPageSite from './views/service/Mypage/MyPageSite';
 import UserDelete from './views/service/Mypage/UserDelete';
 import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
-import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
 import DoReservation from './views/service/Restaurant/Reservation/DoReservation';
 import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
 import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
@@ -38,6 +36,7 @@ import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
 import CeoPageSite from './views/service/CeoPage/CeoPageSite';
 import CeoInfoUpdate from './views/service/CeoPage/CeoInfoUpdate';
+import FavoriteList from './views/service/Restaurant/FavoriteList';
 
 
 // component: root 경로 컴포넌트
@@ -71,9 +70,7 @@ function App() {
         <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
         <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
         <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
-        <Route path={PASSWORD_RESET_FINALLY_PATH} element={<PasswordResetFinally />} />
       </Route>
-      
       <Route element={<TopContainer />} >
         <Route path={RESTAURANT_PATH}> 
           <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />

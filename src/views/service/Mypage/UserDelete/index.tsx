@@ -68,7 +68,6 @@ export default function UserDelete() {
 
     const requestData: DeleteUserRequestDto = { password };
     deleteUserRequest(userEmailId, requestData, cookies.accessToken).then(deleteUserResponse);
-
   };
 
   // effect // 
@@ -83,25 +82,25 @@ export default function UserDelete() {
         <div className='resign-title'>회원 탈퇴</div>
         <div className='resign-box'>
           <div className='resign-content caution-title'>회원 탈퇴 시 주의사항!</div>
-          <div className='resign-content caution-contents'>1. 회원 정보 및 모든 게시물(리뷰, 문의) 삭제 처리됨 
+          <div className='resign-content caution-contents'>1. 회원 정보 및 모든 게시물(리뷰, 문의) 삭제 처리됨
             <p>
-            회원탈퇴 즉시 아래에 해당하는 개인정보가 삭제됩니다.
-            <br/>
-            개인정보 : 이메일 계정, 비밀번호, 휴대폰번호, 생일, 성별 정보 삭제
+              회원탈퇴 즉시 아래에 해당하는 개인정보가 삭제됩니다.
+              <br />
+              개인정보 : 이메일 계정, 비밀번호, 휴대폰번호, 생일, 성별 정보 삭제
             </p>
           </div>
           <div className='resign-content caution-contents'>2. 30일간 동일한 전화번호로 가입 불가능
             <p>
-            회원탈퇴를 신청하시면 해당 닉네임은 즉시 탈퇴 처리되며 
-            <br/>
-            기존에 사용하던 휴대폰번호로는 30일 동안 재가입이 불가합니다.
+              회원탈퇴를 신청하시면 해당 닉네임은 즉시 탈퇴 처리되며
+              <br />
+              기존에 사용하던 휴대폰번호로는 30일 동안 재가입이 불가합니다.
             </p>
           </div>
         </div>
         <div className='resign-password'>
-          <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />      
+          <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
         </div>
-        <div className='error-button' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
+        <div className='error-button delete' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
       </div>
     </div>
   )

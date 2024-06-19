@@ -8,6 +8,7 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, IN
 import { useUserStore } from 'src/stores';
 import { NoticeBoardListItem } from 'src/types';
 import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
+import { usePagination } from 'src/hooks';
 
 //     component     //
 function ListItem ({
@@ -42,57 +43,28 @@ export default function NoticeList() {
 
   //                    state                    //
   const {loginUserRole} = useUserStore();
-  
   const [cookies] = useCookies();
 
-  const [noticeBoardList, setNoticeBoardList] = useState<NoticeBoardListItem[]>([]);
-  const [viewNoticeList, setViewNoticeList] = useState<NoticeBoardListItem[]>([]);
-  const [totalLength, setTotalLength] = useState<number>(0);
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageList, setPageList] = useState<number[]>([1]);
-  const [totalSection, setTotalSection] = useState<number>(1);
-  const [currentSection, setCurrentSection] = useState<number>(1);
+  const {
+    viewList,
+    pageList,
+    totalPage,
+    currentPage,
+    totalLength,
 
+    setCurrentPage,
+    setCurrentSection,
+    changeList,
+
+    onPageClickHandler,
+    onPreSectionClickHandler,
+    onNextSectionClickHandler
+  } = usePagination<NoticeBoardListItem>();
+  
   const [searchWord, setSearchWord] = useState<string>('');
 
   //                    function                    //
   const navigation = useNavigate();
-  
-  const changePage = (noticeBoardList: NoticeBoardListItem[], totalLength: number) => {
-    if (!currentPage) return;
-    const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-    let endIndex = currentPage * COUNT_PER_PAGE;
-    if (endIndex > totalLength - 1) endIndex = totalLength;
-    const viewList = noticeBoardList.slice(startIndex, endIndex);
-    setViewNoticeList(viewList);
-  };
-
-  const changeSection = (totalPage: number )=> {
-    if (!currentSection) return;
-    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-    let endPage = currentSection * COUNT_PER_SECTION;
-    if(endPage > totalPage) endPage = totalPage;
-    const pageList: number[] = [];
-    for (let page = startPage; page <= endPage; page++) pageList.push(page);
-    setPageList(pageList);
-  };
-
-  const changeNoticeBoardList = (noticeList: NoticeBoardListItem[]) => {
-    setNoticeBoardList(noticeList);
-    const totalLength = noticeList.length;
-    setTotalLength(totalLength);
-
-    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-    setTotalPage(totalPage);
-
-    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-    setTotalSection(totalSection);
-
-    changePage(noticeList, totalLength);
-
-    changeSection(totalPage);
-};
 
   const getNoticeBoardListResponse = (result: GetNoticeBoardListResponseDto | ResponseDto | null) => {
     const message =
@@ -107,7 +79,7 @@ export default function NoticeList() {
     }
 
     const { noticeBoardList } = result as GetNoticeBoardListResponseDto;
-    changeNoticeBoardList(noticeBoardList);
+    changeList(noticeBoardList);
 
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
@@ -128,7 +100,7 @@ export default function NoticeList() {
     }
 
     const { noticeBoardList } = result as GetSearchNoticeBoardListResponseDto;
-    changeNoticeBoardList(noticeBoardList);
+    changeList(noticeBoardList);
 
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
@@ -139,42 +111,6 @@ export default function NoticeList() {
     if (loginUserRole !== 'ROLE_ADMIN') return;
     navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
   }
-
-  const onPageClickHandler = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const onPreSectionClickHandler = () => {
-    if (currentSection <= 1 && currentPage <= 1) {
-      // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
-      return;
-    }
-    if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
-      // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
-      if (currentSection > 1) {
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
-      }
-    } else {
-      // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const onNextSectionClickHandler = () => {
-    if (currentSection >= totalSection && currentPage >= totalPage) {
-      // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
-      return;
-    }
-    if (currentPage === currentSection * COUNT_PER_SECTION) {
-      // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
-      setCurrentSection(currentSection + 1);
-      setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
-    } else {
-      // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
-      setCurrentPage(currentPage + 1);
-    }
-  };
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
@@ -210,16 +146,6 @@ export default function NoticeList() {
     else
       getNoticeBoardListRequest(cookies.accessToken).then(getNoticeBoardListResponse)
   }, []);
-
-  useEffect(() => {
-    if (!noticeBoardList.length) return;
-    changePage(noticeBoardList, totalLength);
-  },[currentPage]);
-
-  useEffect(() => {
-    if (!noticeBoardList.length) return;
-    changeSection(totalPage);
-  }, [currentSection]); 
   
   //                    render                      //
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
@@ -252,7 +178,7 @@ export default function NoticeList() {
           <div className='notice-list-table-view-count'>조회수</div>
         </div>
         <div className='notice-list-table-contents'>
-          {viewNoticeList.map((item, index) => <ListItem {...item}  index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.noticeNumber} />)}
+          {viewList.map((item, index) => <ListItem {...item}  index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.noticeNumber} />)}
         </div>
       </div>
       <div className='notice-list-bottom'>

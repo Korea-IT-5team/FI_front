@@ -8,7 +8,6 @@ export const SIGN_UP_PATH = 'sign-up';
 export const FIND_EMAIL_INPUT_PATH = 'find-email-input';
 export const PASSWORD_RESET_INPUT_PATH = 'password-reset-input';
 export const PASSWORD_RESET_CHECK_PATH = 'password-reset-check/:userEmailId';
-export const PASSWORD_RESET_FINALLY_PATH = 'password-reset-finally';
 
 export const RESTAURANT_PATH = '/restaurant';
 export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
@@ -62,7 +61,6 @@ export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_INPUT_PATH}`;
 export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
 export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/password-reset-check/${userEmailId}`;
-export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
 export const RESTAURANT_INFO_WRITE_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_INFO_WRITE_PATH}`;

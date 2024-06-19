@@ -4,7 +4,7 @@ import { useUserStore } from 'src/stores';
 import { useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH,INQUIRY_BOARD_WRITE_ABSOLUTE_PATH,SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { deleteInquiryBoardRequest, getInquiryBoardRequest, postCommentRequest } from 'src/apis/board/inquiryboard';
 import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import { PostCommentRequestDto } from 'src/apis/board/inquiryboard/dto/request';

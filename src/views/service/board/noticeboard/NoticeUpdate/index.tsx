@@ -3,9 +3,9 @@ import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { getNoticeBoardRequest, patchNoticeBoardRequest } from 'src/apis/board/noticeboard';
 import { PatchNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
-import { GetNoticeBoardListResponseDto, GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
+import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import './style.css';
 

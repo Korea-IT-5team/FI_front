@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./style.css"; 
-import { emailCheckRequest, passwordResetRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { CheckEmailRequestDto, PasswordResetRequestDto, TelNumberAuthRequestDto } from 'src/apis/auth/dto/request';
+import { passwordResetRequest } from 'src/apis/auth';
+import { PasswordResetRequestDto } from 'src/apis/auth/dto/request';
 import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/InputBox';
 import { PASSWORD_RESET_CHECK_ABSOLUTE_PATH } from 'src/constant';
