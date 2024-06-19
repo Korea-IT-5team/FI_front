@@ -7,6 +7,8 @@ import { GetReviewListResponseDto } from 'src/apis/restaurant/review/dto/respons
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
 import { RestaurantReviewListItem } from 'src/types';
 import './style.css';
+import { usePagination } from 'src/hooks';
+import { useUserStore } from 'src/stores';
 
 // component //
 function ListItem ({ 
@@ -37,56 +39,29 @@ function ListItem ({
 
 // component //
 export default function ReviewDetailsList() {
+
     // state //
+    const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
-    const [reviewDetailsList, setReviewDetailsList] = useState<RestaurantReviewListItem[]>([]);
-    const [viewList, setViewList] = useState<RestaurantReviewListItem[]>([]);
-    const [totalLenght, setTotalLength] = useState<number>(0);
-    const [totalPage, setTotalPage] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageList, setPageList] = useState<number[]>([1]);
-    const [totalSection, setTotalSection] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
+
+    const {
+        viewList,
+        pageList,
+        totalPage,
+        currentPage,
+        totalLength,
+    
+        setCurrentPage,
+        setCurrentSection,
+        changeList,
+    
+        onPageClickHandler,
+        onPreSectionClickHandler,
+        onNextSectionClickHandler
+    } = usePagination<RestaurantReviewListItem>();
 
     // function //
     const navigation = useNavigate();
-
-    const changePage = (reviewDetailsList: RestaurantReviewListItem[], totalLenght: number) => {
-        if(!currentPage) return;
-        const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-        let endIndex = currentPage * COUNT_PER_PAGE;
-        if (endIndex > totalLenght - 1) endIndex = totalLenght;
-        const viewList = reviewDetailsList.slice(startIndex, endIndex);
-        setViewList(viewList);
-    };
-
-    const changeSection = (totalPage: number) => {
-        if(!currentSection) return;
-        const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-        let endPage = currentSection * COUNT_PER_SECTION;
-        if (endPage > totalPage) endPage = totalPage;
-        const pageList: number[] = [];
-        for (let page = startPage; page <= endPage; page++) pageList.push(page);
-        setPageList(pageList);
-    };
-
-
-    const changeReviewDetailsList = (reviewDetailsList: RestaurantReviewListItem[]) => {
-        setReviewDetailsList(reviewDetailsList);
-
-        const totalLenght = reviewDetailsList.length;
-        setTotalLength(totalLenght);
-
-        const totalPage = Math.floor((totalLenght - 1) / COUNT_PER_PAGE) + 1;
-        setTotalPage(totalPage);
-        
-
-        const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-        setTotalSection(totalSection);
-
-        changePage(reviewDetailsList, totalLenght);
-        changeSection(totalPage);
-    };
 
     const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
         const message =
@@ -99,26 +74,9 @@ export default function ReviewDetailsList() {
         }
 
         const { restaurantReviewList } = result as GetReviewListResponseDto;
-        changeReviewDetailsList(restaurantReviewList);
+        changeList(restaurantReviewList);
         setCurrentPage(!restaurantReviewList.length ? 0 : 1);
         setCurrentSection(!restaurantReviewList.length ? 0 : 1);
-    };
-
-    // event handler //
-    const onPageClickHandler = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const onPreSectionClickHandler = () => {
-        if (currentSection <= 1) return;
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-    };
-
-    const onNextSectionClickHandler = () => {
-        if (currentSection === totalSection) return;
-        setCurrentSection(currentSection + 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
     };
 
     // effect //
@@ -126,23 +84,13 @@ export default function ReviewDetailsList() {
         GetReviewDetailsRequest(cookies.accessToken)
             .then(GetReviewDetailsResponse);
     },[]);
-
-    useEffect(() => {
-        if (!reviewDetailsList.length) return;
-        changePage(reviewDetailsList, totalLenght);
-    }, [currentPage]);
-
-    useEffect(() => {
-        if (!reviewDetailsList.length) return;
-        changeSection(totalPage);
-    }, [currentSection]);
     
     // render //
     return (
         <div id='review-list-wrapper'>
             <div className='review-list-top'>나의 리뷰 내역</div>
             <div className='review-list-top-box'>
-                <div className='review-list-size-text'>전체<span className='emphasis'> {totalLenght}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+                <div className='review-list-size-text'>전체<span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
             <div className='review-list-table'>
                 <div className='review-list-table-top'>
