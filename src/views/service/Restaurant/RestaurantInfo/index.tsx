@@ -306,39 +306,44 @@ export default function RestaurantInfo() {
     }
     // render //
     return (
-    <>
-        <div id='restaurant-info-container'>
+        <>
             <div id="restaurant-info">
+                <img src={restaurantImage} className='restaurant-image' />
+
                 <div className='restaurant-info-top'>
-                    <div className='restaurant-name'>식당 이름 : {restaurantName}</div>
-                    <div className='restaurant-divider'>{'\|'}</div>
-                    <div>주음식 : {restaurantFoodCategory}</div>
+                    <div className=''>
+                        <div className='restaurant-info-name-grade'> 
+                            <div className='restaurant-info-name'>{restaurantName}</div>
+                            {grade ? (<div className='restaurant-info-grade'>{grade}</div>) : (<div></div>)}
+                        </div>
+                        <div className='restaurant-info-category-favorite'>
+                            <div className='restaurant-info-food-category'>{restaurantFoodCategory}</div>
+                            <div >
+                                {loginUserRole === "ROLE_USER" && (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ?
+                                (<div className='restaurant-info-favorite-heart' onClick={onCancleFavoriteClickHandler}></div>) :
+                                (<div className='restaurant-info-favorite-non-heart' onClick={onFavoriteClickHandler}></div>))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <img src={restaurantImage} className='restaurant-image' />
-                {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                    <div className="button-group">
-                        <button onClick={onSetRestIdNumberHandler}>수정</button>
-                        <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
-                    </div>
-                )}
-
-                <div className="divider"></div>
-
-                {loginUserRole === "ROLE_USER" &&
-                    <div className="button-group">
-                        {loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
-                            (<button onClick={onReservationCancelClickHandler}>예약취소</button>) :
-                            (<button onClick={onReservationClickHandler}>예약</button>)}
-                        {loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ?
-                            (<button onClick={onCancleFavoriteClickHandler}>찜클릭해제</button>) :
-                            (<button onClick={onFavoriteClickHandler}>찜클릭</button>)}
-                    </div>}
-             
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon location'></div>
                     <div className='restaurant-info-location'>위치 : {restaurantLocation}</div>
                 </div>
+
+                {center && 
+                <Map 
+                    id="map"
+                    center={center}
+                    style={{
+                        width: "350px",
+                        height: "350px",
+                    }}
+                    level={3}
+                    >
+                    <MapMarker position={center} />
+                </Map>}
 
                 <div className='restaurant-info-icon-box'>
                     <div className='restaurant-info-icon telnumber'></div>
@@ -375,22 +380,21 @@ export default function RestaurantInfo() {
                     <div>공지사항 : {restaurantNotice}</div>
                 </div>}
 
-                {grade ? (<div className='restaurant-grade'>평점 : {grade}</div>) : (<div></div>)}
+                <div className="button-group">
+                    {loginUserRole === "ROLE_USER" && (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
+                        (<button onClick={onReservationCancelClickHandler}>예약취소</button>) :
+                        (<button onClick={onReservationClickHandler}>예약</button>))}
+                </div>
+
+                {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
+                    <div className="button-group">
+                        <button onClick={onSetRestIdNumberHandler}>수정</button>
+                        <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
+                    </div>
+                )}
                 
                 <ReviewList value={restaurantReviewList} restaurantId={restaurantId} />
             </div>
-            {center && 
-                <Map 
-                    id="map"
-                    center={center}
-                    style={{
-                        width: "60%",
-                    }}
-                    level={3}
-                    >
-                    <MapMarker position={center} />
-            </Map>}
-        </div>
-    </>
+        </>
     )
 }
