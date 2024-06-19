@@ -101,7 +101,7 @@ export default function ReservationList() {
 
     return (
         <div id='reservation-list-wrapper'>
-            <div className='reservation-list-top'>예약 내역</div>
+            <div className='reservation-list-title'>예약 내역</div>
             <div className='reservation-list-top-box'>
                 <div className='reservation-list-size-text'>전체<span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>

@@ -7,11 +7,12 @@
     gap: 17px;
 }
 
-.favorite-list-top {
+.favorite-list-title {
     text-align: center;
-    font-family: 'Nanum Gothic';
-    font-size: 20px;
-    font-weight: bold;
+
+    font-family: 'KCC-Hanbit';
+    font-size: 25px;
+    font-weight: 400;
     line-height: 150%;
     color: rgba(50, 50, 50, 1);
 }

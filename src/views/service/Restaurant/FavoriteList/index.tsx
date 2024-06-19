@@ -58,7 +58,7 @@ export default function FavoriteList() {
     return (
     <>
         <div id='favorite-list-wrapper'>
-            <div className='favorite-list-top'>찜한 맛집</div>
+            <div className='favorite-list-title'>찜한 맛집</div>
             <div className='favorite-list-top-box'>
                 <div className='favorite-list-size-text'>전체<span className='emphasis'> {restaurantList.length}건</span></div>
             </div>
