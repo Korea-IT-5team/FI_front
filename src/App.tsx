@@ -15,7 +15,6 @@ import Main from './views/Main';
 import MyPageSite from './views/service/Mypage/MyPageSite';
 import UserDelete from './views/service/Mypage/UserDelete';
 import UserInfoUpdate from './views/service/Mypage/UserInfoUpdate';
-import FavoriteList from './views/service/Restaurant/Favorite/FavoriteList';
 import DoReservation from './views/service/Restaurant/Reservation/DoReservation';
 import ReservationList from './views/service/Restaurant/Reservation/ReservationList';
 import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
@@ -37,6 +36,7 @@ import RestaurantInfo from './views/service/Restaurant/RestaurantInfo';
 import RestaurantList from './views/service/Restaurant/RestaurantList';
 import CeoPageSite from './views/service/CeoPage/CeoPageSite';
 import CeoInfoUpdate from './views/service/CeoPage/CeoInfoUpdate';
+import FavoriteList from './views/service/Restaurant/FavoriteList';
 
 
 // component: root 경로 컴포넌트
@@ -71,7 +71,6 @@ function App() {
         <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
         <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
       </Route>
-      
       <Route element={<TopContainer />} >
         <Route path={RESTAURANT_PATH}> 
           <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />

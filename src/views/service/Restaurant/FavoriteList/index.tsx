@@ -15,18 +15,18 @@ export default function FavoriteList() {
     // state //
     const [cookies] = useCookies();
     const [restaurantList, setRestaurantList] = useState<RestaurantListItem[]>([]);
-    const [displayCount, setDisplayCount] = useState<number>(8); // 한 번에 보여줄 식당 목록 개수
-  
+    const [displayCount, setDisplayCount] = useState<number>(8);
+
     // function //
     const navigation = useNavigate();
 
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
         const message =
         !result ? '서버에 문제가 있습니다.' :
-            result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-                result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-                    result.code === 'AF' ? '권한이 없습니다.' :
-                        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+        result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+        result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+        result.code === 'AF' ? '권한이 없습니다.' :
+        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
@@ -44,10 +44,8 @@ export default function FavoriteList() {
         navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
     }
 
-
-    // 더보기 버튼 클릭 핸들러 //
     const onLoadMoreClickHandler = () => {
-        setDisplayCount(prevCount => prevCount + 8); // 현재 보여주고 있는 개수에 8개를 더함
+        setDisplayCount(prevCount => prevCount + 8); 
     };
 
     // effect //
@@ -60,7 +58,7 @@ export default function FavoriteList() {
     return (
     <>
         <div id='favorite-list-wrapper'>
-            <div className='favorite-list-top'>나의 찜 내역</div>
+            <div className='favorite-list-top'>찜한 맛집</div>
             <div className='favorite-list-top-box'>
                 <div className='favorite-list-size-text'>전체<span className='emphasis'> {restaurantList.length}건</span></div>
             </div>
@@ -77,7 +75,6 @@ export default function FavoriteList() {
                 ))}
             </div>
         </div>
-        {/* 더보기 버튼 추가 */}
         {restaurantList.length > displayCount && (
         <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
         )}

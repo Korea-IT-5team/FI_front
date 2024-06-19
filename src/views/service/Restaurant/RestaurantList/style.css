@@ -107,31 +107,6 @@
   object-fit: cover;
 }
 
-.category {
-  margin: 0;
-
-  font-size: 13px;
-}
-
-.location {
-  width: 180px;
-  margin: 0px 10px 10px;
-  text-align: left;
-}
-
-.load-more-button {
-  width: 70px;
-  
-  text-align: center;
-
-  padding: 5px;
-  margin-top: 30px;
-
-  background-color: rgba(245, 138, 35, 0.75);
-  border-radius: 5px;
-
-  font-family: 'NanumSquareRound';
-  font-size: 16px;
   line-height: 150%;
   color: rgba(255, 255, 255, 1);
 }

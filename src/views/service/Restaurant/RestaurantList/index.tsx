@@ -12,7 +12,7 @@ import './style.css';
 // component : 식당 리스트 //
 export default function RestaurantList() {
 
-    // state //
+    //    state    //
     const [cookies] = useCookies();
     const [searchWord, setSearchWord] = useState<string>('');
     const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);

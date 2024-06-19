@@ -37,7 +37,6 @@
     transition: transform 0.3s;
 }
 
-
 .favorite-list-card :hover{
     cursor: pointer;
 }
@@ -71,6 +70,24 @@
     font-size: 14px;
     color: rgba(100, 100, 100, 1);
     margin-bottom: 5px;
+}
+
+.load-more-button {
+    padding: 10px 20px;
+    background-color: rgba(255, 148, 45, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.1s ease;
+}
+
+.load-more-button:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 

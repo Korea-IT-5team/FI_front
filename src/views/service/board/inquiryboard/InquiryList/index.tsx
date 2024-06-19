@@ -8,6 +8,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
+import { usePagination } from 'src/hooks';
 
         
 //     component     //
@@ -69,7 +70,7 @@ export default function InquiryList() {
   const [cookies] = useCookies();
 
   const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
-  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
+  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -78,7 +79,6 @@ export default function InquiryList() {
   const [currentSection, setCurrentSection] = useState<number>(1);
 
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
-
   const [searchWord, setSearchWord] = useState<string>('');
 
   //   function   //
@@ -90,7 +90,7 @@ export default function InquiryList() {
     let endIndex = currentPage * COUNT_PER_PAGE;
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
-    setViewInquiryList(viewList);
+    setViewList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
@@ -231,8 +231,6 @@ export default function InquiryList() {
 //     }
 // };
 
-
-
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
@@ -268,6 +266,7 @@ export default function InquiryList() {
   },[isToggleOn]);
 
   useEffect(() => {
+      if (!inquiryBoardList.length) return;
       changePage(inquiryBoardList, totalLength);
   },[currentPage]);
 
@@ -311,7 +310,7 @@ export default function InquiryList() {
           <div className='inquiry-list-table-write-date'>작성일자</div>
         </div>
         <div className='inquiry-list-table-contents'>
-          {viewInquiryList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
+          {viewList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
         </div>
       </div>
       <div className='inquiry-list-bottom'>
