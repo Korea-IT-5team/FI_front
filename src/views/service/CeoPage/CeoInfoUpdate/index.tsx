@@ -122,8 +122,8 @@ export default function CeoInfoUpdate() {
         <div className='short-divider-line'></div>
       </div>
       <div className='ceo-page-navigation-box'>
-        <div className='ceo-page-navigation' onClick={() => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH)}>사장페이지</div>
-        <div className='ceo-page-navigation' onClick={() => navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>사장정보 수정</div>
+        <div className='ceo-page-navigation' onClick={() => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
+        <div className='ceo-page-navigation' onClick={() => navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
         <div className='ceo-page-navigation' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
       </div>
       <div className='short-divider-bottom-line'></div>

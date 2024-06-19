@@ -100,7 +100,7 @@ export default function UserDelete() {
         <div className='resign-password'>
           <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
         </div>
-        <div className='error-button' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
+        <div className='error-button delete' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
       </div>
     </div>
   )
