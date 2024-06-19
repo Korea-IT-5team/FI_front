@@ -1,0 +1,57 @@
+.review-select-list-item-box{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 25px;
+}
+
+.review-select-list-package{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.review-select-item{
+    font-size: 16px;
+}
+
+.review-select-item.nickname{
+    color: #333;
+}
+
+.review-select-item.rating{
+    color: rgba(255, 100, 45, 1);
+}
+
+.review-select-item.date{
+    color: rgba(150, 150, 150, 1);
+}
+
+.review-select-item.image{
+    display: block;
+    margin: 0 auto;
+}
+
+.review-selecton-see-more{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 148, 45, 1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 80px;
+    height: 30px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.review-selecton-see-more:hover {
+    cursor: pointer;
+    opacity: 0.85;
+}

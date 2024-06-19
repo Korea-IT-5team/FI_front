@@ -350,37 +350,37 @@ export default function RestaurantInfo() {
 
                         <div className='restaurant-info-icon-package'>
                             <div className='restaurant-info-icon location'></div>
-                            <div>위치 : {restaurantLocation}</div>
+                            <div className='restaurant-info-imformation'>위치 : {restaurantLocation}</div>
                         </div>
 
                         <div className='restaurant-info-icon-package'>
                             <div className='restaurant-info-icon telnumber'></div>
-                            <div>전화번호 : {restaurantTelNumber}</div>
+                            <div className='restaurant-info-imformation'>전화번호 : {restaurantTelNumber}</div>
                         </div>
 
                         <div className='restaurant-info-icon-package'>
                             {restaurantSnsAddress && <div className='restaurant-info-icon sns'></div>}
-                            {restaurantSnsAddress && <div>SNS : {restaurantSnsAddress}</div>}
+                            {restaurantSnsAddress && <div className='restaurant-info-imformation'>SNS : {restaurantSnsAddress}</div>}
                         </div>
 
                         <div className='restaurant-info-icon-package'>
                             {restaurantOperationHours && <div className='restaurant-info-icon time'></div>}
-                            {restaurantOperationHours && <div>운영시간 : {restaurantOperationHours}</div>}
+                            {restaurantOperationHours && <div className='restaurant-info-imformation'>운영시간 : {restaurantOperationHours}</div>}
                         </div>
 
                         <div className='restaurant-info-icon-package'>
                             {restaurantRepresentativeMenu && <div className='restaurant-info-icon menu'></div>}
-                            {restaurantRepresentativeMenu && <div>대표메뉴 : {restaurantRepresentativeMenu}</div>}
+                            {restaurantRepresentativeMenu && <div className='restaurant-info-imformation'>대표메뉴 : {restaurantRepresentativeMenu}</div>}
                         </div>
 
                         <div className='restaurant-info-icon-package'>
                             {restaurantFeatures && <div className='restaurant-info-icon feature'></div>}
-                            {restaurantFeatures && <div>특징 : {restaurantFeatures}</div>}
+                            {restaurantFeatures && <div className='restaurant-info-imformation'>특징 : {restaurantFeatures}</div>}
                         </div>
 
                         <div className='restaurant-info-icon-package'>
                             {restaurantNotice && <div className='restaurant-info-icon notice'></div>}
-                            {restaurantNotice && <div>공지사항 : {restaurantNotice}</div>}
+                            {restaurantNotice && <div className='restaurant-info-imformation'>공지사항 : {restaurantNotice}</div>}
                         </div>
                     </div>
 

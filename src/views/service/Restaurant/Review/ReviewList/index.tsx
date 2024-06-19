@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { RestaurantReviewListItem } from 'src/types';
+import './style.css';
 
 interface Props {
     value: RestaurantReviewListItem[];
@@ -27,16 +28,19 @@ export default function ReviewList({ value }: Props) {
             <div className='review-select-list'>
                 {currentItems.map((item) => (
                     <div className='review-select-list-item-box' key={item.reviewNumber}>
-                        <img src={item.reviewImage} className='review-select-item' />
-                        <div className='review-select-item'>평점: {item.rating}</div>
-                        <div className='review-select-item'>내용: {item.reviewContents}</div>
-                        <div className='review-select-item'>작성자: {item.reviewWriterNickname}</div>
-                        <div className='review-select-item'>작성일: {item.reviewDate}</div>
+                        <div className='review-select-list-package'>
+                            <div className='review-select-item nickname'>{item.reviewWriterNickname}</div>
+                            <div className='review-select-item rating'>{item.rating}</div>
+                            <div className='review-select-item date'>{item.reviewDate}</div>
+                        </div>
+
+                        <img src={item.reviewImage} className='review-select-item image' />
+                        <div className='review-select-item contents'>{item.reviewContents}</div>
                     </div>
                 ))}
             </div>
             {currentItems.length < value.length && (
-                <div onClick={onLoadMoreClickHandler}>더보기</div>
+                <div className='review-selecton-see-more' onClick={onLoadMoreClickHandler}>더보기</div>
             )}   
         </>
     )
