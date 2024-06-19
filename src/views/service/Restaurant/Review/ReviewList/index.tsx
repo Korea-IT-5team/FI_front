@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 
 interface Props {
@@ -11,12 +9,9 @@ interface Props {
 export default function ReviewList({ value }: Props) {
 
     // state //
-    const {loginUserRole} = useUserStore();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 1; // 한 번에 표시할 리뷰의 수
 
-    // function //
-    const navigation = useNavigate();
 
     // event handler //
 
