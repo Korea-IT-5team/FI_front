@@ -1,20 +1,26 @@
+#restaurant-info-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 700px;
+}
 
 #restaurant-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  width: 40%;
   padding: 20px; /* 패딩 추가 */
   background-color: #f9f9f9; /* 배경색 추가 */
   border-radius: 10px; /* 모서리 둥글게 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  overflow-y: auto; 
 }
 
 #restaurant-info img {
-  width: 100%; /* 이미지 너비 조정 */
-  max-width: 600px; /* 최대 너비 설정 */
-  height: auto; /* 이미지 높이 자동 조정 */
-  margin-bottom: 20px;
+  width: 300px; /* 이미지 너비 조정 */
+  height: 300px; /* 이미지 높이 자동 조정 */
   border-radius: 10px;
   object-fit: cover; /* 이미지 자르기 및 확대/축소 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
@@ -22,7 +28,7 @@
 
 #restaurant-info > div {
   display: flex;
-  flex-direction: row; /* 세로로 요소 배치 */
+  flex-direction: row;
   align-items: center; /* 요소들을 왼쪽 정렬 */
   margin-top: 10px;
 }
@@ -42,6 +48,8 @@
   font-size: 16px;
   transition: background-color 0.3s ease;
   margin-left: 10px;
+  width: 80px;
+  height: 40px;
 }
 
 #restaurant-info button:hover {
@@ -108,7 +116,7 @@
 
 .restaurant-info-icon-box {
 display: flex;
-flex-direction: row;
+flex-direction: column; /* 세로 방향으로 요소들을 배치 */
 align-items: center; /* 요소들을 가운데 정렬 */
 margin-bottom: 10px;
 }
@@ -191,7 +199,8 @@ color: rgba(50, 50, 50, 1);
 .restaurant-grade {
   margin-top: 10px;
   font-size: 18px;
-  color: #ff9800; /* 색상 변경 */
+  font-family: 'Nanum Gothic';
+  color: rgba(50, 50, 50, 1);
 }
 
 .button-group {
@@ -200,7 +209,13 @@ color: rgba(50, 50, 50, 1);
   margin-bottom: 20px;
 }
 
-.restaurant-location{
+.restaurant-info-location{
   font-size: 16px; /* 글자 크기 조정 */
-  color: #555;
+  font-family: 'Nanum Gothic';
+  color: rgba(50, 50, 50, 1);
+}
+
+.divider{
+  width: 100%;
+  border-bottom: 10px solid rgba(200, 200, 200, 1);
 }
