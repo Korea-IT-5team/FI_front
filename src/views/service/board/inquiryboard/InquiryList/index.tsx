@@ -9,7 +9,6 @@ import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, IN
 import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
 
-        
 //     component     //
 function ListItem ({
   index,
@@ -37,7 +36,6 @@ function ListItem ({
   }
 
   //   render   //
-  
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-list-table-reception-number'>{index + 1}</div>
@@ -60,14 +58,12 @@ function ListItem ({
   );
 }
 
-// component: 문의사항 목록보기 //
+//  component  //
 export default function InquiryList() {
 
   //   state   //
   const {loginUserRole} = useUserStore();
-
   const [cookies] = useCookies();
-
   const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
   const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
   const [totalLength, setTotalLength] = useState<number>(0);
@@ -76,9 +72,7 @@ export default function InquiryList() {
   const [pageList, setPageList] = useState<number[]>([1]);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
-
   const [searchWord, setSearchWord] = useState<string>('');
 
   //   function   //
@@ -86,17 +80,22 @@ export default function InquiryList() {
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
     if (!currentPage) return;
+
     const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
     let endIndex = currentPage * COUNT_PER_PAGE;
+
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
+
     setViewInquiryList(viewList);
   };
 
   const changeSection = (totalPage: number )=> {
     if (!currentSection) return;
+
     const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
     let endPage = currentSection * COUNT_PER_SECTION;
+    
     if(endPage > totalPage) endPage = totalPage;
     const pageList: number[] = [];
     for (let page = startPage; page <= endPage; page++) pageList.push(page);
@@ -161,8 +160,6 @@ export default function InquiryList() {
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
 
-
-
   //                    event handler                       //
   const onWriteButtonClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
@@ -178,62 +175,31 @@ export default function InquiryList() {
     setCurrentPage(page);
   };
 
-  // const onPreSectionClickHandler = () => {
-  //   if (currentSection <= 1) return;
-  //   setCurrentSection(currentSection - 1); 
-  //   setCurrentPage((currentSection - 1) * COUNT_PER_SECTION);
-  // };
-
   const onPreSectionClickHandler = () => {
     if (currentSection <= 1 && currentPage <= 1) {
-      // 현재 섹션이 첫 번째 섹션의 첫 번째 페이지인 경우 아무런 동작도 하지 않습니다.
       return;
     }
     if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
-      // 현재 페이지가 현재 섹션의 첫 번째 페이지인 경우
       if (currentSection > 1) {
         setCurrentSection(currentSection - 1);
         setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
       }
     } else {
-      // 현재 페이지가 현재 섹션의 첫 번째 페이지가 아닌 경우
       setCurrentPage(currentPage - 1);
     }
   };
   
-
-  // const onNextSectionClickHandler = () => {
-  //   if (currentSection === totalSection) return;
-  //   setCurrentSection(currentSection + 1);
-  //   setCurrentPage(currentSection * COUNT_PER_SECTION + 1);
-  // };
-
   const onNextSectionClickHandler = () => {
     if (currentSection >= totalSection && currentPage >= totalPage) {
-      // 마지막 섹션 마지막 페이지일 경우 아무런 동작도 하지 않습니다.
       return;
     }
     if (currentPage === currentSection * COUNT_PER_SECTION) {
-      // 현재 페이지가 현재 섹션의 마지막 페이지인 경우
       setCurrentSection(currentSection + 1);
       setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
     } else {
-      // 현재 페이지가 현재 섹션의 마지막 페이지가 아닌 경우
       setCurrentPage(currentPage + 1);
     }
   };
-
-//   const onNextSectionClickHandler = () => {
-//     const lastPageOfCurrentSection = currentSection * COUNT_PER_SECTION;
-//     if (currentPage < lastPageOfCurrentSection) {
-//         setCurrentPage(currentPage + 1);
-//     } else if (currentSection < totalSection) {
-//         setCurrentSection(currentSection + 1);
-//         setCurrentPage(lastPageOfCurrentSection + 1);
-//     }
-// };
-
-
 
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
@@ -251,11 +217,9 @@ export default function InquiryList() {
   const onEnterKeyHandler = (event: { key: string; preventDefault: () => void; }) => {
     if (event.key === 'Enter') {
       event.preventDefault(); 
-  
       if (searchWord) {
         getSearchInquiryBoardListRequest(searchWord, cookies.accessToken)
           .then(getSearchInquiryBoardListResponse);
-
           setSearchWord('');
       }
     }
@@ -296,9 +260,7 @@ export default function InquiryList() {
               <div className='inquiry-list-top-admin-text'>미답변 보기</div>
               <div className={toggleClass} onClick={onToggleClickHandler}></div>
             </>)}
-
           {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&(
-
             <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>
@@ -318,7 +280,6 @@ export default function InquiryList() {
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px' }}></div>
-
         <div className='inquiry-list-pagenation'>
           <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
@@ -329,7 +290,6 @@ export default function InquiryList() {
           </div>
           <div className='page-right' onClick={onNextSectionClickHandler}></div>
         </div>
-
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
             <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} onKeyDown={onEnterKeyHandler}/>
