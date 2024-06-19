@@ -92,7 +92,7 @@ export default function InquiryList() {
 
 
     
-    setViewInquiryList(viewList);
+    setViewList(viewList);
 
 
 
