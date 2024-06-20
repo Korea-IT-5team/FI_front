@@ -10,7 +10,7 @@ import { useUserStore } from 'src/stores';
 import { InquiryBoardListItem } from 'src/types';
 import { usePagination } from 'src/hooks';
 
-//     component     //
+// component //
 function ListItem ({
   index,
   inquiryNumber,
@@ -22,12 +22,13 @@ function ListItem ({
   inquiryWriterId
 }: InquiryBoardListItem & { index: number }) {
   
+  // state //
   const { loginUserRole, loginUserEmailId } = useUserStore();
 
-  //        function       //
+  // function //
   const navigation = useNavigate();
   
-  //      event handler      //
+  // event handler //
   const onClickHandler = () => {
     if (inquiryPublic && inquiryWriterId !== loginUserEmailId && loginUserRole !== 'ROLE_ADMIN') {
       alert('비공개 게시물입니다.');
@@ -36,20 +37,20 @@ function ListItem ({
     navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   }
 
-  //   render   //
+  // render //
   return(
     <div className='inquiry-list-table-tr' onClick={onClickHandler}>
       <div className='inquiry-list-table-reception-number'>{index + 1}</div>
       <div className='inquiry-list-table-status'>
           {status ? 
-          <div className='primary-bedge'>답변</div> :
-          <div className='disable-bedge'>미답변</div> 
+            <div className='primary-bedge'>답변</div> :
+            <div className='disable-bedge'>미답변</div> 
           }
       </div>
       <div className='inquiry-list-table-public'>
           {inquiryPublic ?
-          <div className='disable-bedge'>비공개</div> :
-          <div className='primary-bedge'>공개</div>
+            <div className='disable-bedge'>비공개</div> :
+            <div className='primary-bedge'>공개</div>
           }
       </div>
       <div className='inquiry-list-table-title' style={{ textAlign: 'left' }}>{inquiryTitle}</div>
@@ -59,10 +60,10 @@ function ListItem ({
   );
 }
 
-//  component  //
+// component //
 export default function InquiryList() {
 
-  //   state   //
+  // state //
   const {loginUserRole} = useUserStore();
 
   const [cookies] = useCookies();
@@ -78,7 +79,7 @@ export default function InquiryList() {
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [searchWord, setSearchWord] = useState<string>('');
 
-  //   function   //
+  // function //
   const navigation = useNavigate();
   
   const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
@@ -90,12 +91,7 @@ export default function InquiryList() {
     if (endIndex > totalLength - 1) endIndex = totalLength;
     const viewList = inquiryBoardList.slice(startIndex, endIndex);
 
-
-    
     setViewList(viewList);
-
-
-
   };
 
   const changeSection = (totalPage: number )=> {
@@ -148,18 +144,17 @@ export default function InquiryList() {
   };
 
   const getSearchInquiryBoardListResponse = (result: GetSearchInquiryBoardListResponseDto | ResponseDto | null) => {
-    
     const message = 
-        !result ? '서버에 문제가 있습니다.' : 
-        result.code === 'VF' ? '검색어를 입력하세요.' :
-        result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      !result ? '서버에 문제가 있습니다.' : 
+      result.code === 'VF' ? '검색어를 입력하세요.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
     
-    if (!result || result.code !== 'SU') {
-      alert(message);
-      if (result?.code === 'AF') navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
-      return;
-    }
+      if (!result || result.code !== 'SU') {
+        alert(message);
+        if (result?.code === 'AF') navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+        return;
+      }
 
     const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
     changeInquiryBoardList(inquiryBoardList);
@@ -168,7 +163,7 @@ export default function InquiryList() {
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
 
-  //                    event handler                       //
+  // event handler //
   const onWriteButtonClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
     navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
@@ -187,6 +182,7 @@ export default function InquiryList() {
     if (currentSection <= 1 && currentPage <= 1) {
       return;
     }
+
     if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
       if (currentSection > 1) {
         setCurrentSection(currentSection - 1);
@@ -201,6 +197,7 @@ export default function InquiryList() {
     if (currentSection >= totalSection && currentPage >= totalPage) {
       return;
     }
+
     if (currentPage === currentSection * COUNT_PER_SECTION) {
       setCurrentSection(currentSection + 1);
       setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
@@ -209,8 +206,6 @@ export default function InquiryList() {
     }
   };
 
-
-
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
@@ -218,9 +213,8 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-    
-    getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
 
+    getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
     setSearchWord('');
   };
 
@@ -235,7 +229,7 @@ export default function InquiryList() {
     }
   };
 
-  //   effect   //
+  // effect //
   useEffect(() => {
     if (searchWord)
       getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getInquiryBoardListResponse);
@@ -253,9 +247,10 @@ export default function InquiryList() {
       changeSection(totalPage);
   }, [currentSection]);
 
-  //   render   //
+  // render //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
   const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
+  
   return (
     <div id='inquiry-list-wrapper'>
       <div className='inquiry-list-top'>문의</div>

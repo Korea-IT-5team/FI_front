@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import "./style.css";
@@ -28,6 +29,7 @@ function TopBar() {
     setNickname(nickname);
   };
 
+  // effect //
   useEffect (() => {
     if (!cookies.accessToken) return;
 
@@ -56,7 +58,7 @@ function TopBar() {
   const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
 
-// render // 
+  // render // 
   return (
     <>
       <div className='main-head-box'>
@@ -69,31 +71,31 @@ function TopBar() {
           <div className='top-divider'>|</div>
           <div className='main-top-bar-button'>
           {loginUserRole === 'ROLE_USER' &&
-          <div className="top-bar-role">
-            <div className="sign-in-box">
-              <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+            <div className="top-bar-role">
+              <div className="sign-in-box">
+                <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+              </div>
+              <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-          </div>
           }
           {loginUserRole === 'ROLE_CEO' &&
-          <div className="top-bar-role">
-            <div className="sign-in-wrapper">
-              <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
-            </div> 
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-          </div>
+            <div className="top-bar-role">
+              <div className="sign-in-wrapper">
+                <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
+              </div> 
+              <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+            </div>
           }
           {loginUserRole === 'ROLE_ADMIN' && 
-          <div className="top-bar-role">
-            <div className="sign-in-wrapper">
-              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+            <div className="top-bar-role">
+              <div className="sign-in-wrapper">
+                <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+              </div>
+              <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-          </div>
           }
           {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
-          <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+            <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
           }
           </div>
         </div>
@@ -102,6 +104,7 @@ function TopBar() {
   );
 }
 
+// component //
 function BottomBar() {
 
   // function //
@@ -112,11 +115,11 @@ function BottomBar() {
     <div className='bottom-box'>
       <div className='bottom-title'>Food Insight</div>
       <div className='bottom-navigation-box'>
-        <div className='bottom-navigation'>회사소개</div>
+        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH)}>회사소개</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation'>개인정보처리방침</div>
+        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH)}>개인정보처리방침</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation'>이용약관</div>
+        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH)}>이용약관</div>
         <div className="bottom-divider">{'\|'}</div>
         <div className='bottom-navigation' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>도움말</div>
         <div className="bottom-divider">{'\|'}</div>
@@ -151,7 +154,6 @@ export default function Main() {
   const navigation = useNavigate();
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
-
     const message = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
@@ -188,7 +190,6 @@ export default function Main() {
   
   // effect //
   useEffect(() => {
-
     if (!cookies.accessToken) {
       navigation(MAIN_ABSOLUTE_PATH);
       return;
@@ -196,8 +197,7 @@ export default function Main() {
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, [cookies.accessToken]);
-
-
+  
   let effectFlag1 = false;
 
   useEffect(() => {
@@ -207,7 +207,6 @@ export default function Main() {
     GetRestaurantListRequest(searchWord, cookies.accessToken)
         .then(GetRestaurantListResponse);
   }, []);
-
 
 // render //
   return (

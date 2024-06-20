@@ -1,0 +1,64 @@
+#company-wrapper {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgb(255, 255, 255, 1);
+}
+
+.company-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.company-img-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  background-color: rgba(215, 215, 215, 1);
+
+  font-size: 24px;
+  color: rgb(150, 150, 150);
+  border-radius: 8px;
+}
+
+.company-title-box {
+  width: 100%;
+  max-width: 800px;
+}
+
+.company-title {
+  font-family: 'KCC-Hanbit';
+  font-size: 32px;
+  font-weight: bold;
+  color: rgb(50, 50, 50, 1);
+  
+  margin-bottom: 10px;
+}
+
+.company-title-detail-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.company-title-detail-first {
+  font-family: 'NanumSquareRound';
+  font-size: 20px;
+  color: rgb(88, 88, 88);
+}
+
+.company-title-detail-second {
+  font-family: 'NanumSquareRound';
+  font-size: 15px;
+  color: rgb(131, 131, 131);
+}

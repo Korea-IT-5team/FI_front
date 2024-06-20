@@ -30,15 +30,15 @@ export default function PasswordResetCheck() {
   const passwordResetCheckResponse = (result: ResponseDto | null) => {
 
     const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-        result.code === 'NU' ? '유저 정보를 찾을 수 없습니다.' : 
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
+      result.code === 'NU' ? '유저 정보를 찾을 수 없습니다.' : 
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
     const isSuccess = result && result.code === 'SU';
     if (!isSuccess) {
-        alert(message);
-        return;
+      alert(message);
+      return;
     }
     navigation(SIGN_IN_ABSOLUTE_PATH);
   };
@@ -82,8 +82,8 @@ export default function PasswordResetCheck() {
   const onPasswordResetCheckButtonClickHandler = () => {
     if(!isResetPasswordCheckActive || !userEmailId) return;
     if(!password || !passwordCheck) {
-        alert('모든 내용을 입력해주세요.');
-        return;
+      alert('모든 내용을 입력해주세요.');
+      return;
     }
     alert('비밀번호가 성공적으로 변경되었습니다.');
 

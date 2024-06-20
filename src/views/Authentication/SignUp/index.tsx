@@ -8,10 +8,10 @@ import { SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate, useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 
-//   component: 회원가입   //
+// component: 회원가입 //
 export default function SignUp() {
 
-  //   state   //
+  // state //
   const [searchParam, setSearchParam] = useSearchParams();
   const [emailId, setEmailId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -62,87 +62,81 @@ export default function SignUp() {
   const navigation = useNavigate();
   
   const emailCheckResponse = (result: ResponseDto | null) => {
-    
     const emailMessage = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '이메일 형식에 맞지 않습니다.' :
       result.code === 'DE' ?  '이미 사용중인 이메일입니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '사용 가능한 이메일입니다.' : '';
+
     const emailCheck =  result !== null && result.code === 'SU';
     const emailError = !emailCheck;
-
     setEmailIdMessage(emailMessage);
     setEmailIdCheck(emailCheck);
     setEmailIdError(emailError);
   };
 
   const nicknameCheckResponse = (result: ResponseDto | null) => {
-    
     const nicknameMessage = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '닉네임은 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
       result.code === 'SF' ?  '이미 사용중인 닉네임입니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '사용 가능한 닉네임입니다.' : '';
+
     const nicknameError = !(result && result.code === 'SU');
     const nicknameCheck = !nicknameError;
-
     setNicknameMessage(nicknameMessage);
     setNicknameError(nicknameError);
     setNicknameCheck(nicknameCheck);
   };
 
   const userTelNumberResponse = (result: ResponseDto | null) => {
-    
     const userTelNumberMessage = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '인증번호를 입력해주세요.' : 
       result.code === 'SF' ? '인증번호 전송이 실패하였습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '인증번호가 전송되었습니다.' : '';
+
     const userTelNumberCheck = result !== null && result.code === 'SU';
     const UserTelNumberError = !userTelNumberCheck;
-
     setUserTelNumberMessage(userTelNumberMessage);
     setUserTelNumberCheck(userTelNumberCheck);
     setUserTelNumberError(UserTelNumberError);
   };
 
   const userTelNumberCheckResponse = (result: ResponseDto | null) => {
-    
     const authNumberMessage = 
       !result ? '서버에 문제가 있습니다.' : 
       result.code === 'VF' ? '인증번호를 입력해주세요.' : 
       result.code === 'AF' ? '인증번호가 일치하지 않습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '인증번호가 확인되었습니다.' : '';
+
     const authNumberCheck = result !== null && result.code === 'SU';
     const authNumberError = !authNumberCheck;
-
     setAuthNumberMessage(authNumberMessage);
     setAuthNumberCheck(authNumberCheck);
     setAuthNumberError(authNumberError);
   };
 
   const businessRegistrationNumberResponse = (result: ResponseDto | null) => {
-        
     const businessRegistrationNumberMessage = 
       !result ? '서버에 문제가 있습니다.' :
-      result.code === 'DR' ? '이미 사용중인 사업자번호 입니다.' : //수정
+      result.code === 'DR' ? '이미 사용중인 사업자번호 입니다.' :
       result.code === 'AF' ? '권한이 없습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '사업자번호가 확인되었습니다.' : '' ;
+
     const businessRegistrationNumberError = !(result && result.code ==='SU');
     const businessRegistrationNumberCheck = !businessRegistrationNumberError;
-
     setBusinessRegistrationNumberMessage(businessRegistrationNumberMessage);
     setBusinessRegistrationNumberError(businessRegistrationNumberError);
     setBusinessRegistrationNumberCheck(businessRegistrationNumberCheck);
   }
 
   const signUpResponse = (result: ResponseDto | null) => {
-
     const message = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
@@ -182,7 +176,6 @@ export default function SignUp() {
       isPasswordPattern ? '' : 
       value ? '영문, 숫자를 혼용하여 8 ~ 13자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
-        
 
     const isEqualPassword = passwordCheck === value;
       setEqualPassword(isEqualPassword);
@@ -345,24 +338,15 @@ export default function SignUp() {
         <div className="sign-up-title">회원가입</div>
         <div className="sign-up-container">
           <div className="sign-up-input-container">
-
               <InputBox type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} buttonTitle="중복 확인" buttonStatus={emailIdButtonStatus} onButtonClickHandler={onEmailIdButtonClickHandler} message={emailIdMessage} error={isEmailIdError} />
-
               <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
-
               <InputBox type="password" value={passwordCheck} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordCheckChangeHandler} message={passwordCheckMessage} error />
-
               <InputBox type="text" value={nickname} placeholder="닉네임을 입력해주세요" onChangeHandler={onNicknameChangeHandler} buttonTitle="중복 확인" buttonStatus={nicknameButtonStatus} onButtonClickHandler={onNicknameButtonClickHandler} message={nicknameMessage} error={isNicknameError} />
-
               <InputBox type="text" value={userName} placeholder="이름을 입력해주세요" onChangeHandler={onUserNameChangeHandler} message={UserNameMessage} error />
-
               <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonTitle="인증번호 전송" buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
-
               {isUserTelNumberCheck && 
               <InputBox  type="text" value={authNumber} placeholder="인증번호 6자리를 입력해주세요" onChangeHandler={onAuthNumberChangeHandler} buttonTitle="인증 확인" buttonStatus={authNumberButtonStatus} onButtonClickHandler={onAuthNumberButtonClickHandler} message={authNumberMessage} error={isAuthNumberError} />}
-
               <InputBox type="text" value={userAddress} placeholder="주소를 입력해주세요" onChangeHandler={onUserAddressChangeHandler} message={userAddressMessage} />
-
               <InputBox type="text" value={businessRegistrationNumber} placeholder="사업자등록번호를 입력해주세요" buttonTitle="중복 확인" buttonStatus={businessRegistrationNumberButtonStatus} onChangeHandler={onBusinessRegistrationNumberChangeHandler} onButtonClickHandler={onBusinessRegistrationButtonClickHandler} message={businessRegistrationNumberMessage} error={isBusinessRegistrationNumberError}/>
           </div>
           <div className="sign-up-button-container">

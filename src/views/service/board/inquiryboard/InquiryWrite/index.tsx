@@ -11,7 +11,7 @@ import './style.css';
 // component : 문의 글쓰기 // 
 export default function InquiryWrite() {
 
-  //                    state                    //
+  // state //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { loginUserRole } = useUserStore();
@@ -22,16 +22,15 @@ export default function InquiryWrite() {
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
-  //                    function                    //
+  // function //
   const navigation = useNavigate();
 
   const postBoardResponse = (result: ResponseDto | null) => {
-
     const message =
       !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
-          result.code === 'AF' ? '권한이 없습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'VF' ? '제목과 내용을 모두 입력해주세요.' :
+      result.code === 'AF' ? '권한이 없습니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
@@ -40,7 +39,7 @@ export default function InquiryWrite() {
     navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   };
 
-  //                    event handler                    //
+  // event handler //
   const onInquiryTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const inquiryTitle = event.target.value;
     setInquiryTitle(inquiryTitle);
@@ -48,6 +47,7 @@ export default function InquiryWrite() {
 
   const onInquiryContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const inquiryContents = event.target.value;
+
     if (inquiryContents.length > 500) return;
     setInquiryContents(inquiryContents);
 
@@ -58,6 +58,7 @@ export default function InquiryWrite() {
 
   const onPostButtonClickHandler = () => {
     if (!inquiryTitle.trim() || !inquiryTitle.trim()) return;
+
     if (!cookies.accessToken) return;
 
     const requestBody: PostInquiryBoardRequestDto = { inquiryTitle, inquiryContents, inquiryPublic };
@@ -69,19 +70,20 @@ export default function InquiryWrite() {
     setInquiryPublic(!inquiryPublic);
   }
 
-  //                    effect                    //
+  // effect //
   useEffect(() => {
     if (!cookies.accessToken) {
       navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
+    
     if (loginUserRole === 'ROLE_ADMIN') {
       navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
   }, [loginUserRole]);
 
-  //                    render                    //
+  // render //
   const publicButtonClass = inquiryPublic ? 'public-button' : 'un-public-button';
   return (
     <div id='inquiry-write-wrapper'>
