@@ -6,6 +6,7 @@ import { GetFavoriteRestaurantListRequest } from 'src/apis/restaurant/favorite';
 import { GetFavoriteRestaurantListResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { RestaurantListItem } from 'src/types';
+import restaurantDefault from 'src/assets/image/restaurant-default.png';
 import './style.css';
 
 // component //
@@ -60,7 +61,7 @@ export default function FavoriteList() {
                 <div className='favorite-list-box'>
                     {restaurantList.slice(0, displayCount).map((item) => (
                         <div className='favorite-list-item-box' onClick={() => onClickHandler(item.restaurantId)}>
-                            <img src={item.restaurantImage} className='favorite-list-item' />
+                            <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className='favorite-list-item' />
                             <div className='favorite-list-item-top-box'>
                                     <div className='favorite-list-item name'>{item.restaurantName}</div>
                                     <div className='favorite-list-item category'>{item.restaurantFoodCategory}</div>

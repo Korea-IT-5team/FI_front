@@ -7,8 +7,7 @@ import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
-
-import defaultImage from 'src/assets/image/default.png'
+import restaurantDefault from 'src/assets/image/restaurant-default.png'
 import './style.css';
 
 // component: 식당 리스트 //
@@ -94,7 +93,7 @@ export default function RestaurantList() {
                     (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
                     (restaurantList.slice(0, displayCount).map((item) => (
                     <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                        <img src={item.restaurantImage ? item.restaurantImage : defaultImage} className='restaurant-list-item' />
+                        <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className='restaurant-list-item' />
                         <div className='restaurant-list-item-top-box'>
                             <div className='restaurant-list-item name'>{item.restaurantName}</div>
                             <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
