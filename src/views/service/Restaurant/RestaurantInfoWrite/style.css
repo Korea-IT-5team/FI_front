@@ -1,6 +1,7 @@
 #restaurant-info-write-update {
     width: 100%;
     max-width: 800px;
+
     margin: 0 auto;
     padding: 20px;
     background-color: rgb(255, 255, 255, 1);
@@ -10,7 +11,7 @@
     text-align: center;
     margin: 20px 0px;
 
-    font-family: 'Nanum Gothic';
+    font-family: 'NanumSquareRound';
     font-size: 30px;
     font-weight: bold;
     line-height: 100%;
@@ -19,6 +20,7 @@
 .restaurant-info-write-container {
     display: flex;
     gap: 100px;
+    justify-content: center;
 }
 
 .restaurant-info-write-box {
@@ -38,14 +40,14 @@
 .restaurant-info-write-contents{
     display: flex;
     justify-content: center; 
-    font-family: 'Nanum Gothic';
+    font-family: 'NanumSquareRound';
     font-size: 15px;
 }
 
 .result{
     display: flex;
     justify-content: center; 
-    font-family: 'Nanum Gothic';
+    font-family: 'NanumSquareRound';
 }
 
 .restaurant-info-write-select-box {
@@ -64,9 +66,9 @@
 
     background-color: rgba(255, 148, 45, 1);
     border-radius: 6px;
-    border: 1px solid #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 1);
 
-    font-family: 'Nanum Gothic';
+    font-family: 'NanumSquareRound';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -91,7 +93,7 @@
 
     background-color: rgba(138, 138, 138, 1);
     border-radius: 6px;
-    border: 1px solid #ffffff;
+    border: 1px solid rgba(255, 255, 255, 1);
 
     font-family: 'NanumSquareRound';
     font-size: 16px;
@@ -139,6 +141,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
     margin-top: 15px;
     padding: 10px;
 }

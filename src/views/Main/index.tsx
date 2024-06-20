@@ -230,7 +230,7 @@ export default function Main() {
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, [cookies.accessToken]);
 
-  
+
   let effectFlag1 = false;
 
   useEffect(() => {
@@ -243,6 +243,7 @@ export default function Main() {
 
 
 // render //
+const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id="main-wrapper">
       <TopBar />
@@ -252,7 +253,22 @@ export default function Main() {
       <div className='main-container'>
         <div className='main-banner'></div>
         <div className='main-image-box'></div>
-        
+        <div id='restaurant-list-wrapper'>
+            <div className='restaurant-list-box'>
+                {!restaurantList || restaurantList.length === 0 ?
+                (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+                (restaurantList.slice(0, displayCount).map((item) => (
+                <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
+                    <img src={item.restaurantImage} className='restaurant-list-item' />
+                    <div className='restaurant-list-item-top-box'>
+                        <div className='restaurant-list-item name'>{item.restaurantName}</div>
+                        <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
+                    </div>
+                    <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
+                </div>
+                )))}
+            </div>
+        </div>
       </div>
       <BottomBar />
     </div>
