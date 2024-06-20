@@ -1,46 +1,72 @@
-.review-select-list-item-box{
+#review-list-wrapper {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 30px;
-    padding: 30px;
-    border: 5px solid white;
-    border-radius: 15px;
+    justify-content: center;
+
+    gap: 15px;
 }
 
-.review-select-list-package{
+.review-list-title {
+    width: 100%;
+
+    display: flex;
+    text-align: left;
+
+    font-family: 'KCC-Hanbit';
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+}
+
+.review-list-contents-box {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 10px;
+
+    gap: 5px;
 }
 
-.review-select-list-title {
-    font-size: 24px; 
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+.review-list-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
 }
 
-.review-select-item{
+.review-content-box {
+    display: flex;
+    flex-direction: row;
+
+    gap: 5px;
+
+    font-family: 'NanumSquareRound';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.review-content-divider {
+    font-size: 13px;
+    color: rgba(150, 150, 150, 1);
+}
+
+.review-content.image {
+    width: 200px;
+    height: 200px;
+}
+
+.review-content.rating {
+    color: rgba(255, 150, 30, 1);
+}
+
+.review-content {
+    font-family: 'NanumSquareRound';
     font-size: 16px;
-    max-width: 400px; 
-    word-wrap: break-word; 
-}
-
-.review-select-item.nickname{
-    color: #333;
-    font-weight: bold;
-}
-
-.review-select-item.rating{
-    color: rgba(255, 100, 45, 1);
-    font-weight: bold;
-}
-
-.review-select-item.date{
-    color: rgba(125, 125, 125, 1);
-    font-weight: bold;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(100, 100, 100, 1);
 }
 
 .review-select-item.image{
