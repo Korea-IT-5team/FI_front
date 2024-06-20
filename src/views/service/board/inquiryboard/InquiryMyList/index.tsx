@@ -37,7 +37,7 @@ function ListItem ({
         <div className='disable-bedge'>미답변</div> 
         }
       </div>
-      <div className='inquiry-my-list-table-title'>{inquiryTitle}</div>
+      <div className='inquiry-my-list-table-title' style={{ textAlign: 'left' }}>{inquiryTitle}</div>
       <div className='inquiry-my-list-table-write-date'>{inquiryWriteDatetime}</div>
     </div>
   );
@@ -205,7 +205,7 @@ const onNextSectionClickHandler = () => {
               </div>
             </div>
           </div>
-        <div className='inquiry-my-list-table-th'>
+        <div className='inquiry-my-list-table'>
         <div className='inquiry-my-list-table-top'>
           <div className='inquiry-my-list-table-reception-number'>번호</div>
           <div className='inquiry-my-list-table-status'>상태</div>
@@ -217,8 +217,7 @@ const onNextSectionClickHandler = () => {
         </div> 
       </div>
       <div className='inquiry-my-list-bottom'>
-        <div style={{ width: '332px'}}></div>
-        <div className='inquiry-my-list-pageNation'>
+        <div className='inquiry-my-list-pagenation'>
             <div className='page-left' onClick={onPreSectionClickHandler}></div>
             <div className='inquiry-my-list-page-box'>
                 {pageList.map(page => 

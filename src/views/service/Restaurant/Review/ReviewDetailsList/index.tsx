@@ -30,7 +30,7 @@ function ListItem ({
     return (
         <div className='review-list-table-tr' onClick={onClickHandler}>
             <div className='review-list-table-restaurant-name'>{reviewRestaurantName}</div>
-            <div className='review-list-table-rating' style={{ textAlign: 'left' }}>{rating}</div>
+            <div className='review-list-table-rating'>{rating}</div>
             <div className='review-list-table-writer-nickname'>{reviewWriterNickname}</div>
             <div className='review-list-table-write-date'>{reviewDate}</div>
         </div>
