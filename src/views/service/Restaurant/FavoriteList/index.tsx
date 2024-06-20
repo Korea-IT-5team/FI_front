@@ -57,11 +57,9 @@ export default function FavoriteList() {
     // render //
     return (
         <div id='favorite-list-wrapper'>
-            <div className='favorite-list-top'>찜한 맛집</div>
+            <div className='favorite-list-title'>찜한 맛집</div>
                 <div className='favorite-list-top-box'>
-                    <div className='favorite-list-top-left'>
                     <div className='favorite-list-size-text'>전체<span className='emphasis'> {restaurantList.length}건</span></div>
-                </div>
                 </div>
                 <div className='favorite-list-box'>
                     {restaurantList.slice(0, displayCount).map((item) => (
