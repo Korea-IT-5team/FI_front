@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import "./style.css";
 import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
@@ -38,7 +38,6 @@ export default function UserInfoUpdate() {
         navigation(MAIN_ABSOLUTE_PATH);
         return;
       }
-      
       navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
@@ -52,7 +51,6 @@ export default function UserInfoUpdate() {
     setUserTelNumber(userTelNumber);
     setUserAddress(userAddress);
     setUserRole(userRole);
-
   };
 
   //   effect   //
@@ -92,6 +90,7 @@ export default function UserInfoUpdate() {
 
   const onUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !userEmailId) return;
+
     if (!nickname.trim() || !userAddress.trim()) return;
 
     const requestBody: PatchUserInfoRequestDto = { nickname, userAddress };
@@ -100,6 +99,7 @@ export default function UserInfoUpdate() {
 
   // effect //
   let effectFlag = useRef(false);
+  
   useEffect(() => {
     if (!cookies.accessToken) return;
     if (!loginUserRole) return;

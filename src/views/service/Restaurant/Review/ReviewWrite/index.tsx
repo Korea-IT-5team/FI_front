@@ -10,6 +10,7 @@ import './style.css';
 
 // component //
 export default function ReviewWrite() {
+
     // state //
     const navigation = useNavigate();
     const contentsRef = useRef<HTMLTextAreaElement | null>(null);
@@ -34,7 +35,7 @@ export default function ReviewWrite() {
             return;
         }
 
-        if(!restaurantId) return;
+        if (!restaurantId) return;
         navigation(RESTAURANT_INFO_ABSOLUTE_PATH(restaurantId));
     }
 
@@ -51,12 +52,12 @@ export default function ReviewWrite() {
                     setReviewImage(base64String);
                 }
             };
-            reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
         }
     }
 
     const onRatingChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-        if(event.target.value==="선택")
+        if(event.target.value === "선택")
         { setRating(0); } 
 
         const { value } = event.target;
@@ -73,11 +74,8 @@ export default function ReviewWrite() {
         contentsRef.current.style.height = `${contentsRef.current.scrollHeight}px`;
     }
 
-    
     const UploadClickHandler = () => {
-        if (!rating) {
-            return;
-        }
+        if (!rating) { return; }
 
         const requestBody: PostReviewRequestDto =
         { reviewImage: reviewImage, rating: rating, reviewContents: reviewContents }

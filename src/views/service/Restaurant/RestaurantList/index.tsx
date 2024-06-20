@@ -7,17 +7,19 @@ import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
+
+import defaultImage from 'src/assets/image/default.png'
 import './style.css';
 
-// component : 식당 리스트 //
+// component: 식당 리스트 //
 export default function RestaurantList() {
 
-    //    state    //
+    // state //
     const [cookies] = useCookies();
     const [searchWord, setSearchWord] = useState<string>('');
     const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
     const {loginUserRole } = useUserStore();
-    const [displayCount, setDisplayCount] = useState<number>(8); // 한 번에 보여줄 식당 목록 개수
+    const [displayCount, setDisplayCount] = useState<number>(8);
 
     // function //
     const navigation = useNavigate();
@@ -25,7 +27,7 @@ export default function RestaurantList() {
     const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             return;
@@ -43,7 +45,6 @@ export default function RestaurantList() {
 
     const onSearchClickHandler = () => {
         if (!searchWord) return;
-
         GetRestaurantListRequest(searchWord, cookies.accessToken)
             .then(GetRestaurantListResponse);
     };
@@ -62,9 +63,7 @@ export default function RestaurantList() {
     };
 
     const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            onSearchClickHandler();
-        }
+        if (event.key === 'Enter') { onSearchClickHandler(); }
     };
 
     // effect //
@@ -92,21 +91,19 @@ export default function RestaurantList() {
             </div>
             <div className='restaurant-list-box'>
                 {!restaurantList || restaurantList.length === 0 ?
-                (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
-                (restaurantList.slice(0, displayCount).map((item) => (
-                <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                    <img src={item.restaurantImage} className='restaurant-list-item' />
-                    <div className='restaurant-list-item-top-box'>
-                        <div className='restaurant-list-item name'>{item.restaurantName}</div>
-                        <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
+                    (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+                    (restaurantList.slice(0, displayCount).map((item) => (
+                    <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
+                        <img src={item.restaurantImage ? item.restaurantImage : defaultImage} className='restaurant-list-item' />
+                        <div className='restaurant-list-item-top-box'>
+                            <div className='restaurant-list-item name'>{item.restaurantName}</div>
+                            <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
+                        </div>
+                        <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
                     </div>
-                    <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
-                </div>
                 )))}
             </div>
-            {restaurantList.length > displayCount && (
-                <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
-            )}
+            {restaurantList.length > displayCount && ( <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div> )}
         </div>
     );
 }

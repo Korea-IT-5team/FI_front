@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './style.css';
 
+// interface //
 interface Prop {
     value: string;
     onChange: (value: string) => void;
@@ -56,31 +57,28 @@ export default function SelectBox({ value, onChange }: Prop) {
     };
     
     const onItemClickHandler = (value: string) => {
-        listItem.forEach(item => {
-            if (item.value === value) setName(item.name)
-        })
+        listItem.forEach(item => { if (item.value === value) setName(item.name) })
         onChange(value);
         setShow(false);
     };
 
-  
     // render //
     const buttonClass = show ? 'select-close-button' : 'select-open-button';
     return (
         <div className='select-box'>
             { value === '' ? 
-            <div className='select-none'>주음식</div> :
-            <div className='select-item'>{value}</div>
+                <div className='select-none'>주음식</div> :
+                <div className='select-item'>{value}</div>
             }
             <div className={buttonClass} onClick={onButtonClickHandler}></div>
             {show && 
-            <div className='select-list'>
-                {listItem.map((item) => 
-                <div className='select-list-item-box' onClick={() => onItemClickHandler(item.value)}>
-                    <div className='select-item'>{item.name}</div>
+                <div className='select-list'>
+                    {listItem.map((item) => 
+                        <div className='select-list-item-box' onClick={() => onItemClickHandler(item.value)}>
+                            <div className='select-item'>{item.name}</div>
+                        </div>
+                    )}
                 </div>
-                )}
-            </div>
             }
         </div>
     );

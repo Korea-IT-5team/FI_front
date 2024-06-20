@@ -8,7 +8,6 @@ import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant'
 import { RestaurantListItem } from 'src/types';
 import './style.css';
 
-
 // component //
 export default function FavoriteList() {
 
@@ -22,11 +21,11 @@ export default function FavoriteList() {
 
     const GetFavoriteRestaurantListResponse = (result: GetFavoriteRestaurantListResponseDto | ResponseDto | null) => {
         const message =
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-        result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-        result.code === 'AF' ? '권한이 없습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            !result ? '서버에 문제가 있습니다.' :
+            result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+            result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
@@ -35,14 +34,11 @@ export default function FavoriteList() {
 
         const { restaurantFavoriteList } = result as GetFavoriteRestaurantListResponseDto;
         setRestaurantList(restaurantFavoriteList);
-        
     };
 
     // event handler //
     const onClickHandler = (item: number) =>
-    {     
-        navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
-    }
+    { navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item)); }
 
     const onLoadMoreClickHandler = () => {
         setDisplayCount(prevCount => prevCount + 8); 
@@ -64,7 +60,6 @@ export default function FavoriteList() {
                 <div className='favorite-list-box'>
                     {restaurantList.slice(0, displayCount).map((item) => (
                         <div className='favorite-list-item-box' onClick={() => onClickHandler(item.restaurantId)}>
-                            
                             <img src={item.restaurantImage} className='favorite-list-item' />
                             <div className='favorite-list-item-top-box'>
                                     <div className='favorite-list-item name'>{item.restaurantName}</div>
@@ -75,8 +70,8 @@ export default function FavoriteList() {
                             ))}
                         </div>
                     {restaurantList.length > displayCount && (
-                    <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
-                )}
+                        <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div>
+                    )}
             </div>
             );
         }

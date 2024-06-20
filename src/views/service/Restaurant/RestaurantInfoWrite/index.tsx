@@ -11,17 +11,14 @@ import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import './style.css';
 import { Map, useKakaoLoader, MapMarker } from 'react-kakao-maps-sdk';
 
+// component //
 export default function RestaurantInfoWrite() {
     useKakaoLoader({
         appkey: "1121641ff4fa6668d61874ed79c1709e",
         libraries: ["clusterer", "drawing", "services"],
     })
 
-    const center = {
-        // 지도의 중심좌표
-        lat: 33.450701,
-        lng: 126.570667,
-    }
+    const center = { lat: 33.450701, lng: 126.570667 }
 
     // state //
     const [cookies] = useCookies();
@@ -61,16 +58,12 @@ export default function RestaurantInfoWrite() {
     }
 
     // event handler //
-    // 식당 정보 등록
     const onUploadClickHandler = () => {
-
-        if (!restaurantImage || !restaurantName || !restaurantFoodCategory || !restaurantLocation
-            || !restaurantPosition || !restaurantTelNumber) {
+        if (!restaurantImage || !restaurantName || !restaurantFoodCategory || !restaurantLocation || !restaurantPosition || !restaurantTelNumber) {
             return;
         }
 
-        const requestBody: PostRestaurantInfoRequestDto =
-        {
+        const requestBody: PostRestaurantInfoRequestDto ={
             restaurantImage: restaurantImage,
             restaurantName: restaurantName,
             restaurantFoodCategory: restaurantFoodCategory,
@@ -98,7 +91,7 @@ export default function RestaurantInfoWrite() {
                     setRestaurantImage(base64String);
                 }
             };
-            reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
         }
     }
 
@@ -147,13 +140,12 @@ export default function RestaurantInfoWrite() {
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            onUploadClickHandler();
-        }
+        if (event.key === 'Enter') { onUploadClickHandler(); }
     };
 
     // effect //
-    let effectFlag = false; 
+    let effectFlag = false;
+
     useEffect(() => {
     if (!cookies.accessToken) {
         return;
@@ -164,8 +156,7 @@ export default function RestaurantInfoWrite() {
     setRestaurantPosition({
         lat: center.lat,
         lng: center.lng
-    })
-    }, []);
+    })}, []);
 
     const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPosition && restaurantTelNumber && restaurantLocation;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
@@ -187,7 +178,6 @@ export default function RestaurantInfoWrite() {
                     <RestaurantInputBox label="식당 주소" type="text" value={restaurantLocation}
                         placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler} />
                     <em className="restaurant-info-write-contents">지도를 클릭해주세요!</em>
-                    
                     <Map 
                         id="map"
                         center={center}
@@ -207,26 +197,17 @@ export default function RestaurantInfoWrite() {
                     >
                         <MapMarker position={restaurantPosition ?? center} />
                     </Map>
-                    
                     <div className="restaurant-info-write-select-box">
                         <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                     </div>
                 </div>
                 <div className="restaurant-info-write-box">
-                    <RestaurantInputBox label="식당 연락처" type="text" value={restaurantTelNumber}
-                        placeholder="연락처를 입력해주세요" onChangeHandler={onTelNumberChangeHandler}
-                        onKeydownHandler={onKeyPressHandler} />
-                    <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
-                        placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler} />
-                    <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}
-                        placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler} />
-                    <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures}
-                        placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler} />
-                    <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice}
-                        placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler} />
-                    <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
-                        placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler}
-                        onKeydownHandler={onKeyPressHandler} />
+                    <RestaurantInputBox label="식당 연락처" type="text" value={restaurantTelNumber} placeholder="연락처를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} onKeydownHandler={onKeyPressHandler} />
+                    <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress} placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler} />
+                    <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours} placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler} />
+                    <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures} placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler} />
+                    <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice} placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler} />
+                    <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu} placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} onKeydownHandler={onKeyPressHandler} />
                     <div className='businessRegistrationNumber-box'>
                         <div className='businessRegistrationNumber-title'>사업자 등록번호</div>
                         <div className='businessRegistrationNumber-title-input'>{businessRegistrationNumber}</div>

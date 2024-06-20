@@ -5,7 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import InputBox from 'src/components/InputBox';
 import "./style.css";
 import { SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 
 // component: 회원가입 //
