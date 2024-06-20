@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Route, Routes, useNavigate } from 'react-router';
@@ -20,7 +19,7 @@ import ReservationList from './views/service/Restaurant/Reservation/ReservationL
 import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
 import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
 import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';
-import ReviewDetailsList from './views/service/Restaurant/Review/ReviewDetailsList';
+import ReviewDetailsList from './views/service/Restaurant/Review/MyReviewList';
 import ReviewUpdate from './views/service/Restaurant/Review/ReviewUpdate';
 import ReviewWrite from './views/service/Restaurant/Review/ReviewWrite';
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';

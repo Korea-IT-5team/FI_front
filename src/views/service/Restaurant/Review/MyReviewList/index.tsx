@@ -38,7 +38,7 @@ function ListItem ({
 }
 
 // component //
-export default function ReviewDetailsList() {
+export default function MyReviewList() {
 
     // state //
     const {loginUserRole} = useUserStore();
@@ -87,30 +87,30 @@ export default function ReviewDetailsList() {
     
     // render //
     return (
-        <div id='review-list-wrapper'>
-            <div className='review-list-top'>나의 리뷰 내역</div>
-            <div className='review-list-top-box'>
-                <div className='review-list-size-text'>전체<span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
+        <div id='my-review-list-wrapper'>
+            <div className='my-review-list-top'>나의 리뷰 내역</div>
+            <div className='my-review-list-top-box'>
+                <div className='my-review-list-size-text'>전체<span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span></div>
             </div>
-            <div className='review-list-table'>
-                <div className='review-list-table-top'>
-                    <div className='review-list-table-restaurant-name'>식당 이름</div>
-                    <div className='review-list-table-rating'>평점</div>
-                    <div className='review-list-table-writer-nickname'>작성자</div>
-                    <div className='review-list-table-write-date'>작성일</div>
+            <div className='my-review-list-table'>
+                <div className='my-review-list-table-top'>
+                    <div className='my-review-list-table-restaurant-name'>식당 이름</div>
+                    <div className='my-review-list-table-rating'>평점</div>
+                    <div className='my-review-list-table-writer-nickname'>작성자</div>
+                    <div className='my-review-list-table-write-date'>작성일</div>
                 </div>
                 {viewList.map(item => <ListItem {...item} />)}
             </div>
-            <div className='review-list-bottom'>
-                <div className='review-list-pagenation'>
-                    <div className='review-list-page-left' onClick={onPreSectionClickHandler}></div>
-                    <div className='review-list-page-box'>
+            <div className='my-review-list-bottom'>
+                <div className='my-review-list-pagenation'>
+                    <div className='my-review-list-page-left' onClick={onPreSectionClickHandler}></div>
+                    <div className='my-review-list-page-box'>
                         {pageList.map(page => page === currentPage ?
-                            <div className='review-list-page-active'>{page}</div> :
-                            <div className='review-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+                            <div className='my-review-list-page-active'>{page}</div> :
+                            <div className='my-review-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
                         )}
                     </div>
-                    <div className='review-list-page-right' onClick={onNextSectionClickHandler}></div>
+                    <div className='my-review-list-page-right' onClick={onNextSectionClickHandler}></div>
                 </div>
             </div>
         </div>
