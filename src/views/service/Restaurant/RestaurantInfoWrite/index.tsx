@@ -7,7 +7,7 @@ import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import SelectBox from 'src/views/service/Restaurant/SelectBox';
+import SelectBox from 'src/views/service/Restaurant/FoodSelectBox';
 import './style.css';
 import { Map, useKakaoLoader, MapMarker } from 'react-kakao-maps-sdk';
 
