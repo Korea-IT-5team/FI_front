@@ -29,6 +29,7 @@
 
 .inquiry-my-list-top-left {
   display: flex;
+  flex-direction: row;
   align-items: end;
 }
 
@@ -79,8 +80,8 @@
 
   display: flex;
   flex-direction: column;
-
   text-align: center;
+  
   font-family: 'NanumSquareRound';
   font-size: 17px;
   font-weight: bold;
@@ -154,19 +155,15 @@
 }
 
 .inquiry-my-list-bottom {
-  width: 100%;
-
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.inquiry-my-list-pageNation {
+.inquiry-my-list-pagenation {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  text-align: center;
   
-  margin-right: 300px;
+  gap: 24px;
 }
 
 .inquiry-my-list-page-box {
@@ -177,8 +174,6 @@
 }
 
 .inquiry-my-list-page {
-  margin: 0 5px;
-
   font-family: 'NanumSquareRound';
   font-size: 13px;
   font-weight: 400;
@@ -189,11 +184,9 @@
 }
 
 .inquiry-my-list-page-active {
-  margin: 0 5px;
-
   font-family: 'NanumSquareRound';
   font-size: 13px;
-  font-weight: 400;
+  font-weight: bold;
   line-height: 150%;
   color: rgba(255, 148, 45, 1);
 }

@@ -3,7 +3,7 @@
     max-height: 100vh;
 
     position: fixed;
-    top: 85px;
+    top: 105px;
 
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
 }
 
 .top-container {
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .top-title {

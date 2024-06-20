@@ -56,15 +56,15 @@
 .review-list-table-tr {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    text-align: center;
     
     gap: 95px;
     padding: 13px 13px;
 
     border-top: 1px solid rgba(238, 238, 238, 1);
 
-    text-align: center;
     font-family: 'NanumSquareRound';
     font-size: 15px;
     font-weight: 400;
@@ -78,7 +78,7 @@
 }
 
 .review-list-table-restaurant-name {
-    width: 70px;
+    width: 100px;
 }
 
 .review-list-table-rating {
@@ -86,11 +86,11 @@
 }
 
 .review-list-table-writer-nickname {
-    width: 50px;
+    width: 70px;
 }
 
 .review-list-table-write-date {
-    width: 50px;
+    width: 70px;
 }
 
 .review-list-bottom {
@@ -135,7 +135,7 @@
 
 .review-list-page{
     font-family: 'NanumSquareRound';
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(138, 146, 166, 1);
@@ -145,12 +145,10 @@
 
 .review-list-page-active{
     font-family: 'NanumSquareRound';
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 150%px;
-    color: rgba(50, 50, 50, 1);
-
-    cursor: default;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(255, 148, 45, 1);
 }
 
 .review-list-search-box{
