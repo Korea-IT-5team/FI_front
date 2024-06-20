@@ -9,10 +9,10 @@ import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 
 import { useUserStore } from 'src/stores';
 import './style.css';
 
-//                    component                    //
+// component //
 export default function InquiryUpdate() {
 
-  //                    state                    //
+  // state //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { loginUserEmailId, loginUserRole } = useUserStore();
@@ -24,11 +24,10 @@ export default function InquiryUpdate() {
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
-  //                    function                    //
+  // function //
   const navigation = useNavigate();
 
   const getInquiryBoardResponse = (result: GetInquiryBoardResponseDto | ResponseDto | null) => {
-
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '올바르지 않은 접수 번호입니다.' :
@@ -44,7 +43,6 @@ export default function InquiryUpdate() {
 
     const { inquiryWriterId, inquiryContents, inquiryTitle, status } = result as GetInquiryBoardResponseDto;
 
-    // 요기 수정 
     if (!cookies.accessToken) {
       alert('권한이 없습니다.');
       navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
@@ -54,14 +52,13 @@ export default function InquiryUpdate() {
       alert('답변이 완료된 게시물 입니다.');
       navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
-  }
+    }
     setInquiryWriterId(inquiryWriterId);
     setInquiryTitle(inquiryTitle)
     setInquiryContents(inquiryContents);
   };
 
   const patchInquiryBoardResponse = (result: ResponseDto | null) => {
-
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '권한이 없습니다.' :
@@ -79,7 +76,7 @@ export default function InquiryUpdate() {
     navigation(INQUIRY_DETAILS_ABSOLUTE_PATH(inquiryNumber));
   };
 
-  //                    event handler                    //
+  // event handler //
   const onInquiryTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const inquiryTitle = event.target.value;
     setInquiryTitle(inquiryTitle);
@@ -87,6 +84,7 @@ export default function InquiryUpdate() {
 
   const onInquiryContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const inquiryContents = event.target.value;
+
     if (inquiryContents.length > 500) return;
     setInquiryContents(inquiryContents);
 
@@ -97,26 +95,29 @@ export default function InquiryUpdate() {
 
   const onInquiryUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !inquiryNumber) return;
+
     if (!inquiryTitle.trim() || !inquiryContents.trim()) return;
+
     const requestBody: PatchInquiryBoardRequestDto = { inquiryTitle, inquiryContents };
     patchInquiryBoardRequest(inquiryNumber, requestBody, cookies.accessToken).then(patchInquiryBoardResponse);
   };
 
-  //                    effect                    //
+  // effect //
   let effectFlag = false;
+  
   useEffect(() => {
-      if (!inquiryNumber || !cookies.accessToken) return;
-      if(!loginUserRole) return;
-      if(effectFlag) return;
-      effectFlag = true;
-      if(loginUserRole !== 'ROLE_USER') {
-        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
-        return;
-      }
-      getInquiryBoardRequest(inquiryNumber, cookies.accessToken).then(getInquiryBoardResponse);
+    if (!inquiryNumber || !cookies.accessToken) return;
+    if(!loginUserRole) return;
+    if(effectFlag) return;
+    effectFlag = true;
+    if(loginUserRole !== 'ROLE_USER') {
+      navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+      return;
+    }
+    getInquiryBoardRequest(inquiryNumber, cookies.accessToken).then(getInquiryBoardResponse);
   }, [loginUserRole]);
 
-  //                    render                    //
+  // render //
   return (
     <div id='inquiry-update-wrapper'>
       <div className='inquiry-update-main-box'>

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { postNoticeBoardRequest } from 'src/apis/board/noticeboard';
 import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
 import ResponseDto from 'src/apis/response.dto';
@@ -8,17 +8,16 @@ import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } fro
 import { useUserStore } from 'src/stores';
 import './style.css';
 
-//                    component                    //
+// component //
 export default function NoticeWrite() {
 
-  //                    state                    //
+  // state //
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const { loginUserRole } = useUserStore();
   const [cookies] = useCookies();
   const [noticeTitle, setNoticeTitle] = useState<string>('');
   const [noticeContents, setNoticeContents] = useState<string>('');
-
-  //                    function                    //
+ //
   const navigation = useNavigate();
 
   const postNoticeBoardResponse = (result: ResponseDto | null) => {
@@ -35,7 +34,7 @@ export default function NoticeWrite() {
     navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   };
 
-  //                    event handler                    //
+  // event handler //
   const onNoticeTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const noticeTitle = event.target.value;
     setNoticeTitle(noticeTitle);
@@ -43,6 +42,7 @@ export default function NoticeWrite() {
 
   const onNoticeContentsChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const noticeContents = event.target.value;
+
     if (noticeContents.length > 1000) return;
     setNoticeContents(noticeContents);
 
@@ -53,14 +53,14 @@ export default function NoticeWrite() {
 
   const onPostButtonClickHandler = async () => {
     if (!noticeTitle.trim() || !noticeTitle.trim()) return;
+
     if (!cookies.accessToken) return;
 
     const requestBody: PostNoticeBoardRequestDto = { noticeTitle, noticeContents };
-
     postNoticeBoardRequest(requestBody, cookies.accessToken).then(postNoticeBoardResponse);
   };
 
-  //                    effect                    //
+  // effect //
   useEffect(() => {
     if (loginUserRole === 'ROLE_ADMIN') {
       navigation(NOTICE_BOARD_WRITE_ABSOLUTE_PATH);
@@ -68,7 +68,7 @@ export default function NoticeWrite() {
     }
   }, [loginUserRole]);
 
-  //                    render                    //
+  // render //
   return (
     <div id='notice-write-wrapper'>
       <div className='notice-write-main-box'>
