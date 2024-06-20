@@ -9,7 +9,7 @@ import "./style.css";
 import { RestaurantListItem } from 'src/types';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
-import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
 // component // 
 function TopBar() {
@@ -18,7 +18,7 @@ function TopBar() {
   const [nickname, setNickname] = useState<string>('');
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, removeCookie] = useCookies();
   const { pathname } = useLocation();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
@@ -143,13 +143,16 @@ function BottomBar() {
 export default function Main() {
 
   // state //
-  const { pathname } = useLocation();
   const { setLoginUserEmailId, setLoginUserRole } = useUserStore(); 
   const [cookies] = useCookies();
-  const [searchWord, setSearchWord] = useState<string>('');
+  const [searchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
-  const {loginUserRole } = useUserStore();
-  const [displayCount, setDisplayCount] = useState<number>(8); // 한 번에 보여줄 식당 목록 개수
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 8;
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const totalPages = Math.ceil(restaurantList.length / itemsPerPage);
+
 
   // function // 
   const navigation = useNavigate();
@@ -181,41 +184,24 @@ export default function Main() {
     }
 
     const { restaurantList } = result as GetRestaurantListResponseDto;
+    restaurantList.sort(() => Math.random() - 0.5);
     SetRestaurantList(restaurantList);
   };
 
+  const handleNextPage = () => {
+    if(currentPage==totalPages-1) return;
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if(!currentPage) return;
+    setCurrentPage(currentPage - 1);
+  };
+
   // event handler //
-  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = event.target.value;
-    setSearchWord(searchWord);
-  };
-
-  const onSearchClickHandler = () => {
-    if (!searchWord) return;
-
-    GetRestaurantListRequest(searchWord, cookies.accessToken)
-        .then(GetRestaurantListResponse);
-  };
-
-  const onRegistrationClickHandler = () => {
-    if (!cookies.accessToken) return;
-    navigation(RESTAURANT_INFO_WRITE_ABSOLUTE_PATH);
-  };
-
   const onItemClickHandler = (item: number) => {
     navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
   };
-
-  const onLoadMoreClickHandler = () => {
-    setDisplayCount(prevCount => prevCount + 8);
-  };
-
-  const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-        onSearchClickHandler();
-    }
-  };
-
   
   // effect //
   useEffect(() => {
@@ -238,7 +224,6 @@ export default function Main() {
   }, []);
 
 // render //
-const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id="main-wrapper">
       <TopBar />
@@ -248,21 +233,31 @@ const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
       <div className='main-container'>
         <div className='main-banner'></div>
         <div className='main-image-box'></div>
-        <div id='restaurant-list-wrapper'>
-            <div className='restaurant-list-box'>
-                {!restaurantList || restaurantList.length === 0 ?
-                (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
-                (restaurantList.slice(0, displayCount).map((item) => (
-                <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                    <img src={item.restaurantImage} className='restaurant-list-item' />
-                    <div className='restaurant-list-item-top-box'>
-                        <div className='restaurant-list-item name'>{item.restaurantName}</div>
-                        <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
-                    </div>
-                    <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
-                </div>
-                )))}
+        <div id='main-restaurant-list-wrapper'>
+          
+          <div className="pagination-left-arrow" onClick={handlePrevPage}>
+          </div>
+          
+          <div className='restaurant-list-box'>
+            {!restaurantList || restaurantList.length === 0 ?
+            (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+            (restaurantList.slice(startIndex, endIndex).map((item) => (
+            <div
+              key={item.restaurantId}
+              className="restaurant-list-item-box"
+              onClick={() => onItemClickHandler(item.restaurantId)}
+            >
+              <img src={item.restaurantImage} className="restaurant-list-item" alt="restaurant" />
+              <div className="restaurant-list-item-top-box">
+                <div className="restaurant-list-item name">{item.restaurantName}</div>
+                <div className="restaurant-list-item category">{item.restaurantFoodCategory}</div>
+              </div>
+              <div className="restaurant-list-item location">{item.restaurantLocation}</div>
             </div>
+            )))}
+          </div>
+          <div className="pagination-right-arrow" onClick={handleNextPage}>
+          </div>
         </div>
       </div>
       <BottomBar />
