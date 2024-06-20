@@ -13,6 +13,8 @@ import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUT
 import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
 import ReviewList from '../Review/ReviewList';
+
+import defaultImage from 'src/assets/image/default.png'
 import './style.css';
 
 // component : 특정 식당 정보 //
@@ -288,7 +290,7 @@ export default function RestaurantInfo() {
         <>
             <div id="restaurant-info">
                 <div className='restaurant-info-top'>
-                    <img src={restaurantImage}/>
+                    <img src={restaurantImage ? restaurantImage : defaultImage}/>
                     <div className='restaurant-info-name-favorite'>
                         <div className='restaurant-info-name-grade'> 
                             <div className='restaurant-info-name'>{restaurantName}</div>
