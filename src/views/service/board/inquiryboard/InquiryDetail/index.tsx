@@ -25,6 +25,7 @@ export default function InquiryDetail() {
     const [status, setStatus] = useState<boolean>(false);
     const [inquiryComment, setInquiryComment] = useState<string | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
+    
 
     // function //
     const navigation = useNavigate();
@@ -110,9 +111,15 @@ export default function InquiryDetail() {
         postCommentRequest(inquiryNumber, requestBody, cookies.accessToken).then(postInquiryCommentResponse);
     };
 
+    // const onListClickHandler = () => {
+        
+    //     navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+    // };
+
     const onListClickHandler = () => {
-        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
-    };
+        const currentPath = window.location.pathname;
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH, { state: { currentPath } });
+    }
 
     const onUpdateClickHandler = () => {
         if (!inquiryNumber || loginUserEmailId !== inquiryWriterId || status ) return;
