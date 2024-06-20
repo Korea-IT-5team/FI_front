@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
@@ -152,6 +152,21 @@ export default function RestaurantInfoWrite() {
         }
     };
 
+    // effect //
+    let effectFlag = false; 
+    useEffect(() => {
+    if (!cookies.accessToken) {
+        return;
+    }
+    if(effectFlag) return;
+    effectFlag = true;
+
+    setRestaurantPosition({
+        lat: center.lat,
+        lng: center.lng
+    })
+    }, []);
+
     const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPosition && restaurantTelNumber && restaurantLocation;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
 
@@ -192,7 +207,8 @@ export default function RestaurantInfoWrite() {
                     >
                         <MapMarker position={restaurantPosition ?? center} />
                     </Map>
-                    <div className="restaurant-info-write-selectbox">
+                    
+                    <div className="restaurant-info-write-select-box">
                         <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                     </div>
                 </div>

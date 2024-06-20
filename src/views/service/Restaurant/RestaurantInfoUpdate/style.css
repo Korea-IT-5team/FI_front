@@ -1,0 +1,138 @@
+.restaurant-info-update-write-title {
+  text-align: center;
+  margin: 20px 0px;
+
+  font-family: 'NanumSquareRound';
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 100%;
+}
+
+.restaurant-info-update-write-container {
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+}
+
+.restaurant-info-update-write-box {
+  width: 100%;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.restaurant-update-image-box {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px;
+}
+
+.restaurant-info-update-write-contents{
+  display: flex;
+  justify-content: center; 
+  font-family: 'NanumSquareRound';
+  font-size: 15px;
+}
+
+.result{
+  display: flex;
+  justify-content: center; 
+  font-family: 'NanumSquareRound';
+}
+
+.restaurant-info-update-write-select-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.restaurant-info-update-primary-button {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px 24px;
+
+  background-color: rgba(255, 148, 45, 1);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 1);
+
+  font-family: 'NanumSquareRound';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 170%;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.restaurant-info-update-primary-button:hover {
+  cursor: pointer;
+  opacity: 0.85;
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.restaurant-info-update-disable-button {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px 24px;
+
+  background-color: rgba(138, 138, 138, 1);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 1);
+
+  font-family: 'NanumSquareRound';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 175%;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.businessRegistrationNumber-update-box {
+  justify-content: center;
+  align-items: center;
+}
+
+.businessRegistrationNumber-update-title {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+
+  font-family: 'NanumSquareRound';
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(50, 50, 50, 1);
+}
+
+.businessRegistrationNumber-update-title-input {
+  width: 400px;
+  outline: none;
+  padding: 8px 16px;
+
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(200, 200, 200, 1);
+  border-radius: 6px;
+
+  font-family: 'NanumSquareRound';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(35, 45, 66, 1);
+}
+
+.restaurant-info-update-registered-button-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 15px;
+  padding: 10px;
+}

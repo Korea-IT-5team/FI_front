@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import "./style.css";
+import { RestaurantListItem } from 'src/types';
+import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
+import { GetRestaurantListRequest } from 'src/apis/restaurant';
 
 // component // 
 function TopBar() {
@@ -111,11 +115,11 @@ function BottomBar() {
     <div className='bottom-box'>
       <div className='bottom-title'>Food Insight</div>
       <div className='bottom-navigation-box'>
-        <div className='bottom-navigation'>회사소개</div>
+        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH)}>회사소개</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation'>개인정보처리방침</div>
+        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH)}>개인정보처리방침</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation'>이용약관</div>
+        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH)}>이용약관</div>
         <div className="bottom-divider">{'\|'}</div>
         <div className='bottom-navigation' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>도움말</div>
         <div className="bottom-divider">{'\|'}</div>
@@ -143,6 +147,10 @@ export default function Main() {
   const { pathname } = useLocation();
   const { setLoginUserEmailId, setLoginUserRole } = useUserStore(); 
   const [cookies] = useCookies();
+  const [searchWord, setSearchWord] = useState<string>('');
+  const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
+  const {loginUserRole } = useUserStore();
+  const [displayCount, setDisplayCount] = useState<number>(8); // 한 번에 보여줄 식당 목록 개수
 
   // function // 
   const navigation = useNavigate();
@@ -163,6 +171,52 @@ export default function Main() {
     setLoginUserEmailId(userEmailId);
     setLoginUserRole(userRole);
   };
+
+  const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => {
+    const message =
+        !result ? '서버에 문제가 있습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+
+    if (!result || result.code !== 'SU') {
+        return;
+    }
+
+    const { restaurantList } = result as GetRestaurantListResponseDto;
+    SetRestaurantList(restaurantList);
+  };
+
+  // event handler //
+  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchWord = event.target.value;
+    setSearchWord(searchWord);
+  };
+
+  const onSearchClickHandler = () => {
+    if (!searchWord) return;
+
+    GetRestaurantListRequest(searchWord, cookies.accessToken)
+        .then(GetRestaurantListResponse);
+  };
+
+  const onRegistrationClickHandler = () => {
+    if (!cookies.accessToken) return;
+    navigation(RESTAURANT_INFO_WRITE_ABSOLUTE_PATH);
+  };
+
+  const onItemClickHandler = (item: number) => {
+    navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
+  };
+
+  const onLoadMoreClickHandler = () => {
+    setDisplayCount(prevCount => prevCount + 8);
+  };
+
+  const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+        onSearchClickHandler();
+    }
+  };
+
   
   // effect //
   useEffect(() => {
@@ -173,8 +227,19 @@ export default function Main() {
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
   }, [cookies.accessToken]);
+  
+  let effectFlag1 = false;
+
+  useEffect(() => {
+    if(effectFlag1) return;
+    effectFlag1 = true; 
+
+    GetRestaurantListRequest(searchWord, cookies.accessToken)
+        .then(GetRestaurantListResponse);
+  }, []);
 
 // render //
+const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id="main-wrapper">
       <TopBar />
@@ -184,6 +249,22 @@ export default function Main() {
       <div className='main-container'>
         <div className='main-banner'></div>
         <div className='main-image-box'></div>
+        <div id='restaurant-list-wrapper'>
+            <div className='restaurant-list-box'>
+                {!restaurantList || restaurantList.length === 0 ?
+                (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+                (restaurantList.slice(0, displayCount).map((item) => (
+                <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
+                    <img src={item.restaurantImage} className='restaurant-list-item' />
+                    <div className='restaurant-list-item-top-box'>
+                        <div className='restaurant-list-item name'>{item.restaurantName}</div>
+                        <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
+                    </div>
+                    <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
+                </div>
+                )))}
+            </div>
+        </div>
       </div>
       <BottomBar />
     </div>
