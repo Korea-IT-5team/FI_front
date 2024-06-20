@@ -5,6 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
 import { useUserStore } from 'src/stores';
+import restaurantDefault from 'src/assets/image/restaurant-default.png';
 import "./style.css";
 import { RestaurantListItem } from 'src/types';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
@@ -247,7 +248,7 @@ export default function Main() {
               className="restaurant-list-item-box"
               onClick={() => onItemClickHandler(item.restaurantId)}
             >
-              <img src={item.restaurantImage} className="restaurant-list-item" alt="restaurant" />
+              <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className="restaurant-list-item" alt="restaurant" />
               <div className="restaurant-list-item-top-box">
                 <div className="restaurant-list-item name">{item.restaurantName}</div>
                 <div className="restaurant-list-item category">{item.restaurantFoodCategory}</div>
