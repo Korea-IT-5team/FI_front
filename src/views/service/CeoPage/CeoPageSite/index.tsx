@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
@@ -26,7 +26,6 @@ export default function CeoPageSite() {
   const navigation = useNavigate();
 
   const GetMyInfoResponse = (result : GetMyInfoResponseDto | ResponseDto | null) => {
-
     const message =
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
@@ -52,11 +51,10 @@ export default function CeoPageSite() {
   };
 
   const getRestaurantIdResponse = (result : GetRestaurantIdResponseDto | ResponseDto | null) => {
-    
     const message = 
-    !result ? '서버에 문제가 있습니다.' :
+      !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       if (result?.code === 'AF') {
@@ -85,7 +83,6 @@ export default function CeoPageSite() {
     getRestaurantIdRequest(cookies.accessToken)
       .then(getRestaurantIdResponse);
   } 
-  
 
   //   render   //
   return (
