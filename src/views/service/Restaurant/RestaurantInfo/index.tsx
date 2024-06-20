@@ -59,7 +59,6 @@ export default function RestaurantInfo() {
             result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
-            //alert(message);
             return;
         }
 
@@ -286,16 +285,16 @@ export default function RestaurantInfo() {
 
     // render //
     return (
-        <>
-            <div id="restaurant-info">
-                <div className='restaurant-info-top'>
+        <div id='restaurant-info-wrapper'>
+            <div className='restaurant-info-container'>
+                <div className='restaurant-info-top-container'>
                     <img src={restaurantImage ? restaurantImage : restaurantDefault}/>
-                    <div className='restaurant-info-name-favorite'>
-                        <div className='restaurant-info-name-grade'> 
+                    <div className='restaurant-info-top'>
+                        <div className='restaurant-info-name-box'> 
                             <div className='restaurant-info-name'>{restaurantName}</div>
                             {grade ? (<div className='restaurant-info-grade'>{grade}</div>) : (<div></div>)}
                         </div>
-                        <div className='restaurant-info-category-favorite'>
+                        <div className='restaurant-info-category-box'>
                             <div className='restaurant-info-food-category'>{restaurantFoodCategory}</div>
                             <div >
                                 {loginUserRole === "ROLE_USER" && (loginUserEmailId === favoriteUserId && Number(restaurantId) === favoriteRestaurantId ?
@@ -305,68 +304,57 @@ export default function RestaurantInfo() {
                         </div>
                     </div>
                 </div>
-
-                <div className='restaurant-info-icon-map'>
-                    <div className='restaurant-info-icon-box'>
-                        <div className="restaurant-info-button-group">
+                <div className='restaurant-info-middle-container'>
+                    <div className='restaurant-info-box'>
+                        <div className="restaurant-info-button-box">
                             {loginUserRole === "ROLE_USER" && (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
                                 <button onClick={onReservationCancelClickHandler}>예약취소</button> :
                                 <button onClick={onReservationClickHandler}>예약</button>)}
                             {loginUserRole === "ROLE_USER" && (<button onClick={onWriteClickHandler}>리뷰작성</button>)}
                         </div>
                         {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
-                            <div className="restaurant-info-button-group">
+                            <div className="restaurant-info-button-box">
                                 <button onClick={onSetRestIdNumberHandler}>수정</button>
                                 <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
                             </div>
                         )}
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             <div className='restaurant-info-icon location'></div>
                             <div className='restaurant-info-imformation'>위치 : {restaurantLocation}</div>
                         </div>
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             <div className='restaurant-info-icon telnumber'></div>
                             <div className='restaurant-info-imformation'>전화번호 : {restaurantTelNumber}</div>
                         </div>
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             {restaurantSnsAddress && <div className='restaurant-info-icon sns'></div>}
                             {restaurantSnsAddress && <div className='restaurant-info-imformation'>SNS : {restaurantSnsAddress}</div>}
                         </div>
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             {restaurantOperationHours && <div className='restaurant-info-icon time'></div>}
                             {restaurantOperationHours && <div className='restaurant-info-imformation'>운영시간 : {restaurantOperationHours}</div>}
                         </div>
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             {restaurantRepresentativeMenu && <div className='restaurant-info-icon menu'></div>}
                             {restaurantRepresentativeMenu && <div className='restaurant-info-imformation'>대표메뉴 : {restaurantRepresentativeMenu}</div>}
                         </div>
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             {restaurantFeatures && <div className='restaurant-info-icon feature'></div>}
                             {restaurantFeatures && <div className='restaurant-info-imformation'>특징 : {restaurantFeatures}</div>}
                         </div>
-                        <div className='restaurant-info-icon-package'>
+                        <div className='restaurant-info-content-box'>
                             {restaurantNotice && <div className='restaurant-info-icon notice'></div>}
                             {restaurantNotice && <div className='restaurant-info-imformation'>공지사항 : {restaurantNotice}</div>}
                         </div>
                     </div>
                     {center && 
-                        <Map 
-                            id="map"
-                            center={center}
-                            style={{
-                                width: "400px",
-                                height: "350px",
-                                border: "5px solid white",
-                                borderRadius: "15px"
-                            }}
-                            level={3}
-                            >
+                        <Map id="map" center={center} style={{ width: "400px", height: "300px", border: "5px solid white", borderRadius: "15px" }} level={3}>
                             <MapMarker position={center} />
                         </Map>
                     }
                 </div>
                 <ReviewList value={restaurantReviewList}/>
             </div>
-        </>
+        </div>
     )
 }
