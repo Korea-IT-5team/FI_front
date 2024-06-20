@@ -18,7 +18,7 @@ function TopBar() {
   const [nickname, setNickname] = useState<string>('');
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, removeCookie] = useCookies();
   const { pathname } = useLocation();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
@@ -141,12 +141,10 @@ function BottomBar() {
 export default function Main() {
 
   // state //
-  const { pathname } = useLocation();
   const { setLoginUserEmailId, setLoginUserRole } = useUserStore(); 
   const [cookies] = useCookies();
   const [searchWord, setSearchWord] = useState<string>('');
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
-  const {loginUserRole } = useUserStore();
   const [displayCount, setDisplayCount] = useState<number>(8); // 한 번에 보여줄 식당 목록 개수
 
   // function // 
@@ -184,37 +182,9 @@ export default function Main() {
   };
 
   // event handler //
-  const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchWord = event.target.value;
-    setSearchWord(searchWord);
-  };
-
-  const onSearchClickHandler = () => {
-    if (!searchWord) return;
-
-    GetRestaurantListRequest(searchWord, cookies.accessToken)
-        .then(GetRestaurantListResponse);
-  };
-
-  const onRegistrationClickHandler = () => {
-    if (!cookies.accessToken) return;
-    navigation(RESTAURANT_INFO_WRITE_ABSOLUTE_PATH);
-  };
-
   const onItemClickHandler = (item: number) => {
     navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
   };
-
-  const onLoadMoreClickHandler = () => {
-    setDisplayCount(prevCount => prevCount + 8);
-  };
-
-  const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-        onSearchClickHandler();
-    }
-  };
-
   
   // effect //
   useEffect(() => {
@@ -240,7 +210,6 @@ export default function Main() {
 
 
 // render //
-const searchButtonClass = searchWord ? 'primary-button' : 'disable-button';
   return (
     <div id="main-wrapper">
       <TopBar />
