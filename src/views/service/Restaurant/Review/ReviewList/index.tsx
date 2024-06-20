@@ -8,7 +8,7 @@ interface Props {
     value: RestaurantReviewListItem[];
 }
 
-// component: 리뷰 리스트 // 
+// component: 리뷰 리스트 //
 export default function ReviewList({ value }: Props) {
 
     // state //
@@ -22,22 +22,26 @@ export default function ReviewList({ value }: Props) {
 
     // render //
     return (
-        <>
-            <div className='review-select-list-title'>리뷰 ({value.length})</div>
+        <div id='review-list-wrapper'>
+            <div className='review-list-title'>리뷰 ({value.length})</div>
             {currentItems.map((item) => (
-                <div className='review-select-list-item-box' key={item.reviewNumber}>
-                    <div className='review-select-list-package'>
-                        <div className='review-select-item nickname'>{item.reviewWriterNickname}</div>
-                        <div className='review-select-item rating'>{item.rating}</div>
-                        <div className='review-select-item date'>{item.reviewDate}</div>
+                <div className='review-list-contents-box' key={item.reviewNumber}>
+                    <img src={item.reviewImage ? item.reviewImage : reviewDefault} className='review-content image'/>
+                    <div className='review-list-container'>
+                        <div className='review-content-box'>
+                            <div className='review-content nickname'>{item.reviewWriterNickname}</div>
+                            <div className='review-content-divider'>{'\|'}</div>
+                            <div className='review-content rating'>{item.rating}</div>
+                            <div className='review-content-divider'>{'\|'}</div>
+                            <div className='review-content date'>{item.reviewDate}</div>
+                        </div>
+                        <div className='review-content'>{item.reviewContents}</div>
                     </div>
-                    <img src={item.reviewImage ? item.reviewImage : reviewDefault} className='review-select-item image' />
-                    <div className='review-select-item'>{item.reviewContents}</div>
                 </div>
             ))}
             {currentItems.length < value.length && (
-                <div className='review-selecton-see-more' onClick={onLoadMoreClickHandler}>더보기</div>
+                <div className='review-load-more' onClick={onLoadMoreClickHandler}>더보기</div>
             )}   
-        </>
+        </div>
     )
 }

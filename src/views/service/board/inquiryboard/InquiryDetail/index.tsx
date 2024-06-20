@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import './style.css'
 import { useUserStore } from 'src/stores';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
 import ResponseDto from 'src/apis/response.dto';
 import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
@@ -26,7 +26,6 @@ export default function InquiryDetail() {
     const [inquiryComment, setInquiryComment] = useState<string | null>(null);
     const [commentRows, setCommentRows] = useState<number>(1);
     
-
     // function //
     const navigation = useNavigate();
 
@@ -111,15 +110,9 @@ export default function InquiryDetail() {
         postCommentRequest(inquiryNumber, requestBody, cookies.accessToken).then(postInquiryCommentResponse);
     };
 
-    // const onListClickHandler = () => {
-        
-    //     navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
-    // };
-
     const onListClickHandler = () => {
-        const currentPath = window.location.pathname;
-        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH, { state: { currentPath } });
-    }
+        navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+    };
 
     const onUpdateClickHandler = () => {
         if (!inquiryNumber || loginUserEmailId !== inquiryWriterId || status ) return;

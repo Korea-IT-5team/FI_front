@@ -1,72 +1,160 @@
-.review-select-list-item-box{
+#review-list-wrapper {
+    width: 1000px;
+    min-width: 700px;
+    height: 700px;
+
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 30px;
-    padding: 30px;
-    border: 5px solid white;
-    border-radius: 15px;
+
+    padding: 20px;
+    gap: 17px;
 }
 
-.review-select-list-package{
+.review-list-top {
+    text-align: center;
+
+    font-family: 'KCC-Hanbit';
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+}
+
+.review-list-size-text {
+    font-family: 'NanumSquareRound';
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(138, 146, 166, 1);
+}
+
+.review-list-table {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    text-align: center;
+    font-family: 'NanumSquareRound';
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(50, 50, 50, 1);
+}
+
+.review-list-table-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+
+    background-color: rgba(255, 148, 45, 0.2);
+    border-radius: 6px;
+
+    text-align: center;
+}
+
+.review-list-table-tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    
+    gap: 95px;
+    padding: 13px 13px;
+
+    border-top: 1px solid rgba(238, 238, 238, 1);
+
+    font-family: 'NanumSquareRound';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+}
+
+.review-list-table-tr:hover{
+    cursor: pointer;
+    background-color: rgba(238, 238, 238, 0.2);
+}
+
+.review-list-table-restaurant-name {
+    width: 100px;
+}
+
+.review-list-table-rating {
+    width: 50px;
+}
+
+.review-list-table-writer-nickname {
+    width: 70px;
+}
+
+.review-list-table-write-date {
+    width: 70px;
+}
+
+.review-list-bottom {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10px;
 }
 
-.review-select-list-title {
-    font-size: 24px; 
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.review-select-item{
-    font-size: 16px;
-    max-width: 400px; 
-    word-wrap: break-word; 
-}
-
-.review-select-item.nickname{
-    color: #333;
-    font-weight: bold;
-}
-
-.review-select-item.rating{
-    color: rgba(255, 100, 45, 1);
-    font-weight: bold;
-}
-
-.review-select-item.date{
-    color: rgba(125, 125, 125, 1);
-    font-weight: bold;
-}
-
-.review-select-item.image{
-    display: block;
-    margin: 0 auto;
-}
-
-.review-selecton-see-more{
-    display: flex; 
-    justify-content: center; 
+.review-list-pagenation{
+    display: flex;
     align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: rgba(255, 148, 45, 1);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    width: 80px;
-    height: 30px;
-    font-style: normal;
-    font-weight: bold;
+
+    gap:24px;
 }
 
-.review-selecton-see-more:hover {
+.review-list-page-left{
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-left.png');
+    background-size: 100% 100%;
+
     cursor: pointer;
-    opacity: 0.85;
+}
+
+.review-list-page-right{
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-right.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.review-list-page-box{
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.review-list-page{
+    font-family: 'NanumSquareRound';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(138, 146, 166, 1);
+
+    cursor: pointer;
+}
+
+.review-list-page-active{
+    font-family: 'NanumSquareRound';
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(255, 148, 45, 1);
+}
+
+.review-list-search-box{
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }

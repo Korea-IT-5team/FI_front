@@ -177,7 +177,7 @@
   color: rgba(50, 50, 50, 1);
 }
 
-.location {
+.restaurant-info-icon.location {
   width: 20px;
   height: 20px;
 
@@ -185,7 +185,7 @@
   background-size: cover;
 }
 
-.telnumber {
+.restaurant-info-icon.telnumber {
   width: 20px;
   height: 20px;
 
@@ -193,7 +193,7 @@
   background-size: cover;
 }
 
-.sns {
+.restaurant-info-icon.sns {
   width: 20px;
   height: 20px;
 
@@ -201,7 +201,7 @@
   background-size: cover;
 }
 
-.time {
+.restaurant-info-icon.time {
   width: 20px;
   height: 20px;
 
@@ -209,7 +209,7 @@
   background-size: cover;
 }
 
-.menu {
+.restaurant-info-icon.menu {
   width: 20px;
   height: 20px;
 
@@ -217,7 +217,7 @@
   background-size: cover;
 }
 
-.feature {
+.restaurant-info-icon.feature {
   width: 20px;
   height: 20px;
 
@@ -225,7 +225,7 @@
   background-size: cover;
 }
 
-.notice {
+.restaurant-info-icon.notice {
   width: 20px;
   height: 20px;
 
