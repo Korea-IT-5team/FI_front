@@ -74,6 +74,10 @@ export default function RestaurantInfoUpdate()
             lat: restaurantLat,
             lng: restaurantLng,
         })
+        setRestaurantPosition({
+            lat: restaurantLat,
+            lng: restaurantLng
+        });
     }
    
     const PatchRestaurantInfoResponse = (result: ResponseDto | null) => {
