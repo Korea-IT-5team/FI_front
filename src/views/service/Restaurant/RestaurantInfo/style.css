@@ -159,6 +159,21 @@
   gap: 10px;
 }
 
+.reservation-delete:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.reservation:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.review-write:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 .restaurant-info-content-box {
   display: flex;
   flex-direction: row;
