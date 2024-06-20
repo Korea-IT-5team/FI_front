@@ -7,7 +7,7 @@ import InputBox from 'src/components/InputBox';
 import { PASSWORD_RESET_CHECK_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
 
-// component: 비밀번호 재설정 (이메일 비밀번호) // 
+// component: 비밀번호 재설정(이메일 비밀번호) // 
 export default function PasswordResetInput() {
 
   // state //
@@ -34,15 +34,15 @@ export default function PasswordResetInput() {
   const passwordResetResponse = (result: ResponseDto | null) => {
 
     const message = 
-        !result ? '서버에 문제가 있습니다.' :
-        result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
-        result.code === 'AF' ? '사용자 정보와 불일치 합니다.' :
-        result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
+      !result ? '서버에 문제가 있습니다.' :
+      result.code === 'VF' ? '입력 형식이 맞지 않습니다.' : 
+      result.code === 'AF' ? '사용자 정보와 불일치 합니다.' :
+      result.code === 'DBE' ? '서버에 문제가 있습니다.' : ''
 
     const isSuccess = result && result.code === 'SU';
     if (!isSuccess) {
-        alert(message);
-        return;
+      alert(message);
+      return;
     }
     navigation(PASSWORD_RESET_CHECK_ABSOLUTE_PATH(userEmailId));
   };
@@ -112,7 +112,6 @@ export default function PasswordResetInput() {
         <div className='reset-password-box'>
           <div className='reset-password-input-container'>
             <InputBox type="text" value={userEmailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} buttonStatus={userEmailIdButtonStatus} onButtonClickHandler={onUserEmailIdButtonClickHandler} message={userEmailIdMessage} error={isUserEmailIdError} />
-
             <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
           </div>
           <div className={passwordResetInputButtonClass} onClick={onPasswordResetButtonClickHandler}>본인 확인</div>

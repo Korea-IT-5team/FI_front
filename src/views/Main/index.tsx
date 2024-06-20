@@ -25,6 +25,7 @@ function TopBar() {
     setNickname(nickname);
   };
 
+  // effect //
   useEffect (() => {
     if (!cookies.accessToken) return;
 
@@ -53,7 +54,7 @@ function TopBar() {
   const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
 
-// render // 
+  // render // 
   return (
     <>
       <div className='main-head-box'>
@@ -66,31 +67,31 @@ function TopBar() {
           <div className='top-divider'>|</div>
           <div className='main-top-bar-button'>
           {loginUserRole === 'ROLE_USER' &&
-          <div className="top-bar-role">
-            <div className="sign-in-box">
-              <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+            <div className="top-bar-role">
+              <div className="sign-in-box">
+                <div className="user-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+              </div>
+              <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-          </div>
           }
           {loginUserRole === 'ROLE_CEO' &&
-          <div className="top-bar-role">
-            <div className="sign-in-wrapper">
-              <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
-            </div> 
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-          </div>
+            <div className="top-bar-role">
+              <div className="sign-in-wrapper">
+                <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
+              </div> 
+              <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+            </div>
           }
           {loginUserRole === 'ROLE_ADMIN' && 
-          <div className="top-bar-role">
-            <div className="sign-in-wrapper">
-              <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+            <div className="top-bar-role">
+              <div className="sign-in-wrapper">
+                <div className="user-button" onClick={onAdminPageClickHandler}>관리자</div>
+              </div>
+              <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
             </div>
-            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-          </div>
           }
           {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
-          <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+            <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
           }
           </div>
         </div>
@@ -99,6 +100,7 @@ function TopBar() {
   );
 }
 
+// component //
 function BottomBar() {
 
   // function //
@@ -146,7 +148,6 @@ export default function Main() {
   const navigation = useNavigate();
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
-
     const message = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '인증에 실패했습니다.' :
@@ -165,14 +166,13 @@ export default function Main() {
   
   // effect //
   useEffect(() => {
-
     if (!cookies.accessToken) {
       navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
     getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
-}, [cookies.accessToken]);
+  }, [cookies.accessToken]);
 
 // render //
   return (
