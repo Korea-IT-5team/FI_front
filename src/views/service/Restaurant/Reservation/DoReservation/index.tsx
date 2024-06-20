@@ -50,10 +50,6 @@ export default function DoReservation() {
     const { restaurantId } = useParams();
     const [cookies] = useCookies();
     const navigation = useNavigate();
-    const [selectedTime, setSelectedTime] = useState<number | null>(null);
-    const [selectedPeople, setSelectedPeople] = useState<number | null>(null);
-    const [timeRange, setTimeRange] = useState<{ start: number, end: number }>({ start: 0, end: 11 });
-    const [peopleRange, setPeopleRange] = useState<{ start: number, end: number }>({ start: 1, end: 12 });
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
     // function //
@@ -81,13 +77,12 @@ export default function DoReservation() {
     }
 
     const onPeopleClickHandler = (value: number) => {
-        setSelectedPeople(value);
+       
         setReservationPeople(value);
     };
 
-    const onTimeClickHandler = (value: number) => {
-        setSelectedTime(value);
-        setReservationTime(formatTime(value));
+    const onTimeClickHandler = (value: string) => {
+        setReservationTime(value);
     };
 
     const onCheckClickHandler = () => {
@@ -109,27 +104,8 @@ export default function DoReservation() {
             .then(PostReservationResponse);
     }
 
-    const handleTimeRangeChange = (direction: 'prev' | 'next') => {
-        setTimeRange(prevRange => {
-            const newStart = direction === 'prev' ? Math.max(0, prevRange.start - 12) : Math.min(36, prevRange.start + 12);
-            const newEnd = direction === 'prev' ? Math.max(11, prevRange.end - 12) : Math.min(47, prevRange.end + 12);
-            return { start: newStart, end: newEnd };
-        });
-    };
+   
 
-    const handlePeopleRangeChange = (direction: 'prev' | 'next') => {
-        setPeopleRange(prevRange => {
-            const newStart = direction === 'prev' ? Math.max(1, prevRange.start - 12) : Math.min(49, prevRange.start + 12);
-            const newEnd = direction === 'prev' ? Math.max(12, prevRange.end - 12) : Math.min(60, prevRange.end + 12);
-            return { start: newStart, end: newEnd };
-        });
-    };
-
-    const formatTime = (num: number) => {
-        const hours = Math.floor(num / 2);
-        const minutes = (num % 2) * 30;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    }
 
     const openPopup = () => { setIsPopupOpen(true); }
 
@@ -151,58 +127,6 @@ export default function DoReservation() {
                     dateFormat="yyyy-MM-dd"
                     placeholderText="날짜를 선택해주세요"
                 />}
-                <div className="do-reservation-input-label">시간</div>
-                <div className="do-reservation-time-box">
-                    <div className="time-range">
-                        <button className="do-reservation-arrow" onClick={() => handleTimeRangeChange('prev')}>{'<'}</button>
-                        <table className="do-reservation-table">
-                            <tbody>
-                                {[...Array(3)].map((_, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        {Array.from({ length: 4 }, (_, colIndex) => { const num = rowIndex * 4 + colIndex + timeRange.start;
-                                            return (
-                                                <td
-                                                    key={num}
-                                                    className={`do-reservation-select-item ${selectedTime === num ? 'selected' : ''}`}
-                                                    onClick={() => onTimeClickHandler(num)}
-                                                >
-                                                    {formatTime(num)}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <button className="do-reservation-arrow" onClick={() => handleTimeRangeChange('next')}>{'>'}</button>
-                    </div>
-                </div>
-                <div className="do-reservation-input-label">인원수</div>
-                <div className="do-reservation-people-box">
-                    <div className="people-range">
-                        <button className="do-reservation-arrow" onClick={() => handlePeopleRangeChange('prev')}>{'<'}</button>
-                        <table className="do-reservation-table">
-                            <tbody>
-                                {[...Array(3)].map((_, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        {Array.from({ length: 4 }, (_, colIndex) => { const num = rowIndex * 4 + colIndex + peopleRange.start;
-                                            return (
-                                                <td
-                                                    key={num}
-                                                    className={`do-reservation-select-item ${selectedPeople === num ? 'selected' : ''}`}
-                                                    onClick={() => onPeopleClickHandler(num)}
-                                                >
-                                                    {num}명
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <button className="do-reservation-arrow" onClick={() => handlePeopleRangeChange('next')}>{'>'}</button>
-                    </div>
-                </div>
                 <div className="do-reservation-checkbox">
                     <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
                     <div className="do-reservation-checkfont">인증 약관 전체 동의</div>

@@ -81,6 +81,16 @@ export default function RestaurantInfo() {
         setRestaurantBusinessRegistrationNumber(restaurantBusinessRegistrationNumber);
         setRestaurantWriterId(restaurantWriterId);
         setRestaurantReviewList(restaurantReviewList);
+
+        if(!restaurantLat || !restaurantLng)
+        {
+            setCenter({
+                lat: 33.450701,
+                lng: 126.570667,
+            });
+            return;
+        }
+
         setCenter({
             lat: restaurantLat,
             lng: restaurantLng,

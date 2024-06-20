@@ -190,7 +190,7 @@ export default function Main() {
   };
 
   const handleNextPage = () => {
-    if(currentPage==totalPages-1) return;
+    if(currentPage==4) return;
     setCurrentPage(currentPage + 1);
   };
 
