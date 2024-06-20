@@ -66,7 +66,7 @@ function TopBar() {
     return (
         <>
             <div className='top-head-box'>
-                <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
+                <div className='top-head' onClick={onLogoClickHandler}>{"Food Insight"}</div>
                 <div className='top-right-container'>
                     <div className='top-navigation-box'>
                         <div className='top-navigation' onClick={onRestaurantListClickHandler}>식당 검색</div>
@@ -75,31 +75,31 @@ function TopBar() {
                     <div className='top-divider'>|</div>
                     <div className='top-bar-button'>
                         {loginUserRole === 'ROLE_USER' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+                            <div className="top-bar-role">
+                                <div className="sign-in-wrapper">
+                                    <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
+                                </div>
+                                <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                             </div>
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                        </div>
                         }
                         {loginUserRole === 'ROLE_CEO' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
-                            </div> 
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                        </div>
+                            <div className="top-bar-role">
+                                <div className="sign-in-wrapper">
+                                    <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
+                                </div> 
+                                <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                            </div>
                         }
                         {loginUserRole === 'ROLE_ADMIN' &&
-                        <div className="top-bar-role">
-                            <div className="sign-in-wrapper">
-                                <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
-                            </div> 
-                            <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
-                        </div>
+                            <div className="top-bar-role">
+                                <div className="sign-in-wrapper">
+                                    <div className="top-button" onClick={onAdminPageClickHandler}>관리자</div>
+                                </div> 
+                                <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
+                            </div>
                         }
                         {loginUserRole !== 'ROLE_USER' && loginUserRole !== 'ROLE_ADMIN' && loginUserRole !== 'ROLE_CEO' &&
-                        <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
+                            <div className="top-button" onClick={onSignInClickHandler}>로그인</div>
                         }
                     </div>
                 </div>
@@ -115,7 +115,7 @@ function BottomBar() {
 
     // render // 
     return (
-        <div className='bottom-head-box'>
+        <div className='bottom-box'>
             <div className='bottom-title'>Food Insight</div>
             <div className='bottom-navigation-box'>
                 <div className='bottom-navigation'>회사소개</div>
@@ -128,19 +128,16 @@ function BottomBar() {
                 <div className="bottom-divider">{'\|'}</div>
                 <div className='bottom-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>공지사항</div>
             </div>
-            <div className='bottom-detail-title-box'>
-                <div className='bottom-detail-title'>FoodInsight(주)</div>
-                <div className='bottom-detail-title'>대표자 김나경</div>
-                <div className='bottom-detail-title'>대한민국(어딘가)</div>
+            <div className='bottom-detail-contents-box first'>
+                <div className='bottom-detail-content'>(주)FoodInsight</div>
+                <div className='bottom-detail-contenㅅ'>대표자| 김나경 김다인 김유진 박주형</div>
+                <div className='bottom-detail-content'>대한민국</div>
             </div>
-            <div className='bottom-detail-title-box'>
-                <div className='bottom-detail-title'>사업자등록번호 111-11-11111</div>
-                <div className='bottom-detail-title'>TEL 1515-1515</div>
-                <div className='bottom-detail-title'>FAX 02.000.000</div>
-                <div className='bottom-detail-title'>EMAIL food@food.com</div>
-            </div>
-            <div className='bottom-detail-title-box'>
-                <div className='bottom-detail-title'>Thank you for using FoodInsight</div>
+            <div className='bottom-detail-contents-box second'>
+                <div className='bottom-detail-content'>사업자등록번호 111-11-11111</div>
+                <div className='bottom-detail-content'>TEL 1515-1515</div>
+                <div className='bottom-detail-content'>FAX 02.000.000</div>
+                <div className='bottom-detail-content'>EMAIL foodinsight@email.com</div>
             </div>
         </div>
     );
