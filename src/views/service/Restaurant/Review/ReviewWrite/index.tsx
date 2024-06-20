@@ -119,7 +119,7 @@ export default function ReviewWrite() {
                 </div>
                 <div className='review-write-contents-box'>
                     <textarea ref={contentsRef} className='review-write-contents-textarea'
-                        placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} onChange={onContentsChangeHandler} onKeyPress={onKeyPressHandler}/>
+                        placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} onChange={onContentsChangeHandler} onKeyDown={onKeyPressHandler}/>
                 </div>
                 <div className="review-registered-button-box">
                     <button onClick={UploadClickHandler} className={ButtonClass}>등록하기</button>
