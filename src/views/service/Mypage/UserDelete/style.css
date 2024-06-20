@@ -1,3 +1,8 @@
+#resign-wrapper {
+  margin-top: 10px;
+  height: 550px;
+}
+
 .resign-container {
   display: flex;
   flex-direction: column;
