@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetCeoReservationListRequest, GetUserReservationListRequest } from 'src/apis/restaurant/reservation';
 import { GetReservationListResponseDto } from 'src/apis/restaurant/reservation/dto/response';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantReservationListItem } from 'src/types';
 import './style.css';
@@ -73,7 +73,7 @@ export default function ReservationList() {
     const GetReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
@@ -82,7 +82,6 @@ export default function ReservationList() {
 
         const { restaurantReservationList } = result as GetReservationListResponseDto;
         changeList(restaurantReservationList);
-
         setCurrentPage(!restaurantReservationList.length ? 0 : 1);
         setCurrentSection(!restaurantReservationList.length ? 0 : 1);
     };
@@ -93,12 +92,10 @@ export default function ReservationList() {
         GetUserReservationListRequest(cookies.accessToken)
             .then(GetReservationListResponse):
         GetCeoReservationListRequest(cookies.accessToken)
-            .then(GetReservationListResponse)
-        ;
+            .then(GetReservationListResponse);
     }, []);
 
     // render //
-
     return (
         <div id='reservation-list-wrapper'>
             <div className='reservation-list-title'>예약 내역</div>

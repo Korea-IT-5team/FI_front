@@ -12,8 +12,8 @@ import SelectBox from 'src/views/service/Restaurant/SelectBox';
 import './style.css';
 import { Map,useKakaoLoader,MapMarker } from 'react-kakao-maps-sdk';
 
-export default function RestaurantInfoUpdate() 
-{
+// component //
+export default function RestaurantInfoUpdate() {
     useKakaoLoader({
         appkey: "1121641ff4fa6668d61874ed79c1709e",
         libraries: ["clusterer", "drawing", "services"],
@@ -47,10 +47,9 @@ export default function RestaurantInfoUpdate()
     const GetRestaurantInfoResponse = (result: GetRestaurantInfoResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
-            //alert(message);
             return;
         }
 
@@ -79,14 +78,14 @@ export default function RestaurantInfoUpdate()
             lng: restaurantLng
         });
     }
-   
+
     const PatchRestaurantInfoResponse = (result: ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
-                    result.code === 'NR' ? '존재하지 않는 식당입니다.' :
-                        result.code === 'AF' ? '권한이 없습니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '필수 데이터를 입력하지 않았습니다.' :
+            result.code === 'NR' ? '존재하지 않는 식당입니다.' :
+            result.code === 'AF' ? '권한이 없습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             alert(message);
@@ -99,15 +98,11 @@ export default function RestaurantInfoUpdate()
 
     // event handler //
     const onUpdateClickHandler = () => {
-
-        if (!restaurantImage || !restaurantName || !restaurantFoodCategory || !restaurantPosition
-            || !restaurantLocation || !restaurantId || !restaurantTelNumber) {
-            //alert('필수 정보를 입력하지 않았습니다.');
+        if (!restaurantImage || !restaurantName || !restaurantFoodCategory || !restaurantPosition || !restaurantLocation || !restaurantId || !restaurantTelNumber) {
             return;
         }
 
-        const requestBody: PatchRestaurantInfoRequestDto =
-        {
+        const requestBody: PatchRestaurantInfoRequestDto = {
             restaurantImage: restaurantImage,
             restaurantName: restaurantName,
             restaurantFoodCategory: restaurantFoodCategory,
@@ -124,7 +119,7 @@ export default function RestaurantInfoUpdate()
         PatchRestaurantInfoRequest(restaurantId, requestBody, cookies.accessToken)
             .then(PatchRestaurantInfoResponse);
     }
-  
+
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -135,7 +130,7 @@ export default function RestaurantInfoUpdate()
                     setRestaurantImage(base64String);
                 }
             };
-            reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
         }
     }
 
@@ -190,7 +185,8 @@ export default function RestaurantInfoUpdate()
     };
 
     // effect //
-    let effectFlag = false; 
+    let effectFlag = false;
+
     useEffect(() => {
     if (!cookies.accessToken || !restaurantId) {
         return;
@@ -222,46 +218,33 @@ export default function RestaurantInfoUpdate()
                     <RestaurantInputBox label="식당 주소" type="text" value={restaurantLocation}
                     placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
                     <em className="restaurant-info-update-write-contents">지도를 클릭해주세요!</em>
-                    
                     {center && <Map
                         id="map"
                         center={center}
                         style={{
                             width: "100%",
                             height: "350px",
-                            margin: '0 auto'
-                        }}
+                            margin: '0 auto'}}
                         level={3}
                         onClick={(_, mouseEvent) => {
                             const restaurantRatlng = mouseEvent.latLng
                             setRestaurantPosition({
                                 lat: restaurantRatlng.getLat(),
                                 lng: restaurantRatlng.getLng(),
-                            })
-                        }}  
-                        >
+                            })}}>
                         <MapMarker position={restaurantPosition ?? center} />
                     </Map>}
-
                     <div className="restaurant-info-update-write-select-box">                 
                         <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                     </div>
                 </div>
                 <div className="restaurant-info-update-write-box">
-                    <RestaurantInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber}
-                    placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} 
-                    onKeydownHandler={onKeyPressHandler}/>
-                    <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress}
-                    placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
-                    <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours}
-                    placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
-                    <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures}
-                    placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
-                    <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice}
-                    placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
-                    <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu}
-                    placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} 
-                    onKeydownHandler={onKeyPressHandler}/>
+                    <RestaurantInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber} placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} onKeydownHandler={onKeyPressHandler}/>
+                    <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress} placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
+                    <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours} placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
+                    <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures} placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
+                    <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice} placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
+                    <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu} placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} onKeydownHandler={onKeyPressHandler}/>
                     <div className='businessRegistrationNumber-update-box'>
                         <div className='businessRegistrationNumber-update-title'>사업자 등록번호</div>
                         <div className='businessRegistrationNumber-update-title-input'>{businessRegistrationNumber}</div>
@@ -269,8 +252,7 @@ export default function RestaurantInfoUpdate()
                 </div>
             </div>
             <div className="restaurant-info-update-registered-button-box">
-                <button onClick={onUpdateClickHandler}
-                    className={ButtonClass}>수정하기</button>
+                <button onClick={onUpdateClickHandler} className={ButtonClass}>수정하기</button>
             </div>
         </>
     );

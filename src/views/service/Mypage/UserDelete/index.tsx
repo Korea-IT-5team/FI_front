@@ -9,7 +9,7 @@ import InputBox from 'src/components/InputBox';
 import { useUserStore } from 'src/stores';
 import { DeleteUserRequestDto } from 'src/apis/user/dto/request';
 
-// component: 회원탈퇴 // 
+// component: 회원탈퇴 //
 export default function UserDelete() {
 
   // state //
@@ -20,11 +20,10 @@ export default function UserDelete() {
   const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
   const [passwordMessage, setPasswordMessage] = useState<string>('');
   
-  // function // 
+  // function //
   const navigation = useNavigate();
   
   const deleteUserResponse = (result: ResponseDto | null) => {
-    
     const message = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'AF' ? '권한이 없습니다.' :
@@ -36,7 +35,6 @@ export default function UserDelete() {
       alert(message);
       return;
     }
-
     alert('회원탈퇴가 성공하였습니다.');
 
     removeCookie('accessToken', { path: '/' });
@@ -45,7 +43,7 @@ export default function UserDelete() {
     setLoginUserRole("");
   };
 
-  // event handler // 
+  // event handler //
   const onPasswordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const password = event.target.value;
     setPassword(password);
@@ -58,11 +56,11 @@ export default function UserDelete() {
       isPasswordPattern ? '' :
       password ? '영문, 숫자를 혼용하여 8~13자 입력해주세요.' : '';
     setPasswordMessage(passwordMessage);
-
   };
 
   const onUserDeleteButtonClickHandler = () => {
     if (!userEmailId || !cookies.accessToken) return;
+    
     const isConfirm = window.confirm('정말로 삭제하시겠습니까? 삭제하면 회원의 모든 내역이 사라집니다.');
     if (!isConfirm) return;
 

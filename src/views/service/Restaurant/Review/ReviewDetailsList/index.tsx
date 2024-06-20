@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetReviewDetailsRequest } from 'src/apis/restaurant/review';
 import { GetReviewListResponseDto } from 'src/apis/restaurant/review/dto/response';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
 import { RestaurantReviewListItem } from 'src/types';
 import './style.css';
 import { usePagination } from 'src/hooks';
@@ -66,7 +66,7 @@ export default function ReviewDetailsList() {
     const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
@@ -105,10 +105,9 @@ export default function ReviewDetailsList() {
                 <div className='review-list-pagenation'>
                     <div className='review-list-page-left' onClick={onPreSectionClickHandler}></div>
                     <div className='review-list-page-box'>
-                        {pageList.map(page => 
-                        page === currentPage ?
-                        <div className='review-list-page-active'>{page}</div> :
-                        <div className='review-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
+                        {pageList.map(page => page === currentPage ?
+                            <div className='review-list-page-active'>{page}</div> :
+                            <div className='review-list-page' onClick={() => onPageClickHandler(page)}>{page}</div>
                         )}
                     </div>
                     <div className='review-list-page-right' onClick={onNextSectionClickHandler}></div>

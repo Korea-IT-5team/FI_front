@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import "./style.css";
-import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH } from 'src/constant';
 import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
@@ -39,7 +39,6 @@ export default function CeoInfoUpdate() {
         navigation(MAIN_ABSOLUTE_PATH);
         return;
       }
-      
       navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
@@ -56,7 +55,7 @@ export default function CeoInfoUpdate() {
     setUserRole(userRole);
   };
 
-  //   effect   //
+  // effect //
   useEffect(() => {
     if (!cookies.accessToken) return;
     getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
@@ -93,6 +92,7 @@ export default function CeoInfoUpdate() {
 
   const onUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !userEmailId) return;
+
     if (!nickname.trim() || !userAddress.trim()) return;
 
     const requestBody: PatchUserInfoRequestDto = { nickname, userAddress };
@@ -101,6 +101,7 @@ export default function CeoInfoUpdate() {
 
   // effect //
   let effectFlag = useRef(false);
+  
   useEffect(() => {
     if (!cookies.accessToken) return;
     if (!loginUserRole) return;

@@ -9,8 +9,7 @@ import './style.css';
 import { PostReservationRequest } from "src/apis/restaurant/reservation";
 import DatePicker from "react-datepicker";
 
-// TermsPopup.tsx
-
+// interface //
 interface TermsPopupProps {
     isOpen: boolean;
     onClose: () => void;
@@ -40,6 +39,7 @@ const TermsPopup: React.FC<TermsPopupProps> = ({ isOpen, onClose }) => {
     );
 };
 
+// component //
 export default function DoReservation() {
 
     // state //
@@ -76,7 +76,6 @@ export default function DoReservation() {
     }
 
     // event handler //
-
     const onMonthDayChangeHandler = (date: Date | null) => {
         setReservationDate(date);
     }
@@ -96,26 +95,19 @@ export default function DoReservation() {
     }
 
     const onReservationClickHandler = () => {
-        if (!reservationDate || !reservationTime || !reservationPeople
-            || !isChecked) {
+        if (!reservationDate || !reservationTime || !reservationPeople || !isChecked) {
             return;
         }
 
         const isoDateString = new Date(reservationDate.getTime() - reservationDate.getTimezoneOffset() * 60000).toISOString();
         const dateString = isoDateString.substr(0, 10);
-
         const requestBody: PostReservationRequestDto =
-        {
-            reservationDate: dateString,
-            reservationTime: reservationTime,
-            reservationPeople: reservationPeople,
-        }
+        { reservationDate: dateString, reservationTime: reservationTime, reservationPeople: reservationPeople }
 
         if (!restaurantId) return;
         PostReservationRequest(restaurantId, requestBody, cookies.accessToken)
             .then(PostReservationResponse);
     }
-
 
     const handleTimeRangeChange = (direction: 'prev' | 'next') => {
         setTimeRange(prevRange => {
@@ -125,7 +117,6 @@ export default function DoReservation() {
         });
     };
 
-
     const handlePeopleRangeChange = (direction: 'prev' | 'next') => {
         setPeopleRange(prevRange => {
             const newStart = direction === 'prev' ? Math.max(1, prevRange.start - 12) : Math.min(49, prevRange.start + 12);
@@ -134,20 +125,15 @@ export default function DoReservation() {
         });
     };
 
-
     const formatTime = (num: number) => {
         const hours = Math.floor(num / 2);
         const minutes = (num % 2) * 30;
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     }
 
-    const openPopup = () => {
-        setIsPopupOpen(true);
-    }
+    const openPopup = () => { setIsPopupOpen(true); }
 
-    const closePopup = () => {
-        setIsPopupOpen(false);
-    }
+    const closePopup = () => { setIsPopupOpen(false); }
 
     // render //
     const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
@@ -165,7 +151,6 @@ export default function DoReservation() {
                     dateFormat="yyyy-MM-dd"
                     placeholderText="날짜를 선택해주세요"
                 />}
-
                 <div className="do-reservation-input-label">시간</div>
                 <div className="do-reservation-time-box">
                     <div className="time-range">
@@ -174,8 +159,7 @@ export default function DoReservation() {
                             <tbody>
                                 {[...Array(3)].map((_, rowIndex) => (
                                     <tr key={rowIndex}>
-                                        {Array.from({ length: 4 }, (_, colIndex) => {
-                                            const num = rowIndex * 4 + colIndex + timeRange.start;
+                                        {Array.from({ length: 4 }, (_, colIndex) => { const num = rowIndex * 4 + colIndex + timeRange.start;
                                             return (
                                                 <td
                                                     key={num}
@@ -193,7 +177,6 @@ export default function DoReservation() {
                         <button className="do-reservation-arrow" onClick={() => handleTimeRangeChange('next')}>{'>'}</button>
                     </div>
                 </div>
-
                 <div className="do-reservation-input-label">인원수</div>
                 <div className="do-reservation-people-box">
                     <div className="people-range">
@@ -202,8 +185,7 @@ export default function DoReservation() {
                             <tbody>
                                 {[...Array(3)].map((_, rowIndex) => (
                                     <tr key={rowIndex}>
-                                        {Array.from({ length: 4 }, (_, colIndex) => {
-                                            const num = rowIndex * 4 + colIndex + peopleRange.start;
+                                        {Array.from({ length: 4 }, (_, colIndex) => { const num = rowIndex * 4 + colIndex + peopleRange.start;
                                             return (
                                                 <td
                                                     key={num}
@@ -221,7 +203,6 @@ export default function DoReservation() {
                         <button className="do-reservation-arrow" onClick={() => handlePeopleRangeChange('next')}>{'>'}</button>
                     </div>
                 </div>
-
                 <div className="do-reservation-checkbox">
                     <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
                     <div className="do-reservation-checkfont">인증 약관 전체 동의</div>
@@ -229,7 +210,6 @@ export default function DoReservation() {
                 </div>
                 <div className={signUpButtonClass} onClick={onReservationClickHandler}>예약하기</div>
             </div>
-
             <TermsPopup isOpen={isPopupOpen} onClose={closePopup} />
         </>
     )
