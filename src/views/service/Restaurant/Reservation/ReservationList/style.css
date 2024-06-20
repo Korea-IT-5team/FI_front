@@ -151,7 +151,7 @@
 
 .reservation-list-page {
     font-family: 'NanumSquareRound';
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(138, 146, 166, 1);
@@ -161,10 +161,8 @@
 
 .reservation-list-page-active {
     font-family: 'NanumSquareRound';
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 150%px;
-    color: rgba(50, 50, 50, 1);
-
-    cursor: default;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(255, 148, 45, 1);
 }
