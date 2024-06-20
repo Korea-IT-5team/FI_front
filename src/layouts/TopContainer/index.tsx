@@ -66,7 +66,7 @@ function TopBar() {
     return (
         <>
             <div className='top-head-box'>
-                <div className='top-head' onClick={onLogoClickHandler}>{"Food Insight"}</div>
+                <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
                 <div className='top-right-container'>
                     <div className='top-navigation-box'>
                         <div className='top-navigation' onClick={onRestaurantListClickHandler}>식당 검색</div>
