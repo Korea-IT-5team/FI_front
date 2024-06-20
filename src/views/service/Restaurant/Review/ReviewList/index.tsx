@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { RestaurantReviewListItem } from 'src/types';
+import reviewDefault from 'src/assets/image/review-default.png';
 import './style.css';
 
 // interface //
@@ -30,7 +31,7 @@ export default function ReviewList({ value }: Props) {
                         <div className='review-select-item rating'>{item.rating}</div>
                         <div className='review-select-item date'>{item.reviewDate}</div>
                     </div>
-                    <img src={item.reviewImage} className='review-select-item image' />
+                    <img src={item.reviewImage ? item.reviewImage : reviewDefault} className='review-select-item image' />
                     <div className='review-select-item'>{item.reviewContents}</div>
                 </div>
             ))}

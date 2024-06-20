@@ -5,7 +5,7 @@ import ResponseDto from 'src/apis/response.dto';
 import { DeleteReviewRequest, GetReviewDetailRequest } from 'src/apis/restaurant/review';
 import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
 import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH } from 'src/constant';
-
+import reviewDefault from 'src/assets/image/review-default.png'
 import './style.css';
 
 // component //
@@ -99,7 +99,7 @@ export default function ReviewDetail() {
                     <div className='review-detail-info-divider'>{'\|'}</div>   
                     <div className='review-detail-info'>평점: {rating} </div>   
                 </div>
-                <img src={reviewImage} className='' />
+                <img src={reviewImage ? reviewImage : reviewDefault} />
                 <div className='review-detail-contents-box'>내용: {reviewContents}</div>
             </div>
             <div className='review-detail-button-box'>
