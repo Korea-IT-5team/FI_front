@@ -114,8 +114,8 @@ export default function UserInfoUpdate() {
 
   // render //
   return (
-    <div id='my-page-wrapper'>
-      <div className='my-page-container'>
+    <div id='my-page-update-wrapper'>
+      <div className='my-page-update-container'>
         <div>
           <div className='my-page-update-top-title'>회원정보 수정</div>
           <div className='short-divider-line'></div>

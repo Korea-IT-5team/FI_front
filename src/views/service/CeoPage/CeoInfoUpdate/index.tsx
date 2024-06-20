@@ -116,8 +116,8 @@ export default function CeoInfoUpdate() {
 
   // render //
   return (
-    <div id='ceo-page-wrapper'>
-    <div className='ceo-page-container'>
+    <div id='ceo-page-update-wrapper'>
+    <div className='ceo-page-update-container'>
     <div>
         <div className='ceo-page-update-top-title'>사장정보 수정</div>
         <div className='short-divider-line'></div>
@@ -129,7 +129,7 @@ export default function CeoInfoUpdate() {
       </div>
       <div className='short-divider-bottom-line'></div>
       <div className='ceo-page-update-container'>
-        <div className='ceo-page-update-contents-title'>회원정보 수정</div>
+        <div className='ceo-page-update-contents-title'>사장정보 수정</div>
         <div className='ceo-page-update-contents-box'>
           <div className='ceo-page-update-info-first'>
             <div className='ceo-page-update-info'>닉네임</div>

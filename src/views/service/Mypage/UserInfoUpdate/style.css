@@ -1,4 +1,9 @@
-.my-page-container {
+#my-page-update-wrapper {
+  height: 700px;
+  margin-top: 70px;
+}
+
+.my-page-update-container {
   display: flex;
   flex-direction: column;
 
