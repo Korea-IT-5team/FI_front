@@ -19,14 +19,12 @@ function TopBar() {
 
     const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
         if (!result) return;
-
         const { nickname } = result as GetMyInfoResponseDto;
         setNickname(nickname);
     };
 
     useEffect(() => {
         if (!cookies.accessToken) return;
-
         getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
     }, [cookies.accessToken]);
 
@@ -52,6 +50,7 @@ function TopBar() {
         navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
         window.location.reload();
     }
+    
     const onNoticeBoardListClickHandler = () => {
         navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
         window.location.reload();

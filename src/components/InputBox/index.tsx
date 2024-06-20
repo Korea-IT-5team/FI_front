@@ -1,6 +1,7 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 import "./style.css"
 
+// interface //
 export interface InputBoxProps {
     label?: string;
     type: 'text' | 'password';
@@ -15,11 +16,12 @@ export interface InputBoxProps {
     onKeydownHandler?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
+// component //
 export default function InputBox({ label, type, value, placeholder, onChangeHandler, buttonTitle, buttonStatus, onButtonClickHandler, message, error, onKeydownHandler }: InputBoxProps) {
 
+    // render //
     const buttonClass = buttonStatus ? 'common-input-primary-button' : 'common-input-second-button';
     const messageClass = 'common-input-message ' + (error ? 'error' : 'primary');
-
     return (
         <div className="common-input-box">
             <div className="common-input-content-box">
@@ -32,14 +34,12 @@ export default function InputBox({ label, type, value, placeholder, onChangeHand
                     onKeyDown={onKeydownHandler}
                 />
                 { buttonTitle && 
-                <div className={buttonClass} onClick={onButtonClickHandler}>
-                    {buttonTitle}
-                </div> 
+                    <div className={buttonClass} onClick={onButtonClickHandler}>
+                        {buttonTitle}
+                    </div> 
                 }
             </div>
-            <div className={messageClass}>
-                {message}
-            </div>
+            <div className={messageClass}> {message} </div>
         </div>
     );
 }
