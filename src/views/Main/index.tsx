@@ -19,7 +19,7 @@ function TopBar() {
   const [nickname, setNickname] = useState<string>('');
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [cookies, removeCookie] = useCookies();
+  const [cookies, setCookies,removeCookie] = useCookies();
   const { pathname } = useLocation();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {

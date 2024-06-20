@@ -151,7 +151,7 @@
 .pagination-left-arrow {
   width: 60px;
   height: 60px;
-  background-image: url('../../assets/image/271220.png');
+  background-image: url('../../assets/image/arrow-left.png');
   background-size: 100% 100%;
   opacity: 0.25;
   cursor: pointer;
@@ -162,7 +162,7 @@
 .pagination-right-arrow {
   width: 60px;
   height: 60px;
-  background-image: url('../../assets/image/271228.png');
+  background-image: url('../../assets/image/arrow-right.png');
   background-size: 100% 100%;
   opacity: 0.25;
   cursor: pointer;
