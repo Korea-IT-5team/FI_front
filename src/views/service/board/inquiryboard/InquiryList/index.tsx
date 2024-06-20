@@ -285,7 +285,7 @@ export default function InquiryList() {
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px' }}></div>
-        <div className='inquiry-list-pagenation'>
+        <div className='inquiry-list-page-nation'>
           <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
             {pageList.map(page => page === currentPage ?
