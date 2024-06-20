@@ -308,9 +308,9 @@ export default function RestaurantInfo() {
                     <div className='restaurant-info-box'>
                         <div className="restaurant-info-button-box">
                             {loginUserRole === "ROLE_USER" && (loginUserEmailId === reservationUserId && Number(restaurantId) === reservationRestaurantId ?
-                                <button onClick={onReservationCancelClickHandler}>예약취소</button> :
-                                <button onClick={onReservationClickHandler}>예약</button>)}
-                            {loginUserRole === "ROLE_USER" && (<button onClick={onWriteClickHandler}>리뷰작성</button>)}
+                                <button className='reservation-delete' onClick={onReservationCancelClickHandler}>예약취소</button> :
+                                <button className='reservation' onClick={onReservationClickHandler}>예약</button>)}
+                            {loginUserRole === "ROLE_USER" && (<button className='review-write' onClick={onWriteClickHandler}>리뷰작성</button>)}
                         </div>
                         {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
                             <div className="restaurant-info-button-box">
