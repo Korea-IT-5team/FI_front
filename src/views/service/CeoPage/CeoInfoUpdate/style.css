@@ -1,4 +1,9 @@
-.ceo-page-container {
+#ceo-page-update-wrapper {
+  height: 700px;
+  margin-top: 70px;
+}
+
+.ceo-page-update-container {
   display: flex;
   flex-direction: column;
 
