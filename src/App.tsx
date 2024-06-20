@@ -19,7 +19,7 @@ import ReservationList from './views/service/Restaurant/Reservation/ReservationL
 import RestaurantInfoUpdate from './views/service/Restaurant/RestaurantInfoUpdate';
 import RestaurantInfoWrite from './views/service/Restaurant/RestaurantInfoWrite';
 import ReviewDetail from './views/service/Restaurant/Review/ReviewDetail';
-import ReviewDetailsList from './views/service/Restaurant/Review/MyReviewList';
+import MyReviewList from './views/service/Restaurant/Review/MyReviewList';
 import ReviewUpdate from './views/service/Restaurant/Review/ReviewUpdate';
 import ReviewWrite from './views/service/Restaurant/Review/ReviewWrite';
 import InquiryDetail from './views/service/board/inquiryboard/InquiryDetail';
@@ -80,7 +80,7 @@ function App() {
           <Route path={RESTAURANT_INFO_WRITE_PATH} element={<RestaurantInfoWrite />} />
           <Route path={RESTAURANT_INFO_UPDATE_PATH} element={<RestaurantInfoUpdate />} />
           <Route path={REVIEW_PATH}>
-            <Route path={RESTAURANT_REVIEW_DETAILS_LIST_PATH} element={<ReviewDetailsList />} />
+            <Route path={RESTAURANT_REVIEW_DETAILS_LIST_PATH} element={<MyReviewList />} />
             <Route path={RESTAURANT_REVIEW_DETAIL_PATH} element={<ReviewDetail />} />
             <Route path={RESTAURANT_REVIEW_UPDATE_PATH} element={<ReviewUpdate />} />
             <Route path={RESTAURANT_REVIEW_WRITE_PATH} element={<ReviewWrite />} />
