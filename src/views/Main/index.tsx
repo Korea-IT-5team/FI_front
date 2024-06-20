@@ -19,7 +19,7 @@ function TopBar() {
   const [nickname, setNickname] = useState<string>('');
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [cookies, removeCookie] = useCookies();
+  const [cookies, setCookies,removeCookie] = useCookies();
   const { pathname } = useLocation();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
@@ -190,7 +190,7 @@ export default function Main() {
   };
 
   const handleNextPage = () => {
-    if(currentPage==totalPages-1) return;
+    if(currentPage==4) return;
     setCurrentPage(currentPage + 1);
   };
 
