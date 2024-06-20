@@ -95,7 +95,7 @@ export default function ReviewWrite() {
     
     // render //
     return (
-        <>
+        <div id='review-wrapper'>
             <div className="review-write-title">리뷰 작성</div>
             <div className='review-write-container'>
                 <div className="review-write-box">
@@ -122,13 +122,13 @@ export default function ReviewWrite() {
                     </div>
                     <div className='review-write-contents-box'>
                         <textarea ref={contentsRef} className='review-write-contents-textarea'
-                            placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} onChange={onContentsChangeHandler} onKeyPress={onKeyPressHandler} style={{ resize: 'none', width: '100%', height: '100px'}} />
+                            placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} onChange={onContentsChangeHandler} onKeyDown={onKeyPressHandler} style={{ resize: 'none', width: '100%', height: '100px'}} />
                     </div>
                 </div>
                 <div className="review-registered-button-box">
                     <button onClick={UploadClickHandler} className={ButtonClass}>작성하기</button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
