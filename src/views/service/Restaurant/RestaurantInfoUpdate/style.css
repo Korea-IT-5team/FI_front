@@ -2,10 +2,11 @@
   text-align: center;
   margin: 20px 0px;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
   font-size: 30px;
   font-weight: bold;
   line-height: 100%;
+  margin-bottom: 70px;
 }
 
 .restaurant-info-update-write-container {
@@ -31,15 +32,16 @@
 .restaurant-info-update-write-contents{
   display: flex;
   justify-content: center; 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
   font-size: 15px;
 }
 
 .result{
   display: flex;
   justify-content: center; 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
 }
+
 
 .restaurant-info-update-write-select-box {
   width: 100%;
@@ -59,7 +61,7 @@
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 1);
 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -86,7 +88,7 @@
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 1);
 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -105,7 +107,7 @@
   justify-content: center;
   margin: 10px;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
   font-size: 20px;
   font-weight: bold;
   color: rgba(50, 50, 50, 1);
@@ -120,7 +122,7 @@
   border: 1px solid rgba(200, 200, 200, 1);
   border-radius: 6px;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'KCC-Hanbit';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

@@ -9,7 +9,15 @@
   flex-direction: column;
 
   overflow-y: auto;
+
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
+
+#main-wrapper::-webkit-scrollbar {
+  display: none; /* 변경: 웹킷 브라우저에서 스크롤바 제거 */
+}
+
 
 .main-head-box {
   width: 100%;
