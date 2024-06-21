@@ -29,11 +29,11 @@ export default function ReviewList({ value }: Props) {
                     <img src={item.reviewImage ? item.reviewImage : reviewDefault} className='review-content image'/>
                     <div className='review-list-container'>
                         <div className='review-content-box'>
-                            <div className='review-content nickname'>{item.reviewWriterNickname}</div>
+                            <div className='review-content-nickname'>작성자 {item.reviewWriterNickname}</div>
                             <div className='review-content-divider'>{'\|'}</div>
-                            <div className='review-content rating'>{item.rating}</div>
+                            <div className='review-content-rating'>평점 {item.rating}</div>
                             <div className='review-content-divider'>{'\|'}</div>
-                            <div className='review-content date'>{item.reviewDate}</div>
+                            <div className='review-content-date'>작성일 {item.reviewDate}</div>
                         </div>
                         <div className='review-content'>{item.reviewContents}</div>
                     </div>
