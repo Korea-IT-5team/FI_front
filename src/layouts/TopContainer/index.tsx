@@ -129,7 +129,7 @@ function BottomBar() {
             </div>
             <div className='bottom-detail-contents-box first'>
                 <div className='bottom-detail-content'>(주)FoodInsight</div>
-                <div className='bottom-detail-contenㅅ'>대표자| 김나경 김다인 김유진 박주형</div>
+                <div className='bottom-detail-content'>대표자| 김나경 김다인 김유진 박주형</div>
                 <div className='bottom-detail-content'>대한민국</div>
             </div>
             <div className='bottom-detail-contents-box second'>
