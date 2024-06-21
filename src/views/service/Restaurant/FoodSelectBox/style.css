@@ -72,10 +72,6 @@
     -ms-overflow-style: none;
 }
 
-.select-list::-webkit-scrollbar {
-    display: none;
-}
-
 
 .select-list-item-box {
     display: flex;
