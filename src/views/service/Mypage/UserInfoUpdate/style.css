@@ -81,7 +81,6 @@
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   text-align: left;
   
@@ -93,15 +92,15 @@
 }
 
 .my-page-update-info-left {
-  width: 150px;
+  width: 100px;
 }
 
 .my-page-update-info {
   width: 250px;
 }
 
-.common-input-box {
-  width: 250px;
+.my-page-input-box {
+  flex: 1;
 }
 
 .my-page-update-button {

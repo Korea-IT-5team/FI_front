@@ -22,7 +22,7 @@ export default function Authentication() {
     return (
         <div id="authentication-wrapper">
             <div className='authentication-head-box'>
-                <div className='authentication-head'onClick={onLogoClickHandler}>{"Food Insight"}</div>
+                <div className='authentication-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
             </div>
             <Outlet />
         </div>
