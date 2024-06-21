@@ -131,7 +131,9 @@ export default function UserInfoUpdate() {
           <div className='my-page-update-contents-box'>
             <div className='my-page-update-info-box'>
               <div className='my-page-update-info-left'>닉네임</div>
-              <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+              <div className='my-page-input-box'>
+                <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+              </div>
             </div>
             <div className='my-page-update-info-box'>
               <div className='my-page-update-info-left'>아이디</div>
@@ -147,7 +149,9 @@ export default function UserInfoUpdate() {
             </div>
             <div className='my-page-update-info-box'>
               <div className='my-page-update-info-left'>주소</div>
-              <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+              <div className='my-page-input-box'>
+                <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+              </div>
             </div>
           </div>
           <div className='my-page-update-button' onClick={onUpdateButtonClickHandler}>수정</div>
