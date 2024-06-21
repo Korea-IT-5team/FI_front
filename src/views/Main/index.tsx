@@ -14,8 +14,9 @@ import "./style.css";
 
 // component // 
 function TopBar() {
-
+  
   // state //
+  
   const [nickname, setNickname] = useState<string>('');
 
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
@@ -153,6 +154,8 @@ export default function Main() {
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const totalPages = Math.ceil(restaurantList.length / itemsPerPage);
+  const [curSlide, setCurSlide] = useState(0);
+  const [intervalId, setIntervalId] = useState<number | null>(null);
 
 
   // function // 
@@ -198,12 +201,53 @@ export default function Main() {
     if(!currentPage) return;
     setCurrentPage(currentPage - 1);
   };
+  const trainCompartment = ['','','','',''];
+
+  const FIRST_SLIDE_INDEX = 0; 
+  const LAST_SLIDE_INDEX = trainCompartment.length - 1; 
+  const MOVE_SLIDE_INDEX = 1;
+
+  const moveToSlide = (value: string) => {
+    if (value === 'next') {
+      setCurSlide((prevState) =>
+        prevState < LAST_SLIDE_INDEX
+          ? prevState + MOVE_SLIDE_INDEX
+          : FIRST_SLIDE_INDEX
+      );
+    }
+    if (value === 'prev') {
+      setCurSlide((prevState) =>
+        prevState > FIRST_SLIDE_INDEX
+          ? prevState - MOVE_SLIDE_INDEX
+          : LAST_SLIDE_INDEX
+      );
+    }
+  };
+
+  const autoMoveSlide = () => {
+    if (intervalId !== null) {
+      clearInterval(intervalId);
+    }
+
+  const id = setInterval(() => {
+      setCurSlide((prevState) =>
+        prevState < LAST_SLIDE_INDEX
+          ? prevState + MOVE_SLIDE_INDEX
+          : FIRST_SLIDE_INDEX
+      );
+    }, 3000)
+  };
+
+  // const handlePaginationClick = (index: SetStateAction<number>) => {
+  //   setCurSlide(index);
+  //   autoMoveSlide();
+  // };
 
   // event handler //
   const onItemClickHandler = (item: number) => {
     navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
   };
-  
+
   // effect //
   useEffect(() => {
     if (!cookies.accessToken) {
@@ -224,6 +268,10 @@ export default function Main() {
         .then(GetRestaurantListResponse);
   }, []);
 
+  useState(() => {
+    autoMoveSlide();
+  },);
+
 // render //
   return (
     <div id="main-wrapper">
@@ -232,8 +280,49 @@ export default function Main() {
         <Outlet />
       </div>
       <div className='main-container'>
-        <div className='main-banner'></div>
-        <div className='main-image-box'></div>
+        <div className='main-banner' >
+          {/* <button
+          className='prev-button'
+          onClick={() => moveToSlide('prev')}
+        >
+          이전
+          </button> */}
+          <div className='main-show'>
+            {
+              trainCompartment.map((item, index) => (
+                <div
+                  className='compartment'
+                  key={index}
+                  style={{
+                    transform: `translateX(${-100 * curSlide}%)`,
+                    transition: 'all 0.4s ease-in-out', 
+            }}
+                >
+                  {/* {item} */}
+                </div>
+              ))
+            }
+          </div>
+          {/* <ol className='slide-index'>
+         {
+          trainCompartment.map((_, index) => (
+          <li
+            key={index}
+            className={`index-item ${curSlide === index ? 'active' : ''}`}
+            onClick={() => handlePaginationClick(index)}
+          >
+            {index + 1}
+          </li>
+          ))
+        }
+      </ol> */}
+            {/* <button
+          className='next-button'
+          onClick={() => moveToSlide('next')}
+        >
+          다음
+        </button> */}
+        </div>
         <div id='main-restaurant-list-wrapper'>
           
           <div className="pagination-left-arrow" onClick={handlePrevPage}>

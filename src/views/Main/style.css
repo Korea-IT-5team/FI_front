@@ -114,14 +114,88 @@
 }
 
 .main-banner {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
   width: 100%;
-  height: 600px;
-
-  background-image: url('../../assets/image/food-2569257_1280.jpg');
-  background-size: cover;
-  background-position: center;
 }
 
+.main-show img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h {
+  translate: calc();
+}
+
+.main-show {
+  display: flex;
+  width: 100%; 
+  height: 500px;
+  overflow: hidden;
+  align-items: center;
+  /* border: 2px green dotted; */
+  /* margin: 0 50px;  */
+  margin-top: -10px;
+}
+
+.compartment {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  /* font-size: 40px; */
+  text-align: center;
+  margin-top: 10px;
+  background-position: center;
+  background-size: cover;
+
+  position: relative;
+  
+}
+
+
+
+@media (max-width: 1100px) {
+  .main-show {
+    width: 100%; /* 화면 너비에 맞춰 전체 너비 사용 */
+    /* 기타 스타일링 */
+  }
+  .compartment {
+    width: 100%; /* 화면 너비에 맞춰 전체 너비 사용 */
+    /* 기타 스타일링 */
+  }
+}
+
+
+.compartment:nth-child(1) {
+  background-image: url("../../assets/image/food.7.jpg");
+}
+.compartment:nth-child(2) {
+  background-image: url("../../assets/image/food.2.jpg");
+}
+.compartment:nth-child(3) {
+  background-image: url("../../assets/image/food.3.jpg");
+}
+.compartment:nth-child(4) {
+  background-image: url("../../assets/image/food.9.jpg");
+}
+.compartment:nth-child(5) {
+  background-image: url("../../assets/image/food.11.jpg");
+}
+
+/* .slide-index {
+  position: absolute;
+  display: flex;
+  gap: 8px;
+  margin-top: 365px;
+  cursor: pointer;
+}
+
+.index-item.active {
+  color: blue;
+} */
 
 .restaurant-image {
   text-align: center;
