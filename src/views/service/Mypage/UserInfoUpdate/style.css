@@ -62,12 +62,12 @@
 }
 
 .my-page-update-contents-box{
-  width: 350px;
+  width: 400px;
 
   display: flex;
   flex-direction: column;
   
-  gap: 10px;
+  gap: 20px;
 
   font-family: 'NanumSquareRound';
   font-size: 15px;
@@ -76,50 +76,35 @@
   color: rgba(50, 50, 50, 1);
 }
 
-.my-page-update-info-first {
+.my-page-update-info-box {
   width: 100%;
 
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
   
-  padding-top: 10px;
+  padding-top: 20px;
 
   border-top: 1px solid rgba(238, 238, 238, 1);
   
   word-break: break-word;
 }
 
-.my-page-update-title-info {
-  width: 100%;
-  min-width: 100px;
-
-  text-align: left;
-
-  padding: 10px;
-
-  background-color: rgba(255, 255, 255, 1);
-  
-  font-family: 'NanumSquareRound';
-
-  word-break: break-word;
+.my-page-update-info-left {
+  width: 150px;
 }
 
 .my-page-update-info {
-  width: 100%;
-  min-width: 100px;
-
-  text-align: left;
-
-  padding: 10px;
-
-  background-color: rgba(255, 255, 255, 1);
-  
-  font-family: 'NanumSquareRound';
-
-  word-break: break-word;
+  width: 250px;
 }
 
-.my-page-update {
+.common-input-box {
+  width: 250px;
+}
+
+.my-page-update-button {
   width: 150px;
 
   padding: 10px;

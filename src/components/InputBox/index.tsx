@@ -17,7 +17,7 @@ export interface InputBoxProps {
 }
 
 // component //
-export default function InputBox({ label, type, value, placeholder, onChangeHandler, buttonTitle, buttonStatus, onButtonClickHandler, message, error, onKeydownHandler }: InputBoxProps) {
+export default function InputBox({ type, value, placeholder, onChangeHandler, buttonTitle, buttonStatus, onButtonClickHandler, message, error, onKeydownHandler }: InputBoxProps) {
 
     // render //
     const buttonClass = buttonStatus ? 'common-input-primary-button' : 'common-input-second-button';
