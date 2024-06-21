@@ -7,8 +7,6 @@
     align-items: center;
 
     margin-bottom: 30px;
-
-    overflow-y: auto; /* 세로 스크롤을 사용할 때만 스크롤바가 나타나도록 설정 */
 }
 
 .review-write-container {
