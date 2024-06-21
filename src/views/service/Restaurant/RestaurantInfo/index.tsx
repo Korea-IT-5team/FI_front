@@ -324,8 +324,8 @@ export default function RestaurantInfo() {
                         </div>
                         {loginUserRole === "ROLE_CEO" && loginUserEmailId === restaurantWriterId && (
                             <div className="restaurant-info-button-box">
-                                <button onClick={onSetRestIdNumberHandler}>수정</button>
-                                <button onClick={onDeleteRestIdNumberHandler}>삭제</button>
+                                <button className="restaurant-info-update" onClick={onSetRestIdNumberHandler}>수정</button>
+                                <button className="restaurant-info-delete" onClick={onDeleteRestIdNumberHandler}>삭제</button>
                             </div>
                         )}
                         <div className='restaurant-info-content-box'>
