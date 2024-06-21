@@ -8,7 +8,7 @@ interface Prop {
 }
 
 // component //
-export default function SelectBox({ value, onChange }: Prop) {
+export default function TimeSelectBox({ value, onChange }: Prop) {
 
     const listItem = [
         { name: '00:00' , value: '00:00' },
@@ -81,7 +81,7 @@ export default function SelectBox({ value, onChange }: Prop) {
     return (
         <div className='select-box'>
             { value === '' ? 
-                <div className='select-none'>주음식</div> :
+                <div className='select-none'>시간</div> :
                 <div className='select-item'>{value}</div>
             }
             <div className={buttonClass} onClick={onButtonClickHandler}></div>

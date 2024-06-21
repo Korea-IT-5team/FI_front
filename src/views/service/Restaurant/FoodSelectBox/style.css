@@ -14,8 +14,7 @@
 
 .select-item {
     flex-grow: 1;
-    font-family: 'Nanum Gothic';
-    font-family: Inter;
+    font-family: 'KCC-Hanbit';
     font-size: 16px;
     font-weight: 400;
     line-height: 175%;
@@ -28,7 +27,7 @@
 .select-none {
     flex-grow: 1;
 
-    font-family: Inter;
+    font-family: "KCC-Hanbit";
     font-size: 16px;
     font-weight: 400;
     line-height: 175%;
@@ -69,13 +68,12 @@
     overflow-y: scroll;
 
     background-color: rgba(255, 255, 255, 1);
-
-    -ms-overflow-style: none;
 }
 
 .select-list::-webkit-scrollbar {
     display: none;
 }
+
 
 
 .select-list-item-box {

@@ -1,21 +1,16 @@
-import { ChangeEvent, KeyboardEvent, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
+import { GetRestaurantListRequest } from 'src/apis/restaurant';
+import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { useUserStore } from 'src/stores';
 import restaurantDefault from 'src/assets/image/restaurant-default.png';
-import "./style.css";
-import { RestaurantListItem } from 'src/types';
-import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
-import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-// import { Navigation, Pagination } from 'swiper';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/swiper.scss';
-// import 'swiper/components/navigation/navigation.scss';
-// import 'swiper/components/pagination/pagination.scss';
+import { useUserStore } from 'src/stores';
+import { RestaurantListItem } from 'src/types';
+import "./style.css";
 
 // component // 
 function TopBar() {
@@ -198,7 +193,7 @@ export default function Main() {
   };
 
   const handleNextPage = () => {
-    if(currentPage==4) return;
+    if(currentPage==4 || currentPage == totalPages-1) return;
     setCurrentPage(currentPage + 1);
   };
 

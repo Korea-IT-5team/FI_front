@@ -10,9 +10,6 @@
 
   background-color: rgba(255, 148, 45, 0.15);
   border-radius: 20px;
-
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .restaurant-info-container {
@@ -165,6 +162,16 @@
 }
 
 .reservation:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.restaurant-info-update:hover{
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.restaurant-info-delete:hover{
   cursor: pointer;
   opacity: 0.75;
 }

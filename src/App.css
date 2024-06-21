@@ -208,3 +208,11 @@
 
     cursor: pointer;
 }
+
+#main-wrapper::-webkit-scrollbar {
+    display: none; /* 변경: 웹킷 브라우저에서 스크롤바 제거 */
+}
+
+#main-wrapper {
+    scrollbar-width: none; 
+}

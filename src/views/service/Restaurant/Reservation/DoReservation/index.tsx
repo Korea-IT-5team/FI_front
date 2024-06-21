@@ -6,8 +6,10 @@ import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/r
 import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
 import './style.css';
 
-import { PostReservationRequest } from "src/apis/restaurant/reservation";
 import DatePicker from "react-datepicker";
+import { PostReservationRequest } from "src/apis/restaurant/reservation";
+import PeopleSelectBox from "../../PeopleSelectBox";
+import TimeSelectBox from "../../TimeSelectBox";
 
 // interface //
 interface TermsPopupProps {
@@ -51,6 +53,7 @@ export default function DoReservation() {
     const [cookies] = useCookies();
     const navigation = useNavigate();
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+    const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
 
     // function //
     const PostReservationResponse = (result: ResponseDto | null) => {
@@ -74,14 +77,15 @@ export default function DoReservation() {
     // event handler //
     const onMonthDayChangeHandler = (date: Date | null) => {
         setReservationDate(date);
+        setIsDatePickerOpen(false);
     }
 
-    const onPeopleClickHandler = (value: number) => {
+    const onPeopleChangeHandler = (value: number) => {
        
         setReservationPeople(value);
     };
 
-    const onTimeClickHandler = (value: string) => {
+    const onTimeChangeHandler = (value: string) => {
         setReservationTime(value);
     };
 
@@ -104,12 +108,17 @@ export default function DoReservation() {
             .then(PostReservationResponse);
     }
 
-   
-
-
     const openPopup = () => { setIsPopupOpen(true); }
 
     const closePopup = () => { setIsPopupOpen(false); }
+
+    const openDatePicker = () => { 
+        setIsDatePickerOpen(true); 
+    }
+
+    const closeDatePicker = () => {
+        setIsDatePickerOpen(false);
+    }
 
     // render //
     const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
@@ -119,14 +128,20 @@ export default function DoReservation() {
         <>
             <div className="do-reservation-information">예약자 정보</div>
             <div className="do-reservation-box">
-                {!isPopupOpen && <div className="do-reservation-input-label">날짜</div>}
                 {!isPopupOpen && <DatePicker
                     className="do-reservation-date-input"
                     selected={reservationDate}
                     onChange={onMonthDayChangeHandler}
                     dateFormat="yyyy-MM-dd"
                     placeholderText="날짜를 선택해주세요"
+                    onInputClick={openDatePicker}
+                    onClickOutside={closeDatePicker}
                 />}
+                {!isDatePickerOpen?
+                (<div className="do-reservation-time-people">
+                    <TimeSelectBox value={reservationTime} onChange={onTimeChangeHandler}/>
+                    <PeopleSelectBox value={reservationPeople} onChange={onPeopleChangeHandler}/>
+                </div>):<div className="non-space">안보이는 부분</div>}
                 <div className="do-reservation-checkbox">
                     <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
                     <div className="do-reservation-checkfont">인증 약관 전체 동의</div>
