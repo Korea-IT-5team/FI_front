@@ -120,14 +120,14 @@ export default function UserInfoUpdate() {
           <div className='my-page-update-top-title'>회원정보 수정</div>
           <div className='short-divider-line'></div>
         </div>
-        <div className='my-page-title-box'>
-          <div className='my-page-title' onClick={() => navigation(MY_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
-          <div className='my-page-title' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
-          <div className='my-page-title' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+        <div className='my-page-navigation-box'>
+          <div className='my-page-navigation' onClick={() => navigation(MY_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
+          <div className='my-page-navigation' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
+          <div className='my-page-navigation' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
         </div>
         <div className='short-divider-bottom-line'></div>
         <div className='my-page-update-container'>
-          <div className='my-page-contents-title'>회원정보 수정</div>
+          <div className='my-page-update-contents-title'>회원정보 수정</div>
           <div className='my-page-update-contents-box'>
             <div className='my-page-update-info-first'>
               <div className='my-page-update-info'>닉네임</div>
