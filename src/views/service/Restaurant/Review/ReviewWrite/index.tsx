@@ -100,9 +100,9 @@ export default function ReviewWrite() {
                 <div className="review-write-title">리뷰 작성</div>
                 <div className='review-write-container'>
                     <div className="review-write-box">
-                        <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+                        <input type="file" accept="image/*" onChange={onImageChangeHandler} className="review-image-file-input"/>
                         {reviewImage && (
-                            <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                            <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} className="review-image-file"/>
                         )}
                         <div className='review-grade-box'>
                             <div className='review-grade-image'></div>
