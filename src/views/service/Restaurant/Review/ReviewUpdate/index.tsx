@@ -138,9 +138,9 @@ export default function ReviewUpdate(){
         <>
             <div className="review-write-title">리뷰 수정</div>
             <div className="review-write-box">
-                <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+                <input type="file" accept="image/*" onChange={onImageChangeHandler} className="review-image-file-input"/>
                 {reviewImage && (
-                    <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                    <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} className="review-image-file"/>
                 )} 
                 <div className='review-grade'>평점</div>
                 <div id="review-rating-box">

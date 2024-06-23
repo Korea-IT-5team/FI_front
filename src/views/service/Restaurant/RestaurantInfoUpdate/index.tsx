@@ -1,5 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/restaurant';
@@ -10,7 +11,6 @@ import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import SelectBox from 'src/views/service/Restaurant/FoodSelectBox';
 import './style.css';
-import { Map,useKakaoLoader,MapMarker } from 'react-kakao-maps-sdk';
 
 // component //
 export default function RestaurantInfoUpdate() {
@@ -207,10 +207,11 @@ export default function RestaurantInfoUpdate() {
             <div className="restaurant-info-update-write-title">식당 정보 수정</div>
             <div className='restaurant-info-update-write-container'>
                 <div className="restaurant-info-update-write-box">
-                    <div className='restaurant-update-image-box'>
-                        <input type="file" accept="image/*" onChange={onImageChangeHandler} />
+                    <div className="restaurant-input-label label">식당 사진</div>
+                    <div className='restaurant-image-box'>
+                        <input type="file" accept="image/*" onChange={onImageChangeHandler} className="restaurant-info-image-file-input"/>
                         {restaurantImage && (
-                            <img src={restaurantImage} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                            <img src={restaurantImage} style={{ maxWidth: '100px', maxHeight: '100px' }} className="restaurant-info-image-file"/>
                         )}
                     </div>
                     <RestaurantInputBox label="식당 이름" type="text" value={restaurantName}

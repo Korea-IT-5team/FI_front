@@ -9,6 +9,40 @@
     margin-bottom: 30px;
 }
 
+.review-image-file-input {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'KCC-Hanbit';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    cursor: pointer;
+    border: 1px solid rgba(200, 200, 200, 1);
+    color: rgba(138, 146, 166, 1);
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+  
+.review-image-file-input:hover {
+    opacity: 0.85;
+}
+
+.review-image-file {
+    max-width: 100px;
+    max-height: 100px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+  
+.review-image-file:hover {
+    transform: scale(1.05);
+}
+
 .review-write-container {
     width: 100%;
     margin-top: 20px;
@@ -56,7 +90,7 @@
 }
 
 #review-rating {
-    width: 100%;
+    width: 100px;
     padding: 10px;
 
     font-size: 16px;
