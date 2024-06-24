@@ -75,7 +75,7 @@ export default function DoReservation() {
     }
 
     // event handler //
-    const onMonthDayChangeHandler = (date: Date | null) => {
+    const onMonthDayClickHandler = (date: Date | null) => {
         setReservationDate(date);
         setIsDatePickerOpen(false);
     }
@@ -131,9 +131,10 @@ export default function DoReservation() {
                 {!isPopupOpen && <DatePicker
                     className="do-reservation-date-input"
                     selected={reservationDate}
-                    onChange={onMonthDayChangeHandler}
+                    onSelect={onMonthDayClickHandler}
                     dateFormat="yyyy-MM-dd"
                     placeholderText="날짜를 선택해주세요"
+                    minDate={new Date()}
                     onInputClick={openDatePicker}
                     onClickOutside={closeDatePicker}
                 />}
