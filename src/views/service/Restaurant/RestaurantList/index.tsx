@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
-import { RESERVATION_LIST_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import restaurantDefault from 'src/assets/image/restaurant-default.png'
@@ -46,6 +46,9 @@ export default function RestaurantList() {
         if (!searchWord) return;
         GetRestaurantListRequest(searchWord, cookies.accessToken)
             .then(GetRestaurantListResponse);
+
+        //alert('해당하는 식당이 없습니다.');
+        navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
     };
 
     const onRegistrationClickHandler = () => {
