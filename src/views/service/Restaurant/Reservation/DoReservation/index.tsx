@@ -81,7 +81,7 @@ export default function DoReservation() {
     }
 
     const onPeopleChangeHandler = (value: number) => {
-       
+
         setReservationPeople(value);
     };
 
