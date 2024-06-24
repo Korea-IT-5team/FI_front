@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
-import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { RESERVATION_LIST_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import { RestaurantListItem } from 'src/types';
 import restaurantDefault from 'src/assets/image/restaurant-default.png'
@@ -90,7 +90,7 @@ export default function RestaurantList() {
             </div>
             <div className='restaurant-list-box'>
                 {!restaurantList || restaurantList.length === 0 ?
-                    (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+                    (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) : 
                     (restaurantList.slice(0, displayCount).map((item) => (
                     <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
                         <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className='restaurant-list-item' />

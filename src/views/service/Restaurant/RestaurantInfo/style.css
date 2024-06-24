@@ -58,7 +58,16 @@
   gap: 10px;
 }
 
+.restaurant-info-name-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  gap: 10px;
+}
+
 .restaurant-info-name {
+
   font-family: 'KCC-Hanbit';
   font-size: 30px;
   font-weight: 400;
