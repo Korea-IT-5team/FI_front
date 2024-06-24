@@ -32,6 +32,10 @@
     color: rgba(255, 255, 255, 1);
 }
 
+.top-title:hover {
+    cursor: pointer;
+}
+
 .top-container {
     width: 100%;
     height: auto;
