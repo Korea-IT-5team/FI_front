@@ -22,7 +22,7 @@ function ListItem ({
     reservationUserName,
     reservationRestaurantLocation,
 }: RestaurantReservationListItem) {
-
+    
     // function //
     const navigation = useNavigate();
 
@@ -33,7 +33,7 @@ function ListItem ({
     return (
         <div className='reservation-list-table-tr' onClick={onClickHandler} >
             <div className='reservation-list-table-reservation-number'>{reservationNumber}</div>
-            <div className='reservation-list-table-reservation-status'>{reservationStatus}</div>
+            <div className='reservation-list-table-reservation-status-circle'></div>
             <div className='reservation-list-table-reservation-restaurant-name'>{reservationRestaurantName}</div>
             <div className='reservation-list-table-reservation-restaurant-location'>{reservationRestaurantLocation}</div> 
             <div className='reservation-list-table-reservation-date'>{reservationDate}</div>
