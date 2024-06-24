@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { DeleteReviewRequest, GetReviewDetailRequest } from 'src/apis/restaurant/review';
 import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH } from 'src/constant';
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH } from 'src/constant';
 import reviewDefault from 'src/assets/image/review-default.png'
 import './style.css';
 
@@ -67,6 +67,11 @@ export default function ReviewDetail() {
         navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
     };
 
+    const onRestaurantInfoClickHandler = () => {
+        if(!reviewRestaurantId) return;
+        navigation(RESTAURANT_INFO_ABSOLUTE_PATH(reviewRestaurantId));
+    }
+
     const onUpdateClickHandler = () => {
         if(!reviewNumber) return;
         navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH(reviewNumber));
@@ -103,7 +108,10 @@ export default function ReviewDetail() {
                 <div className='review-detail-contents-box'>{reviewContents}</div>
             </div>
             <div className='review-detail-button-box'>
-                <div className='review-detail-primary-button' onClick={onListClickHandler}>목록보기</div>
+                <div className='review-detail-primary-button-box'>
+                    <div className='review-detail-primary-button' onClick={onListClickHandler}>목록보기</div>
+                    <div className='review-detail-primary-button' onClick={onRestaurantInfoClickHandler}>식당정보</div>
+                </div>
                 <div className='review-detail-owner-button-box'>
                     <div className='review-detail-second-button' onClick={onUpdateClickHandler}>수정</div>
                     <div className='review-detail-error-button' onClick={onDeleteClickHandler}>삭제</div>

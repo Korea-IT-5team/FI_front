@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
-import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH, USER_DELETE_ABSOLUTE_PATH} from 'src/constant';
+import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH, USER_DELETE_ABSOLUTE_PATH} from 'src/constant';
 import "./style.css";
 import { getRestaurantIdRequest } from 'src/apis/restaurant';
 import { GetRestaurantIdResponseDto } from 'src/apis/restaurant/dto/response';
@@ -61,7 +61,7 @@ export default function CeoPageSite() {
         navigation(MAIN_ABSOLUTE_PATH);
         return;
       }
-      navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+      navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
       return;
     }
 

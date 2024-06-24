@@ -13,7 +13,7 @@ export default function ReviewList({ value }: Props) {
 
     // state //
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1;
+    const itemsPerPage = 5;
 
     // event handler //
     const onLoadMoreClickHandler = () => { setCurrentPage(prevPage => prevPage + 1); }
