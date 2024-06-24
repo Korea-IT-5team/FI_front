@@ -61,7 +61,7 @@
     justify-content: space-between;
     
     gap: 95px;
-    padding: 13px 13px;
+    padding: 13px;
 
     border-top: 1px solid rgba(238, 238, 238, 1);
 
@@ -168,12 +168,18 @@
     color: rgba(255, 148, 45, 1);
 }
 
-.reservation-list-table-reservation-status-circle{
-    width: 60px;
-    height: 40px;
-    background-color: lightgreen;
-    border-radius: 50%;
-    display: inline-block;
-    justify-content: center;
-    margin-left: 10px;
+.reservation-list-table-reservation-status-success {
+    width: 25px;
+    height: 25px;
+
+    background-image: url('../../../../../assets/image/status-success.png');
+    background-size: cover;
+}
+
+.reservation-list-table-reservation-status-fail {
+    width: 25px;
+    height: 25px;
+
+    background-image: url('../../../../../assets/image/status-fail.png');
+    background-size: cover;
 }

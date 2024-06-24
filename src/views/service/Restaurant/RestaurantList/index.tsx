@@ -93,7 +93,7 @@ export default function RestaurantList() {
             </div>
             <div className='restaurant-list-box'>
                 {!restaurantList || restaurantList.length === 0 ?
-                    (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+                    (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) : 
                     (restaurantList.slice(0, displayCount).map((item) => (
                     <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
                         <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className='restaurant-list-item' />

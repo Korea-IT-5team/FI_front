@@ -74,7 +74,7 @@ export default function UserInfoUpdate() {
     }
 
     alert('정보가 성공적으로 수정되었습니다.');
-    navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+    navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
   };
 
   // event handler //
@@ -90,7 +90,6 @@ export default function UserInfoUpdate() {
 
   const onUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !userEmailId) return;
-
     if (!nickname.trim() || !userAddress.trim()) return;
 
     const requestBody: PatchUserInfoRequestDto = { nickname, userAddress };

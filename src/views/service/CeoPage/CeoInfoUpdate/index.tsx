@@ -76,7 +76,7 @@ export default function CeoInfoUpdate() {
     }
 
     alert('정보가 성공적으로 수정되었습니다.');
-    navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+    navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
   };
 
   // event handler //
