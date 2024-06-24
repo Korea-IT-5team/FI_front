@@ -58,13 +58,6 @@
   gap: 10px;
 }
 
-.restaurant-info-name-box {
-  display: flex;
-  flex-direction: row;
-
-  gap: 10px;
-}
-
 .restaurant-info-name {
   font-family: 'KCC-Hanbit';
   font-size: 30px;
@@ -131,19 +124,18 @@
   display: flex;
   flex-direction: row;
 
-  gap: 100px;
+  gap: 50px;
 }
 
 .restaurant-info-box {
-  width: 83%;
   height: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 5px;
-  padding: 5px;
+  gap: 10px;
+  padding: 10px;
 
   border: 3px solid rgba(255, 255, 255, 1);
   border-radius: 20px;
@@ -189,6 +181,8 @@
 }
 
 .restaurant-info-imformation {
+  width: 350px;
+
   display: flex;
   align-items: center;
 
