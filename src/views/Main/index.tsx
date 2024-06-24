@@ -282,12 +282,6 @@ export default function Main() {
       </div>
       <div className='main-container'>
         <div className='main-banner' >
-          {/* <button
-          className='prev-button'
-          onClick={() => moveToSlide('prev')}
-        >
-          이전
-          </button> */}
           <div className='main-show'>
             {
               trainCompartment.map((item, index) => (
@@ -299,35 +293,14 @@ export default function Main() {
                     transition: 'all 0.4s ease-in-out', 
             }}
                 >
-                  {/* {item} */}
                 </div>
               ))
             }
           </div>
-          {/* <ol className='slide-index'>
-         {
-          trainCompartment.map((_, index) => (
-          <li
-            key={index}
-            className={`index-item ${curSlide === index ? 'active' : ''}`}
-            onClick={() => handlePaginationClick(index)}
-          >
-            {index + 1}
-          </li>
-          ))
-        }
-      </ol> */}
-            {/* <button
-          className='next-button'
-          onClick={() => moveToSlide('next')}
-        >
-          다음
-        </button> */}
         </div>
         <div id='main-restaurant-list-wrapper'>
           <div className="pagination-left-arrow" onClick={handlePrevPage}>
           </div>
-          
           <div className='restaurant-list-box'>
             {!restaurantList || restaurantList.length === 0 ?
             (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
