@@ -29,11 +29,17 @@ function ListItem ({
     // event handler //
     const onClickHandler = () => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(reservationRestaurantId));  
 
+
     // render //
     return (
         <div className='reservation-list-table-tr' onClick={onClickHandler} >
             <div className='reservation-list-table-reservation-number'>{reservationNumber}</div>
-            <div className='reservation-list-table-reservation-status-circle'></div>
+            <div className='reservation-list-table-reservation-status-circle'>
+            {reservationStatus ?
+            <div className='reservation-list-table-reservation-status-success'></div> :
+            <div className='reservation-list-table-reservation-status-fail'></div>
+            }
+            </div>
             <div className='reservation-list-table-reservation-restaurant-name'>{reservationRestaurantName}</div>
             <div className='reservation-list-table-reservation-restaurant-location'>{reservationRestaurantLocation}</div> 
             <div className='reservation-list-table-reservation-date'>{reservationDate}</div>
@@ -51,6 +57,7 @@ export default function ReservationList() {
     const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
 
+    
     const {
         viewList,
         pageList,
