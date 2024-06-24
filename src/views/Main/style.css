@@ -160,7 +160,7 @@ h {
 
 
 
-@media (max-width: 1100px) {
+@media (max-width: 1500px) {
   .main-show {
     width: 100%; /* 화면 너비에 맞춰 전체 너비 사용 */
     /* 기타 스타일링 */

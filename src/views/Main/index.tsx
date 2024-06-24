@@ -201,6 +201,7 @@ export default function Main() {
     if(!currentPage) return;
     setCurrentPage(currentPage - 1);
   };
+  
   const trainCompartment = ['','','','',''];
 
   const FIRST_SLIDE_INDEX = 0; 
@@ -324,7 +325,6 @@ export default function Main() {
         </button> */}
         </div>
         <div id='main-restaurant-list-wrapper'>
-          
           <div className="pagination-left-arrow" onClick={handlePrevPage}>
           </div>
           
