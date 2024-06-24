@@ -87,13 +87,6 @@ export default function UserDelete() {
               개인정보 : 이메일 계정, 비밀번호, 휴대폰번호, 생일, 성별 정보 삭제
             </p>
           </div>
-          {/* <div className='resign-content caution-contents'>2. 30일간 동일한 전화번호로 가입 불가능
-            <p>
-              회원탈퇴를 신청하시면 해당 닉네임은 즉시 탈퇴 처리되며
-              <br />
-              기존에 사용하던 휴대폰번호로는 30일 동안 재가입이 불가합니다.
-            </p>
-          </div> */}
         </div>
         <div className='resign-password'>
           <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요." onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
