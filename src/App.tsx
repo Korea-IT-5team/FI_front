@@ -65,16 +65,16 @@ function App() {
     <Routes>
       <Route index element={<Index />} />
       <Route path={SNS_PATH} element={<Sns />} />
-      <Route path={MAIN_PATH} element={<Main/>} />
+      <Route path={MAIN_PATH} element={<Main />} />
       <Route path={AUTH_PATH} element={<Authentication />} >
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
         <Route path={FIND_EMAIL_INPUT_PATH} element={<FindEmailInput />} />
-        <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} /> 
-        <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
+        <Route path={PASSWORD_RESET_INPUT_PATH} element={<PasswordResetInput />} />
+        <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} />
       </Route>
       <Route element={<TopContainer />} >
-        <Route path={RESTAURANT_PATH}> 
+        <Route path={RESTAURANT_PATH}>
           <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
           <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />
           <Route path={RESTAURANT_INFO_WRITE_PATH} element={<RestaurantInfoWrite />} />
@@ -85,24 +85,24 @@ function App() {
             <Route path={RESTAURANT_REVIEW_UPDATE_PATH} element={<ReviewUpdate />} />
             <Route path={RESTAURANT_REVIEW_WRITE_PATH} element={<ReviewWrite />} />
           </Route>
-          <Route path={RESERVATION_PATH}>    
+          <Route path={RESERVATION_PATH}>
             <Route path={DO_RESERVATION_PATH} element={<DoReservation />} />
             <Route path={RESERVATION_LIST_PATH} element={<ReservationList />} />
           </Route>
-          <Route path={FAVORITE_PATH}>    
+          <Route path={FAVORITE_PATH}>
             <Route path={RESTAURANT_FAVORITE_LIST_PATH} element={<FavoriteList />} />
           </Route>
         </Route>
         <Route path={MY_PAGE_PATH} >
-          <Route path={MY_PAGE_SITE_PATH} element={<MyPageSite />} /> 
+          <Route path={MY_PAGE_SITE_PATH} element={<MyPageSite />} />
           <Route path={USER_INFO_UPDATE_PATH} element={<UserInfoUpdate />} />
           <Route path={USER_DELETE_PATH} element={<UserDelete />} />
-        </Route>  
+        </Route>
         <Route path={CEO_PAGE_PATH} >
-          <Route path={CEO_PAGE_SITE_PATH} element={<CeoPageSite />} /> 
-          <Route path={CEO_INFO_UPDATE_PATH} element={<CeoInfoUpdate />} /> 
-          <Route path={CEO_DELETE_PATH} element={<UserDelete />} /> 
-        </Route>  
+          <Route path={CEO_PAGE_SITE_PATH} element={<CeoPageSite />} />
+          <Route path={CEO_INFO_UPDATE_PATH} element={<CeoInfoUpdate />} />
+          <Route path={CEO_DELETE_PATH} element={<UserDelete />} />
+        </Route>
         <Route path={BOARD_PATH} >
           <Route path={NOTICE_PATH} >
             <Route path={NOTICE_BOARD_LIST_PATH} element={<NoticeList />} />
@@ -117,7 +117,7 @@ function App() {
             <Route path={INQUIRY_MY_BOARD_LIST_PATH} element={<InquiryMyList />} />
             <Route path={INQUIRY_DETAILS_PATH} element={<InquiryDetail />} />
           </Route>
-        </Route>  
+        </Route>
         <Route path={INTRODUCTION_PATH} >
           <Route path={INTRODUCTION_COMPANY_PATH} element={<Company />} />
           <Route path={INTRODUCTION_PROVISION_PATH} element={<Provision />} />

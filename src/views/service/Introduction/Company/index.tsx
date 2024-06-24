@@ -5,7 +5,7 @@ export default function Company() {
   return (
     <div id='company-wrapper'>
       <div className='company-container'>
-        <div className='company-img-box'>회사소개 사진 화면</div>
+        <div className='company-img-box'></div>
         <div className='company-title-box'>
           <div className='company-title'>Food Insight와 함께하는 맛집탐방</div>
           <div className='company-title-detail-box'>
