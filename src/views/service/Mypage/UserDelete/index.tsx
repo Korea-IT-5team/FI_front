@@ -1,23 +1,29 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import "./style.css";
-import { useNavigate, useParams } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
 import { useCookies } from 'react-cookie';
-import { deleteUserRequest } from 'src/apis/user';
-import { MAIN_ABSOLUTE_PATH } from 'src/constant';
-import InputBox from 'src/components/InputBox';
+import { useNavigate, useParams } from 'react-router';
+
+import { ChangeEvent, useEffect, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
+
+import InputBox from 'src/components/InputBox';
+
+import ResponseDto from 'src/apis/response.dto';
 import { DeleteUserRequestDto } from 'src/apis/user/dto/request';
+
+import { deleteUserRequest } from 'src/apis/user';
+
+import { MAIN_ABSOLUTE_PATH, passwordPatternType } from 'src/constant';
+
+import "./style.css";
 
 // component: 회원탈퇴 //
 export default function UserDelete() {
 
   // state //
   const { userEmailId } = useParams();
-  const { loginUserRole, setLoginUserEmailId, setLoginUserRole} = useUserStore();
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, removeCookie] = useCookies();
   const [password, setPassword] = useState<string>('');
-  const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
+  const {setLoginUserEmailId, setLoginUserRole} = useUserStore();
   const [passwordMessage, setPasswordMessage] = useState<string>('');
   
   // function //
@@ -48,9 +54,8 @@ export default function UserDelete() {
     const password = event.target.value;
     setPassword(password);
 
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;
+    const passwordPattern = passwordPatternType;
     const isPasswordPattern = passwordPattern.test(password);
-    setPasswordPattern(isPasswordPattern);
 
     const passwordMessage = 
       isPasswordPattern ? '' :

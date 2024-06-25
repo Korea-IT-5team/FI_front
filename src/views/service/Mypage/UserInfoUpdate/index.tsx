@@ -1,14 +1,21 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
-import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
-import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { useNavigate } from 'react-router';
+
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+
+import { useUserStore } from 'src/stores';
+
+import InputBox from 'src/components/InputBox';
+
 import ResponseDto from 'src/apis/response.dto';
 import { PatchUserInfoRequestDto } from 'src/apis/user/dto/request';
-import { useUserStore } from 'src/stores';
-import InputBox from 'src/components/InputBox';
+import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
+
+import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
+
+import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
+
+import "./style.css";
 
 // component: 회원정보 수정 //
 export default function UserInfoUpdate() {
@@ -16,12 +23,12 @@ export default function UserInfoUpdate() {
   // state // 
   const [cookies] = useCookies();
   const { loginUserRole } = useUserStore();
-  const [userEmailId, setEmailId] = useState<string>('');
+  const [userRole, setUserRole] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
-  const [userTelNumber, setUserTelNumber] = useState<string>('');
+  const [userEmailId, setEmailId] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('');
-  const [userRole, setUserRole] = useState<string>('');
+  const [userTelNumber, setUserTelNumber] = useState<string>('');
 
   // function //
   const navigation = useNavigate();
@@ -96,6 +103,10 @@ export default function UserInfoUpdate() {
     patchUserInfoRequest(userEmailId, requestBody, cookies.accessToken).then(PatchUpdateUserInfoResponse);
   };
 
+  const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onUserInfoUpdateClickHandler = (userEmailId:string) => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+  const onUserDeleteClickHandler = (userEmailId:string) => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId));
+
   // effect //
   let effectFlag = useRef(false);
   
@@ -120,9 +131,9 @@ export default function UserInfoUpdate() {
           <div className='short-divider-line'></div>
         </div>
         <div className='my-page-navigation-box'>
-          <div className='my-page-navigation' onClick={() => navigation(MY_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
-          <div className='my-page-navigation' onClick={() => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
-          <div className='my-page-navigation' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+          <div className='my-page-navigation' onClick={onMyPageSiteClickHandler}>마이페이지</div>
+          <div className='my-page-navigation' onClick={() => onUserInfoUpdateClickHandler(userEmailId)}>회원정보 수정</div>
+          <div className='my-page-navigation' onClick={() => onUserDeleteClickHandler(userEmailId)}>회원탈퇴</div>
         </div>
         <div className='short-divider-bottom-line'></div>
         <div className='my-page-update-container'>
