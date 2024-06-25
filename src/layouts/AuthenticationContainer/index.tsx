@@ -1,6 +1,8 @@
-import { MAIN_ABSOLUTE_PATH } from "src/constant";
-import "./style.css";
 import { Outlet, useLocation, useNavigate } from 'react-router';
+
+import { MAIN_ABSOLUTE_PATH } from "src/constant";
+
+import "./style.css";
 
 // component: 로그인, 회원가입 공통부분 //
 export default function Authentication() {

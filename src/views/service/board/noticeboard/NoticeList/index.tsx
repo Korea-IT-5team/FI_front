@@ -1,14 +1,19 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useState } from 'react'
+
 import { useUserStore } from 'src/stores';
-import { NoticeBoardListItem } from 'src/types';
-import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
 import { usePagination } from 'src/hooks';
+
+import ResponseDto from 'src/apis/response.dto';
+import { NoticeBoardListItem } from 'src/types';
+import { GetNoticeBoardListResponseDto, GetSearchNoticeBoardListResponseDto} from 'src/apis/board/noticeboard/dto/response';
+
+import { getNoticeBoardListRequest, getSearchNoticeBoardListRequest } from 'src/apis/board/noticeboard';
+
+import { COUNT_PER_PAGE, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css'
 
 // component //
 function ListItem ({
@@ -42,8 +47,8 @@ function ListItem ({
 export default function NoticeList() {
 
   // state //
-  const {loginUserRole} = useUserStore();
   const [cookies] = useCookies();
+  const {loginUserRole} = useUserStore();
 
   const {
     viewList,
@@ -80,7 +85,6 @@ export default function NoticeList() {
 
     const { noticeBoardList } = result as GetNoticeBoardListResponseDto;
     changeList(noticeBoardList);
-
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
   };
@@ -100,7 +104,6 @@ export default function NoticeList() {
 
     const { noticeBoardList } = result as GetSearchNoticeBoardListResponseDto;
     changeList(noticeBoardList);
-
     setCurrentPage(!noticeBoardList.length ? 0 : 1);
     setCurrentSection(!noticeBoardList.length ? 0 : 1);
   };
@@ -126,18 +129,19 @@ export default function NoticeList() {
     if (event.key === 'Enter') {
       event.preventDefault(); 
       if (searchWord) {
-        getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
-          .then(getSearchNoticeBoardListResponse);
+        getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getSearchNoticeBoardListResponse);
         setSearchWord('');
       }
     }
   };
 
+  const onInquiryBoardListClickHandler = () => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+  const onInquiryMyBoardListClickHandler = () => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH);
+
   // effect //
   useEffect(() => {
     if (searchWord)
-    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken)
-      .then(getNoticeBoardListResponse)
+    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getNoticeBoardListResponse)
     else
       getNoticeBoardListRequest(cookies.accessToken).then(getNoticeBoardListResponse)
   }, []);
@@ -148,9 +152,9 @@ export default function NoticeList() {
     <div id='notice-list-wrapper'>
       <div className='notice-list-title'>공지사항</div>
       <div className='notice-list-nav-box'>
-          <div className='notice-list-nav' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>문의사항</div>
+          <div className='notice-list-nav' onClick={onInquiryBoardListClickHandler}>문의사항</div>
           <div className='notice-list-nav-divider'>|</div>
-          <div className='notice-list-nav' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의사항</div>
+          <div className='notice-list-nav' onClick={onInquiryMyBoardListClickHandler}>내 문의사항</div>
         </div>
       <div className='notice-list-top-box'>
         <div className='notice-list-top-left'>

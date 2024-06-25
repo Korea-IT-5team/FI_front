@@ -1,9 +1,11 @@
-import axios from 'axios';
-import { PatchInquiryBoardRequestDto, PostCommentRequestDto, PostInquiryBoardRequestDto } from './dto/request';
-import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, GET_MY_INQUIRY_BOARD_LIST_URL, GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
-import { bearerAuthorization, requestErrorHandler, requestHandler } from 'src/apis';
-import { GetInquiryBoardListResponseDto,GetInquiryBoardResponseDto,GetMyInquiryBoardListResponseDto,GetSearchInquiryBoardListResponseDto } from './dto/response';
 import ResponseDto from 'src/apis/response.dto';
+import { PatchInquiryBoardRequestDto, PostCommentRequestDto, PostInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
+import { GetInquiryBoardListResponseDto, GetInquiryBoardResponseDto, GetMyInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
+
+import axios from 'axios';
+import { bearerAuthorization, requestErrorHandler, requestHandler } from 'src/apis';
+
+import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, GET_MY_INQUIRY_BOARD_LIST_URL, GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
 
 // function: 문의 게시물 작성 API 함수
 export const postInquiryBoardRequest = async (requestBody: PostInquiryBoardRequestDto, accessToken: string) => {

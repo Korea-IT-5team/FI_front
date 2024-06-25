@@ -1,31 +1,35 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import './style.css'
-import { useUserStore } from 'src/stores';
-import { useLocation, useNavigate, useParams } from 'react-router';
 import { useCookies } from 'react-cookie';
+import { useNavigate, useParams } from 'react-router';
+import { ChangeEvent, useEffect, useState } from 'react';
+
+import { useUserStore } from 'src/stores';
+
 import ResponseDto from 'src/apis/response.dto';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import { deleteInquiryBoardRequest, getInquiryBoardRequest, postCommentRequest } from 'src/apis/board/inquiryboard';
-import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
 import { PostCommentRequestDto } from 'src/apis/board/inquiryboard/dto/request';
+import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
+
+import { deleteInquiryBoardRequest, getInquiryBoardRequest, postCommentRequest } from 'src/apis/board/inquiryboard';
+
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_PATH, INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css';
 
 // component //
 export default function InquiryDetail() {
 
     // state //
-    const { loginUserEmailId, loginUserRole }  = useUserStore();
-    const { inquiryNumber } = useParams();
-
     const [cookies] = useCookies();
+    const { inquiryNumber } = useParams();
+    const [status, setStatus] = useState<boolean>(false);
+    const [commentRows, setCommentRows] = useState<number>(1);
+    const { loginUserEmailId, loginUserRole }  = useUserStore();
     const [inquiryTitle, setInquiryTitle] = useState<string>('');
     const [inquiryWriterId, setInquiryWriterId] = useState<string>('');
-    const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
-    const [inquiryWriteDatetime, setInquiryWriteDatetime] = useState<string>('');
     const [inquiryContents, setInquiryContents] = useState<string>('');
-    const [status, setStatus] = useState<boolean>(false);
     const [inquiryComment, setInquiryComment] = useState<string | null>(null);
-    const [commentRows, setCommentRows] = useState<number>(1);
-    
+    const [inquiryWriteDatetime, setInquiryWriteDatetime] = useState<string>('');
+    const [inquiryWriterNickname, setInquiryWriterNickname] = useState<string>('');
+
     // function //
     const navigation = useNavigate();
 

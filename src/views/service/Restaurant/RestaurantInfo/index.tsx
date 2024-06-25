@@ -1,20 +1,27 @@
-import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
+
+import ReviewList from 'src/views/service/Restaurant/Review/ReviewList';
+
 import ResponseDto from 'src/apis/response.dto';
-import { DeleteRestaurantInfoRequest, GetRestaurantInfoRequest } from 'src/apis/restaurant';
-import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import { DeleteRestaurantFavoriteRequest, GetFavoriteCheckStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
-import { GetFavoriteCheckResponseDto } from 'src/apis/restaurant/favorite/dto/response';
-import { DeleteReservationRequest, GetReservationCheckStatusRequest } from 'src/apis/restaurant/reservation';
-import { GetReservationCheckResponseDto } from 'src/apis/restaurant/reservation/dto/response';
-import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
-import ReviewList from '../Review/ReviewList';
-import restaurantDefault from 'src/assets/image/restaurant-default.png'
+import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
+import { GetFavoriteCheckResponseDto } from 'src/apis/restaurant/favorite/dto/response';
+import { GetReservationCheckResponseDto } from 'src/apis/restaurant/reservation/dto/response';
+
+import { DeleteRestaurantInfoRequest, GetRestaurantInfoRequest } from 'src/apis/restaurant';
+import { DeleteReservationRequest, GetReservationCheckStatusRequest } from 'src/apis/restaurant/reservation';
+import { DeleteRestaurantFavoriteRequest, GetFavoriteCheckStatusRequest, PostRestaurantFavoriteRequest } from 'src/apis/restaurant/favorite';
+
+import { useUserStore } from 'src/stores';
+import { RESTAURANT_DO_RESERVATION_ABSOLUTE_PATH, RESTAURANT_INFO_UPDATE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH } from 'src/constant';
+
 import './style.css';
+import restaurantDefault from 'src/assets/image/restaurant-default.png';
+
+// 리엑트 -> 컴포넌트 -> 타입 -> 함수 -> 상수 -> style.css
 
 // component : 특정 식당 정보 //
 export default function RestaurantInfo() {

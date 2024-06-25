@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { getInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
-import { GetMyInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { useEffect, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
 import { InquiryBoardListItem } from 'src/types';
+import { GetMyInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
+
+import { getInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_DETAILS_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css'
 
 // component //
 function ListItem ({
@@ -16,7 +21,6 @@ function ListItem ({
   status,
   inquiryTitle,
   inquiryWriteDatetime,
-  inquiryWriterId
 }: InquiryBoardListItem & { index: number }) {
 
   // function //
@@ -40,24 +44,23 @@ function ListItem ({
     </div>
   );
 }
+
 // component: 나의 문의사항 목록보기 //
 export default function InquiryMyList() {
   
   // state //
-  const {loginUserRole, loginUserEmailId} = useUserStore();
-
   const [cookies] = useCookies();
-
-  const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
-  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
-  const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageList, setPageList] = useState<number[]>([1]);
+  const {loginUserRole, loginUserEmailId} = useUserStore();
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  const [isToggleOn, setToggleOn] = useState<boolean>(false);
-
+  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
+  const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
+  
   // function //
   const filterInquiryList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId)
 
@@ -116,11 +119,6 @@ export default function InquiryMyList() {
   };
 
   // event handler //
-  const onWriteButtonClickHandler = () => {
-    if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
-    navigation(INQUIRY_BOARD_WRITE_ABSOLUTE_PATH);
-  };
-
   const onToggleClickHandler = () => {
     if ((loginUserRole !== 'ROLE_USER') && (loginUserRole !== 'ROLE_CEO')) return;
     setToggleOn(!isToggleOn);

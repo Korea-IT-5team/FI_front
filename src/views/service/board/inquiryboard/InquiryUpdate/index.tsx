@@ -1,27 +1,28 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { getInquiryBoardRequest, patchInquiryBoardRequest } from 'src/apis/board/inquiryboard';
-import { PatchInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
-import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { GetInquiryBoardResponseDto } from 'src/apis/board/inquiryboard/dto/response';
+import { PatchInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
+
+import { getInquiryBoardRequest, patchInquiryBoardRequest } from 'src/apis/board/inquiryboard';
+
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function InquiryUpdate() {
 
   // state //
-  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-
-  const { loginUserEmailId, loginUserRole } = useUserStore();
-  const { inquiryNumber } = useParams();
-
   const [cookies] = useCookies();
-
-  const [inquiryWriterId, setInquiryWriterId] = useState<string>('');
+  const { inquiryNumber } = useParams();
+  const { loginUserRole } = useUserStore();
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
+  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const [inquiryContents, setInquiryContents] = useState<string>('');
 
   // function //
@@ -41,7 +42,7 @@ export default function InquiryUpdate() {
       return;
     }
 
-    const { inquiryWriterId, inquiryContents, inquiryTitle, status } = result as GetInquiryBoardResponseDto;
+    const { inquiryContents, inquiryTitle, status } = result as GetInquiryBoardResponseDto;
 
     if (!cookies.accessToken) {
       alert('권한이 없습니다.');
@@ -53,7 +54,6 @@ export default function InquiryUpdate() {
       navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
-    setInquiryWriterId(inquiryWriterId);
     setInquiryTitle(inquiryTitle)
     setInquiryContents(inquiryContents);
   };

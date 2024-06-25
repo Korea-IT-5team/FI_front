@@ -1,27 +1,30 @@
-import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router';
+
+import { useUserStore } from 'src/stores';
+
+import { RestaurantListItem } from 'src/types';
 import ResponseDto from 'src/apis/response.dto';
-import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
-import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+
+import { GetRestaurantListRequest } from 'src/apis/restaurant';
+import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
+
 import restaurantDefault from 'src/assets/image/restaurant-default.png';
 import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
-import { RestaurantListItem } from 'src/types';
-import "./style.css";
+
+import './style.css';
 
 // component // 
 function TopBar() {
   
   // state //
-  
-  const [nickname, setNickname] = useState<string>('');
-
-  const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
-  const [cookies, setCookies,removeCookie] = useCookies();
   const { pathname } = useLocation();
+  const [cookies, removeCookie] = useCookies();
+  const [nickname, setNickname] = useState<string>('');
+  const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
 
   const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
     if (!result) return;        
@@ -44,7 +47,6 @@ function TopBar() {
     removeCookie('accessToken', { path: '/' });
     setLoginUserEmailId('');
     setLoginUserRole('');
-    window.location.reload();
   };
 
   const onLogoClickHandler = () => {
@@ -54,10 +56,13 @@ function TopBar() {
     navigation(MAIN_ABSOLUTE_PATH);}
   }
 
+  // event handler //
   const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
   const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+  const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+  const onNoticeBoardListClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
 
   // render // 
   return (
@@ -66,8 +71,8 @@ function TopBar() {
         <div className='main-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
         <div className='main-right-container'>
           <div className='top-navigation-box'>
-            <div className='top-navigation' onClick={() => navigation(RESTAURANT_LIST_ABSOLUTE_PATH)}>식당 검색</div>
-            <div className='top-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>고객센터</div>
+            <div className='top-navigation' onClick={onRestaurantListClickHandler}>식당 검색</div>
+            <div className='top-navigation' onClick={onNoticeBoardListClickHandler}>고객센터</div>
           </div>
           <div className='top-divider'>|</div>
           <div className='main-top-bar-button'>
@@ -111,20 +116,27 @@ function BottomBar() {
   // function //
   const navigation = useNavigate();
 
+  // event handler //
+  const onIntroductionCompanyClickHandler = () => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH);
+  const onIntroductionPolicyClickHandler = () => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH);
+  const onIntroductionProvisionClickHandler = () => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH);
+  const onInquiryBoardListClickHandler = () => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+  const onNoticeBoardListClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+
   // render // 
   return (
     <div className='bottom-box'>
       <div className='bottom-title'>Food Insight</div>
       <div className='bottom-navigation-box'>
-        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH)}>회사소개</div>
+        <div className='bottom-navigation' onClick={onIntroductionCompanyClickHandler}>회사소개</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH)}>개인정보처리방침</div>
+        <div className='bottom-navigation' onClick={onIntroductionPolicyClickHandler}>개인정보처리방침</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH)}>이용약관</div>
+        <div className='bottom-navigation' onClick={onIntroductionProvisionClickHandler}>이용약관</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>도움말</div>
+        <div className='bottom-navigation' onClick={onInquiryBoardListClickHandler}>도움말</div>
         <div className="bottom-divider">{'\|'}</div>
-        <div className='bottom-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>공지사항</div>
+        <div className='bottom-navigation' onClick={onNoticeBoardListClickHandler}>공지사항</div>
       </div>
       <div className='bottom-detail-contents-box first'>
         <div className='bottom-detail-content'>(주)FoodInsight</div>
@@ -144,20 +156,21 @@ function BottomBar() {
 // component //
 export default function Main() {
 
-  // state //
-  const { setLoginUserEmailId, setLoginUserRole } = useUserStore(); 
+  // state // 
   const [cookies] = useCookies();
+  const [curSlide] = useState(0);
   const [searchWord] = useState<string>('');
-  const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [intervalId] = useState<number | null>(null);
+  const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
+  const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
+
   const itemsPerPage = 8;
+
+  const totalPages = Math.ceil(restaurantList.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const totalPages = Math.ceil(restaurantList.length / itemsPerPage);
-  const [curSlide, setCurSlide] = useState(0);
-  const [intervalId, setIntervalId] = useState<number | null>(null);
-
-
+  
   // function // 
   const navigation = useNavigate();
 
@@ -179,10 +192,6 @@ export default function Main() {
   };
 
   const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => {
-    const message =
-        !result ? '서버에 문제가 있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
     if (!result || result.code !== 'SU') {
         return;
     }
@@ -204,45 +213,11 @@ export default function Main() {
   
   const trainCompartment = ['','','','',''];
 
-  const FIRST_SLIDE_INDEX = 0; 
-  const LAST_SLIDE_INDEX = trainCompartment.length - 1; 
-  const MOVE_SLIDE_INDEX = 1;
-
-  const moveToSlide = (value: string) => {
-    if (value === 'next') {
-      setCurSlide((prevState) =>
-        prevState < LAST_SLIDE_INDEX
-          ? prevState + MOVE_SLIDE_INDEX
-          : FIRST_SLIDE_INDEX
-      );
-    }
-    if (value === 'prev') {
-      setCurSlide((prevState) =>
-        prevState > FIRST_SLIDE_INDEX
-          ? prevState - MOVE_SLIDE_INDEX
-          : LAST_SLIDE_INDEX
-      );
-    }
-  };
-
   const autoMoveSlide = () => {
     if (intervalId !== null) {
       clearInterval(intervalId);
     }
-
-  const id = setInterval(() => {
-      setCurSlide((prevState) =>
-        prevState < LAST_SLIDE_INDEX
-          ? prevState + MOVE_SLIDE_INDEX
-          : FIRST_SLIDE_INDEX
-      );
-    }, 3000)
   };
-
-  // const handlePaginationClick = (index: SetStateAction<number>) => {
-  //   setCurSlide(index);
-  //   autoMoveSlide();
-  // };
 
   // event handler //
   const onItemClickHandler = (item: number) => {
@@ -265,8 +240,7 @@ export default function Main() {
     if(effectFlag1) return;
     effectFlag1 = true; 
 
-    GetRestaurantListRequest(searchWord, cookies.accessToken)
-        .then(GetRestaurantListResponse);
+    GetRestaurantListRequest(searchWord, cookies.accessToken).then(GetRestaurantListResponse);
   }, []);
 
   useState(() => {
@@ -284,7 +258,7 @@ export default function Main() {
         <div className='main-banner' >
           <div className='main-show'>
             {
-              trainCompartment.map((item, index) => (
+              trainCompartment.map((index) => (
                 <div
                   className='compartment'
                   key={index}

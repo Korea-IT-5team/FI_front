@@ -1,14 +1,19 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import "./style.css";
-import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH } from 'src/constant';
-import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
-import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
-import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { PatchUserInfoRequestDto } from 'src/apis/user/dto/request';
+import { useNavigate } from 'react-router';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
 import InputBox from 'src/components/InputBox';
+
+import ResponseDto from 'src/apis/response.dto';
+import { PatchUserInfoRequestDto } from 'src/apis/user/dto/request';
+import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
+
+import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
+
+import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH } from 'src/constant';
+
+import "./style.css";
 
 // component: 사장 회원정보 수정 //
 export default function CeoInfoUpdate() {
@@ -16,13 +21,13 @@ export default function CeoInfoUpdate() {
   // state // 
   const [cookies] = useCookies();
   const { loginUserRole } = useUserStore();
-  const [userEmailId, setEmailId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
-  const [userTelNumber, setUserTelNumber] = useState<string>('');
-  const [userAddress, setUserAddress] = useState<string>('');
-  const [businessRegistrationNumber, setBusinessRegistrationNumber] = useState<string>('');
   const [userRole, setUserRole] = useState<string>('');
+  const [userEmailId, setEmailId] = useState<string>('');
+  const [userAddress, setUserAddress] = useState<string>('');
+  const [userTelNumber, setUserTelNumber] = useState<string>('');
+  const [businessRegistrationNumber, setBusinessRegistrationNumber] = useState<string>('');
 
   // function //
   const navigation = useNavigate();
@@ -99,6 +104,10 @@ export default function CeoInfoUpdate() {
     patchUserInfoRequest(userEmailId, requestBody, cookies.accessToken).then(PatchUpdateUserInfoResponse);
   };
 
+  const onCeoPageSiteClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+  const onCeoInfoUpdateClickHandler = (userEmailId:string) => navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+  const onUserDeleteClickHandler = (userEmailId:string) => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId));
+
   // effect //
   let effectFlag = useRef(false);
   
@@ -123,9 +132,9 @@ export default function CeoInfoUpdate() {
         <div className='short-divider-line'></div>
       </div>
       <div className='ceo-page-navigation-box'>
-        <div className='ceo-page-navigation' onClick={() => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
-        <div className='ceo-page-navigation' onClick={() => navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
-        <div className='ceo-page-navigation' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
+        <div className='ceo-page-navigation' onClick={onCeoPageSiteClickHandler}>마이페이지</div>
+        <div className='ceo-page-navigation' onClick={() => onCeoInfoUpdateClickHandler(userEmailId)}>회원정보 수정</div>
+        <div className='ceo-page-navigation' onClick={() => onUserDeleteClickHandler(userEmailId)}>회원탈퇴</div>
       </div>
       <div className='short-divider-bottom-line'></div>
       <div className='ceo-page-update-container'>
