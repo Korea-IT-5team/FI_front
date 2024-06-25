@@ -1,25 +1,28 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import { getNoticeBoardRequest, patchNoticeBoardRequest } from 'src/apis/board/noticeboard';
-import { PatchNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
-import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
+import { PatchNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
+
+import { getNoticeBoardRequest, patchNoticeBoardRequest } from 'src/apis/board/noticeboard';
+
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH, NOTICE_DETAILS_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function NoticeUpdate() {
 
   // state //
-  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-
-  const { loginUserEmailId, loginUserRole } = useUserStore();
-  const { noticeNumber } = useParams();
   const [cookies] = useCookies();
-  const [noticeWriterId, setNoticeWriterId] = useState<string>('');
+  const { noticeNumber } = useParams();
   const [noticeTitle, setNoticeTitle] = useState<string>('');
+  const { loginUserEmailId, loginUserRole } = useUserStore();
+  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const [noticeContents, setNoticeContents] = useState<string>('');
 
   // function //
@@ -45,8 +48,6 @@ export default function NoticeUpdate() {
       navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
       return;
     }
-
-    setNoticeWriterId(noticeWriterId);
     setNoticeTitle(noticeTitle)
     setNoticeContents(noticeContents);
   };

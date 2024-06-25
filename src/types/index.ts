@@ -25,8 +25,8 @@ export interface RestaurantReservationListItem {
   reservationDate: string;
   reservationTime: string;
   reservationPeople: number;
-  reservationUserName:string;
-  reservationRestaurantLocation:string;
+  reservationUserName: string;
+  reservationRestaurantLocation: string;
 }
 
 export interface NoticeBoardListItem {

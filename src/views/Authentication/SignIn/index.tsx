@@ -1,20 +1,25 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router";
-import { signInRequest } from "src/apis/auth";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+
+import InputBox from "src/components/InputBox";
+
+import ResponseDto from "src/apis/response.dto";
 import { SignInRequestDto } from "src/apis/auth/dto/request";
 import { SignInResponseDto } from "src/apis/auth/dto/response";
-import ResponseDto from "src/apis/response.dto";
-import InputBox from "src/components/InputBox";
-import { FIND_EMAIL_INPUT_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from "src/constant";
+
+import { signInRequest } from "src/apis/auth";
+
+import { FIND_EMAIL_INPUT_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from "src/constant";
+
 import "./style.css";
 
 // component: Sns 로그인 //
 export function Sns() {
 
     // state //
+    const [, setCookie] = useCookies();
     const { accessToken, expires } = useParams();
-    const [cookies, setCookie] = useCookies();
 
     // function //
     const navigation = useNavigate();
@@ -28,7 +33,7 @@ export function Sns() {
         navigation(SIGN_IN_ABSOLUTE_PATH);
     }, []);
 
-    //   render   //
+    // render //
     return (
         <></>
     );
@@ -63,12 +68,10 @@ function SnsContainer({ title }: SnsContainerProps) {
 export default function SignIn() {
 
     // state //
-    const [cookie, setCookie] = useCookies();
-
+    const [, setCookie] = useCookies();
+    const [message, setMessage] = useState<string>('');
     const [emailId, setEmailId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-
-    const [message, setMessage] = useState<string>('');
 
     // function // 
     const navigation = useNavigate();
@@ -77,10 +80,10 @@ export default function SignIn() {
 
         const message =
             !result ? '서버에 문제가 있습니다.' :
-                result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
-                    result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
-                        result.code === 'TF' ? '서버에 문제가 있습니다.' :
-                            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
+            result.code === 'VF' ? '아이디와 비밀번호를 모두 입력하세요.' :
+            result.code === 'SF' ? '로그인 정보가 일치하지 않습니다.' :
+            result.code === 'TF' ? '서버에 문제가 있습니다.' :
+            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
         setMessage(message);
 
         const isSuccess = result && result.code === 'SU';
@@ -122,6 +125,10 @@ export default function SignIn() {
         signInRequest(requestBody).then(signInResponse);
     };
 
+    const onFindEmailInputClickHandler = () => navigation(FIND_EMAIL_INPUT_ABSOLUTE_PATH)
+    const onPasswordResetInputClickHandler = () => navigation(PASSWORD_RESET_INPUT_ABSOLUTE_PATH)
+    const onSignUpClickHandler = () => navigation(SIGN_UP_ABSOLUTE_PATH)
+    
     //   render   //
     return (
         <div id="authentication-wrapper">
@@ -139,15 +146,15 @@ export default function SignIn() {
                     </div>
                     <div className="find-container">
                         <div className="find-email">
-                            <div className="text-link" onClick={() => { navigation(FIND_EMAIL_INPUT_ABSOLUTE_PATH) }}>이메일 찾기</div>
+                            <div className="text-link" onClick={onFindEmailInputClickHandler}>이메일 찾기</div>
                         </div>
                         <div className="find-divider">{'\|'}</div>
                         <div className="reset-password">
-                            <div className="text-link" onClick={() => { navigation(PASSWORD_RESET_INPUT_ABSOLUTE_PATH) }}>비밀번호 재설정</div>
+                            <div className="text-link" onClick={onPasswordResetInputClickHandler}>비밀번호 재설정</div>
                         </div>
                         <div className="find-divider">{'\|'}</div>
                         <div className="user-sign-up">
-                            <div className="text-link" onClick={() => { navigation(SIGN_UP_ABSOLUTE_PATH) }}>회원가입</div>
+                            <div className="text-link" onClick={onSignUpClickHandler}>회원가입</div>
                         </div>
                     </div>
                     <SnsContainer title="SNS 로그인" />

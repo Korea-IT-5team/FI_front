@@ -1,27 +1,29 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { postInquiryBoardRequest } from 'src/apis/board/inquiryboard';
-import { PostInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
-import ResponseDto from 'src/apis/response.dto';
-import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { PostInquiryBoardRequestDto } from 'src/apis/board/inquiryboard/dto/request';
+
+import { postInquiryBoardRequest } from 'src/apis/board/inquiryboard';
+
+import { INQUIRY_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component : 문의 글쓰기 // 
 export default function InquiryWrite() {
 
   // state //
-  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-
-  const { loginUserRole } = useUserStore();
-
   const [cookies] = useCookies();
-  
-  const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
+  const { loginUserRole } = useUserStore();
   const [inquiryTitle, setInquiryTitle] = useState<string>('');
+  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const [inquiryContents, setInquiryContents] = useState<string>('');
-
+  const [inquiryPublic, setInquiryPublic] = useState<boolean>(false);
+  
   // function //
   const navigation = useNavigate();
 
@@ -58,11 +60,8 @@ export default function InquiryWrite() {
 
   const onPostButtonClickHandler = () => {
     if (!inquiryTitle.trim() || !inquiryTitle.trim()) return;
-
     if (!cookies.accessToken) return;
-
     const requestBody: PostInquiryBoardRequestDto = { inquiryTitle, inquiryContents, inquiryPublic };
-
     postInquiryBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
   };
 

@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+
 import { COUNT_PER_PAGE, COUNT_PER_SECTION } from "src/constant";
-import { useUserStore } from "src/stores";
 
 const usePagination = <T>() => {
 
   const [listItem, setListItem] = useState<T[]>([]);
   const [viewList, setViewList] = useState<T[]>([]);
-  const [totalLength, setTotalLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageList, setPageList] = useState<number[]>([1]);
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
 
@@ -37,18 +36,13 @@ const usePagination = <T>() => {
     setListItem(changeList);
     const totalLength = changeList.length;
     setTotalLength(totalLength);
-
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
     setTotalPage(totalPage);
-
     const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
     setTotalSection(totalSection);
-
     changePage(changeList, totalLength);
-
     changeSection(totalPage);
-};
-
+  };
 
   const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
@@ -105,7 +99,6 @@ const usePagination = <T>() => {
     onPreSectionClickHandler,
     onNextSectionClickHandler
   };
-
 };
 
 export default usePagination;

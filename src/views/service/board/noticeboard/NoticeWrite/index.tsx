@@ -1,23 +1,28 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { postNoticeBoardRequest } from 'src/apis/board/noticeboard';
-import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
-import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { PostNoticeBoardRequestDto } from 'src/apis/board/noticeboard/dto/request';
+
+import { postNoticeBoardRequest } from 'src/apis/board/noticeboard';
+
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_WRITE_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function NoticeWrite() {
 
   // state //
-  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-  const { loginUserRole } = useUserStore();
   const [cookies] = useCookies();
+  const { loginUserRole } = useUserStore();
   const [noticeTitle, setNoticeTitle] = useState<string>('');
+  const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const [noticeContents, setNoticeContents] = useState<string>('');
- //
+ 
   const navigation = useNavigate();
 
   const postNoticeBoardResponse = (result: ResponseDto | null) => {

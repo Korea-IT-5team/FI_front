@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+
 import { useUserStore } from 'src/stores';
-import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
+
 import ResponseDto from 'src/apis/response.dto';
-import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
+
 import { deleteNoticeBoardRequest, getNoticeBoardRequest, increaseViewCountRequest } from 'src/apis/board/noticeboard';
+
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function NoticeDetail() {
 
     // state //
-    const { loginUserEmailId, loginUserRole } = useUserStore();
-    const { noticeNumber } = useParams();
-    
     const [cookies] = useCookies();
+    const { noticeNumber } = useParams();
+    const [viewCount, setViewCount] = useState<number>(0);
+    const { loginUserEmailId, loginUserRole } = useUserStore();
     const [noticeTitle, setNoticeTitle] = useState<string>('');
     const [noticeWriterId, setNoticeWriterId] = useState<string>('');
-    const [noticeWriterNickname, setNoticeWriterNickname] = useState<string>('');
-    const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
     const [noticeContents, setNoticeContents] = useState<string>('');
-    const [viewCount, setViewCount] = useState<number>(0);
-    
+    const [noticeWriteDatetime, setNoticeWriteDatetime] = useState<string>('');
+    const [noticeWriterNickname, setNoticeWriterNickname] = useState<string>('');
+
     // function //
     const navigation = useNavigate();
 
@@ -45,8 +49,7 @@ export default function NoticeDetail() {
         }
 
         if (!cookies.accessToken || !noticeNumber) return;
-        getNoticeBoardRequest(noticeNumber, cookies.accessToken)
-            .then(getNoticeBoardResponse);
+        getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse);
     };
 
     const getNoticeBoardResponse = (result: GetNoticeBoardResponseDto | ResponseDto | null) => {
@@ -102,7 +105,7 @@ export default function NoticeDetail() {
 
     const onDeleteClickHandler = () => {
         if (!noticeNumber || loginUserEmailId !== noticeWriterId || !cookies.accessToken) return;
-        
+
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
 
@@ -112,8 +115,7 @@ export default function NoticeDetail() {
     // effect //
     useEffect(() => {
         if (!noticeNumber) return;
-        increaseViewCountRequest(noticeNumber, cookies.accessToken)
-            .then(increaseViewCountResponse);
+        increaseViewCountRequest(noticeNumber, cookies.accessToken).then(increaseViewCountResponse);
     }, []);
 
     useEffect(() => {

@@ -1,58 +1,62 @@
-import { ChangeEvent, useState } from 'react';
-import { businessRegistrationNumberRequest, checkNicknameRequest, emailCheckRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
-import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto, businessRegistrationNumberRequestDto } from 'src/apis/auth/dto/request';
-import ResponseDto from 'src/apis/response.dto';
-import InputBox from 'src/components/InputBox';
-import "./style.css";
-import { SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { useNavigate } from 'react-router';
+import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
+import InputBox from 'src/components/InputBox';
+
+import ResponseDto from 'src/apis/response.dto';
+import { CheckEmailRequestDto, CheckNicknameDto, SignUpRequestDto, CheckTelNumberAuthRequestDto, TelNumberAuthRequestDto, businessRegistrationNumberRequestDto } from 'src/apis/auth/dto/request';
+
+import { businessRegistrationNumberRequest, checkNicknameRequest, emailCheckRequest, signUpRequest, telNumberAuthCheckRequest, telNumberAuthRequest } from 'src/apis/auth';
+
+import { SIGN_IN_ABSOLUTE_PATH, emailIdPatternType, passwordPatternType, userTelNumberPatternType } from 'src/constant';
+
+import './style.css';
 
 // component: 회원가입 //
 export default function SignUp() {
 
   // state //
-  const [searchParam, setSearchParam] = useSearchParams();
+  const [searchParam] = useSearchParams();
   const [emailId, setEmailId] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [passwordCheck, setPasswordCheck] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
-  const [userTelNumber, setUserTelNumber] = useState<string>('');
   const [authNumber, setAuthNumber] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('');
-  const [userName, setUserName] = useState<string>('');
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
+  const [userTelNumber, setUserTelNumber] = useState<string>('');
   const [businessRegistrationNumber, setBusinessRegistrationNumber] = useState<string>('');
 
   const [emailIdButtonStatus, setEmailIdButtonStatus] = useState<boolean>(false);
   const [nicknameButtonStatus, setNicknameButtonStatus] = useState<boolean>(false);
-  const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
   const [authNumberButtonStatus, setAuthNumberButtonStatus] = useState<boolean>(false);
+  const [userTelNumberButtonStatus, setUserTelNumberButtonStatus] = useState<boolean>(false);
   const [businessRegistrationNumberButtonStatus, setBusinessRegistrationNumberButtonStatus] = useState<boolean>(false);
 
   const [isEmailIdCheck, setEmailIdCheck] = useState<boolean>(false);
-  const [isEmailIdPattern, setEmailIdPattern] = useState<boolean>(false);
   const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
-  const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
   const [isNicknameCheck, setNicknameCheck] = useState<boolean>(false);
+  const [isEmailIdPattern, setEmailIdPattern] = useState<boolean>(false);
+  const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
+  const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
   const [isUserTelNumberCheck, setUserTelNumberCheck] = useState<boolean>(false);
   const [isUserTelNumberPattern, setUserTelNumberPattern] = useState<boolean>(false);
-  const [isAuthNumberCheck, setAuthNumberCheck] = useState<boolean>(false);
-  const [isBusinessRegistrationNumberCheck, setBusinessRegistrationNumberCheck] = useState<boolean>(false);
 
   const [emailIdMessage, setEmailIdMessage] = useState<string>('');
   const [passwordMessage, setPasswordMessage] = useState<string>('');
-  const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
   const [nicknameMessage, setNicknameMessage] = useState<string>('');
   const [UserNameMessage, setUserNameMessage] = useState<string>('');
-  const [userTelNumberMessage, setUserTelNumberMessage] = useState<string>('');
   const [authNumberMessage, setAuthNumberMessage] = useState<string>('');
   const [userAddressMessage, setUserAddressMessage] = useState<string>('');
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
+  const [userTelNumberMessage, setUserTelNumberMessage] = useState<string>('');
   const [businessRegistrationNumberMessage, setBusinessRegistrationNumberMessage] = useState<string>('');
 
   const [isEmailIdError, setEmailIdError] = useState<boolean>(false);
   const [isNicknameError, setNicknameError] = useState<boolean>(false);
-  const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
   const [isAuthNumberError, setAuthNumberError] = useState<boolean>(false);
+  const [isUserTelNumberError, setUserTelNumberError] = useState<boolean>(false);
   const [isBusinessRegistrationNumberError, setBusinessRegistrationNumberError] = useState<boolean>(false);
 
   const isSignUpActive = isEmailIdCheck && isEmailIdPattern && isEqualPassword && isPasswordPattern && isNicknameCheck && isUserTelNumberCheck && isUserTelNumberPattern && isAuthNumberCheck;
@@ -80,7 +84,7 @@ export default function SignUp() {
     const nicknameMessage = 
       !result ? '서버에 문제가 있습니다.' :
       result.code === 'VF' ? '닉네임은 빈 값 혹은 공백으로만 이루어질 수 없습니다.' :
-      result.code === 'SF' ?  '이미 사용중인 닉네임입니다.' :
+      result.code === 'DN' ?  '이미 사용중인 닉네임입니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' :
       result.code === 'SU' ? '사용 가능한 닉네임입니다.' : '';
 
@@ -130,10 +134,8 @@ export default function SignUp() {
       result.code === 'SU' ? '사업자번호가 확인되었습니다.' : '' ;
 
     const businessRegistrationNumberError = !(result && result.code ==='SU');
-    const businessRegistrationNumberCheck = !businessRegistrationNumberError;
     setBusinessRegistrationNumberMessage(businessRegistrationNumberMessage);
     setBusinessRegistrationNumberError(businessRegistrationNumberError);
-    setBusinessRegistrationNumberCheck(businessRegistrationNumberCheck);
   }
 
   const signUpResponse = (result: ResponseDto | null) => {
@@ -168,7 +170,7 @@ export default function SignUp() {
     const {value} = event.target;
     setPassword(value);
 
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;
+    const passwordPattern = passwordPatternType;
     const isPasswordPattern = passwordPattern.test(value);
     setPasswordPattern(isPasswordPattern);
 
@@ -240,14 +242,13 @@ export default function SignUp() {
     const {value} = event.target;
     setBusinessRegistrationNumber(value);
     setBusinessRegistrationNumberButtonStatus(value !== '');
-    setBusinessRegistrationNumberCheck(false);
     setBusinessRegistrationNumberMessage('');
   };
 
   const onEmailIdButtonClickHandler = () => {
     if(!emailIdButtonStatus) return;
 
-    const emailIdPattern = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+    const emailIdPattern = emailIdPatternType;
     const isEmailIdPattern = emailIdPattern.test(emailId);
     setEmailIdPattern(isEmailIdPattern);
 
@@ -273,7 +274,7 @@ export default function SignUp() {
   const onUserTelNumberButtonClickHandler = () => {
     if(!userTelNumberButtonStatus) return;
 
-    const userTelNumberPattern = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+    const userTelNumberPattern = userTelNumberPatternType;
     const isUserTelNumberPattern = userTelNumberPattern.test(userTelNumber);
     setUserTelNumberPattern(isUserTelNumberPattern);
 

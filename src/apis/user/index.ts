@@ -1,9 +1,11 @@
-import { DELETE_INFO_DELETE_REQUEST_URL, GET_MY_INFO_URL, GET_SIGN_IN_USER_REQUEST_URL, PASSWORD_RECHECK_REQUEST_URL, PATCH_INFO_UPDATE_REQUEST_URL } from "src/constant";
-import { bearerAuthorization, requestErrorHandler, requestHandler } from "..";
-import axios from "axios";
-import { GetMyInfoResponseDto, GetUserInfoResponseDto } from "./dto/response";
-import ResponseDto from "../response.dto";
-import { DeleteUserRequestDto, PasswordRecheckRequestDto, PatchUserInfoRequestDto } from "./dto/request";
+import ResponseDto from 'src/apis/response.dto';
+import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
+import { DeleteUserRequestDto, PatchUserInfoRequestDto } from 'src/apis/user/dto/request';
+
+import axios from 'axios';
+import { bearerAuthorization, requestErrorHandler, requestHandler } from 'src/apis/index';
+
+import { DELETE_INFO_DELETE_REQUEST_URL, GET_MY_INFO_URL, GET_SIGN_IN_USER_REQUEST_URL, PATCH_INFO_UPDATE_REQUEST_URL } from 'src/constant';
 
 // function: 로그인 유저 정보 불러오기 API 함수 
 export const getSignInUserRequest = async (accessToken: string) => {

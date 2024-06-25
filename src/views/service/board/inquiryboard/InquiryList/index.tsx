@@ -1,13 +1,18 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import './style.css'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
-import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
-import ResponseDto from 'src/apis/response.dto';
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useState } from 'react'
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
 import { InquiryBoardListItem } from 'src/types';
+import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dto/response';
+
+import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
+
+import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css'
 
 // component //
 function ListItem ({
@@ -63,20 +68,18 @@ function ListItem ({
 export default function InquiryList() {
 
   // state //
-  const {loginUserRole} = useUserStore();
-
   const [cookies] = useCookies();
-
-  const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
-  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
-  const [totalLength, setTotalLength] = useState<number>(0);
+  const {loginUserRole} = useUserStore();
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageList, setPageList] = useState<number[]>([1]);
+  const [searchWord, setSearchWord] = useState<string>('');
+  const [totalLength, setTotalLength] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isToggleOn, setToggleOn] = useState<boolean>(false);
   const [totalSection, setTotalSection] = useState<number>(1);
   const [currentSection, setCurrentSection] = useState<number>(1);
-  const [isToggleOn, setToggleOn] = useState<boolean>(false);
-  const [searchWord, setSearchWord] = useState<string>('');
+  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
+  const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
 
   // function //
   const navigation = useNavigate();
@@ -137,7 +140,6 @@ export default function InquiryList() {
 
     const { inquiryBoardList } = result as GetInquiryBoardListResponseDto;
     changeInquiryBoardList(inquiryBoardList);
-
     setCurrentPage(!inquiryBoardList.length ? 0 : 1);
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
@@ -221,9 +223,8 @@ export default function InquiryList() {
     if (event.key === 'Enter') {
       event.preventDefault(); 
       if (searchWord) {
-        getSearchInquiryBoardListRequest(searchWord, cookies.accessToken)
-          .then(getSearchInquiryBoardListResponse);
-          setSearchWord('');
+        getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
+        setSearchWord('');
       }
     }
   };

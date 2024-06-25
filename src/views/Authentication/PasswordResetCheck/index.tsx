@@ -1,11 +1,16 @@
-import React, { ChangeEvent, useState } from 'react'
-import "./style.css"; 
-import { newPasswordRequest } from 'src/apis/auth';
-import { NewPasswordRequestDto } from 'src/apis/auth/dto/request';
-import ResponseDto from 'src/apis/response.dto';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+
 import InputBox from 'src/components/InputBox';
-import { SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+
+import ResponseDto from 'src/apis/response.dto';
+import { NewPasswordRequestDto } from 'src/apis/auth/dto/request';
+
+import { newPasswordRequest } from 'src/apis/auth';
+
+import { SIGN_IN_ABSOLUTE_PATH, passwordPatternType } from 'src/constant';
+
+import './style.css';
 
 // component: 비밀번호 재설정 // 
 export default function PasswordResetCheck() {
@@ -14,11 +19,9 @@ export default function PasswordResetCheck() {
   const { userEmailId } = useParams();
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
-
+  const [passwordMessage, setPasswordMessage] = useState<string>('');
   const [isEqualPassword, setEqualPassword] = useState<boolean>(false);
   const [isPasswordPattern, setPasswordPattern] = useState<boolean>(false);
-
-  const [passwordMessage, setPasswordMessage] = useState<string>('');
   const [passwordCheckMessage, setPasswordCheckMessage] = useState<string>('');
 
   const isResetPasswordCheckActive = isPasswordPattern && isEqualPassword;
@@ -48,7 +51,7 @@ export default function PasswordResetCheck() {
     const {value} = event.target;
     setPassword(value);
 
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;
+    const passwordPattern = passwordPatternType;
     const isPasswordPattern = passwordPattern.test(value);
     setPasswordPattern(isPasswordPattern);
 

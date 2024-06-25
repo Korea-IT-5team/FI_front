@@ -57,7 +57,6 @@ export const INTRODUCTION_COMPANY_PATH = 'company';
 export const INTRODUCTION_PROVISION_PATH = 'provision';
 export const INTRODUCTION_POLICY_PATH = 'policy';
 
-
 // description: Navigation 절대 URL PATH 
 export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
 
@@ -105,13 +104,11 @@ export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: string | numbe
 export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
 export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
 
-// 회사소개 페이지 
 export const INTRODUCTION_ABSOLUTE_PATH = INTRODUCTION_PATH;
 
 export const INTRODUCTION_COMPANY_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_COMPANY_PATH}`;
 export const INTRODUCTION_PROVISION_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_PROVISION_PATH}`;
 export const INTRODUCTION_POLICY_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_POLICY_PATH}`;
-
 
 // description: API URL PATH
 export const SERVER_DOMAIN_URL = 'http://localhost:9999';
@@ -143,14 +140,13 @@ export const SERVER_RESTAURANT_MODULE_URL = `${SERVER_API_URL}/restaurant`;
 export const GET_SEARCH_RESTAURANT_LIST_URL = `${SERVER_RESTAURANT_MODULE_URL}/search`;
 export const GET_RESTAURANT_URL = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}`;
 export const POST_RESTAURANT_INFO_UPLOAD = `${SERVER_RESTAURANT_MODULE_URL}/info-upload`;
-export const GET_RESTAURANT_ID_URL = `${SERVER_RESTAURANT_MODULE_URL}/restaurantid`;
+export const GET_RESTAURANT_ID_URL = `${SERVER_RESTAURANT_MODULE_URL}/restaurantId`;
 
 export const PATCH_RESTAURANT_INFO_UPDATE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-update`;
 export const DELETE_RESTAURANT_INFO_DELETE = (restaurantId: number | string) => `${SERVER_RESTAURANT_MODULE_URL}/${restaurantId}/info-delete`;
 
 // description: REVIEW 모듈 내의 기능 URL
 export const SERVER_REVIEW_MODULE_URL = `${SERVER_RESTAURANT_MODULE_URL}/review`;
-// description: 아래의 경우 GET_REVIEW_URL로 먼저 화살표함수와 URL을 적어줘서 코드의 가독성을 향상시킬 수 있다.
 export const GET_REVIEW_DETAILS_LIST_URL =  `${SERVER_REVIEW_MODULE_URL}/list`;
 export const GET_REVIEW_DETAIL_URL = (reviewNumber:number|string) => `${SERVER_REVIEW_MODULE_URL}/${reviewNumber}`;
 
@@ -199,3 +195,8 @@ export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERV
 
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
+
+export const emailIdPatternType = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
+export const passwordPatternType = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;
+export const userTelNumberPatternType = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+

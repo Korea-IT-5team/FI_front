@@ -56,10 +56,8 @@ export default function RestaurantList() {
         navigation(RESTAURANT_INFO_WRITE_ABSOLUTE_PATH);
     };
 
-    const onItemClickHandler = (item: number) => {
-        navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
-    };
-
+    const onItemClickHandler = (item: number) => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
+    
     const onLoadMoreClickHandler = () => {
         setDisplayCount(prevCount => prevCount + 8);
     };
