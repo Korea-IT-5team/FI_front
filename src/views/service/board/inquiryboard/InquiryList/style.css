@@ -157,12 +157,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-
-    position: absolute;
-    bottom: 0;
     gap: 24px;
-
-    text-align: center;
 }
 
 .inquiry-list-page-box {

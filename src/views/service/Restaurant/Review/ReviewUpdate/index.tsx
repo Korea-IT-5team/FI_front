@@ -1,25 +1,31 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { GetReviewDetailRequest, PatchReviewRequest } from 'src/apis/restaurant/review';
-import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
-import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
+import { PatchReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
+
+import { GetReviewDetailRequest, PatchReviewRequest } from 'src/apis/restaurant/review';
+
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function ReviewUpdate(){
 
     // state //
-    const {reviewNumber} = useParams();
-    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const {loginUserRole} = useUserStore();
-    const [reviewImage, setReviewImage] = useState<string>("");
-    const [rating, setRating] = useState<number>();
-    const [reviewContents, setReviewContents] = useState<string>("");
     const [cookies] = useCookies();
+    const {reviewNumber} = useParams();
+    const {loginUserRole} = useUserStore();
+    const [rating, setRating] = useState<number>();
+    const [reviewImage, setReviewImage] = useState<string>("");
+    const [reviewContents, setReviewContents] = useState<string>("");
+
+    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
 
     // function //
     const navigation = useNavigate();
@@ -103,8 +109,7 @@ export default function ReviewUpdate(){
             reviewContents: reviewContents
         }
 
-        PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken)
-            .then(PatchReviewResponse);
+        PatchReviewRequest(reviewNumber, requestBody, cookies.accessToken).then(PatchReviewResponse);
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -112,8 +117,6 @@ export default function ReviewUpdate(){
             UpdateClickHandler();
         }
     };
-
-    const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
     
     // effect //
     let effectFlag = false;
@@ -129,9 +132,10 @@ export default function ReviewUpdate(){
             return;
         }
 
-        GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
-            .then(GetReviewDetailResponse);
+        GetReviewDetailRequest(reviewNumber,cookies.accessToken).then(GetReviewDetailResponse);
     },[])
+
+    const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
 
     // render //
     return (

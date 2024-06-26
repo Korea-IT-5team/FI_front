@@ -1,6 +1,5 @@
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-
 import { useEffect, useState } from 'react';
 
 import ResponseDto from 'src/apis/response.dto';
@@ -47,13 +46,14 @@ export default function MyPageSite() {
   };
 
   // event handler //
-  const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onUserInfoUpdateClickHandler = (userEmailId:string) => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
   const onUserDeleteClickHandler = (userEmailId:string) => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId));
+  const onUserInfoUpdateClickHandler = (userEmailId:string) => navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+  
+  const onMyPageSiteClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+  const onInquiryMyBoardListClickHandler = () => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH);
   const onRestaurantFavoriteClickHandler = () => navigation(RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH);
   const onRestaurantReservationListClickHandler = () => navigation(RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH);
   const onRestaurantReviewDetailsClickHandler = () => navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
-  const onInquiryMyBoardListClickHandler = () => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH);
 
   //   effect   //
   useEffect(() => {

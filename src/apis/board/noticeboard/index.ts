@@ -40,7 +40,7 @@ export const getNoticeBoardRequest = async (noticeNumber: number | string, acces
     return result;
 };
 
-// function:공지 게시물 수정 API 함수 
+// function: 공지 게시물 수정 API 함수 
 export const patchNoticeBoardRequest = async (noticeNumber: number | string, requestBody: PatchNoticeBoardRequestDto, accessToken: string) => {
     const result = await axios.patch(PATCH_NOTICE_BOARD_URL(noticeNumber), requestBody, bearerAuthorization(accessToken))
         .then(requestHandler<ResponseDto>)

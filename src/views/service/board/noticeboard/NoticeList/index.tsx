@@ -141,7 +141,7 @@ export default function NoticeList() {
   // effect //
   useEffect(() => {
     if (searchWord)
-    getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getNoticeBoardListResponse)
+      getSearchNoticeBoardListRequest(searchWord, cookies.accessToken).then(getNoticeBoardListResponse)
     else
       getNoticeBoardListRequest(cookies.accessToken).then(getNoticeBoardListResponse)
   }, []);

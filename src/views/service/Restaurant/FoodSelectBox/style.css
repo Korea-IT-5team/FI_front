@@ -23,7 +23,6 @@
     color: rgba(64, 64, 64, 1);
 }
 
-
 .select-none {
     flex-grow: 1;
 
@@ -45,7 +44,6 @@
 
     cursor: pointer;
 }
-
 
 .select-close-button {
     width: 24px;
@@ -74,8 +72,6 @@
     display: none;
 }
 
-
-
 .select-list-item-box {
     display: flex;
 
@@ -90,4 +86,3 @@
     background-color: rgba(238, 238, 238, 0.2);
     cursor: pointer;
 }
- 

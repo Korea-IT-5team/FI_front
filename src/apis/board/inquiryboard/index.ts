@@ -5,7 +5,7 @@ import { GetInquiryBoardListResponseDto, GetInquiryBoardResponseDto, GetMyInquir
 import axios from 'axios';
 import { bearerAuthorization, requestErrorHandler, requestHandler } from 'src/apis';
 
-import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, GET_MY_INQUIRY_BOARD_LIST_URL, GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
+import { DELETE_INQUIRY_BOARD_URL, GET_INQUIRY_BOARD_LIST_URL, GET_INQUIRY_BOARD_SEARCH_LIST_URL, GET_INQUIRY_BOARD_URL, GET_MY_INQUIRY_BOARD_LIST_URL, PATCH_INQUIRY_BOARD_REQUEST_URL, POST_INQUIRY_BOARD_COMMENT_REQUEST_URL, POST_INQUIRY_BOARD_REQUEST_URL } from 'src/constant';
 
 // function: 문의 게시물 작성 API 함수
 export const postInquiryBoardRequest = async (requestBody: PostInquiryBoardRequestDto, accessToken: string) => {
@@ -68,15 +68,6 @@ export const deleteInquiryBoardRequest = async (inquiryNumber: number | string, 
 export const getMyInquiryBoardListRequest = async (accessToken: string) => {
     const result = await axios.get(GET_MY_INQUIRY_BOARD_LIST_URL, bearerAuthorization(accessToken))
         .then(requestHandler<GetMyInquiryBoardListResponseDto>)
-        .catch(requestErrorHandler);
-    return result;
-};
-
-// function: 나의 검색 문의 게시물 목록 확인 API 함수 
-export const getMySearchInquiryBoardListRequest = async (searchWord: string, accessToken: string) => {
-    const config = { ...bearerAuthorization(accessToken), params: { searchWord } };
-    const result = await axios.get(GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL, config)
-        .then(requestHandler<GetSearchInquiryBoardListResponseDto>)
         .catch(requestErrorHandler);
     return result;
 };

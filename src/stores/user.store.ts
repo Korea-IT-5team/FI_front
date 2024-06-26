@@ -7,7 +7,6 @@ interface UserStore {
     setLoginUserRole: (loginUserRole: string) => void,
     businessRegistrationNumber: string,
     setBusinessRegistrationNumber: (businessRegistrationNumber: string) => void,
-
 }
 
 const useUserStore = create<UserStore>(set => ({

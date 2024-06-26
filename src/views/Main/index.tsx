@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 
 import { useUserStore } from 'src/stores';
+import restaurantDefault from 'src/assets/image/restaurant-default.png';
 
 import { RestaurantListItem } from 'src/types';
 import ResponseDto from 'src/apis/response.dto';
@@ -12,8 +13,7 @@ import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/
 import { GetRestaurantListRequest } from 'src/apis/restaurant';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 
-import restaurantDefault from 'src/assets/image/restaurant-default.png';
-import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, ITEM_PER_PAGE1, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 
 import './style.css';
 
@@ -22,7 +22,7 @@ function TopBar() {
   
   // state //
   const { pathname } = useLocation();
-  const [cookies, removeCookie] = useCookies();
+  const [cookies, , removeCookie] = useCookies();
   const [nickname, setNickname] = useState<string>('');
   const { loginUserRole, setLoginUserEmailId, setLoginUserRole } = useUserStore();
 
@@ -33,16 +33,10 @@ function TopBar() {
     setNickname(nickname);
   };
 
-  // effect //
-  useEffect (() => {
-    if (!cookies.accessToken) return;
-
-    getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-  }, [cookies.accessToken]);
-
   // function //
   const navigation = useNavigate();
 
+  // event handler //
   const onLogoutClickHandler = () => {
     removeCookie('accessToken', { path: '/' });
     setLoginUserEmailId('');
@@ -56,13 +50,19 @@ function TopBar() {
     navigation(MAIN_ABSOLUTE_PATH);}
   }
 
-  // event handler //
   const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
   const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
-  const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+  const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
   const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
   const onNoticeBoardListClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+
+  // effect //
+  useEffect (() => {
+    if (!cookies.accessToken) return;
+
+    getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+  }, [cookies.accessToken]);
 
   // render // 
   return (
@@ -117,11 +117,11 @@ function BottomBar() {
   const navigation = useNavigate();
 
   // event handler //
-  const onIntroductionCompanyClickHandler = () => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH);
-  const onIntroductionPolicyClickHandler = () => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH);
-  const onIntroductionProvisionClickHandler = () => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH);
-  const onInquiryBoardListClickHandler = () => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
   const onNoticeBoardListClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+  const onInquiryBoardListClickHandler = () => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH);
+  const onIntroductionPolicyClickHandler = () => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH);
+  const onIntroductionCompanyClickHandler = () => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH);
+  const onIntroductionProvisionClickHandler = () => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH);
 
   // render // 
   return (
@@ -165,24 +165,17 @@ export default function Main() {
   const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
 
-  const itemsPerPage = 8;
-
-  const totalPages = Math.ceil(restaurantList.length / itemsPerPage);
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const totalPages = Math.ceil(restaurantList.length / ITEM_PER_PAGE1);
+  const startIndex = currentPage * ITEM_PER_PAGE1;
+  const endIndex = startIndex + ITEM_PER_PAGE1;
+  const trainCompartment = ['','','','',''];
   
   // function // 
   const navigation = useNavigate();
 
   const getSignInUserResponse = (result: GetUserInfoResponseDto | ResponseDto | null) => {
-    const message = 
-      !result ? '서버에 문제가 있습니다.' :
-      result.code === 'AF' ? '인증에 실패했습니다.' :
-      result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
-      alert(message);
-      navigation(SIGN_IN_ABSOLUTE_PATH);
       return;
     }
 
@@ -201,6 +194,7 @@ export default function Main() {
     SetRestaurantList(restaurantList);
   };
 
+  //  event handler //
   const handleNextPage = () => {
     if(currentPage==4 || currentPage == totalPages-1) return;
     setCurrentPage(currentPage + 1);
@@ -210,8 +204,6 @@ export default function Main() {
     if(!currentPage) return;
     setCurrentPage(currentPage - 1);
   };
-  
-  const trainCompartment = ['','','','',''];
 
   const autoMoveSlide = () => {
     if (intervalId !== null) {
@@ -219,11 +211,8 @@ export default function Main() {
     }
   };
 
-  // event handler //
-  const onItemClickHandler = (item: number) => {
-    navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
-  };
-
+  const onItemClickHandler = (item: number) => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
+  
   // effect //
   useEffect(() => {
     if (!cookies.accessToken) {

@@ -126,7 +126,7 @@ export const FIND_EMAIL_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/find-email`;
 export const PASSWORD_RESET_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-reset`;
 export const PASSWORD_UPDATE_REQUEST_URL = (userEmailId: string) => `${SERVER_AUTH_MODULE_URL}/password-update/${userEmailId}`;
 export const PASSWORD_RECHECK_REQUEST_URL = `${SERVER_AUTH_MODULE_URL}/password-recheck`;
-export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/business-registration`;
+export const BUSINESS_REGISTRATION_REQUEST_PATH = `${SERVER_AUTH_MODULE_URL}/business-registration-check`;
 
 // description: USER 모듈 내의 기능 URL
 export const SERVER_USER_MODULE_URL = `${SERVER_API_URL}/user`;
@@ -180,7 +180,6 @@ export const POST_INQUIRY_BOARD_COMMENT_REQUEST_URL = (inquiryNumber: number | s
 export const DELETE_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
 export const PATCH_INQUIRY_BOARD_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/update/${inquiryNumber}`;
 export const GET_MY_INQUIRY_BOARD_LIST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/my-list`;
-export const GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_MY_INQUIRY_BOARD_LIST_URL}/search`;
 export const GET_MY_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${GET_MY_INQUIRY_BOARD_LIST_URL}/${inquiryNumber}`;
 
 // description : Notice board 모듈 내의 기능 URL
@@ -195,6 +194,8 @@ export const PATCH_NOTICE_BOARD_URL = (noticeNumber: number | string) => `${SERV
 
 export const COUNT_PER_PAGE = 10;
 export const COUNT_PER_SECTION = 10;
+export const ITEM_PER_PAGE1 = 8;
+export const ITEM_PER_PAGE2 = 5;
 
 export const emailIdPatternType = /^[a-zA-Z0-9]*@([-.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,4}$/;
 export const passwordPatternType = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,13}$/;

@@ -26,12 +26,8 @@
   background-color: rgba(215, 215, 215, 1);
 
   font-size: 24px;
-  /* color: rgb(150, 150, 150);
-  border-radius: 8px; */
-
   background-image: url("../../../../assets/image/office.jpg");
   background-size: 100%;
-
 }
 
 .company-title-box {

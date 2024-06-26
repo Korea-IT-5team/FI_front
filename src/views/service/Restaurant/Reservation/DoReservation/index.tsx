@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import DatePicker from "react-datepicker";
 import { useNavigate, useParams } from "react-router";
+
+import TimeSelectBox from "src/views/service/Restaurant/TimeSelectBox";
+import PeopleSelectBox from "src/views/service/Restaurant/PeopleSelectBox";
+
 import ResponseDto from "src/apis/response.dto";
 import { PostReservationRequestDto } from "src/apis/restaurant/reservation/dto/request";
-import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
-import './style.css';
 
-import DatePicker from "react-datepicker";
 import { PostReservationRequest } from "src/apis/restaurant/reservation";
-import PeopleSelectBox from "../../PeopleSelectBox";
-import TimeSelectBox from "../../TimeSelectBox";
+
+import { RESTAURANT_INFO_ABSOLUTE_PATH } from "src/constant";
+
+import './style.css';
 
 // interface //
 interface TermsPopupProps {
@@ -45,15 +49,15 @@ const TermsPopup: React.FC<TermsPopupProps> = ({ isOpen, onClose }) => {
 export default function DoReservation() {
 
     // state //
-    const [reservationDate, setReservationDate] = useState<Date | null>(null);
-    const [reservationTime, setReservationTime] = useState<string>('');
-    const [reservationPeople, setReservationPeople] = useState<number>();
-    const [isChecked, setIsChecked] = useState<boolean>(false);
-    const { restaurantId } = useParams();
     const [cookies] = useCookies();
     const navigation = useNavigate();
+    const { restaurantId } = useParams();
+    const [isChecked, setIsChecked] = useState<boolean>(false);
     const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+    const [reservationTime, setReservationTime] = useState<string>('');
+    const [reservationPeople, setReservationPeople] = useState<number>();
     const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
+    const [reservationDate, setReservationDate] = useState<Date | null>(null);
 
     // function //
     const PostReservationResponse = (result: ResponseDto | null) => {
@@ -81,7 +85,6 @@ export default function DoReservation() {
     }
 
     const onPeopleChangeHandler = (value: number) => {
-
         setReservationPeople(value);
     };
 
@@ -104,22 +107,14 @@ export default function DoReservation() {
         { reservationDate: dateString, reservationTime: reservationTime, reservationPeople: reservationPeople }
 
         if (!restaurantId) return;
-        PostReservationRequest(restaurantId, requestBody, cookies.accessToken)
-            .then(PostReservationResponse);
+        PostReservationRequest(restaurantId, requestBody, cookies.accessToken).then(PostReservationResponse);
     }
 
-    const openPopup = () => { setIsPopupOpen(true); }
-
-    const closePopup = () => { setIsPopupOpen(false); }
-
-    const openDatePicker = () => { 
-        setIsDatePickerOpen(true); 
-    }
-
-    const closeDatePicker = () => {
-        setIsDatePickerOpen(false);
-    }
-
+    const openPopup = () => setIsPopupOpen(true);
+    const closePopup = () => setIsPopupOpen(false); 
+    const openDatePicker = () => setIsDatePickerOpen(true); 
+    const closeDatePicker = () => setIsDatePickerOpen(false);
+    
     // render //
     const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
     const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-reservation-disable'}-button`;

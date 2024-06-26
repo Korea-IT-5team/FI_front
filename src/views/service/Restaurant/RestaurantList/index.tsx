@@ -1,13 +1,18 @@
-import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { GetRestaurantListRequest } from 'src/apis/restaurant';
-import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
-import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
+
 import { useUserStore } from 'src/stores';
+import restaurantDefault from 'src/assets/image/restaurant-default.png';
+
 import { RestaurantListItem } from 'src/types';
-import restaurantDefault from 'src/assets/image/restaurant-default.png'
+import ResponseDto from 'src/apis/response.dto';
+import { GetRestaurantListResponseDto } from 'src/apis/restaurant/dto/response';
+
+import { GetRestaurantListRequest } from 'src/apis/restaurant';
+
+import { RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_INFO_WRITE_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component: 식당 리스트 //
@@ -15,18 +20,15 @@ export default function RestaurantList() {
 
     // state //
     const [cookies] = useCookies();
-    const [searchWord, setSearchWord] = useState<string>('');
-    const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
     const {loginUserRole } = useUserStore();
+    const [searchWord, setSearchWord] = useState<string>('');
     const [displayCount, setDisplayCount] = useState<number>(8);
+    const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
 
     // function //
     const navigation = useNavigate();
 
     const GetRestaurantListResponse = (result: GetRestaurantListResponseDto | ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             return;
@@ -44,10 +46,8 @@ export default function RestaurantList() {
 
     const onSearchClickHandler = () => {
         if (!searchWord) return;
-        GetRestaurantListRequest(searchWord, cookies.accessToken)
-            .then(GetRestaurantListResponse);
+        GetRestaurantListRequest(searchWord, cookies.accessToken).then(GetRestaurantListResponse);
 
-        //alert('해당하는 식당이 없습니다.');
         navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
     };
 
@@ -57,13 +57,10 @@ export default function RestaurantList() {
     };
 
     const onItemClickHandler = (item: number) => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
-    
-    const onLoadMoreClickHandler = () => {
-        setDisplayCount(prevCount => prevCount + 8);
-    };
+    const onLoadMoreClickHandler = () => setDisplayCount(prevCount => prevCount + 8);
 
     const onSearchKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') { onSearchClickHandler(); }
+        if (event.key === 'Enter') onSearchClickHandler();
     };
 
     // effect //
@@ -73,8 +70,7 @@ export default function RestaurantList() {
     if(effectFlag1) return;
     effectFlag1 = true; 
 
-    GetRestaurantListRequest(searchWord, cookies.accessToken)
-        .then(GetRestaurantListResponse);
+    GetRestaurantListRequest(searchWord, cookies.accessToken).then(GetRestaurantListResponse);
     }, []);
 
     // render //

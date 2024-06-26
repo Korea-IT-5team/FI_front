@@ -1,54 +1,52 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useNavigate, useParams } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/restaurant';
-import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
-import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
 import SelectBox from 'src/views/service/Restaurant/FoodSelectBox';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
+
+import ResponseDto from 'src/apis/response.dto';
+import { GetRestaurantInfoResponseDto } from 'src/apis/restaurant/dto/response';
+import { PatchRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
+
+import { GetRestaurantInfoRequest, PatchRestaurantInfoRequest } from 'src/apis/restaurant';
+
+import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function RestaurantInfoUpdate() {
-    useKakaoLoader({
-        appkey: "1121641ff4fa6668d61874ed79c1709e",
-        libraries: ["clusterer", "drawing", "services"],
-    })
+
+    // interface //
+    type Center = {
+        lat: number;
+        lng: number;
+    };
 
     // state //
-    const { restaurantId } = useParams();
     const [cookies] = useCookies();
-    const [restaurantImage, setRestaurantImage] = useState('');
-    const [restaurantName, setRestaurantName] = useState('');
-    const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
-    const [restaurantLocation, setRestaurantLocation] = useState('');
-    const [restaurantTelNumber, setRestaurantTelNumber] = useState('');
-    const [restaurantSnsAddress, setRestaurantSnsAddress] = useState('');
-    const [restaurantOperationHours, setRestaurantOperationHours] = useState('');
-    const [restaurantFeatures, setRestaurantFeatures] = useState('');
-    const [restaurantNotice, setRestaurantNotice] = useState('');
-    const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState('');
-    const { businessRegistrationNumber } = useUserStore();
-    const [restaurantPosition, setRestaurantPosition] = useState<{
-        lat: number
-        lng: number
-    }>()
-    const [center, setCenter] = useState<{
-        lat: number
-        lng: number
-    }>()
     const navigation = useNavigate();
+    const { restaurantId } = useParams();
+    const [restaurantName, setRestaurantName] = useState<string>('');
+    const [restaurantImage, setRestaurantImage] = useState<string>('');
+    const [restaurantNotice, setRestaurantNotice] = useState<string>('');
+    const [restaurantFeatures, setRestaurantFeatures] = useState<string>('');
+    const [restaurantLocation, setRestaurantLocation] = useState<string>('');
+    const [restaurantTelNumber, setRestaurantTelNumber] = useState<string>('');
+    const [restaurantSnsAddress, setRestaurantSnsAddress] = useState<string>('');
+    const [restaurantFoodCategory, setRestaurantFoodCategory] = useState<string>('');
+    const [restaurantOperationHours, setRestaurantOperationHours] = useState<string>('');
+    const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState<string>('');
+
+    const [center, setCenter] = useState<Center>();
+    const {businessRegistrationNumber} = useUserStore();
+    const [restaurantPosition, setRestaurantPosition] = useState<Center>();
 
     // function //
     const GetRestaurantInfoResponse = (result: GetRestaurantInfoResponseDto | ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
         if (!result || result.code !== 'SU') {
             return;
         }
@@ -116,8 +114,7 @@ export default function RestaurantInfoUpdate() {
             restaurantLat: restaurantPosition.lat,
             restaurantLng: restaurantPosition.lng
         }
-        PatchRestaurantInfoRequest(restaurantId, requestBody, cookies.accessToken)
-            .then(PatchRestaurantInfoResponse);
+        PatchRestaurantInfoRequest(restaurantId, requestBody, cookies.accessToken).then(PatchRestaurantInfoResponse);
     }
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -139,9 +136,7 @@ export default function RestaurantInfoUpdate() {
         setRestaurantName(value);
     }
 
-    const onFoodCategoryChangeHandler = (selectFood: string) => {
-        setRestaurantFoodCategory(selectFood);
-    };
+    const onFoodCategoryChangeHandler = (selectFood: string) => setRestaurantFoodCategory(selectFood);
 
     const onLocationChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
@@ -194,13 +189,12 @@ export default function RestaurantInfoUpdate() {
     if(effectFlag) return;
     effectFlag = true;
 
-    GetRestaurantInfoRequest(restaurantId, cookies.accessToken)
-        .then(GetRestaurantInfoResponse);
+    GetRestaurantInfoRequest(restaurantId, cookies.accessToken).then(GetRestaurantInfoResponse);
     }, []);
     
     const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantLocation && restaurantTelNumber && restaurantPosition;
     const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
-
+    
     // render //
     return (
         <>

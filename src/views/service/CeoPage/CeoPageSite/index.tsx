@@ -89,8 +89,8 @@ export default function CeoPageSite() {
           <div className='short-divider-line'></div>
         </div>
         <div className='ceo-page-navigation-box'>
-          <div className='ceo-page-navigation' onClick={onCeoPageSiteClickHandler}>마이페이지</div>
-          <div className='ceo-page-navigation' onClick={() => onCeoInfoUpdateClickHandler(userEmailId)}>회원정보 수정</div>
+          <div className='ceo-page-navigation' onClick={onCeoPageSiteClickHandler}>사장페이지</div>
+          <div className='ceo-page-navigation' onClick={() => onCeoInfoUpdateClickHandler(userEmailId)}>사장정보 수정</div>
           <div className='ceo-page-navigation' onClick={() => onUserDeleteClickHandler(userEmailId)}>회원탈퇴</div>
         </div>
         <div className='short-divider-line'></div>
@@ -101,7 +101,7 @@ export default function CeoPageSite() {
         </div>
         <div className='short-divider-bottom-line'></div>
         <div className='ceo-page-info-contents-container'>
-          <div className='ceo-page-contents-title'>회원정보</div>
+          <div className='ceo-page-contents-title'>사장정보</div>
           <div className='ceo-page-contents-box'>
             <div className='ceo-page-info-first'>
               <div className='ceo-page-info'>아이디</div>

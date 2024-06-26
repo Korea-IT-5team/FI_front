@@ -22,7 +22,8 @@ export default function NoticeWrite() {
   const [noticeTitle, setNoticeTitle] = useState<string>('');
   const contentsRef = useRef<HTMLTextAreaElement | null>(null);
   const [noticeContents, setNoticeContents] = useState<string>('');
- 
+
+  //  function  //
   const navigation = useNavigate();
 
   const postNoticeBoardResponse = (result: ResponseDto | null) => {

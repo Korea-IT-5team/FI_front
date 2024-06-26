@@ -1,48 +1,39 @@
-
-
-/* DatePickerStyles.css */
-
-/* 전체 DatePicker를 감싸는 컨테이너 */
 .react-datepicker {
     font-family: 'KCC-Hanbit', sans-serif;
     font-size: 16px;
     border: 1px solid rgba(200, 200, 200, 1);
     border-radius: 6px;
-    z-index: 9999; /* 필요에 따라 z-index 조정 */
-    position: relative; /* 상대 위치 지정 */
-    background-color: rgba(255, 255, 255, 0); /* 배경을 투명하게 설정 */
+    z-index: 9999; 
+    position: relative; 
+    background-color: rgba(255, 255, 255, 0); 
 }
 
-/* DatePicker의 헤더 */
 .react-datepicker__header {
-    background-color: rgba(255, 148, 45, 1); /* 달력 헤더 배경색 */
-    border-bottom: none; /* 헤더 아래 선 제거 */
+    background-color: rgba(255, 148, 45, 1); 
+    border-bottom: none;
     padding: 10px;
 }
 
-/* 달력 내부 월 텍스트 */
 .react-datepicker__current-month {
-    font-size: 18px; /* 달력 월 텍스트 크기 */
+    font-size: 18px; 
     font-weight: bold;
-    color: white; /* 달력 월 텍스트 색상 */
+    color: white; 
     text-align: center;
     margin-bottom: 10px;
 }
 
-/* 달력 요일 이름들 */
 .react-datepicker__day-names {
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
 }
 
-/* 달력의 각 날짜 버튼 */
 .react-datepicker__day {
     display: inline-block;
-    width: 50px; /* 날짜 버튼 너비 */
-    height: 50px; /* 날짜 버튼 높이 */
-    line-height: 40px; /* 버튼 텍스트 중앙 정렬 */
-    text-align: center; /* 버튼 텍스트 가운데 정렬 */
+    width: 50px; 
+    height: 50px; 
+    line-height: 40px; 
+    text-align: center; 
     margin: 2px;
     cursor: pointer;
     transition: background-color 0.1s ease;
@@ -50,20 +41,15 @@
     margin: 0;
 }
 
-/* 선택된 날짜 버튼 */
 .react-datepicker__day--selected {
-    background-color: rgba(255, 148, 45, 1); /* 선택된 날짜 배경색 */
-    color: white; /* 선택된 날짜 텍스트 색상 */
+    background-color: rgba(255, 148, 45, 1); 
+    color: white; 
 }
 
-
-/* 날짜 버튼 호버 효과 */
 .react-datepicker__day:hover {
-    background-color: rgba(255, 148, 45, 1); /* 날짜 버튼 호버 배경색 */
+    background-color: rgba(255, 148, 45, 1);
 }
 
-
-/* DatePicker 입력 상자 스타일 */
 .do-reservation-date-input {
     display: inline-block;
     font-size: 16px;
@@ -72,13 +58,12 @@
     border: 1px solid rgba(200, 200, 200, 1);
     border-radius: 6px;
     cursor: pointer;
-    z-index: 9999; /* 필요에 따라 z-index 조정 */
-    position: relative; /* 상대 위치 지정 */
-    width: 300px; /* 너비 조정 */
-    margin: 0 auto; /* 중앙 배치 */
+    z-index: 9999; 
+    position: relative; 
+    width: 300px; 
+    margin: 0 auto; 
     margin-top: 20px;
 }
-
 
 .do-reservation-information{
     text-align: center;
@@ -103,10 +88,9 @@
     text-align: center;
 }
 
-
 .do-reservation-select-item.selected {
     background-color: rgba(255, 148, 45, 0.5);
-  }
+}
 
 .do-reservation-checkbox{
     display: flex;
@@ -169,8 +153,6 @@
     opacity: 0.85;
 }
 
-
-/* TermsPopup.css */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -200,8 +182,8 @@
     font-family: 'KCC-Hanbit', sans-serif;
     font-size: 14px;
     line-height: 1.6;
-    color: rgba(64, 64, 64, 1); /* 텍스트 색상 */
-    text-align: justify; /* 텍스트 정렬 방식 */
+    color: rgba(64, 64, 64, 1); 
+    text-align: justify; 
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

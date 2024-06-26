@@ -1,43 +1,48 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
-import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
-import RestaurantInputBox from 'src/components/RestaurantInputBox';
-import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+
 import { useUserStore } from 'src/stores';
 import SelectBox from 'src/views/service/Restaurant/FoodSelectBox';
+import RestaurantInputBox from 'src/components/RestaurantInputBox';
+
+import ResponseDto from 'src/apis/response.dto';
+import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
+
+import { PostRestaurantInfoRequest } from 'src/apis/restaurant';
+
+import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function RestaurantInfoWrite() {
-    useKakaoLoader({
-        appkey: "1121641ff4fa6668d61874ed79c1709e",
-        libraries: ["clusterer", "drawing", "services"],
-    })
-
+    
     const center = { lat: 33.450701, lng: 126.570667 }
 
+    // interface //
+    type Position = {
+        lat: number;
+        lng: number;
+    };
+
     // state //
+    const [restaurantName, setRestaurantName] = useState<string>('');
+    const [restaurantImage, setRestaurantImage] = useState<string>('');
+    const [restaurantNotice, setRestaurantNotice] = useState<string>('');
+    const [restaurantLocation, setRestaurantLocation] = useState<string>('');
+    const [restaurantFeatures, setRestaurantFeatures] = useState<string>('');
+    const [restaurantTelNumber, setRestaurantTelNumber] = useState<string>('');
+    const [restaurantSnsAddress, setRestaurantSnsAddress] = useState<string>('');
+    const [restaurantFoodCategory, setRestaurantFoodCategory] = useState<string>('');
+    const [restaurantOperationHours, setRestaurantOperationHours] = useState<string>('');
+    const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState<string>('');
+
     const [cookies] = useCookies();
-    const [restaurantImage, setRestaurantImage] = useState('');
-    const [restaurantName, setRestaurantName] = useState('');
-    const [restaurantFoodCategory, setRestaurantFoodCategory] = useState('');
-    const [restaurantTelNumber, setRestaurantTelNumber] = useState('');
-    const [restaurantSnsAddress, setRestaurantSnsAddress] = useState('');
-    const [restaurantOperationHours, setRestaurantOperationHours] = useState('');
-    const [restaurantFeatures, setRestaurantFeatures] = useState('');
-    const [restaurantNotice, setRestaurantNotice] = useState('');
-    const [restaurantRepresentativeMenu, setRestaurantRepresentativeMenu] = useState('');
-    const [restaurantLocation, setRestaurantLocation] = useState('');
-    const { businessRegistrationNumber } = useUserStore();
     const navigation = useNavigate();
-    const [restaurantPosition, setRestaurantPosition] = useState<{
-        lat: number
-        lng: number
-    }>()
+    const { businessRegistrationNumber } = useUserStore();
+    const [restaurantPosition, setRestaurantPosition] = useState<Position>();
 
     // function //
     const PostRestaurantInfoResponse = (result: ResponseDto | null) => {
@@ -77,8 +82,7 @@ export default function RestaurantInfoWrite() {
             restaurantLat: restaurantPosition.lat,
             restaurantLng: restaurantPosition.lng
         }
-        PostRestaurantInfoRequest(requestBody, cookies.accessToken)
-            .then(PostRestaurantInfoResponse);
+        PostRestaurantInfoRequest(requestBody, cookies.accessToken).then(PostRestaurantInfoResponse);
     }
 
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -100,10 +104,8 @@ export default function RestaurantInfoWrite() {
         setRestaurantName(value);
     }
 
-    const onFoodCategoryChangeHandler = (selectFood: string) => {
-        setRestaurantFoodCategory(selectFood);
-    };
-
+    const onFoodCategoryChangeHandler = (selectFood: string) => setRestaurantFoodCategory(selectFood);
+    
     const onTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setRestaurantTelNumber(value);
@@ -140,7 +142,7 @@ export default function RestaurantInfoWrite() {
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') { onUploadClickHandler(); }
+        if (event.key === 'Enter') onUploadClickHandler(); 
     };
 
     // effect //

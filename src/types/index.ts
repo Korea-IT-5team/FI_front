@@ -1,58 +1,58 @@
 export interface RestaurantListItem {
   restaurantId: number;
-  restaurantImage: string;
   restaurantName: string;
-  restaurantFoodCategory: string;
+  restaurantImage: string;
   restaurantLocation: string;
+  restaurantFoodCategory: string;
 }
 
 export interface RestaurantReviewListItem {
+  rating: number;
   reviewNumber: number;
   reviewRestaurantId: number;
-  reviewImage: string;
-  rating: number;
-  reviewContents: string;
-  reviewWriterNickname: string;
   reviewDate: string;
+  reviewImage: string;
+  reviewContents: string;
   reviewRestaurantName: String;
+  reviewWriterNickname: string;
 }
 
 export interface RestaurantReservationListItem {
-  reservationNumber: number;
   reservationStatus: boolean;
+  reservationNumber: number;
+  reservationPeople: number;
   reservationRestaurantId: number;
-  reservationRestaurantName: string;
   reservationDate: string;
   reservationTime: string;
-  reservationPeople: number;
   reservationUserName: string;
+  reservationRestaurantName: string;
   reservationRestaurantLocation: string;
 }
 
 export interface NoticeBoardListItem {
+  viewCount: number;
   noticeNumber: number;
   noticeTitle: string;
   noticeWriteDatetime: string;
-  viewCount: number;
   noticeWriterNickname: string;
 }
 
 export interface InquiryBoardListItem {
-  inquiryNumber: number;
   status: boolean;
   inquiryPublic: boolean;
+  inquiryNumber: number;
   inquiryTitle: string;
   inquiryWriterId: string;
-  inquiryWriterNickname: string;
   inquiryWriteDatetime: string;
+  inquiryWriterNickname: string;
 }
 
 export interface RestaurantReviewListItem {
+  rating: number,
   reviewNumber: number,
   reviewRestaurantId: number,
   reviewDate: string,
   reviewImage: string,
-  rating: number,
   reviewContents: string,
   reviewWriterNickname: string
 }

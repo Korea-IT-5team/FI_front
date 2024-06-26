@@ -1,10 +1,8 @@
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { useUserStore } from 'src/stores';
-
 import InputBox from 'src/components/InputBox';
 
 import ResponseDto from 'src/apis/response.dto';
@@ -21,7 +19,7 @@ export default function UserDelete() {
 
   // state //
   const { userEmailId } = useParams();
-  const [cookies, removeCookie] = useCookies();
+  const [cookies, ,removeCookie] = useCookies();
   const [password, setPassword] = useState<string>('');
   const {setLoginUserEmailId, setLoginUserRole} = useUserStore();
   const [passwordMessage, setPasswordMessage] = useState<string>('');
@@ -96,7 +94,7 @@ export default function UserDelete() {
         <div className='resign-password'>
           <InputBox label="비밀번호 재입력" type="password" value={password} placeholder="비밀번호를 입력해주세요." onChangeHandler={onPasswordChangeHandler} message={passwordMessage} error />
         </div>
-        <div className='error-button delete' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
+        <div className='delete-button' onClick={onUserDeleteButtonClickHandler}>회원 탈퇴하기</div>
       </div>
     </div>
   )

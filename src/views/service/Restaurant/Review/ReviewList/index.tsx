@@ -1,6 +1,11 @@
 import { useState } from 'react';
-import { RestaurantReviewListItem } from 'src/types';
+
 import reviewDefault from 'src/assets/image/review-default.png';
+
+import { RestaurantReviewListItem } from 'src/types';
+
+import { ITEM_PER_PAGE2 } from 'src/constant';
+
 import './style.css';
 
 // interface //
@@ -13,12 +18,11 @@ export default function ReviewList({ value }: Props) {
 
     // state //
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
 
     // event handler //
-    const onLoadMoreClickHandler = () => { setCurrentPage(prevPage => prevPage + 1); }
+    const onLoadMoreClickHandler = () => setCurrentPage(prevPage => prevPage + 1); 
 
-    const currentItems = value.slice(0, currentPage * itemsPerPage);
+    const currentItems = value.slice(0, currentPage * ITEM_PER_PAGE2);
 
     // render //
     return (

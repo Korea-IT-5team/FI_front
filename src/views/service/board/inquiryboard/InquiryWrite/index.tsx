@@ -65,10 +65,8 @@ export default function InquiryWrite() {
     postInquiryBoardRequest(requestBody, cookies.accessToken).then(postBoardResponse);
   };
 
-  const onPublicButtonClickHandler = () => {
-    setInquiryPublic(!inquiryPublic);
-  }
-
+  const onPublicButtonClickHandler = () => setInquiryPublic(!inquiryPublic);
+  
   // effect //
   useEffect(() => {
     if (!cookies.accessToken) {

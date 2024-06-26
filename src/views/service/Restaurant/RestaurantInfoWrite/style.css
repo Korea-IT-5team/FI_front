@@ -23,7 +23,7 @@
     text-align: center;
     transition: background-color 0.3s ease;
 }
-  
+
 .restaurant-info-image-file-input:hover {
     opacity: 0.85;
 }
@@ -36,7 +36,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
-  
+
 .restaurant-info-image-file:hover {
     transform: scale(1.05);
 }
