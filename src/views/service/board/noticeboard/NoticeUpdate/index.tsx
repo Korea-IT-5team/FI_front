@@ -58,7 +58,6 @@ export default function NoticeUpdate() {
       result.code === 'AF' ? '권한이 없습니다.' :
       result.code === 'VF' ? '모든 값을 입력해주세요.' :
       result.code === 'NB' ? '존재하지 않는 접수 번호입니다.' :
-      result.code === 'WC' ? '이미 답글이 작성되어있습니다.' :
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {

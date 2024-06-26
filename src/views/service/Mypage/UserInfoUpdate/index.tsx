@@ -1,10 +1,8 @@
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { useUserStore } from 'src/stores';
-
 import InputBox from 'src/components/InputBox';
 
 import ResponseDto from 'src/apis/response.dto';
@@ -60,13 +58,6 @@ export default function UserInfoUpdate() {
     setUserRole(userRole);
   };
 
-  //   effect   //
-  useEffect(() => {
-    if (!cookies.accessToken) return;
-    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
-  }, []);
-
-  // function //
   const PatchUpdateUserInfoResponse = (result: PatchUserInfoResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -109,6 +100,11 @@ export default function UserInfoUpdate() {
 
   // effect //
   let effectFlag = useRef(false);
+
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
+  }, []);
   
   useEffect(() => {
     if (!cookies.accessToken) return;

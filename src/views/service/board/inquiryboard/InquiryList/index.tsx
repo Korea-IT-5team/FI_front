@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { ChangeEvent, useEffect, useState } from 'react'
 
 import { useUserStore } from 'src/stores';
+import { usePagination } from 'src/hooks';
 
 import ResponseDto from 'src/apis/response.dto';
 import { InquiryBoardListItem } from 'src/types';
@@ -10,7 +11,7 @@ import { GetInquiryBoardListResponseDto, GetSearchInquiryBoardListResponseDto } 
 
 import { getInquiryBoardListRequest, getSearchInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INQUIRY_BOARD_WRITE_ABSOLUTE_PATH, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH } from 'src/constant';
 
 import './style.css'
 
@@ -70,61 +71,28 @@ export default function InquiryList() {
   // state //
   const [cookies] = useCookies();
   const {loginUserRole} = useUserStore();
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [pageList, setPageList] = useState<number[]>([1]);
+
+  const {
+    viewList,
+    pageList,
+    totalPage,
+    currentPage,
+    totalLength,
+
+    setCurrentPage,
+    setCurrentSection,
+    changeList,
+
+    onPageClickHandler,
+    onPreSectionClickHandler,
+    onNextSectionClickHandler
+  } = usePagination<InquiryBoardListItem>();
+
   const [searchWord, setSearchWord] = useState<string>('');
-  const [totalLength, setTotalLength] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
-  const [totalSection, setTotalSection] = useState<number>(1);
-  const [currentSection, setCurrentSection] = useState<number>(1);
-  const [viewList, setViewList] = useState<InquiryBoardListItem[]>([]);
-  const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
 
   // function //
   const navigation = useNavigate();
-  
-  const changePage = (inquiryBoardList: InquiryBoardListItem[], totalLength: number) => {
-    if (!currentPage) return;
-
-    const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-    let endIndex = currentPage * COUNT_PER_PAGE;
-
-    if (endIndex > totalLength - 1) endIndex = totalLength;
-    const viewList = inquiryBoardList.slice(startIndex, endIndex);
-
-    setViewList(viewList);
-  };
-
-  const changeSection = (totalPage: number )=> {
-    if (!currentSection) return;
-
-    const startPage = (currentSection * COUNT_PER_SECTION) - (COUNT_PER_SECTION - 1);
-    let endPage = currentSection * COUNT_PER_SECTION;
-    
-    if(endPage > totalPage) endPage = totalPage;
-    const pageList: number[] = [];
-    for (let page = startPage; page <= endPage; page++) pageList.push(page);
-    setPageList(pageList);
-  };
-
-  const changeInquiryBoardList = (inquiryBoardList: InquiryBoardListItem[]) => {
-    if (isToggleOn) inquiryBoardList = inquiryBoardList.filter(inquiryBoardList => !inquiryBoardList.status);
-    setInquiryBoardList(inquiryBoardList);
-
-    const totalLength = inquiryBoardList.length;
-    setTotalLength(totalLength);
-
-    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-    setTotalPage(totalPage);
-
-    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-    setTotalSection(totalSection);
-
-    changePage(inquiryBoardList, totalLength);
-
-    changeSection(totalPage);
-  };
 
   const getInquiryBoardListResponse = (result: GetInquiryBoardListResponseDto | ResponseDto | null) => {
     const message =
@@ -139,7 +107,7 @@ export default function InquiryList() {
     }
 
     const { inquiryBoardList } = result as GetInquiryBoardListResponseDto;
-    changeInquiryBoardList(inquiryBoardList);
+    changeList(inquiryBoardList, isToggleOn);
     setCurrentPage(!inquiryBoardList.length ? 0 : 1);
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
@@ -158,8 +126,7 @@ export default function InquiryList() {
       }
 
     const { inquiryBoardList } = result as GetSearchInquiryBoardListResponseDto;
-    changeInquiryBoardList(inquiryBoardList);
-    
+    changeList(inquiryBoardList, isToggleOn);
     setCurrentPage(!inquiryBoardList.length ? 0 : 1);
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
   };
@@ -175,38 +142,6 @@ export default function InquiryList() {
     setToggleOn(!isToggleOn);
   };
 
-  const onPageClickHandler = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const onPreSectionClickHandler = () => {
-    if (currentSection <= 1 && currentPage <= 1) {
-      return;
-    }
-
-    if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
-      if (currentSection > 1) {
-        setCurrentSection(currentSection - 1);
-        setCurrentPage((currentSection - 2) * COUNT_PER_SECTION + COUNT_PER_SECTION);
-      }
-    } else {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  
-  const onNextSectionClickHandler = () => {
-    if (currentSection >= totalSection && currentPage >= totalPage) {
-      return;
-    }
-
-    if (currentPage === currentSection * COUNT_PER_SECTION) {
-      setCurrentSection(currentSection + 1);
-      setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
-    } else {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
   const onSearchWordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchWord = event.target.value;
     setSearchWord(searchWord);
@@ -214,7 +149,6 @@ export default function InquiryList() {
 
   const onSearchButtonClickHandler = () => {
     if (!searchWord) return;
-
     getSearchInquiryBoardListRequest(searchWord, cookies.accessToken).then(getSearchInquiryBoardListResponse);
     setSearchWord('');
   };
@@ -236,16 +170,6 @@ export default function InquiryList() {
     else
       getInquiryBoardListRequest(cookies.accessToken).then(getInquiryBoardListResponse);
   },[isToggleOn]);
-
-  useEffect(() => {
-      if (!inquiryBoardList.length) return;
-      changePage(inquiryBoardList, totalLength);
-  },[currentPage]);
-
-  useEffect(() => {
-      if (!inquiryBoardList.length) return;
-      changeSection(totalPage);
-  }, [currentSection]);
 
   // render //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
@@ -298,7 +222,7 @@ export default function InquiryList() {
         </div>
         <div className='inquiry-list-search-box'>
           <div className='inquiry-list-search-input-box'>
-            <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} onKeyDown={onEnterKeyHandler}/>
+            <input className='inquiry-list-search-input' placeholder='검색어를 입력하세요.' value={searchWord} onChange={onSearchWordChangeHandler} onKeyDown={onEnterKeyHandler} />
           </div>
           <div className={searchButtonClass} onClick={onSearchButtonClickHandler}>검색</div>
         </div>

@@ -1,35 +1,37 @@
-import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+
+import reviewDefault from 'src/assets/image/review-default.png';
+
 import ResponseDto from 'src/apis/response.dto';
-import { DeleteReviewRequest, GetReviewDetailRequest } from 'src/apis/restaurant/review';
 import { GetReviewResponseDto } from 'src/apis/restaurant/review/dto/response';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH } from 'src/constant';
-import reviewDefault from 'src/assets/image/review-default.png'
+
+import { DeleteReviewRequest, GetReviewDetailRequest } from 'src/apis/restaurant/review';
+
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_UPDATE_PATH } from 'src/constant';
+
 import './style.css';
 
 // component //
 export default function ReviewDetail() {
 
     // state //
-    const{reviewNumber} = useParams();
-
     const[cookies] = useCookies();
-    const[reviewRestaurantId,setReviewRestaurantId] = useState<number>();
+    const{reviewNumber} = useParams();
     const[reviewDate,setReviewDate] = useState<string>('');
     const[reviewImage,setReviewImage] = useState<string>('');
     const[reviewContents,setReviewContents] = useState<string>('');
-    const[rating,setRating] = useState<number>();
     const[reviewWriterNickname, setReviewWriterNickname] = useState<string>('');
+
+    const[rating,setRating] = useState<number>();
+    const[reviewRestaurantId,setReviewRestaurantId] = useState<number>();
 
     // function //
     const navigation = useNavigate();
 
     const GetReviewDetailResponse = (result: GetReviewResponseDto | ResponseDto | null) => {
-        const message = 
-            !result ? '서버에 문제가 있습니다.' : 
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
+        
         if (!result || result.code !== 'SU') { 
             if (result?.code === 'AF') {
                 navigation(MAIN_ABSOLUTE_PATH);
@@ -63,10 +65,8 @@ export default function ReviewDetail() {
     };
 
     // event handler //
-    const onListClickHandler = () => {
-        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
-    };
-
+    const onListClickHandler = () => navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH);
+    
     const onRestaurantInfoClickHandler = () => {
         if(!reviewRestaurantId) return;
         navigation(RESTAURANT_INFO_ABSOLUTE_PATH(reviewRestaurantId));
@@ -82,15 +82,13 @@ export default function ReviewDetail() {
         const isConfirm = window.confirm('정말로 삭제하시겠습니까?');
         if(!isConfirm) return;
 
-        DeleteReviewRequest(reviewNumber, cookies.accessToken)
-            .then(DeleteReviewResponse);
+        DeleteReviewRequest(reviewNumber, cookies.accessToken).then(DeleteReviewResponse);
     }
     
     // effect //
     useEffect(()=> {
         if(!cookies.accessToken || !reviewNumber) return;
-        GetReviewDetailRequest(reviewNumber,cookies.accessToken)  
-            .then(GetReviewDetailResponse);
+        GetReviewDetailRequest(reviewNumber,cookies.accessToken).then(GetReviewDetailResponse);
     },[]);
     
     // render //

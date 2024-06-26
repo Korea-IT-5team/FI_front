@@ -2,10 +2,11 @@ import { useCookies } from 'react-cookie';
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 
+import { useUserStore } from 'src/stores';
+
 import ResponseDto from 'src/apis/response.dto';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
 
-import { useUserStore } from 'src/stores';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 
 import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH} from 'src/constant';
@@ -17,7 +18,7 @@ function TopBar() {
 
     // state //
     const { pathname } = useLocation();
-    const [cookies, removeCookie] = useCookies();
+    const [cookies, , removeCookie] = useCookies();
     const [nickname, setNickname] = useState<string>('');
     const { setLoginUserEmailId, setLoginUserRole, loginUserRole } = useUserStore();
 
@@ -26,11 +27,6 @@ function TopBar() {
         const { nickname } = result as GetMyInfoResponseDto;
         setNickname(nickname);
     };
-
-    useEffect(() => {
-        if (!cookies.accessToken) return;
-        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
-    }, [cookies.accessToken]);
 
     // function //
     const navigation = useNavigate();
@@ -50,12 +46,30 @@ function TopBar() {
         }
     }
 
-    const onRestaurantListClickHandler = () => navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
-    const onNoticeBoardListClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    const onRestaurantSearchListClickHandler = () => {
+        if (pathname === RESTAURANT_LIST_ABSOLUTE_PATH) {
+            window.location.reload();
+        } else {
+            navigation(RESTAURANT_LIST_ABSOLUTE_PATH);
+        }
+    }
+    const onNoticeBoardSearchListClickHandler = () => {
+        if (pathname === NOTICE_BOARD_LIST_ABSOLUTE_PATH) {
+            window.location.reload();
+        } else
+            navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    }
+
     const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
     const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
     const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+
+    //  effect  //
+    useEffect(() => {
+        if (!cookies.accessToken) return;
+        getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
+    }, [cookies.accessToken]);
 
     // render // 
     return (
@@ -64,8 +78,8 @@ function TopBar() {
                 <div className='top-title' onClick={onLogoClickHandler}>{"Food Insight"}</div>
                 <div className='top-right-container'>
                     <div className='top-navigation-box'>
-                        <div className='top-navigation' onClick={onRestaurantListClickHandler}>식당 검색</div>
-                        <div className='top-navigation' onClick={onNoticeBoardListClickHandler}>고객센터</div>
+                        <div className='top-navigation' onClick={onRestaurantSearchListClickHandler}>식당 검색</div>
+                        <div className='top-navigation' onClick={onNoticeBoardSearchListClickHandler}>고객센터</div>
                     </div>
                     <div className='top-divider'>|</div>
                     <div className='top-bar-button'>
@@ -158,13 +172,14 @@ export default function TopContainer() {
         if (!result || result.code !== 'SU') {
             return;
         }
-
+    
         const { userEmailId, userRole, businessRegistrationNumber } = result as GetUserInfoResponseDto;
         setLoginUserEmailId(userEmailId);
         setLoginUserRole(userRole);
         setBusinessRegistrationNumber(businessRegistrationNumber);
     };
 
+    //  effect  //
     useEffect(() => {
         getSignInUserRequest(cookies.accessToken).then(getSignInUserResponse);
     }, [cookies.accessToken]);

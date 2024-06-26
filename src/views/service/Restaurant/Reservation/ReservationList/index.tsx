@@ -1,14 +1,19 @@
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { GetCeoReservationListRequest, GetUserReservationListRequest } from 'src/apis/restaurant/reservation';
-import { GetReservationListResponseDto } from 'src/apis/restaurant/reservation/dto/response';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+
 import { useUserStore } from 'src/stores';
-import { RestaurantReservationListItem } from 'src/types';
-import './style.css';
 import { usePagination } from 'src/hooks';
+
+import ResponseDto from 'src/apis/response.dto';
+import { RestaurantReservationListItem } from 'src/types';
+import { GetReservationListResponseDto } from 'src/apis/restaurant/reservation/dto/response';
+
+import { GetCeoReservationListRequest, GetUserReservationListRequest } from 'src/apis/restaurant/reservation';
+
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css';
 
 // component //
 function ListItem ({ 
@@ -28,7 +33,6 @@ function ListItem ({
 
     // event handler //
     const onClickHandler = () => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(reservationRestaurantId));  
-
 
     // render //
     return (
@@ -54,10 +58,9 @@ function ListItem ({
 export default function ReservationList() {
 
     // state //
-    const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
+    const {loginUserRole} = useUserStore();
 
-    
     const {
         viewList,
         pageList,
@@ -78,10 +81,6 @@ export default function ReservationList() {
     const navigation = useNavigate();
 
     const GetReservationListResponse = (result: GetReservationListResponseDto | ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
-
         if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
             return;
@@ -96,10 +95,8 @@ export default function ReservationList() {
     // effect //
     useEffect(() => {
         loginUserRole === "ROLE_USER" ? 
-        GetUserReservationListRequest(cookies.accessToken)
-            .then(GetReservationListResponse):
-        GetCeoReservationListRequest(cookies.accessToken)
-            .then(GetReservationListResponse);
+        GetUserReservationListRequest(cookies.accessToken).then(GetReservationListResponse):
+        GetCeoReservationListRequest(cookies.accessToken).then(GetReservationListResponse);
     }, []);
 
     // render //

@@ -60,13 +60,6 @@ export default function CeoInfoUpdate() {
     setUserRole(userRole);
   };
 
-  // effect //
-  useEffect(() => {
-    if (!cookies.accessToken) return;
-    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
-  }, []);
-
-  // function //
   const PatchUpdateUserInfoResponse = (result: PatchUserInfoResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
@@ -110,6 +103,11 @@ export default function CeoInfoUpdate() {
 
   // effect //
   let effectFlag = useRef(false);
+
+  useEffect(() => {
+    if (!cookies.accessToken) return;
+    getMyInfoRequest(cookies.accessToken).then(GetMyInfoResponse);
+  }, []);
   
   useEffect(() => {
     if (!cookies.accessToken) return;
@@ -132,8 +130,8 @@ export default function CeoInfoUpdate() {
         <div className='short-divider-line'></div>
       </div>
       <div className='ceo-page-navigation-box'>
-        <div className='ceo-page-navigation' onClick={onCeoPageSiteClickHandler}>마이페이지</div>
-        <div className='ceo-page-navigation' onClick={() => onCeoInfoUpdateClickHandler(userEmailId)}>회원정보 수정</div>
+        <div className='ceo-page-navigation' onClick={onCeoPageSiteClickHandler}>사장페이지</div>
+        <div className='ceo-page-navigation' onClick={() => onCeoInfoUpdateClickHandler(userEmailId)}>사장정보 수정</div>
         <div className='ceo-page-navigation' onClick={() => onUserDeleteClickHandler(userEmailId)}>회원탈퇴</div>
       </div>
       <div className='short-divider-bottom-line'></div>

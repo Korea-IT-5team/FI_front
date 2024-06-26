@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { GetReviewDetailsRequest } from 'src/apis/restaurant/review';
-import { GetReviewListResponseDto } from 'src/apis/restaurant/review/dto/response';
-import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
-import { RestaurantReviewListItem } from 'src/types';
-import './style.css';
+
 import { usePagination } from 'src/hooks';
-import { useUserStore } from 'src/stores';
+
+import ResponseDto from 'src/apis/response.dto';
+import { RestaurantReviewListItem } from 'src/types';
+import { GetReviewListResponseDto } from 'src/apis/restaurant/review/dto/response';
+
+import { GetReviewDetailsRequest } from 'src/apis/restaurant/review';
+
+import { MAIN_ABSOLUTE_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAIL_PATH } from 'src/constant';
+
+import './style.css';
 
 // component //
 function ListItem ({ 
     reviewNumber,
-    reviewImage,
     rating,
     reviewWriterNickname,
     reviewDate,
@@ -41,7 +44,6 @@ function ListItem ({
 export default function MyReviewList() {
 
     // state //
-    const {loginUserRole} = useUserStore();
     const [cookies] = useCookies();
 
     const {
@@ -64,9 +66,6 @@ export default function MyReviewList() {
     const navigation = useNavigate();
 
     const GetReviewDetailsResponse = (result: GetReviewListResponseDto | ResponseDto | null) => {
-        const message =
-            !result ? '서버에 문제가 있습니다.' :
-            result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
         if (!result || result.code !== 'SU') {
             if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
@@ -81,8 +80,7 @@ export default function MyReviewList() {
 
     // effect //
     useEffect(() => {
-        GetReviewDetailsRequest(cookies.accessToken)
-            .then(GetReviewDetailsResponse);
+        GetReviewDetailsRequest(cookies.accessToken).then(GetReviewDetailsResponse);
     },[]);
     
     // render //

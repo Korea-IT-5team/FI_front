@@ -32,8 +32,14 @@ const usePagination = <T>() => {
     setPageList(pageList);
   };
 
-  const changeList = (changeList: T[]) => {
+  const changeList = (changeList: T[], isToggleOn?: boolean) => {
+    if (isToggleOn) changeList = changeList.filter((board: any) => {
+      if ('status' in board) return !board.status;
+      return false;
+    });
+
     setListItem(changeList);
+
     const totalLength = changeList.length;
     setTotalLength(totalLength);
     const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;

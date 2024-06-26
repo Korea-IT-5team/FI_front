@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 
 import { useUserStore } from 'src/stores';
+import { usePagination } from 'src/hooks';
 
 import ResponseDto from 'src/apis/response.dto';
 import { InquiryBoardListItem } from 'src/types';
@@ -10,7 +11,7 @@ import { GetMyInquiryBoardListResponseDto } from 'src/apis/board/inquiryboard/dt
 
 import { getInquiryBoardListRequest } from 'src/apis/board/inquiryboard';
 
-import { COUNT_PER_PAGE, COUNT_PER_SECTION, INQUIRY_DETAILS_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
+import { COUNT_PER_PAGE, INQUIRY_DETAILS_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH } from 'src/constant';
 
 import './style.css'
 
@@ -49,62 +50,42 @@ function ListItem ({
 export default function InquiryMyList() {
   
   // state //
-  const [cookies] = useCookies();
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [pageList, setPageList] = useState<number[]>([1]);
   const {loginUserRole, loginUserEmailId} = useUserStore();
-  const [totalLength, setTotalLength] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [cookies] = useCookies();
+
+  const {
+    viewList,
+    pageList,
+    totalPage,
+    currentPage,
+    totalLength,
+
+    setCurrentPage,
+    setCurrentSection,
+    changeList,
+
+    onPageClickHandler,
+    onPreSectionClickHandler,
+    onNextSectionClickHandler
+  } = usePagination<InquiryBoardListItem>();
+
   const [isToggleOn, setToggleOn] = useState<boolean>(false);
-  const [totalSection, setTotalSection] = useState<number>(1);
-  const [currentSection, setCurrentSection] = useState<number>(1);
-  const [viewInquiryList, setViewInquiryList] = useState<InquiryBoardListItem[]>([]);
-  const [inquiryBoardList, setInquiryBoardList] = useState<InquiryBoardListItem[]>([]);
+  const [inquiryBoardList] = useState<InquiryBoardListItem[]>([]);
   
   // function //
   const filterInquiryList = inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId)
 
   const navigation = useNavigate();
-  
-  const changePage = (inquiryMyBoardList: InquiryBoardListItem[], totalLength: number) => {
-    if (!currentPage) return;
-    const startIndex = (currentPage - 1) * COUNT_PER_PAGE;
-    let endIndex = currentPage * COUNT_PER_PAGE;
-    if (endIndex > totalLength) endIndex = totalLength;
-    const viewList = inquiryMyBoardList.slice(startIndex, endIndex);
-    setViewInquiryList(viewList);
-  };
-
-  const changeSection = (totalPage: number) => {
-    if (!currentSection) return;
-    const startPage = (currentSection - 1) * COUNT_PER_SECTION + 1;
-    let endPage = currentSection * COUNT_PER_SECTION;
-    if (endPage > totalPage) endPage = totalPage;
-    const pageList: number[] = [];
-    for (let page = startPage; page <= endPage; page++) pageList.push(page);
-    setPageList(pageList);
-  };
-
-  const changeInquiryBoardList = (inquiryMyBoardList: InquiryBoardListItem[]) => {
-    if (isToggleOn) inquiryMyBoardList = inquiryMyBoardList.filter(inquiryBoardList => !inquiryBoardList.status);
-    setInquiryBoardList(inquiryMyBoardList);
-    const totalLength = inquiryMyBoardList.length;
-    setTotalLength(totalLength);
-    const totalPage = Math.floor((totalLength - 1) / COUNT_PER_PAGE) + 1;
-    setTotalPage(totalPage);
-    const totalSection = Math.floor((totalPage - 1) / COUNT_PER_SECTION) + 1;
-    setTotalSection(totalSection);
-    changePage(inquiryMyBoardList, totalLength);
-    changeSection(totalPage);
-  };
 
   const getMyInquiryBoardListResponse = (result: GetMyInquiryBoardListResponseDto | ResponseDto | null) => {
     const message =
       !result ? '서버에 문제가 있습니다.' :
+      result.code === 'AF' ? '인증에 실패했습니다.' : 
       result.code === 'DBE' ? '서버에 문제가 있습니다.' : '';
 
     if (!result || result.code !== 'SU') {
       alert(message);
+      if (result?.code === 'AF') navigation(MAIN_ABSOLUTE_PATH);
       return;
     }
 
@@ -112,7 +93,7 @@ export default function InquiryMyList() {
     { navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH); }
 
     const { inquiryBoardList } = result as GetMyInquiryBoardListResponseDto;
-    changeInquiryBoardList(inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId));
+    changeList(inquiryBoardList.filter(item => item.inquiryWriterId === loginUserEmailId), isToggleOn);
 
     setCurrentPage(!inquiryBoardList.length ? 0 : 1);
     setCurrentSection(!inquiryBoardList.length ? 0 : 1);
@@ -124,54 +105,11 @@ export default function InquiryMyList() {
     setToggleOn(!isToggleOn);
   };
 
-  const onPreSectionClickHandler = () => {
-    if (currentSection <= 1 && currentPage <= 1) {
-      return;
-    }
-
-    if (currentPage === (currentSection - 1) * COUNT_PER_SECTION + 1) {
-      if (currentSection > 1) {
-        setCurrentSection(currentSection - 1);
-        setCurrentPage(currentSection * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
-      }
-    } else {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const onPageClickHandler = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const onNextSectionClickHandler = () => {
-    if (currentSection >= totalSection && currentPage >= totalPage) {
-      return;
-    }
-    
-    if (currentPage === currentSection * COUNT_PER_SECTION) {
-      if (currentSection < totalSection) {
-        setCurrentSection(currentSection + 1);
-        setCurrentPage((currentSection + 1) * COUNT_PER_SECTION - (COUNT_PER_SECTION - 1));
-      }
-    } else {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
   // effect //
   useEffect(() => {
     if (!cookies.accessToken) return;
     getInquiryBoardListRequest(cookies.accessToken).then(getMyInquiryBoardListResponse);
   }, [isToggleOn ,cookies.accessToken, loginUserEmailId]);
-
-  useEffect(() => {
-    changePage(inquiryBoardList, totalLength);
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (!inquiryBoardList.length) return;
-    changeSection(totalPage);
-  }, [currentSection]);
 
   // render //
   const toggleClass = isToggleOn ? 'toggle-active' : 'toggle';
@@ -198,7 +136,7 @@ export default function InquiryMyList() {
       <div className='inquiry-my-list-table-write-date'>작성일자</div>
     </div>
     <div className='inquiry-my-list-table-contents'>
-    {viewInquiryList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
+    {viewList.map((item, index)=> <ListItem {...item} index={totalLength - (currentPage - 1) * COUNT_PER_PAGE - (index + 1)} key={item.inquiryNumber} />)}
     </div> 
   </div>
   <div className='inquiry-my-list-bottom'>

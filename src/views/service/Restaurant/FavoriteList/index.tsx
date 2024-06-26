@@ -1,12 +1,10 @@
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
-
 import { useEffect, useState } from 'react';
 
 import restaurantDefault from 'src/assets/image/restaurant-default.png';
 
 import { RestaurantListItem } from 'src/types';
-
 import ResponseDto from 'src/apis/response.dto';
 import { GetFavoriteRestaurantListResponseDto } from 'src/apis/restaurant/favorite/dto/response';
 

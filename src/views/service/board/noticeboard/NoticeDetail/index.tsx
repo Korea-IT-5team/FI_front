@@ -94,10 +94,8 @@ export default function NoticeDetail() {
     };
 
     // event handler //
-    const onListClickHandler = () => {
-        navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
-    };
-
+    const onListClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    
     const onUpdateClickHandler = () => {
         if (!noticeNumber || loginUserEmailId !== noticeWriterId) return;
         navigation(NOTICE_BOARD_UPDATE_ABSOLUTE_PATH(noticeNumber));

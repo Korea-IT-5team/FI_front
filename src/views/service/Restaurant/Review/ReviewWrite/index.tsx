@@ -1,24 +1,28 @@
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
-import ResponseDto from 'src/apis/response.dto';
-import { PostReviewRequest } from 'src/apis/restaurant/review';
-import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
-import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
-import './style.css';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 
+import ResponseDto from 'src/apis/response.dto';
+import { PostReviewRequestDto } from 'src/apis/restaurant/review/dto/request';
+
+import { PostReviewRequest } from 'src/apis/restaurant/review';
+
+import { RESTAURANT_INFO_ABSOLUTE_PATH } from 'src/constant';
+
+import './style.css';
 
 // component //
 export default function ReviewWrite() {
 
     // state //
-    const navigation = useNavigate();
-    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
-    const {restaurantId} = useParams();
-    const [reviewImage, setReviewImage] = useState<string>("");
-    const [rating, setRating] = useState<number>(0);
-    const [reviewContents, setReviewContents] = useState<string>("");
     const [cookies] = useCookies();
+    const navigation = useNavigate();
+    const {restaurantId} = useParams();
+    const [rating, setRating] = useState<number>(0);
+    const [reviewImage, setReviewImage] = useState<string>("");
+    const [reviewContents, setReviewContents] = useState<string>("");
+
+    const contentsRef = useRef<HTMLTextAreaElement | null>(null);
 
     // function //
     const PostReviewResponse = (result: ResponseDto | null) => {
@@ -41,8 +45,6 @@ export default function ReviewWrite() {
 
     // event handler //
     const onImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-
         const file = event.target.files?.[0];
         if (file) {
             const reader = new FileReader();
@@ -81,8 +83,7 @@ export default function ReviewWrite() {
         { reviewImage: reviewImage, rating: rating, reviewContents: reviewContents }
 
         if(!restaurantId) return;
-        PostReviewRequest(restaurantId, requestBody, cookies.accessToken)
-            .then(PostReviewResponse);
+        PostReviewRequest(restaurantId, requestBody, cookies.accessToken).then(PostReviewResponse);
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
