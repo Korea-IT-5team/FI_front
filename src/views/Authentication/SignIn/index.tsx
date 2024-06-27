@@ -10,7 +10,7 @@ import { SignInResponseDto } from "src/apis/auth/dto/response";
 
 import { signInRequest } from "src/apis/auth";
 
-import { FIND_EMAIL_INPUT_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from "src/constant";
+import { FIND_EMAIL_INPUT_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SERVER_DOMAIN_URL, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH} from "src/constant";
 
 import "./style.css";
 
@@ -49,7 +49,7 @@ function SnsContainer({ title }: SnsContainerProps) {
 
     // event handler //
     const onSnsButtonClickHandler = (type: 'kakao' | 'naver') => {
-        window.location.href = 'http://localhost:9999/api/v1/auth/oauth2/' + type;
+        window.location.href = SERVER_DOMAIN_URL +'/api/v1/auth/oauth2/' + type;
     };
 
     // render: sns화면 //
