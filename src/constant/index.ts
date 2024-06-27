@@ -111,7 +111,7 @@ export const INTRODUCTION_PROVISION_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTR
 export const INTRODUCTION_POLICY_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_POLICY_PATH}`;
 
 // description: API URL PATH
-export const SERVER_DOMAIN_URL = 'http://localhost:9999';
+export const SERVER_DOMAIN_URL = process.env.REACT_APP_REST_API_SERVER;
 export const SERVER_API_URL = `${SERVER_DOMAIN_URL}/api/v1`;
 
 // description: AUTH 모듈 내의 기능 URL

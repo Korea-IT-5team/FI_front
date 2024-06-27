@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ab5254e6.css",
+    "main.js": "/static/js/main.5c611b11.js",
+    "static/media/office.jpg": "/static/media/office.6bd3a6b24cbb44476cfc.jpg",
+    "static/media/food.11.jpg": "/static/media/food.11.8f74915792482811fc96.jpg",
+    "static/media/food.3.jpg": "/static/media/food.3.1f76f3b533b355126bd0.jpg",
+    "static/media/food.2.jpg": "/static/media/food.2.ca6e24182af006088cd8.jpg",
+    "static/media/food.9.jpg": "/static/media/food.9.01575e9392aa78c0c00e.jpg",
+    "static/media/food.7.jpg": "/static/media/food.7.b7ca612a5fd0899ed42c.jpg",
+    "static/media/tel-number-icon.png": "/static/media/tel-number-icon.374b209aafb5178c74f1.png",
+    "static/media/review-default.png": "/static/media/review-default.6e51b15f244e0dbb62ff.png",
+    "static/media/star-icon.png": "/static/media/star-icon.55016aeb45122609a3b2.png",
+    "static/media/restaurant-default.png": "/static/media/restaurant-default.16830ac3d7d7a87b8708.png",
+    "static/media/feature-icon.png": "/static/media/feature-icon.eeb9f83457a49114a615.png",
+    "static/media/location-icon.png": "/static/media/location-icon.0255ad7a503a70713ba6.png",
+    "static/media/time-icon.png": "/static/media/time-icon.855d98d5ccd0591af4f5.png",
+    "static/media/un-favorite-icon.png": "/static/media/un-favorite-icon.2d3cff309880b6824969.png",
+    "static/media/favorite-icon.png": "/static/media/favorite-icon.a13e3857c7c7f11756ac.png",
+    "index.html": "/index.html",
+    "main.ab5254e6.css.map": "/static/css/main.ab5254e6.css.map",
+    "main.5c611b11.js.map": "/static/js/main.5c611b11.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab5254e6.css",
+    "static/js/main.5c611b11.js"
+  ]
+}
