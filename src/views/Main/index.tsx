@@ -158,17 +158,21 @@ export default function Main() {
 
   // state // 
   const [cookies] = useCookies();
-  const [curSlide] = useState(0);
   const [searchWord] = useState<string>('');
+  const [curSlide, setCurSlide] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [intervalId] = useState<number | null>(null);
-  const { setLoginUserEmailId, setLoginUserRole } = useUserStore();
+  const { setLoginUserEmailId, setLoginUserRole } = useUserStore(); 
   const [restaurantList, SetRestaurantList] = useState<RestaurantListItem[]>([]);
 
-  const totalPages = Math.ceil(restaurantList.length / ITEM_PER_PAGE1);
   const startIndex = currentPage * ITEM_PER_PAGE1;
   const endIndex = startIndex + ITEM_PER_PAGE1;
+  const totalPages = Math.ceil(restaurantList.length / ITEM_PER_PAGE1);
+
   const trainCompartment = ['','','','',''];
+  const FIRST_SLIDE_INDEX = 0; 
+  const LAST_SLIDE_INDEX = trainCompartment.length - 1; 
+  const MOVE_SLIDE_INDEX = 1;
   
   // function // 
   const navigation = useNavigate();
@@ -189,12 +193,11 @@ export default function Main() {
         return;
     }
 
-    const { restaurantList } = result as GetRestaurantListResponseDto;
+  const { restaurantList } = result as GetRestaurantListResponseDto;
     restaurantList.sort(() => Math.random() - 0.5);
     SetRestaurantList(restaurantList);
   };
 
-  //  event handler //
   const handleNextPage = () => {
     if(currentPage==4 || currentPage == totalPages-1) return;
     setCurrentPage(currentPage + 1);
@@ -209,10 +212,19 @@ export default function Main() {
     if (intervalId !== null) {
       clearInterval(intervalId);
     }
+
+    const id = setInterval(() => {
+      setCurSlide((prevState) =>
+        prevState < LAST_SLIDE_INDEX
+          ? prevState + MOVE_SLIDE_INDEX
+          : FIRST_SLIDE_INDEX
+      );
+    }, 3000)
   };
 
+  //  event handler //
   const onItemClickHandler = (item: number) => navigation(RESTAURANT_INFO_ABSOLUTE_PATH(item));
-  
+
   // effect //
   useEffect(() => {
     if (!cookies.accessToken) {
@@ -224,7 +236,6 @@ export default function Main() {
   }, [cookies.accessToken]);
   
   let effectFlag1 = false;
-
   useEffect(() => {
     if(effectFlag1) return;
     effectFlag1 = true; 
@@ -236,7 +247,7 @@ export default function Main() {
     autoMoveSlide();
   },);
 
-// render //
+  // render //
   return (
     <div id="main-wrapper">
       <TopBar />
