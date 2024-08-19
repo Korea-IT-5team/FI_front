@@ -1,4 +1,9 @@
-.my-page-container {
+#my-page-update-wrapper {
+  height: 700px;
+  margin-top: 70px;
+}
+
+.my-page-update-container {
   display: flex;
   flex-direction: column;
 
@@ -25,7 +30,7 @@
 
   border: 1px solid rgba(245, 245, 245, 1);
 
-  font-family: 'HakgyoansimWoojuR';
+  font-family: 'NanumSquareRound';
   font-size: 17px;
   font-weight: bold;
 }
@@ -41,8 +46,19 @@
   gap: 20px;
   padding: 20px;
   margin-top: 20px;
+}
 
-  /* border-top: 1px solid rgba(238, 238, 238, 1); */
+.my-page-update-contents-title {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start ;
+
+  font-family: 'KCC-Hanbit';
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
 }
 
 .my-page-update-contents-title {
@@ -59,42 +75,48 @@
 }
 
 .my-page-update-contents-box{
-  width: 300px;
+  width: 400px;
 
   display: flex;
   flex-direction: column;
   
   gap: 20px;
 
-  font-family: 'HakgyoansimWoojuR';
+  font-family: 'NanumSquareRound';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
   color: rgba(50, 50, 50, 1);
 }
 
-.my-page-update-info-first {
+.my-page-update-info-box {
   width: 100%;
 
   display: flex;
   flex-direction: row;
-  word-break: break-word;
+  align-items: center;
+  text-align: left;
+  
+  padding-top: 20px;
 
-  border-top: 1px solid rgba(238, 238, 238, 1); 
+  border-top: 1px solid rgba(238, 238, 238, 1);
+  
+  word-break: break-word;
+}
+
+.my-page-update-info-left {
+  width: 100px;
 }
 
 .my-page-update-info {
-  width: 100%;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 1);
-  /* border-radius: 7px; */
-  min-width: 100px; 
-  text-align: center; 
-  font-family: 'HakgyoansimWoojuR';
-  word-break: break-word; 
+  width: 250px;
 }
 
-.my-page-update {
+.my-page-input-box {
+  flex: 1;
+}
+
+.my-page-update-button {
   width: 150px;
 
   padding: 10px;
@@ -103,7 +125,7 @@
   border-radius: 8px;
 
   text-align: center;
-  font-family: 'HakgyoansimWoojuR';
+  font-family: 'NanumSquareRound';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;

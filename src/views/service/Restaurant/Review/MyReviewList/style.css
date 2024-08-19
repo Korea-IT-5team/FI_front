@@ -1,0 +1,160 @@
+#my-review-list-wrapper {
+    width: 1000px;
+    min-width: 700px;
+    height: 700px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+    gap: 17px;
+}
+
+.my-review-list-top {
+    text-align: center;
+
+    font-family: 'KCC-Hanbit';
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+}
+
+.my-review-list-size-text {
+    font-family: 'NanumSquareRound';
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(138, 146, 166, 1);
+}
+
+.my-review-list-table {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    text-align: center;
+    font-family: 'NanumSquareRound';
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(50, 50, 50, 1);
+}
+
+.my-review-list-table-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+
+    background-color: rgba(255, 148, 45, 0.2);
+    border-radius: 6px;
+
+    text-align: center;
+}
+
+.my-review-list-table-tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    
+    gap: 95px;
+    padding: 13px 13px;
+
+    border-top: 1px solid rgba(238, 238, 238, 1);
+
+    font-family: 'NanumSquareRound';
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(50, 50, 50, 1);
+}
+
+.my-review-list-table-tr:hover{
+    cursor: pointer;
+    background-color: rgba(238, 238, 238, 0.2);
+}
+
+.my-review-list-table-restaurant-name {
+    width: 100px;
+}
+
+.my-review-list-table-rating {
+    width: 50px;
+}
+
+.my-review-list-table-writer-nickname {
+    width: 70px;
+}
+
+.my-review-list-table-write-date {
+    width: 70px;
+}
+
+.my-review-list-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.my-review-list-pagenation{
+    display: flex;
+    align-items: center;
+
+    gap:24px;
+}
+
+.my-review-list-page-left{
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-left.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.my-review-list-page-right{
+    width: 40px;
+    height: 40px;
+
+    background-image: url('../../../../../assets/image/page-right.png');
+    background-size: 100% 100%;
+
+    cursor: pointer;
+}
+
+.my-review-list-page-box{
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.my-review-list-page{
+    font-family: 'NanumSquareRound';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(138, 146, 166, 1);
+
+    cursor: pointer;
+}
+
+.my-review-list-page-active{
+    font-family: 'NanumSquareRound';
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(255, 148, 45, 1);
+}
+
+.my-review-list-search-box{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

@@ -9,7 +9,7 @@ import InputBox from "src/components/InputBox";
 import { FIND_EMAIL_INPUT_ABSOLUTE_PATH, MAIN_PATH, PASSWORD_RESET_INPUT_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, SIGN_UP_ABSOLUTE_PATH } from "src/constant";
 import "./style.css";
 
-//   component: Sns 로그인   //
+// component: Sns 로그인 //
 export function Sns() {
 
     // state //
@@ -110,7 +110,6 @@ export default function SignIn() {
     };
 
     const onSignInButtonClickHandler = () => {
-
         if (!emailId || !password) {
             setMessage('이에일과 비밀번호를 모두 입력하세요.');
             return;
@@ -131,10 +130,8 @@ export default function SignIn() {
                 <div className="authentication-sign-container">
                     <div className="authentication-contents-box">
                         <div className="authentication-input-container">
-
                             <InputBox type="text" value={emailId} placeholder="이메일을 입력해주세요" onChangeHandler={onEmailIdChangeHandler} />
                             <InputBox type="password" value={password} placeholder="비밀번호를 입력해주세요" onChangeHandler={onPasswordChangeHandler} onKeydownHandler={onPasswordKeydownHandler} message={message} error />
-
                         </div>
                         <div className="authentication-button-container">
                             <div className="primary-button full-width" onClick={onSignInButtonClickHandler}>로그인</div>

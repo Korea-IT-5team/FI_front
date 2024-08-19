@@ -1,17 +1,17 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useParams } from 'react-router';
 import { useUserStore } from 'src/stores';
 import { GetNoticeBoardResponseDto } from 'src/apis/board/noticeboard/dto/response';
 import ResponseDto from 'src/apis/response.dto';
-import { BOARD_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { NOTICE_BOARD_LIST_ABSOLUTE_PATH, NOTICE_BOARD_UPDATE_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
 import { deleteNoticeBoardRequest, getNoticeBoardRequest, increaseViewCountRequest } from 'src/apis/board/noticeboard';
 import './style.css';
 
-//                    component                    //
+// component //
 export default function NoticeDetail() {
 
-    //                    state                    //
+    // state //
     const { loginUserEmailId, loginUserRole } = useUserStore();
     const { noticeNumber } = useParams();
     
@@ -23,11 +23,10 @@ export default function NoticeDetail() {
     const [noticeContents, setNoticeContents] = useState<string>('');
     const [viewCount, setViewCount] = useState<number>(0);
     
-    //                    function                    //
+    // function //
     const navigation = useNavigate();
 
     const increaseViewCountResponse = (result: ResponseDto | null) => {
-
         const message =
             !result ? '서버에 문제가 있습니다.' :
             result.code === 'VF' ? '잘못된 공지번호입니다.' :
@@ -92,7 +91,7 @@ export default function NoticeDetail() {
         navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
 
-    //                    event handler                    //    
+    // event handler //
     const onListClickHandler = () => {
         navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
     };
@@ -104,13 +103,14 @@ export default function NoticeDetail() {
 
     const onDeleteClickHandler = () => {
         if (!noticeNumber || loginUserEmailId !== noticeWriterId || !cookies.accessToken) return;
+        
         const isConfirm = window.confirm('게시물을 삭제하시겠습니까?');
         if (!isConfirm) return;
 
         deleteNoticeBoardRequest(noticeNumber, cookies.accessToken).then(deleteNoticeBoardResponse);
     };
 
-    //                    effect                    //
+    // effect //
     useEffect(() => {
         if (!noticeNumber) return;
         increaseViewCountRequest(noticeNumber, cookies.accessToken)
@@ -122,8 +122,7 @@ export default function NoticeDetail() {
         getNoticeBoardRequest(noticeNumber, cookies.accessToken).then(getNoticeBoardResponse)
     }, []);
 
-
-    //                    render                    //
+    // render //
     return (
         <div id='notice-detail-wrapper'>
             <div className='notice-detail-main-box'>
@@ -142,10 +141,10 @@ export default function NoticeDetail() {
             <div className='notice-detail-bottom-box'>
                 <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
                 { loginUserEmailId === noticeWriterId && loginUserRole === 'ROLE_ADMIN' &&
-                (<div className="notice-detail-button-box">
-                    <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
-                    <div className="error-button full-width" onClick={onDeleteClickHandler}>삭제</div>
-                </div>)}
+                    (<div className="notice-detail-button-box">
+                        <div className="second-button full-width" onClick={onUpdateClickHandler}>수정</div>
+                        <div className="error-button full-width" onClick={onDeleteClickHandler}>삭제</div>
+                    </div>)}
             </div>
         </div>
     );

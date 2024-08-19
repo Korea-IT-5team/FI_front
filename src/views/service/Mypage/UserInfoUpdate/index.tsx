@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import "./style.css";
 import { MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { getMyInfoRequest, patchUserInfoRequest } from 'src/apis/user';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import { GetMyInfoResponseDto, PatchUserInfoResponseDto } from 'src/apis/user/dto/response';
 import ResponseDto from 'src/apis/response.dto';
@@ -38,7 +38,6 @@ export default function UserInfoUpdate() {
         navigation(MAIN_ABSOLUTE_PATH);
         return;
       }
-      
       navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
       return;
     }
@@ -52,7 +51,6 @@ export default function UserInfoUpdate() {
     setUserTelNumber(userTelNumber);
     setUserAddress(userAddress);
     setUserRole(userRole);
-
   };
 
   //   effect   //
@@ -92,14 +90,16 @@ export default function UserInfoUpdate() {
 
   const onUpdateButtonClickHandler = () => {
     if (!cookies.accessToken || !userEmailId) return;
+
     if (!nickname.trim() || !userAddress.trim()) return;
 
     const requestBody: PatchUserInfoRequestDto = { nickname, userAddress };
     patchUserInfoRequest(userEmailId, requestBody, cookies.accessToken).then(PatchUpdateUserInfoResponse);
   };
 
-  // useEffect //
+  // effect //
   let effectFlag = useRef(false);
+  
   useEffect(() => {
     if (!cookies.accessToken) return;
     if (!loginUserRole) return;
@@ -114,8 +114,8 @@ export default function UserInfoUpdate() {
 
   // render //
   return (
-    <div id='my-page-wrapper'>
-      <div className='my-page-container'>
+    <div id='my-page-update-wrapper'>
+      <div className='my-page-update-container'>
         <div>
           <div className='my-page-update-top-title'>회원정보 수정</div>
           <div className='short-divider-line'></div>
@@ -129,28 +129,32 @@ export default function UserInfoUpdate() {
         <div className='my-page-update-container'>
           <div className='my-page-update-contents-title'>회원정보 수정</div>
           <div className='my-page-update-contents-box'>
-            <div className='my-page-update-info-first'>
-              <div className='my-page-update-info'>닉네임</div>
-              <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+            <div className='my-page-update-info-box'>
+              <div className='my-page-update-info-left'>닉네임</div>
+              <div className='my-page-input-box'>
+                <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+              </div>
             </div>
-            <div className='my-page-update-info-first'>
-              <div className='my-page-update-info'>아이디</div>
+            <div className='my-page-update-info-box'>
+              <div className='my-page-update-info-left'>아이디</div>
               <div className='my-page-update-info'>{userEmailId}</div>
             </div>
-            <div className='my-page-update-info-first'>
-              <div className='my-page-update-info'>이름</div>
+            <div className='my-page-update-info-box'>
+              <div className='my-page-update-info-left'>이름</div>
               <div className='my-page-update-info'>{userName}</div>
             </div>
-            <div className='my-page-update-info-first'>
-              <div className='my-page-update-info'>전화번호</div>
+            <div className='my-page-update-info-box'>
+              <div className='my-page-update-info-left'>전화번호</div>
               <div className='my-page-update-info'>{userTelNumber}</div>
             </div>
-            <div className='my-page-update-info-first'>
-              <div className='my-page-update-info'>주소</div>
-              <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+            <div className='my-page-update-info-box'>
+              <div className='my-page-update-info-left'>주소</div>
+              <div className='my-page-input-box'>
+                <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onUserAddressChangeHandler} />
+              </div>
             </div>
           </div>
-          <div className='my-page-update' onClick={onUpdateButtonClickHandler}>수정</div>
+          <div className='my-page-update-button' onClick={onUpdateButtonClickHandler}>수정</div>
         </div>
       </div>
     </div>

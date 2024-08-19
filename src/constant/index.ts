@@ -8,7 +8,6 @@ export const SIGN_UP_PATH = 'sign-up';
 export const FIND_EMAIL_INPUT_PATH = 'find-email-input';
 export const PASSWORD_RESET_INPUT_PATH = 'password-reset-input';
 export const PASSWORD_RESET_CHECK_PATH = 'password-reset-check/:userEmailId';
-export const PASSWORD_RESET_FINALLY_PATH = 'password-reset-finally';
 
 export const RESTAURANT_PATH = '/restaurant';
 export const RESTAURANT_INFO_PATH = 'info/:restaurantId';
@@ -53,6 +52,11 @@ export const INQUIRY_BOARD_UPDATE_PATH = 'update/:inquiryNumber';
 export const INQUIRY_MY_BOARD_LIST_PATH = 'my-board';
 export const INQUIRY_DETAILS_PATH = ':inquiryNumber';
 
+export const INTRODUCTION_PATH = '/introduction';
+export const INTRODUCTION_COMPANY_PATH = 'company';
+export const INTRODUCTION_PROVISION_PATH = 'provision';
+export const INTRODUCTION_POLICY_PATH = 'policy';
+
 
 // description: Navigation 절대 URL PATH 
 export const MAIN_ABSOLUTE_PATH = MAIN_PATH;
@@ -62,7 +66,6 @@ export const SIGN_UP_ABSOLUTE_PATH = `${AUTH_PATH}/${SIGN_UP_PATH}`;
 export const FIND_EMAIL_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${FIND_EMAIL_INPUT_PATH}`;
 export const PASSWORD_RESET_INPUT_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_INPUT_PATH}`;
 export const PASSWORD_RESET_CHECK_ABSOLUTE_PATH = (userEmailId: string ) => `${AUTH_PATH}/password-reset-check/${userEmailId}`;
-export const PASSWORD_RESET_FINALLY_ABSOLUTE_PATH = `${AUTH_PATH}/${PASSWORD_RESET_FINALLY_PATH}`;
 
 export const RESTAURANT_INFO_ABSOLUTE_PATH = (restaurantId: number | string) => `${RESTAURANT_PATH}/info/${restaurantId}`;
 export const RESTAURANT_INFO_WRITE_ABSOLUTE_PATH = `${RESTAURANT_PATH}/${RESTAURANT_INFO_WRITE_PATH}`;
@@ -101,6 +104,13 @@ export const INQUIRY_BOARD_WRITE_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/
 export const INQUIRY_BOARD_UPDATE_ABSOLUTE_PATH = (inquiryNumber: string | number) => `${BOARD_PATH}/${INQUIRY_PATH}/update/${inquiryNumber}`;
 export const INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH = `${BOARD_PATH}/${INQUIRY_PATH}/${INQUIRY_MY_BOARD_LIST_PATH}`;
 export const INQUIRY_DETAILS_ABSOLUTE_PATH = (inquiryNumber: number | string) => `${BOARD_PATH}/${INQUIRY_PATH}/${inquiryNumber}`;
+
+// 회사소개 페이지 
+export const INTRODUCTION_ABSOLUTE_PATH = INTRODUCTION_PATH;
+
+export const INTRODUCTION_COMPANY_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_COMPANY_PATH}`;
+export const INTRODUCTION_PROVISION_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_PROVISION_PATH}`;
+export const INTRODUCTION_POLICY_ABSOLUTE_PATH = `${INTRODUCTION_PATH}/${INTRODUCTION_POLICY_PATH}`;
 
 
 // description: API URL PATH
@@ -174,7 +184,7 @@ export const POST_INQUIRY_BOARD_COMMENT_REQUEST_URL = (inquiryNumber: number | s
 export const DELETE_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/${inquiryNumber}`;
 export const PATCH_INQUIRY_BOARD_REQUEST_URL = (inquiryNumber: number | string) => `${SERVER_INQUIRY_BOARD_MODULE_URL}/update/${inquiryNumber}`;
 export const GET_MY_INQUIRY_BOARD_LIST_URL = `${SERVER_INQUIRY_BOARD_MODULE_URL}/my-list`;
-export const GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_MY_INQUIRY_BOARD_LIST_URL}/search`;
+// export const GET_MY_INQUIRY_BOARD_SEARCH_LIST_URL = `${GET_MY_INQUIRY_BOARD_LIST_URL}/search`;
 export const GET_MY_INQUIRY_BOARD_URL = (inquiryNumber: number | string) => `${GET_MY_INQUIRY_BOARD_LIST_URL}/${inquiryNumber}`;
 
 // description : Notice board 모듈 내의 기능 URL

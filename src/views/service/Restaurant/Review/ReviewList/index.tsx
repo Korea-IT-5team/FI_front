@@ -1,55 +1,47 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH } from 'src/constant';
-import { useUserStore } from 'src/stores';
 import { RestaurantReviewListItem } from 'src/types';
+import reviewDefault from 'src/assets/image/review-default.png';
+import './style.css';
 
+// interface //
 interface Props {
     value: RestaurantReviewListItem[];
-    restaurantId: string | undefined;
 }
 
-// component: 리뷰 리스트 // 
-export default function ReviewList({ value,restaurantId }: Props) {
+// component: 리뷰 리스트 //
+export default function ReviewList({ value }: Props) {
 
     // state //
-    const {loginUserRole} = useUserStore();
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // 한 번에 표시할 리뷰의 수
-
-    // function //
-    const navigation = useNavigate();
+    const itemsPerPage = 1;
 
     // event handler //
-    const onWriteClickHandler = () => {
-        if(!restaurantId) return;
-        navigation(RESTAURANT_REVIEW_ABSOLUTE_DETAIL_WRITE_PATH(restaurantId));
-    }
-
-    const onLoadMoreClickHandler = () => {
-        setCurrentPage(prevPage => prevPage + 1);
-    }
+    const onLoadMoreClickHandler = () => { setCurrentPage(prevPage => prevPage + 1); }
 
     const currentItems = value.slice(0, currentPage * itemsPerPage);
 
     // render //
     return (
-        <>
-            {loginUserRole === "ROLE_USER" && (<div onClick={onWriteClickHandler}>리뷰작성</div>)}
-            <div className='review-select-list'>
-                {currentItems.map((item) => (
-                    <div className='review-select-list-item-box' key={item.reviewNumber}>
-                        <img src={item.reviewImage} className='review-select-item' />
-                        <div className='review-select-item'>평점: {item.rating}</div>
-                        <div className='review-select-item'>내용: {item.reviewContents}</div>
-                        <div className='review-select-item'>작성자: {item.reviewWriterNickname}</div>
-                        <div className='review-select-item'>작성일: {item.reviewDate}</div>
+        <div id='review-list-wrapper'>
+            <div className='review-list-title'>리뷰 ({value.length})</div>
+            {currentItems.map((item) => (
+                <div className='review-list-contents-box' key={item.reviewNumber}>
+                    <img src={item.reviewImage ? item.reviewImage : reviewDefault} className='review-content image'/>
+                    <div className='review-list-container'>
+                        <div className='review-content-box'>
+                            <div className='review-content-nickname'>작성자 {item.reviewWriterNickname}</div>
+                            <div className='review-content-divider'>{'\|'}</div>
+                            <div className='review-content-rating'>평점 {item.rating}</div>
+                            <div className='review-content-divider'>{'\|'}</div>
+                            <div className='review-content-date'>작성일 {item.reviewDate}</div>
+                        </div>
+                        <div className='review-content'>{item.reviewContents}</div>
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
             {currentItems.length < value.length && (
-                <div onClick={onLoadMoreClickHandler}>더보기</div>
+                <div className='review-load-more' onClick={onLoadMoreClickHandler}>더보기</div>
             )}   
-        </>
+        </div>
     )
 }

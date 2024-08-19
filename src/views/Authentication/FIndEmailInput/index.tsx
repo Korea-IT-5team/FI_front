@@ -93,7 +93,6 @@ export default function FindEmailInput() {
             userTelNumber: userTelNumber
         }
         findEmailRequest(requestBody).then(findEmailResponse);
-
     };
 
    // render //
@@ -103,16 +102,15 @@ export default function FindEmailInput() {
             <div className='find-email-box'>
                 <div className='find-email-input'>
                     <InputBox type="text" value={userName} placeholder="이름을 입력해주세요" onChangeHandler={onUserNameChangeHandler} message={UserNameMessage} error />
-
                     <InputBox type="text" value={userTelNumber} placeholder="전화번호를 입력해주세요" onChangeHandler={onUserTelNumberChangeHandler} buttonStatus={userTelNumberButtonStatus} onButtonClickHandler={onUserTelNumberButtonClickHandler} message={userTelNumberMessage} error={isUserTelNumberError} />
                 </div>
                 <div className='find-email-button'>
                     <div className={findEmailButtonClass} onClick={onFindEmailButtonClickHandler}>이메일 찾기</div> 
                 </div>
                 {userEmailId &&
-                <div>
-                    <div className='return-email-id' >* {userEmailId}</div>
-                </div>
+                    <div>
+                        <div className='return-email-id' >* {userEmailId}</div>
+                    </div>
                 }
                 <div className='navigation-button'>
                     <div className='moving-sign-up' onClick={() => navigation(SIGN_IN_ABSOLUTE_PATH)}>로그인</div>

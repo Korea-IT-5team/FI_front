@@ -1,0 +1,47 @@
+#policy-wrapper {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgb(255, 255, 255, 1);
+}
+
+.policy-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.policy-title-box {
+  text-align: left;
+}
+
+.policy-title {
+  font-family: 'KCC-Hanbit';
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.policy-title-detail-box {
+  padding: 10px 20px;
+  border-left: 4px solid rgba(255, 148, 45, 1);
+  background-color: rgb(245, 245, 245, 1);
+  margin-bottom: 15px;
+}
+
+.policy-title-detail-first {
+  font-family: 'NanumSquareRound';
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.policy-title-detail-second {
+  font-family: 'NanumSquareRound', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(50, 50, 50, 1);
+  margin-bottom: 5px;
+}

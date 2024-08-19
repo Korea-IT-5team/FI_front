@@ -1,30 +1,60 @@
 #restaurant-info-write-update {
-    height: 100vh;
+    width: 100%;
+    max-width: 800px;
 
-    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(255, 255, 255, 1);
 }
 
 .restaurant-info-write-title {
-    width: 1300px;
-
     text-align: center;
-
     margin: 20px 0px;
 
-    font-family: 'Nanum Gothic';
-    font-size: 20px;
+    font-family: 'KCC-Hanbit';
+    font-size: 30px;
     font-weight: bold;
     line-height: 100%;
+    margin-bottom: 70px;
+}
+
+.restaurant-info-write-container {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+}
+
+.result{
+    display: flex;
+    justify-content: center; 
+    font-family: 'KCC-Hanbit';
 }
 
 .restaurant-info-write-box {
     width: 100%;
+
     align-items: center;
     justify-content: center;
 }
 
-.restaurant-info-write-selectbox{
+.restaurant-image-box {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.restaurant-info-write-contents{
+    display: flex;
+    justify-content: center; 
+    font-family: 'KCC-Hanbit';
+    font-size: 15px;
+}
+
+.restaurant-info-write-select-box {
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .restaurant-info-primary-button {
@@ -37,9 +67,9 @@
 
     background-color: rgba(255, 148, 45, 1);
     border-radius: 6px;
-    border: 1px solid #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 1);
 
-    font-family: 'Nanum Gothic';
+    font-family: 'KCC-Hanbit';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -51,7 +81,7 @@
 .restaurant-info-primary-button:hover {
     cursor: pointer;
     opacity: 0.85;
-    border: 1px solid #ffffff;
+    border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .restaurant-info-disable-button {
@@ -64,9 +94,9 @@
 
     background-color: rgba(138, 138, 138, 1);
     border-radius: 6px;
-    border: 1px solid #ffffff;
+    border: 1px solid rgba(255, 255, 255, 1);
 
-    font-family: 'Nanum Gothic';
+    font-family: 'KCC-Hanbit';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -75,21 +105,44 @@
     color: rgba(255, 255, 255, 1);
 }
 
+.businessRegistrationNumber-box {
+    justify-content: center;
+    align-items: center;
+}
+
+.businessRegistrationNumber-title {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+
+    font-family: 'KCC-Hanbit';
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(50, 50, 50, 1);
+}
+
+.businessRegistrationNumber-title-input {
+    width: 400px;
+    outline: none;
+    padding: 8px 16px;
+
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(200, 200, 200, 1);
+    border-radius: 6px;
+
+    font-family: 'KCC-Hanbit';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(35, 45, 66, 1);
+}
+
 .restaurant-info-registered-button-box{
-    margin-left: 43%;
-    margin-bottom: 5%;
-}
-
-
-.restaurant-info-write-contents{
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    font-family: 'Nanum Gothic';
-    font-size: 15px;
-}
-
-.result{
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    font-family: 'Nanum Gothic';
+    justify-content: center;
+    align-items: center;
+    
+    margin-top: 15px;
+    padding: 10px;
 }

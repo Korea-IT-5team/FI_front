@@ -1,6 +1,7 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 import './style.css';
 
+// interface //
 export interface InputBoxProps {
     label: string;
     type: 'text' | 'password' |'file' | 'date';
@@ -13,8 +14,10 @@ export interface InputBoxProps {
     onKeydownHandler?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
+// component //
 export default function RestaurantInputBox({ label, type, value, placeholder, onChangeHandler, onKeydownHandler }: InputBoxProps) {
 
+    // render //
     return (
         <div className="restaurant-input-box">
             <div className="restaurant-input-label label">{label}</div>

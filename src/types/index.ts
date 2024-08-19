@@ -56,12 +56,3 @@ export interface RestaurantReviewListItem {
   reviewContents: string,
   reviewWriterNickname: string
 }
-
-// export interface InquiryBoardDetailItem {
-//   inquiryNumber: number;
-//   inquiryTitle: string;
-//   inquiryWriterId: string;
-//   inquiryWriteDatetime: string;
-//   inquiryContents: string;
-//   comment: string;
-// }

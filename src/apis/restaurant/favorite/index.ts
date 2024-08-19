@@ -11,7 +11,7 @@ export const PostRestaurantFavoriteRequest = async (restaurantId: number|string,
     .catch(requestErrorHandler);
     return result;
 } 
- 
+
 // function : 식당 찜 저장 삭제 API 함수
 export const DeleteRestaurantFavoriteRequest = async (restaurantId: number|string, accessToken: string) => {
     const result = await axios.delete(DELETE_FAVORITE_REQUEST_URL(restaurantId), bearerAuthorization(accessToken))

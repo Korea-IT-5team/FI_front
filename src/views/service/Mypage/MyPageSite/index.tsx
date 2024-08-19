@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto } from 'src/apis/user/dto/response';
 import { INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, RESTAURANT_FAVORITE_ABSOLUTE_LIST_PATH, RESTAURANT_RESERVATION_ABSOLUTE_LIST_PATH, RESTAURANT_REVIEW_ABSOLUTE_DETAILS_LIST_PATH, USER_DELETE_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH} from 'src/constant';
 import "./style.css";
 
-// component : 마이페이지 // 
+// component: 마이페이지 //
 export default function MyPageSite() {
 
-  // state // 
+  // state //
   const [cookies] = useCookies();
-  
+
   const [userEmailId, setEmailId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
@@ -47,7 +47,6 @@ export default function MyPageSite() {
     setUserTelNumber(userTelNumber);
     setUserAddress(userAddress);
     setUserRole(userRole);
-
   };
 
   //   effect   //
@@ -99,5 +98,5 @@ export default function MyPageSite() {
         </div>
       </div>
     </div>
-  )
+  );
 }
