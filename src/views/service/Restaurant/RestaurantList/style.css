@@ -1,11 +1,13 @@
 #restaurant-list-wrapper {
-  width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  margin-bottom: 30px;
+  overflow: scroll;
+}
+
+#restaurant-list-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .restaurant-list-search-input-box {
@@ -15,7 +17,7 @@
   align-items: center;
 
   margin-top: 50px;
-
+  margin-bottom: 20px;
   gap: 10px;
 }
 
@@ -28,44 +30,42 @@
   border-radius: 5px;
   outline: none;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
+  color: rgba(67, 67, 67, 1);
 }
 
-.second-button {
-  width: 80px;
-}
-
-.restaurant-list-no-item {
+.restaurant-list-container {
   width: 100%;
 
   display: flex;
   justify-content: center;
+  align-items: center;
+}
 
-  margin-top: 70px;
-  margin-left: 600px;
-
-  font-family: 'NanumSquareRound';
+.restaurant-list-no-item {
+  margin-top: 30px;
+  
+  font-family: 'ELAND_Choice_M';
   font-size: 20px;
-  font-weight: bold;
-  color: rgba(50, 50, 50, 1);
+  font-weight: 400;
+  color: rgba(67, 67, 67, 1);
 }
 
 .restaurant-list-box {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
+  align-items: center;
 
   gap: 50px;
-  margin-top: 70px;
 }
 
 .restaurant-list-item-box {
-  width: 200px;
-  height: 330px;
+  width: 250px;
+  height: 300px;
 
   display: flex;
   flex-direction: column;
@@ -83,13 +83,11 @@
   transform: translateY(-5px);
 }
 
-.restaurant-list-item-top-box {
-  width: 100%;
+.restaurant-list-item-box img {
+  width: 230px;
+  height: 150px;
 
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-  align-items: center;
+  object-fit: cover;
 }
 
 .restaurant-list-item {
@@ -98,17 +96,20 @@
 
   margin: 10px;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 13px;
   font-weight: 400;
-  color: rgba(50, 50, 50, 1);
+  color: rgba(67, 67, 67, 1);
 }
 
-.restaurant-list-item-box img {
-  width: 180px;
-  height: 150px;
+.restaurant-list-item-top-box {
+  width: 100%;
 
-  object-fit: cover;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .name {
@@ -125,11 +126,11 @@
 }
 
 .location {
-  width: 180px;
-
-  margin: 0px 10px 10px;
+  width: 230px;
 
   text-align: left;
+
+  margin: 0px 10px 10px;
 }
 
 .load-more-button {
@@ -140,10 +141,10 @@
   padding: 5px;
   margin-top: 30px;
 
-  background-color: rgba(245, 138, 35, 0.75);
+  background-color: rgba(23, 54, 133, 0.75);
   border-radius: 5px;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 16px;
   line-height: 150%;
   color: rgba(255, 255, 255, 1);
@@ -151,5 +152,5 @@
 
 .load-more-button:hover {
   cursor: pointer;
-  background-color: rgba(245, 138, 35, 0.9);
+  background-color: rgba(23, 54, 133, 0.9);
 }

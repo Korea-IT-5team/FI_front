@@ -103,10 +103,10 @@ export default function ReviewDetail() {
                 <div className='review-detail-contents-box'>{reviewContents}</div>
             </div>
             <div className='review-detail-button-box'>
-                <div className='review-detail-primary-button' onClick={onListClickHandler}>목록보기</div>
+                <div className='primary-button' onClick={onListClickHandler}>목록보기</div>
                 <div className='review-detail-owner-button-box'>
-                    <div className='review-detail-second-button' onClick={onUpdateClickHandler}>수정</div>
-                    <div className='review-detail-error-button' onClick={onDeleteClickHandler}>삭제</div>
+                    <div className='second-button' onClick={onUpdateClickHandler}>수정</div>
+                    <div className='error-button' onClick={onDeleteClickHandler}>삭제</div>
                 </div>
             </div>
         </div>

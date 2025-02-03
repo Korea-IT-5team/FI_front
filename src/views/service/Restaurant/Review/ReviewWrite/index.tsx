@@ -91,7 +91,7 @@ export default function ReviewWrite() {
         }
     };
 
-    const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
+    const ButtonClass = `${rating ? 'primary' : 'disable'}-button`;
     
     // render //
     return (
@@ -105,10 +105,11 @@ export default function ReviewWrite() {
                             <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
                         )}
                         <div className='review-grade-box'>
-                            <div className='review-grade-image'></div>
+                            <div className='review-grade'>✪</div>
                             <div id="review-rating-box">
                                 <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
-                                    <option value="선택">별점</option>
+                                    <option value="선택">선택</option>
+                                    <option value="0.5">0.5</option>
                                     <option value="1.0">1.0</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2.0">2.0</option>
@@ -117,7 +118,6 @@ export default function ReviewWrite() {
                                     <option value="3.5">3.5</option>
                                     <option value="4.0">4.0</option>
                                     <option value="4.5">4.5</option>
-                                    <option value="5.0">5.0</option>
                                 </select>
                             </div>
                         </div>

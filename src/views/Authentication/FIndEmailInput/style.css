@@ -11,12 +11,12 @@
 .find-email-title {
     text-align: center;
 
-    margin-top: 80px;
+    margin-top: 250px;
 
-    font-family: 'KCC-Hanbit';
+    font-family: 'ELAND_Choice_M';
     font-size: 25px;
-    font-weight: 400;
-    color: rgba(50, 50, 50, 1);
+    font-weight: bold;
+    color: rgba(67, 67, 67, 1);
 }
 
 .find-email-box {
@@ -50,7 +50,7 @@
 
     gap: 16px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 16px;
     font-weight: 400;
 }
@@ -58,10 +58,10 @@
 .return-email-id {
     text-align: center;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 20px;
     font-weight: 400;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .navigation-button {
@@ -73,7 +73,7 @@
 
     gap: 10px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 16px;
     font-weight: 400;
     line-height: 150%;

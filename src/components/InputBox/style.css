@@ -22,14 +22,13 @@
     background-color: rgba(255, 255, 255, 1);
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 6px;
-
     outline: none;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .common-input::placeholder {
@@ -41,16 +40,16 @@
     height: 28px;
 
     text-align: center;
-
-    padding: 5px;
-
-    background-color: rgba(255, 148, 45, 1);
+    
+    padding: 3px 2px;
+    
+    background-color: rgba(23, 54, 133, 1);
     border-radius: 6px;
-
-    font-family: 'NanumSquareRound';
-    font-size: 15px;
+    
+    font-family: 'ELAND_Choice_M';
+    font-size: 13px;
     font-weight: 400;
-    line-height: 150%;
+    line-height: 210%;
     color: rgba(255, 255, 255, 1);
 }
 
@@ -64,20 +63,20 @@
 
     text-align: center;
 
-    padding: 5px;
+    padding: 3px 2px;
 
-    background-color: rgba(245, 138, 35, 0.8);
+    background-color: rgba(23, 54, 133, 0.3);
     border-radius: 6px;
 
-    font-family: 'NanumSquareRound';
-    font-size: 15px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 13px;
     font-weight: 400;
-    line-height: 150%;
-    color: rgba(255, 255, 255, 0.8);
+    line-height: 210%;
+    color: rgba(250, 250, 250, 1);
 }
 
 .common-input-message {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 12px;
     font-weight: 400;
     line-height: 150%;

@@ -1,0 +1,61 @@
+.bottom-box {
+  text-align: left;
+
+  padding: 20px;
+  
+  background-color: rgba(245, 245, 245, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 1);
+}
+
+.bottom-title {
+  margin-bottom: 20px;
+
+  font-family: 'MoiraiOne-Regular';
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.bottom-navigation-box {
+  display: flex;
+
+  justify-content: left;
+
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.bottom-navigation {
+  cursor: pointer;
+  
+  font-family: 'ELAND_Choice_M';
+  font-size: 14px;
+  color: rgba(50, 50, 50, 1);
+}
+
+.bottom-navigation:hover {
+  color: rgba(0, 0, 0, 1);
+  text-decoration: underline;
+}
+
+.bottom-divider {
+  font-size: 15px;
+  font-weight: 200;
+  color: rgba(215, 215, 215, 1);
+}
+
+.bottom-detail-contents-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+  margin-bottom: 15px;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  color: rgba(100, 100, 100, 0.8);
+}

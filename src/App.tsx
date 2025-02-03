@@ -65,7 +65,6 @@ function App() {
     <Routes>
       <Route index element={<Index />} />
       <Route path={SNS_PATH} element={<Sns />} />
-      <Route path={MAIN_PATH} element={<Main/>} />
       <Route path={AUTH_PATH} element={<Authentication />} >
         <Route path={SIGN_IN_PATH} element={<SignIn />} />
         <Route path={SIGN_UP_PATH} element={<SignUp />} />
@@ -74,6 +73,7 @@ function App() {
         <Route path={PASSWORD_RESET_CHECK_PATH} element={<PasswordResetCheck />} /> 
       </Route>
       <Route element={<TopContainer />} >
+        <Route path={MAIN_PATH} element={<Main />} />
         <Route path={RESTAURANT_PATH}> 
           <Route path={RESTAURANT_LIST_PATH} element={<RestaurantList />} />
           <Route path={RESTAURANT_INFO_PATH} element={<RestaurantInfo />} />

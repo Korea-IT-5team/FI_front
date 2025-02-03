@@ -1,22 +1,25 @@
 #favorite-list-wrapper {
-    width: 940px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    overflow: scroll;
+}
 
-    margin-bottom: 30px;
-    gap: 20px;
+#favorite-list-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .favorite-list-title {
     text-align: center;
 
-    font-family: 'KCC-Hanbit';
+    margin-top: 50px;
+
+    font-family: 'ELAND_Choice_M';
     font-size: 25px;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .favorite-list-top-box {
@@ -24,10 +27,12 @@
 
     display: flex;
     align-items: end;
+
+    margin-bottom: 10px;
 }
 
 .favorite-list-size-text {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     color: rgba(138, 146, 166, 1);
 }
@@ -38,12 +43,11 @@
     justify-content: center;
 
     gap: 50px;
-    margin-top: 10px;
 }
 
 .favorite-list-item-box {
-    width: 200px;
-    height: 330px;
+    width: 250px;
+    height: 300px;
 
     display: flex;
     flex-direction: column;
@@ -61,15 +65,12 @@
     transform: translateY(-5px);
 }
 
-.favorite-list-item-top-box {
-    width: 100%;
+.favorite-list-item-box img {
+    width: 230px;
+    height: 150px;
 
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-    align-items: center;
+    object-fit: cover;
 }
-
 
 .favorite-list-item {
     text-align: left;
@@ -77,17 +78,20 @@
 
     margin: 10px;     
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
     font-weight: 400;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
-.favorite-list-item-box img {
-    width: 180px;
-    height: 150px;
+.favorite-list-item-top-box {
+    width: 100%;
 
-    object-fit: cover;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .name {
@@ -104,33 +108,31 @@
 }
 
 .location {
-    width: 180px;
+    width: 230px;
+    
+    text-align: left;
 
     margin: 0px 10px 10px;
-
-    text-align: left;
 }
 
 .load-more-button {
     width: 70px;
-
+    
     text-align: center;
-
+  
     padding: 5px;
     margin-top: 30px;
-
-    background-color: rgba(245, 138, 35, 0.75);
+  
+    background-color: rgba(23, 54, 133, 0.75);
     border-radius: 5px;
-
-    font-family: 'NanumSquareRound';
+  
+    font-family: 'ELAND_Choice_M';
     font-size: 16px;
     line-height: 150%;
     color: rgba(255, 255, 255, 1);
-}
-
-.load-more-button:hover {
+  }
+  
+  .load-more-button:hover {
     cursor: pointer;
-    background-color: rgba(245, 138, 35, 0.9);
-}
-
-
+    background-color: rgba(23, 54, 133, 0.9);
+  }

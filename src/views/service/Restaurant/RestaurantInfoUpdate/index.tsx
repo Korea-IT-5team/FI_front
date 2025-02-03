@@ -15,7 +15,7 @@ import { Map,useKakaoLoader,MapMarker } from 'react-kakao-maps-sdk';
 // component //
 export default function RestaurantInfoUpdate() {
     useKakaoLoader({
-        appkey: "1121641ff4fa6668d61874ed79c1709e",
+        appkey: "d842f1d869773de0e704340a995f0811",
         libraries: ["clusterer", "drawing", "services"],
     })
 
@@ -199,14 +199,14 @@ export default function RestaurantInfoUpdate() {
     }, []);
     
     const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantLocation && restaurantTelNumber && restaurantPosition;
-    const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
+    const ButtonClass = `${isRestUploadUpActive ? 'primary' : 'disable'}-button`;
 
     // render //
     return (
-        <>
-            <div className="restaurant-info-update-write-title">식당 정보 수정</div>
-            <div className='restaurant-info-update-write-container'>
-                <div className="restaurant-info-update-write-box">
+        <div id="restaurant-info-update-wrapper">
+            <div className="restaurant-info-update-title">식당 정보 수정</div>
+            <div className='restaurant-info-update-container'>
+                <div className="restaurant-info-update-box">
                     <div className='restaurant-update-image-box'>
                         <input type="file" accept="image/*" onChange={onImageChangeHandler} />
                         {restaurantImage && (
@@ -217,7 +217,7 @@ export default function RestaurantInfoUpdate() {
                     placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler}/>
                     <RestaurantInputBox label="식당 주소" type="text" value={restaurantLocation}
                     placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler}/>
-                    <em className="restaurant-info-update-write-contents">지도를 클릭해주세요!</em>
+                    <em className="restaurant-info-map">지도를 클릭해주세요!</em>
                     {center && <Map
                         id="map"
                         center={center}
@@ -234,26 +234,26 @@ export default function RestaurantInfoUpdate() {
                             })}}>
                         <MapMarker position={restaurantPosition ?? center} />
                     </Map>}
-                    <div className="restaurant-info-update-write-select-box">                 
+                </div>
+                <div className="restaurant-info-update-box">
+                    <div className="restaurant-info-update-select-box">                 
                         <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
                     </div>
-                </div>
-                <div className="restaurant-info-update-write-box">
                     <RestaurantInputBox label="식당 연락쳐" type="text" value={restaurantTelNumber} placeholder="연락쳐를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} onKeydownHandler={onKeyPressHandler}/>
                     <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress} placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler}/>
                     <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours} placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler}/> 
                     <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures} placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler}/>     
                     <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice} placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler}/>
                     <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu} placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} onKeydownHandler={onKeyPressHandler}/>
-                    <div className='businessRegistrationNumber-update-box'>
-                        <div className='businessRegistrationNumber-update-title'>사업자 등록번호</div>
-                        <div className='businessRegistrationNumber-update-title-input'>{businessRegistrationNumber}</div>
+                    <div className='business-registration-number-box'>
+                        <div className='business-registration-number-title'>사업자 등록번호</div>
+                        <div className='business-registration-number'>{businessRegistrationNumber}</div>
                     </div>
                 </div>
             </div>
             <div className="restaurant-info-update-registered-button-box">
                 <button onClick={onUpdateClickHandler} className={ButtonClass}>수정하기</button>
             </div>
-        </>
+        </div>
     );
 }

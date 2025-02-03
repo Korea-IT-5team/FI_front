@@ -3,12 +3,13 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    overflow-y: auto;
 
     gap: 15px;
-    padding-top: 40px;
+}
 
-    border-top: 5px solid rgba(170, 170, 170, 0.4);
+#review-list-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .review-list-title {
@@ -17,17 +18,19 @@
     display: flex;
     text-align: left;
 
-    font-family: 'KCC-Hanbit';
-    font-size: 24px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 17px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .review-list-contents-box {
+    width: 100%;
+
     display: flex;
     flex-direction: row;
-    width: 100%;
+    
     gap: 50px;
 }
 
@@ -44,10 +47,10 @@
 
     gap: 10px;
 
-    border-bottom: 3px solid rgba(170, 170, 170, 0.4);
+    border-bottom: 2px solid rgba(190, 190, 190, 0.4);
 
-    font-family: 'NanumSquareRound';
-    font-size: 17px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 16px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(100, 100, 100, 1);
@@ -60,19 +63,19 @@
 
 .review-content.image {
     width: 200px;
-    height: 200px;
+    height: 180px;
 
     object-fit: cover;
 }
 
 .review-content-rating {
-    color: rgba(255, 150, 30, 1);
+    color: rgba(23, 54, 133, 1);
 }
 
 .review-content {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(70, 70, 70, 1);
+    color: rgba(67, 67, 67, 1);
 }

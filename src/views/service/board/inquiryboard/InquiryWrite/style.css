@@ -25,23 +25,24 @@
     align-items: center;
     flex-grow: 1;
 
-    background-color: rgba(240, 240, 240, 1);
+    background-color: rgba(245, 245, 245, 1);
     border-radius: 8px;
 }
 
 .inquiry-write-title-input {
+    width: 100%;
+    
+    padding: 0px 5px;
+
     border: none;
     outline: none;
     background: none;
-    
-    width: 100%;
-    padding: 0px 5px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 20px;
     font-weight: 400;
     line-height: 200%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-write-contents-box {
@@ -55,22 +56,20 @@
 }
 
 .inquiry-write-contents-textarea {
-    border: none;
-    outline: none;
-    background: none;
-    resize: none;
-    
     width: 1000px;
     min-height: 300px;
 
-    background-color: rgba(240, 240, 240, 1);
+    background-color: rgba(245, 245, 245, 1);
+    border: none;
+    outline: none;
+    resize: none;
     border-radius: 8px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-bottom-button-box {
@@ -88,10 +87,10 @@
 
     padding: 5px;
 
-    background-color: rgba(245, 138, 35, 0.6);
+    background-color: rgba(23, 54, 133, 0.5);
     border-radius: 5px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
@@ -105,10 +104,10 @@
 
     padding: 5px;
 
-    background-color: rgba(245, 138, 35, 1);
+    background-color: rgba(23, 54, 133, 1);
     border-radius: 5px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;

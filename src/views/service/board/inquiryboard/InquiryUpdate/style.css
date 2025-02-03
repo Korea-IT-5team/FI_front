@@ -1,52 +1,52 @@
 #inquiry-update-wrapper {
+    width: 1000px;
+    min-width: 700px;
+
     display: flex;
     overflow-x: hidden;
 
-    margin-top: 50px;
+    margin-top: 130px;
 
     border: 1px solid rgba(240, 240, 240, 1);
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .inquiry-update-main-box {
     width: 100%;
-    min-width: 1000px;
+    height: 470px;
 
     display: flex;
     flex-direction: column;
+    overflow: auto;
 
-    padding: 45px;
     gap: 30px;
+    padding: 35px;
 }
 
 .inquiry-update-title-box {
-    width: 100%;
-
     align-items: center;
-    flex-grow: 1;
 
-    background-color: rgba(240, 240, 240, 1);
-    border-radius: 8px;
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 6px;
 }
 
 .inquiry-update-title-input {
+    width: 100%;
+    
+    padding: 0px 0px 0px 5px;
+
     border: none;
     outline: none;
     background: none;
     
-    width: 100%;
-    padding: 0px 5px;
-
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 20px;
     font-weight: 400;
     line-height: 200%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-update-contents-box {
-    width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -55,28 +55,18 @@
 }
 
 .inquiry-update-contents-textarea {
-    border: none;
-    outline: none;
-    background: none;
-    resize: none;
-    
-    width: 1000px;
+    width: 100%;
     min-height: 300px;
 
-    background-color: rgba(240, 240, 240, 1);
-    border-radius: 8px;
+    background-color: rgba(245, 245, 245, 1);
+    border: none;
+    outline: none;
+    resize: none;
+    border-radius: 6px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
-}
-
-.inquiry-bottom-button-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 15px;
+    color: rgba(67, 67, 67, 1);
 }

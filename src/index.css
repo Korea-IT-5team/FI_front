@@ -1,22 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-
 @font-face {
-  font-family: 'KCC-Hanbit';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+  font-family: 'MoiraiOne-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/MoiraiOne-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'NanumSquareRound';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+  font-family: 'ELAND_Choice_M';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_M.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 * {
   margin: 0px;
-  font-family: Pretendard;
+  font-family: 'ELAND_Choice_M';
 }
 
 .h1 {
@@ -35,7 +33,7 @@
 
 body {
   margin: 0;
-  font-family: 'NanumSquareRound', 'KCC-Hanbit', 'Ubuntu';
+  font-family: 'ELAND_Choice_M', 'MoiraiOne-Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

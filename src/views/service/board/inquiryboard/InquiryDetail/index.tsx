@@ -151,9 +151,9 @@ export default function InquiryDetail() {
             { loginUserRole === 'ROLE_ADMIN' && !status &&
                 <div className='inquiry-detail-comment-write-box'>
                     <div className='inquiry-detail-comment-textarea-box'>
-                        <textarea style={{height: `${28 * commentRows}px`}} className='inquiry-detail-comment-textarea' placeholder='답글을 작성해주세요.' value={inquiryComment === null ? '' : inquiryComment} onChange={onCommentChangeHandler} />
+                        <textarea style={{height: `${28 * commentRows}px`}} className='inquiry-detail-comment-textarea' placeholder='답변을 작성해주세요.' value={inquiryComment === null ? '' : inquiryComment} onChange={onCommentChangeHandler} />
                     </div>
-                    <div className='primary-button' onClick={onCommentSubmitClickHandler}>답글달기</div>
+                    <div className='primary-button' onClick={onCommentSubmitClickHandler}>답변 달기</div>
                 </div>
             }
             { status && 

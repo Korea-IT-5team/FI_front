@@ -8,7 +8,7 @@ interface Prop {
 }
 
 // component //
-export default function SelectBox({ value, onChange }: Prop) {
+export default function FoodSelectBox({ value, onChange }: Prop) {
 
     const listItem = [
         { name: '한식', value: '한식' },
@@ -18,10 +18,9 @@ export default function SelectBox({ value, onChange }: Prop) {
         { name: '분식', value: '분식' },
         { name: '치킨', value: '치킨' },
         { name: '피자', value: '피자' },
-        { name: '패스트푸드', value: '패스트푸드' },
         { name: '고기', value: '고기' },
+        { name: '패스트푸드', value: '패스트푸드' },
         { name: '뷔페', value: '뷔페' },
-        { name: '멕시칸푸드', value: '멕시칸푸드' },
         { name: '아시안푸드', value: '아시안푸드' },
         { name: '카페', value: '카페' },
         { name: '기타', value: '기타'}
@@ -47,7 +46,7 @@ export default function SelectBox({ value, onChange }: Prop) {
     return (
         <div className='select-box'>
             { value === '' ? 
-                <div className='select-none'>주음식</div> :
+                <div className='select-none'>음식 종류</div> :
                 <div className='select-item'>{value}</div>
             }
             <div className={buttonClass} onClick={onButtonClickHandler}></div>

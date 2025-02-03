@@ -1,23 +1,23 @@
 #inquiry-list-wrapper {
-    width: 1300px;
-    min-width: 800px;
+    width: 1000px;
+    min-width: 700px;
     height: 700px;
 
     display: flex;
     flex-direction: column;
 
-    padding: 20px;
-    gap: 17px;
+    margin-top: 50px;
+    gap: 20px;
 }
 
-.inquiry-list-top {
+.inquiry-list-title {
     text-align: center;
 
-    font-family: 'KCC-Hanbit';
+    font-family: 'ELAND_Choice_M';
     font-size: 25px;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-list-top-box {
@@ -35,36 +35,18 @@
 }
 
 .inquiry-list-size-text {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 15px;
     font-weight: 400;
     color: rgba(138, 146, 166, 1);
 }
 
-.inquiry-list-top-right {
-    display: flex;
-    flex-direction: row;
-
-    gap: 10px;
-}
-
 .inquiry-list-top-admin-text {
+    font-family: 'ELAND_Choice_M';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
-}
-
-.inquiry {
-    width: 80px;
-    height: 35px;
-
-    padding: 3px;
-
-    font-family: 'NanumSquareRound';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 150%;
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-list-table {
@@ -73,12 +55,12 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    
     text-align: center;
-    font-family: 'NanumSquareRound';
+    
+    font-family: 'ELAND_Choice_M';
     font-size: 17px;
     font-weight: bold;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-list-table-top {
@@ -89,7 +71,7 @@
 
     padding: 15px;
 
-    background-color: rgba(255, 148, 45, 0.2);
+    background-color: rgba(220, 226, 240, 0.6);
     border-radius: 6px;
 }
 
@@ -100,20 +82,20 @@
     justify-content: space-between;
     
     gap: 95px;
-    padding: 13px 13px;
+    padding: 13px;
 
     border-top: 1px solid rgba(238, 238, 238, 1);
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .inquiry-list-table-tr:hover {
     cursor: pointer;
-    background-color: rgba(238, 238, 238, 0.2);
+    background-color: rgba(238, 238, 238, 0.4);
 } 
 
 .inquiry-list-table-reception-number {
@@ -138,6 +120,7 @@
 
 .inquiry-list-table-writer-nickname {
     width: 100px;
+
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -149,27 +132,15 @@
 .inquiry-list-bottom {
     display: flex;
     justify-content: space-between;
-
     position: relative;
+
 }
 
-.inquiry-list-page-nation {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    position: absolute;
-    bottom: 0;
-    gap: 24px;
-
-    text-align: center;
-}
-
-.inquiry-list-page-box {
+.inquiry-list-pagenation {
     display: flex;
     align-items: center;
 
-    gap: 13px;
+    gap: 24px;
 }
 
 .inquiry-list-page-left {
@@ -192,8 +163,15 @@
     cursor: pointer;
 }
 
+.notice-list-page-box {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
 .inquiry-list-page {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
@@ -203,11 +181,11 @@
 }
 
 .inquiry-list-page-active {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
     font-weight: bold;
     line-height: 150%;
-    color: rgba(255, 148, 45, 1);
+    color: rgba(23, 54, 133, 0.7);
 }
 
 .inquiry-list-search-box {
@@ -231,9 +209,9 @@
 
     border: none;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }

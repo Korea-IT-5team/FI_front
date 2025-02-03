@@ -1,0 +1,92 @@
+#review-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 150px;
+}
+
+.review-update-title {
+  text-align: center;
+  
+  margin-bottom: 20px;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 150%;
+  color: rgba(67, 67, 67, 1);
+}
+
+.review-update-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.review-update-container {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.review-update-box {
+  display: flex;
+  flex-direction: column;
+  
+  gap: 15px;
+}
+
+.review-grade-box {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.review-grade {
+  font-family: 'ELAND_Choice_M';
+  font-size: 35px;
+  font-weight: bold;
+  color: rgba(255, 235, 59, 1);
+}
+
+#review-rating-box {
+  width: 20%;
+}
+
+#review-rating {
+  width: 100%;
+  padding: 10px;
+
+  border: 1px solid rgba(238, 238, 238, 1);
+  border-radius: 4px;
+  
+  font-family: 'ELAND_Choice_M';
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(67, 67, 67, 1);
+}
+
+.review-update-contents-box {
+  width: 100%;
+}
+
+.review-update-contents-textarea {
+  width: 100%;
+
+  padding: 10px;
+
+  border: 1px solid rgba(238, 238, 238, 1);
+  border-radius: 4px;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(67, 67, 67, 1);
+}
+
+.review-registered-button-box {
+  display: flex;
+  justify-content: center;
+  
+  margin-top: 20px;
+}

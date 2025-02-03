@@ -1,6 +1,5 @@
 #restaurant-info-wrapper {
-  width: 900px;
-  min-width: 800px;
+  height: 880px;
 
   display: flex;
   flex-direction: column;
@@ -8,38 +7,16 @@
 
   padding: 20px;
 
-  background-color: rgba(255, 148, 45, 0.15);
   border-radius: 20px;
 }
 
 .restaurant-info-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   gap: 40px;
-}
-
-.restaurant-info-container img {
-  width: 400px;
-  height: 400px;
-
-  border-radius: 15px;
-}
-
-.restaurant-info-container button {
-  width: 80px;
-  height: 35px;
-  
-  background-color: rgba(255, 148, 45, 0.85);
-  border: none;
-  border-radius: 5px;
-
-  font-family: 'NanumSquareRound';
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-
-  transition: background-color 0.3s ease;
 }
 
 .restaurant-info-top-container {
@@ -48,17 +25,33 @@
   align-items: center;
   justify-content: center;
 
-  gap: 15px;
+  gap: 5px;
 }
 
-.restaurant-info-top {
+.restaurant-info-top-contents {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+
+  gap: 30px;
+}
+
+.restaurant-info-top-contents img {
+  width: 350px;
+  height: 350px;
+
+  border-radius: 15px;
+}
+
+.restaurant-info-top-text {
+  height: 40px;
+
+  display: flex;
+  flex-direction: row;
 
   gap: 10px;
 }
 
-.restaurant-info-name-box {
+.restaurant-info-top-left-box {
   display: flex;
   flex-direction: row;
 
@@ -66,22 +59,22 @@
 }
 
 .restaurant-info-name {
-  font-family: 'KCC-Hanbit';
-  font-size: 30px;
+  font-family: 'ELAND_Choice_M';
+  font-size: 25px;
   font-weight: 400;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
+  color: rgba(67, 67, 67, 1);
 }
 
 .restaurant-info-grade {
-  font-family: 'KCC-Hanbit';
-  font-size: 30px;
+  font-family: 'ELAND_Choice_M';
+  font-size: 25px;
   font-weight: 400;
   line-height: 150%;
-  color: rgba(255, 150, 30, 1);
+  color: rgba(23, 54, 133, 1);
 }
 
-.restaurant-info-category-box {
+.restaurant-info-top-right-box {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -92,61 +85,33 @@
 }
 
 .restaurant-info-food-category {
-  font-family: 'NanumSquareRound';
-  font-size: 17px;
+  font-family: 'ELAND_Choice_M';
+  font-size: 15px;
   font-weight: bold;
-  line-height: 150%;
   color: rgba(125, 125, 125, 1);
 }
 
 .restaurant-info-favorite-heart {
-  width: 30px;
-  height: 30px;
-
-  display: inline-block;
-
-  background-image: url('../../../../assets/image/favorite-icon.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border: none;
-
   cursor: pointer;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 25px;
+  font-weight: bold;
+  color: rgba(244, 67, 54, 1);
 }
 
 .restaurant-info-favorite-non-heart{
-  width: 30px;
-  height: 30px;
-
-  display: inline-block;
-
-  background-image: url('../../../../assets/image/un-favorite-icon.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border: none;
-
   cursor: pointer;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 25px;
+  font-weight: bold;
+  color: rgba(67, 67, 67, 1);
 }
 
-.restaurant-info-middle-container {
-  display: flex;
-  flex-direction: row;
-
-  gap: 100px;
-}
-
-.restaurant-info-box {
-  width: 60%;
-  height: 100%;
-
+restaurant-info-top-button {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  gap: 5px;
-  padding: 5px;
-
-  border: 3px solid rgba(255, 255, 255, 1);
-  border-radius: 20px;
 }
 
 .restaurant-info-button-box {
@@ -154,6 +119,20 @@
   flex-direction: row;
 
   gap: 10px;
+}
+
+.restaurant-info-container button {
+  width: 60px;
+  height: 20px;
+  
+  background-color: rgba(23, 54, 133, 0.5);
+  border: none;
+  border-radius: 5px;
+
+  font-family: 'ELAND_Choice_Mv';
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
 }
 
 .reservation-delete:hover {
@@ -181,76 +160,35 @@
   opacity: 0.75;
 }
 
-.restaurant-info-content-box {
+.restaurant-info-middle-container {
+  width: 1000px;
+  height: 350px;
+
   display: flex;
   flex-direction: row;
 
+  gap: 100px;
+}
+
+.restaurant-info-box {
+  width: 400px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column  ;
+  text-align: left;
+  
   gap: 5px;
 }
 
 .restaurant-info-imformation {
   display: flex;
   align-items: center;
+  word-break: break-all;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-}
-
-.restaurant-info-icon.location {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/location-icon.png');
-  background-size: cover;
-}
-
-.restaurant-info-icon.telnumber {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/tel-number-icon.png');
-  background-size: cover;
-}
-
-.restaurant-info-icon.sns {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/sns-icon.png');
-  background-size: cover;
-}
-
-.restaurant-info-icon.time {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/time-icon.png');
-  background-size: cover;
-}
-
-.restaurant-info-icon.menu {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/menu-icon.png');
-  background-size: cover;
-}
-
-.restaurant-info-icon.feature {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/feature-icon.png');
-  background-size: cover;
-}
-
-.restaurant-info-icon.notice {
-  width: 20px;
-  height: 20px;
-
-  background-image: url('../../../../assets/image/notice-icon.png');
-  background-size: cover;
+  color: rgba(67, 67, 67, 1);
 }

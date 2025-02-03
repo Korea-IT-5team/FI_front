@@ -76,7 +76,7 @@ export default function CeoInfoUpdate() {
     }
 
     alert('정보가 성공적으로 수정되었습니다.');
-    navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+    navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
   };
 
   // event handler //
@@ -118,45 +118,40 @@ export default function CeoInfoUpdate() {
   return (
     <div id='ceo-page-update-wrapper'>
     <div className='ceo-page-update-container'>
-    <div>
-        <div className='ceo-page-update-top-title'>사장정보 수정</div>
-        <div className='short-divider-line'></div>
-      </div>
-      <div className='ceo-page-navigation-box'>
-        <div className='ceo-page-navigation' onClick={() => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH)}>마이페이지</div>
-        <div className='ceo-page-navigation' onClick={() => navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId))}>회원정보 수정</div>
-        <div className='ceo-page-navigation' onClick={() => navigation(USER_DELETE_ABSOLUTE_PATH(userEmailId))}>회원탈퇴</div>
-      </div>
+      <div className='ceo-page-update-top-title'>사장정보 수정</div>
       <div className='short-divider-bottom-line'></div>
       <div className='ceo-page-update-container'>
-        <div className='ceo-page-update-contents-title'>사장정보 수정</div>
         <div className='ceo-page-update-contents-box'>
-          <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-info'>닉네임</div>
-            <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+          <div className='ceo-page-update-info-box'>
+            <div className='ceo-page-update-info-left'>닉네임</div>
+            <div className='ceo-page-input-box'>
+              <InputBox type='text' value={nickname} placeholder='닉네임을 입력해주세요.' onChangeHandler={onNicknameChangeHandler} />
+            </div>
           </div>
-          <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-title-info'>아이디</div>
+          <div className='ceo-page-update-info-box'>
+            <div className='ceo-page-update-info-left'>아이디</div>
             <div className='ceo-page-update-info'>{userEmailId}</div>
           </div>
-          <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-title-info'>이름</div>
+          <div className='ceo-page-update-info-box'>
+            <div className='ceo-page-update-info-left'>이름</div>
             <div className='ceo-page-update-info'>{userName}</div>
           </div>
-          <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-title-info'>전화번호</div>
+          <div className='ceo-page-update-info-box'>
+            <div className='ceo-page-update-info-left'>전화번호</div>
             <div className='ceo-page-update-info'>{userTelNumber}</div>
           </div>
-          <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-title-info'>주소</div>
-            <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onCeoAddressChangeHandler} />
+          <div className='ceo-page-update-info-box'>
+            <div className='ceo-page-update-info-left'>주소</div>
+            <div className='ceo-page-input-box'>
+              <InputBox type='text' value={userAddress}  placeholder='주소를 입력해주세요.' onChangeHandler={onCeoAddressChangeHandler} />
+            </div>
           </div>
-          <div className='ceo-page-update-info-first'>
-            <div className='ceo-page-update-title-info'>사업자등록번호</div>
+          <div className='ceo-page-update-info-box'>
+            <div className='ceo-page-update-info-left'>사업자등록번호</div>
             <div className='ceo-page-update-info'>{businessRegistrationNumber}</div>
           </div>
         </div>
-        <div className='ceo-page-update' onClick={onUpdateButtonClickHandler}>수정</div>
+        <div className='ceo-page-update-button' onClick={onUpdateButtonClickHandler}>수정</div>
       </div>
     </div>
   </div>

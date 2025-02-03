@@ -1,12 +1,21 @@
 #review-wrapper {
-    width: 100%;
-    height: 500px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    margin-bottom: 30px;
+    margin-top: 150px;
+}
+
+.review-write-title {
+    text-align: center;
+    
+    margin-bottom: 20px;
+
+    font-family: 'ELAND_Choice_M';
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 150%;
+    color: rgba(67, 67, 67, 1);
 }
 
 .review-write-container {
@@ -14,18 +23,7 @@
     margin-top: 20px;
 }
 
-.review-write-title {
-    margin-bottom: 20px;
-
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'KCC-Hanbit';
-}
-
 .review-write-container {
-    width: 100%;
-    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -33,35 +31,39 @@
 .review-write-box {
     display: flex;
     flex-direction: column;
+
     gap: 15px;
 }
 
 .review-grade-box {
     display: flex;
     align-items: center;
+
     gap: 10px;
 }
 
-.review-grade-image {
-    width: 50px; 
-    height: 50px; 
-
-    background-image: url('../../../../../assets/image/star-icon.png'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
+.review-grade {
+    font-family: 'ELAND_Choice_M';
+    font-size: 35px;
+    font-weight: bold;
+    color: rgba(255, 235, 59, 1);
 }
 
 #review-rating-box {
-    width: 20%;
+    width: 30%;
 }
 
 #review-rating {
     width: 100%;
     padding: 10px;
 
-    font-size: 16px;
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 4px;
+    
+    font-family: 'ELAND_Choice_M';
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(67, 67, 67, 1);
 }
 
 .review-write-contents-box {
@@ -70,32 +72,21 @@
 
 .review-write-contents-textarea {
     width: 100%;
+
     padding: 10px;
 
-    font-size: 16px;
     border: 1px solid rgba(238, 238, 238, 1);
     border-radius: 4px;
+
+    font-family: 'ELAND_Choice_M';
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(67, 67, 67, 1);
 }
 
 .review-registered-button-box {
     display: flex;
     justify-content: center;
+
     margin-top: 20px;
-}
-
-.review-registered-button-box button {
-    padding: 12px 24px;
-    
-    font-size: 18px;
-    font-weight: bold;
-    background-color: rgba(255, 148, 45, 1);
-
-    color: rgba(245, 245, 245, 1);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.review-registered-button-box button:hover {
-    opacity: 0.85;
 }

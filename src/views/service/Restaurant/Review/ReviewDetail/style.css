@@ -1,14 +1,17 @@
 #review-detail-wrapper {
+    width: 1000px;
+    min-width: 700px;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    gap: 24px;
-    padding-top: 20px;
+    margin-top: 130px;
+    gap: 30px;
 }
 
-
 .review-detail-main-box {
-    width: 500px;
+    width: 700px;
     height: 400px;
 
     display: flex;
@@ -22,11 +25,6 @@
     border-radius: 8px;
 }
 
-.review-detail-image {
-    width: 200px;
-    height: 200px;
-}
-
 .review-detail-info-box {
     width: 100%;
 
@@ -34,21 +32,27 @@
     flex-direction: row;
     justify-content: left;
 
-    gap: 8px;
+    gap: 6px;
 
-    font-family: 'NanumSquareRound';
-    font-size: 14px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 13px;
     font-weight: 400;
-    line-height: 150%;
     color: rgba(138, 146, 166, 1);
 }
 
 .review-detail-info-divider {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
     color: rgba(230, 230, 230, 1);
+}
+
+.review-detail-image {
+    width: 250px;
+    height: 200px;
+
+    object-fit: cover;
 }
 
 .review-detail-contents-box {
@@ -57,17 +61,18 @@
 
     display: flex;
     justify-content: left;
+    white-space: pre-wrap;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
-
-    white-space: pre-wrap;
+    color: rgba(67, 67, 67, 1);
 }
 
 .review-detail-button-box {
+    width: 70%;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -78,73 +83,4 @@
     flex-direction: row;
 
     gap: 12px;
-}
-
-.review-detail-primary-button{
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 8px 20px;
-
-    background-color: rgba(255, 148, 45, 1);
-    border-radius: 6px;
-
-    font-family: 'NanumSquareRound';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 150%;
-    color: rgba(255, 255, 255, 1);
-}
-
-.review-detail-primary-button:hover {
-    cursor: pointer;
-    opacity: 0.85;
-}
-
-.review-detail-second-button {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 8px 20px;
-
-    background-color: rgba(245, 138, 35, 0.8);
-    border-radius: 6px;
-
-    font-family: 'NanumSquareRound';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 100%;
-    color: rgba(255, 255, 255, 1);
-}
-
-.review-detail-second-button:hover {
-    cursor: pointer;
-    opacity: 0.75;
-}
-
-.review-detail-error-button {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 8px 20px;
-
-    background-color: rgba(170, 170, 170, 1);
-    border-radius: 6px;
-
-    font-family: 'Nanum Gothic';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 100%;
-    color: rgba(255, 255, 255, 1);
-}
-
-.review-detail-error-button:hover {
-    cursor: pointer;
-    opacity: 0.85;
 }

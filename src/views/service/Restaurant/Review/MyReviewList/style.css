@@ -6,23 +6,23 @@
     display: flex;
     flex-direction: column;
 
-    padding: 20px;
-    gap: 17px;
+    padding: 50px;
+    gap: 20px;
 }
 
 .my-review-list-top {
     text-align: center;
 
-    font-family: 'KCC-Hanbit';
+    font-family: 'ELAND_Choice_M';
     font-size: 25px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .my-review-list-size-text {
-    font-family: 'NanumSquareRound';
-    font-size: 16px;
+    font-family: 'ELAND_Choice_M';
+    font-size: 15px;
     font-weight: 400;
     color: rgba(138, 146, 166, 1);
 }
@@ -33,12 +33,12 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-
     text-align: center;
-    font-family: 'NanumSquareRound';
+
+    font-family: 'ELAND_Choice_M';
     font-size: 17px;
     font-weight: 400;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .my-review-list-table-top {
@@ -49,34 +49,31 @@
 
     padding: 15px;
 
-    background-color: rgba(255, 148, 45, 0.2);
-    border-radius: 6px;
-
-    text-align: center;
+    background-color: rgba(220, 226, 240, 0.6);
+    border-radius: 15px;
 }
 
 .my-review-list-table-tr {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
     
     gap: 95px;
-    padding: 13px 13px;
+    padding: 13px;
 
-    border-top: 1px solid rgba(238, 238, 238, 1);
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .my-review-list-table-tr:hover{
     cursor: pointer;
-    background-color: rgba(238, 238, 238, 0.2);
+    background-color: rgba(238, 238, 238, 0.4);
 }
 
 .my-review-list-table-restaurant-name {
@@ -132,11 +129,11 @@
     display: flex;
     align-items: center;
 
-    gap: 16px;
+    gap: 13px;
 }
 
 .my-review-list-page{
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
     font-weight: 400;
     line-height: 150%;
@@ -146,15 +143,16 @@
 }
 
 .my-review-list-page-active{
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 400;
     line-height: 150%;
-    color: rgba(255, 148, 45, 1);
+    color: rgba(23, 54, 133, 0.7);
 }
 
 .my-review-list-search-box{
     display: flex;
     align-items: center;
+
     gap: 12px;
 }

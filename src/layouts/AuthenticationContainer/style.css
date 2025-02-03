@@ -1,7 +1,8 @@
 #authentication-wrapper {
+    max-height: 100vh;
+    
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
 }
 
 .authentication-head-box {
@@ -12,13 +13,16 @@
     align-items: center;
     justify-content: center;
 
+    position: fixed;
+    top: 0;
     padding: 10px 20px;
 
-    background-color: rgba(255, 148, 45, 0.8);
+    background-color: rgba(220, 226, 240, 1);
 }
 
 .authentication-title {
+    font-family: 'MoiraiOne-Regular';
     font-size: 40px;
     font-weight: bold;
-    margin: 10px 0px;
+    color: rgba(80, 88, 108, 1);
 }

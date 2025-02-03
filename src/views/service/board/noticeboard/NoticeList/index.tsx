@@ -158,10 +158,6 @@ export default function NoticeList() {
             <span className='emphasis'> {totalLength}건</span> | 페이지 <span className='emphasis'>{currentPage}/{totalPage}</span>
           </div>
         </div>
-        <div className='notice-list-nav-text'>
-          <div className='notice-list-text' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>문의사항</div>
-          <div className='notice-list-text' onClick={() => navigation(INQUIRY_MY_BOARD_LIST_ABSOLUTE_PATH)}>내 문의사항</div>
-        </div>
         <div className='notice-list-top-right'>
           {loginUserRole === 'ROLE_ADMIN' && (
             <div className='primary-button' onClick={onWriteButtonClickHandler}>공지 작성</div>

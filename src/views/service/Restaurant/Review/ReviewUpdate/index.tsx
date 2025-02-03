@@ -113,7 +113,7 @@ export default function ReviewUpdate(){
         }
     };
 
-    const ButtonClass = `${rating ? 'review-primary' : 'review-disable'}-button`;
+    const ButtonClass = `${rating ? 'primary' : 'disable'}-button`;
     
     // effect //
     let effectFlag = false;
@@ -135,35 +135,37 @@ export default function ReviewUpdate(){
 
     // render //
     return (
-        <>
-            <div className="review-write-title">리뷰 수정</div>
-            <div className="review-write-box">
+        <div id="review-wrapper">
+            <div className="review-update-title">리뷰 수정</div>
+            <div className="review-update-box">
                 <input type="file" accept="image/*" onChange={onImageChangeHandler} />
                 {reviewImage && (
                     <img src={reviewImage}  style={{ maxWidth: '100px', maxHeight: '100px' }} />
                 )} 
-                <div className='review-grade'>평점</div>
-                <div id="review-rating-box">
-                    <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
-                        <option value="선택">선택</option>
-                        <option value="1.0">1.0</option>
-                        <option value="1.5">1.5</option>
-                        <option value="2.0">2.0</option>
-                        <option value="2.5">2.5</option>
-                        <option value="3.0">3.0</option>
-                        <option value="3.5">3.5</option>
-                        <option value="4.0">4.0</option>
-                        <option value="4.5">4.5</option>
-                        <option value="5.0">5.0</option>
-                    </select>
+                <div className='review-grade-box'>
+                    <div className='review-grade'>✪</div>
+                    <div id="review-rating-box">
+                        <select id="review-rating" name="review-rating" defaultValue={rating} onChange={onRatingChangeHandler}>
+                            <option value="선택">선택</option>
+                            <option value="0.5">0.5</option>
+                            <option value="1.0">1.0</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2.0">2.0</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3.0">3.0</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4.0">4.0</option>
+                            <option value="4.5">4.5</option>
+                        </select>
+                    </div>
                 </div>
-                <div className='review-write-contents-box'>
-                    <textarea ref={contentsRef} className='review-write-contents-textarea' placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} onChange={onContentsChangeHandler} onKeyPress={onKeyPressHandler}/>
+                <div className='review-update-contents-box'>
+                    <textarea ref={contentsRef} className='review-update-contents-textarea' placeholder='내용을 입력해주세요. / 300자' maxLength={300} value={reviewContents} onChange={onContentsChangeHandler} onKeyDown={onKeyPressHandler} style={{ resize: 'none', width: '100%', height: '100px'}} />
                 </div>
                 <div className="review-registered-button-box">
                     <button onClick={UpdateClickHandler} className={ButtonClass}>수정하기</button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

@@ -1,13 +1,13 @@
 #notice-detail-wrapper {
-    width: 1300px;
-    min-width: 800px;
+    width: 1000px;
+    min-width: 700px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    margin-top: 130px;
     gap: 30px;
-    margin-top: 50px;
 }
 
 .notice-detail-main-box {
@@ -35,10 +35,10 @@
 .notice-detail-title {
     padding: 0px 5px;
 
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 25px;
     font-weight: bold;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .notice-detail-info-box {
@@ -52,7 +52,7 @@
 }
 
 .notice-detail-info {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
@@ -60,7 +60,7 @@
 }
 
 .notice-detail-info-divider {
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
@@ -70,15 +70,14 @@
 .notice-detail-contents-box {
     min-height: 300px;
 
+    white-space: pre-wrap;
     padding: 0px 5px;
 
-    white-space: pre-wrap;
-
-    font-family: 'NanumSquareRound';
+    font-family: 'ELAND_Choice_M';
     font-size: 17px;
     font-weight: 400;
     line-height: 150%;
-    color: rgba(50, 50, 50, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .notice-detail-bottom-box {
@@ -92,6 +91,7 @@
 .notice-detail-button-box {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     
     gap: 12px;
 }

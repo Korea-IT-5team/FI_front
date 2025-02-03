@@ -11,12 +11,12 @@
 .reset-password-title {
   text-align: center;
 
-  margin-top: 80px;
+  margin-top: 250px;
 
-  font-family: 'KCC-Hanbit';
+  font-family: 'ELAND_Choice_M';
   font-size: 25px;
-  font-weight: 400;
-  color: rgba(50, 50, 50, 1);
+  font-weight: bold;
+  color: rgba(67, 67, 67, 1);
 }
 
 .reset-password-box {

@@ -252,7 +252,7 @@ export default function InquiryList() {
   
   return (
     <div id='inquiry-list-wrapper'>
-      <div className='inquiry-list-top'>문의</div>
+      <div className='inquiry-list-title'>문의</div>
       <div className='inquiry-list-top-box'>
         <div className='inquiry-list-top-left'>
           <div className='inquiry-list-size-text'>전체
@@ -266,7 +266,7 @@ export default function InquiryList() {
               <div className={toggleClass} onClick={onToggleClickHandler}></div>
             </>)}
           {(loginUserRole === 'ROLE_USER' || loginUserRole === 'ROLE_CEO') &&(
-            <div className='primary-button inquiry' onClick={onWriteButtonClickHandler}>문의 작성</div>
+            <div className='primary-button' onClick={onWriteButtonClickHandler}>문의 작성</div>
           )}
         </div>
       </div>
@@ -285,7 +285,7 @@ export default function InquiryList() {
       </div>
       <div className='inquiry-list-bottom'>
         <div style={{ width: '332px' }}></div>
-        <div className='inquiry-list-page-nation'>
+        <div className='inquiry-list-pagenation'>
           <div className='page-left' onClick={onPreSectionClickHandler}></div>
           <div className='inquiry-list-page-box'>
             {pageList.map(page => page === currentPage ?

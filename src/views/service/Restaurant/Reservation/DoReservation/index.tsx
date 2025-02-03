@@ -121,11 +121,11 @@ export default function DoReservation() {
     }
 
     // render //
-    const isSignUpActive = reservationDate && reservationTime && reservationPeople && isChecked;
-    const signUpButtonClass = `${isSignUpActive ? 'do-reservation-primary' : 'do-reservation-disable'}-button`;
+    const isAgreeActive = reservationDate && reservationTime && reservationPeople && isChecked;
+    const agreeButtonClass = `${isAgreeActive ? 'primary' : 'disable'}-button`;
 
     return (
-        <>
+        <div id="reservation-wrapper">
             <div className="do-reservation-information">예약자 정보</div>
             <div className="do-reservation-box">
                 {!isPopupOpen && <DatePicker
@@ -137,19 +137,20 @@ export default function DoReservation() {
                     onInputClick={openDatePicker}
                     onClickOutside={closeDatePicker}
                 />}
-                {!isDatePickerOpen?
+                {!isDatePickerOpen ?
                 (<div className="do-reservation-time-people">
                     <TimeSelectBox value={reservationTime} onChange={onTimeChangeHandler}/>
-                    <PeopleSelectBox value={reservationPeople} onChange={onPeopleChangeHandler}/>
-                </div>):<div className="non-space">안보이는 부분</div>}
+                    <PeopleSelectBox value={reservationPeople} onChange={onPeopleChangeHandler} />
+                </div>) : 
+                <div className="non-space"></div>}
                 <div className="do-reservation-checkbox">
                     <input type="checkbox" checked={isChecked} onClick={onCheckClickHandler} />
                     <div className="do-reservation-checkfont">인증 약관 전체 동의</div>
                     <button className="popup-open-button" onClick={openPopup}>약관 보기</button>
                 </div>
-                <div className={signUpButtonClass} onClick={onReservationClickHandler}>예약하기</div>
+                <div className={agreeButtonClass} onClick={onReservationClickHandler}>예약하기</div>
             </div>
             <TermsPopup isOpen={isPopupOpen} onClose={closePopup} />
-        </>
+        </div>
     )
 }

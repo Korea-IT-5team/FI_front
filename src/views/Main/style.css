@@ -1,127 +1,32 @@
 #main-wrapper {
   width: 100%;
-  max-height: 100vh;
-
-  position: fixed;
-  top: 105px;
-
+  
   display: flex;
   flex-direction: column;
-
-  overflow-y: auto;
-
-}
-
-
-.main-head-box {
-  width: 100%;
-  height: 85px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  position: fixed;
-  top: 0;
-  padding: 10px 20px;
-
-  background-color: rgba(255, 148, 45, 0.8);
-}
-
-.main-title {
-    font-size: 40px;
-    font-weight: bold;
-    color: rgba(64, 64, 64, 1);
-}
-
-.main-right-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  gap: 15px;
-
-  font-family: 'NanumSquareRound';
-  line-height: 150%;
-  color: rgba(255, 255, 255, 1);
-}
-
-.top-navigation-box {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  gap: 15px;
-
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.top-navigation:hover {
-  cursor: pointer;
-  opacity: 0.75;
-}
-
-.top-divider {
-  font-family: 'KCC-Hanbit';
-  font-size: 20px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.main-top-bar-button {
-  display: flex;
-  flex-direction: column;
-
-  margin-right: 30px;
-
-  font-family: 'NanumSquareRound';
-  font-size: 17px;
-  color: rgba(255, 255, 255, 1);
-}
-
-.logout-button {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.user-button:hover {
-  cursor: pointer;
-  color: rgba(245, 245, 245, 0.7);
-}
-
-.top-button:hover {
-  cursor: pointer;
-  color: rgba(245, 245, 245, 0.7);
-}
-
-.logout-button:hover {
-  cursor: pointer;
-  color: rgba(245, 245, 245, 0.7);
 }
 
 .main-container {
   width: 100%;
-  height: auto;
   
-  gap: 24px;
+  gap: 120px;
 
   display: flex;
   flex-direction: column;
-
   align-items: center;
 }
 
 .main-banner {
+  width: 100%;
+
   display: flex;
   justify-content: center;
+  
   margin: 0 auto;
-  width: 100%;
 }
 
 .main-show img {
   width: 100%;
-  height: 100%;
+
   object-fit: cover;
 }
 
@@ -130,31 +35,25 @@ h {
 }
 
 .main-show {
-  display: flex;
   width: 100%; 
-  height: 500px;
-  overflow: hidden;
+  height: 300px;
+
+  display: flex;
   align-items: center;
-  /* border: 2px green dotted; */
-  /* margin: 0 50px;  */
-  margin-top: -10px;
+
+  overflow: hidden;
 }
 
 .compartment {
   width: 100%;
   height: 100%;
+
   flex-shrink: 0;
-  /* font-size: 40px; */
-  text-align: center;
-  margin-top: 10px;
   background-position: center;
   background-size: cover;
 
   position: relative;
-  
 }
-
-
 
 @media (max-width: 1100px) {
   .main-show {
@@ -166,7 +65,6 @@ h {
     /* 기타 스타일링 */
   }
 }
-
 
 .compartment:nth-child(1) {
   background-image: url("../../assets/image/food.7.jpg");
@@ -184,18 +82,6 @@ h {
   background-image: url("../../assets/image/food.11.jpg");
 }
 
-/* .slide-index {
-  position: absolute;
-  display: flex;
-  gap: 8px;
-  margin-top: 365px;
-  cursor: pointer;
-}
-
-.index-item.active {
-  color: blue;
-} */
-
 .restaurant-image {
   text-align: center;
 
@@ -206,34 +92,35 @@ h {
   border-radius: 5px;
 }
 
-#main-restaurant-list-wrapper{
+#main-restaurant-list-wrapper {
+  width: 100%;
+
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+
   gap: 30px;
 }
-
 
 .pagination-left-arrow {
   width: 60px;
   height: 60px;
+
   background-image: url('../../assets/image/arrow-left.png');
   background-size: 100% 100%;
+
   opacity: 0.25;
   cursor: pointer;
 }
-
-
 
 .pagination-right-arrow {
   width: 60px;
   height: 60px;
+
   background-image: url('../../assets/image/arrow-right.png');
   background-size: 100% 100%;
+  
   opacity: 0.25;
   cursor: pointer;
 }
-
-
-
-

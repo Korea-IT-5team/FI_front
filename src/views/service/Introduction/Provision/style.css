@@ -4,12 +4,14 @@
 
   margin: 0 auto;
   padding: 20px;
+
   background-color: rgb(255, 255, 255, 1);
 }
 
 .provision-container {
   display: flex;
   flex-direction: column;
+
   gap: 20px;
 }
 
@@ -18,30 +20,34 @@
 }
 
 .provision-title {
-  font-family: 'KCC-Hanbit';
+  margin-bottom: 10px;
+
+  font-family: 'ELAND_Choice_M';
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .provision-title-detail-box {
   padding: 10px 20px;
+  margin-bottom: 15px;
+
   border-left: 4px solid rgba(255, 148, 45, 1);
   background-color: rgb(245, 245, 245, 1);
-  margin-bottom: 15px;
 }
 
 .provision-title-detail-first {
-  font-family: 'NanumSquareRound';
+  margin-bottom: 5px;
+
+  font-family: 'ELAND_Choice_M';
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
 .provision-title-detail-second {
-  font-family: 'NanumSquareRound', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(50, 50, 50, 1);
   margin-bottom: 5px;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 16px;
+  line-height: 150%;
+  color: rgba(50, 50, 50, 1);
 }

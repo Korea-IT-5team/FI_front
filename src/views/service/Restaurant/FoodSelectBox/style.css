@@ -1,39 +1,39 @@
 .select-box {
+    width: 150px;
+
     display: flex;
     align-items: center;
-    position: relative;
 
-    border: 1px solid rgba(238, 238, 238, 1);
-    border-radius: 6px;
+    position: relative;
     padding: 8px 16px;
-    width: 168px;
-    margin-top: 30px;
 
     background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(238, 238, 238, 1);
+    border-radius: 6px;
 }
 
 .select-item {
+    text-align: center;
+
     flex-grow: 1;
-    font-family: 'KCC-Hanbit';
+
+    font-family: 'ELAND_Choice_M';
     font-size: 16px;
     font-weight: 400;
     line-height: 175%;
-    text-align: center;
-
-    color: rgba(64, 64, 64, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 
 .select-none {
     flex-grow: 1;
+    text-align: center;
 
-    font-family: "KCC-Hanbit";
+    font-family: "ELAND_Choice_M";
     font-size: 16px;
     font-weight: 400;
     line-height: 175%;
-    text-align: center;
-
-    color: rgba(138, 146, 166, 1);
+    color: rgba(67, 67, 67, 1);
 }
 
 .select-open-button {
@@ -58,14 +58,14 @@
 }
 
 .select-list {
-    position: absolute;
-    left: -1px;
-    top: 44px;
+    max-height: 123px;
+    overflow-y: scroll;
 
     display: inline-block;
 
-    max-height: 144px;
-    overflow-y: scroll;
+    position: absolute;
+    left: -1px;
+    top: 44px;
 
     background-color: rgba(255, 255, 255, 1);
 }
@@ -74,16 +74,15 @@
     display: none;
 }
 
-
-
 .select-list-item-box {
-    display: flex;
+    width: 150px;
 
-    border: 1px solid rgba(238, 238, 238, 1);
+    display: flex;
+    
     padding: 8px 16px;
-    width: 168px;
 
     background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(238, 238, 238, 1);
 }
 
 .select-list-item-box:hover {

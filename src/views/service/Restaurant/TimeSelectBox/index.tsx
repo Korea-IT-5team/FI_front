@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './style.css';
 
 // interface //
 interface Prop {
@@ -11,22 +10,6 @@ interface Prop {
 export default function TimeSelectBox({ value, onChange }: Prop) {
 
     const listItem = [
-        { name: '00:00' , value: '00:00' },
-        { name: '00:30' , value: '00:30' },
-        { name: '01:00' , value: '01:00' },
-        { name: '01:30' , value: '01:30' },
-        { name: '02:00' , value: '02:00' },
-        { name: '02:30' , value: '02:30' },
-        { name: '03:00' , value: '03:00' },
-        { name: '03:30' , value: '03:30' },
-        { name: '04:00' , value: '04:00' },
-        { name: '04:30' , value: '04:30' },
-        { name: '05:00' , value: '05:00' },
-        { name: '05:30' , value: '05:30' },
-        { name: '06:00' , value: '06:00' },
-        { name: '06:30' , value: '06:30' },
-        { name: '07:00' , value: '07:00' },
-        { name: '07:30' , value: '07:30' },
         { name: '08:00' , value: '08:00' },
         { name: '08:30' , value: '08:30' },
         { name: '09:00' , value: '09:00' },

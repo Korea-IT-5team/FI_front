@@ -1,92 +1,42 @@
 #my-page-update-wrapper {
-  height: 700px;
   margin-top: 70px;
-}
-
-.my-page-update-container {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
 }
 
 .my-page-update-top-title {
   text-align: center;
 
-  font-family: 'KCC-Hanbit';
-  font-size: 30px;
+  font-family: 'ELAND_Choice_M';
+  font-size: 25px;
   font-weight: bold;
   line-height: 150%;
-}
-
-.my-page-title-box {
-  display: flex;
-  flex-direction: row;
-}
-
-.my-page-title {
-  padding: 10px;
-
-  border: 1px solid rgba(245, 245, 245, 1);
-
-  font-family: 'NanumSquareRound';
-  font-size: 17px;
-  font-weight: bold;
 }
 
 .my-page-update-container {
   height: 500px;
-  max-width: 800px;
+  max-width: 600px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   gap: 20px;
   padding: 20px;
-  margin-top: 20px;
 }
 
-.my-page-update-contents-title {
-  width: 100%;
-
-  display: flex;
-  justify-content: flex-start ;
-
-  font-family: 'KCC-Hanbit';
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-}
-
-.my-page-update-contents-title {
-  width: 100%;
-
-  display: flex;
-  justify-content: flex-start ;
-
-  font-family: 'KCC-Hanbit';
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-}
-
-.my-page-update-contents-box{
+.my-page-update-contents-box {
   width: 400px;
 
   display: flex;
   flex-direction: column;
   
-  gap: 20px;
+  gap: 15px;
 
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
+  color: rgba(67, 67, 67, 1);
 }
 
 .my-page-update-info-box {
@@ -96,16 +46,17 @@
   flex-direction: row;
   align-items: center;
   text-align: left;
-  
-  padding-top: 20px;
-
-  border-top: 1px solid rgba(238, 238, 238, 1);
-  
   word-break: break-word;
+  
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid rgba(238, 238, 238, 1);
 }
 
 .my-page-update-info-left {
   width: 100px;
+
+  margin-right: 10px;
 }
 
 .my-page-update-info {
@@ -119,20 +70,21 @@
 .my-page-update-button {
   width: 150px;
 
+  text-align: center;
+  
   padding: 10px;
 
-  background-color: rgba(255, 148, 45, 0.7);
+  background-color: rgba(23, 54, 133, 0.5);
   border-radius: 8px;
 
-  text-align: center;
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 15px;
   font-weight: 400;
   line-height: 150%;
   color: rgba(255, 255, 255, 1);
 }
 
-.my-page-update:hover {
+.my-page-update-button:hover {
   cursor: pointer;
-  opacity: 0.85;
+  background-color: rgba(23, 54, 133, 1);
 }

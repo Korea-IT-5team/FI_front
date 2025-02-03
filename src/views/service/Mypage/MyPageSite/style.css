@@ -1,14 +1,13 @@
 #my-page-wrapper {
-  /* width: 100%; */
-  height: 550px;
+  height: 700px;
 }
 
 .my-page-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  gap: 20px;
+  
+  gap: 30px;
   margin-top: 70px;
 }
 
@@ -23,50 +22,11 @@
 .my-page-top-title {
   text-align: center;
 
-  font-family: 'KCC-Hanbit';
+  font-family: 'ELAND_Choice_M';
   font-size: 30px;
   font-weight: bold;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-}
-
-.short-divider-line {
-  width: 1200px;
-
-  border: 1px solid rgba(238, 238, 238, 1);
-}
-
-.short-divider-bottom-line {
-  width: 1200px;
-  border: 1px solid rgba(255, 148, 45, 0.3);
-}
-
-.my-page-navigation-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.my-page-navigation {
-  width: 100px;
-  height: 25px;
-
-  padding: 10px;
-
-  border: 1px solid rgba(245, 245, 245, 1);
-
-  font-family: 'KCC-Hanbit';
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-}
-
-.my-page-navigation:hover {
-  cursor: pointer;
-  background-color: rgba(255, 148, 45, 0.2);
+  color: rgba(67, 67, 67, 1);
 }
 
 .my-page-contents-nav-box {
@@ -78,114 +38,88 @@
 
   gap: 30px;
   
-  font-family: 'NanumSquareRound';
+  font-family: 'ELAND_Choice_M';
   font-size: 17px;
   font-weight: bold;
-  color: rgba(50, 50, 50, 1);
+  color: rgba(67, 67, 67, 1);
 }
 
 .my-page-contents-nav {
-  padding: 10px;
-  border-radius: 7px;
-
   text-align: center;
+
+  padding: 10px;
+
+  border-radius: 7px;
 }
 
 .my-page-contents-nav:hover {
   cursor: pointer;
-  color: rgba(255, 148, 45, 0.8);
+  color: rgba(23, 54, 133, 0.7);
+}
+
+.short-divider-bottom-line {
+  width: 1300px;
+
+  border: 1px solid rgba(23, 54, 133, 0.15);
 }
 
 .my-page-info-contents-container {
-  width: 1100px;
-
   display: flex;
   flex-direction: column;
+  align-items: center;
 
-  gap: 10px;
+  gap: 20px;
   margin-top: 20px;
 }
 
 .my-page-contents-title {
-  width: 100%;
-
   display: flex;
-  justify-content: flex-start ;
+  justify-content: center;
 
-  font-family: 'KCC-Hanbit';
-  font-size: 20px;
+  margin-bottom: 20px;
+
+  font-family: 'ELAND_Choice_M';
+  font-size: 22px;
   font-weight: bold;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
+  color: rgba(67, 67, 67, 1);
 }
 
 .my-page-contents-box {
-  width: 100%;
+  width: 30%;
+  height: 300px;
 
-  display: grid;
+  display: flex;
   flex-direction: column;
-  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+
+  border: 5px solid rgba(3, 54, 133, 0.15);
+  border-radius: 8px;
 }
 
-.my-page-info-first {
-  width: 100%;
-
+.my-page-info {  
   display: flex;
   flex-direction: row;
-
-  border-top: 1px solid rgba(238, 238, 238, 1);
-
-  word-break: break-word;
-}
-
-.my-page-info-second {
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  word-break: break-word;
-
-  border-top: 1px solid rgba(238, 238, 238, 1); 
-  border-bottom: 1px solid rgba(238, 238, 238, 1); 
-}
-
-.my-page-info {
-  width: 100%;
-  min-width: 100px;
-  
   text-align: left;
+  word-break: break-word;
 
-  padding: 10px;
+  padding: 15px;
+  gap: 15px;
 
-  background-color: rgba(255, 255, 255, 1);
-
-  font-family: 'NanumSquareRound';
-  font-size: 15px;
+  font-family: 'ELAND_Choice_M';
+  font-size: 17px;
   font-weight: 400;
   line-height: 150%;
-  color: rgba(50, 50, 50, 1);
-
-  word-break: break-word; 
+  color: rgba(67, 67, 67, 1);
 }
 
-.my-page-resign {
+.my-page-info-first  {
   width: 150px;
 
-  text-align: center;
-
-  padding: 10px;
-
-  background-color: rgba(255, 148, 45, 0.7);
-  border-radius: 8px;
-
-  font-family: 'NanumSquareRound';
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 150%;
-  color: rgba(255, 255, 255, 1);
+  border-right: 1px solid rgba(238, 238, 238, 1);
 }
 
-.my-page-resign:hover {
-  cursor: pointer;
-  opacity: 0.85;
+.my-page-info-delete {
+  font-size: 17px;
+  color: black;
 }

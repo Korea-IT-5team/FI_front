@@ -4,27 +4,33 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import ResponseDto from 'src/apis/response.dto';
 import { getMyInfoRequest, getSignInUserRequest } from 'src/apis/user';
 import { GetMyInfoResponseDto, GetUserInfoResponseDto } from 'src/apis/user/dto/response';
-import { CEO_PAGE_SITE_ABSOLUTE_PATH, INQUIRY_BOARD_LIST_ABSOLUTE_PATH, INTRODUCTION_COMPANY_ABSOLUTE_PATH, INTRODUCTION_POLICY_ABSOLUTE_PATH, INTRODUCTION_PROVISION_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH } from 'src/constant';
+import { CEO_INFO_UPDATE_ABSOLUTE_PATH, CEO_PAGE_SITE_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MY_PAGE_SITE_ABSOLUTE_PATH, NOTICE_BOARD_LIST_ABSOLUTE_PATH, RESTAURANT_LIST_ABSOLUTE_PATH, SIGN_IN_ABSOLUTE_PATH, USER_INFO_UPDATE_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
 import "./style.css";
+import BottomBar from '../BottomContainer';
 
 // component // 
 function TopBar() {
 
     // state //
     const [nickname, setNickname] = useState<string>('');
+    const [userEmailId, setUserEmailId] = useState<string>('');
+    const [isPageSelect, setIsPageSelect] = useState<boolean>(false);
     const { setLoginUserEmailId, setLoginUserRole, loginUserRole } = useUserStore();
     const [cookies, setCookie, removeCookie] = useCookies();
     const { pathname } = useLocation();
 
     const getMyInfoResponse = (result: GetMyInfoResponseDto | ResponseDto | null) => {
         if (!result) return;
-        const { nickname } = result as GetMyInfoResponseDto;
+
+        const { userEmailId, nickname } = result as GetMyInfoResponseDto;
+        setUserEmailId(userEmailId);
         setNickname(nickname);
     };
 
     useEffect(() => {
         if (!cookies.accessToken) return;
+
         getMyInfoRequest(cookies.accessToken).then(getMyInfoResponse);
     }, [cookies.accessToken]);
 
@@ -56,11 +62,34 @@ function TopBar() {
         window.location.reload();
     }
 
-    const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
-    const onMyPageClickHandler = () => navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
-    const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
-    const onCeoPageClickHandler = () => navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+    const onPageSelectClickHandler = () => {
+        setIsPageSelect(!isPageSelect);
+    }
 
+    const onSignInClickHandler = () => navigation(SIGN_IN_ABSOLUTE_PATH);
+
+    const onMyPageClickHandler = () => {
+        navigation(MY_PAGE_SITE_ABSOLUTE_PATH);
+        window.location.reload();
+    }
+
+    const onUserUpdateClickHandler = () => {
+        navigation(USER_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+        window.location.reload();
+    }
+
+    const onCeoPageClickHandler = () => {
+        navigation(CEO_PAGE_SITE_ABSOLUTE_PATH);
+        window.location.reload();
+    }
+
+    const onCeoUpdateClickHandler = () => {
+        navigation(CEO_INFO_UPDATE_ABSOLUTE_PATH(userEmailId));
+        window.location.reload();
+    }
+
+    const onAdminPageClickHandler = () => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH);
+    
     // render // 
     return (
         <>
@@ -75,16 +104,26 @@ function TopBar() {
                     <div className='top-bar-button'>
                         {loginUserRole === 'ROLE_USER' &&
                             <div className="top-bar-role">
-                                <div className="sign-in-wrapper">
-                                    <div className="top-button" onClick={onMyPageClickHandler}>{nickname}님</div>
-                                </div>
+                                <div className="top-button" onClick={onPageSelectClickHandler}>{nickname}님</div>
+                                {isPageSelect && (
+                                    <ul className='top-ul'>
+                                        <li className='top-li' onClick={onMyPageClickHandler}>마이페이지</li>
+                                        <li className='top-li' onClick={onUserUpdateClickHandler}>회원 정보 수정</li>
+                                    </ul>
+                                )}
                                 <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                             </div>
                         }
                         {loginUserRole === 'ROLE_CEO' &&
                             <div className="top-bar-role">
                                 <div className="sign-in-wrapper">
-                                    <div className="top-button" onClick={onCeoPageClickHandler}>사장</div>
+                                    <div className="top-button" onClick={onPageSelectClickHandler}>사장</div>
+                                    {isPageSelect && (
+                                    <ul className='top-ul'>
+                                        <li className='top-li' onClick={onCeoPageClickHandler}>마이페이지</li>
+                                        <li className='top-li' onClick={onCeoUpdateClickHandler}>회원 정보 수정</li>
+                                    </ul>
+                                )}
                                 </div> 
                                 <div className="logout-button" onClick={onLogoutClickHandler}>로그아웃</div>
                             </div>
@@ -104,41 +143,6 @@ function TopBar() {
                 </div>
             </div>
         </>
-    );
-}
-
-function BottomBar() {
-
-     // function //
-    const navigation = useNavigate();
-
-    // render // 
-    return (
-        <div className='bottom-box'>
-            <div className='bottom-title'>Food Insight</div>
-            <div className='bottom-navigation-box'>
-                <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_COMPANY_ABSOLUTE_PATH)}>회사소개</div>
-                <div className="bottom-divider">{'\|'}</div>
-                <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_POLICY_ABSOLUTE_PATH)}>개인정보처리방침</div>
-                <div className="bottom-divider">{'\|'}</div>
-                <div className='bottom-navigation' onClick={() => navigation(INTRODUCTION_PROVISION_ABSOLUTE_PATH)}>이용약관</div>
-                <div className="bottom-divider">{'\|'}</div>
-                <div className='bottom-navigation' onClick={() => navigation(INQUIRY_BOARD_LIST_ABSOLUTE_PATH)}>도움말</div>
-                <div className="bottom-divider">{'\|'}</div>
-                <div className='bottom-navigation' onClick={() => navigation(NOTICE_BOARD_LIST_ABSOLUTE_PATH)}>공지사항</div>
-            </div>
-            <div className='bottom-detail-contents-box first'>
-                <div className='bottom-detail-content'>(주)FoodInsight</div>
-                <div className='bottom-detail-content'>대표자| 김나경 김다인 김유진 박주형</div>
-                <div className='bottom-detail-content'>대한민국</div>
-            </div>
-            <div className='bottom-detail-contents-box second'>
-                <div className='bottom-detail-content'>사업자등록번호 111-11-11111</div>
-                <div className='bottom-detail-content'>TEL 1515-1515</div>
-                <div className='bottom-detail-content'>FAX 02.000.000</div>
-                <div className='bottom-detail-content'>EMAIL foodinsight@email.com</div>
-            </div>
-        </div>
     );
 }
 
@@ -177,9 +181,9 @@ export default function TopContainer() {
 
     // render //
     return (
-        <div id="top-wrapper">
+        <div id="page-wrapper">
             <TopBar />
-            <div className="top-container">
+            <div className='page-container'>
                 <Outlet />
             </div>
             <BottomBar />

@@ -7,18 +7,18 @@ import { PostRestaurantInfoRequestDto } from 'src/apis/restaurant/dto/request';
 import RestaurantInputBox from 'src/components/RestaurantInputBox';
 import { RESTAURANT_LIST_ABSOLUTE_PATH } from 'src/constant';
 import { useUserStore } from 'src/stores';
-import SelectBox from 'src/views/service/Restaurant/FoodSelectBox';
+import FoodSelectBox from 'src/views/service/Restaurant/FoodSelectBox';
 import './style.css';
 import { Map, useKakaoLoader, MapMarker } from 'react-kakao-maps-sdk';
 
 // component //
 export default function RestaurantInfoWrite() {
     useKakaoLoader({
-        appkey: "1121641ff4fa6668d61874ed79c1709e",
+        appkey: "d842f1d869773de0e704340a995f0811",
         libraries: ["clusterer", "drawing", "services"],
     })
 
-    const center = { lat: 33.450701, lng: 126.570667 }
+    const center = { lat: 35.1940316, lng: 129.0615183 }
 
     // state //
     const [cookies] = useCookies();
@@ -159,7 +159,7 @@ export default function RestaurantInfoWrite() {
     })}, []);
 
     const isRestUploadUpActive = restaurantImage && restaurantName && restaurantFoodCategory && restaurantPosition && restaurantTelNumber && restaurantLocation;
-    const ButtonClass = `${isRestUploadUpActive ? 'restaurant-info-primary' : 'restaurant-info-disable'}-button`;
+    const ButtonClass = `${isRestUploadUpActive ? 'primary' : 'disable'}-button`;
 
     // render //
     return (
@@ -177,13 +177,13 @@ export default function RestaurantInfoWrite() {
                         placeholder="이름을 입력해주세요" onChangeHandler={onNameChangeHandler} />
                     <RestaurantInputBox label="식당 주소" type="text" value={restaurantLocation}
                         placeholder="주소를 입력해주세요" onChangeHandler={onLocationChangeHandler} />
-                    <em className="restaurant-info-write-contents">지도를 클릭해주세요!</em>
+                    <em className="restaurant-info-map">지도를 클릭해주세요!</em>
                     <Map 
                         id="map"
                         center={center}
                         style={{
                             width: "100%",
-                            height: "350px",
+                            height: "300px",
                             margin: '0 auto'
                         }}
                         level={3} 
@@ -197,20 +197,20 @@ export default function RestaurantInfoWrite() {
                     >
                         <MapMarker position={restaurantPosition ?? center} />
                     </Map>
-                    <div className="restaurant-info-write-select-box">
-                        <SelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
-                    </div>
                 </div>
                 <div className="restaurant-info-write-box">
+                    <div className="restaurant-info-write-select-box">
+                        <FoodSelectBox value={restaurantFoodCategory} onChange={onFoodCategoryChangeHandler} />
+                    </div>
                     <RestaurantInputBox label="식당 연락처" type="text" value={restaurantTelNumber} placeholder="연락처를 입력해주세요" onChangeHandler={onTelNumberChangeHandler} onKeydownHandler={onKeyPressHandler} />
                     <RestaurantInputBox label="식당 SNS 주소" type="text" value={restaurantSnsAddress} placeholder="주소를 입력해주세요" onChangeHandler={onSnsLocationChangeHandler} />
                     <RestaurantInputBox label="운영 시간" type="text" value={restaurantOperationHours} placeholder="운영시간을 입력해주세요" onChangeHandler={onOperationHoursChangeHandler} />
                     <RestaurantInputBox label="식당 특징" type="text" value={restaurantFeatures} placeholder="특징을 입력해주세요" onChangeHandler={onFeaturesChangeHandler} />
                     <RestaurantInputBox label="식당 공지" type="text" value={restaurantNotice} placeholder="공지를 입력해주세요" onChangeHandler={onNoticeChangeHandler} />
                     <RestaurantInputBox label="대표메뉴" type="text" value={restaurantRepresentativeMenu} placeholder="대표메뉴를 입력해주세요" onChangeHandler={onRepresentativeMenuChangeHandler} onKeydownHandler={onKeyPressHandler} />
-                    <div className='businessRegistrationNumber-box'>
-                        <div className='businessRegistrationNumber-title'>사업자 등록번호</div>
-                        <div className='businessRegistrationNumber-title-input'>{businessRegistrationNumber}</div>
+                    <div className='business-registration-number-box'>
+                        <div className='business-registration-number-title'>사업자 등록번호</div>
+                        <div className='business-registration-number'>{businessRegistrationNumber}</div>
                     </div>
                 </div>
             </div>

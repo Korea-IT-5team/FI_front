@@ -88,20 +88,22 @@ export default function RestaurantList() {
                     <div className="second-button" onClick={onRegistrationClickHandler}>등록하기</div>
                 }
             </div>
-            <div className='restaurant-list-box'>
-                {!restaurantList || restaurantList.length === 0 ?
-                    (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
-                    (restaurantList.slice(0, displayCount).map((item) => (
-                    <div className='restaurant-list-item-box' onClick={() => onItemClickHandler(item.restaurantId)}>
-                        <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className='restaurant-list-item' />
-                        <div className='restaurant-list-item-top-box'>
-                            <div className='restaurant-list-item name'>{item.restaurantName}</div>
-                            <div className='restaurant-list-item category'>{item.restaurantFoodCategory}</div>
-                        </div>
-                        <div className='restaurant-list-item location'>{item.restaurantLocation}</div>
+            {!restaurantList || restaurantList.length === 0 ?
+                (<div className='restaurant-list-no-item'>해당하는 식당이 없습니다.</div>) :
+                (<div className='restaurant-list-box'>
+                {restaurantList.slice(0, displayCount).map((item) => (
+                    <div
+                    key={item.restaurantId}
+                    className="restaurant-list-item-box"
+                    onClick={() => onItemClickHandler(item.restaurantId)}>
+                    <img src={item.restaurantImage ? item.restaurantImage : restaurantDefault} className="restaurant-list-item" alt="restaurant" />
+                    <div className="restaurant-list-item-top-box">
+                    <div className="restaurant-list-item name">{item.restaurantName}</div>
+                    <div className="restaurant-list-item category">{item.restaurantFoodCategory}</div>
                     </div>
-                )))}
-            </div>
+                    <div className="restaurant-list-item location">{item.restaurantLocation}</div>
+                    </div>))}
+                </div>)}
             {restaurantList.length > displayCount && ( <div className="load-more-button" onClick={onLoadMoreClickHandler}>더보기</div> )}
         </div>
     );
